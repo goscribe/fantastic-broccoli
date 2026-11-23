@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-7-2",
+  "topicCode": "3.7.2",
+  "topicName": "Populations and Hardy-Weinberg",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:54.538Z",
+  "cards": [
+    {
+      "id": "0k71wet",
+      "kind": "term",
+      "front": "What does the Hardy–Weinberg principle predict about allele and genotype frequencies?",
+      "back": "When its conditions hold, the **Hardy–Weinberg principle** predicts that allele and genotype frequencies stay constant across generations. This gives a baseline for checking whether a population is changing.",
+      "hint": "Think about what happens to frequencies from one generation to the next.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aseh8n",
+      "kind": "formula",
+      "front": "Which equation links the genotype frequencies to the allele frequencies under Hardy–Weinberg conditions?",
+      "back": "$p^2+2pq+q^2=1$, where $p$ and $q$ are the two allele frequencies ($p+q=1$), $p^2$ and $q^2$ are the homozygote frequencies, and $2pq$ is the heterozygote frequency.",
+      "hint": "Start from the two allele frequencies, which add up to one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "149ll5l",
+      "kind": "concept",
+      "front": "What can cause observed allele frequencies to differ from Hardy–Weinberg predictions?",
+      "back": "**Mutation**, **gene flow**, **natural selection** and **genetic drift** can all change allele frequencies between generations. Each one breaks a Hardy–Weinberg condition.",
+      "hint": "Compare each process with the list of Hardy–Weinberg conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16hpgyb",
+      "kind": "term",
+      "front": "What is a population in biological terms?",
+      "back": "A **population** is a group of organisms of the same species living in the same area at the same time, able to breed with one another.",
+      "hint": "Consider what limits which organisms can be grouped together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rmq1a3",
+      "kind": "term",
+      "front": "What is the gene pool of a population?",
+      "back": "The **gene pool** is the complete collection of alleles carried by all members of a population.",
+      "hint": "Think about the whole group's genetic makeup, not one member.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gamwgc",
+      "kind": "term",
+      "front": "What is an allele frequency?",
+      "back": "An **allele frequency** is the proportion of all copies of a gene in a population that are one particular allele. It is not the proportion of individuals carrying that allele.",
+      "hint": "Compare this with counting how many organisms have a given version of a gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ba8jl3",
+      "kind": "mistake",
+      "front": "Why can a single individual not have an allele frequency?",
+      "back": "Allele frequency is a **population** measure, calculated across all gene copies in the group. An individual has a genotype, not an allele frequency.",
+      "hint": "Think about what the measure is calculated across.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00p2e5b",
+      "kind": "concept",
+      "front": "Why must mating be random for offspring allele combinations to follow the gene pool frequencies?",
+      "back": "With **random mating**, an individual's genotype for the gene does not influence its choice of mate, so offspring combine alleles in the proportions found in the gene pool.",
+      "hint": "Think about whether choosing a mate can change which alleles pair up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yv01bk",
+      "kind": "example",
+      "front": "In a population, 9% of individuals show a fully recessive trait. Assuming Hardy–Weinberg conditions, what is the heterozygote frequency?",
+      "back": "0.42 (42% of individuals). Here $q^2=0.09$, so $q=0.30$ and $p=0.70$, giving $2pq=2(0.70)(0.30)=0.42$.",
+      "hint": "First find the recessive allele frequency from the affected genotype frequency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0et07vc",
+      "kind": "mistake",
+      "front": "Why is the 9% of affected individuals not the recessive allele frequency?",
+      "back": "The 9% is the **recessive genotype frequency**, which equals $q^2$. The allele frequency is $q$, found by taking the square root: $q=\\sqrt{0.09}=0.30$.",
+      "hint": "Ask which of the two measures is counted across every gene copy in the group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f0kx1e",
+      "kind": "term",
+      "front": "What is genetic drift?",
+      "back": "**Genetic drift** is a change in allele frequency between generations caused by chance. Its effects are stronger in small populations, where a few individuals can contribute a large share of the next generation's alleles.",
+      "hint": "Think about why a small sample is less reliable than a large one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jaw8rr",
+      "kind": "term",
+      "front": "What is gene flow?",
+      "back": "**Gene flow** is the movement of alleles between populations through migration followed by breeding. It changes allele frequencies in the populations involved.",
+      "hint": "Think about what has to happen after an individual moves to a new population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qwc6r6",
+      "kind": "mistake",
+      "front": "Why does non-random mating not necessarily change allele frequencies?",
+      "back": "Non-random mating changes which alleles occur together in offspring, so it alters **genotype frequencies**. The overall proportion of each allele in the population can stay the same.",
+      "hint": "Separate the combinations of alleles from the total count of each allele.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-5",
+  "topicCode": "7.5",
+  "topicName": "Magnitude of the equilibrium constant",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:04.077Z",
+  "cards": [
+    {
+      "id": "1cluwtk",
+      "kind": "concept",
+      "front": "What does a large equilibrium constant, K, tell you about the equilibrium position of a reaction?",
+      "back": "A large K means the reaction is **product-favored**. The product side dominates the equilibrium expression, so product formation is extensive at equilibrium.",
+      "hint": "Think about which side of the expression is much bigger.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wpmkc0",
+      "kind": "concept",
+      "front": "What does a small equilibrium constant, K, tell you about the equilibrium position of a reaction?",
+      "back": "A small K means the reaction is **reactant-favored**. The reactant side dominates, so the mixture holds much more reactant than product, though some product can still form.",
+      "hint": "Compare this with the large-K case.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19vfsks",
+      "kind": "mistake",
+      "front": "A student says a very large K means the reaction is fast. What is wrong with this?",
+      "back": "K describes **where** the reaction settles at equilibrium, not **how fast** it gets there. A product-favored reaction can still be slow.",
+      "hint": "K is about equilibrium position, not speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vsu5pr",
+      "kind": "term",
+      "front": "What is an equilibrium expression?",
+      "back": "A **ratio of product terms to reactant terms**, with exponents set by the coefficients in the balanced reaction.",
+      "hint": "Products go on top, reactants on the bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kns6vv",
+      "kind": "formula",
+      "front": "For A⇌B, what is the equilibrium expression for K?",
+      "back": "$K=\\frac{[\\text{B}]}{[\\text{A}]}$, where **[B]** and **[A]** are the equilibrium concentrations of B and A.",
+      "hint": "Put the product over the reactant.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vk0lou",
+      "kind": "formula",
+      "front": "For 2A⇌B, with A and B dissolved, what is the equilibrium expression for K?",
+      "back": "$K=\\frac{[\\text{B}]}{[\\text{A}]^2}$. The **exponent 2** on [A] comes from the coefficient 2 in the balanced reaction.",
+      "hint": "Where does the coefficient of A go?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yrp21d",
+      "kind": "process",
+      "front": "What steps do you follow to interpret the size of K for a reaction?",
+      "back": "1. Write the balanced reaction. 2. Write the expression, using coefficients as exponents. 3. Judge whether K is large, small, or near 1. 4. State which side is favored.",
+      "hint": "Start with the balanced equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n5t8gi",
+      "kind": "example",
+      "front": "For A⇌B, K = 0.20 and [A] = 0.50 mol/L at equilibrium. What is [B]?",
+      "back": "**0.10 mol/L**. Rearrange K = [B]/[A] to get [B] = K[A] = 0.20 × 0.50.",
+      "hint": "Rearrange the expression to solve for [B].",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xbz4qs",
+      "kind": "example",
+      "front": "For A⇌B, K = 25 and [A] = 0.020 mol/L at equilibrium. What is [B]?",
+      "back": "**0.50 mol/L**. B is more abundant than A at equilibrium.",
+      "hint": "Multiply K by [A].",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nmixpg",
+      "kind": "mistake",
+      "front": "A student says that for 2A⇌B, a large K proves [B] is greater than [A]. Why is this wrong?",
+      "back": "A large K means the ratio **[B]/[A]^2** is large. It does not alone show that [B] exceeds [A], because the value of [A] also matters.",
+      "hint": "Look at the exponent on [A].",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bu3ei4",
+      "kind": "concept",
+      "front": "Why can two different mixtures have the same value of K?",
+      "back": "K sets the **relative balance** of products and reactants, but the starting amounts affect the actual equilibrium concentrations. The same K can describe mixtures with different absolute amounts.",
+      "hint": "K alone does not fix exact concentrations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0aamn6m",
+      "kind": "concept",
+      "front": "Are pure solids and pure liquids included in an equilibrium expression?",
+      "back": "No. **Pure solids and pure liquids** are omitted from the equilibrium expression.",
+      "hint": "Think about what is left out of the ratio.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0am4uev",
+      "kind": "term",
+      "front": "What is the extent of reaction?",
+      "back": "The **degree** to which reactants form products before the reaction reaches equilibrium.",
+      "hint": "It is about how far the reaction goes forward.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d2twaj",
+      "kind": "concept",
+      "front": "What does a value of K near 1 indicate?",
+      "back": "**Neither side** strongly dominates the equilibrium expression, so neither reactants nor products are strongly favored.",
+      "hint": "Think about the ratio when top and bottom are similar.",
+      "sectionId": "s2"
+    }
+  ]
+}

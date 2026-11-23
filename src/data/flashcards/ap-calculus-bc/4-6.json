@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Local linearity and linearization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:15.339Z",
+  "cards": [
+    {
+      "id": "078q2ww",
+      "kind": "formula",
+      "front": "What is the linearization of f at a base point a, and what does each part mean?",
+      "back": "$L(x)=f(a)+f'(a)(x-a)$ is the **tangent line** through $(a,f(a))$. Its constant slope is $f'(a)$, and near $a$ we use $f(x)\\approx L(x)$.",
+      "hint": "Which value gives the constant slope of the line?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1arkbav",
+      "kind": "concept",
+      "front": "Why must a function be differentiable at a point before you can linearize it there?",
+      "back": "A **tangent slope** only exists where the derivative exists. At a sharp corner there is no single tangent line, so the tangent-line method does not work there.",
+      "hint": "Think about corners on a graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03ejghf",
+      "kind": "example",
+      "front": "Use the linearization of $f(x)=\\sqrt{x}$ at $a=4$ to estimate $\\sqrt{4.2}$.",
+      "back": "**About 2.05.** Here $L(x)=2+\\frac{1}{4}(x-4)$, so $L(4.2)=2+\\frac{1}{4}(0.2)=2.05$.",
+      "hint": "First find f(4) and f'(4).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0udfizg",
+      "kind": "process",
+      "front": "What are the steps to build a linearization of f at a base point a?",
+      "back": "First find the known value **f(a)**. Then find the tangent slope **f'(a)**. Finally substitute both into $L(x)=f(a)+f'(a)(x-a)$.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04x6u7q",
+      "kind": "mistake",
+      "front": "Why is using f'(x) as the slope of a linearization wrong?",
+      "back": "**f'(x)** changes with x, but the linearization needs a constant slope. Evaluate the derivative at $a$ to get the fixed slope $f'(a)$.",
+      "hint": "Is the slope the same everywhere on the line?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ibkrl",
+      "kind": "term",
+      "front": "What is approximation error?",
+      "back": "The **difference** between an estimated value and the actual function value.",
+      "hint": "Estimate minus actual.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10v2jnx",
+      "kind": "term",
+      "front": "What is the base point in a linearization?",
+      "back": "The **base point** $a$ is the input where both $f(a)$ and $f'(a)$ are known, and the tangent line passes through $(a,f(a))$.",
+      "hint": "Choose an input with easy values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "135ub7m",
+      "kind": "concept",
+      "front": "Where a function is concave up, is its tangent line above or below the graph nearby?",
+      "back": "**Below** the graph. Concave up means the slope increases, so the tangent line lies under the curve near the base point.",
+      "hint": "Think about the slope increasing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "172d1qw",
+      "kind": "concept",
+      "front": "Why does the tangent-line estimate of $\\sqrt{4.2}$ at $a=4$ come out too high?",
+      "back": "The square-root function is **concave down** for positive inputs, so its tangent line lies above the curve near $x=4$. The actual value is about $2.04939$, slightly less than $2.05$.",
+      "hint": "Which side of the graph is the tangent line on?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03dxkpp",
+      "kind": "mistake",
+      "front": "Will a tangent-line estimate stay accurate as you move far from the base point?",
+      "back": "**No.** The resemblance is strongest very close to the base point. Farther away the graph may bend away from the tangent line, so the estimate becomes less reliable.",
+      "hint": "Locally means nearby.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ru5y0r",
+      "kind": "example",
+      "front": "Find the linearization of $f(x)=x^2$ at $a=3$.",
+      "back": "$L(x)=9+6(x-3)$, since $f(3)=9$ and $f'(3)=6$.",
+      "hint": "Find f'(x) first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hvtzvy",
+      "kind": "example",
+      "front": "Use $L(x)=9+6(x-3)$ to estimate $3.1^2$.",
+      "back": "**9.6**, because $L(3.1)=9+6(0.1)=9.6$, so $3.1^2\\approx 9.6$.",
+      "hint": "Substitute x = 3.1 into the line.",
+      "sectionId": "s2"
+    }
+  ]
+}

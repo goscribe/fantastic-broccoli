@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Extreme value theorem and critical points",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:04.185Z",
+  "cards": [
+    {
+      "id": "1enabs9",
+      "kind": "concept",
+      "front": "What does the Extreme Value Theorem guarantee?",
+      "back": "A **continuous** function on a closed interval attains both an absolute maximum and an absolute minimum on that interval. It guarantees the values exist but does not say where they are.",
+      "hint": "Think about the two conditions the function and interval must meet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ln8o13",
+      "kind": "concept",
+      "front": "What makes a number $c$ a critical point of $f$?",
+      "back": "$c$ is an interior number in the domain where $f'(c)=0$ or $f'(c)$ does not exist. A **corner** can be critical even though its derivative is undefined there.",
+      "hint": "Two ways to qualify: one involves a zero, the other a missing value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xu15dn",
+      "kind": "process",
+      "front": "How do you find the absolute extrema of a continuous function on a closed interval?",
+      "back": "Evaluate $f$ at both **endpoints** and at every interior critical point. Compare these values: the largest is the absolute maximum and the smallest is the absolute minimum.",
+      "hint": "List the candidate inputs first, then compare their outputs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12cv2gs",
+      "kind": "term",
+      "front": "What is an absolute maximum?",
+      "back": "The **greatest** function value a function attains over the specified domain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bfs6ow",
+      "kind": "term",
+      "front": "What is a local maximum?",
+      "back": "A function value that is **at least as great** as all sufficiently nearby function values. It need not be the greatest value on the whole interval.",
+      "hint": "Compare only values close to the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hlopux",
+      "kind": "mistake",
+      "front": "Is every critical point a local extremum?",
+      "back": "No. For $f(x)=x^3$, $f'(0)=0$, but values keep **rising** through $x=0$, so $x=0$ is not a local extremum.",
+      "hint": "Check the values on both sides of the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hobmjb",
+      "kind": "mistake",
+      "front": "Why does the Extreme Value Theorem not guarantee a maximum for $f(x)=x$ on $(0,1)$?",
+      "back": "The interval is **open**, so the theorem does not apply. Values approach $1$ but the function never reaches it on this interval.",
+      "hint": "Check which endpoints the interval includes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jvpsef",
+      "kind": "mistake",
+      "front": "Does a derivative that fails to exist always give a critical point?",
+      "back": "No. The number must be where the **function is defined**. If $f$ itself is undefined at that number, it is not a critical point.",
+      "hint": "The function value has to exist too.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1exudh8",
+      "kind": "example",
+      "front": "Is $x=0$ a critical point of $f(x)=|x|$?",
+      "back": "Yes. $f(0)=0$ is defined, but $f'(0)$ does not exist because the graph has a corner there, so $x=0$ is **critical**.",
+      "hint": "Look at whether the derivative exists at the corner.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vzpe1i",
+      "kind": "formula",
+      "front": "What equation gives the interior critical points where the derivative is zero?",
+      "back": "Solve $f'(x)=0$ for $x$ inside the interval. Each solution is a **candidate** to check, along with endpoints and any points where $f'$ fails.",
+      "hint": "Set the derivative equal to a value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y5shbc",
+      "kind": "example",
+      "front": "What are the absolute extrema of $f(x)=x^2-2x$ on $[0,3]$?",
+      "back": "Absolute minimum $-1$ at $x=1$; absolute maximum $3$ at $x=3$. The critical point $x=1$ comes from solving $2x-2=0$.",
+      "hint": "Compare $f(0)$, $f(1)$ and $f(3)$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hffp8r",
+      "kind": "concept",
+      "front": "How should you write down an extremum?",
+      "back": "Name the **value and its input**, for example “a minimum of $-1$ at $x=1$.” This makes the answer clear and complete.",
+      "hint": "Include both the output and the input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pne1m1",
+      "kind": "mistake",
+      "front": "Does a critical point guarantee that it is an extremum?",
+      "back": "No. A critical point is only a **possible** location for an extremum, so you must compare its value with the endpoint values.",
+      "hint": "Critical points are candidates, not answers.",
+      "sectionId": "s4"
+    }
+  ]
+}

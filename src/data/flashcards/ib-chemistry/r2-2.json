@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r2-2",
+  "topicCode": "R2.2",
+  "topicName": "Rate of chemical change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:25.487Z",
+  "cards": [
+    {
+      "id": "01wwdvy",
+      "kind": "concept",
+      "front": "Why do reactions only happen when particles collide?",
+      "back": "Only **successful collisions** produce products: the particles need enough energy and a suitable orientation. Collision theory links the rate to how often these successful collisions happen.",
+      "hint": "Think about what a collision must have to work.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "108bzqj",
+      "kind": "concept",
+      "front": "How does raising the temperature speed up a reaction?",
+      "back": "Particles move faster, so they collide more often, and a **greater proportion** of collisions have energy above the activation energy.",
+      "hint": "Two effects, both acting on successful collisions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jq5j4k",
+      "kind": "concept",
+      "front": "How does a catalyst speed up a reaction without being used up?",
+      "back": "It provides an **alternative pathway** with lower activation energy, so more collisions lead to reaction. The catalyst is regenerated during the reaction.",
+      "hint": "Think about the energy barrier.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1582tda",
+      "kind": "term",
+      "front": "What is activation energy?",
+      "back": "The **minimum energy** a collision needs for it to lead to reaction. A collision below this energy does not produce products.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jygkq5",
+      "kind": "term",
+      "front": "What is a rate–time graph?",
+      "back": "A graph with **rate** on the vertical axis and time on the horizontal axis. A higher point means a faster reaction at that moment.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rjsgph",
+      "kind": "formula",
+      "front": "How is the average rate of a reaction found from a concentration change?",
+      "back": "$\\text{rate}=\\frac{\\Delta c}{\\Delta t}$, the **change in concentration** divided by the time interval. Units are mol dm$^{-3}$ s$^{-1}$, with $\\Delta c$ in mol dm$^{-3}$ and $\\Delta t$ in s.",
+      "hint": "Concentration change over time taken.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lmawia",
+      "kind": "example",
+      "front": "A reactant's concentration falls from 0.80 to 0.60 mol dm⁻³ in 20 s. What is its average rate of disappearance?",
+      "back": "**0.010 mol dm⁻³ s⁻¹**. The decrease is 0.20 mol dm⁻³, and 0.20 ÷ 20 s gives 0.010.",
+      "hint": "Find the decrease in concentration first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "081yv32",
+      "kind": "mistake",
+      "front": "Does a higher concentration lower the activation energy?",
+      "back": "No. Higher **concentration** increases how often reacting particles collide. The activation energy stays the same.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eoxz67",
+      "kind": "mistake",
+      "front": "Is a catalyst a reactant that is permanently used up?",
+      "back": "No. A catalyst is **regenerated** during the reaction, so it is not used up overall.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0h1qdsx",
+      "kind": "concept",
+      "front": "Why does a powder usually react faster than one large lump of the same solid?",
+      "back": "Crushing increases the **surface area** without changing the mass. More particles are exposed, so collisions at the surface are more frequent.",
+      "hint": "The total mass stays the same.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eq2v57",
+      "kind": "mistake",
+      "front": "Does crushing a solid lower its activation energy?",
+      "back": "No. Crushing increases the **frequency** of collisions at the surface. The activation energy is unchanged.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g6cz71",
+      "kind": "process",
+      "front": "How do you sketch a rate–time graph for a reaction whose rate falls as reactants are used up?",
+      "back": "Label **rate** on the vertical axis and **time** on the horizontal axis. Draw a curve that starts high, falls with time and approaches zero.",
+      "hint": "Label both axes before drawing the curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v3jzzv",
+      "kind": "concept",
+      "front": "Why does increasing the pressure of a gas speed up a reaction?",
+      "back": "Reducing the volume raises the **concentration** of the gas, so collisions are more frequent. Pressure only matters through its effect on concentration.",
+      "hint": "Link pressure to concentration.",
+      "sectionId": "s2"
+    }
+  ]
+}

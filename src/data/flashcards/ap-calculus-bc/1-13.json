@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-13",
+  "topicCode": "1.13",
+  "topicName": "Removing discontinuities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:53.438Z",
+  "cards": [
+    {
+      "id": "1o91z89",
+      "kind": "term",
+      "front": "What is a removable discontinuity at $x=a$?",
+      "back": "A point where a **finite limit** $L$ exists at $a$, but $f(a)$ is missing or not equal to $L$. Only the value at the point is wrong.",
+      "hint": "Compare the limit with the function value at $a$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0izt6kz",
+      "kind": "concept",
+      "front": "Why can changing one value fix a hole but not a jump?",
+      "back": "A hole has one finite two-sided limit, so assigning that limit works. A **jump** has different left and right limits, so no single value at $a$ can match both sides.",
+      "hint": "Count how many limits the two sides approach.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a2sfsx",
+      "kind": "concept",
+      "front": "Why can't an infinite discontinuity be filled by assigning a value?",
+      "back": "Function values grow without bound near the point, so there is no **finite limit**. No finite value at $a$ can make the function continuous.",
+      "hint": "Is there a finite number the outputs approach?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b28jr5",
+      "kind": "process",
+      "front": "What are the steps to fill the hole in $\\frac{x^2-1}{x-1}$ at $x=1$?",
+      "back": "Factor the numerator, cancel to get $x+1$ for $x\\ne1$, find the limit $\\lim_{x\\to1}f(x)=2$, then define $g(1)=2$.",
+      "hint": "Start by factoring $x^2-1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0suooji",
+      "kind": "example",
+      "front": "Redefine $f(x)=\\frac{x^2-9}{x-3}$ for $x\\ne3$ so it is continuous at $x=3$. What is $f(3)$?",
+      "back": "$f(3)=6$. For $x\\ne3$, $f(x)=x+3$, and its **limit** at $3$ is $6$.",
+      "hint": "Factor $x^2-9$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dkz102",
+      "kind": "mistake",
+      "front": "Does canceling $x-1$ from $\\frac{x^2-1}{x-1}$ make the function defined at $x=1$?",
+      "back": "No. The original fraction is undefined at $x=1$. The simplified $x+1$ only matches for $x\\ne1$, so you must state $g(1)=2$ explicitly.",
+      "hint": "What is the denominator when $x=1$?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17108ar",
+      "kind": "term",
+      "front": "What is a mismatched value?",
+      "back": "A function value at a point that differs from the finite **limit** there. Replacing it with the limit makes the function continuous.",
+      "hint": "Think of $f(1)=7$ when the limit is $3$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12zjtrh",
+      "kind": "example",
+      "front": "For $f(x)=x+2$ when $x\\ne1$ but $f(1)=7$, what value repairs the function?",
+      "back": "$f(1)=3$. The limit at $1$ is $3$, so changing only $f(1)$ to $3$ makes it continuous.",
+      "hint": "Find the limit as $x$ approaches $1$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lkel2p",
+      "kind": "term",
+      "front": "What is a piecewise definition used for in a removable discontinuity?",
+      "back": "A **piecewise definition** uses one rule for $x\\ne a$ and a separate value at $x=a$. It keeps every other output while fixing the point.",
+      "hint": "Two rules for two parts of the domain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tsvf9d",
+      "kind": "term",
+      "front": "What is a jump discontinuity?",
+      "back": "A point where finite left-hand and right-hand limits exist but are **different**. Example: $f(x)=0$ for $x<0$ and $f(x)=1$ for $x>0$.",
+      "hint": "Look at each side separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d4ilzm",
+      "kind": "term",
+      "front": "What is a limit at a point $x=a$?",
+      "back": "The value $f(x)$ approaches as $x$ gets close to $a$, whether or not the function is **defined** at $a$.",
+      "hint": "The value exactly at the point is not used.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p3pq6b",
+      "kind": "concept",
+      "front": "How do you justify a repair, and how do you rule one out?",
+      "back": "To **justify**, state the finite limit and assign that value. To **rule out**, explain why the finite two-sided limit does not exist.",
+      "sectionId": "s4"
+    }
+  ]
+}

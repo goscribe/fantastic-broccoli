@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Solving related rates problems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:02.647Z",
+  "cards": [
+    {
+      "id": "13q28be",
+      "kind": "concept",
+      "front": "What is the most important rule when solving a related rates problem?",
+      "back": "**Differentiate with respect to time first**, then substitute the values at the stated instant. Substituting early makes a changing quantity's derivative wrongly zero.",
+      "hint": "Ask whether the quantity is still changing at the moment you substitute it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t3lg16",
+      "kind": "term",
+      "front": "What is a related rates problem?",
+      "back": "A problem where an equation connecting **changing quantities** is used to find an unknown rate from a known rate.",
+      "hint": "Think about two quantities that both depend on time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tmp288",
+      "kind": "formula",
+      "front": "In $\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}$ for a circle, what do the symbols mean?",
+      "back": "$A$ is area, $r$ is radius and $t$ is time. $\\frac{dA}{dt}$ is how fast the area changes in square centimeters per second, and $\\frac{dr}{dt}$ is how fast the radius changes in centimeters per second.",
+      "hint": "Each derivative is a rate with respect to time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ozxt0b",
+      "kind": "process",
+      "front": "What are the steps for solving a related rates problem?",
+      "back": "1. Name the changing quantities and write a connecting equation. 2. **Differentiate** with respect to time. 3. Substitute the instantaneous values. 4. Solve for the requested rate and check its units and sign.",
+      "hint": "Notice the order: the substitution comes after differentiation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lh6y0x",
+      "kind": "example",
+      "front": "A circular ripple's radius grows at 2 cm/s. How fast is its area growing when the radius is 3 cm?",
+      "back": "$\\frac{dA}{dt}=2\\pi(3)(2)=12\\pi$, so the area grows at $12\\pi$ square centimeters per second.",
+      "hint": "Start with $A=\\pi r^2$ and differentiate before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iujoj0",
+      "kind": "mistake",
+      "front": "A student puts r = 3 cm into $A=\\pi r^2$ before differentiating. What goes wrong?",
+      "back": "**Wrong**: the radius changes with time, so this makes its derivative zero and drops the $\\frac{dr}{dt}$ term. Differentiate first, then substitute.",
+      "hint": "Is the radius a fixed number during the whole process?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wws26n",
+      "kind": "mistake",
+      "front": "Why is the answer to the ripple problem in square centimeters per second, not centimeters per second?",
+      "back": "Area is measured in **square** units, so its rate is in square centimeters per second. The positive sign means the area is increasing.",
+      "hint": "Check the units of area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "188z8e1",
+      "kind": "formula",
+      "front": "What does the Pythagorean relationship $x^2+y^2=L^2$ describe in the ladder problem?",
+      "back": "$x$ is the base's distance from the wall, $y$ is the height of the top, and $L$ is the ladder's length. It works because the ladder and wall form a **right triangle**.",
+      "hint": "Which sides of the triangle are $x$, $y$ and $L$?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gc1y5v",
+      "kind": "concept",
+      "front": "Why does the ladder length $L$ produce no rate term after differentiating $x^2+y^2=L^2$?",
+      "back": "The ladder's **length is constant**, so its time derivative is zero. Only $x$ and $y$ contribute rate terms.",
+      "hint": "Does the ladder get longer or shorter while it moves?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04zjtpz",
+      "kind": "example",
+      "front": "A 10-foot ladder has its base 6 feet from the wall and moving away at 2 ft/s. How fast does the top move?",
+      "back": "The top moves **down** at $\\frac{3}{2}$ ft/s. Here $y=8$, and $2(6)(2)+2(8)\\frac{dy}{dt}=0$ gives $\\frac{dy}{dt}=-\\frac{3}{2}$.",
+      "hint": "Find $y$ first using $x^2+y^2=10^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01spgp5",
+      "kind": "mistake",
+      "front": "A student says the top of the ladder moves up at 3/2 ft/s because the answer is a fraction. What is wrong?",
+      "back": "The sign matters: $\\frac{dy}{dt}=-\\frac{3}{2}$ means the top moves **downward**. A negative result shows motion opposite to the positive direction chosen for $y$.",
+      "hint": "Which direction did you choose as positive for $y$?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08alqx7",
+      "kind": "term",
+      "front": "What are instantaneous values in a related rates problem?",
+      "back": "The **values of the quantities at the particular time** being examined. They are substituted only after differentiating.",
+      "hint": "Think of a single moment, not the whole process.",
+      "sectionId": "s2"
+    }
+  ]
+}

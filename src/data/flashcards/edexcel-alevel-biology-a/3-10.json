@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-10",
+  "topicCode": "3.10",
+  "topicName": "Mitosis and the cell cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:35.782Z",
+  "cards": [
+    {
+      "id": "01z4ls9",
+      "kind": "concept",
+      "front": "Which part of the cell cycle takes up most of the cell's time?",
+      "back": "**Interphase** takes up most of the cycle, with G1, S and G2 before division. The division phase is much shorter.",
+      "hint": "Compare the time spent growing and copying with the time spent splitting.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1veyury",
+      "kind": "concept",
+      "front": "Why does mitosis produce genetically identical daughter cells?",
+      "back": "Mitosis shares the **chromatids** equally between two nuclei. DNA was already copied in S phase, so both daughter nuclei get the same chromosomes and alleles as the parent.",
+      "hint": "Trace what happened to the DNA in S phase.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jjcffy",
+      "kind": "process",
+      "front": "What are the four stages of mitosis, in order?",
+      "back": "**Prophase**, metaphase, anaphase, telophase. Chromosomes condense and the envelope breaks down, then line up, then centromeres divide and chromatids move apart, then nuclear envelopes re-form.",
+      "hint": "Follow the events from the start of nuclear division to its end.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04dizim",
+      "kind": "term",
+      "front": "What name is given to the long period between divisions, containing G1, S and G2?",
+      "back": "**Interphase**. The cell grows, copies its DNA and checks it during this period before it divides.",
+      "hint": "Think about what the cell does before it divides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0res15e",
+      "kind": "term",
+      "front": "What is a chromatid?",
+      "back": "One of the two identical copies of a replicated chromosome, held together at the **centromere**.",
+      "hint": "Consider what S phase does to each chromosome.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14usxys",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that DNA is replicated during prophase?",
+      "back": "DNA is replicated in the **S phase** of interphase. Chromosomes are already copied before prophase starts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16uefgq",
+      "kind": "formula",
+      "front": "How is the mitotic index calculated from cell counts?",
+      "back": "$\\text{mitotic index}=\\frac{\\text{cells in mitosis}}{\\text{total cells observed}}$. It is a ratio, so it has no units.",
+      "hint": "Think about what the top and bottom of the ratio count.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1y5vegi",
+      "kind": "example",
+      "front": "A root tip squash has 120 cells observed, and 18 are in mitosis. What is the mitotic index?",
+      "back": "$\\frac{18}{120}=0.15$, so 15% of the cells are dividing.",
+      "hint": "Divide the cells in mitosis by the total cells observed.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "08bdpc9",
+      "kind": "term",
+      "front": "What is the spindle in mitosis?",
+      "back": "A structure of **protein** fibres that moves the chromosomes during nuclear division.",
+      "hint": "Think about what pulls the chromatids apart.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n6e6ri",
+      "kind": "process",
+      "front": "How does cytokinesis divide the cytoplasm differently in animal and plant cells?",
+      "back": "In animal cells the **cell surface membrane** pinches inwards. In plant cells a new cell wall forms across the middle.",
+      "hint": "Consider which cell type has a rigid outer layer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x5mqpo",
+      "kind": "concept",
+      "front": "Where in a flowering plant does mitosis mainly take place?",
+      "back": "In **meristems** at the tips of roots and shoots, where they add length to the plant.",
+      "hint": "Think about the parts of a plant that grow longer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1udbn5c",
+      "kind": "concept",
+      "front": "Which animal tissues show a lot of mitosis, and why?",
+      "back": "Tissues such as the **gut lining**, base of the skin and bone marrow. Their cells are worn away or lost often, so new cells are needed all the time.",
+      "hint": "Think about tissues that wear away quickly.",
+      "sectionId": "s5"
+    }
+  ]
+}

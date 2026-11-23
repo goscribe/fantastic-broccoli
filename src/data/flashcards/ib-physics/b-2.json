@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "b-2",
+  "topicCode": "B.2",
+  "topicName": "Greenhouse effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:30.661Z",
+  "cards": [
+    {
+      "id": "0yria9a",
+      "kind": "concept",
+      "front": "How do greenhouse gases make Earth's surface warmer?",
+      "back": "They **absorb** some outgoing infrared radiation at particular wavelengths, then re-emit it in all directions, including back towards the surface. This slows the loss of energy to space.",
+      "hint": "Think about what happens to the infrared the surface gives out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d5js8v",
+      "kind": "concept",
+      "front": "Why does adding greenhouse gases warm Earth instead of letting it lose energy to space as before?",
+      "back": "Added gases **initially reduce** outgoing radiation, so energy builds up. The surface and lower atmosphere warm until outgoing radiation rises enough to restore **balance** with the energy absorbed from the Sun.",
+      "hint": "Compare energy in and energy out at a steady temperature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sza9gs",
+      "kind": "term",
+      "front": "What is the difference between the natural and the enhanced greenhouse effect?",
+      "back": "The **natural greenhouse effect** is the warming from greenhouse gases already present without human additions. The **enhanced greenhouse effect** is the extra warming caused by increased concentrations, mainly from human activity.",
+      "hint": "One is the baseline; the other is the added warming.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t5ycwp",
+      "kind": "term",
+      "front": "What is a positive feedback?",
+      "back": "A **positive feedback** is when a change produces an effect that reinforces the original change. In the greenhouse effect, warming increases water vapour, which causes more warming.",
+      "hint": "Reinforces, rather than cancels, the original change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xcemh7",
+      "kind": "process",
+      "front": "Describe the water vapour feedback loop in the enhanced greenhouse effect, in order.",
+      "back": "1) Greenhouse gases warm the surface. 2) Evaporation increases. 3) Air holds more **water vapour**. 4) The extra vapour absorbs more infrared radiation. 5) Further warming occurs.",
+      "hint": "Start from the initial warming of the surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04nv3c9",
+      "kind": "concept",
+      "front": "Why is water vapour mainly a response to warming rather than the main direct cause of the human-driven increase?",
+      "back": "Warmer air can hold more **water vapour**, so its concentration largely follows temperature. It amplifies warming but is not the main direct human-added gas.",
+      "hint": "Consider what controls how much vapour the air can hold.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "043kee2",
+      "kind": "concept",
+      "front": "What are the main sources of carbon dioxide, and what removes it from the atmosphere?",
+      "back": "Sources include **respiration**, **decomposition** and **combustion**. Burning fossil fuels adds carbon stored underground. Plants and oceans take up carbon dioxide.",
+      "hint": "Sources, then sinks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p1zmbq",
+      "kind": "concept",
+      "front": "Name two sources of methane and one human-linked source of nitrous oxide.",
+      "back": "Methane comes from **wetlands**, **livestock**, rice cultivation, waste sites and fossil-fuel extraction. Nitrous oxide is released by **soils**, especially when nitrogen fertilisers are used in agriculture.",
+      "hint": "Link each gas to a specific process.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aobvr4",
+      "kind": "mistake",
+      "front": "A student says greenhouse gases form a solid barrier that reflects all heat back to the ground. What is wrong?",
+      "back": "Greenhouse gases do **not** reflect all heat. They **absorb and emit** infrared radiation at particular wavelengths, which slows energy loss to space.",
+      "hint": "Think about wavelengths, not a wall.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o430kw",
+      "kind": "mistake",
+      "front": "A student says humans caused the natural greenhouse effect. What is the error?",
+      "back": "The **natural greenhouse effect** is not caused by humans. Human emissions instead **strengthen** an effect that already exists, producing the enhanced greenhouse effect.",
+      "hint": "Which part is natural and which part is added?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19x97kz",
+      "kind": "concept",
+      "front": "What are the two main processes that raise sea level in a warmer world?",
+      "back": "**Land-ice melt** adds water to the ocean, and **seawater expansion** occurs as the water warms. Melting floating ice does not directly raise sea level in the same way.",
+      "hint": "One adds water; the other changes the water's volume.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rkh64h",
+      "kind": "term",
+      "front": "What is ocean acidification, and what causes it?",
+      "back": "**Ocean acidification** is a decrease in seawater pH. It is caused by the oceans absorbing atmospheric carbon dioxide, which dissolves in seawater. It is a separate chemical effect, not direct trapping of infrared radiation.",
+      "hint": "Which gas dissolves, and what does it do to pH?",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-18",
+  "topicCode": "5.18",
+  "topicName": "First-order differential equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:09.397Z",
+  "cards": [
+    {
+      "id": "1vhilnt",
+      "kind": "process",
+      "front": "How do you solve a separable first-order differential equation?",
+      "back": "**Separate** the y terms with dy and the x terms with dx, integrate each side with respect to its own variable, add one constant c, then rearrange to get y in terms of x.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16jerp2",
+      "kind": "concept",
+      "front": "Why does a first-order differential equation have many solutions, and what picks out one?",
+      "back": "Integration introduces an arbitrary constant, giving a **general solution** family of curves. An **initial condition**, such as $y=3$ when $x=0$, fixes the constant to give one particular solution.",
+      "hint": "Think about the constant from integrating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17o34yr",
+      "kind": "formula",
+      "front": "What is the solution of $\\frac{dN}{dt}=kN$, and what does the sign of $k$ tell you?",
+      "back": "$N=N_0e^{kt}$, where $N_0$ is the value at $t=0$. A positive $k$ gives **growth** and a negative $k$ gives **decay**.",
+      "hint": "Separate the variables first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lgbg6o",
+      "kind": "term",
+      "front": "What is a differential equation?",
+      "back": "An equation linking a function to at least one of its **derivatives**, such as a quantity linked to its rate of change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mm32cy",
+      "kind": "term",
+      "front": "What is a separable equation?",
+      "back": "A first-order equation that can be written as $\\frac{dy}{dx}=f(x)g(y)$, so the **variables** can be moved to opposite sides.",
+      "hint": "Look for a product of a function of x and a function of y.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lni8e6",
+      "kind": "term",
+      "front": "What is an initial condition?",
+      "back": "A given pair of values, such as $y=3$ when $x=0$, used to fix the **arbitrary constant** in a general solution.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vo1h75",
+      "kind": "mistake",
+      "front": "After integrating $\\frac{1}{y}\\,dy=2x\\,dx$ to get $\\ln|y|=x^2+c$, why is $y=e^{x^2}+c$ wrong?",
+      "back": "Because $e^{x^2+c}=Ae^{x^2}$: the constant **multiplies** the exponential rather than being added. The correct form is $y=Ae^{x^2}$.",
+      "hint": "Use exponent rules on $e^{x^2+c}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rrejyl",
+      "kind": "example",
+      "front": "Solve $\\frac{dy}{dx}=2xy$ given that $y=3$ when $x=0$.",
+      "back": "$y=3e^{x^2}$. Separating and integrating gives $\\ln|y|=x^2+c$, then $A=3$ from the initial condition.",
+      "hint": "Separate, integrate, then use $y=3$ at $x=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mc2v9m",
+      "kind": "example",
+      "front": "A sample has $\\frac{dM}{dt}=-0.2M$ with $M=500$ when $t=0$, where $t$ is in years. Find $M$ when $t=5$.",
+      "back": "$M=500e^{-1}\\approx184$ g. The mass is multiplied by $e^{-0.2}\\approx0.819$ each year.",
+      "hint": "Find A from the initial condition first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08s9v5o",
+      "kind": "process",
+      "front": "How do you verify that a proposed function is a solution of a differential equation?",
+      "back": "**Differentiate** the function, substitute it and its derivative into both sides, confirm they are equal on the interval, then check any initial condition.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k2eh3g",
+      "kind": "example",
+      "front": "Verify that $y=\\frac{1}{1-x}$ satisfies $\\frac{dy}{dx}=y^2$, with $y=1$ when $x=0$.",
+      "back": "Yes. Both sides equal $\\frac{1}{(1-x)^2}$, and $y=1$ at $x=0$. The solution is valid for $x<1$.",
+      "hint": "Differentiate $(1-x)^{-1}$ using the chain rule.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1awtxyh",
+      "kind": "mistake",
+      "front": "Why must you state the interval on which a solution is valid?",
+      "back": "A solution only counts where the function and its derivative both **exist**. For $y=\\frac{1}{1-x}$ this excludes $x=1$, where the function is undefined.",
+      "hint": "Where is $\\frac{1}{1-x}$ undefined?",
+      "sectionId": "s5"
+    }
+  ]
+}

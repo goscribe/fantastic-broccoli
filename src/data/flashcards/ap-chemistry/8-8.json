@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-8",
+  "topicCode": "8.8",
+  "topicName": "Properties of buffers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:22.640Z",
+  "cards": [
+    {
+      "id": "087xnz8",
+      "kind": "term",
+      "front": "What is a buffer, and what does it resist?",
+      "back": "A **buffer** is a solution that resists large pH changes when small amounts of acid or base are added.",
+      "hint": "Think about what stays fairly stable when a little acid or base goes in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ssgo7x",
+      "kind": "concept",
+      "front": "Which two components must a buffer contain, and what is an example pair?",
+      "back": "A **weak acid** and its **conjugate base**, both present in appreciable amounts. Example: $\\mathrm{CH_3COOH}$ and $\\mathrm{CH_3COO^-}$.",
+      "hint": "One is the acid form and one is the base form of the same species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ftdpef",
+      "kind": "concept",
+      "front": "How do the two buffer components handle added acid and added base differently?",
+      "back": "The **conjugate base** removes added acid, turning it into weak acid. The **weak acid** removes added base, turning it into water and conjugate base.",
+      "hint": "Match each component to the species it reacts with.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iexeh0",
+      "kind": "term",
+      "front": "What is a weak acid?",
+      "back": "A **weak acid** donates protons but ionizes only partially in water.",
+      "hint": "Compare how far it ionizes with a strong acid.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ps4dnq",
+      "kind": "term",
+      "front": "What is a conjugate base?",
+      "back": "A **conjugate base** is the species formed when an acid donates a proton.",
+      "hint": "Ask what remains after an acid loses H+.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "107ylcm",
+      "kind": "formula",
+      "front": "Write the reaction that removes added hydronium ion in an acetate buffer.",
+      "back": "$\\mathrm{CH_3COO^- + H_3O^+ \\rightarrow CH_3COOH + H_2O}$. The **acetate** (conjugate base) reacts with the added acid.",
+      "hint": "Acetate is the species that accepts the proton.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06v27x5",
+      "kind": "formula",
+      "front": "Write the reaction that removes added hydroxide ion in an acetate buffer.",
+      "back": "$\\mathrm{CH_3COOH + OH^- \\rightarrow CH_3COO^- + H_2O}$. The **acetic acid** (weak acid) reacts with the added base.",
+      "hint": "The weak acid gives a proton to the hydroxide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xf0f8r",
+      "kind": "process",
+      "front": "What are the steps of a buffer's response when a small amount of acid is added?",
+      "back": "1) The **conjugate base** reacts with the added $\\mathrm{H_3O^+}$. 2) Conjugate base falls and weak acid rises. 3) The pH falls only slightly.",
+      "hint": "Start with which component reacts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bholxv",
+      "kind": "mistake",
+      "front": "Common mistake: a student says the conjugate base removes added OH-. Why is this wrong?",
+      "back": "Wrong: the **weak acid** removes added OH-. The conjugate base handles added acid instead.",
+      "hint": "Check which component is the proton donor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aw09bm",
+      "kind": "mistake",
+      "front": "Does a strong acid mixed only with its salt make a buffer?",
+      "back": "No. It does not provide the same pair of **weak, reversible** reactants that a buffer needs to resist pH change.",
+      "hint": "Look at whether the acid is weak.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xl4k7k",
+      "kind": "concept",
+      "front": "Why does a buffer's pH still change a little after acid or base is added?",
+      "back": "The addition shifts the amounts of weak acid and conjugate base, so their balance changes. A buffer **resists** a pH change; it does not prevent one.",
+      "hint": "Resist is different from prevent.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pcu49n",
+      "kind": "concept",
+      "front": "Why does a buffer work only over a limited range of additions?",
+      "back": "If too much acid is added, the **conjugate base** can run out. If too much base is added, the **weak acid** can run out. Further additions then cause larger pH changes.",
+      "hint": "Think about what happens when one component is used up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02ne7pt",
+      "kind": "process",
+      "front": "What should you name when explaining a buffer's response in an exam answer?",
+      "back": "Name the **component** that reacts, its product, and the direction of the pH change.",
+      "hint": "Three things to name, in order.",
+      "sectionId": "s4"
+    }
+  ]
+}

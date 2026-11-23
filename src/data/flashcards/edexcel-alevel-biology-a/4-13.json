@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-13",
+  "topicCode": "4.13",
+  "topicName": "Drug testing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:52.037Z",
+  "cards": [
+    {
+      "id": "0k6727z",
+      "kind": "concept",
+      "front": "Why does a drug trial need a placebo control group rather than comparing the drug group with nothing?",
+      "back": "The placebo group shows how much improvement comes from **expectation**. The drug's effect is only the extra improvement in the drug group beyond the placebo group.",
+      "hint": "Think about what patients might improve from even without an active ingredient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15k0xg7",
+      "kind": "concept",
+      "front": "Why is a trial designed so that neither patients nor researchers know who gets the drug?",
+      "back": "Patients' expectations cannot change how they feel or report, and researchers cannot judge results more favourably. This **removes bias** from the results.",
+      "hint": "Think about who could influence the result, and how.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wj386o",
+      "kind": "process",
+      "front": "What is the order of the three phases of a clinical trial?",
+      "back": "Phase 1 gives the drug to a small group, often healthy volunteers, to test safety and dose range. Phase 2 tests early **efficacy** and the best dose in patients. Phase 3 compares it with existing treatment or placebo in large groups.",
+      "hint": "Each phase only starts if the earlier one showed the drug is safe enough.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lcyvuj",
+      "kind": "term",
+      "front": "What is pre-clinical testing?",
+      "back": "**Pre-clinical testing** is laboratory, computer and animal testing of a new drug before it is given to any human volunteer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09bvxvf",
+      "kind": "term",
+      "front": "What is meant by the efficacy of a drug?",
+      "back": "**Efficacy** is the ability of a drug to produce its intended beneficial effect.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01rbtun",
+      "kind": "term",
+      "front": "What is bias in a trial?",
+      "back": "**Bias** is a systematic influence that pushes the results away from the true value in one direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b1u8zh",
+      "kind": "concept",
+      "front": "How does random allocation help a trial produce trustworthy results?",
+      "back": "Each volunteer is placed in a group **by chance**, so the groups end up similar in age, health and other features. This reduces bias between groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1828qju",
+      "kind": "concept",
+      "front": "Why is a result from a handful of patients less trustworthy than one from a large group?",
+      "back": "A small group can easily show a difference that is just **coincidence**. Large groups reduce the effect of chance.",
+      "hint": "Compare how much a single unusual patient could shift the result.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sd2dlb",
+      "kind": "term",
+      "front": "What is a placebo?",
+      "back": "A **placebo** is a dummy treatment that looks and tastes like the drug but has no active ingredient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j01cuc",
+      "kind": "mistake",
+      "front": "A student says a double-blind trial means there are two groups of patients. What is wrong with this?",
+      "back": "Double-blind means **two sets of people**, the patients and the researchers, are unaware of who receives which treatment. It does not describe the number of patient groups.",
+      "hint": "Think about who is kept unaware, not how the groups are split.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yq9tdv",
+      "kind": "mistake",
+      "front": "A student says phase 1 of a clinical trial mainly tests whether the drug works. What is wrong?",
+      "back": "Phase 1's **first aim is safety**, not efficacy. Early evidence of whether the drug works is gathered in phase 2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pyum33",
+      "kind": "formula",
+      "front": "How is the percentage of patients who improved in a group calculated?",
+      "back": "Percentage improved equals $\\frac{\\text{number improved}}{\\text{group size}}\\times100$, giving a **percentage** (%). Dividing by group size lets groups of different sizes be compared fairly.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1vdl2rj",
+      "kind": "example",
+      "front": "In a trial, 99 of 150 patients on a drug improved and 45 of 150 on a placebo improved. What is the difference in percentage improved?",
+      "back": "Drug: $\\frac{99}{150}\\times100=66\\%$. Placebo: $\\frac{45}{150}\\times100=30\\%$. Difference: $66\\%-30\\%=36$ percentage points.",
+      "hint": "Work out each group's percentage first, then subtract.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1h7qvmq",
+      "kind": "process",
+      "front": "What happens after phase 3 trial results show the benefits outweigh the risks?",
+      "back": "Regulators may **license** the drug. Monitoring then continues after release to find rare side effects.",
+      "sectionId": "s2"
+    }
+  ]
+}

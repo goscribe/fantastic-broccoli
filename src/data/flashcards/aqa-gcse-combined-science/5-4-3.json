@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-4-3",
+  "topicCode": "5.4.3",
+  "topicName": "Electrolysis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:49.289Z",
+  "cards": [
+    {
+      "id": "0lqijvk",
+      "kind": "mistake",
+      "front": "Why does being ionic not mean a solid can be electrolysed?",
+      "back": "Its **ions are fixed in place** and cannot move to the electrodes. The substance must be molten or dissolved so the ions can move and carry the current.",
+      "hint": "Think about what the current needs to flow through the electrolyte.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17lk0kb",
+      "kind": "concept",
+      "front": "What happens to positive ions when they reach the cathode during electrolysis?",
+      "back": "They **gain electrons**. The cathode is the negative electrode, so it attracts the positive ions.",
+      "hint": "Think about which charges attract each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hmx1cp",
+      "kind": "process",
+      "front": "How do you predict the product at the cathode of an aqueous solution?",
+      "back": "Compare the metal with **hydrogen** in reactivity. If the metal is more reactive than hydrogen, hydrogen forms. If it is less reactive, the metal forms.",
+      "hint": "Check the metal against hydrogen before naming the product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0goaq2p",
+      "kind": "term",
+      "front": "What is an electrolyte?",
+      "back": "The **molten ionic compound or ionic solution** that contains mobile ions, which carry electric charge during electrolysis.",
+      "hint": "It is the liquid placed between the two electrodes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11cwabd",
+      "kind": "term",
+      "front": "What is the anode in electrolysis?",
+      "back": "The **positive electrode**, where negative ions move towards it and lose electrons.",
+      "hint": "Compare its charge with the charge on the cathode.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1frievq",
+      "kind": "example",
+      "front": "What forms at each electrode during electrolysis of molten $\\text{NaCl}$?",
+      "back": "**Sodium** forms at the cathode and **chlorine** forms at the anode, because the melt contains only sodium and chloride ions.",
+      "hint": "Positive ions move to the cathode; negative ions move to the anode.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ebb36r",
+      "kind": "mistake",
+      "front": "Why is hydrogen wrongly predicted at the cathode when electrolysing molten $\\text{PbBr}_2$?",
+      "back": "A **molten compound** has only its own ions and no water, so hydrogen ions are not present to form hydrogen.",
+      "hint": "Ask which ions the melt actually contains.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q9up7c",
+      "kind": "term",
+      "front": "What are halide ions?",
+      "back": "**Negative ions of halogen elements**, such as chloride, bromide and iodide ions.",
+      "hint": "Look at which group of the periodic table the halogens belong to.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h59uix",
+      "kind": "example",
+      "front": "What forms at each electrode when aqueous copper sulfate is electrolysed with inert electrodes?",
+      "back": "**Copper** forms at the cathode, because copper is less reactive than hydrogen. **Oxygen** forms at the anode, because sulfate is not a halide ion.",
+      "hint": "Check the metal's reactivity against hydrogen first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1egqbnr",
+      "kind": "example",
+      "front": "What forms at the anode when concentrated aqueous $\\text{NaCl}$ is electrolysed with inert electrodes?",
+      "back": "**Chlorine** forms, because the concentrated solution contains halide ions, which take priority over oxygen from water.",
+      "hint": "Ask which negative ions are present besides those from water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "115s0p8",
+      "kind": "mistake",
+      "front": "Why might the products change if the anode is a reactive metal rather than an inert one?",
+      "back": "A **reactive anode can dissolve** and react, so the inert-electrode rules for anode products no longer apply.",
+      "hint": "Think about what the electrode material itself might do during electrolysis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02o7i9f",
+      "kind": "term",
+      "front": "What are electrodes in electrolysis?",
+      "back": "**Conductors** that connect the electrolyte to the power supply, carrying current into and out of the electrolyte.",
+      "hint": "Think about what links the circuit to the liquid.",
+      "sectionId": "s1"
+    }
+  ]
+}

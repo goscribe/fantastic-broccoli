@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a3-1",
+  "topicCode": "A3.1",
+  "topicName": "Database fundamentals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:57.603Z",
+  "cards": [
+    {
+      "id": "1hcwass",
+      "kind": "term",
+      "front": "What is a database?",
+      "back": "A **database** is an organised collection of related data held electronically, so it can be retrieved, updated and managed efficiently.",
+      "hint": "Think of a school office keeping student details and timetables.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0otoi4a",
+      "kind": "concept",
+      "front": "What does a DBMS do for the people and programs that use a database?",
+      "back": "A **DBMS** is the software that carries out their requests, storing and retrieving data, controlling access, keeping data consistent when several users edit, and backing up data.",
+      "hint": "It sits between users and the stored data.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ucqxta",
+      "kind": "concept",
+      "front": "How does a relational database avoid repeating the same facts?",
+      "back": "It splits the data into several **linked tables**, joined through **primary keys** such as a student ID, so each fact is stored once.",
+      "hint": "Which field identifies each record?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d3g354",
+      "kind": "term",
+      "front": "What is a primary key?",
+      "back": "A **primary key** is a field, or set of fields, whose value identifies each record in a table uniquely.",
+      "hint": "A student ID is a typical example.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "115z1bg",
+      "kind": "mistake",
+      "front": "Is the DBMS the same thing as the database?",
+      "back": "No. The **database** is the stored data, and the **DBMS** is the software that manages it.",
+      "hint": "One is data, the other is software.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18lgsd7",
+      "kind": "concept",
+      "front": "Why does a flat file cause data redundancy and inconsistency?",
+      "back": "It keeps all data in one table, so a repeated fact such as an address is stored in every row. Correcting one copy and missing another leaves two different addresses.",
+      "hint": "Look at how Ana's address appears in the table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p4ifue",
+      "kind": "term",
+      "front": "What is a flat file?",
+      "back": "A **flat file** is a database held in a single table, with no links to other tables.",
+      "hint": "One table only.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f18rs8",
+      "kind": "term",
+      "front": "What is a record, and how does it differ from a field?",
+      "back": "A **record** is one row holding all the fields for a single item. A **field** is one column holding one kind of fact about every record.",
+      "hint": "Rows versus columns.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rqzs6i",
+      "kind": "process",
+      "front": "What are the four main tasks of a DBMS?",
+      "back": "It stores and retrieves data when asked, controls access through accounts and permissions, keeps data consistent when several users edit, and backs up and recovers data after a failure.",
+      "hint": "Four tasks, each starting with a different verb.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yumcyp",
+      "kind": "term",
+      "front": "What is data integrity?",
+      "back": "**Data integrity** is the accuracy, consistency and validity of data throughout its life in a database.",
+      "hint": "Think of data that stays correct.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08kucmv",
+      "kind": "term",
+      "front": "What is a data type?",
+      "back": "A **data type** states what kind of value a field may hold. The DBMS uses it to check input and to decide how much space to reserve.",
+      "hint": "It sets the rules for a field's values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1psg0r4",
+      "kind": "example",
+      "front": "Which data type suits a field recording whether a library book is on loan?",
+      "back": "**Boolean**, because the field only needs to hold true or false.",
+      "hint": "The field has just two possible values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b1epz0",
+      "kind": "mistake",
+      "front": "Why is a phone number stored as text rather than as an integer?",
+      "back": "Text keeps the **leading zeros**, which an integer would drop. Phone numbers are never used in calculations, so a number type gives no benefit.",
+      "hint": "Think about what a number type removes.",
+      "sectionId": "s5"
+    }
+  ]
+}

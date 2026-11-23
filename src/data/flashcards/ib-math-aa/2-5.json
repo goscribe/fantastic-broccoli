@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Composite and inverse functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:08.561Z",
+  "cards": [
+    {
+      "id": "0wr9nr0",
+      "kind": "term",
+      "front": "What does the composite function $(f\\circ g)(x)$ mean?",
+      "back": "**Composite function**: $(f\\circ g)(x)=f(g(x))$. Apply $g$ first, then feed its output into $f$.",
+      "hint": "Read it from the inside out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r7nsy7",
+      "kind": "concept",
+      "front": "What does the inverse function $f^{-1}$ do?",
+      "back": "It **undoes** $f$: it sends each output of $f$ back to the input that produced it, so $f^{-1}(f(x))=x$.",
+      "hint": "Think of running a machine in reverse.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16ex86x",
+      "kind": "concept",
+      "front": "Why does $f(x)=x^2$ have no inverse function over all real numbers?",
+      "back": "Different inputs give the same output, since $3$ and $-3$ both give $9$. The function must be **one-to-one** to be reversed, so it is not.",
+      "hint": "Compare $f(3)$ and $f(-3)$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15h2n3y",
+      "kind": "mistake",
+      "front": "Is $f^{-1}(x)$ the same as $\\frac{1}{f(x)}$?",
+      "back": "**No**. The $-1$ marks the inverse function, not a reciprocal. The reciprocal of $f(x)$ is a different function.",
+      "hint": "Think about what the index $-1$ refers to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kenk2i",
+      "kind": "mistake",
+      "front": "Is $(f\\circ g)(x)$ the same as the product $f(x)g(x)$?",
+      "back": "**No**. The composite chains the functions, feeding $g(x)$ into $f$. The product multiplies their outputs.",
+      "hint": "Chaining is not multiplying.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kxfqo0",
+      "kind": "process",
+      "front": "What are the steps to find the inverse rule of $f$?",
+      "back": "Write $y=f(x)$, **swap** $x$ and $y$, rearrange to make $y$ the subject, then write the result as $f^{-1}(x)$.",
+      "hint": "Start by writing $y$ equals $f$ of $x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08reueu",
+      "kind": "concept",
+      "front": "For $(f\\circ g)(x)$ to be defined, what conditions must hold?",
+      "back": "$x$ must lie in the **domain** of $g$, and the output $g(x)$ must lie in the domain of $f$.",
+      "hint": "Apply the inner function first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1roljk3",
+      "kind": "example",
+      "front": "For $f(x)=\\sqrt{x}$ and $g(x)=x-4$, find $(f\\circ g)(x)$ and its domain.",
+      "back": "$(f\\circ g)(x)=\\sqrt{x-4}$, with domain $x\\ge4$, because $x-4\\ge0$ is needed for a square root.",
+      "hint": "Put $g(x)$ inside $f$, then set the inside non-negative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v9e91z",
+      "kind": "example",
+      "front": "Find $f^{-1}(x)$ for $f(x)=\\frac{2x+1}{x-3}$, where $x\\ne3$.",
+      "back": "$f^{-1}(x)=\\frac{3x+1}{x-2}$, for $x\\ne2$. The domain of $f^{-1}$ is the range of $f$.",
+      "hint": "Swap $x$ and $y$, then collect the $y$ terms on one side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b5aql0",
+      "kind": "process",
+      "front": "How can you evaluate $f^{-1}(a)$ without first finding the inverse rule?",
+      "back": "Let $f^{-1}(a)=b$, so $f(b)=a$, and solve for $b$. For $f(x)=5x-2$, $f^{-1}(8)=2$ because $5(2)-2=8$.",
+      "hint": "Write $f(b)=a$ and solve for $b$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0yxyxaa",
+      "kind": "example",
+      "front": "Solve $(f\\circ g)(x)=11$ for $f(x)=2x+1$ and $g(x)=x^2-3$.",
+      "back": "$x=\\pm2\\sqrt{2}$. The composite is $2x^2-5=11$, so $x^2=8$.",
+      "hint": "Write out the composite rule first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1niayfk",
+      "kind": "concept",
+      "front": "How is the graph of $f^{-1}$ related to the graph of $f$?",
+      "back": "It is the **reflection** of $f$ in the line $y=x$. A point $(a,b)$ on $f$ becomes $(b,a)$ on $f^{-1}$.",
+      "hint": "Think about swapping coordinates.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lezhdz",
+      "kind": "mistake",
+      "front": "After solving a composite equation, do you need to check the answers?",
+      "back": "**Yes**. Check each answer against the domain of the inner function, and reject any value that is not allowed.",
+      "sectionId": "s6"
+    }
+  ]
+}

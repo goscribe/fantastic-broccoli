@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b3-2",
+  "topicCode": "B3.2",
+  "topicName": "OOP with multiple classes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:17.882Z",
+  "cards": [
+    {
+      "id": "1x96213",
+      "kind": "concept",
+      "front": "How do you decide between inheritance and composition for two related classes?",
+      "back": "Ask whether the new class is a **kind of** the old one (is-a, so use inheritance) or **contains** one (has-a, so use composition). Name the relationship and one consequence for changing the code.",
+      "hint": "Think about is-a versus has-a.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1w9m050",
+      "kind": "term",
+      "front": "What is a reference?",
+      "back": "A **reference** is a value held in a variable or attribute that identifies where an object is stored in memory. It works like an address that tells the program where to look.",
+      "hint": "Think about how a program finds an object.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wqpfxs",
+      "kind": "term",
+      "front": "What does it mean to override a method?",
+      "back": "To **override** a method, a subclass defines a method with the same name as an inherited one, so objects of the subclass use the new version instead of the inherited version.",
+      "hint": "Compare the subclass version with the inherited one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jjpehl",
+      "kind": "concept",
+      "front": "How do Loan and Book objects cooperate in a library system?",
+      "back": "They form an **association**: a Loan object calls a method of a Book object, such as getTitle, to use the Book's data.",
+      "hint": "Name both classes and the method call that links them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v2fgu8",
+      "kind": "term",
+      "front": "What is composition?",
+      "back": "**Composition** is a design in which a class has attributes that are objects of other classes, forming a has-a relationship, such as a Car that has an Engine.",
+      "hint": "Think about the whole and its parts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wdthsy",
+      "kind": "process",
+      "front": "What are the steps to design a Car that starts its Engine?",
+      "back": "1. Engine has running, set to false by its constructor. 2. Engine.start sets running to true. 3. Car has an engine attribute, created in its constructor. 4. Car.start calls engine.start().",
+      "hint": "Start with the part class.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gn6336",
+      "kind": "term",
+      "front": "What is inheritance?",
+      "back": "**Inheritance** lets a new class take the attributes and methods of an existing class, so it reuses code instead of repeating it. It models an is-a relationship.",
+      "hint": "Think about a Car and a Vehicle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uk8zie",
+      "kind": "term",
+      "front": "What is the difference between a superclass and a subclass?",
+      "back": "The **superclass** is the existing class whose attributes and methods are inherited. The **subclass** is the new class that inherits them and may add or override features.",
+      "hint": "Which class is inherited from?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07kevu9",
+      "kind": "concept",
+      "front": "Why does a change in a superclass matter for its subclasses?",
+      "back": "Changes made in the **superclass** are available to every subclass, so subclasses avoid repeating code that the superclass already holds.",
+      "hint": "Think about one change reaching many classes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0htjgcp",
+      "kind": "example",
+      "front": "After s1 = new Student('Ben', 10), then s2 = s1, then s2.setGrade(11), what is s1.grade?",
+      "back": "**11**. The assignment copies the reference, so s1 and s2 refer to the same Student object, and setGrade changes that one object.",
+      "hint": "Do s1 and s2 point to one object or two?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17cggqs",
+      "kind": "mistake",
+      "front": "A student writes s2 = s1 and thinks they now have two separate objects. What is wrong?",
+      "back": "Assigning one object variable to another does **not** make a new object. Both names refer to the same object, so changing one changes the other.",
+      "hint": "Copying a reference is not the same as copying the object.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "102xrji",
+      "kind": "example",
+      "front": "Bicycle extends Vehicle and overrides move to output pedalling. What is the output of b.move() where b = new Bicycle()?",
+      "back": "**pedalling**. Bicycle defines its own move, so the program uses that version rather than the inherited one in Vehicle.",
+      "hint": "Which move version does the object use?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0moucpl",
+      "kind": "example",
+      "front": "Should Bicycle and Wheel use inheritance or composition, and why?",
+      "back": "**Composition**. A bicycle has wheels and is not a kind of wheel, so this is a has-a relationship.",
+      "hint": "Ask whether it is is-a or has-a.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "05vilq7",
+      "kind": "concept",
+      "front": "How does a change to a superclass compare with a change to a part in composition?",
+      "back": "With **inheritance**, a superclass change affects all subclasses. With **composition**, a change in a part stays contained, and a part can be replaced with less effect.",
+      "hint": "Think about how tightly the classes are linked.",
+      "sectionId": "s6"
+    }
+  ]
+}

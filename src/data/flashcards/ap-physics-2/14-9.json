@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-9",
+  "topicCode": "14.9",
+  "topicName": "Thin-film interference",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:49.476Z",
+  "cards": [
+    {
+      "id": "1asnod4",
+      "kind": "concept",
+      "front": "Why do soap bubbles and oil slicks show colors even though they contain no dye?",
+      "back": "Light reflects from the **top and bottom surfaces** of a very thin film, and the two reflected waves overlap and interfere. Some wavelengths reinforce while others cancel.",
+      "hint": "Think about how many reflections there are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v48fcl",
+      "kind": "concept",
+      "front": "What two effects decide whether two reflections from a thin film reinforce or cancel?",
+      "back": "The **path difference** and any **phase change**. For near-perpendicular light the path difference is about $2t$, and each inverted reflection adds a half-cycle phase change.",
+      "hint": "One effect is geometric, one comes from the boundaries.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mya7ez",
+      "kind": "concept",
+      "front": "When is a reflected light wave inverted?",
+      "back": "When it reflects at a boundary with a medium of **higher index of refraction**, giving a half-cycle phase change. Reflection into a lower index gives no phase change.",
+      "hint": "Compare the index beyond the boundary with the index before it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bfkgua",
+      "kind": "term",
+      "front": "What is a thin film?",
+      "back": "A **thin film** is a transparent layer whose thickness is about the size of a wavelength of visible light.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04p76rg",
+      "kind": "term",
+      "front": "What is a phase change in thin-film reflection?",
+      "back": "A **phase change** is a half-cycle shift, equal to half a wavelength, that a reflected wave undergoes at a boundary with a higher index of refraction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r2wwma",
+      "kind": "formula",
+      "front": "What is the wavelength of light inside a film, and what do its symbols mean?",
+      "back": "$\\lambda_\\mathrm{film}=\\frac{\\lambda}{n}$, where $\\lambda$ is the wavelength in air (m or nm) and $n$ is the film's index of refraction (no unit).",
+      "hint": "Light slows down inside the film.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0by1rz4",
+      "kind": "formula",
+      "front": "For near-perpendicular light with exactly one inverted reflection, what condition gives bright reflection?",
+      "back": "$2t=\\left(m+\\frac{1}{2}\\right)\\lambda_\\mathrm{film}$ with $m=0,1,2,\\dots$, where $t$ is the film thickness and $\\lambda_\\mathrm{film}$ is the wavelength inside the film.",
+      "hint": "Use the wavelength inside the film.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dqbjkw",
+      "kind": "process",
+      "front": "What are the steps to predict whether a thin film reflects brightly or darkly?",
+      "back": "1) Count the inverted reflections. 2) Find the path difference $2t$. 3) Convert to $\\lambda_\\mathrm{film}=\\frac{\\lambda}{n}$. 4) Exactly one inversion: bright at half-wavelengths, dark at whole wavelengths. Both or neither: swap these.",
+      "hint": "Start by checking the index at each surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nisnda",
+      "kind": "mistake",
+      "front": "Which wavelength should you put into the thin-film conditions?",
+      "back": "Use the wavelength **inside the film**, $\\frac{\\lambda}{n}$, not the wavelength in air, because the path $2t$ lies within the film.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ejp9rr",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every reflection in a thin film is inverted?",
+      "back": "Only reflection at a boundary with a **higher index** inverts the wave. Light that passes through a boundary is never inverted, so check both surfaces before choosing a row.",
+      "hint": "Check the index at each boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dh73zx",
+      "kind": "example",
+      "front": "A soap film in air (n = 1.33) must strongly reflect 560 nm light. What is its smallest thickness?",
+      "back": "About **105 nm**. $\\lambda_\\mathrm{film}=\\frac{560}{1.33}\\approx421\\,\\mathrm{nm}$, and with one inversion the smallest bright thickness is $t=\\frac{\\lambda_\\mathrm{film}}{4}$.",
+      "hint": "Only the top reflection is inverted here.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tgr3zi",
+      "kind": "example",
+      "front": "A film in air (n = 1.50) with one inverted reflection is lit by 600 nm light in air. What is its smallest nonzero thickness for dark reflection?",
+      "back": "**200 nm**. $\\lambda_\\mathrm{film}=\\frac{600}{1.50}=400\\,\\mathrm{nm}$, and dark reflection gives $2t=m\\lambda_\\mathrm{film}$, so $m=1$ gives $t=200\\,\\mathrm{nm}$.",
+      "hint": "Dark needs whole wavelengths when one reflection is inverted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "115w6ns",
+      "kind": "concept",
+      "front": "Why does a quarter-wavelength antireflective coating on glass reduce reflection?",
+      "back": "Both reflections are inverted, so the phase changes cancel. At thickness $\\frac{\\lambda_\\mathrm{film}}{4}$ the path difference is half a wavelength, so the two reflected waves **cancel**.",
+      "hint": "Count the inverted reflections.",
+      "sectionId": "s5"
+    }
+  ]
+}

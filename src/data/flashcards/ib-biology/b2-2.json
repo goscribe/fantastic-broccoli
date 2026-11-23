@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b2-2",
+  "topicCode": "B2.2",
+  "topicName": "Organelles and compartmentalization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:47.035Z",
+  "cards": [
+    {
+      "id": "1uzspgd",
+      "kind": "concept",
+      "front": "Why do eukaryotic cells separate their activities into membrane-bound compartments?",
+      "back": "**Compartmentalisation** keeps enzymes and reactants together and maintains conditions suited to each reaction. This lets processes with different requirements run in one cell.",
+      "hint": "Think about what could clash if all enzymes were mixed in one space.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0s4a95z",
+      "kind": "concept",
+      "front": "Why does a photosynthetic plant cell need both chloroplasts and mitochondria?",
+      "back": "**Chloroplasts** carry out photosynthesis, making organic molecules. **Mitochondria** carry out aerobic respiration, releasing usable energy from those molecules.",
+      "hint": "Consider what each process makes or releases.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lm437h",
+      "kind": "process",
+      "front": "Describe the route of a protein made for secretion, from ribosome to cell surface.",
+      "back": "A **rough endoplasmic reticulum** ribosome makes the protein, and the ER helps fold and transport it. The **Golgi apparatus** modifies and sorts it, then a vesicle carries it to the cell surface.",
+      "hint": "Follow the protein through each compartment in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b7b97s",
+      "kind": "term",
+      "front": "What is the nucleus?",
+      "back": "A **membrane-bound** organelle containing most of a eukaryotic cell's DNA. Its envelope separates the DNA from the cytoplasm, and nuclear pores let selected molecules pass.",
+      "hint": "Think about where most of the cell's DNA is kept.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ayf25e",
+      "kind": "term",
+      "front": "What do ribosomes do, and are they surrounded by a membrane?",
+      "back": "**Ribosomes** make proteins by joining amino acids in the order set by messenger RNA. They are not surrounded by membranes.",
+      "hint": "Consider what instructions they follow.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wpl3ip",
+      "kind": "term",
+      "front": "What is the endoplasmic reticulum, and how do rough and smooth forms differ?",
+      "back": "A **membrane network** connected to the nuclear envelope. Rough ER has attached ribosomes and helps fold and transport proteins; smooth ER lacks ribosomes and makes lipids.",
+      "hint": "Focus on what each form is attached to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ucmdz5",
+      "kind": "term",
+      "front": "What is a lysosome, and where is it especially common?",
+      "back": "A **membrane-bound** compartment containing digestive enzymes that break down materials, including worn cell parts. It is particularly common in animal cells.",
+      "hint": "Think about how a cell recycles its own parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13xuvcz",
+      "kind": "term",
+      "front": "What is the main job of mitochondria?",
+      "back": "Carrying out **aerobic respiration**, releasing energy used to produce ATP. Their folded inner membrane provides space for the ATP-producing reactions.",
+      "hint": "Think about the cell's energy currency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kqpsyx",
+      "kind": "concept",
+      "front": "How does the internal structure of a chloroplast relate to its function?",
+      "back": "Its internal membranes form **thylakoids**, which hold the pigments that absorb light for photosynthesis.",
+      "hint": "Think about what absorbs light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dri6f6",
+      "kind": "term",
+      "front": "What is the central vacuole, and what does it help maintain?",
+      "back": "A large **membrane-bound** compartment in many plant cells that stores cell sap. It helps maintain pressure against the cell wall.",
+      "hint": "Think about the water and dissolved substances it holds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k9n5jz",
+      "kind": "concept",
+      "front": "Is the cell wall an organelle, and what does it do?",
+      "back": "No. The **cell wall** lies outside the plasma membrane and provides support. It is a cell structure, not a membrane-bound organelle.",
+      "hint": "Compare where it sits with the plasma membrane.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mip7rn",
+      "kind": "mistake",
+      "front": "A student says every membrane-bound compartment in a cell does the same job. Why is this wrong?",
+      "back": "Compartments differ. Each one's **enzymes** and internal conditions suit particular reactions, so their jobs vary.",
+      "hint": "Think about what each compartment contains.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qx1b79",
+      "kind": "mistake",
+      "front": "A student says a plant cell does not need mitochondria because it photosynthesises. What is wrong?",
+      "back": "Photosynthesis makes organic molecules, but **aerobic respiration** in mitochondria releases the usable energy from them. Plant cells still need mitochondria.",
+      "hint": "What does respiration do that photosynthesis does not?",
+      "sectionId": "s3"
+    }
+  ]
+}

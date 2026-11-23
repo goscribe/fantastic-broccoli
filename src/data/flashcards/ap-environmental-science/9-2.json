@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-2",
+  "topicCode": "9.2",
+  "topicName": "Reducing ozone depletion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:18.163Z",
+  "cards": [
+    {
+      "id": "1f60gu0",
+      "kind": "concept",
+      "front": "Why is an international treaty needed to phase out ozone-depleting substances?",
+      "back": "Chemicals drift across borders, so no single country can fix the problem alone. The **Montreal Protocol** (1987) gave nations a shared treaty to phase them out.",
+      "hint": "Think about where the chemicals go after they are released.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xh40cf",
+      "kind": "concept",
+      "front": "What makes a good substitute for a CFC?",
+      "back": "A good substitute avoids **chlorine and bromine**, and it should also be safe, affordable, and efficient. Each option trades one concern for another.",
+      "hint": "Compare the substitutes in the table with the CFCs they replace.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nkq4zc",
+      "kind": "concept",
+      "front": "Why will the ozone layer take decades to recover even after CFC production stops?",
+      "back": "CFCs have a long **atmospheric lifetime**, so chlorine keeps reaching the stratosphere. Old equipment and foam still hold CFCs that can leak.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c1ppxv",
+      "kind": "term",
+      "front": "What is an ozone-depleting substance?",
+      "back": "A **human-made chemical**, such as a CFC or halon, that releases chlorine or bromine in the stratosphere and destroys ozone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m9ueqg",
+      "kind": "term",
+      "front": "What is a phase-out in the context of ozone-depleting substances?",
+      "back": "A **planned, gradual end** to the production and use of a substance. It gives industries time to switch to other products.",
+      "hint": "Think about what industries need before a ban takes full effect.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01yl8fe",
+      "kind": "process",
+      "front": "How can coolant be kept out of the air when old refrigerators and air conditioners are repaired or scrapped?",
+      "back": "Technicians use **refrigerant recovery** to capture the coolant for reuse or destruction, instead of venting it into the air.",
+      "hint": "Think about what happens to equipment at repair or disposal time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a217ij",
+      "kind": "mistake",
+      "front": "What mistake do students often make about stopping new production of CFCs?",
+      "back": "They assume it stops releases at once. **Old equipment and stored stocks** can still leak, so releases continue after production ends.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ao3npz",
+      "kind": "concept",
+      "front": "How did the Montreal Protocol treat developing countries?",
+      "back": "It gave them **longer deadlines** and financial help to adopt substitutes, because switching takes time and money.",
+      "hint": "Think about what switching to substitutes costs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1klrqe3",
+      "kind": "concept",
+      "front": "How does an HFC differ from an HCFC as a substitute for CFCs?",
+      "back": "An HFC contains **no chlorine**, so it does not destroy ozone, though many trap heat strongly. An HCFC still contains chlorine and harms ozone, though less than a CFC.",
+      "hint": "Look at which elements each compound contains.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l6b50z",
+      "kind": "concept",
+      "front": "What do ammonia, carbon dioxide, and propane have in common as substitutes?",
+      "back": "They contain **no chlorine, fluorine, or bromine**. Each still has a concern: ammonia is toxic if leaked, carbon dioxide needs high-pressure systems, and propane is flammable.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ke23qr",
+      "kind": "concept",
+      "front": "How do scientists track whether the ozone layer is recovering?",
+      "back": "They measure **stratospheric chlorine** and **Antarctic ozone** each spring. Levels of chlorine-containing chemicals have fallen since the treaty took effect.",
+      "hint": "Think about what is measured and when.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10ahrml",
+      "kind": "concept",
+      "front": "Why was a later amendment to the Montreal Protocol needed for HFCs?",
+      "back": "Many HFCs trap heat strongly, so a **later amendment** phases down HFCs. Substitutes can create new problems.",
+      "hint": "Consider the side effects of the substitutes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ykypx3",
+      "kind": "concept",
+      "front": "What made the ozone case a success, according to the note?",
+      "back": "Countries agreed on a **clear target**, had substitutes available, and shared costs. Production of the main ozone-depleting substances has fallen sharply.",
+      "sectionId": "s5"
+    }
+  ]
+}

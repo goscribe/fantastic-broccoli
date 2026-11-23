@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Counting principles",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:55.999Z",
+  "cards": [
+    {
+      "id": "0treucb",
+      "kind": "concept",
+      "front": "When should you multiply counting choices rather than add them?",
+      "back": "**Multiply** when tasks happen in sequence: if one task has $m$ ways and a second has $n$ ways, together there are $m\\times n$ ways. This is the **fundamental principle of counting**.",
+      "hint": "Think 'and' versus 'or'.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10rf6my",
+      "kind": "concept",
+      "front": "How do you decide between a permutation and a combination?",
+      "back": "Ask whether **order matters**. If it does (ranked, in order, different roles), use a permutation. If it does not (chosen, group, team), use a combination.",
+      "hint": "Look at the wording of the question.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nhn7bb",
+      "kind": "formula",
+      "front": "What is the formula for the number of permutations of r objects chosen from n distinct objects?",
+      "back": "$^nP_r=\\frac{n!}{(n-r)!}$, where $n$ is the number of distinct objects and $r$ is the number chosen. Dividing by $(n-r)!$ removes the places that are not used.",
+      "hint": "Order matters here.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0353gg9",
+      "kind": "formula",
+      "front": "What is the formula for combinations of r objects from n, and what does each symbol mean?",
+      "back": "$\\binom{n}{r}=\\frac{n!}{r!\\,(n-r)!}$, the number of ways to choose $r$ objects from $n$ distinct objects when order does not matter.",
+      "hint": "Divide the permutation count by $r!$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "165mp32",
+      "kind": "term",
+      "front": "What is a factorial?",
+      "back": "The **factorial** $n!$ is the product of all positive integers up to $n$, so $5!=5\\times4\\times3\\times2\\times1=120$. By definition $0!=1$.",
+      "hint": "Multiply down to 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18o93rw",
+      "kind": "mistake",
+      "front": "Why is $\\frac{8!}{6!}$ not equal to $\\frac{8}{6}$?",
+      "back": "Factorials do not divide like ordinary numbers. Cancel the common part instead: $\\frac{8!}{6!}=8\\times7=56$, not $\\frac{8}{6}$ or $2!$.",
+      "hint": "Write 8! out in full.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bwri7p",
+      "kind": "mistake",
+      "front": "A student adds the ways for two steps done one after the other. What is wrong?",
+      "back": "Steps done in sequence should be **multiplied**, giving $m\\times n$. Add only when one task replaces the other, using the addition principle $m+n$.",
+      "hint": "Is it 'and' or 'or'?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lhv5wm",
+      "kind": "mistake",
+      "front": "A student uses $\\frac{n!}{(n-r)!}$ to count a 3-person team with no roles. What is the error?",
+      "back": "Order does not matter for a team, so this overcounts. Use $\\binom{n}{r}$, which divides out the $r!$ orders of each group.",
+      "hint": "Does the order of team members matter?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uuqdl9",
+      "kind": "example",
+      "front": "How many 4-letter codes can be made from 6 different letters, with no repeats?",
+      "back": "$^6P_4=\\frac{6!}{2!}=6\\times5\\times4\\times3=360$ codes. Order matters because the code is ordered.",
+      "hint": "Use n = 6 and r = 4.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ee85sg",
+      "kind": "example",
+      "front": "How many groups of 3 can be picked from 12 pupils?",
+      "back": "$\\binom{12}{3}=\\frac{12\\times11\\times10}{3\\times2\\times1}=220$ groups, since order within the group does not matter.",
+      "hint": "Cancel before multiplying.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "023odyc",
+      "kind": "process",
+      "front": "What are the steps for counting arrangements where two objects must stay together?",
+      "back": "1) Glue the two objects into one block. 2) Arrange the blocks. 3) Arrange the objects inside the block. Multiply the results: five people give $4!\\times2!=48$.",
+      "hint": "Treat the pair as one object.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ce5h8p",
+      "kind": "process",
+      "front": "What is a good approach for 'not together' or 'at least one' conditions?",
+      "back": "Count all the arrangements, then **subtract** those that break the rule. This is usually shorter than listing every allowed case.",
+      "hint": "Find the total first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01ab1kr",
+      "kind": "example",
+      "front": "A club of 10 members chooses a president, secretary and treasurer, each a different member. How many ways are there?",
+      "back": "The roles are different, so order matters: $^{10}P_3=\\frac{10!}{7!}=10\\times9\\times8=720$ ways.",
+      "hint": "Use permutations.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ot6qfe",
+      "kind": "concept",
+      "front": "Why is $\\binom{n}{r}=\\binom{n}{n-r}$ true?",
+      "back": "Choosing the $r$ objects to take is the same as choosing the $n-r$ objects to leave behind, so the two counts are equal. This can shorten a calculation.",
+      "hint": "Think about who is left out.",
+      "sectionId": "s4"
+    }
+  ]
+}

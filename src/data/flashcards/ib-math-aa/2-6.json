@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Quadratic functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:07.156Z",
+  "cards": [
+    {
+      "id": "19gmg16",
+      "kind": "formula",
+      "front": "What is the equation of the axis of symmetry for $f(x)=ax^2+bx+c$, and what does the axis pass through?",
+      "back": "$x=-\\frac{b}{2a}$. It is a **vertical line through the vertex**, and the graph is a mirror image about it.",
+      "hint": "Think about the mirror line of the parabola.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01rhrfp",
+      "kind": "concept",
+      "front": "Which way does a parabola open, and what decides it?",
+      "back": "The sign of **$a$** decides it. If $a>0$ it opens upwards with a minimum vertex; if $a<0$ it opens downwards with a maximum vertex.",
+      "hint": "Only one coefficient matters here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rttk9a",
+      "kind": "concept",
+      "front": "What does vertex form $f(x)=a(x-h)^2+k$ show you straight away?",
+      "back": "The **vertex** $(h,k)$ and the axis $x=h$. The value $k$ is the minimum or maximum value of the function.",
+      "hint": "Read the coordinates from the form itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00uzl9x",
+      "kind": "term",
+      "front": "What is a quadratic function?",
+      "back": "A function that can be written as $f(x)=ax^2+bx+c$ where $a\\ne0$. Its highest power of $x$ is **2**.",
+      "hint": "Look at the highest power of $x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c6ygnd",
+      "kind": "term",
+      "front": "What is a parabola?",
+      "back": "The **symmetric U-shaped curve** that forms the graph of a quadratic function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u6blqe",
+      "kind": "example",
+      "front": "Find the vertex and axis of symmetry of $f(x)=2x^2-8x+5$.",
+      "back": "Axis $x=2$ and vertex **$(2,-3)$**. Since $a>0$, the vertex is a minimum point.",
+      "hint": "Find the axis first, then substitute it into $f$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iqp14f",
+      "kind": "process",
+      "front": "What are the steps to convert $ax^2+bx+c$ into vertex form by completing the square?",
+      "back": "Factor $a$ out of the $x^2$ and $x$ terms. Complete the square inside the bracket. Expand the outside $a$ and simplify the constant to get $a(x-h)^2+k$.",
+      "hint": "Start by factoring out $a$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "161ijfo",
+      "kind": "example",
+      "front": "Write $f(x)=2x^2-12x+7$ in vertex form and state the vertex.",
+      "back": "$f(x)=2(x-3)^2-11$, so the vertex is **$(3,-11)$**.",
+      "hint": "Complete the square on $x^2-6x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ol5u2v",
+      "kind": "mistake",
+      "front": "Why is the vertex of $f(x)=(x+3)^2+2$ not $(3,2)$?",
+      "back": "The vertex is **$(-3,2)$**. The sign inside the bracket is opposite to the $x$-coordinate of the vertex.",
+      "hint": "Compare the sign inside the bracket with the vertex.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bibyqu",
+      "kind": "formula",
+      "front": "In factorised form $f(x)=a(x-p)(x-q)$, where does the graph cross the $x$-axis and where is the axis of symmetry?",
+      "back": "It crosses at **$x=p$ and $x=q$**. The axis lies halfway between them, at $x=\\frac{p+q}{2}$.",
+      "hint": "The axis sits midway between the crossing points.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gznyaz",
+      "kind": "example",
+      "front": "Find the vertex of $f(x)=-(x+1)(x-5)$ and say whether it is a maximum or minimum.",
+      "back": "Vertex **$(2,9)$**. Since $a=-1<0$, it is a maximum point.",
+      "hint": "Use $p=-1$ and $q=5$ to find the axis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ca4eva",
+      "kind": "process",
+      "front": "What are the steps to sketch the graph of a quadratic function?",
+      "back": "1) Use the sign of $a$ to choose up or down. 2) Mark $(0,c)$. 3) Find the $x$-intercepts. 4) Find the vertex and draw the axis. 5) Draw a smooth symmetric curve.",
+      "hint": "Start with the direction of opening.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wxv6bf",
+      "kind": "mistake",
+      "front": "Does a negative $b$ or $c$ make a parabola open downwards?",
+      "back": "No. The direction depends on **$a$ alone**; $b$ and $c$ do not change which way the parabola opens.",
+      "hint": "Which coefficient was the direction linked to?",
+      "sectionId": "s2"
+    }
+  ]
+}

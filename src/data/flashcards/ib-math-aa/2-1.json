@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Equations of straight lines",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:05.227Z",
+  "cards": [
+    {
+      "id": "01pe3ib",
+      "kind": "formula",
+      "front": "How do you find the gradient of a straight line from two points on it?",
+      "back": "Use $m=\\frac{y_2-y_1}{x_2-x_1}$: the **gradient** is the change in $y$ divided by the change in $x$. It is the same everywhere on the line.",
+      "hint": "Subtract the y-values and the x-values in the same order.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o86h3w",
+      "kind": "formula",
+      "front": "In $y=mx+c$, what do $m$ and $c$ tell you about the line?",
+      "back": "$m$ is the **gradient** and $c$ is the **y-intercept**, the point $(0,c)$ where the line crosses the y-axis.",
+      "hint": "Rearrange the equation first if it is not in this form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kl35yv",
+      "kind": "formula",
+      "front": "What is the gradient rule for two perpendicular lines?",
+      "back": "The gradients multiply to give $-1$: $m_1m_2=-1$, so $m_2=-\\frac{1}{m_1}$. Flip the fraction and change its sign.",
+      "hint": "Think about lines meeting at a right angle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s4ycv0",
+      "kind": "formula",
+      "front": "What equation gives the line with gradient $m$ through the point $(x_1,y_1)$?",
+      "back": "$y-y_1=m(x-x_1)$. Every point on the line must give the same gradient $m$ with $(x_1,y_1)$.",
+      "hint": "Substitute the point and gradient, then rearrange to $y=mx+c$ if asked.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1im8mc9",
+      "kind": "process",
+      "front": "How do you find the equation of a line through two given points?",
+      "back": "First find $m$ from the two points. Then use either point in $y-y_1=m(x-x_1)$. The final equation is the same whichever point you choose.",
+      "hint": "Two steps: gradient first, then the point-gradient formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00ofqqi",
+      "kind": "process",
+      "front": "How do you find the point where two lines $y=mx+c$ meet?",
+      "back": "Set the two right-hand sides equal and solve for $x$. Then substitute that $x$ into either equation to find $y$.",
+      "hint": "Two equations, one shared point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1177zid",
+      "kind": "example",
+      "front": "Find the intersection point of $y=2x+1$ and $y=-x+7$.",
+      "back": "$(2,5)$. Setting $2x+1=-x+7$ gives $3x=6$, so $x=2$, and then $y=2(2)+1=5$.",
+      "hint": "Set the two expressions for $y$ equal.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16q6pc6",
+      "kind": "example",
+      "front": "Find the gradient of the line through $(1,2)$ and $(5,10)$.",
+      "back": "The gradient is $2$, since $m=\\frac{10-2}{5-1}=\\frac{8}{4}=2$.",
+      "hint": "Label your two points before substituting.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10d4ma7",
+      "kind": "example",
+      "front": "Find the gradient and y-intercept of $2x+3y=6$.",
+      "back": "Gradient $-\\frac{2}{3}$ and y-intercept $2$, after rearranging to $y=-\\frac{2}{3}x+2$.",
+      "hint": "Make $y$ the subject first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04p201r",
+      "kind": "mistake",
+      "front": "Why is the gradient of $2x+3y=6$ not $2$?",
+      "back": "The $2$ is the coefficient of $x$ in the unrearranged form. You must rearrange to $y=mx+c$ before reading off $m$, which gives $-\\frac{2}{3}$.",
+      "hint": "Which term is the $y$ term?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sswxnt",
+      "kind": "mistake",
+      "front": "What goes wrong when you find a gradient from two points?",
+      "back": "If you subtract the coordinates in a different order on the top and bottom, the **gradient** changes sign. Use the same order for both subtractions.",
+      "hint": "Check the order of your subtractions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o7uwfj",
+      "kind": "concept",
+      "front": "How can you tell that two lines are parallel?",
+      "back": "**Parallel** lines have equal gradients, $m_1=m_2$. Their intercepts differ, so they never meet.",
+      "hint": "Compare the gradients only.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1im79uq",
+      "kind": "mistake",
+      "front": "Do the perpendicular gradient rules work for vertical lines?",
+      "back": "No. Vertical lines have no gradient, so the rule $m_1m_2=-1$ does not cover them. A vertical line is perpendicular to a horizontal line.",
+      "hint": "Think about which lines have a gradient.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-10",
+  "topicCode": "6.10",
+  "topicName": "Long division and completing the square",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:24.390Z",
+  "cards": [
+    {
+      "id": "06tpai0",
+      "kind": "concept",
+      "front": "When should you use polynomial long division before integrating a rational function?",
+      "back": "Use it when the **numerator's degree** is at least the denominator's degree. The rewritten pieces are then easier to integrate.",
+      "hint": "Compare the highest powers of x on top and bottom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "023ar26",
+      "kind": "concept",
+      "front": "What does completing the square do to a quadratic denominator?",
+      "back": "It rewrites the quadratic as a **squared binomial** plus a constant, so $x^2+bx+c=(x+\\frac b2)^2+c-\\frac{b^2}{4}$ for a monic quadratic. It changes the form, not the values.",
+      "hint": "Halve the coefficient of x, then square it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sq920j",
+      "kind": "formula",
+      "front": "What is the inverse tangent pattern for $\\int\\frac{du}{u^2+a^2}$, when $a>0$?",
+      "back": "$\\frac1a\\arctan\\left(\\frac ua\\right)+C$. The **positive** constant $a$ sits under the square, so the denominator must be a sum of squares.",
+      "hint": "Check the scale a and the sign under the square.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m4cso4",
+      "kind": "process",
+      "front": "What are the steps of polynomial long division for a rational function?",
+      "back": "Divide the leading terms, multiply the result by the denominator, then **subtract**. Repeat until the remainder has a lower degree than the denominator.",
+      "hint": "It works like ordinary long division with numbers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i0z59h",
+      "kind": "mistake",
+      "front": "What is the mistake when the remainder after long division is not zero?",
+      "back": "Discarding it is wrong. Divide the **remainder** by the original denominator and include that fraction in the rewrite.",
+      "hint": "Every piece of the rewrite must be kept.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oc5rsz",
+      "kind": "concept",
+      "front": "When does completing the square give a sum-of-squares form?",
+      "back": "When the constant left after the squared binomial is **positive**, giving $(x-h)^2+a^2$. A zero or negative constant needs a different approach.",
+      "hint": "Look at the constant term after completing the square.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hhbs4r",
+      "kind": "term",
+      "front": "What is a logarithmic antiderivative?",
+      "back": "For a nonzero constant $a$, an antiderivative of $\\frac{1}{ax+b}$ is $\\frac1a\\ln|ax+b|$. A **constant over a linear denominator** gives this kind of result.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kdokdz",
+      "kind": "example",
+      "front": "Find $\\int\\frac{x^2+1}{x+1}\\,dx$ after dividing first.",
+      "back": "$\\frac{x^2}{2}-x+2\\ln|x+1|+C$, valid for $x\\ne-1$. Division first gives $x-1+\\frac{2}{x+1}$.",
+      "hint": "Start by dividing x^2 by x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qrq7on",
+      "kind": "mistake",
+      "front": "Why should the answer use $\\ln|x+1|$ rather than $\\ln(x+1)$?",
+      "back": "Use **absolute value** bars. The original function is defined on both sides of $x=-1$, so $\\ln|x+1|$ covers both.",
+      "hint": "Think about values of x where x+1 is negative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18v5nox",
+      "kind": "example",
+      "front": "Find $\\int\\frac{1}{x^2+4x+8}\\,dx$ by completing the square.",
+      "back": "$\\frac12\\arctan\\left(\\frac{x+2}{2}\\right)+C$. Completing the square first gives $(x+2)^2+2^2$.",
+      "hint": "Write x^2+4x+4 and adjust the constant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10ionln",
+      "kind": "mistake",
+      "front": "What should you check when an inverse tangent answer may need a constant factor?",
+      "back": "Do not skip the check. **Differentiate** your result to confirm it matches the original integrand, including any constant factor.",
+      "hint": "Differentiate your answer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09reb61",
+      "kind": "term",
+      "front": "What is a rational function?",
+      "back": "A **quotient of two polynomials**, defined wherever its denominator is nonzero.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s2-4",
+  "topicCode": "S2.4",
+  "topicName": "From models to materials",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:16.544Z",
+  "cards": [
+    {
+      "id": "19kgj4w",
+      "kind": "concept",
+      "front": "Why can a molecular substance often melt easily?",
+      "back": "Melting overcomes **intermolecular forces** between separate molecules, not the covalent bonds within them.",
+      "hint": "Think about what is actually separated when the substance melts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y4pkpb",
+      "kind": "concept",
+      "front": "How can electronegativity difference and average show the bonding character of a substance?",
+      "back": "A **large difference** suggests ionic character. A small difference with a high average suggests covalent character, and a low average suggests metallic character.",
+      "hint": "Use the van Arkel-Ketelaar triangle idea.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ffq59i",
+      "kind": "concept",
+      "front": "Why do solid metals conduct electricity, but solid ionic substances do not?",
+      "back": "Metals have **delocalised electrons** that can move through the structure. In a solid ionic substance, the ions cannot move freely within the lattice.",
+      "hint": "Name the moving charged particle in each case.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "013v301",
+      "kind": "term",
+      "front": "What is an ionic lattice?",
+      "back": "A **regular, repeating arrangement** of positive and negative ions held together by electrostatic attraction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02ie72e",
+      "kind": "term",
+      "front": "What is a metallic lattice?",
+      "back": "An arrangement of **positive metal ions** held together by attraction to delocalised electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qgq2h6",
+      "kind": "term",
+      "front": "What are intermolecular forces?",
+      "back": "**Attractions between separate molecules**, distinct from the covalent bonds within those molecules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sshrmh",
+      "kind": "process",
+      "front": "What steps should you follow when explaining the electrical conductivity of a substance?",
+      "back": "1) **Name the moving charged particle.** 2) State whether it can or cannot move in that state. 3) Conclude whether the substance conducts.",
+      "hint": "Three steps, in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wh4con",
+      "kind": "mistake",
+      "front": "A student says a substance with a high melting point must be ionic. What is wrong with this?",
+      "back": "A high melting point does **not identify one bonding model**. First identify which attractions melting must overcome.",
+      "hint": "Consider which attractions are being broken.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q7dt0y",
+      "kind": "concept",
+      "front": "Why are ionic solids brittle while metals are often malleable?",
+      "back": "In ionic solids, shifting layers bring **like-charged ions** together, so they repel and the solid breaks. In metals, layers slide while metallic attraction remains.",
+      "hint": "Think about what happens to the charges when layers move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14tvdlm",
+      "kind": "concept",
+      "front": "Why are many alloys harder than the pure metal?",
+      "back": "**Different-sized atoms** can hinder the movement of layers.",
+      "hint": "Think about what happens when layers try to slide.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eu2lz9",
+      "kind": "concept",
+      "front": "Why do giant covalent structures generally fail to dissolve?",
+      "back": "Separating their atoms requires **breaking covalent bonds**, so they are generally insoluble.",
+      "hint": "Compare with what breaks when a molecular solid dissolves.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z94e4h",
+      "kind": "concept",
+      "front": "Why do giant covalent structures often have very high melting points?",
+      "back": "Melting must **break many strong covalent bonds** throughout a continuous network.",
+      "hint": "Compare with melting a molecular substance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02bek43",
+      "kind": "mistake",
+      "front": "A student says graphite cannot conduct because it is a giant covalent structure. Is this correct?",
+      "back": "No. Most giant covalent structures do not conduct, but **graphite is an exception** because electrons can move along its layers.",
+      "hint": "Consider which particles can move in graphite.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10pgj7z",
+      "kind": "term",
+      "front": "What does malleable mean?",
+      "back": "Able to be **shaped by pressure without breaking**.",
+      "sectionId": "s4"
+    }
+  ]
+}

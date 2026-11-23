@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-15",
+  "topicCode": "7.15",
+  "topicName": "Ethics of performance-enhancing substances",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:55.835Z",
+  "cards": [
+    {
+      "id": "0kkoccc",
+      "kind": "term",
+      "front": "What is doping in sport?",
+      "back": "**Doping** is using a banned substance or method to gain a sporting advantage. Most sports forbid it, so it is usually done in secret.",
+      "hint": "Think about what makes a substance or method allowed or banned.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06jy5tq",
+      "kind": "concept",
+      "front": "Why are some substances banned in sport?",
+      "back": "Four reasons are given: **fairness**, health, spirit of sport and role models. A drug can give an advantage training cannot match, and many carry serious risks.",
+      "hint": "Think about who benefits, who is harmed and what sport is meant to reward.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13hl5jq",
+      "kind": "concept",
+      "front": "What is the strongest argument against allowing performance-enhancing drugs?",
+      "back": "**Harm**: some drugs have serious effects and long-term risks may not be fully known. Young athletes may also be unable to judge those risks or refuse pressure.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0krkozh",
+      "kind": "concept",
+      "front": "What is the main argument for allowing regulated drug use?",
+      "back": "**Autonomy**: adults have the right to decide what happens to their own bodies. Sport is already unequal through genes, coaching and funding.",
+      "hint": "Think about personal choice and how level sport already is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hbntjx",
+      "kind": "term",
+      "front": "How does erythropoietin (EPO) help endurance athletes?",
+      "back": "EPO is a **hormone**, made mainly by the kidneys, that stimulates red blood cell production. More red blood cells carry more oxygen to the muscles.",
+      "hint": "Think about the organ that makes it and what carries oxygen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1oe4hh4",
+      "kind": "term",
+      "front": "What is an anabolic steroid?",
+      "back": "An **anabolic steroid** is an artificial compound with effects like testosterone. It increases protein synthesis in muscle, so muscle mass rises faster during training.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p6jgbh",
+      "kind": "example",
+      "front": "Why might a beta blocker help an archer?",
+      "back": "A beta blocker reduces adrenaline's effect on the heart, slowing the heart rate and steadying the hands. Steadier hands make aiming more precise.",
+      "hint": "Think about what adrenaline does to the heart and the hands.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14k1iss",
+      "kind": "concept",
+      "front": "How can a diuretic help an athlete cheat?",
+      "back": "A **diuretic** increases urine output. It can dilute urine, which may hide other drugs from a test.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1afsakk",
+      "kind": "mistake",
+      "front": "Why is it wrong to equate genetic differences with doping?",
+      "back": "**Genes** are inherited and not chosen, whereas doping is a deliberate decision to gain an advantage. Only doping is a choice made to cheat.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gle7ui",
+      "kind": "mistake",
+      "front": "Why does a ban not automatically stop drug use?",
+      "back": "Testing is costly and imperfect, and bans can push use **underground**, where it becomes harder to detect and control.",
+      "hint": "Think about what secrecy does to testing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lx12ws",
+      "kind": "concept",
+      "front": "Why is out-of-competition testing important?",
+      "back": "**Out-of-competition testing** takes samples outside events, so athletes cannot stop taking a drug just before a competition to avoid detection.",
+      "hint": "Think about the timing of when athletes could hide a drug.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1r08xc4",
+      "kind": "concept",
+      "front": "What can clean athletes lose after a doping scandal?",
+      "back": "They may lose places, prize money or recognition, sometimes years after the event. Spectators also lose trust in the results.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ofvh03",
+      "kind": "concept",
+      "front": "How should you structure a discussion answer on drug use in sport?",
+      "back": "Give points **for** and **against**, then reach a reasoned **judgement** and explain why one side is stronger.",
+      "hint": "Think about what examiners reward beyond a list of points.",
+      "sectionId": "s5"
+    }
+  ]
+}

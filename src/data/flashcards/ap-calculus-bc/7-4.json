@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Reasoning with slope fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:44.786Z",
+  "cards": [
+    {
+      "id": "0edy4pb",
+      "kind": "concept",
+      "front": "What does one segment in a slope field tell you about a solution curve?",
+      "back": "It gives the **slope** of any solution curve passing through that point. For $\\frac{dy}{dx}=f(x,y)$, the segment at $(a,b)$ has slope $f(a,b)$, so a curve through it is tangent to the segment.",
+      "hint": "Think about what the differential equation assigns at that point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z933q5",
+      "kind": "process",
+      "front": "How do you trace a solution curve through a slope field from a given starting point?",
+      "back": "Start at the point and draw a **smooth** path that stays tangent to nearby segments as you move right or left. Do not join segment ends like dots.",
+      "hint": "Each segment gives direction only at its own location.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0387szi",
+      "kind": "concept",
+      "front": "What does an initial condition $y(a)=b$ select in a slope field?",
+      "back": "It selects **one solution path** through the field, starting at $(a,b)$. The field itself stays the same because the differential equation has not changed.",
+      "hint": "Compare two different starting values for the same equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r9own7",
+      "kind": "term",
+      "front": "What is a nullcline?",
+      "back": "A **nullcline** is a set of points where the differential equation assigns zero slope, so the field has horizontal segments there.",
+      "hint": "Zero slope means which kind of segment?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1am0djp",
+      "kind": "process",
+      "front": "What steps help you match a slope field to a differential equation?",
+      "back": "First locate the **horizontal segments** (the zero-slope locations). Then check where slopes are positive and negative, and compare steepness at selected points. Test a second point before deciding.",
+      "hint": "Start with the easiest features to find.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16m7mk9",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x-y$, where do the horizontal segments lie, and where are slopes positive?",
+      "back": "Horizontal segments lie on $y=x$. Slopes are positive **below** that line and negative above it, since $x-y$ changes sign there.",
+      "hint": "Where is $x-y$ equal to zero?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14ma8p9",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x-y$ with $y(0)=1$, estimate $y(0.25)$ using one step of width $0.25$.",
+      "back": "The starting slope is $0-1=-1$, so the change is $0.25(-1)=-0.25$. Therefore $y(0.25)\\approx 0.75$.",
+      "hint": "Evaluate the slope at the starting point first."
+    },
+    {
+      "id": "0tvqhtf",
+      "kind": "concept",
+      "front": "Can two distinct solution curves cross at one point, and why?",
+      "back": "No, for a continuously differentiable right-hand side. A crossing would give **two solutions** through the same initial point. This may fail for other equations where solutions are not unique.",
+      "hint": "Think about what a shared point would mean for the initial condition.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ibrz8d",
+      "kind": "mistake",
+      "front": "A student says changing the initial value changes the segment slopes. What is wrong?",
+      "back": "Changing the initial value does **not** change segment slopes. It changes which path you trace through the same, unchanged field.",
+      "hint": "What does the differential equation assign at each point?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k24ql0",
+      "kind": "concept",
+      "front": "What does a horizontal segment tell you about a curve that passes through it?",
+      "back": "The curve has a **horizontal tangent** there. Check the segments on both sides to see whether the curve turns or keeps rising or falling.",
+      "hint": "Look at the slopes just before and after that point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18gn9ul",
+      "kind": "concept",
+      "front": "What does a steeper segment tell you about a solution curve's behavior?",
+      "back": "A **steeper** segment has a larger absolute slope. Where segments become steeper, the solution curve should also become steeper.",
+      "hint": "Compare absolute values of slope.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00jbwp7",
+      "kind": "term",
+      "front": "What is a solution curve?",
+      "back": "A **solution curve** graphs a function whose derivative matches the assigned slope at every point on its path.",
+      "hint": "Connect the curve's derivative to the slope field.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07acduj",
+      "kind": "mistake",
+      "front": "A student treats a segment as showing how far a solution travels. What is the correct reading?",
+      "back": "A segment shows only the **direction** of a solution at its own point. It does not show how far the solution travels.",
+      "hint": "A segment is a local direction, not a destination.",
+      "sectionId": "s1"
+    }
+  ]
+}

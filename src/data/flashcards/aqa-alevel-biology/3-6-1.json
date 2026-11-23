@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-6-1",
+  "topicCode": "3.6.1",
+  "topicName": "Stimuli, receptors and responses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:23.938Z",
+  "cards": [
+    {
+      "id": "1tc0m82",
+      "kind": "process",
+      "front": "What is the sequence of events from a stimulus to a response?",
+      "back": "A **receptor** detects the stimulus and converts it into a signal. The signal passes to a coordinating centre, which helps organise the response. An **effector** (a muscle or gland) carries out the response.",
+      "hint": "Start with what happens first when something changes near an organism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ndsmbm",
+      "kind": "process",
+      "front": "What is the pathway of impulses in a simple reflex arc?",
+      "back": "Receptor, then **sensory neurone** to the central nervous system, across synapses to a **relay neurone**, then **motor neurone**, then the effector, which produces the response.",
+      "hint": "Follow the order the signal travels, from skin to muscle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11lqt2q",
+      "kind": "concept",
+      "front": "How does taxis differ from kinesis?",
+      "back": "In **taxis**, the whole organism moves towards or away from the stimulus, so its direction depends on the stimulus. In **kinesis**, the stimulus changes speed or how often it turns, without directing movement.",
+      "hint": "Ask whether the direction of movement depends on where the stimulus is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v397ya",
+      "kind": "term",
+      "front": "What is a Pacinian corpuscle?",
+      "back": "A **Pacinian corpuscle** is a pressure receptor with layers surrounding a sensory neurone ending. Pressure on the skin can activate it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wk6vbr",
+      "kind": "concept",
+      "front": "Why does stronger pressure produce a larger generator potential?",
+      "back": "Stronger pressure deforms the membrane more, so more **sodium ions** enter. This gives a larger **generator potential**, usually producing more frequent impulses.",
+      "hint": "Think about what pressure does to the receptor membrane.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vxxr7g",
+      "kind": "concept",
+      "front": "Why do cone cells give better visual acuity than rod cells?",
+      "back": "Several rods connect to one neurone, so their signals combine and detail is lost. Fewer cones connect to each neurone, so the eye can distinguish fine detail.",
+      "hint": "Compare how many receptors share one neurone.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b046u4",
+      "kind": "mistake",
+      "front": "A student says the skin receptor carries out the withdrawal in a reflex. What is wrong with this?",
+      "back": "A **receptor** only detects the stimulus and does not carry out the response. The **muscle** is the effector in a withdrawal reflex, and it contracts to move the hand.",
+      "hint": "Which part of the arc actually moves?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05pd0cd",
+      "kind": "example",
+      "front": "Why do woodlice gather in damp areas without moving directly towards moisture?",
+      "back": "Woodlice move faster in dry conditions and slower in damp ones, so they spend more time in damp areas. This is **kinesis**, because moisture changes their activity, not their direction.",
+      "hint": "Does the stimulus change how fast they move or which way they move?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ugool4",
+      "kind": "term",
+      "front": "What is phototropism?",
+      "back": "**Phototropism** is directional growth of a plant in response to light. A shoot growing towards light shows positive phototropism.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rnh9te",
+      "kind": "concept",
+      "front": "Why does a shoot bend towards light?",
+      "back": "**IAA** moves to the shaded side of the shoot. It stimulates cell elongation there, so the shaded side grows more and the shoot bends towards the light.",
+      "hint": "Think about where the growth substance collects.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14ic625",
+      "kind": "concept",
+      "front": "How does IAA make a horizontal root bend downwards?",
+      "back": "**IAA** collects on the lower side of the root and inhibits cell elongation there. Cells on the upper side elongate more, so the root bends downwards.",
+      "hint": "Compare this with what IAA does in a shoot.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11reldb",
+      "kind": "mistake",
+      "front": "Why is it wrong to say IAA always promotes growth in plants?",
+      "back": "IAA stimulates elongation in shoots but inhibits it in roots at the concentrations involved. Its effect **depends on the organ**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07a4a2s",
+      "kind": "term",
+      "front": "Which way do roots and shoots grow in gravitropism?",
+      "back": "Roots show positive **gravitropism**, growing downwards towards gravity. Shoots show negative gravitropism, growing upwards away from gravity.",
+      "sectionId": "s4"
+    }
+  ]
+}

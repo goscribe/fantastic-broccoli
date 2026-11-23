@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "Optimization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:09.741Z",
+  "cards": [
+    {
+      "id": "0zwx8jv",
+      "kind": "concept",
+      "front": "Why must you use a constraint before differentiating an area or cost?",
+      "back": "Use the **constraint** to eliminate one variable, so the **objective function** depends on a single variable you can differentiate. Differentiating while two variables remain does not work.",
+      "hint": "Think about what the derivative is taken with respect to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12ah3fe",
+      "kind": "process",
+      "front": "What are the steps for solving an optimization problem with calculus?",
+      "back": "1 Name the quantity to optimise. 2 Use the constraint to write it in one variable. 3 Differentiate and solve the derivative equal to zero. 4 Confirm whether it is a maximum or minimum. 5 Answer in context, with units.",
+      "hint": "Start with the quantity, end with a sentence about the situation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e6i422",
+      "kind": "concept",
+      "front": "After solving the derivative equal to zero, why do you still need a further check?",
+      "back": "The solutions are only **candidates**. The second derivative shows whether each one is a **maximum**, a **minimum** or neither.",
+      "hint": "Solving the derivative only finds stationary points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "150eumy",
+      "kind": "term",
+      "front": "What is an objective function?",
+      "back": "The **objective function** is the quantity to be maximised or minimised, written as a function of a single variable.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08okxkw",
+      "kind": "term",
+      "front": "What is a constraint in an optimization problem?",
+      "back": "A **constraint** is a given condition that links the variables and restricts the values they may take. It lets you eliminate one variable.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dv8exm",
+      "kind": "example",
+      "front": "A farmer has 40 m of fencing for three sides of a rectangular pen, with a wall as the fourth side. What width gives the greatest area?",
+      "back": "Width $x=10$ m, giving the greatest area of $200\\,\\mathrm{m^2}$, with length 20 m. Here $A=40x-2x^2$, so $\\frac{dA}{dx}=40-4x=0$.",
+      "hint": "The length is 40 minus 2x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0scpy2x",
+      "kind": "formula",
+      "front": "Which test tells you whether a stationary point is a maximum or a minimum?",
+      "back": "The second derivative $\\frac{d^2y}{dx^2}$. If it is **negative** the point is a maximum, and if it is **positive** the point is a minimum.",
+      "hint": "Substitute the stationary value into the second derivative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e3u07y",
+      "kind": "concept",
+      "front": "Why must you check the domain before accepting a stationary value?",
+      "back": "Not every solution of the derivative is usable. A length cannot be negative, so the **domain** restricts the values. Stationary values outside it are rejected.",
+      "hint": "Think about what the variable represents.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1clrkbe",
+      "kind": "mistake",
+      "front": "A student differentiates $A=xy$ while both x and y are still present. What is wrong?",
+      "back": "They cannot differentiate with two variables. First use the **constraint** to eliminate one variable, leaving a function of one variable.",
+      "hint": "Count the variables.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13qzy74",
+      "kind": "example",
+      "front": "A rectangle has area 50 m² and width x m. What width minimises its perimeter?",
+      "back": "About $7.07$ m, giving a minimum perimeter of about $28.3\\,\\mathrm{m}$. Using $P=2x+\\frac{100}{x}$, setting $\\frac{dP}{dx}=0$ gives $x=\\sqrt{50}$, and $\\frac{d^2P}{dx^2}>0$ shows a minimum.",
+      "hint": "The length is 50 divided by x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0az60b0",
+      "kind": "mistake",
+      "front": "A student solves for x and then stops. Why is this incomplete?",
+      "back": "The question usually asks for the **maximum or minimum value** of the objective function. Substitute x back into the objective function and give the answer with units.",
+      "hint": "Read what the question finally asks for.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pxnj69",
+      "kind": "concept",
+      "front": "What should you do if only whole items can be made, so the exact stationary value is not allowed?",
+      "back": "Compare the **objective function** at the whole numbers either side of the stationary value, then choose the better one.",
+      "hint": "Test the two nearest whole numbers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vc30ly",
+      "kind": "concept",
+      "front": "Why should a result outside the range where a model is reasonable not be trusted?",
+      "back": "A model is a **simplification**, so results outside its reasonable range may not reflect the real situation.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Clearcutting",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:59.850Z",
+  "cards": [
+    {
+      "id": "1sp06e5",
+      "kind": "term",
+      "front": "What is **clearcutting**?",
+      "back": "A logging method that removes all or nearly all trees from an area at once, leaving the ground bare and open to sun and rain.",
+      "hint": "Compare it with a method that leaves some trees standing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lq6g9c",
+      "kind": "concept",
+      "front": "Why does clearcutting cause so much **soil erosion** on a hillside?",
+      "back": "Removing the trees takes away the canopy and roots that protected the soil. Rain then hits bare ground and runs downhill, carrying soil with it, worst on steep slopes.",
+      "hint": "Think about what the canopy and roots did before the trees were cut.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10rsfe1",
+      "kind": "concept",
+      "front": "Which is the main trade-off between clearcutting and selective cutting?",
+      "back": "Clearcutting is cheaper and faster per log, but selective cutting causes much less damage to soil, water, and habitat.",
+      "hint": "Look at the table comparing cost and environmental effects.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14hphki",
+      "kind": "term",
+      "front": "What is the **canopy** of a forest?",
+      "back": "The upper layer of a forest, formed by the crowns of the tallest trees, which softens falling rain.",
+      "hint": "Picture looking up from the forest floor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rj9ncu",
+      "kind": "term",
+      "front": "What is **soil erosion**?",
+      "back": "The removal of surface soil by water or wind faster than natural processes can form new soil.",
+      "hint": "Think about what heavy rain does to bare ground.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fyyf99",
+      "kind": "concept",
+      "front": "How does sediment from a clearcut harm a stream?",
+      "back": "Fine **sediment** makes the water cloudy and can smother fish eggs and the plants fish rely on. Heavy runoff can also raise flood risk downstream.",
+      "hint": "Follow the sediment from the hillside to the water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1olegw0",
+      "kind": "term",
+      "front": "What is **habitat fragmentation**?",
+      "back": "The breaking of a large continuous habitat into smaller, isolated patches, which isolates populations and makes survival harder.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xtubno",
+      "kind": "concept",
+      "front": "How does clearcutting add carbon dioxide to the air?",
+      "back": "Removed trees release stored carbon when debris decays or burns. Fewer trees also means less carbon dioxide is absorbed by **photosynthesis**.",
+      "hint": "Think about where a forest keeps its carbon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "169ro2n",
+      "kind": "term",
+      "front": "What is a **carbon sink**?",
+      "back": "A reservoir, such as a forest, that absorbs more carbon from the atmosphere than it releases.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03tw0vx",
+      "kind": "mistake",
+      "front": "What is the common mistake about replanting after a clearcut?",
+      "back": "Thinking replanting instantly restores the forest. Young trees give far less cover and habitat than mature ones for many years.",
+      "hint": "Consider how old the new trees are compared with the old forest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12ulna8",
+      "kind": "term",
+      "front": "What is **selective cutting**?",
+      "back": "A harvesting method that removes only chosen trees, often mature or high-value ones, while the rest of the forest stays standing.",
+      "hint": "Contrast it with removing almost every tree at once.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0smv17o",
+      "kind": "term",
+      "front": "What is **strip cutting**?",
+      "back": "A harvesting method that removes all trees in narrow strips, leaving uncut belts between them that supply seeds and whose roots slow runoff.",
+      "hint": "Picture the pattern a logger leaves across the hillside.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07g8xc5",
+      "kind": "concept",
+      "front": "How does regrowth differ between clearcutting and selective cutting?",
+      "back": "Clearcut areas rely on replanting or sun-loving seedlings, while selective cutting lets shade-tolerant trees regrow naturally.",
+      "hint": "Think about how much sunlight reaches the forest floor in each case.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lm7dqo",
+      "kind": "concept",
+      "front": "What practice reduces the sediment that reaches a stream after logging?",
+      "back": "Leaving uncut trees along the stream, which cuts the amount of sediment washing into the water.",
+      "hint": "Think about where on the slope the forest should be kept to protect the water.",
+      "sectionId": "s5"
+    }
+  ]
+}

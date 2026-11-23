@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-21",
+  "topicCode": "5.21",
+  "topicName": "The carbon cycle and reducing atmospheric carbon",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:36.001Z",
+  "cards": [
+    {
+      "id": "1l5mu4z",
+      "kind": "term",
+      "front": "What is a carbon store?",
+      "back": "A **carbon store** is a place that holds carbon for a period of time, such as the air, a forest or a coal seam. Stores differ greatly in size and in how long they hold carbon.",
+      "hint": "Think about what the air, a forest and rock have in common.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mfj342",
+      "kind": "concept",
+      "front": "Why does carbon keep cycling between the air and living things?",
+      "back": "Photosynthesis removes **carbon dioxide** from the air, and respiration puts it back. All living things respire, so the cycle runs continuously.",
+      "hint": "Consider which process takes a gas in and which process gives it out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04ky1s8",
+      "kind": "concept",
+      "front": "What has human activity done to the natural carbon cycle?",
+      "back": "It has moved carbon into the air faster than natural processes can remove it, so atmospheric **carbon dioxide** has risen. Left alone, the transfers roughly balance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fdjnhk",
+      "kind": "term",
+      "front": "What is a saprobiont?",
+      "back": "A **saprobiont** is a microorganism, mainly a fungus or bacterium, that feeds on dead organisms and waste. It respires, so decay releases carbon dioxide to the air.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "180f95t",
+      "kind": "mistake",
+      "front": "What happens to carbon when saprobionts break down dead material?",
+      "back": "It is not destroyed. The carbon passes into the air as **carbon dioxide** or into the microorganisms' own bodies.",
+      "hint": "Think about where the carbon atoms could go, not whether they disappear.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d4oxdb",
+      "kind": "term",
+      "front": "What is a fossil fuel?",
+      "back": "A **fossil fuel** is a carbon-rich energy source, such as coal, oil or gas. It forms over millions of years from dead organisms, under heat and pressure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09cyfxt",
+      "kind": "concept",
+      "front": "Why does waterlogged soil lock carbon away?",
+      "back": "Little **oxygen** blocks decay, so dead material builds up and the carbon stays stored in the ground.",
+      "hint": "Compare decay speed in waterlogged soil with decay in well-drained soil.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s724ww",
+      "kind": "concept",
+      "front": "How does deforestation add to atmospheric carbon dioxide?",
+      "back": "Burned or rotting trees release **carbon dioxide**, and fewer trees remain to take it in by photosynthesis. Both effects increase the amount in the air.",
+      "hint": "Consider what trees do with carbon dioxide while they are alive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gge0px",
+      "kind": "concept",
+      "front": "Why is using less fossil fuel the most direct response to rising carbon dioxide?",
+      "back": "Burning fossil fuels is the source of the extra carbon. Cutting their use lowers the rate at which carbon enters the air.",
+      "hint": "Trace the extra carbon back to where it comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01vqh1n",
+      "kind": "mistake",
+      "front": "Why do actions such as efficient energy use not remove carbon already in the air?",
+      "back": "They only slow the rate at which carbon enters the air. None of them takes out carbon that is already there.",
+      "hint": "Separate slowing an input from reversing what has already built up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1eq65xj",
+      "kind": "term",
+      "front": "What is a carbon sink?",
+      "back": "A **carbon sink** is a carbon store that absorbs more carbon from the atmosphere than it releases over a given period. A growing forest is an example.",
+      "hint": "Compare what the store takes in with what it gives out.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0lhr7rl",
+      "kind": "concept",
+      "front": "Why does a mature forest absorb less carbon than a growing one?",
+      "back": "Its growth levels off, so its uptake slows. It still holds a great deal of carbon, but it takes up less each year.",
+      "hint": "Think about how uptake links to the plants' growth.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ddce1t",
+      "kind": "term",
+      "front": "What is a biofuel?",
+      "back": "A **biofuel** is a fuel made from recently grown biological material rather than from fossil deposits. Growing the crop takes in carbon dioxide, which partly offsets emissions on burning.",
+      "hint": "Compare where biofuels come from with where fossil fuels come from.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1oasde7",
+      "kind": "mistake",
+      "front": "Why does burning a biofuel still add some carbon dioxide to the atmosphere?",
+      "back": "Farming and processing use energy, which releases some carbon dioxide. So biofuels are not free of emissions, though they add less net carbon dioxide than fossil fuels.",
+      "hint": "Think about what else is needed to produce the fuel before it is burned.",
+      "sectionId": "s6"
+    }
+  ]
+}

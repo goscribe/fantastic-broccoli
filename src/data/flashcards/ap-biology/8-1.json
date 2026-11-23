@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-1",
+  "topicCode": "8.1",
+  "topicName": "Responses to the environment",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:59.344Z",
+  "cards": [
+    {
+      "id": "01aa78f",
+      "kind": "process",
+      "front": "In what order does a signal travel from detection to a response in a signaling pathway?",
+      "back": "A **stimulus** activates a receptor, which starts signal transduction (a chain of changes inside cells). The pathway then produces a response, such as altered enzyme activity or gene expression.",
+      "hint": "Start with the trigger and end with the effect.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mapl1h",
+      "kind": "concept",
+      "front": "How does negative feedback keep an organism's internal conditions workable?",
+      "back": "A change triggers a response that **counteracts** that change, so the response decreases as conditions return to their usual range. For example, rising body temperature triggers heat-loss responses.",
+      "hint": "Think of the response as pushing back against the change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00sijro",
+      "kind": "mistake",
+      "front": "A student says a hormone affects every cell it reaches. What is wrong, and what is right?",
+      "back": "Wrong: a hormone does not affect every cell it reaches. Right: only **target cells** with a suitable receptor respond to a particular hormone.",
+      "hint": "Think about what the receiving cell needs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04185w3",
+      "kind": "term",
+      "front": "What is a stimulus?",
+      "back": "A **stimulus** is a detectable change inside or outside an organism, such as light, temperature, water availability, or chemical concentration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tbffsz",
+      "kind": "term",
+      "front": "What does a receptor do?",
+      "back": "A **receptor** is a cell or molecule that detects a particular stimulus and begins a response.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "031ct5v",
+      "kind": "concept",
+      "front": "Must every response to a stimulus be an immediate movement?",
+      "back": "No. A response may change **growth**, gene expression, or the activity of an organ, depending on the organism and the conditions it faces.",
+      "hint": "Think beyond movement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19jgooa",
+      "kind": "term",
+      "front": "What is signal transduction?",
+      "back": "**Signal transduction** is the series of changes inside cells that passes a signal along after a receptor is activated.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18xjboz",
+      "kind": "term",
+      "front": "What are hormones?",
+      "back": "**Hormones** are chemical signals that travel to target cells and help coordinate longer-lasting responses. Nervous signals coordinate rapid responses in animals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16sfz1t",
+      "kind": "term",
+      "front": "What is a behavioral response?",
+      "back": "A **behavioral response** is a change in what an organism does after a stimulus, such as a lizard moving into shade when it becomes hot.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wof61e",
+      "kind": "term",
+      "front": "What is migration?",
+      "back": "**Migration** is movement between areas, often linked to seasonal changes in conditions or resources, and it can help organisms track those changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00dn61l",
+      "kind": "term",
+      "front": "When does a signal count as communication?",
+      "back": "**Communication** occurs when one organism produces a signal that another organism detects and responds to by changing its behavior.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "006rkcl",
+      "kind": "concept",
+      "front": "Why do behavior and communication matter for an organism?",
+      "back": "These interactions can affect **fitness**, meaning an organism's success in surviving and producing offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pououx",
+      "kind": "term",
+      "front": "What is a physiological response?",
+      "back": "A **physiological response** changes how an organism's body functions, such as sweating to increase heat loss or hormone signaling that increases water reabsorption by the kidneys.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "**Homeostasis** is maintaining internal conditions within a workable range. It does not mean conditions never vary; responses limit changes that could disrupt normal function.",
+      "sectionId": "s4"
+    }
+  ]
+}

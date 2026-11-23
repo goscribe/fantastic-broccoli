@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "Algebraic properties of limits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:30.033Z",
+  "cards": [
+    {
+      "id": "0cxzklp",
+      "kind": "concept",
+      "front": "How do the sum and difference rules let you find a limit from the limits of its parts?",
+      "back": "If $\\lim_{x\\to a}f(x)=L$ and $\\lim_{x\\to a}g(x)=M$, then the **sum** $f(x)+g(x)$ approaches $L+M$ and the **difference** approaches $L-M$. Each individual finite limit must exist.",
+      "hint": "Work out each part's limit separately, then combine them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "011yi3c",
+      "kind": "mistake",
+      "front": "What is wrong with dividing by a denominator whose limit is zero, and what does it mean?",
+      "back": "**Do not** use the quotient rule. It needs a nonzero denominator limit, and a zero limit means the rule cannot determine the quotient's limit.",
+      "hint": "Check the denominator's limit before you divide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yj6npw",
+      "kind": "process",
+      "front": "What order should you follow when evaluating a combined limit?",
+      "back": "Find the limits of the parts, evaluate powers and constant multiples, combine sums or differences, then check the denominator's limit is nonzero before applying the quotient rule.",
+      "hint": "Start with the parts and finish with the quotient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z3hjz7",
+      "kind": "term",
+      "front": "What is the product rule for limits?",
+      "back": "The **product rule** says the limit of $f(x)g(x)$ equals $LM$, the product of the individual finite limits $L$ and $M$.",
+      "hint": "Multiply the two finite limits.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06jwpke",
+      "kind": "formula",
+      "front": "What is the quotient rule, and what condition must hold?",
+      "back": "$\\lim_{x\\to a}\\frac{f(x)}{g(x)}=\\frac{L}{M}$, where $L$ and $M$ are finite limits and $M\\ne0$. The denominator's limit must be nonzero.",
+      "hint": "Look at what M stands for and what it must not equal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dr8u7l",
+      "kind": "term",
+      "front": "What is the constant multiple rule?",
+      "back": "The **constant multiple rule** says $\\lim_{x\\to a}[cf(x)]=cL$ for a constant $c$, where $L$ is the finite limit of $f(x)$. The constant stays outside the limit.",
+      "hint": "The constant does not change as x approaches a.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08f9kjd",
+      "kind": "term",
+      "front": "What is the power rule for limits?",
+      "back": "For a positive integer $n$, the **power rule** says $\\lim_{x\\to a}[f(x)]^n=L^n$, the nth power of the finite limit $L$.",
+      "hint": "Raise the limit itself to the power.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jdvqx9",
+      "kind": "example",
+      "front": "If $\\lim_{x\\to a}f(x)=3$, what does $\\lim_{x\\to a}[-2f(x)]$ equal?",
+      "back": "$-6$. Multiply the limit 3 by the constant $-2$ using the constant multiple rule.",
+      "hint": "Use the constant multiple rule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "192l7ph",
+      "kind": "example",
+      "front": "Given $\\lim_{x\\to 2}f(x)=4$ and $\\lim_{x\\to 2}g(x)=1$, find $\\lim_{x\\to 2}\\frac{3[f(x)]^2-2g(x)}{f(x)+g(x)}$.",
+      "back": "$\\frac{46}{5}$. The numerator's limit is $3(4)^2-2(1)=46$, and the denominator's limit is $4+1=5$, which is nonzero.",
+      "hint": "Find the numerator's and denominator's limits first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pysty7",
+      "kind": "mistake",
+      "front": "If the denominator's limit is zero, does that prove the quotient has no limit?",
+      "back": "**No**. The quotient rule simply cannot be used, and a zero denominator limit does not by itself prove that no limit exists. A different method may be needed.",
+      "hint": "The quotient rule is only one tool.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12tgvhi",
+      "kind": "example",
+      "front": "If $\\lim_{x\\to a}f(x)=2$ and $\\lim_{x\\to a}g(x)=3$, find $\\lim_{x\\to a}[5f(x)-[g(x)]^2]$.",
+      "back": "$1$. The first term approaches $5(2)=10$ and the squared term approaches $3^2=9$, so the difference is $10-9=1$.",
+      "hint": "Evaluate each term before subtracting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14aeca0",
+      "kind": "term",
+      "front": "What is the denominator condition?",
+      "back": "The **denominator condition** is the requirement that the quotient rule's denominator limit be nonzero. If it is zero, stop using the quotient rule.",
+      "hint": "It is the check you make before dividing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oty760",
+      "kind": "example",
+      "front": "If $\\lim_{x\\to a}f(x)=5$ and $\\lim_{x\\to a}g(x)=1$, find $\\lim_{x\\to a}\\frac{2f(x)+g(x)}{f(x)-g(x)}$.",
+      "back": "$\\frac{11}{4}$. The numerator approaches $2(5)+1=11$ and the denominator approaches $5-1=4$, which is nonzero.",
+      "hint": "Check the denominator's limit is nonzero before dividing.",
+      "sectionId": "s4"
+    }
+  ]
+}

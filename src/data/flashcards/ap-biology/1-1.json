@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Structure of water and hydrogen bonding",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:20.449Z",
+  "cards": [
+    {
+      "id": "1h1reoa",
+      "kind": "concept",
+      "front": "Why is a water molecule polar?",
+      "back": "Oxygen pulls the shared electrons harder than hydrogen does, so oxygen is **partially negative** and each hydrogen is partially positive. The **bent shape** stops these bond polarities from canceling.",
+      "hint": "Which atom pulls the shared electrons harder? Consider the molecule's angle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0thchho",
+      "kind": "term",
+      "front": "What is a hydrogen bond?",
+      "back": "A **hydrogen bond** is an attraction between a partially positive hydrogen on one molecule and a partially negative atom, such as oxygen, on a neighboring molecule. It is weaker than the covalent bonds inside water.",
+      "hint": "It links neighboring molecules. It is not a bond inside one molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ykof19",
+      "kind": "concept",
+      "front": "How do hydrogen bonds give water its cohesion?",
+      "back": "Hydrogen bonds attract neighboring water molecules, so water molecules **cohere**. This attraction produces **surface tension** and helps keep a continuous water column in plant tubes.",
+      "hint": "Cohesion is attraction between molecules of the same substance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wnolby",
+      "kind": "term",
+      "front": "What is the difference between cohesion and adhesion?",
+      "back": "**Cohesion** is attraction between molecules of the same substance. **Adhesion** is attraction between different substances, such as water and the walls of a plant's tubes.",
+      "hint": "Same substance or different substances?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03887c9",
+      "kind": "term",
+      "front": "What is surface tension?",
+      "back": "**Surface tension** is the resistance of a liquid surface to being stretched. It allows some small organisms to remain on top of water.",
+      "hint": "It comes from cohesion at the water surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v282go",
+      "kind": "process",
+      "front": "How does water move up through a plant's water-conducting tubes?",
+      "back": "1) Water evaporates from the leaves, creating a pull. 2) **Cohesion** keeps the water molecules together as a continuous column. 3) The pull draws the column upward. **Adhesion** helps water cling to the tube walls.",
+      "hint": "Start with what happens at the leaves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rrwwvx",
+      "kind": "concept",
+      "front": "Why does water have a high specific heat capacity?",
+      "back": "Added energy first **breaks hydrogen bonds** before molecular motion increases much, so water's temperature rises slowly. Temperature reflects average molecular motion.",
+      "hint": "Link the energy transfer to the bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ns6lfw",
+      "kind": "term",
+      "front": "What is high specific heat capacity?",
+      "back": "**High specific heat capacity** means substantial energy is needed to raise the temperature of a given amount of substance.",
+      "hint": "Think about energy needed per amount of substance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bd1rsa",
+      "kind": "concept",
+      "front": "Why does water have a high heat of vaporization?",
+      "back": "Molecules need substantial energy to escape into the gas phase, so water needs a lot of energy to **evaporate**. Evaporation removes energetic molecules and can cool a surface.",
+      "hint": "Think about molecules escaping from the liquid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15tcogb",
+      "kind": "mistake",
+      "front": "A student says a hydrogen bond joins the oxygen and hydrogen within one water molecule. What is wrong with that?",
+      "back": "That bond is **covalent**, not a hydrogen bond. A hydrogen bond links neighboring molecules and does not replace the covalent bonds within a water molecule.",
+      "hint": "Where are the atoms that the hydrogen bond joins?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ud3sbf",
+      "kind": "mistake",
+      "front": "Is the hydrogen-bond network in liquid water fixed in place?",
+      "back": "No. Water molecules move constantly, so **hydrogen bonds break and form again**. The network is changing rather than fixed.",
+      "hint": "Think about how the molecules are moving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "039vfna",
+      "kind": "mistake",
+      "front": "Does high specific heat capacity mean water cannot warm up or cool down?",
+      "back": "No. It means water **resists rapid temperature change**. Water can still warm or cool, just more slowly than many substances.",
+      "hint": "Resist is not the same as prevent.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10ru4cb",
+      "kind": "mistake",
+      "front": "Are the charges on water's oxygen and hydrogen atoms full ionic charges?",
+      "back": "No. They are **partial charges**: oxygen is partially negative and each hydrogen is partially positive. Full charges belong to ions.",
+      "hint": "Compare with how ions carry their charge.",
+      "sectionId": "s1"
+    }
+  ]
+}

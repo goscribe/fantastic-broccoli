@@ -69,7 +69,7 @@ export default async function CourseNotesPage({ params }: Params) {
         data-total={topicCount}
       >
         <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
-        <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-white/90 sm:min-h-0 sm:pr-0">
+        <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
           <span>
             <span className="font-extrabold text-white">{course.boardName}</span> · {course.qualification}
             {course.levels?.length ? ` · ${course.levels.join(" and ")}` : ""}
@@ -78,7 +78,7 @@ export default async function CourseNotesPage({ params }: Params) {
         <h1 className="nl-rise mt-2 text-[32px] font-black leading-[1.05] sm:text-[44px]" style={{ "--i": 1 } as React.CSSProperties}>
           {empty ? `${course.title} topics` : `${course.title} notes and practice questions`}
         </h1>
-        <p className="nl-rise mt-3 max-w-[560px] text-[16.5px] font-semibold leading-snug text-white/90 sm:text-[18px]" style={{ "--i": 2 } as React.CSSProperties}>
+        <p className="nl-rise mt-3 max-w-[560px] text-read font-semibold text-white/90" style={{ "--i": 2 } as React.CSSProperties}>
           {topicCount} topics in {course.units.length} units
           {n.notes ? ` · ${n.notes.toLocaleString("en-GB")} topic notes` : ""}
           {n.questions ? ` · ${n.questions.toLocaleString("en-GB")} exam-style questions with worked answers` : ""}.
@@ -94,7 +94,7 @@ export default async function CourseNotesPage({ params }: Params) {
             <div className="nl-meter" aria-hidden="true">
               <span />
             </div>
-            <p data-nl-count className="mt-1.5 text-[13px] font-bold text-white/90">
+            <p data-nl-count className="mt-1.5 text-small font-bold text-white/90">
               Your progress shows up here as you read and practise
             </p>
           </div>
@@ -106,7 +106,7 @@ export default async function CourseNotesPage({ params }: Params) {
         )}
       </header>
       <CourseUnits course={course} />
-      <p className="mt-10 text-[12.5px] leading-snug text-faint">{course.sourceNote}</p>
+      <p className="mt-10 text-small text-faint">{course.sourceNote}</p>
       <NotesProgress />
     </div>
   );

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a4-1",
+  "topicCode": "A4.1",
+  "topicName": "Evolution and speciation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:44.576Z",
+  "cards": [
+    {
+      "id": "1h9p9in",
+      "kind": "term",
+      "front": "What is natural selection?",
+      "back": "**Natural selection** is unequal reproductive success linked to inherited variation: individuals with advantageous inherited traits survive and reproduce more, so their alleles become more common across generations.",
+      "hint": "Think about who leaves more surviving offspring.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kzhvoc",
+      "kind": "concept",
+      "front": "How can a physical barrier eventually lead to a new species?",
+      "back": "A barrier reduces **gene flow** between populations. Mutations arise independently, selection or chance changes allele frequencies, and over generations the populations become reproductively isolated, so they cannot interbreed even if they meet again.",
+      "hint": "Follow the populations from separation to meeting again.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hjkoa6",
+      "kind": "concept",
+      "front": "Why do fossils, homologous structures and DNA sequences together support evolution?",
+      "back": "They are independent lines of evidence pointing to **common ancestry**: fossils show forms changing over time, homologous structures share underlying anatomy, and close relatives have more similar DNA.",
+      "hint": "Each type of evidence is separate, but they agree.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10ta4iz",
+      "kind": "term",
+      "front": "What is heritable variation?",
+      "back": "**Heritable variation** is differences between individuals that can be passed from parents to offspring. Mutation and sexual reproduction are sources of it.",
+      "hint": "Think about what parents can pass on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "085ng4m",
+      "kind": "term",
+      "front": "What is an environmental selection pressure?",
+      "back": "An **environmental selection pressure** is a factor such as predators, disease, competition or temperature that makes some inherited characteristics more useful than others for survival or reproduction.",
+      "hint": "Name a few examples from the environment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oxxwlh",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an organism develops a useful mutation because it needs one?",
+      "back": "**Need does not cause mutation.** Mutations arise without regard to whether they will help; natural selection later favours the useful ones.",
+      "hint": "Consider whether mutations are directed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ieimo8",
+      "kind": "process",
+      "front": "List the steps by which an inherited trait becomes more common through natural selection.",
+      "back": "1) Individuals vary in an inherited trait. 2) In a particular environment, one form improves survival or reproduction. 3) Those individuals leave more surviving offspring. 4) Offspring inherit the allele, so it becomes more common across generations.",
+      "hint": "Start with variation in the population.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1adraca",
+      "kind": "term",
+      "front": "What is reproductive isolation?",
+      "back": "**Reproductive isolation** is when populations can no longer exchange genes through successful interbreeding.",
+      "hint": "Focus on whether genes can still pass between groups.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rdhtcw",
+      "kind": "term",
+      "front": "What is a prezygotic barrier?",
+      "back": "A **prezygotic barrier** prevents fertilisation between members of different populations, for example by breeding at different times.",
+      "hint": "Pre means before the zygote forms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xofuic",
+      "kind": "concept",
+      "front": "How does a postzygotic barrier differ from a prezygotic barrier?",
+      "back": "A **postzygotic barrier** acts after fertilisation, reducing offspring development or fertility, such as hybrid offspring being infertile. A prezygotic barrier stops fertilisation from happening.",
+      "hint": "Compare the timing relative to fertilisation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u77ihu",
+      "kind": "mistake",
+      "front": "Does a geographical barrier instantly create a new species?",
+      "back": "**No.** Divergence and reproductive isolation develop over many generations. A barrier alone does not establish that speciation has occurred.",
+      "hint": "Think about how long divergence takes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tjbgwi",
+      "kind": "term",
+      "front": "What are homologous structures?",
+      "back": "**Homologous structures** have a shared evolutionary origin and an underlying similar anatomy, even though their functions may differ. This supports descent from a common ancestor.",
+      "hint": "Shared origin, not necessarily shared job.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hj5o9q",
+      "kind": "concept",
+      "front": "How can evolution be observed directly?",
+      "back": "When inherited traits change across generations. For example, **antibiotic resistance** becomes more common when resistant bacteria survive treatment and reproduce.",
+      "hint": "Think of a trait changing in a population over time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xzhp5c",
+      "kind": "concept",
+      "front": "Why is the fossil record incomplete?",
+      "back": "**Fossilisation** requires unusual conditions, so many organisms leave no preserved remains or traces.",
+      "hint": "Think about what conditions preserve remains.",
+      "sectionId": "s5"
+    }
+  ]
+}

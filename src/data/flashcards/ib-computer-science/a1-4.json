@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a1-4",
+  "topicCode": "A1.4",
+  "topicName": "Translation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:49.940Z",
+  "cards": [
+    {
+      "id": "1vjoqd9",
+      "kind": "concept",
+      "front": "Why must high-level source code be translated before a CPU can run it?",
+      "back": "A CPU can execute only binary **machine code**, so readable source code must be converted into instructions for a particular processor.",
+      "hint": "Think about which form of instructions the CPU can actually execute.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11mjkjg",
+      "kind": "concept",
+      "front": "How does a compiler differ from an interpreter?",
+      "back": "A **compiler** translates the whole program into a separate executable before it runs. An **interpreter** translates and runs one statement at a time and produces no separate executable.",
+      "hint": "Compare when the translation happens and whether a separate file is made.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hqgol7",
+      "kind": "process",
+      "front": "What are the six stages of compilation, in order?",
+      "back": "1 **lexical analysis** (split into tokens), 2 **syntax analysis** (check grammar, build a tree), 3 **semantic analysis** (check meaning and data types), 4 intermediate code generation (processor-independent), 5 **optimisation** (faster or less memory), 6 **code generation** (final machine code).",
+      "hint": "Each stage hands its output to the next one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ayjbkf",
+      "kind": "term",
+      "front": "What is an assembler?",
+      "back": "An **assembler** is a translator that converts assembly language into machine code, usually one assembly instruction to one machine instruction.",
+      "hint": "Assembly language uses short codes such as ADD and LOAD.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gicb9m",
+      "kind": "mistake",
+      "front": "Is an assembler the same as a compiler?",
+      "back": "No. An **assembler** works on assembly language, usually one instruction to one instruction, while a compiler translates a whole high-level language program.",
+      "hint": "Think about the input language each one translates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mc8qgr",
+      "kind": "mistake",
+      "front": "Does running a compiler also run the program?",
+      "back": "No. A **compiler** only translates the program. The resulting executable is run afterwards as a separate step.",
+      "hint": "Consider what files exist after compiling.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jstb05",
+      "kind": "concept",
+      "front": "Why does an interpreted program usually run more slowly?",
+      "back": "The interpreter translates the source code again every time the program runs, because both the interpreter and the source are needed each run.",
+      "hint": "Count how many times the translation happens.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n5xlwg",
+      "kind": "term",
+      "front": "What happens during lexical analysis?",
+      "back": "The source code is split into **tokens**, the smallest meaningful units such as keywords and names. Spaces and comments are discarded.",
+      "hint": "It is the first compilation stage.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v8mcgy",
+      "kind": "term",
+      "front": "Which compilation stage checks that data types match and variables are declared?",
+      "back": "**Semantic analysis** checks that statements are meaningful, for example that data types match and variables are declared.",
+      "hint": "This stage checks meaning rather than grammar.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hiuyqp",
+      "kind": "concept",
+      "front": "Why does a compiler suit finished software?",
+      "back": "Users can run the **executable** without any translator, and the source code stays private. The executable also usually runs faster.",
+      "hint": "Think about what the user needs and what the developer wants to protect.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g5bzfr",
+      "kind": "concept",
+      "front": "Why does an interpreter suit development and learning?",
+      "back": "A programmer can run a change straight away and see exactly where an error occurs, because errors appear as each statement is reached.",
+      "hint": "Think about how quickly feedback comes after a change.",
+      "sectionId": "s5"
+    }
+  ]
+}

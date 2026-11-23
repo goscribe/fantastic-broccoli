@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-11",
+  "topicCode": "5.11",
+  "topicName": "Catalysis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:43.415Z",
+  "cards": [
+    {
+      "id": "0if7pvn",
+      "kind": "term",
+      "front": "What is a catalyst, and what does it do to a reaction's rate?",
+      "back": "A **catalyst** increases reaction rate by providing a different reaction pathway. It takes part in the reaction but is regenerated before the reaction ends, so it does not appear in the overall equation.",
+      "hint": "Think about the pathway, not the products.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uc5spw",
+      "kind": "concept",
+      "front": "Why does a catalyst make a reaction faster at the same temperature?",
+      "back": "The catalyzed pathway has a lower **activation energy**, so more reacting particles can overcome the energy barrier. The starting and ending substances stay the same, so the overall energy change does not change.",
+      "hint": "Compare the height of the energy barrier.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0noacpu",
+      "kind": "concept",
+      "front": "Does a catalyst change the equilibrium position of a reaction?",
+      "back": "No. A catalyst speeds up both the forward and reverse reactions equally, so it only helps the system reach **equilibrium** faster. It does not change the energies of reactants or products.",
+      "hint": "A catalyst speeds up both directions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lw4b1p",
+      "kind": "mistake",
+      "front": "Students say a catalyst is permanently used up in a reaction. Why is that wrong?",
+      "back": "A catalyst is **regenerated**, not permanently used up. It can be consumed in an early mechanism step and then released again in a later step.",
+      "hint": "Look at what happens in the later steps.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "058ir5a",
+      "kind": "term",
+      "front": "What is homogeneous catalysis?",
+      "back": "**Homogeneous catalysis** happens when the catalyst and reactants are in the same phase. For example, dissolved iodide ions can catalyze the decomposition of dissolved hydrogen peroxide.",
+      "hint": "Focus on the phase of the catalyst and reactants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m0ccx8",
+      "kind": "term",
+      "front": "What is heterogeneous catalysis, and what is a typical example?",
+      "back": "**Heterogeneous catalysis** happens when the catalyst and reactants are in different phases. A solid catalyst can provide a surface where gaseous reactants attach, react, and then leave.",
+      "hint": "Think about a solid surface and a gas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10tp9tj",
+      "kind": "mistake",
+      "front": "A student says a catalyst is heterogeneous just because it is a solid. What is wrong with this?",
+      "back": "Catalysis is classified by comparing **phases** of the catalyst and reactants, not by whether the catalyst is a solid. A solid catalyst with reactants in the same phase would not be heterogeneous.",
+      "hint": "Compare phases, not the catalyst alone.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mbg20e",
+      "kind": "process",
+      "front": "How can you tell which species in a mechanism is a catalyst and which is an intermediate?",
+      "back": "Track each species through the steps. A **catalyst** is consumed in one step and regenerated in a later step. An **intermediate** forms in one step and is consumed in a later step.",
+      "hint": "Note which step comes first for each species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0je57bi",
+      "kind": "example",
+      "front": "Given $\\mathrm{H_2O_2+I^-\\rightarrow H_2O+IO^-}$ then $\\mathrm{H_2O_2+IO^-\\rightarrow H_2O+O_2+I^-}$, which species is the catalyst?",
+      "back": "**Iodide** ($\\mathrm{I^-}$) is the catalyst. It is consumed in the first step and regenerated in the second, and the steps add to $2\\mathrm{H_2O_2\\rightarrow 2H_2O+O_2}$.",
+      "hint": "Which species is used first and then released?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qdmvqf",
+      "kind": "example",
+      "front": "In the same two steps, which species is the intermediate, and why?",
+      "back": "**Hypoiodite** ($\\mathrm{IO^-}$) is the intermediate. It forms in the first step and is consumed in the second step, so it cancels when the steps are added.",
+      "hint": "Ask which species forms first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03dblsw",
+      "kind": "term",
+      "front": "What is an intermediate in a reaction mechanism?",
+      "back": "An **intermediate** forms during a mechanism and is consumed in a later step. It is not in the overall equation, because it cancels when the steps are added.",
+      "hint": "It is the opposite pattern to a catalyst.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1582tda",
+      "kind": "term",
+      "front": "What is activation energy?",
+      "back": "**Activation energy** is the energy barrier that reacting particles must overcome for a reaction step to occur. A lower barrier means more particles can react at a given temperature.",
+      "hint": "Think of it as a hill the particles must climb.",
+      "sectionId": "s2"
+    }
+  ]
+}

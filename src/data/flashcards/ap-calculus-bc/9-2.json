@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-2",
+  "topicCode": "9.2",
+  "topicName": "Second derivatives of parametric equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:59.763Z",
+  "cards": [
+    {
+      "id": "1du0tle",
+      "kind": "formula",
+      "front": "What formula gives the second derivative $\\frac{d^2y}{dx^2}$ of a parametric curve?",
+      "back": "$\\frac{d^2y}{dx^2}=\\frac{\\frac{d}{dt}\\left(\\frac{dy}{dx}\\right)}{\\frac{dx}{dt}}$. You **differentiate** $\\frac{dy}{dx}$ with respect to $t$, then divide by $\\frac{dx}{dt}$. The chain rule makes this work.",
+      "hint": "Start by differentiating with respect to t, not x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g4bdss",
+      "kind": "concept",
+      "front": "What does a positive second derivative tell you about a curve's shape?",
+      "back": "The curve is **concave up**, because the slopes rise as $x$ increases. A negative value means the curve is **concave down**, with slopes falling as $x$ increases.",
+      "hint": "Think about whether the slopes are rising or falling.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "175pz9y",
+      "kind": "mistake",
+      "front": "Can you find $\\frac{d^2y}{dx^2}$ by dividing $\\frac{d^2y}{dt^2}$ by $\\frac{d^2x}{dt^2}$?",
+      "back": "No, that is a **mistake**. Differentiate $\\frac{dy}{dx}$ with respect to $t$ first, then divide by $\\frac{dx}{dt}$.",
+      "hint": "Which quantity should be differentiated first?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nhxqwo",
+      "kind": "concept",
+      "front": "Why is $\\frac{dy}{dx}$ not enough to give the second derivative directly?",
+      "back": "$\\frac{dy}{dx}$ is a function of $t$. Differentiating it with respect to $t$ gives a rate per unit of $t$, not per unit of $x$, so you must convert it using $\\frac{dx}{dt}$.",
+      "hint": "Check which variable the slope depends on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03kn19g",
+      "kind": "term",
+      "front": "What is concavity?",
+      "back": "**Concavity** describes whether a graph's slopes increase or decrease as its input increases. It is the bend of the curve.",
+      "hint": "It is about how the curve bends, not how steep it is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kf6p3t",
+      "kind": "process",
+      "front": "What are the four steps to find the second derivative of a parametric curve?",
+      "back": "1) Find $\\frac{dx}{dt}$ and $\\frac{dy}{dt}$. 2) Form $\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}$. 3) Differentiate $\\frac{dy}{dx}$ with respect to $t$. 4) Divide that result by $\\frac{dx}{dt}$.",
+      "hint": "Each step builds on the one before.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wjrrf9",
+      "kind": "example",
+      "front": "For $x=t^2+1$ and $y=t^3-3t$, what is $\\frac{d^2y}{dx^2}$?",
+      "back": "$\\frac{3\\left(t^2+1\\right)}{4t^3}$, valid for $t\\ne0$. It comes from dividing $\\frac{3}{2}+\\frac{3}{2t^2}$ by $2t$.",
+      "hint": "Start with $\\frac{dy}{dx}=\\frac{3t^2-3}{2t}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uwhwqy",
+      "kind": "term",
+      "front": "What is an inflection point?",
+      "back": "An **inflection point** is a point on a graph where concavity changes. There the second derivative is zero or undefined, and its sign changes.",
+      "hint": "Think about where the bend switches direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0njheq8",
+      "kind": "mistake",
+      "front": "Does a negative $\\frac{dx}{dt}$ affect the concavity verdict?",
+      "back": "Yes. A negative $\\frac{dx}{dt}$ flips the sign of the quotient, which can **reverse** the concavity verdict. Always check the sign of $\\frac{dx}{dt}$ too.",
+      "hint": "Look at the sign of the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nlva0y",
+      "kind": "example",
+      "front": "For $\\frac{d^2y}{dx^2}=\\frac{3(t^2+1)}{4t^3}$, is the curve concave up or down at $t=2$, and what is the value?",
+      "back": "Concave **up**, with value $\\frac{15}{32}$. The numerator is always positive and $t>0$ makes the denominator positive.",
+      "hint": "Substitute $t=2$ and check the sign.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rc90v4",
+      "kind": "example",
+      "front": "For $x=t^3$ and $y=t^2$, is the curve concave up or down for every $t\\ne0$?",
+      "back": "Concave **down** for every $t\\ne0$. Here $\\frac{d^2y}{dx^2}=-\\frac{2}{9t^4}$, which is negative.",
+      "hint": "Find $\\frac{dy}{dx}$ first, then differentiate it with respect to $t$."
+    },
+    {
+      "id": "00h40jl",
+      "kind": "example",
+      "front": "For $x=2t$ and $y=t^3$, what is $\\frac{d^2y}{dx^2}$ at $t=4$?",
+      "back": "$6$. Here $\\frac{d^2y}{dx^2}=\\frac{3t}{2}$, which equals $6$ when $t=4$.",
+      "hint": "Find $\\frac{dy}{dx}$ first, then divide by $\\frac{dx}{dt}=2$."
+    }
+  ]
+}

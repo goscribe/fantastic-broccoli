@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-8-1-3",
+  "topicCode": "3.8.1.3",
+  "topicName": "Radioactive decay",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:17.785Z",
+  "cards": [
+    {
+      "id": "1cuhqen",
+      "kind": "concept",
+      "front": "Why can you not predict when one particular unstable nucleus will decay?",
+      "back": "Decay is **random**: each nucleus has the same fixed chance of decaying each second, so the exact moment cannot be predicted. It is also spontaneous, so temperature and pressure do not change that chance.",
+      "hint": "Think of popcorn popping in a hot pan.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jii1wm",
+      "kind": "term",
+      "front": "What is the decay constant $\\lambda$?",
+      "back": "The **probability** that a given nucleus decays in unit time, measured in $\\mathrm{s^{-1}}$.",
+      "hint": "Compare it with activity, which counts decays per second for the whole sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k90l3l",
+      "kind": "term",
+      "front": "What is the half-life of a nuclide?",
+      "back": "The **time taken** for half the undecayed nuclei in a large sample to decay. It is the same for every sample of a given nuclide.",
+      "hint": "Think about what happens to activity over each interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jggar9",
+      "kind": "concept",
+      "front": "Why does the activity of a sample depend on the number of undecayed nuclei $N$?",
+      "back": "Each nucleus has the same chance of decaying, so **more nuclei** give more decays each second, which gives $A=\\lambda N$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z32i30",
+      "kind": "example",
+      "front": "What is the activity of a sample holding $4.0\\times10^{15}$ undecayed nuclei, given $\\lambda=5.0\\times10^{-6}\\,\\mathrm{s^{-1}}$?",
+      "back": "**$2.0\\times10^{10}\\,\\mathrm{Bq}$**, from $A=\\lambda N$ with $N$ the number of undecayed nuclei.",
+      "hint": "Which relation links activity to the number of undecayed nuclei?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nor8xf",
+      "kind": "formula",
+      "front": "What does each symbol mean in $N=N_0e^{-\\lambda t}$?",
+      "back": "**$N$** is the number of undecayed nuclei at time $t$, $N_0$ is the number at $t=0$, $\\lambda$ is the decay constant in $\\mathrm{s^{-1}}$, and $t$ is time in $\\mathrm{s}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hn53f7",
+      "kind": "concept",
+      "front": "Why is radioactive decay described by an exponential law rather than a straight line?",
+      "back": "The rate of decay is proportional to the number remaining, $\\frac{\\Delta N}{\\Delta t}=-\\lambda N$, so the **rate falls** as $N$ falls, and only an exponential does this.",
+      "hint": "Consider how the rate changes as fewer nuclei remain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o6pned",
+      "kind": "formula",
+      "front": "Which equation links the half-life $T_{1/2}$ to the decay constant $\\lambda$?",
+      "back": "$T_{1/2}=\\frac{\\ln 2}{\\lambda}$, so a larger $\\lambda$ gives a **shorter** half-life.",
+      "hint": "Substitute the half-life point into the exponential law and take logarithms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n8htff",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a sample has fully decayed after two half-lives?",
+      "back": "After two half-lives a **quarter** remains. Half of whatever is left decays in each half-life, so the amount never reaches zero after a finite number of half-lives.",
+      "hint": "Work through the fraction remaining one interval at a time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d62a9a",
+      "kind": "example",
+      "front": "A source has an activity of $3200\\,\\mathrm{Bq}$ and a half-life of $12\\,\\mathrm{h}$. What is its activity after $36\\,\\mathrm{h}$?",
+      "back": "**$400\\,\\mathrm{Bq}$**, since $36\\,\\mathrm{h}$ is 3 half-lives and $3200\\times\\left(\\frac{1}{2}\\right)^{3}=400$.",
+      "hint": "Count how many half-lives fit into the elapsed time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jynx1g",
+      "kind": "example",
+      "front": "For a nuclide with $\\lambda=0.050\\,\\mathrm{s^{-1}}$, what fraction of nuclei remains after $30\\,\\mathrm{s}$?",
+      "back": "About **0.22**, from $e^{-0.050\\times30}=e^{-1.5}=0.223$.",
+      "hint": "Use the exponential law with the given time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hifw5u",
+      "kind": "concept",
+      "front": "Why does plotting $\\ln A$ against $t$ give a straight line?",
+      "back": "Taking logarithms of $A=A_0e^{-\\lambda t}$ gives $\\ln A=\\ln A_0-\\lambda t$, which has the form $y=mx+c$ with **gradient** $-\\lambda$.",
+      "hint": "Apply a logarithm to both sides of the exponential law.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1km3gzl",
+      "kind": "example",
+      "front": "A graph of $\\ln A$ against $t$ has a gradient of $-0.20\\,\\mathrm{h^{-1}}$. What is the half-life?",
+      "back": "About **$3.5\\,\\mathrm{h}$**, since $\\lambda=0.20\\,\\mathrm{h^{-1}}$ and $T_{1/2}=\\frac{0.693}{\\lambda}$.",
+      "hint": "The gradient equals minus the decay constant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1t9fy4c",
+      "kind": "mistake",
+      "front": "Why should background count rate be subtracted before plotting decay data?",
+      "back": "Otherwise the **line curves** at low count rates, so the straight-line method no longer works well.",
+      "hint": "Think about what the sample alone contributes to the count.",
+      "sectionId": "s5"
+    }
+  ]
+}

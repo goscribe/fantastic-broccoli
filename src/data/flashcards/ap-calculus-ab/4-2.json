@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Straight-line motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:00.521Z",
+  "cards": [
+    {
+      "id": "0r6pfks",
+      "kind": "formula",
+      "front": "What is velocity as a derivative of position, and what units does it use when position is in meters and time in seconds?",
+      "back": "**Velocity** is $v(t)=x'(t)=\\frac{dx}{dt}$, the instantaneous rate of change of position. With meters and seconds, it is measured in $\\mathrm{m/s}$.",
+      "hint": "Think of it as the rate of change of position with respect to time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eabtpv",
+      "kind": "process",
+      "front": "How do you find when an object is at rest and which way it moves over a time interval?",
+      "back": "First solve $v(t)=0$ to find the **rest** times. Then check the sign of $v(t)$ on each side: positive means the positive direction, negative means the negative direction.",
+      "hint": "Two steps: find the zeros of velocity, then test signs between them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aq59vd",
+      "kind": "concept",
+      "front": "How can you tell whether an object is speeding up or slowing down?",
+      "back": "**Speeding up** happens when velocity and acceleration have the same sign. **Slowing down** happens when their signs differ.",
+      "hint": "Compare the signs of two quantities.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01eqsjw",
+      "kind": "concept",
+      "front": "Why is displacement different from total distance traveled?",
+      "back": "**Displacement** is $x(t_2)-x(t_1)$ and includes direction, while distance ignores it. Moving from 3 m to $-2$ m gives a displacement of $-5$ m.",
+      "hint": "Does the measure keep track of which way the object went?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "183f674",
+      "kind": "mistake",
+      "front": "A position is negative, so is the object moving backward?",
+      "back": "**No.** A negative position only means the object is on the negative side of the origin. Velocity, not position, gives direction.",
+      "hint": "Position gives location. What gives direction?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16rxkdw",
+      "kind": "formula",
+      "front": "How is acceleration defined in terms of velocity and position, and what units does it use?",
+      "back": "**Acceleration** is $a(t)=v'(t)=x''(t)$, the rate of change of velocity. With meters and seconds, it is measured in $\\mathrm{m/s^2}$.",
+      "hint": "Differentiate velocity once more.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17gp38x",
+      "kind": "mistake",
+      "front": "Does negative acceleration always mean an object is slowing down?",
+      "back": "**No.** An object moving in the negative direction with negative acceleration speeds up, because velocity and acceleration share a sign.",
+      "hint": "Check whether velocity is also negative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ciixm5",
+      "kind": "mistake",
+      "front": "Does an object always change direction when its velocity equals zero?",
+      "back": "**No.** Velocity can be zero without changing sign, so check the sign of velocity on both sides of that zero.",
+      "hint": "Look at the signs on both sides before deciding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o742ou",
+      "kind": "example",
+      "front": "For $x(t)=t^2-4t+3$ meters on $0\\leq t\\leq4$, when is the object at rest, and which way does it move before and after?",
+      "back": "It is at **rest** at $t=2$ s, since $v(t)=2t-4=0$. It moves in the negative direction before 2 s and the positive direction after.",
+      "hint": "Differentiate first, then solve for zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mn6vfu",
+      "kind": "example",
+      "front": "For $x(t)=t^2-4t+3$ meters, what are the velocity and acceleration at $t=1$ second?",
+      "back": "**v(1) = -2 m/s** and **a = 2 m/s²**. Velocity and acceleration have opposite signs, so the object is slowing down.",
+      "hint": "Find $v(t)$ first, then differentiate again for acceleration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ve8e51",
+      "kind": "term",
+      "front": "What is a position graph's tangent slope, and what does a horizontal tangent mean?",
+      "back": "The **tangent slope** of a position graph gives velocity. A horizontal tangent means velocity is zero, so the object is at rest at that instant.",
+      "hint": "Slope is a rate of change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0epp4ra",
+      "kind": "concept",
+      "front": "On a velocity graph, what do height and slope each tell you?",
+      "back": "**Height** above or below the time axis gives direction. The **slope** gives acceleration.",
+      "hint": "Height and slope answer different questions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tgyffx",
+      "kind": "concept",
+      "front": "Does the height of an acceleration graph show the direction of motion?",
+      "back": "**No.** It shows the sign of acceleration. Compare it with the sign of velocity to decide whether speed is increasing or decreasing.",
+      "hint": "Acceleration describes change in velocity, not velocity itself.",
+      "sectionId": "s4"
+    }
+  ]
+}

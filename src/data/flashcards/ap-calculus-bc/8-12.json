@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-12",
+  "topicCode": "8.12",
+  "topicName": "Washer method about other axes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:59.830Z",
+  "cards": [
+    {
+      "id": "17mdnrg",
+      "kind": "concept",
+      "front": "What must the two radii of a washer be measured from?",
+      "back": "The **rotation axis**, not a coordinate axis. Each radius is the distance from the rotation axis to a boundary of the region.",
+      "hint": "Think about where the spinning happens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04ad0v7",
+      "kind": "formula",
+      "front": "What is the area of a washer cross section, and what do R and r mean?",
+      "back": "$\\pi(R^2-r^2)$, where $R$ is the **outer radius** and $r$ is the inner radius. It is a large disk with a smaller disk removed.",
+      "hint": "Subtract the areas of two circles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1umb9f2",
+      "kind": "formula",
+      "front": "Write the washer volume for rotating a region over $a\\leq x\\leq b$ around a horizontal line.",
+      "back": "$V=\\pi\\int_a^b(R(x)^2-r(x)^2)\\,dx$, using vertical slices. $R$ and $r$ are vertical distances from the axis to the boundary curves.",
+      "hint": "Vertical slices mean you integrate with respect to x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mswysc",
+      "kind": "concept",
+      "front": "When the axis $y=k$ lies above the region, which curve gives the outer radius?",
+      "back": "The **lower curve** gives $R$ because it is farther from the axis. The upper curve gives $r$.",
+      "hint": "Ask which boundary is farther from the axis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l33j97",
+      "kind": "process",
+      "front": "What steps set up a washer integral?",
+      "back": "1) State the slice direction. 2) Find R and r as distances from the axis. 3) Square each full distance, then subtract. 4) Write the bounds and integrate.",
+      "hint": "Set up everything before you evaluate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tguegd",
+      "kind": "mistake",
+      "front": "Why is using a curve's height as its radius usually wrong?",
+      "back": "It is only correct when the axis is the x-axis. For any other axis, the **radius is the distance from the rotation axis** to the curve.",
+      "hint": "Check where the axis is first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ielo0q",
+      "kind": "mistake",
+      "front": "A student writes $(R-r)^2$ for the washer area factor. What is wrong, and what is right?",
+      "back": "Square each distance first, then subtract. The correct factor is $R^2-r^2$, not $(R-r)^2$.",
+      "hint": "Work out what happens to each term separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07lvckp",
+      "kind": "example",
+      "front": "Find the volume when the region between $y=x$ and $y=x^2$ on $0\\leq x\\leq1$ is rotated around $y=2$.",
+      "back": "$\\frac{8\\pi}{15}$ cubic units. Here $R=2-x^2$, $r=2-x$, and $V=\\pi\\int_0^1[(2-x^2)^2-(2-x)^2]\\,dx$.",
+      "hint": "The axis is above the entire region.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10dyqh1",
+      "kind": "concept",
+      "front": "Which slice direction and variable do you use for rotation around a horizontal line?",
+      "back": "**Vertical slices**, integrating with respect to $x$.",
+      "hint": "The axis runs horizontally.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a5mjzr",
+      "kind": "formula",
+      "front": "Write the washer integral for rotation around $x=h$, using the region's $y$-values.",
+      "back": "$V=\\pi\\int(R(y)^2-r(y)^2)\\,dy$, using horizontal slices. $R$ and $r$ are horizontal distances from $x=h$.",
+      "hint": "Write the boundaries as x in terms of y first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tjy008",
+      "kind": "example",
+      "front": "Set up the volume for the region between $x=y$ and $x=\\sqrt y$ for $0<y<1$, rotated around $x=2$.",
+      "back": "$V=\\pi\\int_0^1[(2-y)^2-(2-\\sqrt y)^2]\\,dy$. The left boundary $x=y$ gives $R=2-y$, and the right boundary $x=\\sqrt y$ gives $r=2-\\sqrt y$.",
+      "hint": "Which boundary is farther from x=2?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z4f0zm",
+      "kind": "term",
+      "front": "What is a washer in a solid of revolution?",
+      "back": "A **washer** is a circular cross section with a circular hole in its middle. It has an outer radius $R$ and an inner radius $r$.",
+      "hint": "Picture a flat ring.",
+      "sectionId": "s1"
+    }
+  ]
+}

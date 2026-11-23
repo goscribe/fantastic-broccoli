@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-7",
+  "topicCode": "3.3.7",
+  "topicName": "Optical isomerism",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:26.960Z",
+  "cards": [
+    {
+      "id": "19ekuz8",
+      "kind": "term",
+      "front": "What is optical isomerism?",
+      "back": "**Optical isomerism** is a type of stereoisomerism in which two isomers are non-superimposable mirror images of each other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03ihkvh",
+      "kind": "concept",
+      "front": "What must a carbon atom have to be a chiral centre?",
+      "back": "It must be a tetrahedral carbon bonded to four **different** atoms or groups, so it can be arranged in two mirror-image ways.",
+      "hint": "Think about what happens when two of the attached groups are the same.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0runmjw",
+      "kind": "concept",
+      "front": "How do the two enantiomers of a pair affect plane-polarised light?",
+      "back": "Each **optically active** enantiomer turns the plane of vibration by the same angle, one clockwise and the other anticlockwise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "010drgl",
+      "kind": "term",
+      "front": "What is an enantiomer?",
+      "back": "One member of a pair of **optical isomers**, which have the same bonding but are non-superimposable mirror images of each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qdbj88",
+      "kind": "process",
+      "front": "What are the steps for drawing a pair of enantiomers around a chiral centre?",
+      "back": "1) Draw the chiral carbon with two bonds in the plane. 2) Show one group as a **wedge** and another as a **dash**. 3) Reflect in a vertical mirror line, swapping the wedge and dash.",
+      "hint": "Start by drawing the chiral carbon on the page.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0isjml1",
+      "kind": "example",
+      "front": "Which carbon in butan-2-ol, $\\mathrm{CH_3CH(OH)CH_2CH_3}$, is a chiral centre?",
+      "back": "Carbon 2, the carbon bonded to OH, carrying **H**, **OH**, $\\mathrm{CH_3}$ and $\\mathrm{CH_2CH_3}$.",
+      "hint": "Count the groups attached to each carbon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pu3ksh",
+      "kind": "mistake",
+      "front": "Why is a carbon with two hydrogen atoms never a chiral centre?",
+      "back": "Two identical groups mean the molecule matches its mirror image. A chiral centre needs **four different groups**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aw0uxw",
+      "kind": "mistake",
+      "front": "What should be compared when deciding whether two groups on a chiral centre are the same?",
+      "back": "The **whole groups**, not just the first atom, since two chains that both start with carbon can still be different.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "014siaq",
+      "kind": "mistake",
+      "front": "Why is 'mirror image' alone not enough to define optical isomers?",
+      "back": "Many molecules have mirror images identical to themselves. The mirror image must be **non-superimposable** for optical isomerism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17mhye4",
+      "kind": "term",
+      "front": "What is plane-polarised light?",
+      "back": "Light whose waves **vibrate in only one plane**. A polarising filter produces it from ordinary light, which vibrates in many planes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08kt69y",
+      "kind": "concept",
+      "front": "Why does a racemic mixture show no overall rotation of plane-polarised light?",
+      "back": "It contains equal amounts of two enantiomers, whose equal and opposite rotations **cancel out**.",
+      "hint": "Think about the direction each enantiomer turns the light.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j9dcin",
+      "kind": "mistake",
+      "front": "What is wrong with saying a racemic mixture contains no chiral molecules?",
+      "back": "Each molecule is still **chiral**. The rotation cancels only because both enantiomers are present in equal amounts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z7067n",
+      "kind": "concept",
+      "front": "Why does attacking a flat molecule often give a racemic mixture?",
+      "back": "The attacking species approaches from either face with **equal chance**, so both mirror-image products form in equal amounts.",
+      "hint": "Think about the two faces of a flat molecule.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14pobl2",
+      "kind": "formula",
+      "front": "What is the maximum number of stereoisomers for a molecule with $n$ chiral centres?",
+      "back": "$2^n$, where $n$ is the number of **chiral centres**. Internal symmetry can make the real number smaller.",
+      "hint": "Consider the two possible arrangements at each chiral centre.",
+      "sectionId": "s3"
+    }
+  ]
+}

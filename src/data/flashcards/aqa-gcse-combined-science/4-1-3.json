@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-1-3",
+  "topicCode": "4.1.3",
+  "topicName": "Transport in cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:14.608Z",
+  "cards": [
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "**Diffusion** is the net movement of particles from higher to lower concentration. It does not need energy from the cell.",
+      "hint": "Think about how particles move randomly in both directions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o12l51",
+      "kind": "concept",
+      "front": "Which way does water move by osmosis?",
+      "back": "Water moves from a more dilute solution to a more concentrated solution through a **partially permeable membrane**.",
+      "hint": "Think about which side has more dissolved substance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00dx17i",
+      "kind": "concept",
+      "front": "Why does active transport need energy from respiration?",
+      "back": "It moves substances from lower to higher concentration, against the **concentration gradient**, so the cell must supply energy.",
+      "hint": "Compare this with the direction particles would move naturally.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eeu8n3",
+      "kind": "term",
+      "front": "What is a partially permeable membrane?",
+      "back": "A **partially permeable membrane** lets some substances, such as water, pass through while restricting others.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bwcr29",
+      "kind": "mistake",
+      "front": "Why is it wrong to say osmosis moves dissolved substances?",
+      "back": "Osmosis moves only water. The **dissolved substance** affects which way the water moves, not what moves.",
+      "hint": "Look at what osmosis is defined as moving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cyh77r",
+      "kind": "concept",
+      "front": "What happens to a plant cell placed in a dilute solution?",
+      "back": "It gains water by osmosis and becomes **turgid**. Its cell wall resists further swelling.",
+      "hint": "Think about what the cell wall does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18yl7ld",
+      "kind": "concept",
+      "front": "Why can an animal cell burst or shrink during osmosis?",
+      "back": "It has no cell wall. It can burst after gaining too much water and shrink after losing water.",
+      "hint": "Compare it with a plant cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08wxhkq",
+      "kind": "example",
+      "front": "How do root hair cells take up mineral ions from dilute soil water?",
+      "back": "By **active transport**, using energy from respiration to move ions against the gradient into cells where they are already more concentrated.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rl2yqz",
+      "kind": "term",
+      "front": "What do carrier proteins do in a cell membrane?",
+      "back": "**Carrier proteins** are membrane proteins that move particular substances across the membrane, as in active transport.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qmytni",
+      "kind": "mistake",
+      "front": "Why is it wrong to say particles stop moving once diffusion is complete?",
+      "back": "Particles still move when concentrations are equal, but there is no **net movement**, so the overall change stops.",
+      "hint": "Think about the word net in the definition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i92opb",
+      "kind": "concept",
+      "front": "Why does surface area to volume ratio fall as an organism grows?",
+      "back": "Its volume increases faster than its surface area, so larger organisms need specialised **exchange surfaces** to supply their cells.",
+      "hint": "Compare how area and volume change as a shape gets bigger.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hb8y2m",
+      "kind": "formula",
+      "front": "How do you calculate the surface area of a cube?",
+      "back": "$\\text{surface area} = 6\\times\\text{side}^2$, giving $\\text{cm}^2$ when the side is in cm.",
+      "hint": "Count the faces of the cube.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y9vjpd",
+      "kind": "example",
+      "front": "What is the surface area to volume ratio of a cube with sides of 2 cm?",
+      "back": "$3:1$. Its surface area is $24\\,\\text{cm}^2$ and its volume is $8\\,\\text{cm}^3$, so $24:8=3:1$.",
+      "hint": "Work out the area and volume separately first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tzrdf2",
+      "kind": "concept",
+      "front": "Which three factors speed up diffusion across an exchange surface?",
+      "back": "A **larger surface area**, a **steeper concentration gradient** and a **shorter diffusion distance** each increase the rate of diffusion.",
+      "hint": "Think about what the surface, gradient and distance each control.",
+      "sectionId": "s5"
+    }
+  ]
+}

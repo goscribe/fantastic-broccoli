@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "3-1-3",
+  "topicCode": "3.1.3",
+  "topicName": "Transport in plants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:03.430Z",
+  "cards": [
+    {
+      "id": "1m2gbmo",
+      "kind": "concept",
+      "front": "How is water pulled up the xylem to the leaves without the plant using metabolic energy?",
+      "back": "Evaporation from the leaves, called **transpiration**, lowers pressure in the xylem and creates tension. Hydrogen bonds between water molecules (cohesion) keep the column unbroken as it is pulled upwards.",
+      "hint": "Think about what happens at the leaf surface.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u6bbpo",
+      "kind": "concept",
+      "front": "How does sucrose move from a source to a sink in the phloem?",
+      "back": "Sucrose is actively loaded into sieve tubes at the **source**, lowering water potential. Water enters by osmosis, pressure rises, and the contents flow to the sink, where sucrose is removed. This is **translocation** by pressure flow.",
+      "hint": "Start with what happens at the source end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jey9ce",
+      "kind": "concept",
+      "front": "Why do xerophytes have features such as sunken stomata and a thick waxy cuticle?",
+      "back": "They **reduce water loss** in dry habitats. Sunken stomata trap humid air, which lowers the water potential gradient out of the leaf, and a thick cuticle cuts evaporation through the leaf surface.",
+      "hint": "Compare with the problem a dry habitat creates.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1spqdrf",
+      "kind": "term",
+      "front": "What is xylem and what does it carry?",
+      "back": "**Xylem** is non-living transport tissue made of hollow, dead tubes with no end walls. It carries water and mineral ions upwards, and its lignified walls give support.",
+      "hint": "Compare its contents with those of phloem.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11b0fr0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that phloem sap always moves downwards?",
+      "back": "Translocation is not always downwards. Sucrose moves **up or down** the plant, from wherever the source is to wherever the sink is.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1asw4bb",
+      "kind": "term",
+      "front": "Which way does water move in terms of water potential?",
+      "back": "Water moves down a **water potential** gradient, from higher to lower water potential, by osmosis. Water potential is the tendency of water molecules to move.",
+      "hint": "Think about the tendency of water molecules to move.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0250izr",
+      "kind": "process",
+      "front": "How does the waterproof band in the endodermis change water's route to the xylem?",
+      "back": "It blocks the **apoplast pathway**, so water must enter the cytoplasm and move through the symplast pathway before reaching the xylem. This lets the plant control which substances get through.",
+      "hint": "Consider which route goes through cell walls.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yb6pq8",
+      "kind": "formula",
+      "front": "What is the formula for the volume of water taken up in a potometer, and what does each symbol mean?",
+      "back": "$V=\\pi r^2 l$, where $V$ is volume in $\\mathrm{mm^3}$, $r$ is the capillary tube radius in $\\mathrm{mm}$, and $l$ is the distance the air bubble moves in $\\mathrm{mm}$.",
+      "hint": "Think of the water taken up as a cylinder inside the tube.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11i6a5p",
+      "kind": "example",
+      "front": "An air bubble moves 36 mm in 6.0 minutes along a tube of radius 0.50 mm. What is the rate of water uptake?",
+      "back": "About $4.7\\,\\mathrm{mm^3\\,min^{-1}}$. The volume is $\\pi\\times(0.50)^2\\times36\\approx28.3\\,\\mathrm{mm^3}$, and dividing by 6.0 min gives the rate.",
+      "hint": "Find the volume first, then divide by time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19tdi0z",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that the plant uses energy to lift water up the xylem?",
+      "back": "The xylem is made of dead cells and needs no metabolic energy to move water. **Evaporation** from the leaves provides the pull.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gsegjb",
+      "kind": "term",
+      "front": "What is a xerophyte, and what is an example?",
+      "back": "A **xerophyte** is a plant with adaptations that reduce water loss, allowing it to survive in dry habitats. Marram grass is an example.",
+      "hint": "Think about the type of habitat it lives in.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "14pkjgr",
+      "kind": "concept",
+      "front": "How does humidity affect the rate of transpiration?",
+      "back": "Dry air steepens the water potential gradient out of the leaf, so transpiration speeds up. Humid air shallows the gradient and slows **transpiration**.",
+      "hint": "Think about the gradient between the leaf and the surrounding air.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tuoghz",
+      "kind": "term",
+      "front": "What is a sink in the phloem?",
+      "back": "A **sink** is a part of the plant that removes sucrose from the phloem for use or storage, such as roots, fruits and growing tips.",
+      "hint": "Think about where the sugar ends up.",
+      "sectionId": "s5"
+    }
+  ]
+}

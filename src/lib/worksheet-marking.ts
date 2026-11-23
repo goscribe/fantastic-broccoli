@@ -137,6 +137,14 @@ export function isPartCorrect(part: WorksheetPart, value: string): boolean {
   const given = value.trim();
   if (!part.answer) return given.length > 0;
   // Choice parts: unchanged word match (True/False and the accepted synonyms).
+  // Practice-paper multiple choice: the letter, or the option's own text.
+  if (part.type === "mcq") {
+    const want = part.answer.trim().toUpperCase();
+    const letter = /^\(?[A-Da-d]\)?$/.test(given)
+      ? given.replace(/[()]/g, "").toUpperCase()
+      : "ABCD"[(part.options ?? []).findIndex((o) => o.trim().toLowerCase() === given.toLowerCase())] ?? "";
+    return letter === want;
+  }
   if (part.type === "true_false") {
     const want = asBoolean(part.answer);
     const got = asBoolean(given);
@@ -171,7 +179,7 @@ export function serverCanMarkPart(
   part: WorksheetPart,
   drawing?: string | null,
 ): boolean {
-  if (part.type === "true_false") return false;
+  if (part.type === "true_false" || part.type === "mcq") return false;
   return Boolean(part.markScheme?.points.length) || Boolean(drawing);
 }
 

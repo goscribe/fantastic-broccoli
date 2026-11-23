@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-14",
+  "topicCode": "6.14",
+  "topicName": "Antibiotics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:36.396Z",
+  "cards": [
+    {
+      "id": "1b6lixa",
+      "kind": "concept",
+      "front": "Why can an antibiotic kill bacteria without harming human cells?",
+      "back": "Because it attacks a structure or process that bacteria have and human cells lack, a property called **selective toxicity**. Bacterial cell walls and ribosomes are examples of such targets.",
+      "hint": "Compare what bacterial cells have with what human cells have.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08ba7cg",
+      "kind": "process",
+      "front": "How does a penicillin-type antibiotic kill a growing bacterium?",
+      "back": "It blocks the enzymes that form cross-links in the peptidoglycan wall, so the new wall is weak. Water enters by osmosis and the cell bursts, a process called **lysis**.",
+      "hint": "Start with what the cell wall normally stops the cell from doing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12i20cz",
+      "kind": "concept",
+      "front": "How does antibiotic use make a resistant population grow over time?",
+      "back": "The antibiotic acts as a **selection pressure**. Susceptible bacteria die, while resistant survivors reproduce and pass on the resistance gene, so the resistant fraction rises.",
+      "hint": "Consider which bacteria survive a dose, and what they pass on to their offspring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y1clm3",
+      "kind": "term",
+      "front": "What is an antibiotic?",
+      "back": "A chemical that **kills bacteria** or stops them growing, usually without harming the cells of the person treated. Many were first found in fungi and other microorganisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0367q6k",
+      "kind": "concept",
+      "front": "Why do antibiotics have no effect on influenza or the common cold?",
+      "back": "Viruses are not cells, so they have no cell wall, ribosomes or metabolism of their own for antibiotics to target. They use the host cell's ribosomes and enzymes instead.",
+      "hint": "List the targets antibiotics attack and check whether a virus has any of them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k21bt4",
+      "kind": "mistake",
+      "front": "What is wrong with taking antibiotics for a viral illness such as flu?",
+      "back": "They give no benefit against the virus, and they may **select for resistant bacteria** elsewhere in the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qyrza8",
+      "kind": "mistake",
+      "front": "A student says penicillin dissolves the existing cell wall of a bacterium. What is wrong with this?",
+      "back": "The antibiotic does not dissolve an existing wall. It stops **new cross-links** forming, so mainly growing cells, which keep adding wall, are affected.",
+      "hint": "Think about when the bacterium is adding new wall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yjt4ku",
+      "kind": "concept",
+      "front": "What is the difference between bactericidal and bacteriostatic antibiotics?",
+      "back": "Bactericidal antibiotics **kill** bacteria directly. Bacteriostatic antibiotics only stop them **multiplying**, without necessarily killing them.",
+      "hint": "Compare the actions described in the two definitions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q6fmw1",
+      "kind": "concept",
+      "front": "What does an antibiotic that binds bacterial ribosomes stop, and why does this halt growth?",
+      "back": "It stops **protein synthesis**. Without new enzymes and structural proteins, the cell cannot grow, repair itself or multiply. Human ribosomes differ in structure, so they are affected far less.",
+      "hint": "Think about what ribosomes build.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g59u27",
+      "kind": "term",
+      "front": "What is a plasmid, and why does it matter for antibiotic resistance?",
+      "back": "A **plasmid** is a small circular loop of DNA, separate from the main chromosome, that can pass between bacteria, even of different species. It spreads resistance faster than inheritance alone.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qkweh7",
+      "kind": "concept",
+      "front": "Why does antibiotic resistance make infections harder to treat?",
+      "back": "The choice of effective drugs shrinks, so infections last longer and become more serious, and doctors need stronger, costlier or more toxic drugs. Resistant bacteria can also spread between people, especially in hospitals.",
+      "hint": "Think about what drugs doctors have left to prescribe.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0smwr5x",
+      "kind": "process",
+      "front": "Which two steps slow the development of antibiotic resistance?",
+      "back": "Use antibiotics only for **bacterial infections**, and make sure patients **finish the full course**. Stopping early may leave survivors that multiply.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0knedn3",
+      "kind": "term",
+      "front": "What is peptidoglycan?",
+      "back": "The **polymer** that forms the bacterial cell wall. It is a mesh of sugar chains joined by short peptide cross-links, and it stops the cell swelling and bursting as water enters by osmosis.",
+      "hint": "Think about what the cross-links join together.",
+      "sectionId": "s2"
+    }
+  ]
+}

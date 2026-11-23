@@ -76,7 +76,7 @@ const en = {
   "settings.usage": "Usage",
   "settings.language": "Language",
   "settings.languageHint":
-    "Used for the app and for generated study content (sessions, flashcards, podcasts).",
+    "Used for the app and for what Scribe writes for you: sessions, notes and flashcards.",
   "settings.languageSaved": "Language saved",
   "common.save": "Save",
   "common.cancel": "Cancel",
@@ -115,7 +115,7 @@ const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, strin
     "settings.usage": "Uso",
     "settings.language": "Idioma",
     "settings.languageHint":
-      "Se usa para la aplicación y para el contenido de estudio generado (sesiones, tarjetas, pódcasts).",
+      "Se usa para la aplicación y para lo que Scribe escribe para ti: sesiones, apuntes y tarjetas.",
     "settings.languageSaved": "Idioma guardado",
     "common.save": "Guardar",
     "common.cancel": "Cancelar",
@@ -144,7 +144,7 @@ const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, strin
     "settings.usage": "Utilisation",
     "settings.language": "Langue",
     "settings.languageHint":
-      "Utilisée pour l'application et pour le contenu d'étude généré (sessions, cartes, podcasts).",
+      "Utilisée pour l'application et pour ce que Scribe écrit pour toi : sessions, fiches et cartes.",
     "settings.languageSaved": "Langue enregistrée",
     "common.save": "Enregistrer",
     "common.cancel": "Annuler",
@@ -173,7 +173,7 @@ const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, strin
     "settings.usage": "Nutzung",
     "settings.language": "Sprache",
     "settings.languageHint":
-      "Gilt für die App und für generierte Lerninhalte (Sitzungen, Karteikarten, Podcasts).",
+      "Gilt für die App und für alles, was Scribe für dich schreibt: Lerneinheiten, Notizen und Karteikarten.",
     "settings.languageSaved": "Sprache gespeichert",
     "common.save": "Speichern",
     "common.cancel": "Abbrechen",
@@ -202,7 +202,7 @@ const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, strin
     "settings.usage": "用量",
     "settings.language": "语言",
     "settings.languageHint":
-      "用于应用界面和生成的学习内容（学习会话、闪卡、播客）。",
+      "用于应用界面以及 Scribe 为你生成的内容：学习会话、笔记和闪卡。",
     "settings.languageSaved": "语言已保存",
     "common.save": "保存",
     "common.cancel": "取消",
@@ -231,7 +231,7 @@ const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, strin
     "settings.usage": "उपयोग",
     "settings.language": "भाषा",
     "settings.languageHint":
-      "ऐप और जनरेट की गई अध्ययन सामग्री (सत्र, फ़्लैशकार्ड, पॉडकास्ट) के लिए उपयोग होती है।",
+      "ऐप और Scribe द्वारा आपके लिए लिखी सामग्री (सत्र, नोट्स और फ़्लैशकार्ड) के लिए उपयोग होती है।",
     "settings.languageSaved": "भाषा सहेजी गई",
     "common.save": "सहेजें",
     "common.cancel": "रद्द करें",
@@ -260,7 +260,7 @@ const dictionaries: Partial<Record<Locale, Partial<Record<keyof typeof en, strin
     "settings.usage": "Paggamit",
     "settings.language": "Wika",
     "settings.languageHint":
-      "Ginagamit para sa app at sa mga ginawang study content (sessions, flashcards, podcasts).",
+      "Ginagamit para sa app at sa mga isinusulat ng Scribe para sa iyo: sessions, notes at flashcards.",
     "settings.languageSaved": "Nai-save ang wika",
     "common.save": "I-save",
     "common.cancel": "Kanselahin",

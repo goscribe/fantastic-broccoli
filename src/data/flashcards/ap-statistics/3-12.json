@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-12",
+  "topicCode": "3.12",
+  "topicName": "Setting up a two-proportion test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:21.931Z",
+  "cards": [
+    {
+      "id": "1sb4h1t",
+      "kind": "term",
+      "front": "What does the null hypothesis $H_0$ claim in a two-proportion test?",
+      "back": "**No difference** between the two population proportions: $H_0: p_1 - p_2 = 0$.",
+      "hint": "Think about what the test assumes before it looks at any data.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0j4bk5b",
+      "kind": "process",
+      "front": "Which conditions must hold before you use a two-proportion z-test?",
+      "back": "The data must come from random samples or randomized groups, the groups must be **independent**, each sample must be under 10% of its population, and all four expected counts must be at least 10.",
+      "hint": "There are four checks in total."
+    },
+    {
+      "id": "1u2skq0",
+      "kind": "process",
+      "front": "How do you recognize that a two-proportion z-test is the right procedure?",
+      "back": "Use it when there are two groups, each summarized by a proportion, with independent samples and a claim that the two proportions **differ**.",
+      "hint": "Contrast it with one sample or with paired data.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cykf9h",
+      "kind": "concept",
+      "front": "Where should the direction of the alternative hypothesis come from?",
+      "back": "From the **research question or claim**, decided before collecting data. It should never come from which sample proportion happens to be larger.",
+      "hint": "Not from the sample results.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zi3v4r",
+      "kind": "formula",
+      "front": "What is the combined proportion $\\hat{p}_c$, and what do its symbols mean?",
+      "back": "$\\hat{p}_c = \\frac{x_1 + x_2}{n_1 + n_2}$: the **total successes** divided by the total sample size, where $x_1, x_2$ are the success counts and $n_1, n_2$ are the sample sizes.",
+      "hint": "Pool both samples together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1otxwz3",
+      "kind": "term",
+      "front": "What is the large counts condition?",
+      "back": "Each of $n_1\\hat{p}_c$, $n_1(1-\\hat{p}_c)$, $n_2\\hat{p}_c$, and $n_2(1-\\hat{p}_c)$ must be at least **10**, so the normal model is reasonable.",
+      "hint": "Four products to check.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ofi0ej",
+      "kind": "example",
+      "front": "Sample 1 has 66 successes out of 120. Independent sample 2 has 60 successes out of 150. Is the large counts condition met?",
+      "back": "Yes. $\\hat{p}_c \\approx 0.467$, and the four counts are about 56, 64, 70, and 80, all at least **10**.",
+      "hint": "Find the combined proportion first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1thp68c",
+      "kind": "mistake",
+      "front": "Why is a two-proportion z-test wrong for the same people asked before and after a campaign?",
+      "back": "The samples are **paired**, not independent, because the same people appear in both groups. The test requires two independent samples.",
+      "hint": "Think about who is in each group.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n6sthr",
+      "kind": "mistake",
+      "front": "What goes wrong if you swap which group is called group 1 in a one-sided test?",
+      "back": "The sign of $H_a$ **flips**. A claim that group 1 is higher becomes a claim that group 2 is lower, so define $p_1$ and $p_2$ carefully first.",
+      "hint": "Check your definitions before writing the sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vpqg6v",
+      "kind": "example",
+      "front": "A counselor claims a higher proportion of seniors than freshmen plan to attend college. With seniors as group 1, what are $H_0$ and $H_a$?",
+      "back": "$H_0: p_1 - p_2 = 0$ and $H_a: p_1 - p_2 > 0$, where $p_1$ is the proportion of **seniors** and $p_2$ is the proportion of freshmen.",
+      "hint": "Group 1 is seniors in this problem.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17mklfa",
+      "kind": "formula",
+      "front": "What are the two forms the alternative hypothesis can take for $p_1 - p_2$?",
+      "back": "Two-sided: $H_a: p_1 - p_2 \\neq 0$. One-sided: $H_a: p_1 - p_2 > 0$ or $H_a: p_1 - p_2 < 0$, with the direction set by the **claim**.",
+      "hint": "There are two shapes, and one has a single direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1reqmn7",
+      "kind": "process",
+      "front": "What should you do before writing any hypotheses for a two-proportion test?",
+      "back": "**Define** $p_1$ and $p_2$ in words and in context, and say clearly which group is group 1.",
+      "hint": "Start with words, not symbols.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0559dvk",
+      "kind": "term",
+      "front": "What is the 10% condition?",
+      "back": "Each sample must be less than **10%** of its population when sampling without replacement, so observations can be treated as approximately independent.",
+      "hint": "Compare the sample size with the population size.",
+      "sectionId": "s3"
+    }
+  ]
+}

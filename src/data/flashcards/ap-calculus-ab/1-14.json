@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-14",
+  "topicCode": "1.14",
+  "topicName": "Infinite limits and vertical asymptotes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:43.361Z",
+  "cards": [
+    {
+      "id": "11r8w8p",
+      "kind": "term",
+      "front": "What is a vertical asymptote?",
+      "back": "A **vertical asymptote** is a line $x=a$ where at least one one-sided limit at $a$ is $+\\infty$ or $-\\infty$. The other side does not need to match.",
+      "hint": "Think about what happens on just one side of $a$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h6t7mq",
+      "kind": "concept",
+      "front": "What does $\\lim_{x\\to a}f(x)=+\\infty$ mean?",
+      "back": "The **values** of $f(x)$ become arbitrarily large and positive as $x$ gets close to $a$. Infinity is not a number the function actually reaches.",
+      "hint": "Describe the output values, not the input.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z12sud",
+      "kind": "mistake",
+      "front": "Does a zero denominator always mean a vertical asymptote?",
+      "back": "**No.** If a factor cancels, as in $\\frac{x-2}{x-2}=1$ for $x\\ne2$, the values approach 1, so there is no asymptote. Simplify first, then check the limits.",
+      "hint": "Look for a factor that cancels from the top and bottom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rmtylr",
+      "kind": "process",
+      "front": "What are the steps to find vertical asymptotes of a rational function?",
+      "back": "1) Factor the numerator and denominator. 2) Cancel common factors where the original is defined. 3) The zeros of the remaining denominator are candidates. 4) Check the one-sided limits at each candidate.",
+      "hint": "Start by factoring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vnkmhr",
+      "kind": "mistake",
+      "front": "If the left limit at $a$ is $+\\infty$ and the right limit is $-\\infty$, does the two-sided limit exist?",
+      "back": "**No.** Opposite signs mean no two-sided limit exists, even though both sides are unbounded. A two-sided infinite limit needs both sides to have the same sign.",
+      "hint": "Check each side separately.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "104qrr1",
+      "kind": "formula",
+      "front": "For $\\frac{1}{(x-a)^n}$, what does an odd or even power of $n$ tell you about the two sides of $a$?",
+      "back": "**Odd** $n$: the sign changes across $a$, so the limit is $-\\infty$ from the left and $+\\infty$ from the right. **Even** $n$: the value is $+\\infty$ from both sides.",
+      "hint": "Think about whether the sign of the denominator changes at $a$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mr0b9i",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x+1}{(x-2)(x+3)}$, what is $\\lim_{x\\to2^-}f(x)$?",
+      "back": "$-\\infty$. Near $2$, the factors $x+1$ and $x+3$ are positive, so the sign comes from $x-2$, which is negative from the left.",
+      "hint": "Which factor controls the sign near $x=2$?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pil6qm",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{x+1}{(x-2)(x+3)}$, what is $\\lim_{x\\to-3^+}f(x)$?",
+      "back": "$+\\infty$. Near $-3$, the factors $x+1$ and $x-2$ are both negative, so $f(x)$ takes the sign of $x+3$, which is positive from the right.",
+      "hint": "Near $-3$, check the signs of the other two factors first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09jbsx2",
+      "kind": "example",
+      "front": "For $q(x)=\\frac{x-1}{(x-1)(x+2)}$, is $x=1$ a vertical asymptote?",
+      "back": "**No.** For $x\\ne1$, $q(x)=\\frac{1}{x+2}$, which approaches $\\frac{1}{3}$ as $x$ approaches $1$. The factor $x-1$ cancels, so the values stay finite.",
+      "hint": "Cancel first, then take the limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09tjcky",
+      "kind": "term",
+      "front": "What is a removable discontinuity?",
+      "back": "A **removable discontinuity** is a point where a finite limit exists, but the function is undefined there or has a different value. Changing the value at that single point does not change nearby behavior.",
+      "hint": "The limit is finite, but the function value is off.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15usxr2",
+      "kind": "term",
+      "front": "What is a one-sided limit?",
+      "back": "A **one-sided limit** describes function values as the input approaches a point from only one direction. Use $x\\to a^-$ for values below $a$ and $x\\to a^+$ for values above $a$.",
+      "hint": "Which direction does the superscript sign indicate?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xxs8a8",
+      "kind": "term",
+      "front": "What is a sign chart?",
+      "back": "A **sign chart** records whether each factor, or the whole expression, is positive or negative across the intervals around candidate points. Pick a test value in each interval, record each factor's sign, then combine them.",
+      "hint": "It is used when several factors affect the result.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e6pqyd",
+      "kind": "concept",
+      "front": "Why does the sign of the denominator matter near an asymptote?",
+      "back": "It decides whether each branch of the graph rises or falls. For $\\frac{1}{x-2}$, the values go to $-\\infty$ from the left and $+\\infty$ from the right, because the denominator changes sign.",
+      "hint": "Think about which side of the asymptote the denominator is negative on.",
+      "sectionId": "s4"
+    }
+  ]
+}

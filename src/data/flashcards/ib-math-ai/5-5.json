@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Introduction to integration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:02.218Z",
+  "cards": [
+    {
+      "id": "1kcvjb2",
+      "kind": "concept",
+      "front": "Why is integration called the reverse of differentiation?",
+      "back": "**Integration** takes you from a rate back to the original function, undoing what differentiation does. Going from distance to speed is differentiation; going from speed back to distance is integration.",
+      "hint": "Think of an odometer and a speedometer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1840ur9",
+      "kind": "concept",
+      "front": "Why does an indefinite integral have a $+c$ at the end?",
+      "back": "The derivative of any constant is zero, so **many functions** share the same derivative. The constant of integration $c$ stands for any of them, giving a whole family of antiderivatives.",
+      "hint": "What is the derivative of 5?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lrk67v",
+      "kind": "formula",
+      "front": "What is the power rule for integrating $ax^n$, and when does it fail?",
+      "back": "$\\int ax^n\\,dx=\\frac{a\\,x^{n+1}}{n+1}+c$, valid for $n\\ne-1$. Raise the **power by one** and divide by the new power; $c$ is added once at the end.",
+      "hint": "Integration does the opposite of lowering a power.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0brvhyn",
+      "kind": "example",
+      "front": "Find $\\int(6x^2-4x+5)\\,dx$.",
+      "back": "$2x^3-2x^2+5x+c$. Integrate $6x^2$ to $2x^3$, $-4x$ to $-2x^2$, and $5$ (which is $5x^0$) to $5x$, then add $c$ once.",
+      "hint": "Treat each term separately and check by differentiating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1doibqf",
+      "kind": "mistake",
+      "front": "A student integrates $6x^2-4x+5$ and writes $2x^3-2x^2+5x$. What is wrong?",
+      "back": "They have left out the **constant of integration** $+c$. Without it they have found one antiderivative, not the indefinite integral.",
+      "hint": "What must always follow an indefinite integral?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14m9xt7",
+      "kind": "term",
+      "front": "What is a definite integral $\\int_a^b f(x)\\,dx$ used for?",
+      "back": "It gives the **area** between the curve $y=f(x)$, the $x$-axis and the lines $x=a$ and $x=b$, when $f(x)$ lies above the axis. It is a single number, not a function.",
+      "hint": "Compare it with the indefinite integral, which gives a function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uomvpd",
+      "kind": "process",
+      "front": "What are the steps to evaluate a definite integral $\\int_a^b f(x)\\,dx$?",
+      "back": "Find an antiderivative $F(x)$, then calculate $F(b)-F(a)$. The constant $c$ **cancels** in the subtraction, so it is not needed.",
+      "hint": "Work out F at the upper limit first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cg5i2q",
+      "kind": "example",
+      "front": "Find the area between $y=x^2$, the $x$-axis and the lines $x=0$ and $x=3$.",
+      "back": "**9 square units**. Evaluate $\\int_0^3 x^2\\,dx=\\left[\\frac{x^3}{3}\\right]_0^3=\\frac{27}{3}-0=9$.",
+      "hint": "The antiderivative of $x^2$ is $\\frac{x^3}{3}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fzptmf",
+      "kind": "mistake",
+      "front": "Why can a definite integral be negative even when the question asks for an area?",
+      "back": "The integral gives **signed** area: area below the $x$-axis counts as negative. The true area is the positive size of that part, so take the absolute value or split the interval at the $x$-intercept.",
+      "hint": "Where is the curve relative to the x-axis?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15lvbco",
+      "kind": "process",
+      "front": "How do you find the area when a curve crosses the $x$-axis inside the interval?",
+      "back": "**Split** the interval at the $x$-intercept. Integrate each part separately, make each area positive, then add the sizes together.",
+      "hint": "Find where the curve meets the x-axis first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ukteyy",
+      "kind": "concept",
+      "front": "What does the integral of a rate over an interval measure?",
+      "back": "The **accumulated total** change over that interval. Units multiply: units of $y$ times units of $x$ give the units of the total.",
+      "hint": "Think of a tank filling at a steady rate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00vmnwm",
+      "kind": "example",
+      "front": "Water flows into a tank at $r(t)=2t$ dm³ per minute. How much water is added in the first 4 minutes?",
+      "back": "**16 dm³**. Evaluate $\\int_0^4 2t\\,dt=\\left[t^2\\right]_0^4=16$; the units are dm³ min⁻¹ × min = dm³.",
+      "hint": "Integrate the rate between t = 0 and t = 4.",
+      "sectionId": "s5"
+    }
+  ]
+}

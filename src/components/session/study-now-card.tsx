@@ -154,7 +154,7 @@ export function StudyNowCard({
   if (session?.generating) {
     return (
       <div className={cn(shell, "border-accent/30 bg-accent-soft/50")}>
-        <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
+        <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
           <Loader2 className="h-3.5 w-3.5 animate-spin" />
           {session.quickStart
             ? t("ws.studyNow.buildingQuick5")
@@ -163,7 +163,7 @@ export function StudyNowCard({
         <h2 className="mt-1.5 text-lg font-bold tracking-tight sm:text-xl">
           {session.title}
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-1 text-ui text-muted-foreground">
           {t("ws.studyNow.buildingHint")}
         </p>
         <Button
@@ -214,7 +214,7 @@ export function StudyNowCard({
           </div>
         )}
         <div className="relative">
-          <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
+          <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
             {session.quickStart ? (
               <>
                 <Zap className="h-3.5 w-3.5" />
@@ -230,7 +230,7 @@ export function StudyNowCard({
           <h2 className="mt-1.5 text-lg font-bold tracking-tight sm:text-xl">
             {session.title}
           </h2>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-1 text-ui text-muted-foreground">
             {next && (
               <>
                 {t(ACTIVITY_TYPE_LABELS[next.type] ?? "session.typeActivity")}
@@ -253,14 +253,14 @@ export function StudyNowCard({
             <span
               className={cn(
                 "inline-flex items-center gap-2 rounded-full bg-accent font-semibold text-accent-foreground transition-all group-hover:gap-3",
-                compact ? "px-4 py-2 text-sm" : "px-6 py-3 text-base",
+                compact ? "px-4 py-2 text-ui" : "px-6 py-3 text-read",
               )}
             >
               <Play className="h-4 w-4 fill-current" />
               {started ? t("ws.studyNow.continue") : t("ws.studyNow.cta")}
             </span>
             {started && (
-              <span className="text-xs font-semibold text-muted-foreground tabular-nums">
+              <span className="text-caption font-semibold text-muted-foreground tabular-nums">
                 {session.progress}% {t("ws.complete")}
               </span>
             )}
@@ -279,14 +279,14 @@ export function StudyNowCard({
   if (hasMaterials) {
     return (
       <div className={cn(shell, "border-accent/30 bg-accent-soft/50")}>
-        <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
+        <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
           <Zap className="h-3.5 w-3.5" />
           {t("ws.studyNow.quick5")}
         </p>
         <h2 className="mt-1.5 text-lg font-bold tracking-tight sm:text-xl">
           {t("ws.studyNow.fromNotesTitle")}
         </h2>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-1 text-ui text-muted-foreground">
           {analyzing
             ? t("ws.studyNow.fromNotesAnalyzing")
             : t("ws.studyNow.fromNotesHint")}
@@ -326,14 +326,14 @@ export function StudyNowCard({
 
   return (
     <div className={cn(shell, "border-dashed border-border-strong bg-card")}>
-      <p className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-accent">
+      <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
         <Upload className="h-3.5 w-3.5" />
         {t("ws.studyNow.step1")}
       </p>
       <h2 className="mt-1.5 text-lg font-bold tracking-tight sm:text-xl">
         {t("ws.studyNow.emptyTitle")}
       </h2>
-      <p className="mt-1 text-sm text-muted-foreground">
+      <p className="mt-1 text-ui text-muted-foreground">
         {t("ws.studyNow.emptyHint")}
       </p>
       <Button size={compact ? "sm" : "lg"} className="mt-4" onClick={onUpload}>
@@ -342,7 +342,7 @@ export function StudyNowCard({
       </Button>
       {onImportYoutube && (
         <>
-          <p className="mt-4 text-[11px] font-semibold uppercase tracking-wide text-faint">
+          <p className="mt-4 text-caption font-semibold uppercase tracking-wide text-faint">
             {t("ws.youtube.or")}
           </p>
           <YoutubePaste

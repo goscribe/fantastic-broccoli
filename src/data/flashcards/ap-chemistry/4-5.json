@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Stoichiometry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:31.349Z",
+  "cards": [
+    {
+      "id": "05750nu",
+      "kind": "concept",
+      "front": "Why do the coefficients in a balanced equation matter for calculations?",
+      "back": "They give the **mole ratios** between substances. For $\\mathrm{N_2+3H_2\\rightarrow 2NH_3}$, one mole of nitrogen reacts with three moles of hydrogen to make two moles of ammonia. They are ratios of moles, not masses.",
+      "hint": "Think about what the numbers in front of each formula count.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0phdp8u",
+      "kind": "process",
+      "front": "How do you find the limiting reactant when both reactant amounts are known?",
+      "back": "Calculate how much product **each reactant could make** on its own, using its mole ratio. The **smaller** product amount identifies the limiting reactant and sets the maximum product.",
+      "hint": "Work out each reactant separately before comparing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "096jg0l",
+      "kind": "formula",
+      "front": "What is the formula for percent yield, and what do its parts mean?",
+      "back": "$\\frac{\\text{actual yield}}{\\text{theoretical yield}}\\times100\\%$. The **actual yield** is the amount collected in the lab. The **theoretical yield** is the maximum amount calculated from the limiting reactant.",
+      "hint": "Both yields must be for the same product in matching units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k0opdv",
+      "kind": "term",
+      "front": "What is molar mass?",
+      "back": "**Molar mass** is the mass of one mole of a substance. Divide a substance's mass by its molar mass to find its moles.",
+      "hint": "Units are usually grams per mole.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o9he0y",
+      "kind": "process",
+      "front": "What are the three steps for converting a given amount into a requested product amount?",
+      "back": "1. Convert the given amount to **moles**. 2. Apply the **coefficient ratio** in the required direction. 3. Convert the resulting moles into the requested unit last.",
+      "hint": "Moles are the common currency of every calculation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09cwnlq",
+      "kind": "mistake",
+      "front": "Why is it wrong to apply coefficients directly to masses?",
+      "back": "Coefficients give mole ratios, so you must convert to **moles first**. Equal numbers of moles can have very different masses, so a mass-based ratio gives the wrong answer.",
+      "hint": "Compare a mole of hydrogen with a mole of nitrogen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "098ectv",
+      "kind": "formula",
+      "front": "How do you find moles of solute in a solution?",
+      "back": "Multiply the **molarity** by the volume in liters: moles = $M \\times V$. Molarity is moles of dissolved solute per liter of solution.",
+      "hint": "Convert milliliters to liters first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16nsrx0",
+      "kind": "example",
+      "front": "How much ammonia forms from 0.750 mol nitrogen when hydrogen is in excess?",
+      "back": "**1.50 mol NH$_3$**. Use the ratio $\\frac{2\\ \\mathrm{mol\\ NH_3}}{1\\ \\mathrm{mol\\ N_2}}$, so $0.750\\times2=1.50$.",
+      "hint": "Read the ratio from the coefficients: 1 N2 to 2 NH3.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tfj0er",
+      "kind": "example",
+      "front": "React 2.00 mol nitrogen with 3.00 mol hydrogen. What is the maximum moles of ammonia that can form?",
+      "back": "**2.00 mol NH$_3$**. Hydrogen could make $3.00\\times\\frac{2}{3}=2.00$ mol, while nitrogen could make 4.00 mol, so hydrogen is limiting.",
+      "hint": "Calculate each reactant's possible product separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0634f9a",
+      "kind": "term",
+      "front": "What is an excess reactant?",
+      "back": "An **excess reactant** is the reactant that remains after the limiting reactant is fully consumed.",
+      "hint": "Contrast it with the reactant that runs out first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kp210q",
+      "kind": "mistake",
+      "front": "Why is it wrong to pick the limiting reactant by comparing starting mole amounts alone?",
+      "back": "The reactants are needed in **different proportions** set by the coefficients. You must compare the product each reactant could make, not the starting amounts.",
+      "hint": "The balanced equation sets the proportions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b2yzzv",
+      "kind": "term",
+      "front": "What is the difference between theoretical yield and actual yield?",
+      "back": "**Theoretical yield** is the maximum product calculated from the limiting reactant. **Actual yield** is the product really collected in an experiment.",
+      "hint": "One is calculated, the other is measured.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bxisdk",
+      "kind": "mistake",
+      "front": "A percent yield comes out above 100%. What does this suggest?",
+      "back": "A **measurement problem** or collected material containing **impurities**. Yield cannot truly exceed the theoretical maximum, so check the measurements and the product's purity.",
+      "hint": "Think about what could add extra mass to the product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ldp7ya",
+      "kind": "example",
+      "front": "An experiment has a theoretical yield of 34.0 g ammonia and collects 27.2 g. What is the percent yield?",
+      "back": "**80.0%**. Calculate $\\frac{27.2\\ \\mathrm{g}}{34.0\\ \\mathrm{g}}\\times100\\%=80.0\\%$.",
+      "hint": "Divide actual by theoretical, then multiply by 100.",
+      "sectionId": "s4"
+    }
+  ]
+}

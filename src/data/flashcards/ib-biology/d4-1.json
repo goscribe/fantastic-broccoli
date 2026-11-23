@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d4-1",
+  "topicCode": "D4.1",
+  "topicName": "Natural selection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:08.119Z",
+  "cards": [
+    {
+      "id": "0c0mqxh",
+      "kind": "concept",
+      "front": "How does natural selection change a population over generations?",
+      "back": "Individuals with inherited traits suited to local conditions reproduce more successfully, so those traits become more common. This **unequal reproductive success** is central to natural selection.",
+      "hint": "Think about who leaves surviving offspring.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vmj0iy",
+      "kind": "concept",
+      "front": "Why must variation be heritable for natural selection to change a population?",
+      "back": "Only **heritable** differences can be passed to offspring, so only they can change the population over generations. Differences caused by diet, such as size from food received, are not inherited.",
+      "hint": "Ask whether offspring can inherit the difference.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o0m6oj",
+      "kind": "mistake",
+      "front": "Does an organism develop an inherited adaptation because it needs one?",
+      "back": "No. Mutation provides new variants and sexual reproduction combines existing ones; **selection acts on variation already present**, rather than producing traits on demand.",
+      "hint": "Where does the variation come from?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited characteristic that improves reproductive success in a particular environment.",
+      "hint": "Focus on inheritance and reproductive success.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u7sh24",
+      "kind": "term",
+      "front": "What is a selection pressure?",
+      "back": "A **selection pressure** is an environmental factor that affects reproductive success differently among inherited variants. Predators, food availability and medicines can all act this way.",
+      "hint": "Think of something in the environment that favours some variants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1no97la",
+      "kind": "term",
+      "front": "What is competition in the context of natural selection?",
+      "back": "**Competition** occurs when organisms require resources that are limited, so not all offspring can survive and reproduce.",
+      "hint": "Consider what happens when resources run short.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sn5s72",
+      "kind": "process",
+      "front": "What are the steps by which natural selection changes a population?",
+      "back": "1) Heritable variation exists. 2) Organisms produce more offspring than resources support, causing competition. 3) Variants with suited traits reproduce more successfully. 4) Offspring inherit those traits. 5) The traits become more common across generations.",
+      "hint": "Start with the variation and end with the population change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ptfqhj",
+      "kind": "concept",
+      "front": "Why does antibiotic resistance become more common after treatment?",
+      "back": "Some bacteria are already **resistant** before treatment. The antibiotic kills susceptible bacteria, so resistant ones survive, reproduce and pass resistance on.",
+      "hint": "Consider which bacteria survive and what they then do.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pxkfxa",
+      "kind": "mistake",
+      "front": "Does a bacterium surviving an antibiotic alone prove natural selection?",
+      "back": "Not on its own. Survival matters only if the resistant bacterium leaves **more descendants** that inherit the trait.",
+      "hint": "Survival is not the same as passing the trait on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kbhssb",
+      "kind": "concept",
+      "front": "Why might a useful trait stop being advantageous?",
+      "back": "An adaptation improves reproductive success only under particular conditions. If the **environment changes**, the trait may no longer help survival or reproduction.",
+      "hint": "Consider what the trait was useful for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10m4y11",
+      "kind": "mistake",
+      "front": "Is a change in trait frequency alone strong evidence for natural selection?",
+      "back": "No. It is **weaker evidence** because chance events or movement between populations could also change frequencies.",
+      "hint": "What else could change how common a trait is?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "060j60r",
+      "kind": "concept",
+      "front": "What evidence best supports natural selection as the cause of a population change?",
+      "back": "Observations that link an **inherited trait** to survival and to its carriers leaving more offspring, with the trait becoming more common across generations.",
+      "hint": "Connect the trait, survival and offspring.",
+      "sectionId": "s5"
+    }
+  ]
+}

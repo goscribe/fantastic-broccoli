@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-4",
+  "topicCode": "10.4",
+  "topicName": "Integral test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:12.817Z",
+  "cards": [
+    {
+      "id": "177xfzt",
+      "kind": "concept",
+      "front": "What does the integral test let you conclude about a series $\\sum a_n$?",
+      "back": "If $a_n=f(n)$ and $f$ is positive, continuous, and decreasing for $x\\ge1$, then the series and $\\int_1^{\\infty}f(x)\\,dx$ **both converge or both diverge**.",
+      "hint": "Think about how the series links to an area.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0geemwy",
+      "kind": "process",
+      "front": "What must you check before using the integral test?",
+      "back": "Check three conditions on $f$ for $x\\ge1$: **positive**, **continuous**, and **decreasing** (with $f'(x)<0$). Write all three checks before computing the integral.",
+      "hint": "Check the function before you integrate it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r6utu3",
+      "kind": "mistake",
+      "front": "Does the value of the integral equal the total of the series?",
+      "back": "No. The test matches **behavior** (convergence or divergence), not value. $\\int_1^{\\infty}x^{-2}\\,dx=1$, but $\\sum_{n=1}^{\\infty}\\frac{1}{n^2}$ is larger than 1 because its first term is 1.",
+      "hint": "Behavior is not the same as value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hd552a",
+      "kind": "formula",
+      "front": "How is the improper integral $\\int_1^{\\infty}f(x)\\,dx$ defined?",
+      "back": "It is the **limit** $\\lim_{b\\to\\infty}\\int_1^{b}f(x)\\,dx$. The integral converges when this limit is finite.",
+      "hint": "Replace the infinite upper limit with b.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r58z6p",
+      "kind": "concept",
+      "front": "Why does a decreasing $f$ make the integral test work?",
+      "back": "Rectangles of width 1 and height $a_n$ sit **above** the curve, so the rectangle sum is at least the integral. If the integral diverges, the series diverges too.",
+      "hint": "Picture rectangles starting at x = n.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1525xbs",
+      "kind": "concept",
+      "front": "Why does a convergent integral force the series to converge?",
+      "back": "Shifted rectangles lie **under** the curve, so the partial sums are bounded above. Positive terms make the partial sums increase, and an increasing bounded sequence converges.",
+      "hint": "Count what happens to the partial sums.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11qyra4",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{n}{n^2+1}$ converge? Use the integral test.",
+      "back": "It **diverges**. $\\int_1^{b}\\frac{x}{x^2+1}\\,dx=\\frac{1}{2}\\ln(b^2+1)-\\frac{1}{2}\\ln 2$, which grows without bound as $b\\to\\infty$.",
+      "hint": "Find the antiderivative, then take the limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pylupa",
+      "kind": "mistake",
+      "front": "If the terms $a_n$ approach 0, does the series have to converge?",
+      "back": "No. Terms approaching 0 is not enough. The series $\\sum\\frac{n}{n^2+1}$ has terms approaching 0, yet it diverges by the integral test.",
+      "hint": "Terms going to zero is a necessary condition, not a sufficient one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03l0xmz",
+      "kind": "example",
+      "front": "Using the integral test, what bounds the total of $\\sum_{n=1}^{\\infty}\\frac{1}{n^2}$?",
+      "back": "The series converges, and its total lies between **1 and 2**. The integral is $\\int_1^{\\infty}x^{-2}\\,dx=1$ and $a_1=1$, so the total lies between $1$ and $1+1$.",
+      "hint": "Use the bounds with the first term a_1.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sm9rc6",
+      "kind": "formula",
+      "front": "What bounds does the integral test give on the total of a convergent series?",
+      "back": "$\\int_1^{\\infty}f(x)\\,dx\\le\\sum_{n=1}^{\\infty}a_n\\le a_1+\\int_1^{\\infty}f(x)\\,dx$, where $a_1$ is the first term of the series.",
+      "hint": "The lower bound is the integral alone.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l99e10",
+      "kind": "example",
+      "front": "Does $\\sum_{n=2}^{\\infty}\\frac{1}{n\\ln n}$ converge? Use the integral test.",
+      "back": "It **diverges**. $\\int_2^{b}\\frac{dx}{x\\ln x}=\\ln(\\ln b)-\\ln(\\ln 2)$, which grows without bound as $b\\to\\infty$.",
+      "hint": "Check that f is decreasing for x of at least 2."
+    },
+    {
+      "id": "04h9pxo",
+      "kind": "process",
+      "front": "What are the three moves when you apply the integral test to a series?",
+      "back": "1) Check the conditions on $f$. 2) Evaluate the improper integral as a limit. 3) State the conclusion about the series, converges or diverges.",
+      "hint": "Start with the checks.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fsq4r7",
+      "kind": "concept",
+      "front": "Where should the integral start if the series starts at a later index?",
+      "back": "Start the integral at the **same index** as the series. Finitely many early terms cannot change convergence, so the conditions only need to hold from some index on.",
+      "hint": "Match the lower limit to the first index.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xzpu98",
+      "kind": "term",
+      "front": "What is a decreasing function?",
+      "back": "A **decreasing function** has outputs that fall as the input rises. A derivative that stays negative, $f'(x)<0$, proves it on an interval.",
+      "hint": "Think about the sign of the derivative.",
+      "sectionId": "s2"
+    }
+  ]
+}

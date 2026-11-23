@@ -30,7 +30,7 @@ export function UnlockedTopic({ data, signupHref }: { data: PublicTopic; signupH
             <h2 id="h-practice-full" className="text-[30px] font-black leading-[1.05] text-foreground sm:text-[38px]">
               Practice this topic
             </h2>
-            <p className="mt-2.5 text-[16px] font-semibold leading-snug text-foreground/75 sm:text-[17px]">
+            <p className="mt-2.5 text-read font-semibold text-foreground/75">
               {questions.length} quick-fire multiple-choice questions, easy to hard. Tap an answer to see if you&apos;re right and the worked explanation.
             </p>
             <div className="mt-4">

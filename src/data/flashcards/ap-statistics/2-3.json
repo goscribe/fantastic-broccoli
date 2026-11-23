@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Simulation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:06.402Z",
+  "cards": [
+    {
+      "id": "0ob04ta",
+      "kind": "concept",
+      "front": "Why do we use a simulation instead of watching the real random process many times?",
+      "back": "A simulation uses a **model** with a random device to imitate the process and repeat it many times quickly. It is useful when the real process is slow, costly or hard to calculate exactly.",
+      "hint": "Think about the free-throw example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "041xodz",
+      "kind": "concept",
+      "front": "Why must the digits assigned to each outcome match the real probabilities exactly?",
+      "back": "Each outcome needs a **share of digits** equal to its probability, or the model is built wrong. For a 70% shooter, seven of ten digits stand for a made shot. More trials cannot fix a wrong setup.",
+      "hint": "Count how many digits go to each outcome.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1owcnm8",
+      "kind": "term",
+      "front": "What is an empirical probability?",
+      "back": "An **empirical probability** is the proportion of trials in which an event occurs. It is used as an estimate of the true probability, not as the exact value.",
+      "hint": "It comes from counting trials.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f4e16e",
+      "kind": "process",
+      "front": "What are the five design steps of a simulation, in order?",
+      "back": "1) State the real situation and its chances. 2) Assign digits so their shares match those chances. 3) Define one trial. 4) Run many trials and record each result. 5) Find the proportion of trials where the event occurred.",
+      "hint": "Start with the real situation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tj3vfm",
+      "kind": "term",
+      "front": "What is a random device?",
+      "back": "A **random device** is a tool, such as a coin, a die, a random number generator or a table of random digits, that produces outcomes by chance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1txf4bq",
+      "kind": "term",
+      "front": "What is a trial in a simulation?",
+      "back": "A **trial** is one complete run of the simulated random process, ending in a recorded result.",
+      "hint": "Think of one full run of the model.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m7r6zx",
+      "kind": "mistake",
+      "front": "A student models a 70% free-throw shooter using only four digits. What is wrong with this?",
+      "back": "The **digit shares** cannot match 70% with only four digits, so the model has a built-in error. Use ten digits, with seven for made shots and three for misses.",
+      "hint": "Compare the share of digits with the probability.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1li03hq",
+      "kind": "example",
+      "front": "Ten trials of 4 shots were run and 6 of them had at least 3 makes. What is the empirical probability of at least 3 makes?",
+      "back": "$\\frac{6}{10}=0.60$. About 60% of the 10 trials had at least 3 made shots.",
+      "hint": "Divide trials with the event by total trials.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "122p0pm",
+      "kind": "formula",
+      "front": "What is the formula for empirical probability, and what does each part mean?",
+      "back": "$\\text{empirical probability}=\\frac{\\text{trials with the event}}{\\text{total trials}}$. The top counts trials where the event occurred. The bottom counts all trials run.",
+      "hint": "The result is a proportion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cxs2h7",
+      "kind": "concept",
+      "front": "Why does a simulation result change when you repeat the simulation with new trials?",
+      "back": "**Chance variation** affects every simulation, so another set of trials gives a different proportion. A simulation gives an estimate that can be close or far from the true probability.",
+      "hint": "Think about randomness between runs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bgcpp7",
+      "kind": "concept",
+      "front": "How does increasing the number of trials affect a simulation estimate?",
+      "back": "**More trials** make the estimate steadier and tend to settle nearer the true probability. Using four times as many trials roughly halves the typical error.",
+      "hint": "Compare 10 trials with 10,000 trials.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12fbh8a",
+      "kind": "process",
+      "front": "A student guesses 3 questions with 4 equally likely options each. How do you simulate one trial using random digits?",
+      "back": "Let digit 1 be a correct guess and digits 2, 3 and 4 be incorrect; ignore 0 and 5 to 9. Read three digits for one trial and record the number of 1s.",
+      "hint": "Assign digits to outcomes by their shares first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19uh3wa",
+      "kind": "concept",
+      "front": "When choosing people without repeats, what do you do when a digit repeats?",
+      "back": "**Skip** the repeated digit and keep reading. Repeated digits are allowed for shots, since each shot is separate, but not when choosing people without repeats.",
+      "hint": "Compare choosing people with taking separate shots.",
+      "sectionId": "s3"
+    }
+  ]
+}

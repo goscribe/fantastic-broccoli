@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Further models",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:32.626Z",
+  "cards": [
+    {
+      "id": "1s13j5k",
+      "kind": "concept",
+      "front": "What two things should justify your choice of model for a real situation?",
+      "back": "The **pattern in the data** and the **context** of the problem. A good fit alone is not enough; the model must make sense for the quantity measured.",
+      "hint": "Think about the shape of the points and what they measure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ry6r6q",
+      "kind": "formula",
+      "front": "In $P=\\frac{L}{1+Ce^{-kt}}$ with positive $C$ and $k$, what does $L$ represent, and what is $P$ at $t=0$?",
+      "back": "$L$ is the **limit** that $P$ approaches as $t$ grows. At $t=0$, $P=\\frac{L}{1+C}$.",
+      "hint": "Set t = 0 and remember what e^{-kt} does as t grows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ef8gpx",
+      "kind": "concept",
+      "front": "Why is a limitation important when you use a model?",
+      "back": "A **limitation** is a condition where predictions become unreliable or invalid. You should name it and link it to the situation, for example predictions far outside the data range.",
+      "hint": "What happens when you predict far beyond the data?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fw115c",
+      "kind": "term",
+      "front": "What is a sinusoidal function?",
+      "back": "A **sinusoidal function** is a function whose graph is a smooth wave that repeats at regular intervals. It suits tides and daylight hours.",
+      "hint": "Think of a repeating wave.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05a9ptt",
+      "kind": "formula",
+      "front": "For a sinusoidal model, how do you find the amplitude $a$ and the midline value $d$ from the maximum and minimum values?",
+      "back": "$a=\\frac{h_\\mathrm{max}-h_\\mathrm{min}}{2}$ is the **amplitude**, and $d=\\frac{h_\\mathrm{max}+h_\\mathrm{min}}{2}$ is the midline value.",
+      "hint": "Half the difference, then half the sum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u7axmi",
+      "kind": "formula",
+      "front": "For the sinusoidal model $h=a\\sin(bt)+d$, how is $b$ found from the period $T$?",
+      "back": "$b=\\frac{2\\pi}{T}$, where $T$ is the **period**, the time for one full cycle.",
+      "hint": "The period is the time for one full wave.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sk4ora",
+      "kind": "example",
+      "front": "A harbour depth varies between 2.0 m and 6.0 m with period 12 hours, and is on the midline and rising at $t=0$. What is the depth at $t=1$?",
+      "back": "$h=2.0\\sin\\left(\\frac{\\pi t}{6}\\right)+4.0$, so at $t=1$ the depth is **5.0 m**.",
+      "hint": "Find a and d first, then b = 2π/T.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aguslx",
+      "kind": "example",
+      "front": "For $P=\\frac{500}{1+9e^{-0.4t}}$, what are the starting population and the limit as $t$ grows?",
+      "back": "Starting population is **50** (at $t=0$, $\\frac{500}{10}$). The limit is **500**, since $e^{-0.4t}$ approaches 0.",
+      "hint": "At t = 0, e^0 = 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17p1xmv",
+      "kind": "concept",
+      "front": "Why does a logistic curve bend over and flatten?",
+      "back": "Growth slows as the quantity nears $L$ because **resources run short**. Growth is fastest when the quantity is half of $L$.",
+      "hint": "Think about room and resources.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uy69gx",
+      "kind": "mistake",
+      "front": "A calculator gives the best fit for a family, so you should use it. Is this enough?",
+      "back": "No. The calculator gives parameters but not the right family. Check the context: a tide does not grow without limit, and a population cannot be negative.",
+      "hint": "Does the model make sense for what is measured?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dbz43u",
+      "kind": "mistake",
+      "front": "Your model has a very good fit to the data. Does this prove it is the true rule?",
+      "back": "No. Different functions can fit the same data over a short range, so a good fit does not prove the **true rule**.",
+      "hint": "Think about data over a short range.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jbe7al",
+      "kind": "process",
+      "front": "How should you compare two models fitted to the same data?",
+      "back": "1) Compare the **residuals** (observed minus predicted) on the same data. 2) Check predictions stay sensible outside the data. 3) Check the assumptions fit the context. 4) Prefer the simpler model if the fits are similar.",
+      "hint": "Start with fit, then sense, then simplicity.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04lak0n",
+      "kind": "process",
+      "front": "How should you state a limitation of a chosen model?",
+      "back": "**Name** the type of limitation precisely and link it to the situation. For example, a tide model ignores weather, so it cannot predict unusual water levels caused by storms.",
+      "hint": "Be precise and tie it to the context.",
+      "sectionId": "s6"
+    }
+  ]
+}

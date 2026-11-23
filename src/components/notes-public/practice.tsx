@@ -107,7 +107,7 @@ function scrollToNext(ids: string[], from: string, answered: Record<string, numb
 }
 
 /** A small burst in the cat's orange and cream for a right answer (feedback; off under reduced motion). */
-function Sparkles() {
+export function Sparkles() {
   return (
     <span className="pointer-events-none absolute left-5 top-5" aria-hidden="true">
       {[0, 45, 90, 135, 180, 225, 270, 315].map((a, i) => (
@@ -160,8 +160,8 @@ export function PracticeCard(p: CardProps) {
           <>
             <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized loading="lazy" className="-my-2 h-[58px] w-auto shrink-0" />
             <div className="min-w-0">
-              <p className="text-[17px] font-extrabold leading-tight text-foreground">Quick check</p>
-              <p className="text-[13px] font-bold text-muted-foreground">One question on the part you just read</p>
+              <p className="text-read font-extrabold leading-tight text-foreground">Quick check</p>
+              <p className="text-small font-bold text-muted-foreground">One question on the part you just read</p>
             </div>
           </>
         ) : (
@@ -169,7 +169,7 @@ export function PracticeCard(p: CardProps) {
             {p.number}.
           </span>
         )}
-        <p className={cn("flex flex-wrap items-center gap-x-2 gap-y-1 text-[13px] font-bold text-muted-foreground", inline ? "ml-auto justify-end" : "min-w-0 flex-1")}>
+        <p className={cn("flex flex-wrap items-center gap-x-2 gap-y-1 text-small font-bold text-muted-foreground", inline ? "ml-auto justify-end" : "min-w-0 flex-1")}>
           <span className="inline-flex items-center gap-1.5">
             <span className="inline-flex items-end gap-[3px]" aria-hidden="true">
               {[1, 2, 3].map((n) => (
@@ -191,7 +191,7 @@ export function PracticeCard(p: CardProps) {
           )}
         </p>
       </div>
-      <div className="mt-3 px-0.5 text-[18px] font-extrabold leading-[1.35] text-foreground sm:text-[19px]">{p.stem}</div>
+      <div className="mt-3 px-0.5 text-read font-extrabold text-foreground">{p.stem}</div>
       <ol className="mt-3.5 flex flex-col gap-2.5" aria-label="Options">
         {p.options.map((o, i) => {
           const isKey = i === p.correctIndex;
@@ -245,8 +245,8 @@ export function PracticeCard(p: CardProps) {
           >
             Show answer and explanation
           </summary>
-          <div className={cn("text-[16px] leading-[1.55] text-foreground", !answered && "nl-well mt-1 px-4 py-3")}>
-            <p className="text-[13px] font-extrabold text-muted-foreground">
+          <div className={cn("text-read text-foreground", !answered && "nl-well mt-1 px-4 py-3")}>
+            <p className="text-small font-extrabold text-muted-foreground">
               Answer: {LETTERS[p.correctIndex]} · Worked explanation
             </p>
             <div className="mt-1">{p.explanation}</div>
@@ -283,7 +283,7 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
   return (
     <div className="sticky top-0 z-10 -mx-1 border-b border-border bg-[color-mix(in_srgb,var(--page,#fff)_94%,transparent)] px-1 py-3 backdrop-blur">
       <div className="flex min-h-8 items-center gap-2.5">
-        <p className="text-[15px] font-extrabold tabular-nums">
+        <p className="text-ui font-extrabold tabular-nums">
           <span className="text-[22px] font-black leading-none text-foreground">{s.correct}</span>
           <span className="text-muted-foreground"> right</span>
           <span className="ml-2 font-bold text-muted-foreground">
@@ -291,7 +291,7 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
           </span>
         </p>
         {streak >= 2 && (
-          <span key={streak} className="nl-pop inline-flex items-center text-[13px] font-extrabold text-[var(--flame-ink)]">
+          <span key={streak} className="nl-pop inline-flex items-center text-small font-extrabold text-[var(--flame-ink)]">
             {streak} in a row
           </span>
         )}
@@ -312,7 +312,7 @@ export function PracticeScore({ inlineCount }: { inlineCount: number }) {
         })}
       </ol>
       {inlineCount > 0 && s.answered === 0 && (
-        <p className="mt-2 text-[13px] font-semibold text-muted-foreground">Includes the {inlineCount === 1 ? "quick check" : `${inlineCount} quick checks`} in the note above.</p>
+        <p className="mt-2 text-small font-semibold text-muted-foreground">Includes the {inlineCount === 1 ? "quick check" : `${inlineCount} quick checks`} in the note above.</p>
       )}
     </div>
   );
@@ -336,7 +336,7 @@ const BAND_LINE: Record<ResultBand, [title: string, sub: string]> = {
 const CONFETTI_COLORS = ["#f6a53b", "#ffd166", "#34b27b", "#4f8df7", "#ef5d7a", "#ffffff"];
 
 /** Thrown from the cat, once, on a strong score. Positions are fixed, so server and client agree. */
-function Confetti({ count = 38 }: { count?: number }) {
+export function Confetti({ count = 38 }: { count?: number }) {
   return (
     <span aria-hidden="true" className="nl-confetti">
       {Array.from({ length: count }, (_, i) => {
@@ -397,17 +397,17 @@ export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quic
                 <Image src={cat} alt="" width={catW} height={catH} unoptimized className="nl-cat-in relative h-full w-auto" />
               </div>
             </div>
-            <p className="hero-eyebrow relative text-[13.5px] font-extrabold">Practice complete</p>
+            <p className="hero-eyebrow relative text-small font-extrabold">Practice complete</p>
             <h3 id="practice-done-title" className="relative mt-1.5 text-[30px] font-black leading-[1.08] tracking-[-0.02em] sm:max-w-[58%] sm:text-[38px]">
               {title}
             </h3>
-            <p className="relative mt-1.5 text-[15.5px] font-semibold leading-snug text-foreground/75 sm:max-w-[52%]">{sub}</p>
+            <p className="relative mt-1.5 text-ui font-semibold text-foreground/75 sm:max-w-[52%]">{sub}</p>
             <p className="relative mt-4 flex items-baseline gap-3 sm:mt-6" role="status">
               <span className="nl-score text-[60px] font-black leading-[0.9] tracking-[-0.03em] tabular-nums sm:text-[76px]">
                 <CountUp value={s.correct} />
                 <span className="text-[0.5em] text-muted-foreground"> / {s.total}</span>
               </span>
-              <span className="text-[15px] font-bold leading-tight text-foreground/75">right</span>
+              <span className="text-ui font-bold leading-tight text-foreground/75">right</span>
             </p>
           </section>
 
@@ -417,7 +417,7 @@ export function PracticeDone({ nextTopic, quick5 }: { nextTopic: ReactNode; quic
                 <li key={id} aria-hidden="true" style={{ "--i": i } as React.CSSProperties} className={cn("nl-findot size-3.5 rounded-full", t?.correct[id] ? "bg-[var(--ok)]" : "border-[2.5px] border-[var(--no)]")} />
               ))}
             </ol>
-            {missed > 0 && <span className="text-[13.5px] font-bold text-muted-foreground">{missed} to look over</span>}
+            {missed > 0 && <span className="text-small font-bold text-muted-foreground">{missed} to look over</span>}
           </div>
 
           <div className="nl-stagger mt-6 flex flex-col items-stretch gap-3 px-1 sm:flex-row sm:flex-wrap sm:items-center" style={{ "--i": 4 } as React.CSSProperties}>
@@ -464,10 +464,10 @@ function SignupNudge({ className }: { className?: string }) {
       <div className="flex items-center gap-3 pr-8">
         <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="h-[60px] w-auto shrink-0" />
         <div>
-          <p id="signup-prompt-title" className="text-[17px] font-extrabold leading-snug">
+          <p id="signup-prompt-title" className="text-read font-extrabold">
             {s.correct * 2 >= s.answered ? `${s.correct}/${s.answered} so far. Keep your progress?` : `${s.answered} questions done. Keep your progress?`}
           </p>
-          <p className="mt-0.5 text-[14.5px] font-semibold leading-snug text-muted-foreground">Free account: save your scores, and get questions made from your own notes and slides.</p>
+          <p className="mt-0.5 text-ui font-semibold text-muted-foreground">Free account: save your scores, and get questions made from your own notes and slides.</p>
         </div>
       </div>
       <div className="mt-3.5 flex flex-wrap items-center gap-x-4 gap-y-2">

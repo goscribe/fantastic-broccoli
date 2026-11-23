@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Conservation of linear momentum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:32.846Z",
+  "cards": [
+    {
+      "id": "0avr24d",
+      "kind": "concept",
+      "front": "What does the law of conservation of linear momentum say about an isolated system?",
+      "back": "The **total** linear momentum of an isolated system stays constant: the vector sum before equals the vector sum after, whatever happens inside it.",
+      "hint": "Think about what happens to the total, not to each object.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lvj16w",
+      "kind": "concept",
+      "front": "Why does a single object's momentum change in a collision while the system's total does not?",
+      "back": "By Newton's third law the objects exert equal and opposite forces on each other for the same time, so their impulses are equal and opposite. One **gains** exactly what the other **loses**.",
+      "hint": "Consider the forces each object exerts on the other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bjzvx1",
+      "kind": "term",
+      "front": "What is an isolated system?",
+      "back": "A **system** on which the net external force is zero, so its total momentum is constant.",
+      "hint": "Net external force is the key condition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q9c5n7",
+      "kind": "term",
+      "front": "What are internal forces?",
+      "back": "Forces that objects inside a system exert on one another. They **cannot** change the system's total momentum.",
+      "hint": "Both objects lie inside the same system.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16yq6m2",
+      "kind": "process",
+      "front": "What are the steps for solving a momentum conservation problem?",
+      "back": "1) Choose the system and confirm no net external force. 2) Pick a positive direction. 3) Write each object's momentum before and after, with signs. 4) Set total before equal to total after. 5) Solve and check units and direction.",
+      "hint": "Start by deciding what counts as the system.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g7rxkv",
+      "kind": "example",
+      "front": "A 2.0 kg cart moving at 3.0 m/s hits a 1.0 kg cart at rest and they stick together. What is their speed afterward?",
+      "back": "**2.0 m/s** in the original direction. Before: $(2.0)(3.0)=6.0$ kg m/s. After: $(3.0)v$, so $v=2.0$ m/s.",
+      "hint": "Total momentum before equals total after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0077yab",
+      "kind": "mistake",
+      "front": "A student writes a leftward velocity as positive when rightward was chosen positive. Why is this wrong?",
+      "back": "The **sign** of each velocity must match the chosen positive direction. A leftward velocity is negative when rightward is positive, so every sign must be kept consistent.",
+      "hint": "Check the direction you declared at the start.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u65ayp",
+      "kind": "concept",
+      "front": "What is the total momentum of an explosion that starts with objects at rest?",
+      "back": "**Zero** before and after. The pieces therefore carry equal and opposite momenta, and the lighter piece moves faster.",
+      "hint": "What is the total before the objects separate?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lrjhld",
+      "kind": "example",
+      "front": "A 75 kg skater and a 50 kg skater start at rest and push apart. The 75 kg skater moves at 1.2 m/s to the right. What is the 50 kg skater's velocity?",
+      "back": "**1.8 m/s to the left**. Using right as positive, $(75)(1.2)+(50)v=0$, so $v=-1.8$ m/s.",
+      "hint": "The total momentum starts at zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tcih82",
+      "kind": "concept",
+      "front": "Why can momentum conservation be applied to a collision even when friction acts?",
+      "back": "The collision lasts a very short time, so the external impulse from friction is **negligible** compared with the internal impulses between the objects.",
+      "hint": "Compare the size of the internal and external impulses.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wzmpi9",
+      "kind": "mistake",
+      "front": "Why is a cart slowed by floor friction not a case of conserved momentum for the cart alone?",
+      "back": "Friction is an **external** force on the cart, so the cart's own momentum changes. Conservation applies only when the net external force is zero or negligible.",
+      "hint": "Which forces are external to the cart?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0f973fy",
+      "kind": "concept",
+      "front": "Does a falling ball conserve momentum on its own?",
+      "back": "No. Gravity is external to the ball, so its momentum changes. The **ball and Earth together** form a system whose total momentum stays constant.",
+      "hint": "Choose a system that includes the source of the external force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18etbe4",
+      "kind": "example",
+      "front": "A 1.0 kg cart moving at 4.0 m/s hits a 3.0 kg cart at rest and they stick together. What is their common speed?",
+      "back": "**1.0 m/s**. Using $(1.0)(4.0)=(1.0+3.0)v$ gives $v=\\frac{4.0}{4.0}=1.0$ m/s.",
+      "hint": "Add the masses after the collision."
+    }
+  ]
+}

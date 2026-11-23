@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-15",
+  "topicCode": "6.15",
+  "topicName": "Hospital-acquired infections",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:36.487Z",
+  "cards": [
+    {
+      "id": "0xns7rz",
+      "kind": "term",
+      "front": "What is a hospital-acquired infection?",
+      "back": "An infection a patient develops during healthcare that was not present when they were admitted. The idea also covers care homes and clinics, not just **hospitals**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hjkjat",
+      "kind": "concept",
+      "front": "Why do hospitals carry extra infection risk?",
+      "back": "Many patients are immunocompromised, so they fight pathogens poorly. Surgery and catheters bypass the body's barriers, and many people share one space, so pathogens spread easily.",
+      "hint": "Think about who is in hospital and what procedures do to the body.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0stz4na",
+      "kind": "term",
+      "front": "What is cross-infection?",
+      "back": "The transfer of a pathogen from one patient to another, directly or on **contaminated** hands, equipment or surfaces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lruex1",
+      "kind": "term",
+      "front": "What does immunocompromised mean?",
+      "back": "Having a **weakened immune system** that fights infection less effectively than normal. Illness, old age and drugs such as chemotherapy can cause it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gt2sl5",
+      "kind": "term",
+      "front": "What is MRSA?",
+      "back": "A strain of Staphylococcus aureus **resistant** to many antibiotics. It is one of the common hospital-acquired infections.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16axeya",
+      "kind": "concept",
+      "front": "Why are hospital-acquired infections a serious concern?",
+      "back": "Patients recover more slowly or die, and stays get longer. Costs rise from extra drugs, tests and staff time, and resistant strains leave fewer effective antibiotics.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bxglgg",
+      "kind": "term",
+      "front": "What is an outbreak?",
+      "back": "A **sudden rise** in the number of cases of an infection in a particular place or population.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yjgmdh",
+      "kind": "concept",
+      "front": "Why must staff wash their hands both before and after contact with each patient?",
+      "back": "Washing before stops pathogens on staff hands reaching the patient. Washing after stops that patient's pathogens reaching staff or the next patient.",
+      "hint": "Think about which way pathogens could travel in each direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sx9009",
+      "kind": "mistake",
+      "front": "What is the mistake in thinking disinfecting and sterilising mean the same thing?",
+      "back": "**Disinfectant** lowers the number of pathogens on a surface but need not kill all microorganisms. **Sterilisation** removes or kills all microorganisms, including spores.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "178i6r9",
+      "kind": "term",
+      "front": "What is aseptic technique?",
+      "back": "A set of practices that prevents **pathogens** contaminating a wound, equipment or procedure. Staff use it in theatre.",
+      "hint": "Think about where surgery takes place.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0drikz0",
+      "kind": "term",
+      "front": "What is isolation in a hospital?",
+      "back": "Separating **infected patients** from others, usually in a single room, to stop their pathogen spreading. Staff wear protective clothing when they enter.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vi78n8",
+      "kind": "term",
+      "front": "What is screening on admission?",
+      "back": "Testing patients when they arrive to detect **carriers** of a pathogen before it spreads. Carriers with no symptoms can be treated before surgery.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q09t3f",
+      "kind": "concept",
+      "front": "Why do hospitals limit antibiotic use to cases where it is needed?",
+      "back": "Frequent use **selects for resistant bacteria**, which can then spread between vulnerable patients.",
+      "hint": "Think about what antibiotics do to bacteria that survive them.",
+      "sectionId": "s5"
+    }
+  ]
+}

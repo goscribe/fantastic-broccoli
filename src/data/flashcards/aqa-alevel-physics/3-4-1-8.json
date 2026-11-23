@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-8",
+  "topicCode": "3.4.1.8",
+  "topicName": "Conservation of energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:21.864Z",
+  "cards": [
+    {
+      "id": "1i48y93",
+      "kind": "concept",
+      "front": "What does the principle of conservation of energy say about the energy in a closed system?",
+      "back": "Energy is never created or destroyed, only **transferred** between stores, so the total energy of a closed system stays constant.",
+      "hint": "Think about what happens to a ball's energy as it is dropped and speeds up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "152tq8e",
+      "kind": "concept",
+      "front": "Why does the speed of a dropped ball not depend on its mass?",
+      "back": "Its loss of **gravitational potential energy**, $mg\\Delta h$, equals its gain of **kinetic energy**, $\\frac{1}{2}mv^2$, so the mass cancels and $v=\\sqrt{2g\\Delta h}$.",
+      "hint": "Write the energy equation first and check which terms contain m.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13ek1jr",
+      "kind": "concept",
+      "front": "What is a non-conservative force, and what does it do to mechanical energy?",
+      "back": "A **non-conservative force**, such as friction or air resistance, transfers mechanical energy into thermal energy, so it cannot be fully recovered as useful motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0499n6z",
+      "kind": "term",
+      "front": "What is gravitational potential energy?",
+      "back": "The energy an object stores because of its **position** in a gravitational field.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08an0ll",
+      "kind": "term",
+      "front": "What is kinetic energy, and how is it calculated?",
+      "back": "The energy an object has due to its **motion**. It equals $\\frac{1}{2}mv^2$ and is measured in $\\text{J}$.",
+      "hint": "Think about what determines how much energy a moving object has.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09x32gq",
+      "kind": "formula",
+      "front": "What does $v=\\sqrt{2g\\Delta h}$ calculate for a dropped object, and what is $g$?",
+      "back": "It gives the **speed** $v$ in $\\text{m\\,s}^{-1}$ of an object dropped from rest through height $\\Delta h$ in $\\text{m}$. Here $g=9.81\\,\\text{N\\,kg}^{-1}$ is the gravitational field strength.",
+      "hint": "Start from loss of potential energy equals gain of kinetic energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ybfpdh",
+      "kind": "example",
+      "front": "A 0.50 kg ball is dropped from rest from 2.0 m. What is its speed just before landing, ignoring air resistance?",
+      "back": "$v\\approx6.3\\,\\text{m\\,s}^{-1}$, from $v=\\sqrt{2\\times9.81\\times2.0}=\\sqrt{39.24}$. The mass is not needed.",
+      "hint": "Since mass cancels, which quantities do you actually need?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jvhztq",
+      "kind": "concept",
+      "front": "Why does tension in a pendulum string do no work on the bob?",
+      "back": "Tension acts at **right angles** to the movement along the circular arc, so it does no work. Only the Earth's pull transfers energy.",
+      "hint": "Compare the direction of the tension force with the direction the bob moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "048ovp5",
+      "kind": "example",
+      "front": "A pendulum bob is released from rest 0.10 m above its lowest point. What is its speed at the lowest point?",
+      "back": "$v\\approx1.4\\,\\text{m\\,s}^{-1}$, from $v=\\sqrt{2\\times9.81\\times0.10}=\\sqrt{1.962}$, ignoring air resistance.",
+      "hint": "Use the same energy balance as for a falling ball.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nbd5x8",
+      "kind": "process",
+      "front": "What are the steps of the fixed method for energy questions with losses?",
+      "back": "1) Identify the start and end positions. 2) Find $E_p$ and $E_k$ at each. 3) Compare the totals to find the thermal energy. 4) Check the answer is not negative.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wyg446",
+      "kind": "example",
+      "front": "A 500 kg car starts from rest at the top of a 20 m slope and reaches 15 m/s at the bottom. How much energy becomes thermal energy?",
+      "back": "About $4.2\\times10^{4}\\,\\text{J}$. Loss in $E_p$ is $98\\,100\\,\\text{J}$, gain in $E_k$ is $56\\,250\\,\\text{J}$, and $98\\,100-56\\,250=41\\,850\\,\\text{J}$.",
+      "hint": "Work out the potential energy lost and the kinetic energy gained first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1finf4b",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that friction 'uses up' or 'loses' energy?",
+      "back": "Energy is not destroyed. It is **transferred** to the surroundings as thermal energy, which is spread out and less useful.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yaogcj",
+      "kind": "mistake",
+      "front": "What is wrong with stating that energy is conserved without naming the system?",
+      "back": "Conservation applies to a **closed system** that exchanges no energy with its surroundings. Say that the total energy of a closed system remains constant.",
+      "hint": "Think about what happens if energy can flow in or out of the system.",
+      "sectionId": "s1"
+    }
+  ]
+}

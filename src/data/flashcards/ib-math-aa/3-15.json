@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-15",
+  "topicCode": "3.15",
+  "topicName": "Intersecting and skew lines",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:40.527Z",
+  "cards": [
+    {
+      "id": "0871iug",
+      "kind": "concept",
+      "front": "What are the three ways two lines in space can relate?",
+      "back": "They can be **parallel** (direction vectors are multiples, with none or all points in common), **intersecting** (directions not multiples, exactly one common point), or **skew** (directions not multiples, no common point).",
+      "hint": "Think about the bridge over a road.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00p6qs0",
+      "kind": "process",
+      "front": "How do you decide whether two non-parallel lines intersect?",
+      "back": "**Equate** the components of the two lines, solve two of the equations for $\\lambda$ and $\\mu$, then substitute into the third. If it holds they intersect; if it fails they are skew.",
+      "hint": "Use different parameter letters for each line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u4sbfn",
+      "kind": "mistake",
+      "front": "Why is checking only two of the three component equations not enough?",
+      "back": "Two equations in $\\lambda$ and $\\mu$ can always be solved, so they prove nothing alone. The **third equation** decides whether the lines meet.",
+      "hint": "Count the unknowns against the equations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ow3c2f",
+      "kind": "term",
+      "front": "What are skew lines?",
+      "back": "**Skew lines** are lines in three dimensions that are neither parallel nor intersecting, so they never lie in one plane.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e3e0ko",
+      "kind": "example",
+      "front": "Find the intersection of $L_1$: $(1,0,2)+\\lambda(1,2,-1)$ and $L_2$: $(1,3,1)+\\mu(2,1,-1)$.",
+      "back": "The lines intersect at $(3,4,0)$, found with $\\lambda=2$ and $\\mu=1$. The third equation holds, since $2-2=1-1$.",
+      "hint": "Start with the first two component equations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bf43sk",
+      "kind": "term",
+      "front": "What are parallel lines?",
+      "back": "**Parallel lines** are lines whose direction vectors are non-zero scalar multiples of each other, including negative multiples.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mznjut",
+      "kind": "term",
+      "front": "What are coincident lines?",
+      "back": "**Coincident lines** are two lines that share every point, so they are one line written with different equations.",
+      "hint": "Parallel lines that also share a point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zz13hg",
+      "kind": "example",
+      "front": "Are $L_1$: $(1,2,0)+\\lambda(2,-4,6)$ and $L_2$: $(0,1,3)+\\mu(-1,2,-3)$ parallel, coincident or neither?",
+      "back": "**Parallel but not coincident**. The direction $(2,-4,6)$ is $-2$ times $(-1,2,-3)$, but the point $(1,2,0)$ does not lie on the second line.",
+      "hint": "Compare the direction vectors first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lpe5mi",
+      "kind": "formula",
+      "front": "What is the formula for the angle $\\theta$ between two lines with direction vectors $\\mathbf{b}_1$ and $\\mathbf{b}_2$?",
+      "back": "$\\cos\\theta=\\frac{|\\mathbf{b}_1\\cdot\\mathbf{b}_2|}{|\\mathbf{b}_1||\\mathbf{b}_2|}$. The **absolute value** of the scalar product keeps $\\theta$ between $0^{\\circ}$ and $90^{\\circ}$.",
+      "hint": "The scalar product multiplies matching components and adds.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "081n0gj",
+      "kind": "example",
+      "front": "Find the angle between lines with direction vectors $\\begin{pmatrix}1\\\\2\\\\-1\\end{pmatrix}$ and $\\begin{pmatrix}2\\\\1\\\\-1\\end{pmatrix}$, to 1 decimal place.",
+      "back": "$\\theta\\approx33.6^{\\circ}$, since the scalar product is $5$, both lengths are $\\sqrt{6}$, and $\\cos\\theta=\\frac{5}{6}$.",
+      "hint": "Work out the scalar product first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1apxu4b",
+      "kind": "mistake",
+      "front": "Are lines with direction vectors $(1,2,3)$ and $(-1,-2,-3)$ parallel?",
+      "back": "**Yes**. A negative multiple reverses the direction but the lines are still parallel. Equal directions are not required.",
+      "hint": "Is one vector a scalar multiple of the other?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i782nr",
+      "kind": "mistake",
+      "front": "Why do we use the absolute value when finding the angle between two lines?",
+      "back": "Reversing a direction vector leaves its line unchanged but turns the angle $\\theta$ into $180^{\\circ}-\\theta$. The **absolute value** always gives the acute angle.",
+      "hint": "What happens if you flip one direction vector?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0c5ytj0",
+      "kind": "concept",
+      "front": "Does the position of two lines affect the angle between them?",
+      "back": "**No**. Moving a line parallel to itself keeps its direction vector, so only the direction vectors matter. Skew lines also have an angle.",
+      "hint": "Think about what the direction vector describes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "020hgdl",
+      "kind": "concept",
+      "front": "Can two lines lying in the same plane be skew?",
+      "back": "**No**. Two lines in one plane can never be skew, because they must either meet or be parallel.",
+      "hint": "Compare this with the bridge picture.",
+      "sectionId": "s1"
+    }
+  ]
+}

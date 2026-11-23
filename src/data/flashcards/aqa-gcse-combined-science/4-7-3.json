@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-7-3",
+  "topicCode": "4.7.3",
+  "topicName": "Biodiversity and human impact",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:37.230Z",
+  "cards": [
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variety of different species in an area, or across the whole Earth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0coqp64",
+      "kind": "concept",
+      "front": "Why does greater biodiversity help an ecosystem stay stable?",
+      "back": "If conditions change and one **species** declines, other species may still carry out similar roles, so the ecosystem keeps functioning.",
+      "hint": "Think about what happens to a job an organism does if that organism becomes scarce.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jte8r0",
+      "kind": "concept",
+      "front": "How do farming, building and roads threaten wild species?",
+      "back": "They replace a **habitat** with fields, roads or buildings, reducing the space and resources available. Roads can also divide a habitat, isolating populations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k9hujb",
+      "kind": "process",
+      "front": "What are the steps by which fertiliser runoff kills aquatic animals?",
+      "back": "1) Excess nutrients cause **algal growth**. 2) The algae die. 3) Decomposers break them down and use up **oxygen**. 4) Oxygen falls to low levels and aquatic animals die.",
+      "hint": "Start with what the fertiliser adds to the water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14mdiud",
+      "kind": "mistake",
+      "front": "Why is a field of one crop not a sign of high biodiversity?",
+      "back": "Biodiversity concerns the **variety of species**, not the number of organisms. A crop field may have many plants but very few species.",
+      "hint": "Count species, not individual plants.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17zww55",
+      "kind": "concept",
+      "front": "Why does deforestation affect the carbon cycle?",
+      "back": "Trees take in **carbon dioxide** during photosynthesis, so removing them reduces this uptake.",
+      "hint": "Think about what plants do with carbon dioxide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "087dk79",
+      "kind": "term",
+      "front": "What are peatlands and why do they matter for carbon?",
+      "back": "**Peatlands** are areas where partly decayed plant material builds up and stores carbon. Draining or burning them releases carbon dioxide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s2qics",
+      "kind": "term",
+      "front": "What is pollution?",
+      "back": "**Pollution** is the introduction of harmful substances into the environment.",
+      "hint": "Think about what can be added to air, water or land.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07tz7ct",
+      "kind": "concept",
+      "front": "How does climate change put pressure on species?",
+      "back": "**Greenhouse gases** trap heat, raising global temperatures. This changes habitats and where species can survive, and species that cannot move or adapt may decline.",
+      "hint": "Think about what a temperature rise does to where a species can live.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r1ijnf",
+      "kind": "mistake",
+      "front": "Why can't cutting emissions alone restore a destroyed habitat?",
+      "back": "Cutting **emissions** limits climate pressure, but it cannot repair a habitat that has already been destroyed. Restoration and other actions are also needed.",
+      "hint": "Compare the cause of the pressure with the damage already done.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qwsqz3",
+      "kind": "term",
+      "front": "What is habitat restoration?",
+      "back": "**Habitat restoration** repairs a damaged habitat so it can support living organisms again, for example by planting native trees or restoring wetlands.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1m3h4ly",
+      "kind": "term",
+      "front": "What are protected areas?",
+      "back": "**Protected areas** are places where damaging human activities are restricted to conserve habitats and species.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09s5gms",
+      "kind": "process",
+      "front": "What are four practical actions that could reduce human damage to ecosystems?",
+      "back": "Restore damaged habitats, protect important areas, treat sewage before release, and reduce, reuse or recycle materials to produce less **waste**.",
+      "hint": "Think about waste, water and land.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cpecvr",
+      "kind": "term",
+      "front": "What is conservation?",
+      "back": "**Conservation** is the protection and management of species and habitats so they are less likely to disappear.",
+      "sectionId": "s1"
+    }
+  ]
+}

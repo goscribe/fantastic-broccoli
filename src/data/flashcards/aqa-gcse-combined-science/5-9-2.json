@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-9-2",
+  "topicCode": "5.9.2",
+  "topicName": "Greenhouse gases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:44.181Z",
+  "cards": [
+    {
+      "id": "051xplk",
+      "kind": "process",
+      "front": "What are the steps by which greenhouse gases warm Earth's surface?",
+      "back": "Sunlight passes through the atmosphere and warms the surface, which emits **infrared radiation**. Greenhouse gases absorb some of this and re-emit it in all directions, so some returns to the surface and less energy escapes to space.",
+      "hint": "Start with what the Sun's energy does first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ngzcj7",
+      "kind": "concept",
+      "front": "What happens to Earth's temperature when greenhouse gas levels increase?",
+      "back": "Outgoing energy to space falls at first, so the surface and lower atmosphere warm until outgoing energy rises enough to restore the **energy balance**. Greenhouse gases do not trap heat permanently.",
+      "hint": "Think about what must happen for incoming and outgoing energy to match again.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w6e5x5",
+      "kind": "concept",
+      "front": "Why does burning fossil fuels release carbon dioxide?",
+      "back": "The **carbon** in the fuel combines with oxygen during **combustion**, forming carbon dioxide. Fossil fuels are burned for electricity, heating and transport.",
+      "hint": "Think about what the fuel's carbon reacts with when it burns.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fefpu4",
+      "kind": "term",
+      "front": "What are greenhouse gases?",
+      "back": "Atmospheric gases that **absorb and emit infrared radiation**, slowing the rate at which Earth loses energy to space. Examples include water vapour, carbon dioxide, methane and nitrous oxide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s14rsk",
+      "kind": "term",
+      "front": "What is infrared radiation in this topic?",
+      "back": "**Electromagnetic radiation** emitted by Earth's warmed surface, which greenhouse gases absorb.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i47cjq",
+      "kind": "mistake",
+      "front": "Why is it wrong to think the greenhouse effect is a solid layer that reflects heat?",
+      "back": "The greenhouse effect works because **gas molecules** absorb and emit infrared radiation. No solid layer reflects heat back to the surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gegg13",
+      "kind": "concept",
+      "front": "Which gas forms when organic material breaks down without enough oxygen?",
+      "back": "**Methane**. It is released as organic matter decomposes without oxygen, for example in flooded rice fields and landfill sites.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fpl9f6",
+      "kind": "concept",
+      "front": "How does deforestation raise carbon dioxide levels?",
+      "back": "Fewer trees remain to remove carbon dioxide by **photosynthesis**, and burning cleared vegetation releases more carbon dioxide.",
+      "hint": "Think about what plants do with carbon dioxide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11f329f",
+      "kind": "concept",
+      "front": "How do nitrogen fertilisers add to greenhouse gases?",
+      "back": "They can lead to **nitrous oxide** emissions from the soil.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0di5pgb",
+      "kind": "term",
+      "front": "What is climate change?",
+      "back": "**Long-term changes** in temperature, rainfall and other weather patterns.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rgr99b",
+      "kind": "concept",
+      "front": "What two processes contribute to rising sea levels as Earth warms?",
+      "back": "**Melting land ice** adds water to the oceans, and warmer seawater **expands**, both raising sea levels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oe4zkf",
+      "kind": "mistake",
+      "front": "Why can't a single hot summer prove that global warming is happening?",
+      "back": "**Global warming** is a long-term rise in average surface temperature. Individual weather events cannot be explained by greenhouse gases alone.",
+      "hint": "Compare one season with a long-term average.",
+      "sectionId": "s4"
+    }
+  ]
+}

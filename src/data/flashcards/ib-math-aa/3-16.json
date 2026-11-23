@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-16",
+  "topicCode": "3.16",
+  "topicName": "Vector product",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:35.610Z",
+  "cards": [
+    {
+      "id": "1p0t4p4",
+      "kind": "concept",
+      "front": "What does the vector product a×b give, and which way does it point?",
+      "back": "It gives a **vector** at right angles to both a and b. Its direction comes from the right-hand rule, and its length is $|\\mathbf{a}||\\mathbf{b}|\\sin\\theta$.",
+      "hint": "Compare it with the scalar product, which gives a number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sebzxu",
+      "kind": "formula",
+      "front": "Write the components of a×b for a=(a1,a2,a3) and b=(b1,b2,b3).",
+      "back": "$(a_2b_3-a_3b_2,\\ a_3b_1-a_1b_3,\\ a_1b_2-a_2b_1)$. The middle entry runs in the opposite order, so take extra care with its sign.",
+      "hint": "The indices follow a cycle: 2,3 then 3,1 then 1,2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j93sml",
+      "kind": "formula",
+      "front": "What is the length |a×b| in terms of |a|, |b| and θ, and what does it measure?",
+      "back": "$|\\mathbf{a}||\\mathbf{b}|\\sin\\theta$. It is the **area** of the parallelogram with adjacent sides a and b.",
+      "hint": "Think of base times perpendicular height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ajc2n8",
+      "kind": "process",
+      "front": "How do you calculate a×b from components, and how do you check the answer?",
+      "back": "Work out each of the three entries in order. Then take the scalar product of the result with a and with b. Both results must be **zero**.",
+      "hint": "Check against both original vectors.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0buuibd",
+      "kind": "concept",
+      "front": "How does b×a relate to a×b?",
+      "back": "$\\mathbf{b}\\times\\mathbf{a}=-(\\mathbf{a}\\times\\mathbf{b})$. Swapping the vectors reverses the **sign** of every component, so order matters.",
+      "hint": "Think about curling the fingers the other way.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zj1nha",
+      "kind": "mistake",
+      "front": "A student says a×b = b×a because the vector product works like ordinary multiplication. What is wrong?",
+      "back": "The vector product is **not commutative**. Swapping the vectors gives the negative of the original vector, so the order must be kept.",
+      "hint": "Check with a simple pair of vectors.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mg7ntm",
+      "kind": "concept",
+      "front": "What is a×a, and why?",
+      "back": "The **zero vector**. The angle between parallel vectors gives $\\sin\\theta=0$, so the length of the result is zero.",
+      "hint": "Think about the sine of the angle between a vector and itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "024qn49",
+      "kind": "example",
+      "front": "Find a×b for a=(2,1,3) and b=(1,-2,4).",
+      "back": "$\\begin{pmatrix}10\\\\-5\\\\-5\\end{pmatrix}$. Check: $2(10)+1(-5)+3(-5)=0$.",
+      "hint": "Work out each entry with the component formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u0iyc2",
+      "kind": "example",
+      "front": "Find the area of the parallelogram with adjacent sides a=(2,0,0) and b=(0,3,4).",
+      "back": "$\\mathbf{a}\\times\\mathbf{b}=(0,-8,6)$, so the area is $\\sqrt{64+36}=10$ square units.",
+      "hint": "The area is the magnitude of the vector product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lz0a14",
+      "kind": "process",
+      "front": "How do you find the area of triangle ABC using vectors?",
+      "back": "Form $\\overrightarrow{AB}$ and $\\overrightarrow{AC}$ from the same vertex, find their vector product, then take **half** its magnitude: $\\frac{1}{2}|\\overrightarrow{AB}\\times\\overrightarrow{AC}|$.",
+      "hint": "Both vectors must start at A.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fkysj0",
+      "kind": "concept",
+      "front": "Why must AB and AC start from the same vertex?",
+      "back": "Both vectors must share a **common starting point**, otherwise the vector product does not give the triangle's area. Any vertex works, provided it is used for both vectors.",
+      "hint": "The two sides must meet at one corner.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "013jc6k",
+      "kind": "mistake",
+      "front": "A student finds the area of a triangle as |AB×AC| with no further step. What is wrong?",
+      "back": "The magnitude gives the **parallelogram** area. A triangle with the same two sides is half of that, so include the factor $\\frac{1}{2}$.",
+      "hint": "How does a diagonal cut a parallelogram?",
+      "sectionId": "s5"
+    }
+  ]
+}

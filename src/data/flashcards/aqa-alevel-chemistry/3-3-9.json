@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-9",
+  "topicCode": "3.3.9",
+  "topicName": "Carboxylic acids and derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:42.290Z",
+  "cards": [
+    {
+      "id": "1223trw",
+      "kind": "concept",
+      "front": "Why does a nucleophile attack an acyl chloride so readily?",
+      "back": "The carbonyl carbon is strongly $\\delta+$ because the oxygen and chlorine atoms bonded to it are both **electronegative** and pull electron density away from it.",
+      "hint": "Think about which bonded atoms pull electron density away from the carbon.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ivzkiy",
+      "kind": "process",
+      "front": "What are the steps to make ethyl ethanoate from ethanoic acid?",
+      "back": "Heat ethanoic acid with ethanol and a few drops of **concentrated sulfuric acid**, which acts as a catalyst. The reaction is reversible, so an equilibrium mixture of ester and water forms.",
+      "hint": "Consider which two reactants combine and what the mixture eventually reaches.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "144dgeu",
+      "kind": "concept",
+      "front": "Why does alkaline hydrolysis of an ester go to completion?",
+      "back": "The **carboxylate ion** formed does not react with the alcohol, so the reaction is not reversible and no equilibrium forms.",
+      "hint": "Compare this with what happens in acid hydrolysis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hrw7ru",
+      "kind": "term",
+      "front": "What is a carboxylic acid?",
+      "back": "An organic compound containing the **carboxyl group**, $\\mathrm{-COOH}$, at the end of a carbon chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iexeh0",
+      "kind": "term",
+      "front": "What is a weak acid?",
+      "back": "An acid that is only **partially dissociated** (partly ionised) in aqueous solution, yet it still reacts fully with reactive metals and carbonates.",
+      "hint": "Compare with a strong acid, which ionises fully.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m0wxk6",
+      "kind": "example",
+      "front": "Which gas is produced when ethanoic acid reacts with sodium carbonate?",
+      "back": "**Carbon dioxide**, $\\mathrm{CO_2}$. The fizzing is a standard test for a carboxylic acid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08det1t",
+      "kind": "mistake",
+      "front": "What is wrong with saying the ethyl group in ethyl propanoate comes from the acid?",
+      "back": "It is **wrong**: the ethyl group comes from the alcohol and the propanoate comes from the acid.",
+      "hint": "Think about which reactant supplies which half of the ester name.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04h88ky",
+      "kind": "concept",
+      "front": "Why do esters boil at lower temperatures than acids of similar size?",
+      "back": "Ester molecules cannot form **hydrogen bonds** with each other, so less energy is needed to separate them.",
+      "hint": "Compare the intermolecular forces present in each type of molecule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t3wrlp",
+      "kind": "formula",
+      "front": "What is the equation for alkaline hydrolysis of ethyl ethanoate?",
+      "back": "$\\mathrm{CH_3COOCH_2CH_3(l) + NaOH(aq) \\rightarrow CH_3COONa(aq) + CH_3CH_2OH(aq)}$. The products are a **carboxylate salt** and an alcohol.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y9trar",
+      "kind": "process",
+      "front": "What are the steps when ethanoyl chloride reacts with a nucleophile?",
+      "back": "1) The nucleophile's lone pair attacks the carbonyl carbon. 2) The $\\mathrm{C=O}$ bond breaks, forming an intermediate with $\\mathrm{O^-}$. 3) The $\\mathrm{C=O}$ bond reforms and a **chloride ion** leaves. 4) The nucleophile loses $\\mathrm{H^+}$.",
+      "hint": "Two stages: which happens first, the nucleophile joining or a group leaving?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tibglo",
+      "kind": "example",
+      "front": "What two products form when ethanoyl chloride reacts with ammonia?",
+      "back": "**Ethanamide** (the organic product) and ammonium chloride.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1y4iq0k",
+      "kind": "concept",
+      "front": "Why is ethanoic anhydride preferred to ethanoyl chloride for making aspirin on a large scale?",
+      "back": "It is **cheaper and safer** to handle, and its by-product is ethanoic acid rather than hydrogen chloride.",
+      "hint": "Think about cost, handling and the by-product formed.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0xmhuqg",
+      "kind": "term",
+      "front": "What is acylation?",
+      "back": "A reaction in which an **acyl group**, $\\mathrm{RCO{-}}$, is transferred to, or replaces a hydrogen atom in, another molecule.",
+      "hint": "Think about what the reacting acyl chloride donates to the nucleophile.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ynpj92",
+      "kind": "term",
+      "front": "What is hydrolysis?",
+      "back": "A reaction in which a **bond is broken** by reaction with water, often catalysed by acid or alkali.",
+      "hint": "Think about what water does to an ester in the reverse of esterification.",
+      "sectionId": "s4"
+    }
+  ]
+}

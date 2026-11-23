@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-15",
+  "topicCode": "4.15",
+  "topicName": "Central limit theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:03.283Z",
+  "cards": [
+    {
+      "id": "1rqxepb",
+      "kind": "concept",
+      "front": "What does the central limit theorem tell you about the distribution of sample means?",
+      "back": "For a large random sample from any population with mean $\\mu$ and finite variance $\\sigma^2$, the sample mean is **approximately normal**: $\\bar X\\approx\\mathrm{N}(\\mu,\\frac{\\sigma^2}{n})$. The population itself need not be normal.",
+      "hint": "Think about the shape of the population and the sample size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "062vw7z",
+      "kind": "formula",
+      "front": "What are the mean and standard error of the sample mean $\\bar X$ for a random sample of size $n$?",
+      "back": "$E(\\bar X)=\\mu$ and standard error $\\frac{\\sigma}{\\sqrt n}$, where $\\mu$ is the population mean and $\\sigma$ the population standard deviation. Sample means are not systematically too high or too low, and their spread shrinks as $n$ grows.",
+      "hint": "The variance is $\\sigma^2/n$; take the square root for the standard error.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fqg9vy",
+      "kind": "process",
+      "front": "What are the steps to find a probability about a sample mean using the central limit theorem?",
+      "back": "1) Check $n$ is large, so $\\bar X$ is approximately normal with mean $\\mu$. 2) Find the standard error $\\frac{\\sigma}{\\sqrt n}$. 3) Standardise with $z=\\frac{\\bar x-\\mu}{\\sigma/\\sqrt n}$. 4) Use the normal distribution.",
+      "hint": "Start with the standard error, not $\\sigma$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gjuont",
+      "kind": "term",
+      "front": "What is the sampling distribution of the sample mean?",
+      "back": "The **sampling distribution** is the probability distribution of $\\bar X$, found from all possible random samples of the same size.",
+      "hint": "It describes means, not individual values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xkwymi",
+      "kind": "term",
+      "front": "What is the standard error?",
+      "back": "The **standard error** is the standard deviation of the sample mean, equal to $\\frac{\\sigma}{\\sqrt n}$ for random samples of size $n$.",
+      "hint": "It depends on the sample size $n$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kdv7cx",
+      "kind": "example",
+      "front": "A population has $\\sigma=12$ g. Find the standard error of the mean for random samples of size 36.",
+      "back": "**2.0 g**. Using $\\frac{12}{\\sqrt{36}}=\\frac{12}{6}=2.0$.",
+      "hint": "Take the square root of 36 first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s7n6u8",
+      "kind": "example",
+      "front": "Waiting times have mean 8.0 min and standard deviation 6.0 min. For a random sample of 36 waits, find $P(\\bar X>9.5)$.",
+      "back": "**About 0.0668**. The standard error is 1.0, so $z=1.5$ and $P(Z>1.5)=1-0.9332=0.0668$.",
+      "hint": "Find the standard error, then standardise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "100s17d",
+      "kind": "formula",
+      "front": "For a total of $n$ observations, what is the approximate distribution?",
+      "back": "$\\mathrm{N}(n\\mu,\\,n\\sigma^2)$, where $\\mu$ and $\\sigma^2$ are the population mean and variance. Use this when the question is about a total, not a mean.",
+      "hint": "Multiply the mean and variance by $n$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zrf5yl",
+      "kind": "mistake",
+      "front": "A student uses $\\sigma$ instead of $\\frac{\\sigma}{\\sqrt n}$ when standardising a sample mean. What is wrong?",
+      "back": "**Wrong spread.** $\\sigma$ is the spread of single values, much larger than the spread of a mean of $n$ values. Use the standard error $\\frac{\\sigma}{\\sqrt n}$ for any question about a sample mean.",
+      "hint": "Which spread belongs to the mean?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "057v20v",
+      "kind": "mistake",
+      "front": "Does the central limit theorem make the population or a single sample normal?",
+      "back": "**No.** It describes the distribution of sample means for large $n$. The population and a single sample keep their own shape.",
+      "hint": "Think about what $\\bar X$ is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07wtlq1",
+      "kind": "concept",
+      "front": "What conditions must hold for the central limit theorem to apply?",
+      "back": "The observations form a **random sample** and are **independent**, the population has a finite mean and variance, and the sample size is large, usually $n\\geq30$.",
+      "hint": "There are four conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pwy9sb",
+      "kind": "concept",
+      "front": "Why does the population's shape affect how large a sample must be?",
+      "back": "A **strongly skewed** population needs a larger $n$ before the sampling distribution looks normal, while a nearly symmetric one needs less. The rule $n\\geq30$ is only a rule of thumb.",
+      "hint": "Think about skew.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ewxkcm",
+      "kind": "concept",
+      "front": "What happens to the standard error when the sample size grows?",
+      "back": "It **falls**, since it equals $\\frac{\\sigma}{\\sqrt n}$. To halve it, multiply the sample size by four, so larger samples give narrower sampling distributions.",
+      "hint": "Look at the square root in the denominator.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0acvpxp",
+      "kind": "mistake",
+      "front": "Does taking a large sample from a small population always satisfy the theorem's conditions?",
+      "back": "**No.** Sampling a large part of a small population breaks independence, so results are less reliable. Check that the sample is random as well as large.",
+      "hint": "What does taking a big share of the population do?",
+      "sectionId": "s6"
+    }
+  ]
+}

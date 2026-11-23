@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-2-2",
+  "topicCode": "4.2.2",
+  "topicName": "Animal tissues, organs and organ systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:34.066Z",
+  "cards": [
+    {
+      "id": "1onmkio",
+      "kind": "concept",
+      "front": "Why does the left ventricle have a thicker muscular wall than the right ventricle?",
+      "back": "It pumps blood around the whole body at higher pressure, so it needs more muscle. The right ventricle only pumps blood to the nearby lungs.",
+      "hint": "Think about how far each side of the heart pumps blood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00m1426",
+      "kind": "concept",
+      "front": "How are alveoli adapted for rapid gas exchange?",
+      "back": "Their large number gives a **large surface area**. Their walls are one cell thick, so gases diffuse over a short distance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p4gwaz",
+      "kind": "concept",
+      "front": "Why are capillary walls only one cell thick?",
+      "back": "This gives substances a **short diffusion distance** between the blood and the body's tissues.",
+      "hint": "Think about how distance affects the speed of diffusion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19h2983",
+      "kind": "term",
+      "front": "What is an organ system?",
+      "back": "An **organ system** is a group of organs working together to carry out a major function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ldlh2d",
+      "kind": "process",
+      "front": "What is the order of blood flow from the body, through the heart and lungs, and back to the body?",
+      "back": "Vena cava, right atrium, right ventricle, pulmonary artery, lungs, pulmonary vein, left atrium, left ventricle, aorta, body.",
+      "hint": "Start where blood enters the heart from the body.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0flc816",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that arteries always carry oxygenated blood?",
+      "back": "The **pulmonary artery** carries deoxygenated blood from the heart to the lungs. Arteries carry blood away from the heart, whatever its oxygen level.",
+      "hint": "Check which vessel travels to the lungs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kia2pz",
+      "kind": "term",
+      "front": "What are veins?",
+      "back": "**Veins** are blood vessels that carry blood towards the heart at lower pressure. They have valves to prevent backflow.",
+      "hint": "Compare their direction and pressure with arteries.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "125woks",
+      "kind": "concept",
+      "front": "Why are red blood cells biconcave in shape?",
+      "back": "Their biconcave shape gives them a **large surface area** for exchange of gases.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fyvlv6",
+      "kind": "concept",
+      "front": "What do platelets do in the blood?",
+      "back": "They help blood **clot**, reducing blood loss and limiting the entry of pathogens.",
+      "hint": "Think about what happens when the body is cut.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1trdxkz",
+      "kind": "term",
+      "front": "What is ventilation?",
+      "back": "**Ventilation** is the movement of air into and out of the lungs, which replaces the air in the alveoli.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0or7bj9",
+      "kind": "process",
+      "front": "How does oxygen move from an alveolus into the blood?",
+      "back": "Oxygen dissolves in the moist lining of the alveolus, then **diffuses** from the air in the alveolus into the blood.",
+      "hint": "Think about what must happen before a gas can diffuse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c74hk4",
+      "kind": "term",
+      "front": "What are coronary arteries?",
+      "back": "**Coronary arteries** are blood vessels that supply the heart muscle with oxygenated blood.",
+      "hint": "Think about which organ these arteries serve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jm9ob5",
+      "kind": "concept",
+      "front": "How does a diet high in saturated fat affect the heart?",
+      "back": "It raises **blood cholesterol**, which increases the risk of fatty deposits narrowing the coronary arteries.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0aijnee",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that smoking certainly causes heart disease?",
+      "back": "Lifestyle factors **increase or decrease risk**; they do not guarantee that someone will develop disease. Inherited factors cannot be changed.",
+      "sectionId": "s5"
+    }
+  ]
+}

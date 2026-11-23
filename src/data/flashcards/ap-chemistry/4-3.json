@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Representations of reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:31.590Z",
+  "cards": [
+    {
+      "id": "033nbq7",
+      "kind": "concept",
+      "front": "Which particles are left out of a net ionic equation, and why?",
+      "back": "**Spectator ions** are left out because they appear unchanged on both sides of the complete ionic equation.",
+      "hint": "Look for ions that are the same before and after the reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j0ixa4",
+      "kind": "process",
+      "front": "How do you turn a molecular equation into a complete ionic equation?",
+      "back": "Separate each **dissolved strong electrolyte** into its ions, and keep solids and other non-dissociating substances whole.",
+      "hint": "Use the state symbols to decide what to separate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x2u3k1",
+      "kind": "term",
+      "front": "What does the state symbol (aq) mean?",
+      "back": "The substance is **dissolved in water**. Its formula alone does not show whether it forms ions in solution.",
+      "hint": "Think about what water does to the substance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16gf873",
+      "kind": "term",
+      "front": "What is a molecular equation?",
+      "back": "An equation that writes each substance as a **complete formula**, even when dissolved ionic compounds exist as separate ions.",
+      "hint": "Compare it with the ionic forms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o3re9r",
+      "kind": "example",
+      "front": "What is the net ionic equation when aqueous silver nitrate mixes with aqueous sodium chloride?",
+      "back": "$\\mathrm{Ag^{+}(aq)+Cl^{-}(aq)\\rightarrow AgCl(s)}$, because Na$^{+}$ and NO$_3^{-}$ are spectator ions.",
+      "hint": "Which ions form the solid?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kl5a24",
+      "kind": "example",
+      "front": "Write the complete ionic equation for $\\mathrm{AgNO_3(aq)+NaCl(aq)\\rightarrow AgCl(s)+NaNO_3(aq)}$.",
+      "back": "$\\mathrm{Ag^{+}(aq)+NO_3^{-}(aq)+Na^{+}(aq)+Cl^{-}(aq)\\rightarrow AgCl(s)+Na^{+}(aq)+NO_3^{-}(aq)}$",
+      "hint": "Split the aqueous compounds, but keep AgCl whole.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0eaaiz2",
+      "kind": "mistake",
+      "front": "A student says (aq) means liquid. What is wrong?",
+      "back": "**Aqueous** means dissolved in water. Liquid describes the substance itself.",
+      "hint": "Separate the idea of water from the state of the substance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1no38er",
+      "kind": "mistake",
+      "front": "A student splits solid AgCl into Ag$^{+}$ and Cl$^{-}$ in a complete ionic equation. What is wrong?",
+      "back": "Solids stay together because their ions are part of a **crystal**. Only dissolved strong electrolytes separate.",
+      "hint": "Check the state symbol before separating anything.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ktlrg7",
+      "kind": "concept",
+      "front": "What two checks confirm that a particle diagram or equation is balanced?",
+      "back": "Each element has the **same number of atoms** on both sides, and the total **electrical charge** stays the same.",
+      "hint": "One check is about atoms, the other about charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pf57cc",
+      "kind": "process",
+      "front": "How do you write a molecular equation from a net ionic equation?",
+      "back": "Choose soluble compounds that supply the needed ions, add the unchanged ions to form a complete ionic equation, then combine the ions into **neutral formulas**.",
+      "hint": "Work backward in three steps and keep states consistent.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sau41a",
+      "kind": "concept",
+      "front": "Why does a net ionic equation not identify one unique set of starting compounds?",
+      "back": "The same reacting ions can come from different starting compounds, so one **net ionic equation** fits several molecular equations.",
+      "hint": "Focus on which particles actually react.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l2dudy",
+      "kind": "term",
+      "front": "What is a particle diagram?",
+      "back": "A diagram that uses **labeled particles** (atoms, molecules, or ions) to show the substances present before or after a reaction.",
+      "hint": "Think about what the particles are labeled with.",
+      "sectionId": "s2"
+    }
+  ]
+}

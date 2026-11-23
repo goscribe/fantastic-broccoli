@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "hl-c",
+  "topicCode": "HL.c",
+  "topicName": "Environmental ethics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:58.454Z",
+  "cards": [
+    {
+      "id": "1r8civy",
+      "kind": "term",
+      "front": "What is the difference between instrumental value and intrinsic value?",
+      "back": "**Instrumental value** is worth that comes from being useful to people, such as food or water. **Intrinsic value** is worth something has in itself, whether or not anyone benefits.",
+      "hint": "Think about usefulness versus worth in itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16azm7k",
+      "kind": "concept",
+      "front": "How do anthropocentric and ecocentric views differ on why nature should be protected?",
+      "back": "**Anthropocentric** views protect nature for human needs now and later. **Ecocentric** views value nature for its own sake, so it has a right to exist, whereas humans are not its only source of value.",
+      "hint": "Compare the reason each view gives for protection.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f5p9jt",
+      "kind": "concept",
+      "front": "Why can the same facts about a forest lead governments to different policies?",
+      "back": "Because each government weighs the facts by its **ethical values**. An anthropocentric government may allow mining for jobs, while an ecocentric one may create **protected areas**.",
+      "hint": "Think about what each government values most.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "001lrpz",
+      "kind": "term",
+      "front": "What does a technocentric view believe about environmental problems?",
+      "back": "It is a form of anthropocentric thinking that **trusts science and technology** to solve them, favouring innovation such as cleaner energy over cutting consumption.",
+      "hint": "Technocentric is a kind of anthropocentric view.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nt8793",
+      "kind": "concept",
+      "front": "Why does an anthropocentric view still support protecting nature?",
+      "back": "Because **people depend on healthy ecosystems**, so careful management is seen as a duty to current and future generations.",
+      "hint": "Think about what people rely on from nature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02novpj",
+      "kind": "term",
+      "front": "What does a biocentric view give to every living organism?",
+      "back": "**Intrinsic value**, whether or not it is useful. Humans are one species among many, so harming a plant or animal needs a moral reason.",
+      "hint": "Think about who counts, not only what is useful.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1984qb4",
+      "kind": "concept",
+      "front": "Why do ecocentric thinkers often support limits on human consumption?",
+      "back": "They value **whole ecosystems** and their processes, and the health of the system matters more than any single organism.",
+      "hint": "Focus on the system rather than individual species.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zg67g7",
+      "kind": "mistake",
+      "front": "Does being ecocentric mean that people do not matter?",
+      "back": "No. **Ecocentric** means people are not the only source of value. People still matter, but within a wider system of value.",
+      "hint": "Consider what the word only implies.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09ep76k",
+      "kind": "example",
+      "front": "A dam gives electricity but floods a valley. How would an ecocentric view count the loss of the valley?",
+      "back": "As a **harm in itself**, because losing the valley ecosystem matters whether or not people benefit. An anthropocentric view weighs the power and jobs against costs to people.",
+      "hint": "Consider which costs each view takes into account.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gne3k5",
+      "kind": "concept",
+      "front": "How can ethics decide whose views are heard in environmental policy?",
+      "back": "Communities with a **strong cultural bond to land** may value it in ways markets do not capture. Policies that ignore these values can cause conflict.",
+      "hint": "Think about values that prices do not show.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jp9b01",
+      "kind": "concept",
+      "front": "What is one gain and one cost of ethical considerations for environmental management?",
+      "back": "A gain is that they can **justify protection where profit would not**. A cost is that groups hold different values, so agreement can be slow.",
+      "hint": "Use the gains and costs listed in the note.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1hqa4k8",
+      "kind": "mistake",
+      "front": "Do most people fall neatly into one ethical viewpoint?",
+      "back": "No. Most people hold a **mix of views**, and the labels anthropocentric, biocentric and ecocentric describe a spectrum.",
+      "hint": "Think of the labels as points on a scale.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10z4clk",
+      "kind": "term",
+      "front": "What is environmental ethics?",
+      "back": "The study of the **moral relationship** between humans and the natural environment, including what humans owe to nature.",
+      "hint": "Focus on what humans owe to nature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m3h4ly",
+      "kind": "term",
+      "front": "What are protected areas?",
+      "back": "Land or sea legally set aside to conserve species and ecosystems, with **limits on harmful use**, such as extraction being limited or banned.",
+      "hint": "Think about legal protection and limits on use.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ijci4v",
+      "kind": "mistake",
+      "front": "Does strict protection of an area always benefit everyone?",
+      "back": "No. Strict protection can **limit the livelihoods** of local people, so this cost must be weighed against its gains.",
+      "hint": "Consider who pays the cost of protection.",
+      "sectionId": "s6"
+    }
+  ]
+}

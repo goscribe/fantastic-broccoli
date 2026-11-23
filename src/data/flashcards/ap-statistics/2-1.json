@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Two categorical variables: tables and graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:01.109Z",
+  "cards": [
+    {
+      "id": "188zrzc",
+      "kind": "concept",
+      "front": "How can you tell whether two categorical variables have an association?",
+      "back": "Check whether the **percents within each group** differ. An association exists when the distribution of one variable changes across the categories of the other.",
+      "hint": "Compare percents within rows, not raw counts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a5e3uf",
+      "kind": "mistake",
+      "front": "A group has more students in a category than another group. Does that mean a larger share of that group is in the category?",
+      "back": "**No.** A larger count can come from a larger group. Compare percents within each group to judge the share fairly.",
+      "hint": "Think about group size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1k2138f",
+      "kind": "term",
+      "front": "What is a two-way table?",
+      "back": "A **two-way table** is a table of counts that sorts each unit by the categories of two categorical variables, with one variable in rows and the other in columns.",
+      "hint": "Rows for one variable, columns for the other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rf18kd",
+      "kind": "process",
+      "front": "What are the steps to build a two-way table from survey answers?",
+      "back": "List one variable's categories down the side and the other's across the top. Tally each unit into the one cell that matches both answers. Then add the row and column totals.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sjbi2d",
+      "kind": "term",
+      "front": "What is a joint frequency?",
+      "back": "A **joint frequency** is the count of units in one particular pair of categories, found in a single cell of the table.",
+      "hint": "Think about one cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tldojk",
+      "kind": "term",
+      "front": "What is a marginal frequency?",
+      "back": "A **marginal frequency** is the total count for one category of a single variable, found in a row total or column total in the margins.",
+      "hint": "Look at the edges of the table.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14y0s87",
+      "kind": "term",
+      "front": "What is the grand total in a two-way table?",
+      "back": "The **grand total** is the count of all units in the table, found in the bottom-right corner. It equals the sum of all the cell counts.",
+      "hint": "Where is the bottom-right corner?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vac43t",
+      "kind": "formula",
+      "front": "How is the relative frequency of a cell calculated?",
+      "back": "Relative frequency = $\\frac{\\text{cell count}}{\\text{grand total}}$. The result is a **proportion**, which you can write as a percent.",
+      "hint": "A count divided by a total.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vzs1jf",
+      "kind": "example",
+      "front": "In the bus table of 200 students, what percent are upperclass students who ride the bus, given 20 such students?",
+      "back": "**10%**, because $\\frac{20}{200}=0.10$. The cell count is divided by the grand total.",
+      "hint": "Which number is the denominator?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05592oq",
+      "kind": "example",
+      "front": "Of 120 underclass students, 66 ride the bus. What percent of underclass students ride the bus?",
+      "back": "**55%**, because $\\frac{66}{120}=0.55$. The cell is divided by its own row total, not the grand total.",
+      "hint": "Use the row total as the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1blhv2g",
+      "kind": "term",
+      "front": "What is a segmented bar chart?",
+      "back": "A **segmented bar chart** has one bar per group, and each bar is split into segments showing the percent of each category within that group. Every bar totals 100%.",
+      "hint": "One bar per group.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10754oe",
+      "kind": "term",
+      "front": "How does a side-by-side bar chart differ from a segmented bar chart?",
+      "back": "A **side-by-side bar chart** places separate bars next to each other, grouped by the other variable, instead of splitting one bar into segments.",
+      "hint": "Separate bars, not segments.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dfipo9",
+      "kind": "concept",
+      "front": "What does a mosaic plot show that a segmented bar chart does not?",
+      "back": "A mosaic plot shows **group sizes** as well as within-group percents. Bar widths match group sizes, so each block's area shows that cell's share of all units.",
+      "hint": "Think about bar width.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "168upgd",
+      "kind": "example",
+      "front": "Club A: 60 of 150 members prefer tea. Club B: 30 of 50 members prefer tea. Is there an association between club and preference?",
+      "back": "**Yes.** Club A has 40% and Club B has 60% preferring tea. The percents differ, so preference differs across the clubs.",
+      "hint": "Compare percents within each club."
+    }
+  ]
+}

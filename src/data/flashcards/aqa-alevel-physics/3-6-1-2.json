@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-6-1-2",
+  "topicCode": "3.6.1.2",
+  "topicName": "Simple harmonic motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:37.637Z",
+  "cards": [
+    {
+      "id": "1kqfafx",
+      "kind": "concept",
+      "front": "What two conditions must an oscillation meet to count as simple harmonic motion?",
+      "back": "The **acceleration** must be proportional to the displacement from equilibrium and directed towards equilibrium, written as $a=-\\omega^2x$.",
+      "hint": "Consider which way the acceleration points compared with the displacement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09hzaui",
+      "kind": "formula",
+      "front": "In SHM, what is the maximum acceleration in terms of $\\omega$ and $A$?",
+      "back": "$a_\\mathrm{max}=\\omega^2A$, reached at maximum displacement, where the object is briefly at rest but accelerating strongly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i4jdoi",
+      "kind": "concept",
+      "front": "Why does doubling the amplitude of an SHM oscillation leave the period unchanged?",
+      "back": "The period depends only on the system, through $\\omega$. A larger swing covers more distance, but the object moves faster so the time is the same.",
+      "hint": "Compare the distance travelled with the speed reached.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0krmqpl",
+      "kind": "formula",
+      "front": "Which equation links the angular frequency $\\omega$ to the period $T$?",
+      "back": "$\\omega=\\frac{2\\pi}{T}$, equivalently $\\omega=2\\pi f$ with $f=\\frac{1}{T}$. $\\omega$ is in $\\mathrm{rad\\,s^{-1}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17dpjg9",
+      "kind": "term",
+      "front": "What is the amplitude of an oscillation?",
+      "back": "The **maximum displacement** of the oscillation from its equilibrium (undisturbed) position.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eh64e0",
+      "kind": "formula",
+      "front": "Which starting condition gives $x=A\\cos\\omega t$ rather than $x=A\\sin\\omega t$?",
+      "back": "Starting at maximum displacement gives $x=A\\cos\\omega t$. Starting at equilibrium gives $x=A\\sin\\omega t$. The angle $\\omega t$ is in radians.",
+      "hint": "Think about where the object is at $t=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xe8nwo",
+      "kind": "formula",
+      "front": "In SHM, what is the maximum speed in terms of $\\omega$ and $A$, and where is it reached?",
+      "back": "$v_\\mathrm{max}=\\omega A$, reached as the object passes through equilibrium.",
+      "hint": "Consider where the object is moving fastest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ynlw1j",
+      "kind": "formula",
+      "front": "What equation gives the speed of an SHM object at displacement $x$?",
+      "back": "$v=\\pm\\omega\\sqrt{A^2-x^2}$, where $A$ is the amplitude and $\\omega$ is the angular frequency in $\\mathrm{rad\\,s^{-1}}$.",
+      "hint": "Compare with the speed at equilibrium, where $x$ is zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dts8fy",
+      "kind": "example",
+      "front": "A mass oscillates with amplitude 0.040 m and period 0.50 s. What are its maximum speed and maximum acceleration?",
+      "back": "$\\omega=12.6\\,\\mathrm{rad\\,s^{-1}}$, so $v_\\mathrm{max}=0.50\\,\\mathrm{m\\,s^{-1}}$ and $a_\\mathrm{max}=6.3\\,\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Find the angular frequency from the period first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03o0nrm",
+      "kind": "mistake",
+      "front": "A student evaluates $\\cos\\omega t$ with the calculator in degree mode. Why is this wrong?",
+      "back": "Because $\\omega t$ is an angle in **radians**, so degree mode gives wrong values. Set the calculator to radians.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bg8l27",
+      "kind": "concept",
+      "front": "For an object starting at maximum displacement, how is its velocity graph related to its displacement graph?",
+      "back": "Velocity is the gradient of displacement, so the velocity graph is a **negative sine curve**. Velocity is zero whenever displacement is at its maximum.",
+      "hint": "Think about the gradient of a cosine curve at its peaks.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06k4yvt",
+      "kind": "mistake",
+      "front": "A student says acceleration is zero at the extremes of an SHM oscillation. What is wrong with this?",
+      "back": "Acceleration is **zero at equilibrium**, not at the extremes. At the extremes it is greatest, even though the object is briefly at rest.",
+      "hint": "Think about the restoring force at the ends of the swing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a3g9w4",
+      "kind": "process",
+      "front": "What steps show from experimental data that an oscillation is simple harmonic?",
+      "back": "Measure the acceleration at several displacements and plot $a$ against $x$. A straight line through the origin with negative gradient confirms SHM, and the gradient equals $-\\omega^2$.",
+      "hint": "Think about which quantities go on each axis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gxzep7",
+      "kind": "example",
+      "front": "On an $a$–$x$ graph for SHM, the gradient is $-100\\,\\mathrm{s^{-2}}$. What are $\\omega$ and $T$?",
+      "back": "$\\omega=10\\,\\mathrm{rad\\,s^{-1}}$, so $T=\\frac{2\\pi}{\\omega}\\approx0.63\\,\\mathrm{s}$.",
+      "hint": "Use the fact that the gradient equals $-\\omega^2$.",
+      "sectionId": "s5"
+    }
+  ]
+}

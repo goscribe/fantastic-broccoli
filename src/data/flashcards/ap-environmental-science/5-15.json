@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-15",
+  "topicCode": "5.15",
+  "topicName": "Sustainable agriculture",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:10.052Z",
+  "cards": [
+    {
+      "id": "098engq",
+      "kind": "term",
+      "front": "What is sustainable agriculture?",
+      "back": "**Sustainable agriculture** is farming that meets today's food needs while protecting soil, water, and ecosystems for the future.",
+      "hint": "Think about what a bare, plowed field loses over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g399r1",
+      "kind": "concept",
+      "front": "How does growing a legume in the rotation reduce fertilizer use?",
+      "back": "Legume roots host **nitrogen-fixing bacteria** that convert nitrogen from the air into a form plants can use. The next crop needs less synthetic fertilizer, so less nitrogen runs off into waterways.",
+      "hint": "Consider where the nitrogen comes from and where it might otherwise end up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a1cstt",
+      "kind": "concept",
+      "front": "How does a cover crop protect soil between harvests?",
+      "back": "Roots hold soil in place and leaves soften the impact of raindrops. Plants also take up leftover **nitrate**, reducing leaching into groundwater and streams.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06ucd1q",
+      "kind": "term",
+      "front": "What is soil erosion?",
+      "back": "**Soil erosion** is the removal of topsoil by wind or moving water. It takes away the nutrient-rich layer that crops depend on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11vkhms",
+      "kind": "concept",
+      "front": "How does no-till farming differ from plowing before planting?",
+      "back": "No-till plants seeds directly into the previous crop's **residue** without plowing. The residue shields the surface and slows evaporation, so soil keeps its structure, organic matter, and moisture.",
+      "hint": "Compare what happens to the soil surface during planting in each method.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aou7g4",
+      "kind": "term",
+      "front": "What is tillage?",
+      "back": "**Tillage** is plowing or turning soil to prepare it for planting. It buries weeds and loosens soil, but it also breaks up soil structure and exposes bare ground.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pma12h",
+      "kind": "term",
+      "front": "What is leaching?",
+      "back": "**Leaching** is the downward movement of dissolved nutrients or chemicals through soil with water.",
+      "hint": "Think of water moving through soil and taking things along with it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s9ozua",
+      "kind": "term",
+      "front": "What is crop rotation?",
+      "back": "**Crop rotation** is growing different crops in a planned sequence on the same field over successive seasons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13qg9qc",
+      "kind": "concept",
+      "front": "Why does crop rotation reduce the need for pesticides?",
+      "back": "Pests that feed on only one crop have their **life cycle** interrupted when the crop changes. Fewer pesticides are then needed.",
+      "hint": "Think about what a pest needs from the field each season.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s5svvo",
+      "kind": "term",
+      "front": "What is contour farming?",
+      "back": "**Contour farming** plants crop rows along the curves of a slope, across its steepest incline. This slows water and traps soil.",
+      "hint": "Compare with rows running straight up and down a hill.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tfbaun",
+      "kind": "term",
+      "front": "Where is a buffer strip placed, and what does it do?",
+      "back": "A **buffer strip** is a band of permanent vegetation, such as grass or trees, between a field and a waterway. It filters runoff before it reaches the water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1plvvzi",
+      "kind": "mistake",
+      "front": "Why is it wrong to think sustainable farming uses no inputs at all?",
+      "back": "Sustainable farming uses inputs **efficiently** so soil and water are not damaged. It does not mean eliminating fertilizers, pesticides, or other inputs.",
+      "hint": "Think about the goal of the practice, not the amount of inputs used.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-5",
+  "topicCode": "7.5",
+  "topicName": "Link reaction and Krebs cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:45.936Z",
+  "cards": [
+    {
+      "id": "0mjsdxw",
+      "kind": "concept",
+      "front": "Why must pyruvate be converted before it can enter the Krebs cycle?",
+      "back": "Pyruvate has three carbons, but the cycle accepts only a two-carbon unit, so the **link reaction** converts it into acetyl coenzyme A first.",
+      "hint": "Compare the number of carbons in pyruvate with what the next stage accepts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fdegvm",
+      "kind": "process",
+      "front": "What happens to an acetyl group when it enters the Krebs cycle?",
+      "back": "It joins **oxaloacetate**, a four-carbon molecule, to form citrate (six carbons). Coenzyme A is released to collect another acetyl group, and citrate is converted back to oxaloacetate so the cycle can repeat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zqplkf",
+      "kind": "concept",
+      "front": "Where is most of the energy from the link reaction and Krebs cycle held?",
+      "back": "In the **reduced carriers** (reduced NAD and reduced FAD). They carry hydrogen to the final stage, where most ATP is made; only a little ATP forms directly in the cycle.",
+      "hint": "Think about what the carriers do next.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19nr3s4",
+      "kind": "term",
+      "front": "What is **decarboxylation**?",
+      "back": "The removal of a carboxyl group from a molecule as **carbon dioxide**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ygpdm6",
+      "kind": "term",
+      "front": "What is **dehydrogenation**?",
+      "back": "The removal of hydrogen atoms from a molecule, usually passing them to a carrier such as NAD.",
+      "hint": "Think of what is lost from the molecule, not gained.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xmdrhy",
+      "kind": "mistake",
+      "front": "Where does the carbon dioxide released in the link reaction come from?",
+      "back": "From **carbon atoms in glucose**, not from the oxygen gas breathed in. It diffuses out of the cell and leaves the body in the breath.",
+      "hint": "Trace the carbon back through glycolysis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03hz4pj",
+      "kind": "example",
+      "front": "How many carbon dioxide molecules are released by the link reaction and Krebs cycle when 4 glucose molecules are broken down?",
+      "back": "**24** molecules. Each glucose gives 6 (2 from the link reaction and 4 from the Krebs cycle), so $4\\times6=24$.",
+      "hint": "Work out the total for one glucose molecule first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ohdjeo",
+      "kind": "example",
+      "front": "How many reduced NAD molecules are formed per glucose molecule across the link reaction and Krebs cycle?",
+      "back": "**8** molecules: 2 from the link reaction and 6 from the Krebs cycle, which turns twice per glucose.",
+      "hint": "Add the totals for each stage separately.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r26soq",
+      "kind": "process",
+      "front": "What are the products of one turn of the Krebs cycle?",
+      "back": "**2** carbon dioxide, **3** reduced NAD, **1** reduced FAD and **1** ATP.",
+      "hint": "One turn means one acetyl group has entered the cycle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ib58yf",
+      "kind": "mistake",
+      "front": "Why is one turn of the Krebs cycle not the same as one glucose molecule when counting products?",
+      "back": "One glucose gives two pyruvate molecules, so two acetyl groups enter the cycle. One glucose therefore means **two turns**, so double the one-turn totals.",
+      "hint": "Count how many acetyl groups each glucose molecule supplies.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03ryvf1",
+      "kind": "term",
+      "front": "What is **acetyl coenzyme A**?",
+      "back": "A **two-carbon acetyl group** attached to coenzyme A, which delivers the group to the Krebs cycle.",
+      "hint": "Look at the product of the link reaction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gmrlwj",
+      "kind": "term",
+      "front": "How is ATP made directly in the Krebs cycle?",
+      "back": "By **substrate-level phosphorylation**, where a phosphate group passes directly from a substrate molecule to ADP, giving one ATP per turn.",
+      "hint": "Compare this with where most ATP is made later.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jc48b1",
+      "kind": "term",
+      "front": "What is **reduced FAD**?",
+      "back": "A second carrier molecule, like NAD, that has accepted hydrogen and carries it from the Krebs cycle to the electron transport chain.",
+      "sectionId": "s4"
+    }
+  ]
+}

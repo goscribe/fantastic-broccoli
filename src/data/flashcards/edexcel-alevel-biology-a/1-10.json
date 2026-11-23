@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Perceived and actual risk",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:43.410Z",
+  "cards": [
+    {
+      "id": "0nwewc4",
+      "kind": "term",
+      "front": "What is the difference between actual risk and perceived risk?",
+      "back": "**Actual risk** is the real chance of harm, worked out from data. **Perceived risk** is a person's own judgement of how likely that harm is, and the two can differ a great deal.",
+      "hint": "Ask where each number comes from: a study, or a person's view.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tkayl1",
+      "kind": "concept",
+      "front": "Why does perceived risk matter, even though it is not based on arithmetic?",
+      "back": "It is an honest judgement, and people act on it. So it shapes health choices even when it does not match the data.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03m28dc",
+      "kind": "concept",
+      "front": "Why do people often misjudge health risks, even when actual risk can be measured?",
+      "back": "Several influences act together: media coverage, personal experience, difficulty judging small numbers, and optimism that harm will happen to others.",
+      "hint": "Think about what fills the gap when clear numbers are missing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o3zu03",
+      "kind": "formula",
+      "front": "How is actual risk calculated from data?",
+      "back": "Divide the number harmed by the number in the group, over a stated time: $\\frac{\\text{number harmed}}{\\text{number in group}}$. The result is a proportion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06y4su1",
+      "kind": "example",
+      "front": "In one year, 12 people in a group of 4000 develop a disease. What is the actual risk as a percentage?",
+      "back": "$\\frac{12}{4000}=0.0030$, then $0.0030\\times100=0.30\\%$. So the actual risk is 0.30% in one year, which is 3 in 1000.",
+      "hint": "Divide first, then convert the decimal to a percentage.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xcykdi",
+      "kind": "process",
+      "front": "What steps does a researcher follow to find an actual risk?",
+      "back": "Count how many people in a group are harmed over a set time, divide by the group size, then express the result as a decimal, percentage or 1 in N, stating the time period.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d12u1y",
+      "kind": "concept",
+      "front": "Why must the time period be stated when giving an actual risk?",
+      "back": "Risk over one year differs from risk over a lifetime, so a figure without a time period is unclear and cannot be compared fairly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ngfboq",
+      "kind": "term",
+      "front": "What is a voluntary risk?",
+      "back": "A **voluntary risk** is one a person knowingly chooses to take, such as smoking or rock climbing. People tend to rate these lower than risks forced on them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04zoc9w",
+      "kind": "concept",
+      "front": "How do familiarity and control change how large a risk feels?",
+      "back": "A hazard people know well, or feel able to control, seems less threatening, so its perceived risk is lower. Dramatic media coverage and imposed risks raise it instead.",
+      "hint": "Compare a risk you chose with one that was forced on you.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rv11hl",
+      "kind": "mistake",
+      "front": "Why can saying that a habit doubles a risk mislead people?",
+      "back": "Doubling sounds large, but if the starting risk is tiny, the new risk may still be tiny. Give actual numbers, such as 3 in 1000, so people can compare fairly.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06z165g",
+      "kind": "concept",
+      "front": "How can misjudging a risk lead to poor health choices?",
+      "back": "Overestimating may lead someone to avoid a safe treatment or worry unnecessarily. Underestimating may lead them to ignore real danger, such as continuing to smoke.",
+      "hint": "Consider both overestimating and underestimating the same risk.",
+      "sectionId": "s5"
+    }
+  ]
+}

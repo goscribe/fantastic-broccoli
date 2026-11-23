@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "9-1",
+  "topicCode": "9.1",
+  "topicName": "Kinetic theory of temperature and pressure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:59.551Z",
+  "cards": [
+    {
+      "id": "1xue1v0",
+      "kind": "concept",
+      "front": "What does temperature measure in a gas?",
+      "back": "**Temperature** measures the average translational kinetic energy per particle. It does not depend on how many particles there are.",
+      "hint": "Compare with thermal energy, which depends on particle count too.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l3c9vb",
+      "kind": "concept",
+      "front": "How do gas particles produce pressure on the wall of a container?",
+      "back": "Particles collide with the wall and rebound, pushing on it. Countless collisions each second add up to a steady **force**, and pressure is that force divided by the wall area, $P=\\frac{F}{A}$.",
+      "hint": "Think about Newton's third law for each collision.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d4p0ra",
+      "kind": "formula",
+      "front": "Which equation links the average kinetic energy of a gas particle to absolute temperature?",
+      "back": "$K_\\mathrm{avg}=\\frac{3}{2}k_\\mathrm{B}T$, where $T$ is **absolute temperature** in kelvins and $k_\\mathrm{B}=1.38\\times10^{-23}\\,\\mathrm{J/K}$ is the Boltzmann constant.",
+      "hint": "Which temperature unit must you use here?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gnff04",
+      "kind": "mistake",
+      "front": "A student says thermal energy and temperature are the same thing. What is wrong?",
+      "back": "They are different. **Thermal energy** depends on how many particles there are, while temperature depends only on the average energy per particle.",
+      "hint": "Ask what happens to thermal energy if you add more particles at the same temperature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05ugdt6",
+      "kind": "concept",
+      "front": "How do heating and squeezing a gas change its pressure?",
+      "back": "Higher temperature or smaller volume raises the **pressure**. Faster particles hit harder, and smaller volume means more frequent collisions.",
+      "hint": "Consider speed of particles and how often they reach the walls.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17whlyb",
+      "kind": "formula",
+      "front": "In kinetic theory, what does $PV=\\frac{2}{3}NK_\\mathrm{avg}$ tell you about pressure?",
+      "back": "Pressure is proportional to $\\frac{N}{V}$ and to the average kinetic energy. Here $N$ is the **number of particles**, $V$ is volume, and $K_\\mathrm{avg}$ is the average translational kinetic energy per particle.",
+      "hint": "Which quantities stay fixed when you change only one thing?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lxsq8g",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a cooled gas stops hitting its container walls?",
+      "back": "A cooled gas still collides with the walls. Its particles just strike **less often and less forcefully**, so the pressure drops.",
+      "hint": "Cooling changes how fast particles move, not whether they move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mc9omt",
+      "kind": "concept",
+      "front": "Two different gases are at the same temperature. Which particles move faster on average, and why?",
+      "back": "The **lighter** particles move faster. They have the same average translational kinetic energy, and since $K=\\frac{1}{2}mv^2$, a smaller mass needs a larger speed.",
+      "hint": "Same energy, different mass: what must change?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09ovc0l",
+      "kind": "example",
+      "front": "What is the average translational kinetic energy of a gas particle at 27 °C?",
+      "back": "About $6.21\\times10^{-21}\\,\\mathrm{J}$. Convert to $300\\,\\mathrm{K}$ first, then use $K_\\mathrm{avg}=\\frac{3}{2}k_\\mathrm{B}T$.",
+      "hint": "Start by converting the temperature to kelvins.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13iick9",
+      "kind": "process",
+      "front": "What steps find the average kinetic energy of a gas particle from a Celsius temperature?",
+      "back": "1) Convert °C to kelvins by adding 273. 2) Substitute into $K_\\mathrm{avg}=\\frac{3}{2}k_\\mathrm{B}T$. 3) Calculate using $k_\\mathrm{B}=1.38\\times10^{-23}\\,\\mathrm{J/K}$.",
+      "hint": "The first step is always a unit conversion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18079c6",
+      "kind": "example",
+      "front": "Find the average translational kinetic energy of a gas particle at 127 °C.",
+      "back": "About $8.28\\times10^{-21}\\,\\mathrm{J}$. Use $T=400\\,\\mathrm{K}$ and $K_\\mathrm{avg}=\\frac{3}{2}(1.38\\times10^{-23})(400)$.",
+      "hint": "Add 273 to the Celsius value first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tthala",
+      "kind": "concept",
+      "front": "Why does doubling the absolute temperature not double particle speed?",
+      "back": "Doubling $T$ doubles the average kinetic energy, but speed depends on the square root of energy, so speed rises by about $\\sqrt{2}$, roughly 41 percent.",
+      "hint": "Kinetic energy is $\\frac{1}{2}mv^2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cdb62p",
+      "kind": "formula",
+      "front": "What is the root-mean-square speed of gas particles, and what does each symbol mean?",
+      "back": "$v_\\mathrm{rms}=\\sqrt{\\frac{3k_\\mathrm{B}T}{m}}$, where $T$ is absolute temperature, $k_\\mathrm{B}$ is the Boltzmann constant, and $m$ is the **mass of one particle**.",
+      "hint": "It comes from setting $\\frac{1}{2}mv_\\mathrm{rms}^2=\\frac{3}{2}k_\\mathrm{B}T$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ch7n0x",
+      "kind": "concept",
+      "front": "Why can a large pool of cool water hold more thermal energy than a small cup of hot tea?",
+      "back": "**Thermal energy** is the total energy of random motion of all particles. The pool has far more particles, so its total can be larger even though each particle has less energy.",
+      "hint": "Think about total versus average.",
+      "sectionId": "s1"
+    }
+  ]
+}

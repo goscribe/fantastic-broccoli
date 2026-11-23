@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Carrying capacity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:35.099Z",
+  "cards": [
+    {
+      "id": "0pf05ia",
+      "kind": "term",
+      "front": "What is carrying capacity, and what is its symbol?",
+      "back": "**Carrying capacity** is the largest population size an environment can support over time under given conditions. It is written $K$.",
+      "hint": "Think about what a small pond can sustain year after year.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cmmt8i",
+      "kind": "concept",
+      "front": "Why does population growth slow and level off as a population nears $K$?",
+      "back": "As resources become scarce, births fall and deaths rise, so growth slows. This gives an S-shaped curve called **logistic growth**.",
+      "hint": "Think about what happens to food and space as the numbers climb.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v5kuj5",
+      "kind": "concept",
+      "front": "Why does a population that overshoots $K$ usually crash?",
+      "back": "It uses resources faster than they are replaced, so they run out. Competition, starvation and disease then raise deaths and lower births, causing a sharp **die-off**.",
+      "hint": "Think about what happens once the resources are used up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h99c4e",
+      "kind": "term",
+      "front": "What is exponential growth?",
+      "back": "**Exponential growth** is population growth by a constant percent each time period, giving a J-shaped curve. It happens when resources are plentiful.",
+      "hint": "Think about what plentiful resources allow each generation to do.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wfb68j",
+      "kind": "concept",
+      "front": "Which resource sets the carrying capacity of a population?",
+      "back": "The **limiting resource**, the one in shortest supply, usually sets $K$. Other resources may be plentiful but do not raise the limit.",
+      "hint": "Think of the resource a population would run out of first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1efpwi1",
+      "kind": "process",
+      "front": "How can ecologists estimate the carrying capacity of a population?",
+      "back": "They track how large the population stays over many years. The level it settles around is used to estimate $K$.",
+      "hint": "Think about how long you would need to watch to see a steady level.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "057i9f0",
+      "kind": "concept",
+      "front": "Why does a population often wobble above and below $K$?",
+      "back": "Resource supply and births do not respond to each other instantly, so the population can overshoot and then dip below the level.",
+      "hint": "Think about the delay between a change and its effect.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i8ylr8",
+      "kind": "concept",
+      "front": "Why can a population fall below its original $K$ after an overshoot?",
+      "back": "Overuse can damage the habitat, for example by overgrazing plants that regrow slowly. A damaged habitat supports fewer individuals, so $K$ falls.",
+      "hint": "Consider what overuse does to the habitat itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ddwjyy",
+      "kind": "concept",
+      "front": "Why is carrying capacity not a fixed number?",
+      "back": "It rises or falls whenever food, water, space or survival changes, such as through habitat restoration, drought or pollution.",
+      "hint": "Think about which parts of an environment can shift over time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pb8jwi",
+      "kind": "concept",
+      "front": "How can a new predator or disease lower the carrying capacity?",
+      "back": "A predator removes individuals each year, and a disease can sweep through a crowded group. Either way, fewer individuals survive, so $K$ falls.",
+      "hint": "Think about what happens to survival rates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yeem8q",
+      "kind": "mistake",
+      "front": "A student says carrying capacity is the highest population ever recorded. What is wrong with this?",
+      "back": "Wrong: $K$ is the number the environment can support over time. A population can briefly exceed it during an overshoot, so the highest count is not $K$.",
+      "hint": "Think about whether a population can ever briefly go above its limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wg1u5o",
+      "kind": "concept",
+      "front": "Why do technology and irrigation leave limits on human population?",
+      "back": "They raise local limits by increasing food supply and lowering death rates, but **fresh water** and **fertile soil** remain finite.",
+      "hint": "Think about which resources technology cannot make more of.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "138gecy",
+      "kind": "concept",
+      "front": "What costs come with human ways of raising food supply?",
+      "back": "Fertilizer runoff pollutes water, irrigation can drain underground water, and burning fossil fuels changes climate. These lower $K$ for other species and eventually for people.",
+      "hint": "Think about side effects that spread beyond the farm.",
+      "sectionId": "s5"
+    }
+  ]
+}

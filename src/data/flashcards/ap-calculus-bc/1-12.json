@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-12",
+  "topicCode": "1.12",
+  "topicName": "Continuity over an interval",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:57.165Z",
+  "cards": [
+    {
+      "id": "1g0hsbn",
+      "kind": "concept",
+      "front": "What must hold at every point inside an open interval $(a,b)$ for $f$ to be continuous over it?",
+      "back": "At each interior point $c$, $f$ must be **defined** there and $\\lim_{x\\to c}f(x)=f(c)$. One gap, jump, or undefined point inside breaks continuity over the whole interval.",
+      "hint": "Every point tested must pass, not just most of them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jg2ewf",
+      "kind": "concept",
+      "front": "How do you test the endpoints of a closed interval $[a,b]$?",
+      "back": "Use **one-sided limits** from inside the interval. The right-hand limit at $a$ must equal $f(a)$, and the left-hand limit at $b$ must equal $f(b)$, with both endpoints defined.",
+      "hint": "Only values inside $[a,b]$ are used.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qydixv",
+      "kind": "concept",
+      "front": "Why can $f$ be continuous on $[0,1)$ even if it is undefined at $x=1$?",
+      "back": "**Excluded endpoints** need no test. Since $1$ is not in $[0,1)$, the behavior at $1$ does not affect continuity on that interval.",
+      "hint": "Check which endpoints the interval includes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "179mvie",
+      "kind": "term",
+      "front": "What is an **open interval** $(a,b)$?",
+      "back": "An interval containing every point strictly between $a$ and $b$, with **both endpoints excluded**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ic532s",
+      "kind": "term",
+      "front": "What are **one-sided limits**?",
+      "back": "Limits describing the value $f(x)$ approaches as $x$ nears a point from **only one side**. They use only values inside the interval being tested.",
+      "hint": "Left side or right side, not both.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f0mqyb",
+      "kind": "term",
+      "front": "What is an **interior discontinuity**?",
+      "back": "A point strictly **inside** an interval where $f$ fails continuity. Any interval with that point inside is noncontinuous.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rd7bsd",
+      "kind": "formula",
+      "front": "What equation must hold at a point $c$ for $f$ to be continuous there?",
+      "back": "$\\lim_{x\\to c}f(x)=f(c)$. The limit as $x$ approaches $c$ must equal the function value at $c$, and $f(c)$ must exist.",
+      "hint": "Both sides must exist and match.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1visfgk",
+      "kind": "term",
+      "front": "What is the **limit at a changed point**?",
+      "back": "The value $f$ approaches nearby, which can **differ** from the function's assigned value at that point.",
+      "hint": "Compare the nearby value with the assigned value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "021q512",
+      "kind": "process",
+      "front": "What steps decide whether $f$ is continuous on an interval?",
+      "back": "1) Check every interior point: $f(c)$ defined and limit equal. 2) Check each **included** endpoint with the one-sided limit from inside. 3) Skip excluded endpoints. State the interval in your conclusion.",
+      "hint": "Interior points first, then endpoints."
+    },
+    {
+      "id": "01sgk3n",
+      "kind": "mistake",
+      "front": "Common mistake: why is a two-sided limit the wrong test at a closed interval's endpoint?",
+      "back": "**Wrong** because it uses values outside $[a,b]$, which do not affect continuity on that interval. Use the one-sided limit from inside instead.",
+      "hint": "What lies outside the interval?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17mu338",
+      "kind": "mistake",
+      "front": "A function's limit at $x=1$ differs from its value there. Can an interval containing $1$ inside still be continuous?",
+      "back": "**No**. Any interval with $1$ inside is not continuous, because the limit and function value disagree at an interior point.",
+      "hint": "Check the interior points.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oa2r38",
+      "kind": "example",
+      "front": "Let $f(x)=\\frac{x^2-1}{x-1}$ for $x\\ne1$ and $f(1)=3$. Is $f$ continuous on $[0,3]$?",
+      "back": "**No**. For $x\\ne1$, $f(x)=x+1$, so $\\lim_{x\\to1}f(x)=2$, but $f(1)=3$. The interior point $1$ is a discontinuity.",
+      "hint": "Simplify first, then compare limit and value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16ehzaq",
+      "kind": "example",
+      "front": "For $f(x)=x+1$ when $x\\ne1$ and $f(1)=3$, is $f$ continuous on $[1,3]$?",
+      "back": "**No**. At the included left endpoint, the right-hand limit is $2$, but $f(1)=3$. The endpoint test fails.",
+      "hint": "Use the limit from inside [1,3].",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nmwh4j",
+      "kind": "concept",
+      "front": "For $f(x)=x+1$ when $x\\ne1$ and $f(1)=3$, which intervals are continuous, and why?",
+      "back": "$[0,1)$ and $(1,3]$ are continuous. They exclude $1$, so the mismatch at $x=1$ is never tested inside them.",
+      "hint": "Which endpoints are excluded?",
+      "sectionId": "s4"
+    }
+  ]
+}

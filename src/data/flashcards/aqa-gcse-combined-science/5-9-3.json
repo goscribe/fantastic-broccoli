@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-9-3",
+  "topicCode": "5.9.3",
+  "topicName": "Atmospheric pollutants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:57.663Z",
+  "cards": [
+    {
+      "id": "0imvsk3",
+      "kind": "term",
+      "front": "What is incomplete combustion?",
+      "back": "**Incomplete combustion** is burning a fuel with too little oxygen, so its carbon does not form only $\\text{CO}_2$. It can produce carbon monoxide and soot instead.",
+      "hint": "Think about what a fire needs in order to burn fully.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nbg7d4",
+      "kind": "concept",
+      "front": "How does carbon monoxide stop the body getting enough oxygen?",
+      "back": "It binds strongly to **haemoglobin** in red blood cells, leaving less haemoglobin free to carry oxygen around the body.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1twuok7",
+      "kind": "process",
+      "front": "What steps lead from sulfur in fuel to acid rain?",
+      "back": "Sulfur impurities burn to form **sulfur dioxide** ($\\text{SO}_2$). This gas reacts in the atmosphere and contributes to **acid rain**.",
+      "hint": "Start with where the sulfur comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mvgme9",
+      "kind": "concept",
+      "front": "Why are particulates harmful to health?",
+      "back": "People can breathe them deep into the lungs, where they irritate airways and can worsen asthma. Long-term exposure increases the risk of heart and lung disease.",
+      "hint": "Think about where the particles travel once inhaled.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zqspxw",
+      "kind": "term",
+      "front": "What is global dimming?",
+      "back": "A reduction in sunlight reaching Earth's surface because particles in the atmosphere block or reflect some of it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rsy12v",
+      "kind": "term",
+      "front": "What is soot?",
+      "back": "**Soot** is mainly carbon particles produced by incomplete combustion. Diesel engines and fires can release it.",
+      "hint": "It is one type of particulate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ahe5ra",
+      "kind": "mistake",
+      "front": "Why is difficulty breathing not the main danger of carbon monoxide?",
+      "back": "The main danger is that carbon monoxide reduces the blood's ability to carry oxygen. Breathing difficulty is not the key effect.",
+      "hint": "Focus on what the blood is doing, not the lungs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k5uyp4",
+      "kind": "concept",
+      "front": "How does carbon dioxide differ from the atmospheric pollutants in this topic?",
+      "back": "$\\text{CO}_2$ forms when carbon burns completely. The pollutants form from incomplete combustion, fuel impurities or high-temperature reactions.",
+      "hint": "Think about how completely the carbon burns.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k4uzcd",
+      "kind": "concept",
+      "front": "How do nitrogen oxides form during combustion?",
+      "back": "Nitrogen and oxygen in the air react at the high temperatures reached during combustion, such as inside engines, forming **nitrogen oxides**.",
+      "hint": "Think about what air is made of and what heat does to gases.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d3lzzo",
+      "kind": "concept",
+      "front": "What environmental damage does acid rain cause?",
+      "back": "It can damage leaves, make lakes and soils more acidic, and wear away some building materials.",
+      "hint": "Think about plants, water and buildings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jrdknm",
+      "kind": "mistake",
+      "front": "What is a weak way to explain acid rain in an exam?",
+      "back": "Saying acid rain is bad without naming a gas. Instead, name the gas (such as sulfur dioxide) and link it to a specific effect, like plant damage or lake acidity.",
+      "hint": "Think about what examiners want to see linked.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lus20b",
+      "kind": "term",
+      "front": "What are atmospheric pollutants?",
+      "back": "**Atmospheric pollutants** are substances released into the air that can harm health or the environment, such as carbon monoxide, particulates, sulfur dioxide and nitrogen oxides.",
+      "sectionId": "s1"
+    }
+  ]
+}

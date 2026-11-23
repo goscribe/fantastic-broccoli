@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-3-2-3",
+  "topicCode": "3.3.2.3",
+  "topicName": "Refraction at a plane surface",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:12.384Z",
+  "cards": [
+    {
+      "id": "1sxx51p",
+      "kind": "concept",
+      "front": "What causes a wave to change direction when it crosses a boundary at an angle?",
+      "back": "A change in wave **speed** at the boundary. The part of the wavefront that enters the new medium first changes speed first, which turns the wavefront, so the ray bends.",
+      "hint": "Think about what the wavefront does when one end reaches the new medium first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1but2gj",
+      "kind": "concept",
+      "front": "Which property of a wave is fixed by its source when it crosses a boundary?",
+      "back": "The **frequency** is unchanged. Speed and wavelength both change, in the same ratio, because the medium changes.",
+      "hint": "Think about what sets how fast the source oscillates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04kathk",
+      "kind": "formula",
+      "front": "Which equation links the refractive indices and angles on the two sides of a boundary, and what does each symbol mean?",
+      "back": "Snell's law: $n_1\\sin\\theta_1=n_2\\sin\\theta_2$, where $n_1$ and $n_2$ are the refractive indices of the two media (no unit) and $\\theta_1$, $\\theta_2$ are the angles to the normal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03scct5",
+      "kind": "term",
+      "front": "What is the refractive index of a medium?",
+      "back": "The **refractive index** $n$ is the speed of light in a vacuum divided by the speed of light in the medium, $n=\\frac{c}{v}$. It has no unit.",
+      "hint": "Think about what a ratio of two speeds must be.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1871zf6",
+      "kind": "term",
+      "front": "What is the normal at a boundary?",
+      "back": "The **normal** is a line at right angles to the boundary, at the point where the ray meets it. Angles of incidence and refraction are measured from it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aitd9w",
+      "kind": "process",
+      "front": "What are the steps to find an unknown angle of refraction using Snell's law?",
+      "back": "Rearrange to $\\sin\\theta_2=\\frac{n_1\\sin\\theta_1}{n_2}$, substitute the known values, then take the inverse sine to get $\\theta_2$.",
+      "hint": "Start by isolating the sine of the unknown angle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tt0l62",
+      "kind": "example",
+      "front": "Light in air meets glass with $n=1.50$ at an angle of incidence of $40^{\\circ}$. What is the angle of refraction?",
+      "back": "About $25^{\\circ}$, since $\\sin\\theta_2=\\frac{1.00\\times\\sin40^{\\circ}}{1.50}=0.429$. It is closer to the normal than the incident ray.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hfjuwo",
+      "kind": "example",
+      "front": "Light of wavelength $600\\,\\mathrm{nm}$ in air enters glass with $n=1.50$. What are its speed and wavelength in the glass?",
+      "back": "Speed $2.00\\times10^{8}\\,\\mathrm{m\\,s^{-1}}$ and wavelength $400\\,\\mathrm{nm}$, using $v=\\frac{c}{n}$ and wavelength in proportion to speed.",
+      "hint": "Find the speed first, then see how the wavelength scales with it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p8dppv",
+      "kind": "mistake",
+      "front": "A student says light bends away from the normal when it enters glass. Why is this wrong?",
+      "back": "Glass is a slower medium, so light bends **towards** the normal. Bending away from the normal happens only when light enters a faster medium.",
+      "hint": "Compare the speed of light in glass with its speed in air.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xli96h",
+      "kind": "mistake",
+      "front": "Why must the angles in Snell's law be measured from the normal rather than from the surface?",
+      "back": "Snell's law uses the angle to the normal. An angle measured from the surface is a different angle, so its sine gives a wrong answer.",
+      "hint": "Think about which line the ray is compared against at the boundary.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0821yw8",
+      "kind": "formula",
+      "front": "Which ratio links the wavelengths in two media to their refractive indices?",
+      "back": "$\\frac{\\lambda_2}{\\lambda_1}=\\frac{n_1}{n_2}$. Frequency is constant, so wavelength is proportional to speed, and speed is inversely proportional to $n$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y0f6j4",
+      "kind": "term",
+      "front": "What is a medium in the context of waves?",
+      "back": "A **medium** is the material through which a wave travels. Light also counts, through transparent materials such as glass.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y3wz7d",
+      "kind": "concept",
+      "front": "What happens to light passing from a higher to a lower refractive index once the angle of incidence exceeds the critical angle?",
+      "back": "**Total internal reflection**: no refracted ray exists, so all the light is reflected back into the first medium.",
+      "hint": "Think about the angle of refraction when the ray is just leaving the boundary.",
+      "sectionId": "s5"
+    }
+  ]
+}

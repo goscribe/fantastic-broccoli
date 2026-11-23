@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Applications of trigonometry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:36.932Z",
+  "cards": [
+    {
+      "id": "00zomu9",
+      "kind": "term",
+      "front": "What is a bearing?",
+      "back": "A **bearing** is an angle measured clockwise from north to the direction of a point, written with three figures such as $045^{\\circ}$.",
+      "hint": "Start from the north line at your starting point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kbwh33",
+      "kind": "concept",
+      "front": "What are angles of elevation and depression measured from?",
+      "back": "From the **horizontal**, never the vertical. Elevation looks up to an object; depression looks down to one.",
+      "hint": "Picture the flat ground line at the observer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p3s0iv",
+      "kind": "process",
+      "front": "How do you find the angle at a turning point on a two-leg journey?",
+      "back": "Find the **back bearing** by adding $180^{\\circ}$ to a bearing below $180^{\\circ}$, or subtracting $180^{\\circ}$ from one of $180^{\\circ}$ or more. Then subtract the next leg's bearing from it.",
+      "hint": "Draw a north line at the turning point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rxp3at",
+      "kind": "formula",
+      "front": "Which ratio finds a height from an angle of elevation and the horizontal distance?",
+      "back": "$\\tan\\theta=\\frac{\\text{opposite}}{\\text{adjacent}}$, so the **height** is $\\text{adjacent}\\times\\tan\\theta$.",
+      "hint": "The height is opposite the angle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c8nlxv",
+      "kind": "mistake",
+      "front": "A student measures a bearing anticlockwise, or from the destination. What is wrong?",
+      "back": "Bearings are always measured **clockwise** from the **north line at the starting point**.",
+      "hint": "Check where the north line is drawn.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zq4ch9",
+      "kind": "concept",
+      "front": "When do you use the cosine rule on a journey triangle?",
+      "back": "When you know **two sides and the included angle**; it gives the third side, such as the distance from the start.",
+      "hint": "The known angle must sit between the two known sides.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13uexno",
+      "kind": "formula",
+      "front": "Write the cosine rule for side $c$ opposite angle $C$.",
+      "back": "$c^2=a^2+b^2-2ab\\cos C$, where $C$ is the angle between sides $a$ and $b$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "167odig",
+      "kind": "formula",
+      "front": "Write the sine rule.",
+      "back": "$\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}$, where each side is opposite the angle with the same letter.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09n1n1w",
+      "kind": "example",
+      "front": "A ship sails 20.0 km on $070^{\\circ}$, then 15.0 km on $200^{\\circ}$. How far is it from the start?",
+      "back": "**$AC\\approx15.5$ km**, found with the cosine rule using the interior angle $50^{\\circ}$.",
+      "hint": "First find the back bearing at the turning point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nm20a4",
+      "kind": "example",
+      "front": "From 40.0 m from a tower's foot, the angle of elevation of the top is $32.0^{\\circ}$. How high is the tower?",
+      "back": "**25.0 m**, since $h=40.0\\times\\tan32.0^{\\circ}\\approx25.0$.",
+      "hint": "The height is opposite the angle; 40.0 m is adjacent.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y290l3",
+      "kind": "term",
+      "front": "What does a map scale of $1:n$ mean?",
+      "back": "**1 unit on the map** represents $n$ units on the ground.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mxxjpw",
+      "kind": "example",
+      "front": "Two huts are 7.2 cm apart on a $1:25\\,000$ map. What is the real distance in km?",
+      "back": "**1.8 km**: $7.2\\times25\\,000=180\\,000$ cm, then divide by $100\\,000$.",
+      "hint": "Convert centimetres to kilometres at the end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c69a4b",
+      "kind": "mistake",
+      "front": "A student gives a map distance as 180 000 cm and stops. What should they do?",
+      "back": "Finish the **unit conversion**, because $100\\,000\\,\\mathrm{cm}=1\\,\\mathrm{km}$, so the answer is 1.8 km.",
+      "hint": "Map answers are usually wanted in metres or kilometres.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18kiyaw",
+      "kind": "concept",
+      "front": "Why is the angle of depression from a cliff top to a boat equal to the angle of elevation from the boat to the cliff top?",
+      "back": "The horizontals at both points are **parallel**, so the two angles are alternate angles and are equal.",
+      "hint": "Think about the two horizontal lines.",
+      "sectionId": "s2"
+    }
+  ]
+}

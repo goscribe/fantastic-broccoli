@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-14",
+  "topicCode": "3.14",
+  "topicName": "Setting up a chi-square test for two-way tables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:26.818Z",
+  "cards": [
+    {
+      "id": "0k3x5gh",
+      "kind": "concept",
+      "front": "How do you decide whether a chi-square test is a test of homogeneity or a test of independence?",
+      "back": "Look at how the data were collected. **Separate random samples** from each group point to homogeneity, while **one random sample** classified two ways points to independence. The calculations are the same either way.",
+      "hint": "Think about the study design, not the look of the table.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1llri9p",
+      "kind": "formula",
+      "front": "What is the formula for an expected count, and what does each part mean?",
+      "back": "$\\text{expected count} = \\frac{(\\text{row total})(\\text{column total})}{\\text{table total}}$. It is the **count we expect in a cell if $H_0$ is true**.",
+      "hint": "Multiply two totals, then divide by the overall total.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sckhad",
+      "kind": "process",
+      "front": "What three conditions must be checked before using a chi-square test on a two-way table?",
+      "back": "**Random** samples or random assignment; **independent** observations, with each sample under 10% of its population when sampling without replacement; and **large counts**, with every expected count at least 5.",
+      "hint": "Three checks, and the first one starts with R.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1k2138f",
+      "kind": "term",
+      "front": "What is a two-way table?",
+      "back": "A **two-way table** is a table of counts in which rows show the categories of one variable and columns show the categories of another.",
+      "hint": "Think about where the row and column labels go.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "130nmvf",
+      "kind": "term",
+      "front": "What does a chi-square test do?",
+      "back": "It compares **observed counts** in a table with the counts expected if the null hypothesis is true, to judge whether the pattern could easily come from chance alone.",
+      "hint": "Compare what you saw with what you expected.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02v3pvf",
+      "kind": "concept",
+      "front": "Why must chi-square tests use actual counts instead of percentages?",
+      "back": "Each individual must sit in **exactly one cell**, so the test needs counts. Convert any percentages back to counts before you start.",
+      "hint": "Think about what each cell holds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ffy3m3",
+      "kind": "term",
+      "front": "What does a test of homogeneity check?",
+      "back": "Whether one categorical variable has the **same distribution** across several populations or treatment groups.",
+      "hint": "Several groups, one variable measured in each.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gbhvad",
+      "kind": "term",
+      "front": "What does a test of independence check?",
+      "back": "Whether two categorical variables are **associated** with each other among the individuals of one population.",
+      "hint": "One sample, two variables measured on each person.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tke0yr",
+      "kind": "mistake",
+      "front": "A student writes the hypotheses about the sample's counts. What is wrong with that?",
+      "back": "Hypotheses must describe the **population**, not the sample. Sample counts will almost never match exactly, so the claim has to be about the population.",
+      "hint": "Will the sample counts ever match exactly?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01vjnqk",
+      "kind": "concept",
+      "front": "Does the alternative hypothesis for a chi-square test say which groups or categories differ?",
+      "back": "No. It says only that the distributions are **not all the same**, or that an association exists. The test does not show where the difference lies.",
+      "hint": "What does the alternative leave out on purpose?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yo8n8r",
+      "kind": "example",
+      "front": "In the lunch survey, what is the expected count for freshmen choosing pizza?",
+      "back": "**42**, from $\\frac{120 \\times 70}{200} = 42$, using the freshmen row total of 120, the pizza column total of 70, and the table total of 200.",
+      "hint": "Use the row total times the column total, divided by the table total.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nhtw73",
+      "kind": "mistake",
+      "front": "Is it enough to check that the observed counts are at least 5 before a chi-square test?",
+      "back": "No. The large counts condition applies to the **expected counts**, and each one must be at least 5.",
+      "hint": "Which counts does the condition apply to?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bg6f89",
+      "kind": "example",
+      "front": "Expected counts in a table are 12.5, 8.0, 4.5, and 15.0. Is the large counts condition met?",
+      "back": "**No**, because the expected count of 4.5 is less than 5. Every expected count must be at least 5.",
+      "hint": "Check the smallest value first.",
+      "sectionId": "s5"
+    }
+  ]
+}

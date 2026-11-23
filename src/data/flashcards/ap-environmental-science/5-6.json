@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Pest control methods",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:04.347Z",
+  "cards": [
+    {
+      "id": "07k5xsm",
+      "kind": "concept",
+      "front": "How does pesticide resistance develop in a pest population?",
+      "back": "Most pests die in a spray, but **survivors** carry genes that help them live. They breed, and over generations most of the population carries those genes. Individual pests do not change during their own lives.",
+      "hint": "Think about which individuals survive a spray and what they pass on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tagewo",
+      "kind": "concept",
+      "front": "Why are chemical pesticides so widely used despite their costs?",
+      "back": "They act **fast**, are often cheap and easy to apply, and work over large areas, so farmers can protect yields quickly when an outbreak appears.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c6cjj3",
+      "kind": "concept",
+      "front": "Which three groups do farmers' pest control methods fall into?",
+      "back": "**Chemical**, **biological**, and **physical** control. Chemical control uses pesticides, biological control uses living enemies of the pest, and physical control uses barriers, traps, or removal.",
+      "hint": "Think about whether a method uses a substance, living things, or barriers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jh6hr3",
+      "kind": "term",
+      "front": "What is a pesticide?",
+      "back": "A **pesticide** is a substance made to kill or repel pests. Examples include insecticides, herbicides, and fungicides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iqkjk9",
+      "kind": "term",
+      "front": "Which type of pesticide kills weeds?",
+      "back": "A **herbicide**, a pesticide designed to kill weeds and other unwanted plants.",
+      "hint": "Pesticides are named for their targets.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mlmg7o",
+      "kind": "concept",
+      "front": "What non-target harms can pesticides cause?",
+      "back": "They kill helpful species such as pollinating bees and pest-eating insects. Rain can wash them into streams and lakes, and exposure can threaten farm workers' health.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ybx0fx",
+      "kind": "term",
+      "front": "What is biomagnification?",
+      "back": "**Biomagnification** is the increase in concentration of a persistent substance at each higher level of a food chain, so top predators carry the highest levels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d46jcm",
+      "kind": "process",
+      "front": "What steps can farmers take to slow the spread of pesticide resistance?",
+      "back": "First, **rotate** different pesticides. Second, spray only when pest numbers justify it. Third, leave some untreated areas where nonresistant pests survive and breed with resistant ones.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1srkaq0",
+      "kind": "term",
+      "front": "What is biological control?",
+      "back": "**Biological control** uses a pest's natural predators, parasites, or disease-causing microbes to reduce its numbers, such as ladybugs eating aphids.",
+      "hint": "Think about who eats or infects the pest in nature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08fxhbo",
+      "kind": "mistake",
+      "front": "Why is releasing a biological control species not always safe?",
+      "back": "An introduced control species can become a **pest** itself or harm native species. Its effects must be considered before release.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s9ozua",
+      "kind": "term",
+      "front": "What is crop rotation?",
+      "back": "**Crop rotation** is growing different crops in the same field in a planned sequence over seasons, so a pest that feeds on one crop declines when that crop is absent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yqkr4r",
+      "kind": "concept",
+      "front": "Which pest control approach needs more labor than sprays but avoids resistance and chemical residue?",
+      "back": "**Physical control**. It blocks or removes pests directly, leaves no chemical residue, and avoids resistance, but it is slower and needs more labor.",
+      "hint": "Think about methods that use no chemicals and no living control species.",
+      "sectionId": "s5"
+    }
+  ]
+}

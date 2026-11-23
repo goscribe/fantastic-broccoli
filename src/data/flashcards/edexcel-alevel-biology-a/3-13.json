@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-13",
+  "topicCode": "3.13",
+  "topicName": "Tissues, organs and organ systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:32.377Z",
+  "cards": [
+    {
+      "id": "104mbqg",
+      "kind": "concept",
+      "front": "Why are cells grouped into tissues rather than working alone?",
+      "back": "A single cell does very little, so grouping similar **specialised** cells lets them work together on one function. Thousands of muscle cells working together can move a limb.",
+      "hint": "Consider how far one muscle cell can shorten on its own.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ywo0yu",
+      "kind": "term",
+      "front": "What is a tissue?",
+      "back": "A **tissue** is a group of similar specialised cells, plus any matrix they secrete, that work together to carry out one function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ujdh8u",
+      "kind": "term",
+      "front": "What is an organ?",
+      "back": "An **organ** is a structure made of several different tissues that work together to carry out particular functions.",
+      "hint": "Compare how many cell types it contains with a tissue.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hwqx6g",
+      "kind": "concept",
+      "front": "Which mammal tissue type has cells scattered in a large amount of matrix, and what is an example?",
+      "back": "**Connective** tissue. Cartilage is an example, and it supports and cushions joints.",
+      "hint": "Think of the tissue that gives strength rather than contracting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fel805",
+      "kind": "concept",
+      "front": "Why is squamous epithelium in the alveoli suited to gas exchange?",
+      "back": "It is a thin sheet of tightly packed flat cells with almost no matrix, so gases can diffuse across it quickly.",
+      "hint": "Think about the distance gases must cross.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "163g3jk",
+      "kind": "mistake",
+      "front": "A student says a tissue is just a small organ. What is wrong with this?",
+      "back": "A **tissue** has one main kind of cell, whereas an organ combines several different tissues working together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05zw49r",
+      "kind": "example",
+      "front": "Which tissue in the stomach wall churns the food?",
+      "back": "**Muscle** tissue churns the food, while epithelial tissue lines the inside and secretes mucus and digestive juice.",
+      "hint": "Think about which tissue contracts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19h2983",
+      "kind": "term",
+      "front": "What is an organ system?",
+      "back": "An **organ system** is a group of organs that work together to carry out a major function in the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m858s3",
+      "kind": "concept",
+      "front": "Why can the pancreas be counted in two organ systems?",
+      "back": "It releases digestive enzymes into the gut, so it belongs to the digestive system. It also releases hormones into the blood, so it belongs to the endocrine system.",
+      "hint": "Consider the two different substances it releases and where each one goes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x41o42",
+      "kind": "example",
+      "front": "During exercise, how do the respiratory and circulatory systems cooperate to supply the muscles?",
+      "back": "The respiratory system takes in more oxygen. The circulatory system carries it in the blood to the muscles, which need more oxygen during exercise.",
+      "hint": "Follow the oxygen from the air to the muscle cells.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nhbr22",
+      "kind": "process",
+      "front": "What is the order of levels of organisation from a cell up to an organism?",
+      "back": "Cells form tissues, tissues form organs, organs form organ systems, and organ systems make up the organism.",
+      "hint": "Start with the smallest unit.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05iyecr",
+      "kind": "concept",
+      "front": "Why does failure of one organ system affect the whole body?",
+      "back": "Systems depend on each other. For example, failing lungs deprive every tissue of oxygen.",
+      "hint": "Think about what every tissue needs in order to keep working.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00w5erf",
+      "kind": "concept",
+      "front": "Which plant tissue carries water and mineral ions upwards from the roots?",
+      "back": "**Xylem** carries water and mineral ions upwards from the roots.",
+      "hint": "Compare it with the plant tissue that moves sugars.",
+      "sectionId": "s2"
+    }
+  ]
+}

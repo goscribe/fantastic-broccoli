@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "3D distance, volume and surface area",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:33.418Z",
+  "cards": [
+    {
+      "id": "0ipq3gp",
+      "kind": "formula",
+      "front": "What formula gives the distance between two points $(x_1,y_1,z_1)$ and $(x_2,y_2,z_2)$ in three dimensions?",
+      "back": "**Distance**: $d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}$. Each coordinate difference is squared, the squares are added, then the square root is taken, using Pythagoras twice.",
+      "hint": "Square each coordinate difference, add them, then take the square root.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iv4fi4",
+      "kind": "formula",
+      "front": "What is the volume of a pyramid with base area $A$ and perpendicular height $h$?",
+      "back": "**Pyramid** volume $V=\\frac{1}{3}Ah$. Use the perpendicular height from the base to the apex, not the length of a sloping face.",
+      "hint": "Compare with the prism volume $Ah$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qtikqd",
+      "kind": "formula",
+      "front": "What are the volume and curved surface area of a cone with radius $r$, perpendicular height $h$ and slant height $l$?",
+      "back": "Volume $V=\\frac{1}{3}\\pi r^2h$. Curved surface area $\\pi rl$, where the **slant height** $l$ runs along the sloping surface from apex to base edge.",
+      "hint": "The volume is one third of a cylinder with the same base and height.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d4g8nj",
+      "kind": "term",
+      "front": "What is a midpoint?",
+      "back": "The **midpoint** of a line segment is the point on it equally far from both endpoints. Its coordinates are the means of the endpoint coordinates.",
+      "hint": "Average each pair of coordinates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zikxyn",
+      "kind": "term",
+      "front": "What is the slant height of a cone and how is it found?",
+      "back": "The **slant height** $l$ is the distance from the apex to a point on the base edge, measured along the surface. It is found from $l^2=r^2+h^2$.",
+      "hint": "Use Pythagoras on the radius and perpendicular height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r5jk9l",
+      "kind": "mistake",
+      "front": "A student uses the sloping face length as the height in the pyramid volume formula. What is wrong?",
+      "back": "The height must be the **perpendicular** height, from the base straight up to the apex. The sloping face length is longer and gives a wrong volume.",
+      "hint": "Which height is measured at right angles to the base?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e4jk16",
+      "kind": "example",
+      "front": "Find the distance and midpoint between $P(1,2,3)$ and $Q(5,-2,5)$.",
+      "back": "Distance $d=\\sqrt{4^2+(-4)^2+2^2}=\\sqrt{36}=6$ units. Midpoint $(3,0,4)$.",
+      "hint": "Find the coordinate differences first, then average the coordinates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xhn6qi",
+      "kind": "mistake",
+      "front": "When finding a coordinate difference with a negative number, what is a common error?",
+      "back": "Subtracting a negative must add: $3-(-2)=5$, not 1. Careless signs give a wrong distance, so write each difference in full.",
+      "hint": "What is minus a negative number?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0aluwpt",
+      "kind": "formula",
+      "front": "What is the total surface area of a closed cylinder with radius $r$ and height $h$?",
+      "back": "$2\\pi r^2+2\\pi rh$. The curved part is $2\\pi rh$, and the two circular ends add $2\\pi r^2$.",
+      "hint": "Unroll the curved part into a rectangle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hm1cv9",
+      "kind": "example",
+      "front": "A closed cone has radius 3 cm and perpendicular height 4 cm. Find its total surface area.",
+      "back": "Slant height $l=5$ cm. Total area $\\pi rl+\\pi r^2=15\\pi+9\\pi=24\\pi\\approx75.4\\,\\mathrm{cm^2}$.",
+      "hint": "Find the slant height before the curved area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xtkqp3",
+      "kind": "process",
+      "front": "What are the steps to find the volume of a composite solid?",
+      "back": "Split the solid into parts whose formulas you know. Find the volume of each part, then add the volumes. Use one length unit throughout.",
+      "hint": "Start by identifying the separate solids.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0aqhchh",
+      "kind": "example",
+      "front": "A solid is a cylinder of radius 5 cm and height 12 cm with a hemisphere of radius 5 cm on top. Find its volume.",
+      "back": "Cylinder $300\\pi$ plus hemisphere $\\frac{250\\pi}{3}$ gives $\\frac{1150\\pi}{3}\\approx1.20\\times10^3\\,\\mathrm{cm^3}$ (3 s.f.).",
+      "hint": "Use $\\frac{2}{3}\\pi r^3$ for the hemisphere.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01ihumd",
+      "kind": "mistake",
+      "front": "Why is $1\\,\\mathrm{dm^3}$ not equal to $100\\,\\mathrm{cm^3}$?",
+      "back": "Since $1\\,\\mathrm{dm}=10\\,\\mathrm{cm}$, a volume conversion cubes the factor, so $1\\,\\mathrm{dm^3}=1000\\,\\mathrm{cm^3}$. Dividing by 10 or 100 gives a wrong answer.",
+      "hint": "Volume involves three lengths.",
+      "sectionId": "s5"
+    }
+  ]
+}

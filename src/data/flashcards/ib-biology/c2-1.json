@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c2-1",
+  "topicCode": "C2.1",
+  "topicName": "Chemical signalling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:59.489Z",
+  "cards": [
+    {
+      "id": "0y18eb6",
+      "kind": "concept",
+      "front": "Why can a hormone travel through the whole body without affecting every cell it reaches?",
+      "back": "Only **target cells** respond, because they have a suitable receptor. Hormones travel in the blood to all tissues, but receptors decide which cells react.",
+      "hint": "Think about what decides whether a cell responds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xsbq3v",
+      "kind": "concept",
+      "front": "How do water-soluble and lipid-soluble hormones differ in where they act on a target cell?",
+      "back": "Water-soluble hormones usually bind **cell-surface receptors** and start signal transduction inside the cell. Lipid-soluble hormones cross the membrane and bind **intracellular receptors**, which can regulate transcription.",
+      "hint": "Consider whether the hormone can cross the membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oq6014",
+      "kind": "concept",
+      "front": "What is the difference between negative and positive feedback?",
+      "back": "**Negative feedback** produces a response that reduces the change that triggered it. **Positive feedback** strengthens the change, pushing the process towards a definite endpoint.",
+      "hint": "Ask whether the response opposes or amplifies the original change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cmht63",
+      "kind": "term",
+      "front": "What is a hormone?",
+      "back": "A **chemical messenger** released by endocrine cells or glands into the blood, which affects cells with suitable receptors.",
+      "hint": "Think about how it moves around the body.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1osjefc",
+      "kind": "term",
+      "front": "What is an endocrine gland?",
+      "back": "A gland that releases hormones directly into the **blood**, rather than through a duct.",
+      "hint": "Where does the gland send its products?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yu37vb",
+      "kind": "term",
+      "front": "What is a receptor?",
+      "back": "A **protein** with a matching binding site that binds a particular signalling molecule and initiates a cellular response.",
+      "hint": "Think about the match between hormone and binding site.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19jgooa",
+      "kind": "term",
+      "front": "What is signal transduction?",
+      "back": "The sequence of **intracellular events** that connects receptor activation to a cellular response.",
+      "hint": "Focus on what happens inside the cell after binding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t6wbnq",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a hormone always enters every cell it affects?",
+      "back": "Many hormones act by binding to **receptors on the cell surface** and never enter the cell. Only lipid-soluble hormones cross the membrane.",
+      "hint": "Consider where water-soluble hormones bind.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qmc3eq",
+      "kind": "concept",
+      "front": "How do endocrine and nervous signalling differ in delivery and speed?",
+      "back": "Endocrine signals travel as **hormones in the blood** and are often slower and longer-lasting. Nervous signals use **impulses along neurons** and synapses and are usually rapid and brief.",
+      "hint": "Compare the route each signal takes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r34fdg",
+      "kind": "process",
+      "front": "Describe the steps of negative feedback control of blood glucose by insulin.",
+      "back": "1) Rising blood glucose stimulates **insulin** release. 2) Insulin promotes glucose uptake and storage. 3) Blood glucose falls, so the stimulus for insulin release decreases.",
+      "hint": "Start from what causes insulin to be released.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h7lx87",
+      "kind": "concept",
+      "front": "What happens when blood glucose falls, and which hormone responds?",
+      "back": "Falling blood glucose stimulates **glucagon** release, which helps raise blood glucose.",
+      "hint": "This is the opposite response to insulin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vm6gib",
+      "kind": "process",
+      "front": "Describe the steps of positive feedback during childbirth.",
+      "back": "1) Stretching of the cervix stimulates **oxytocin** release. 2) Oxytocin increases uterine contractions, causing more stretching and release. 3) Birth removes the stretching stimulus and ends the cycle.",
+      "hint": "Track how each step feeds the next.",
+      "sectionId": "s4"
+    }
+  ]
+}

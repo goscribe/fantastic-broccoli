@@ -194,7 +194,7 @@ export function McqActivity({
             {t("session.back")}
           </button>
         )}
-        <span data-scroll-line className={cn("text-xs text-muted-foreground tabular-nums", newUi && "text-[13px] font-semibold")} aria-live="polite">
+        <span data-scroll-line className={cn("text-caption text-muted-foreground tabular-nums", newUi && "text-small font-semibold")} aria-live="polite">
           {t("session.question")} {index + 1} {t("session.of")}{" "}
           {content.questions.length}
           {index > 0 && ` · ${correctCount} ${t("session.correctSoFar")}`}
@@ -222,7 +222,7 @@ export function McqActivity({
         )}
       </div>
 
-      <p key={`q-${index}`} data-scroll-line className={newUi ? "life-rise text-[20px] font-extrabold leading-[1.3] sm:text-[22px]" : "text-sm font-medium leading-relaxed"}>
+      <p key={`q-${index}`} data-scroll-line className={newUi ? "life-rise text-[20px] font-extrabold leading-[1.3] sm:text-[22px]" : "text-ui font-medium"}>
         <McqQuestionBody text={question.question} figures={question.figures} options={question.options} />
       </p>
 
@@ -237,7 +237,7 @@ export function McqActivity({
             className={cn(
               newUi
                 ? // Soft answer pills, lettered like an exam paper: a tinted fill instead of an outline, a ring once picked, green or rose once marked; a pop when picked, a shake when wrong.
-                  "min-h-[60px] w-full touch-manipulation text-left rounded-[30px] px-3.5 py-3 text-[15.5px] font-semibold leading-snug text-foreground ring-inset transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.99] disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100 sm:px-4"
+                  "min-h-[60px] w-full touch-manipulation text-left rounded-[30px] px-3.5 py-3 text-ui font-semibold text-foreground ring-inset transition-[background-color,box-shadow,transform] duration-150 active:scale-[0.99] disabled:active:scale-100 motion-reduce:transition-none motion-reduce:active:scale-100 sm:px-4"
                 : "w-full text-left p-3 rounded-lg border text-sm",
               !revealed && selected === i && (newUi ? "life-pop bg-[color-mix(in_srgb,var(--accent)_10%,#fff)] ring-2 ring-accent" : "border-accent bg-accent/5"),
               !revealed && selected !== i && (newUi ? "bg-muted hover:bg-[var(--edge)]" : "border-border hover:border-accent/30 hover:bg-muted/30"),
@@ -249,7 +249,7 @@ export function McqActivity({
             <div className="flex items-center gap-3">
               <span
                 className={cn(
-                  newUi ? "flex h-8 w-8 items-center justify-center rounded-full text-[13.5px] font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-xs font-medium flex-shrink-0",
+                  newUi ? "flex h-8 w-8 items-center justify-center rounded-full text-small font-extrabold flex-shrink-0" : "flex h-6 w-6 items-center justify-center rounded-full text-caption font-medium flex-shrink-0",
                   !revealed && selected === i && (newUi ? "bg-accent text-accent-foreground" : "bg-accent text-accent-foreground"),
                   !revealed && selected !== i && (newUi ? "bg-card text-foreground" : "bg-muted text-muted-foreground"),
                   revealed && i === question.correctIndex && (newUi ? "bg-emerald-600 text-white" : "bg-success text-white"),
@@ -313,13 +313,13 @@ export function McqActivity({
         <div className="pt-3 border-t border-border">
           <p
             className={cn(
-              "font-medium text-xs mb-1",
+              "font-medium text-caption mb-1",
               isCorrect ? "text-success" : "text-red-500",
             )}
           >
             {isCorrect ? t("session.correct") : t("session.notQuite")}
           </p>
-          <p className="text-xs text-muted-foreground leading-5">
+          <p className="text-caption text-muted-foreground leading-5">
             <MarkdownText text={question.explanation} />
           </p>
           <div className="flex justify-end mt-3">

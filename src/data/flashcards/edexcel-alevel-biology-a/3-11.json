@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-11",
+  "topicCode": "3.11",
+  "topicName": "Stem cells and potency",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:33.803Z",
+  "cards": [
+    {
+      "id": "1oj0ax6",
+      "kind": "term",
+      "front": "What is a stem cell?",
+      "back": "A **stem cell** can divide and give rise to cells that become specialised. Some daughter cells stay as stem cells, so the supply never runs out.",
+      "hint": "Think about where new skin cells come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0evjg76",
+      "kind": "term",
+      "front": "What is potency?",
+      "back": "**Potency** is the range of cell types a stem cell can form. High potency means many types, and low potency means few.",
+      "hint": "Compare a zygote with a cell in a fully formed adult.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gozb1g",
+      "kind": "process",
+      "front": "What are the steps by which a signal makes a stem cell specialise?",
+      "back": "A signal reaches the stem cell. Transcription factors switch some genes on and others off. The active genes are transcribed into $\\text{mRNA}$ and translated into proteins, which shape the cell's structure and function.",
+      "hint": "Start from what happens to the stem cell's surroundings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01jdu3r",
+      "kind": "mistake",
+      "front": "Why is a stem cell not simply a specialised cell that divides?",
+      "back": "A stem cell **stays unspecialised** until signals make it differentiate. Specialised cells have already changed to suit one job.",
+      "hint": "Think about what happens after a stem cell divides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fpr198",
+      "kind": "term",
+      "front": "What does totipotent mean?",
+      "back": "A **totipotent** cell can form every cell type in the organism, including tissues outside the embryo such as the placenta.",
+      "hint": "Which cells in the note have the highest potency?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rw6wvp",
+      "kind": "term",
+      "front": "Which potency level forms almost all body cell types but not the placenta?",
+      "back": "**Pluripotent**. These cells form almost every body cell type but cannot form the placenta.",
+      "hint": "It sits just below totipotent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rz9riy",
+      "kind": "term",
+      "front": "What can a multipotent cell form?",
+      "back": "A **multipotent** cell forms a limited set of closely related cell types, such as bone marrow cells that make blood cells.",
+      "hint": "Compare its range with that of a pluripotent cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u849tm",
+      "kind": "concept",
+      "front": "Why do a stem cell and a muscle cell differ although they carry the same genes?",
+      "back": "They use **different genes**. The use of a gene to make a product is called gene expression.",
+      "hint": "Think about which genes each cell uses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dqu0s2",
+      "kind": "term",
+      "front": "What is a transcription factor?",
+      "back": "A **transcription factor** is a protein that binds to DNA near a gene and increases or decreases its transcription.",
+      "hint": "Think about what changes which genes are active.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1umo8r3",
+      "kind": "example",
+      "front": "Which genes does a bone marrow cell switch on when it becomes a red blood cell?",
+      "back": "It switches on the genes for **haemoglobin**.",
+      "hint": "Think about what a red blood cell needs to carry oxygen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18ooy41",
+      "kind": "term",
+      "front": "What is a meristem?",
+      "back": "A **meristem** is a region of a plant, such as a shoot tip or root tip, where cells keep dividing and then differentiate.",
+      "hint": "Where do plants keep their stem cells?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gzr27n",
+      "kind": "concept",
+      "front": "Why do adult stem cell sources avoid a concern that embryonic stem cells raise?",
+      "back": "Using embryos raises **ethical questions**. Adult sources, such as bone marrow, avoid this.",
+      "hint": "Think about where each type of stem cell is found.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mp8lx2",
+      "kind": "concept",
+      "front": "How can scientists make a specialised adult cell pluripotent?",
+      "back": "They **reprogramme** it by switching on a small set of genes, producing an induced pluripotent stem cell. This avoids the use of embryos.",
+      "hint": "Recall what changes which genes are switched on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02j844u",
+      "kind": "term",
+      "front": "How many cell types can a unipotent cell form, and what is one example?",
+      "back": "Only **one** cell type. Muscle stem cells that make muscle cells are one example.",
+      "hint": "This is the lowest level of potency.",
+      "sectionId": "s3"
+    }
+  ]
+}

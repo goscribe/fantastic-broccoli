@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a2-2",
+  "topicCode": "A2.2",
+  "topicName": "Network architecture",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:58.102Z",
+  "cards": [
+    {
+      "id": "0axc3nj",
+      "kind": "concept",
+      "front": "What is the difference between a server and a client on a network?",
+      "back": "A **server** provides services or resources, such as files or web pages, while a **client** requests them. Servers are usually switched on all the time and built for reliability.",
+      "hint": "Think of a central kitchen and the people who order from it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1c6oalz",
+      "kind": "concept",
+      "front": "How does the client–server model differ from peer-to-peer in who controls resources?",
+      "back": "In **client–server**, central servers hold resources and enforce access rules. In **peer-to-peer**, every device shares its own resources, so control is spread out. Client–server costs more but scales better.",
+      "hint": "Consider where the resources are kept and who sets the rules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1749ow3",
+      "kind": "term",
+      "front": "What is a protocol?",
+      "back": "A **protocol** is an agreed set of rules for sending and receiving data. It sets the message format, the order of messages and how errors are handled.",
+      "hint": "Two people need a shared language to talk to each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11xjcui",
+      "kind": "term",
+      "front": "What is a network topology?",
+      "back": "A **network topology** is the arrangement of devices and links in a network. It describes the layout, not the devices themselves.",
+      "hint": "Think about the shape of the layout.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00umk1g",
+      "kind": "concept",
+      "front": "Why is the star topology the most common layout in modern wired LANs?",
+      "back": "Each device links to a central **switch**, so a cable fault affects only one device, and adding or removing a device does not disturb the others. The weakness is that a switch failure stops the whole network.",
+      "hint": "Consider what breaks when a single cable fails.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k1w2a4",
+      "kind": "formula",
+      "front": "How many links does a full mesh of n devices need?",
+      "back": "$\\frac{n(n-1)}{2}$ links, where $n$ is the number of devices. Four devices need 6 links and six devices need 15, so the number of links rises much faster than the number of devices.",
+      "hint": "Each device links directly to every other device.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d038dq",
+      "kind": "example",
+      "front": "How many links does a full mesh of six devices need?",
+      "back": "**15 links**. Substituting $n = 6$ into $\\frac{n(n-1)}{2}$ gives $\\frac{6 \\times 5}{2} = 15$.",
+      "hint": "Substitute n = 6 into the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18zui4u",
+      "kind": "term",
+      "front": "What is a peer-to-peer network?",
+      "back": "A **peer-to-peer network** is one in which each device can act as both client and server, without a dedicated central server. It suits a small home or classroom.",
+      "hint": "Each device shares and uses resources at the same time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yeca3t",
+      "kind": "mistake",
+      "front": "Why does describing client–server and peer-to-peer separately earn fewer marks?",
+      "back": "Marks reward a **direct comparison** using named features such as cost, control and security. Separate descriptions rarely show how the two models differ.",
+      "hint": "Look for features that both models can be measured against.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ka1qkh",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat a topology as if it were a protocol?",
+      "back": "A **topology** describes the layout of devices and links, while a **protocol** describes the rules for communication. They answer different questions.",
+      "hint": "One is about layout, the other is about rules.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hkisfv",
+      "kind": "concept",
+      "front": "Why can hardware and software from different makers work together on a network?",
+      "back": "Because **protocols** are agreed standards that devices follow. Both sides use the same message format and rules, so they understand each other.",
+      "hint": "Think about what shared standards allow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0beqgo8",
+      "kind": "term",
+      "front": "What is the difference between HTTP and HTTPS?",
+      "back": "**HTTPS** is a secured version of **HTTP**, the protocol that requests and delivers web pages. Both are used to move web content between a client and a server.",
+      "hint": "The S stands for a feature added to the basic protocol.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rc7ytx",
+      "kind": "example",
+      "front": "Which network model suits a school of 400 students that needs central control of accounts and files?",
+      "back": "The **client–server** model. Servers can manage accounts and access centrally, and the model scales well to many users. Each room can be wired as a star with a switch at its centre.",
+      "hint": "Think about who needs to control access and how many users there are.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -19,7 +19,12 @@ import {
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
-import { planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
+import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
+import { fetchPlanToday } from "@/lib/api/exam-planner";
+import { examPassPitch, freePerks, paidPerks, plural, type ExamPitch, type FreeCaps } from "@/lib/wall";
+
+/** The free plan's caps when the server didn't say (server FREE_TIER_CAPS). */
+const DEFAULT_FREE_CAPS: FreeCaps = { workspaces: 2, studySessions: 3, flashcardTests: 2 };
 import { cn } from "@/lib/utils";
 
 function PlanCard({
@@ -27,10 +32,19 @@ function PlanCard({
   onSelect,
   switching,
   trialDays,
+  freeCaps,
+  pitch,
+  featured,
 }: {
+  /** The one primary on the page: the cheapest subscription (the trial). */
+  featured: boolean;
   plan: PlanOption;
   onSelect: (id: string) => void;
   switching: boolean;
+  /** The free plan's caps, for its own list. */
+  freeCaps: FreeCaps;
+  /** The pass pitched by the student's exam date, when they have one. */
+  pitch: ExamPitch | null;
   /** Free-trial length the account can still use; 0 when unavailable. Only subscriptions have a trial. */
   trialDays: number;
 }) {
@@ -38,16 +52,21 @@ function PlanCard({
   const isCurrent = plan.isActive;
   const paid = plan.priceDollars > 0;
   const price = planPriceLabel(plan);
-  const description = planDescription(plan);
+  const description = paid && planBilling(plan) === "once" && pitch ? pitch.headline : planDescription(plan);
   const terms = isCurrent ? null : planTermsLine(plan, trialDays);
-  const perks = paid
-    ? ["Unlimited subjects, study sessions and tests", "Our strongest AI model on every activity", `${plan.monthlyTokens.toLocaleString()} tokens a month, enough for daily study sessions`, `${formatBytes(plan.storageLimitBytes)} storage`]
-    : ["2 subjects, 3 full study sessions and 2 tests", "A free Quick 5 every day", `${plan.monthlyTokens.toLocaleString()} tokens a month`, `${formatBytes(plan.storageLimitBytes)} storage`];
+  const pitched = paid && planBilling(plan) === "once" ? pitch : null;
+  const storage = plan.storageLimitBytes > 0 ? [`${formatBytes(plan.storageLimitBytes)} for your notes and files`] : [];
+  // Outcomes, not tokens: every line is a fact of the plan (see wall.ts paidPerks / freePerks).
+  const perks = paid ? [...paidPerks(plan, { examLine: pitched?.line ?? null }), ...storage] : [...freePerks(freeCaps), ...storage];
   return (
     <div className={cn("life-card flex flex-col p-5 sm:p-6", isCurrent && "border-border-strong")}>
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="text-[18px] font-extrabold leading-tight">{planDisplayName(plan.name)}</h2>
-        {isCurrent && <span className="shrink-0 text-[13px] font-bold text-accent">Current plan</span>}
+        {isCurrent ? (
+          <span className="shrink-0 text-[13px] font-bold text-muted-foreground">Current plan</span>
+        ) : paid && planBilling(plan) === "once" && pitch ? (
+          <span className="shrink-0 text-[13px] font-bold text-muted-foreground">For your exam</span>
+        ) : null}
       </div>
       {description && <p className="mt-1 text-[14px] text-muted-foreground">{description}</p>}
       <p className="mt-4 text-[30px] font-extrabold leading-none tracking-tight tabular-nums">
@@ -58,7 +77,7 @@ function PlanCard({
       <ul className="mt-3 space-y-2 text-[14px]">
         {perks.map((perk) => (
           <li key={perk} className="flex items-start gap-2">
-            <Check className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={2.6} />
+            <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" strokeWidth={2.6} />
             {perk}
           </li>
         ))}
@@ -73,7 +92,7 @@ function PlanCard({
             Downgrade to Free
           </Button>
         ) : (
-          <Button className="w-full" disabled={switching} onClick={() => onSelect(plan.id)}>
+          <Button className="w-full" variant={featured ? "primary" : "secondary"} disabled={switching} onClick={() => onSelect(plan.id)}>
             {planCta(plan, trialDays)}
           </Button>
         )}
@@ -89,20 +108,39 @@ export default function PricingPage() {
   const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
-
+  const [pitch, setPitch] = useState<ExamPitch | null>(null);
   useEffect(() => {
     Promise.all([
       fetchAccountSummary(),
       fetchPlanOptions(),
       fetchPlanCaps().catch(() => null),
+      fetchPlanToday().catch(() => null),
     ])
-      .then(([acct, nextPlans, nextCaps]) => {
+      .then(([acct, nextPlans, nextCaps, today]) => {
         setSummary(acct);
-        setPlans(nextPlans);
         setCaps(nextCaps);
+        const pass = nextPlans.find((p) => p.priceDollars > 0 && planBilling(p) === "once");
+        const locale = typeof navigator !== "undefined" ? navigator.language : "en-GB";
+        const nextPitch = pass && today ? examPassPitch(today.exams, pass, today.today, locale) : null;
+        setPitch(nextPitch);
+        // With an exam date the pass sits right after the cheapest subscription (the trial).
+        if (nextPitch && pass) {
+          const rest = nextPlans.filter((p) => p.id !== pass.id);
+          const firstSub = rest.findIndex((p) => p.priceDollars > 0);
+          rest.splice(firstSub >= 0 ? firstSub + 1 : rest.length, 0, pass);
+          setPlans(rest);
+        } else {
+          setPlans(nextPlans);
+        }
       })
       .finally(() => setLoading(false));
   }, []);
+  const freeCaps = caps?.caps ?? DEFAULT_FREE_CAPS;
+  // The one primary: the cheapest subscription for someone without a plan; for someone on one, the next plan up (never a downgrade).
+  const activePrice = plans.find((p) => p.isActive && p.priceDollars > 0)?.priceDollars ?? 0;
+  const featuredId = [...plans]
+    .filter((p) => p.priceDollars > activePrice && planBilling(p) !== "once" && !p.isActive)
+    .sort((a, b) => a.priceDollars - b.priceDollars)[0]?.id;
 
   const trialDays = caps?.trialDays ?? 0;
   const trialEndsAt = caps?.trialEndsAt ? new Date(caps.trialEndsAt) : null;
@@ -165,23 +203,32 @@ export default function PricingPage() {
                 {formatBytes(summary.storageUsedBytes)} <span className="text-[13px] font-semibold text-muted-foreground">of {formatBytes(summary.storageLimitBytes)}</span>
               </dd>
             </div>
-            <div>
-              <dt className="text-[13px] font-semibold text-muted-foreground">Tokens left</dt>
-              <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
-                {summary.tokenBalance.toLocaleString()} <span className="text-[13px] font-semibold text-muted-foreground">of {summary.monthlyTokens.toLocaleString()} this month</span>
-              </dd>
-            </div>
+            {caps?.caps && (
+              <>
+                <div>
+                  <dt className="text-[13px] font-semibold text-muted-foreground">Subjects</dt>
+                  <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                    {caps.used.workspaces} <span className="text-[13px] font-semibold text-muted-foreground">of {caps.caps.workspaces}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[13px] font-semibold text-muted-foreground">Full study sessions</dt>
+                  <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                    {caps.used.studySessions} <span className="text-[13px] font-semibold text-muted-foreground">of {caps.caps.studySessions}</span>
+                  </dd>
+                </div>
+              </>
+            )}
           </dl>
         ) : null}
-        {!loading && summary && summary.monthlyTokens > 0 && summary.tokenBalance <= summary.monthlyTokens * 0.3 && (
+        {!loading && caps?.caps && caps.used.workspaces >= caps.caps.workspaces && (
           <p className="mt-3 text-[13.5px] text-muted-foreground">
-            You&apos;re running low on tokens. Paid plans come with a much bigger monthly allowance, and every session is generated with our
-            strongest model.
+            You have the free plan&apos;s {plural(caps.caps.workspaces, "subject", "subjects")}. They stay free to use; a plan lets you add more.
           </p>
         )}
       </section>
 
-      <section className={cn("mt-6 grid gap-4", plans.length >= 3 ? "md:grid-cols-3" : plans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
+      <section className={cn("mt-6 grid gap-4", plans.length >= 4 ? "sm:grid-cols-2 xl:grid-cols-4" : plans.length === 3 ? "md:grid-cols-3" : plans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
         {loading
           ? Array.from({ length: 2 }, (_, i) => (
               <div key={i} className="life-card space-y-3 p-5">
@@ -190,7 +237,7 @@ export default function PricingPage() {
                 <Skeleton className="h-28 w-full rounded-xl" />
               </div>
             ))
-          : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} />)}
+          : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} freeCaps={freeCaps} pitch={pitch} featured={plan.id === featuredId} />)}
       </section>
     </PageShell>
   );

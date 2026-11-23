@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-7-2",
+  "topicCode": "6.7.2",
+  "topicName": "The motor effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:31.508Z",
+  "cards": [
+    {
+      "id": "1u9xzgh",
+      "kind": "term",
+      "front": "What is the motor effect?",
+      "back": "The **motor effect** is the force on a current-carrying conductor placed in a magnetic field.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gje7wr",
+      "kind": "formula",
+      "front": "Which equation gives the force on a straight wire perpendicular to a uniform magnetic field, and what unit is each symbol in?",
+      "back": "$F=BIL$, where $F$ is force in $\\text{N}$, $B$ is **magnetic flux density** in $\\text{T}$, $I$ is current in $\\text{A}$ and $L$ is length in the field in $\\text{m}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lq63u4",
+      "kind": "process",
+      "front": "How do you use Fleming's left-hand rule to find the direction of the force on a wire?",
+      "back": "Point your first finger along the field (north to south), your second finger along **conventional current** (positive to negative), at right angles. Your thumb shows the force.",
+      "hint": "Keep your left hand at right angles and turn it until both fingers point correctly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vanfbo",
+      "kind": "mistake",
+      "front": "Why must the second finger in Fleming's left-hand rule point along conventional current rather than electron flow?",
+      "back": "Conventional current runs in the opposite direction to electron flow, so using electron flow gives the wrong force direction.",
+      "hint": "Compare which way electrons move with the direction the current is defined as flowing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0azfb48",
+      "kind": "example",
+      "front": "What force acts on a 0.20 m wire carrying 3.0 A perpendicular to a 0.50 T magnetic field?",
+      "back": "$0.30\\,\\text{N}$. Using $F=BIL$: $F=0.50\\times3.0\\times0.20=0.30\\,\\text{N}$.",
+      "hint": "Start by writing the equation and check the length is in metres.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aw0vfj",
+      "kind": "term",
+      "front": "How is magnetic flux density measured, and what does it describe?",
+      "back": "It describes **magnetic field strength** and is measured in the unit **tesla** ($\\text{T}$).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nmnc9u",
+      "kind": "mistake",
+      "front": "Why must only the part of a wire inside the magnetic field be used as $L$ in $F=BIL$?",
+      "back": "Only the length inside the field experiences the force, so using the whole wire length gives a wrong answer.",
+      "hint": "Think about where the field actually acts on the wire.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bx1fj6",
+      "kind": "concept",
+      "front": "Which orientation of a current-carrying wire in a magnetic field gives zero force?",
+      "back": "When the wire is **parallel** to the field, there is no force. The force is greatest when the wire is perpendicular to the field.",
+      "hint": "Compare this with the orientation that gives the maximum force.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06cn72i",
+      "kind": "concept",
+      "front": "What happens to the force on a wire if both the current and the field direction are reversed?",
+      "back": "The force stays in its original direction. Reversing only one of them reverses the force.",
+      "hint": "Consider what reversing just one quantity does on its own.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qj5bkd",
+      "kind": "concept",
+      "front": "How do opposite sides of a rectangular coil in a motor experience forces that turn it?",
+      "back": "Current flows in opposite directions along the two sides, so each side feels an opposite force. These opposing forces turn the coil.",
+      "hint": "Think about the direction of current in each side of the coil.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cbv6va",
+      "kind": "concept",
+      "front": "What is the job of the split-ring commutator in a simple electric motor?",
+      "back": "It **reverses the current** in the coil every half-turn, so the forces keep turning the coil in the same direction.",
+      "hint": "Consider what happens to each side of the coil as it passes the poles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sh09eu",
+      "kind": "mistake",
+      "front": "Why does the coil keep turning one way even though the current reverses every half-turn?",
+      "back": "Each side moves to the opposite pole as the current reverses, so the forces still turn the coil in the same direction. Reversing current does not reverse rotation.",
+      "hint": "Think about which pole each side is near after a half-turn.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ukhdyt",
+      "kind": "process",
+      "front": "What energy conversion takes place in a simple electric motor?",
+      "back": "The motor converts **electrical energy** into **kinetic energy** of the turning coil.",
+      "hint": "Think about the form of energy the current brings into the coil.",
+      "sectionId": "s4"
+    }
+  ]
+}

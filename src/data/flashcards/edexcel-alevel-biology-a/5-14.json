@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-14",
+  "topicCode": "5.14",
+  "topicName": "Climate models and predictions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:13.101Z",
+  "cards": [
+    {
+      "id": "08bb5vj",
+      "kind": "concept",
+      "front": "Why do scientists use a climate model instead of running experiments on the whole Earth?",
+      "back": "They cannot run experiments on the whole planet, so they build a **climate model**, which represents the climate in mathematical form and runs on a computer.",
+      "hint": "Think about what you could and could not do to the real planet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kk2c37",
+      "kind": "concept",
+      "front": "Why must a climate model be validated before scientists use it to predict the future?",
+      "back": "**Validation** runs the model for a past period with a known climate and compares its output with observations. A match builds confidence that its equations and processes are reliable.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0641pf0",
+      "kind": "concept",
+      "front": "Why are climate model predictions usually shown as a range rather than one exact figure?",
+      "back": "Different emission scenarios and different models give different outputs, so a **range** shows the uncertainty honestly and helps decision makers judge risks.",
+      "hint": "Consider how many different inputs and models are used.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uf7eb9",
+      "kind": "term",
+      "front": "What is a grid cell in a climate model?",
+      "back": "A **grid cell** is one block of the three-dimensional grid that divides the atmosphere, oceans, land and ice. Each variable is given a single average value within it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mqmjkb",
+      "kind": "process",
+      "front": "What does a climate model repeat to show how the climate changes over time?",
+      "back": "It uses physical equations to calculate temperature, pressure and moisture in each cell, exchanges energy and water between neighbouring cells, then repeats these calculations for small time steps.",
+      "hint": "Start with what happens inside a single cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v496ue",
+      "kind": "process",
+      "front": "What are the steps from validating a model to using it for predictions?",
+      "back": "Run it for a past period with a known climate, compare with the observed record, adjust and retest if it fails, then once it performs well, run it forward to predict the future.",
+      "hint": "Think about what happens when the check fails.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t4yaqs",
+      "kind": "term",
+      "front": "What is an emission scenario?",
+      "back": "An **emission scenario** is an assumed future pattern of greenhouse gas release. It is given to the model before it runs forward, and high emissions give more warming than low emissions.",
+      "hint": "Think about what you feed into the model before running it forward.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h0w0r3",
+      "kind": "concept",
+      "front": "How does a simple energy-balance model differ from a general circulation model?",
+      "back": "A **simple energy-balance model** treats the whole Earth as one unit and runs quickly, but gives no regional detail. A **general circulation model** uses a 3D grid and physical laws for air and ocean, giving regional patterns but needing far more computing power.",
+      "hint": "Compare the spatial detail each one gives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wmatmd",
+      "kind": "term",
+      "front": "What is an Earth system model?",
+      "back": "An **Earth system model** is a general circulation model extended to include the carbon cycle, vegetation and ice, so it captures interactions between living and non-living parts of the Earth.",
+      "hint": "Start from the model type it builds on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rwkk9i",
+      "kind": "concept",
+      "front": "Why is a more detailed climate model not always better?",
+      "back": "Complex models need more data and time to run, and each added process brings its own uncertainty into the predictions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bjhdh2",
+      "kind": "term",
+      "front": "What is a feedback in a climate system, and what is an example?",
+      "back": "A **feedback** is a process in which a change triggers further change that amplifies or reduces the original change. Melting ice exposes darker surfaces that absorb more sunlight, amplifying warming.",
+      "hint": "Think of one change that sets off a second change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1iveaqb",
+      "kind": "mistake",
+      "front": "A student says uncertainty means climate models are worthless. What is wrong with this?",
+      "back": "Uncertainty limits how precise predictions are but does not make models worthless. Models agree that warming follows rising greenhouse gas levels, though they differ on its size.",
+      "hint": "Separate what models agree on from what they disagree about.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02qud5j",
+      "kind": "concept",
+      "front": "Which limitation of climate models cannot be reduced by better science, and why?",
+      "back": "**Future emissions** cannot be known, because they depend on human choices that are not yet made.",
+      "hint": "Think about who decides how much greenhouse gas is released.",
+      "sectionId": "s5"
+    }
+  ]
+}

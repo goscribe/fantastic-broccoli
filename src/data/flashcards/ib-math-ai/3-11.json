@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-11",
+  "topicCode": "3.11",
+  "topicName": "Vector equation of a line",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:51.802Z",
+  "cards": [
+    {
+      "id": "1fp9lzz",
+      "kind": "formula",
+      "front": "Write the vector equation of a line through a known point with position vector a and direction vector d.",
+      "back": "$\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{d}$, where $\\lambda$ is a **parameter** that can be any real number. Setting $\\lambda=0$ gives the known point itself.",
+      "hint": "Recall the two facts: where you begin and which way you go.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ah32xl",
+      "kind": "process",
+      "front": "How do you write a vector equation of the line through two points A and B?",
+      "back": "Find $\\mathbf{d}=\\mathbf{b}-\\mathbf{a}$ by subtracting coordinates, use A or B as the known point $\\mathbf{a}$, then write $\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{d}$. Any non-zero multiple of $\\mathbf{d}$ also works.",
+      "hint": "Subtract the coordinates of A from those of B.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rxa4f8",
+      "kind": "process",
+      "front": "How do you check whether a point lies on a given line?",
+      "back": "Set the point's coordinates equal to the three components of $\\mathbf{r}$ and solve for $\\lambda$ in each. The point is **on the line only if all three give the same $\\lambda$**.",
+      "hint": "Use every component, not just one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0i2bfa7",
+      "kind": "term",
+      "front": "What is a direction vector of a line?",
+      "back": "A **direction vector** is a non-zero vector parallel to the line. Any non-zero scalar multiple of it is also a direction vector.",
+      "hint": "It points along the path.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tx1ilh",
+      "kind": "term",
+      "front": "What is the parameter in the vector equation of a line?",
+      "back": "The **parameter** is the variable $\\lambda$. Each real value of $\\lambda$ selects exactly one point on the line.",
+      "hint": "It is the letter multiplying the direction vector.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cn71ye",
+      "kind": "concept",
+      "front": "In $\\mathbf{r}=\\mathbf{a}+\\lambda\\mathbf{d}$, what happens to the point as $\\lambda$ increases by 1?",
+      "back": "The point moves by one copy of **d**. Negative values of $\\lambda$ move the point backwards from the start.",
+      "hint": "Think about steps of size d.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lcl7sl",
+      "kind": "example",
+      "front": "For $\\mathbf{r}=\\begin{pmatrix}1\\\\0\\\\-2\\end{pmatrix}+\\lambda\\begin{pmatrix}2\\\\3\\\\1\\end{pmatrix}$, find the point when $\\lambda=2$.",
+      "back": "$(5,6,0)$, since $(1+2\\times2,\\ 0+2\\times3,\\ -2+2\\times1)=(5,6,0)$.",
+      "hint": "Substitute into each component separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lhf9q2",
+      "kind": "example",
+      "front": "Find a direction vector for the line through A(2,-1,3) and B(5,1,9).",
+      "back": "$(3,2,6)$, since $\\vec{AB}=(5-2,\\ 1-(-1),\\ 9-3)$. Using $2\\mathbf{d}=(6,4,12)$ would also be correct.",
+      "hint": "Subtract A from B, component by component.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mwym8f",
+      "kind": "example",
+      "front": "Does $Q(5,5,0)$ lie on $\\mathbf{r}=\\begin{pmatrix}1\\\\0\\\\-2\\end{pmatrix}+\\lambda\\begin{pmatrix}2\\\\3\\\\1\\end{pmatrix}$?",
+      "back": "**No**. The x-component gives $\\lambda=2$, but the y-component gives $\\lambda=\\frac{5}{3}$. The values differ, so Q is not on the line.",
+      "hint": "Solve one component, then test the others.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hke8qb",
+      "kind": "mistake",
+      "front": "Two line equations look different. Can you conclude they are different lines?",
+      "back": "**Not necessarily**. A line has many correct equations. Compare the directions and test whether a point from one equation fits the other.",
+      "hint": "Lines can be written in many ways.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sake65",
+      "kind": "concept",
+      "front": "In the drone model $\\mathbf{r}=\\mathbf{a}+t\\mathbf{d}$, what do $\\mathbf{a}$ and $\\mathbf{d}$ represent?",
+      "back": "$\\mathbf{a}$ is the **starting position** and $\\mathbf{d}$ is the **velocity**. The magnitude $|\\mathbf{d}|$ is the speed. The model assumes constant velocity.",
+      "hint": "Replace the parameter with time.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1dy59e4",
+      "kind": "example",
+      "front": "A drone starts at (10,20,5) m with velocity (3,-4,0) m/s. Find its position after 2 s and its speed.",
+      "back": "$(16,12,5)$ m, since $(10+2\\times3,\\ 20+2\\times(-4),\\ 5+0)$. The speed is $\\sqrt{3^2+(-4)^2}=5\\,\\mathrm{m\\,s^{-1}}$.",
+      "hint": "Substitute $t=2$, then find the magnitude of d.",
+      "sectionId": "s6"
+    }
+  ]
+}

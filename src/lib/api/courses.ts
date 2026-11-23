@@ -106,7 +106,13 @@ export const coursesApi = {
   list: () => rpc<CourseSummary[]>("course.list", "query", undefined),
   get: (courseId: string) => rpc<Course>("course.get", "query", { courseId }),
   mine: () => rpc<CourseSubject[]>("course.mine", "query", undefined),
-  progress: (workspaceId: string) => rpc<CourseProgress>("course.progress", "query", { workspaceId }),
+  /**
+   * Per-topic progress for a subject that follows a course; null when it
+   * follows none. Ask only for a subject known (or not yet known not) to
+   * follow one: see `courseLookup`. A server before the null answer replies
+   * NOT_FOUND instead, which callers treat the same way.
+   */
+  progress: (workspaceId: string) => rpc<CourseProgress | null>("course.progress", "query", { workspaceId }),
   enroll: (courseId: string, level?: CourseLevel) =>
     rpc<{ workspaceId: string }>("course.enroll", "mutation", { courseId, ...(level ? { level } : {}) }),
   startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel; mode?: "quick5" | "session" }) =>

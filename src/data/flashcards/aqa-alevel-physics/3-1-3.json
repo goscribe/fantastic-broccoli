@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-1-3",
+  "topicCode": "3.1.3",
+  "topicName": "Estimating physical quantities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:51.262Z",
+  "cards": [
+    {
+      "id": "11a4qd1",
+      "kind": "term",
+      "front": "What is an estimate in physics?",
+      "back": "An **estimate** is a sensible approximate value found by reasoning from known values, without direct measurement.",
+      "hint": "Think about how you knew a door was about 2 m high.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e8d6qn",
+      "kind": "term",
+      "front": "What is the order of magnitude of a quantity?",
+      "back": "The **order of magnitude** is the power of ten nearest to the quantity's value, which tells you its rough size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yv1j1r",
+      "kind": "process",
+      "front": "What are the steps for an order-of-magnitude check of a calculated answer?",
+      "back": "Round each value to one significant figure, work out the answer using powers of ten, then compare its order of magnitude with your calculated result. A difference of one or more orders of magnitude suggests a conversion error.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r2ixml",
+      "kind": "concept",
+      "front": "Why does a good estimate combine a remembered value with a simple equation?",
+      "back": "A reference value alone rarely answers a question. You choose the quantities you need, round them, and combine them with an equation, keeping every quantity in base units.",
+      "hint": "Consider the steps used in the walking-to-school example.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "139r41u",
+      "kind": "process",
+      "front": "How do you decide the order of magnitude of a value written as $a\\times10^{n}$?",
+      "back": "If $a$ is below about 3, the order of magnitude is $10^{n}$. If $a$ is about 3 or more, it is $10^{n+1}$.",
+      "hint": "Look at the size of the number $a$ before the power of ten.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gpf6po",
+      "kind": "example",
+      "front": "What does an order-of-magnitude check give for a block of mass $0.52\\,\\mathrm{kg}$ and volume $6.5\\times10^{-5}\\,\\mathrm{m^{3}}$?",
+      "back": "About $7\\times10^{3}\\,\\mathrm{kg\\,m^{-3}}$, from $\\frac{0.5\\,\\mathrm{kg}}{7\\times10^{-5}\\,\\mathrm{m^{3}}}$. This agrees in order of magnitude with a calculated $8.0\\times10^{3}\\,\\mathrm{kg\\,m^{-3}}$, so the result is plausible.",
+      "hint": "Round each value to one significant figure first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yym73i",
+      "kind": "mistake",
+      "front": "Why is a rough order-of-magnitude check not proof that an answer is correct?",
+      "back": "The check only shows that an answer is **plausible**. It does not prove the answer is right.",
+      "hint": "Think about what the check actually compares.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0seddhc",
+      "kind": "formula",
+      "front": "What is the formula for the percentage difference of an estimate from a measured value?",
+      "back": "$\\frac{\\mathrm{estimate}-\\mathrm{measured~value}}{\\mathrm{measured~value}}\\times100\\%$. A positive result means the estimate was too high.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u2h764",
+      "kind": "example",
+      "front": "A student estimates a hall as 20 m long. A tape measure gives 26 m. What is the percentage difference?",
+      "back": "About $-23\\%$, so the estimate was about 23% too low. Both values have order of magnitude $10^{1}\\,\\mathrm{m}$, so the estimate is reasonable.",
+      "hint": "Divide the gap by the measured value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nf36dj",
+      "kind": "concept",
+      "front": "What should you do if the gap between an estimate and a measurement is large?",
+      "back": "Check the **reference values** and the arithmetic, since a large gap points to one of these as the likely cause.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ssbwab",
+      "kind": "concept",
+      "front": "How close must a typical reference value be for an estimate to be usually good enough?",
+      "back": "Within a **factor of two** of the real value. Estimates are judged by their scale, not their exact digits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vvfk33",
+      "kind": "concept",
+      "front": "How many significant figures should an estimate be quoted to?",
+      "back": "**One or two** significant figures, written with 'about' or ≈. Quoting more precision than the inputs allow is not justified.",
+      "hint": "Think about how rough the inputs were.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05kmsl1",
+      "kind": "concept",
+      "front": "How can you estimate the thickness of a single sheet of paper with a ruler?",
+      "back": "Measure a stack of 500 sheets and divide by 500. The ruler's uncertainty is a much smaller percentage of the larger stack length, so the single-sheet estimate has a smaller percentage uncertainty.",
+      "hint": "Think about why one sheet is too thin for a ruler to measure well.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09r68vd",
+      "kind": "example",
+      "front": "How long does it take to walk 2.0 km at a typical walking speed of $1.5\\,\\mathrm{m\\,s^{-1}}$?",
+      "back": "About $1.3\\times10^{3}\\,\\mathrm{s}$, which has order of magnitude $10^{3}\\,\\mathrm{s}$.",
+      "hint": "Convert the distance to metres first.",
+      "sectionId": "s3"
+    }
+  ]
+}

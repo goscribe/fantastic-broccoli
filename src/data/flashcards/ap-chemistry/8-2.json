@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "pH and pOH of strong acids and bases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:13.181Z",
+  "cards": [
+    {
+      "id": "0a94fch",
+      "kind": "concept",
+      "front": "For a strong acid that releases one H⁺ per formula unit, how does [H⁺] compare with the acid's initial concentration?",
+      "back": "[H⁺] is **equal** to the acid's initial concentration, because a strong acid ionizes essentially completely in water.",
+      "hint": "Think about how completely a strong acid ionizes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14rac84",
+      "kind": "formula",
+      "front": "What is the formula for pH, and what do its symbols mean?",
+      "back": "$\\mathrm{pH}=-\\log_{10}[\\mathrm{H^+}]$, where [H⁺] is the **hydrogen ion concentration** in $\\mathrm{mol\\,L^{-1}}$. pH has no units.",
+      "hint": "Which ion's concentration does pH measure?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i2mcey",
+      "kind": "formula",
+      "front": "Which two relationships link pH, pOH, and water's ion-product constant at 25 °C?",
+      "back": "$K_\\mathrm{w}=[\\mathrm{H^+}][\\mathrm{OH^-}]=1.0\\times10^{-14}$, so **$\\mathrm{pH}+\\mathrm{pOH}=14.00$** at 25 °C.",
+      "hint": "Start with the product of the two ion concentrations.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mrbi0h",
+      "kind": "term",
+      "front": "What is water's ion-product constant?",
+      "back": "The **ion-product constant** ($K_\\mathrm{w}$) is the product of the hydrogen and hydroxide ion concentrations at a given temperature.",
+      "hint": "It is written as a product of two ion concentrations.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16q0wni",
+      "kind": "mistake",
+      "front": "A student says $0.010\\,\\mathrm{mol\\,L^{-1}}$ Ba(OH)₂ gives $[\\mathrm{OH^-}]=0.010\\,\\mathrm{mol\\,L^{-1}}$. What is wrong?",
+      "back": "The student **forgot to count the ions** in the formula. Ba(OH)₂ releases two hydroxide ions per formula unit, so $[\\mathrm{OH^-}]=0.020\\,\\mathrm{mol\\,L^{-1}}$.",
+      "hint": "Look at the subscript on the OH group.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12hlri0",
+      "kind": "process",
+      "front": "What are the steps for finding pH from a strong base at 25 °C?",
+      "back": "1) Find the **ion concentration** from complete dissociation. 2) Calculate pOH from it. 3) Subtract pOH from 14.00 to get pH.",
+      "hint": "Start with the ion concentration, then move to pOH.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11abk2n",
+      "kind": "example",
+      "front": "Find the pOH and pH of $0.0020\\,\\mathrm{mol\\,L^{-1}}$ Ba(OH)₂ at 25 °C.",
+      "back": "$[\\mathrm{OH^-}]=0.0040\\,\\mathrm{mol\\,L^{-1}}$, so pOH is **2.40** and pH is **11.60**.",
+      "hint": "Count the hydroxide ions first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rdlc0l",
+      "kind": "concept",
+      "front": "How does diluting a strong acid change its pH, and how does diluting a strong base change its pH?",
+      "back": "Diluting a strong acid **raises** its pH, while diluting a strong base **lowers** its pH. This holds while the added acid or base still dominates water's contribution.",
+      "hint": "Think about whether [H⁺] or [OH⁻] falls.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vtp2vn",
+      "kind": "concept",
+      "front": "Why does a tenfold dilution of a strong acid change its pH by exactly one unit?",
+      "back": "The [H⁺] falls by a **factor of ten** because the acid ionizes completely. Since pH is logarithmic, a tenfold change shifts pH by **one unit**.",
+      "hint": "Recall how a logarithm responds to a factor of ten.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hj3nsz",
+      "kind": "mistake",
+      "front": "A student uses pH + pOH = 14.00 for a solution at 50 °C. What is the error?",
+      "back": "The sum 14.00 applies only at **25 °C**. The value **changes with temperature**, so the student must use the correct $K_\\mathrm{w}$ for that temperature.",
+      "hint": "Check the temperature in the question.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hgxd6r",
+      "kind": "example",
+      "front": "A solution has pH 4.00 at 25 °C. What are $[\\mathrm{H^+}]$ and $[\\mathrm{OH^-}]$?",
+      "back": "$[\\mathrm{H^+}]=1.0\\times10^{-4}\\,\\mathrm{mol\\,L^{-1}}$ and $[\\mathrm{OH^-}]=1.0\\times10^{-10}\\,\\mathrm{mol\\,L^{-1}}$, because pOH is **10.00**.",
+      "hint": "Use $[\\mathrm{H^+}]=10^{-\\mathrm{pH}}$ first.",
+      "sectionId": "s3"
+    }
+  ]
+}

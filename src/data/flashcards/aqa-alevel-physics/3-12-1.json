@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-12-1",
+  "topicCode": "3.12.1",
+  "topicName": "Discovery of the electron",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:01.153Z",
+  "cards": [
+    {
+      "id": "1s9065t",
+      "kind": "concept",
+      "front": "What did Thomson conclude cathode rays are, in 1897?",
+      "back": "They are **streams of tiny negative particles**, later named electrons. An electric field bends them towards the positive plate, which shows they carry negative charge.",
+      "hint": "Think about which way an electric field pulls a charged particle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1scmq4h",
+      "kind": "formula",
+      "front": "Which equation gives the specific charge of an electron from its accelerating voltage and speed, and what do the symbols mean?",
+      "back": "$\\frac{e}{m}=\\frac{v^2}{2V}$, where $e$ is the charge in $\\text{C}$, $m$ the mass in $\\text{kg}$, $v$ the speed in $\\text{m\\,s}^{-1}$ and $V$ the potential difference in $\\text{V}$. It comes from $\\frac12mv^2=eV$.",
+      "hint": "Start from the kinetic energy an electron gains when accelerated.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n4bbn1",
+      "kind": "concept",
+      "front": "What evidence shows that the electron is a fundamental particle?",
+      "back": "The **specific charge is the same** for every cathode material and gas, the electron is far lighter than any atom or ion, and charge only comes in whole multiples of $e$, so it carries the smallest unit.",
+      "hint": "Think about what stayed the same across different experiments.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1beni5f",
+      "kind": "process",
+      "front": "How do crossed electric and magnetic fields give the speed of electrons in a beam?",
+      "back": "Adjust the fields until the beam is **not deflected**. The two forces are then equal, so $eE=Bev$ and $v=\\frac{E}{B}$.",
+      "hint": "Consider the two forces on an electron and the directions they act in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rtabei",
+      "kind": "example",
+      "front": "Plates 2.00 cm apart have a potential difference of 100 V, and the magnetic field is $1.00\\times10^{-3}\\,\\text{T}$. What speed must undeflected electrons have?",
+      "back": "$5.00\\times10^{6}\\,\\text{m\\,s}^{-1}$. First $E=\\frac{V_\\text{p}}{d}=5.00\\times10^{3}\\,\\text{V\\,m}^{-1}$, then $v=\\frac{E}{B}$.",
+      "hint": "Find the electric field between the plates first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bshjx6",
+      "kind": "example",
+      "front": "Electrons accelerated through 250 V reach a speed of $9.38\\times10^{6}\\,\\text{m\\,s}^{-1}$. What is their specific charge?",
+      "back": "$1.76\\times10^{11}\\,\\text{C\\,kg}^{-1}$, from $\\frac{e}{m}=\\frac{(9.38\\times10^{6})^2}{2\\times250}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c0du3f",
+      "kind": "formula",
+      "front": "In a fine beam tube, which equation gives the specific charge from the voltage, field and radius of the circular path?",
+      "back": "$\\frac{e}{m}=\\frac{2V}{B^2r^2}$, where $V$ is the accelerating voltage in $\\text{V}$, $B$ the field in $\\text{T}$ and $r$ the radius in $\\text{m}$. Combining $\\frac12mv^2=eV$ with $Bev=\\frac{mv^2}{r}$ removes $v$.",
+      "hint": "Combine the energy equation with the equation for circular motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bctgyr",
+      "kind": "term",
+      "front": "What is thermionic emission?",
+      "back": "The **release of electrons from the surface of a heated metal**. A heated filament in a vacuum uses this to supply electrons.",
+      "hint": "Think about what heating does to the electrons in a metal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mi69sa",
+      "kind": "term",
+      "front": "What is the quantisation of charge?",
+      "back": "Any observed charge is a **whole-number multiple** of the elementary charge $e=1.60\\times10^{-19}\\,\\text{C}$.",
+      "hint": "Think about the charges Millikan's oil drops carried.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lygkus",
+      "kind": "process",
+      "front": "How did Millikan's oil drop experiment show that charge comes in whole-number units?",
+      "back": "He held charged drops still between plates, so $QE$ equalled the weight, with $E=\\frac{V}{d}$. Every charge found was a **whole-number multiple** of $1.60\\times10^{-19}\\,\\text{C}$.",
+      "hint": "Start with the forces acting on a drop that is hanging still.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0odlfs8",
+      "kind": "example",
+      "front": "What charge does a drop of weight $1.92\\times10^{-14}\\,\\text{N}$ carry when held still in a field of $4.00\\times10^{4}\\,\\text{V\\,m}^{-1}$?",
+      "back": "$4.80\\times10^{-19}\\,\\text{C}$, from $Q=\\frac{\\text{weight}}{E}$. Dividing by $e$ gives **3 elementary charges**.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ekxgmp",
+      "kind": "mistake",
+      "front": "What unit error makes a calculated oil drop charge 100 times too large?",
+      "back": "Using the plate separation in **centimetres** instead of metres. Convert $1.00\\,\\text{cm}$ to $0.0100\\,\\text{m}$ before dividing.",
+      "hint": "Check the units before you divide by the separation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02excbr",
+      "kind": "example",
+      "front": "Using $e=1.60\\times10^{-19}\\,\\text{C}$ and $\\frac{e}{m}=1.76\\times10^{11}\\,\\text{C\\,kg}^{-1}$, what is the mass of the electron?",
+      "back": "$9.1\\times10^{-31}\\,\\text{kg}$, from $m=\\frac{e}{(e/m)}$.",
+      "hint": "Rearrange the definition of specific charge.",
+      "sectionId": "s6"
+    }
+  ]
+}

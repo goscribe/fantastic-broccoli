@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "hl-a",
+  "topicCode": "HL.a",
+  "topicName": "Environmental law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:45.859Z",
+  "cards": [
+    {
+      "id": "1d3791r",
+      "kind": "concept",
+      "front": "Why does environmental law work when a polite request to a factory does not?",
+      "back": "Environmental law has **legal penalties** behind it. A factory can ignore a request, but it cannot ignore a fine or a closure order.",
+      "hint": "Think about what happens if a firm breaks the rule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10qmd7o",
+      "kind": "concept",
+      "front": "Why can't one country solve cross-border pollution alone, and why are treaties hard to enforce?",
+      "back": "Pollution ignores **borders**, so states must cooperate. Because states keep **sovereignty**, no outside body can force them to join, so treaties rely on shared benefit and reporting.",
+      "hint": "Consider who has the power to make a state join.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n1xzv7",
+      "kind": "concept",
+      "front": "What should you judge a law by when evaluating how effective it is?",
+      "back": "Whether **behaviour changed or harm fell**. A law is not effective merely because it exists.",
+      "hint": "Existence is not the same as results.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0v3xtqv",
+      "kind": "term",
+      "front": "What is a treaty, and what does it mean for a state to ratify one?",
+      "back": "A **treaty** is a formal written agreement between states that creates legal obligations. A state **ratifies** it when it formally agrees to be bound by it.",
+      "hint": "Treaties bind states, not individuals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11ltv78",
+      "kind": "concept",
+      "front": "Why must countries pass their own national laws to carry out treaty promises?",
+      "back": "A treaty binds **states**, not individual firms. Countries therefore need national laws, such as emission limits and permits, to apply duties to firms within their borders.",
+      "hint": "Who does the treaty actually bind?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09pebhl",
+      "kind": "term",
+      "front": "What is an environmental impact assessment?",
+      "back": "A **process** for predicting and evaluating the likely environmental effects of a proposed project before it is approved.",
+      "hint": "It happens before a major project is approved.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bgfqgh",
+      "kind": "term",
+      "front": "What is the polluter pays principle?",
+      "back": "The **party responsible** for pollution or damage should bear the cost of preventing or repairing it, such as cleaning up a spill and compensating those affected.",
+      "hint": "Focus on who pays.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ibfxjt",
+      "kind": "term",
+      "front": "What is command-and-control regulation?",
+      "back": "A regulatory approach in which authorities set **fixed legal standards** or limits and penalise those who break them. It gives clear, certain limits but little flexibility.",
+      "hint": "Think of direct orders backed by punishment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bhbcpl",
+      "kind": "process",
+      "front": "Outline how an international agreement can help to address a global environmental issue.",
+      "back": "States agree **shared targets and timetables**, and each state that ratifies becomes bound by them. Regular reporting and support for poorer countries then encourage compliance.",
+      "hint": "Start with the agreement and end with compliance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lrfpy0",
+      "kind": "mistake",
+      "front": "A student says economic instruments always cut pollution because firms respond to prices. What is wrong?",
+      "back": "It is **not always true**. Wealthy firms may simply pay to pollute rather than cut emissions, so economic instruments are flexible but not guaranteed to work.",
+      "hint": "Consider which firms can afford to pay.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ps5k2d",
+      "kind": "concept",
+      "front": "What is a free rider, and how can it weaken an agreement?",
+      "back": "A **free rider** is a state or firm that benefits from collective action without bearing its share of the cost. This can weaken the commitment of those who do join.",
+      "hint": "Someone gets the benefit without paying.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1f6csk3",
+      "kind": "term",
+      "front": "What is the precautionary principle?",
+      "back": "The idea that a lack of full scientific certainty should **not delay action** to prevent serious or irreversible environmental harm.",
+      "hint": "Certainty is not required before acting.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y49ena",
+      "kind": "concept",
+      "front": "Why was the Montreal Protocol more successful than climate agreements?",
+      "back": "The Montreal Protocol targeted a **narrow group of chemicals**, substitutes were available, and phase-out dates were binding. Climate change has many sources and national targets with no penalty for missing them.",
+      "hint": "Compare the number of sources and the penalties.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Position, velocity and acceleration with integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:32.819Z",
+  "cards": [
+    {
+      "id": "1geiz8b",
+      "kind": "formula",
+      "front": "How do you find displacement from a velocity function $v(t)$ between times $a$ and $b$?",
+      "back": "**Displacement** is $x(b)-x(a)=\\int_a^b v(t)\\,dt$, the signed area under the velocity graph. Area below the time axis counts negatively.",
+      "hint": "Think about what the integral of a rate gives.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ftb8mk",
+      "kind": "concept",
+      "front": "Why can an object have zero displacement but still have a positive total distance traveled?",
+      "back": "Displacements in opposite directions have opposite signs and **cancel**. Total distance counts motion in both directions as positive, so it does not cancel.",
+      "hint": "Consider an object that goes out and comes back.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06i7eyy",
+      "kind": "concept",
+      "front": "What do the slope and the area of motion graphs tell you?",
+      "back": "On a position graph, **slope** gives velocity. On a velocity graph, slope gives acceleration. The signed **area** under a velocity graph gives the change in position.",
+      "hint": "Check which graph each quantity comes from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pdjnfx",
+      "kind": "term",
+      "front": "What is velocity?",
+      "back": "**Velocity** is the rate of change of position with respect to time, and it includes direction.",
+      "hint": "Compare it with position and acceleration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19rx0r8",
+      "kind": "term",
+      "front": "What is total distance traveled?",
+      "back": "**Total distance traveled** is the sum of lengths moved in every direction, found with $\\int_a^b |v(t)|\\,dt$.",
+      "hint": "Which function is inside the integral?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dcc0qy",
+      "kind": "process",
+      "front": "How do you find total distance on an interval when velocity may change sign?",
+      "back": "First solve $v(t)=0$ for turning times. Split the interval at each sign change. On each piece, take the absolute value of its signed integral, then add the pieces.",
+      "hint": "Start by finding where velocity equals zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rz9bk8",
+      "kind": "mistake",
+      "front": "What is the common mistake when finding total distance from the final displacement?",
+      "back": "Taking the **absolute value of the final displacement** is wrong. Add the absolute values of each separate signed contribution instead.",
+      "hint": "Do cancelling motions add up to distance?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yyid88",
+      "kind": "formula",
+      "front": "How can you find position $x(t)$ from velocity when the position $x(t_0)$ is known?",
+      "back": "$x(t)=x(t_0)+\\int_{t_0}^{t}v(u)\\,du$. The **initial position** $x(t_0)$ fixes the constant that integration introduces.",
+      "hint": "Which known value sets the constant?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kgmlk1",
+      "kind": "process",
+      "front": "How do you find position from acceleration and initial conditions?",
+      "back": "Integrate $a(t)$ using the **initial velocity** to get $v(t)$. Then integrate $v(t)$ using the **initial position** to get $x(t)$. Each integration adds one constant.",
+      "hint": "Work in two stages, one for each integral.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "074k2tu",
+      "kind": "concept",
+      "front": "Why is acceleration with position data alone not enough to fix a unique position function?",
+      "back": "Integrating acceleration twice introduces two constants. You need both **initial velocity** and **initial position** to determine them.",
+      "hint": "Count the constants from each integration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nho0la",
+      "kind": "example",
+      "front": "For $v(t)=t-2$ meters per second on $0\\leq t\\leq4$, what are the displacement and total distance?",
+      "back": "Displacement is **0 meters**. Total distance is **4 meters**. Velocity changes sign at $t=2$, so split the integral there and add the absolute values.",
+      "hint": "Solve $t-2=0$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qabpcl",
+      "kind": "example",
+      "front": "If $v(t)=2t$ meters per second and $x(0)=3$ meters, what is $x(t)$?",
+      "back": "$x(t)=t^2+3$ meters. Integrating gives $t^2+C$, and $x(0)=3$ sets $C=3$.",
+      "hint": "Integrate first, then use the starting position.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l1pv0d",
+      "kind": "term",
+      "front": "What is a turning time?",
+      "back": "A **turning time** is a time when velocity changes sign, so the object reverses direction. A zero alone is not enough; the sign must actually change.",
+      "hint": "Check the sign on both sides of the zero.",
+      "sectionId": "s4"
+    }
+  ]
+}

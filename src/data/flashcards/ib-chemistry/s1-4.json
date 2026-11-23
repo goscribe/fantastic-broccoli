@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s1-4",
+  "topicCode": "S1.4",
+  "topicName": "The mole",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:16.782Z",
+  "cards": [
+    {
+      "id": "1czss0g",
+      "kind": "concept",
+      "front": "What is one mole, and how many particles does it contain?",
+      "back": "A **mole** is an amount of substance containing exactly $6.02214076\\times10^{23}$ specified particles. Chemists use it because samples contain enormous numbers of particles.",
+      "hint": "Think of it as a counting unit, not a mass.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04nzu1k",
+      "kind": "formula",
+      "front": "How are the amount in moles and the particle count linked?",
+      "back": "$N=nN_{\\mathrm A}$, where $N$ is the particle count, $n$ the amount in mol and $N_{\\mathrm A}$ the **Avogadro's constant** in $\\mathrm{mol^{-1}}$. Divide by $N_{\\mathrm A}$ to go the other way.",
+      "hint": "Particle counts have no unit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ih858g",
+      "kind": "concept",
+      "front": "Why does molar mass let you turn a sample's mass into moles?",
+      "back": "The **molar mass**, $M$, is the mass of one mole of a substance, so $n=\\frac{m}{M}$ gives the amount from the sample mass. Both masses must use compatible units.",
+      "hint": "Add the relative atomic masses in the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b6kem4",
+      "kind": "example",
+      "front": "How many water molecules are in 9.00 g of water? Use $M=18.0\\ \\mathrm{g\\,mol^{-1}}$ and $N_{\\mathrm A}=6.02\\times10^{23}\\ \\mathrm{mol^{-1}}$.",
+      "back": "$n=\\frac{9.00}{18.0}=0.500$ mol, so $N=0.500\\times6.02\\times10^{23}=3.01\\times10^{23}$ water molecules.",
+      "hint": "Find the amount first using $n=\\frac{m}{M}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o94tv1",
+      "kind": "process",
+      "front": "What are the steps to find the number of particles in a given mass of a substance?",
+      "back": "1) Convert the mass to an amount with $n=\\frac{m}{M}$. 2) Multiply the amount by $N_{\\mathrm A}$ to get the particle count. 3) Name the particle type in your answer.",
+      "hint": "Mass, then moles, then particles."
+    },
+    {
+      "id": "1iactpn",
+      "kind": "mistake",
+      "front": "Common mistake: a student says a mole is a mass. Why is this wrong?",
+      "back": "A **mole** is a count of particles, not a mass. The same amount in moles has different masses for different substances.",
+      "hint": "Compare one mole of two different substances.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ugy3pv",
+      "kind": "example",
+      "front": "How many moles are in a sample of $1.204\\times10^{24}$ molecules? Use $N_{\\mathrm A}=6.02\\times10^{23}\\ \\mathrm{mol^{-1}}$.",
+      "back": "$n=\\frac{1.204\\times10^{24}}{6.02\\times10^{23}}=2.00$ mol of molecules.",
+      "hint": "Divide the particle count by Avogadro's constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0leau3y",
+      "kind": "example",
+      "front": "How many hydrogen atoms are in 0.500 mol of water molecules?",
+      "back": "**1.00** mol of hydrogen atoms, because each $\\mathrm{H_2O}$ molecule contains two hydrogen atoms.",
+      "hint": "Use the formula to count atoms per molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fau8im",
+      "kind": "mistake",
+      "front": "A student counts NaCl as containing molecules. What is wrong?",
+      "back": "NaCl is an ionic compound, so you should count **formula units** rather than molecules. Each formula unit contains one sodium ion and one chloride ion.",
+      "hint": "Think about what kind of compound NaCl is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11mo11y",
+      "kind": "term",
+      "front": "What is the amount of substance, $n$?",
+      "back": "The **amount of substance** is how many moles of specified particles a sample contains.",
+      "hint": "It is measured in mol.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k0opdv",
+      "kind": "term",
+      "front": "What is molar mass?",
+      "back": "The **molar mass**, $M$, is the mass of one mole of a substance, usually expressed in $\\mathrm{g\\,mol^{-1}}$.",
+      "hint": "Use the relative atomic masses in the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01g0n5n",
+      "kind": "term",
+      "front": "What is a formula unit?",
+      "back": "A **formula unit** is the simplest whole-number ratio of ions in an ionic compound, such as one sodium ion and one chloride ion in NaCl.",
+      "hint": "Used for ionic compounds, not molecules.",
+      "sectionId": "s4"
+    }
+  ]
+}

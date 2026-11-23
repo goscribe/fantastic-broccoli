@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Reaction mechanism and rate law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:48.238Z",
+  "cards": [
+    {
+      "id": "043gk9r",
+      "kind": "concept",
+      "front": "Which step usually controls the overall rate in a multistep mechanism, and why does its rate law matter?",
+      "back": "The **rate-determining step**, the slowest elementary step, limits the overall rate. Its reactants give the starting rate law for predicting the rate.",
+      "hint": "Think about a bottleneck in a pipe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ait8o",
+      "kind": "concept",
+      "front": "How can a fast equilibrium help predict a rate law that contains only measurable reactants?",
+      "back": "Use the **fast equilibrium** to write the intermediate's concentration in terms of reactants, then substitute it into the slow step's rate law. For NO₂ formation, $[\\mathrm{N_2O_2}]=(k_1/k_{-1})[\\mathrm{NO}]^2$ gives $\\mathrm{rate}=k[\\mathrm{NO}]^2[\\mathrm{O_2}]$.",
+      "hint": "Replace the intermediate with something you can measure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ps3vxa",
+      "kind": "process",
+      "front": "What two checks must a mechanism pass to be consistent with the data?",
+      "back": "First, its steps must add to the overall equation, with intermediates canceled. Second, its predicted rate law must match the experimentally determined concentration powers.",
+      "hint": "One check is about addition, the other about experiment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z5xixl",
+      "kind": "term",
+      "front": "What is a reaction mechanism?",
+      "back": "A **reaction mechanism** is a sequence of elementary steps whose sum gives the overall reaction.",
+      "hint": "Think of the steps as a route to the final equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gojhql",
+      "kind": "mistake",
+      "front": "Can you take rate-law exponents directly from the coefficients in the overall equation?",
+      "back": "No. Coefficients from the overall equation are not rate-law exponents. Use the mechanism's slow step or experimental data instead.",
+      "hint": "Check whether the reactant appears in the slow step.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xy5tuu",
+      "kind": "formula",
+      "front": "In the proposed NO₂ mechanism, what rate law does the slow step give?",
+      "back": "$\\mathrm{rate}=k_2[\\mathrm{N_2O_2}][\\mathrm{O_2}]$, where $k_2$ is the rate constant of the slow step.",
+      "hint": "Use the reactants of the slow step only.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k1gydt",
+      "kind": "formula",
+      "front": "What is the final predicted rate law for NO₂ formation, and how is the overall constant k defined?",
+      "back": "$\\mathrm{rate}=k[\\mathrm{NO}]^2[\\mathrm{O_2}]$, with $k=k_2k_1/k_{-1}$.",
+      "hint": "Substitute the intermediate, then combine the constants.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06np64v",
+      "kind": "term",
+      "front": "What is N₂O₂ in the proposed NO₂ mechanism?",
+      "back": "N₂O₂ is an **intermediate**. It forms in the fast equilibrium and is used up in the slow step, so it is absent from the overall equation.",
+      "hint": "Check whether it appears in the overall equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ds5zhe",
+      "kind": "term",
+      "front": "What is a fast equilibrium in a mechanism?",
+      "back": "A **fast equilibrium** is a reversible step that reaches equilibrium before the slower step significantly uses its product.",
+      "hint": "Compare its speed with the slow step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04xunab",
+      "kind": "example",
+      "front": "Trial 2 doubles only [NO] and the rate rises from 0.010 to 0.040 mol/L/s. What is the order in NO?",
+      "back": "**Second order** in NO. The rate ratio is $0.040/0.010=4$, and doubling NO quadruples the rate.",
+      "hint": "Compare the rate ratio with the concentration ratio.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17amsp9",
+      "kind": "example",
+      "front": "Using trial 1, [NO] = 0.10 mol/L, [O₂] = 0.20 mol/L, rate = 0.010 mol/L/s, what is k for $\\mathrm{rate}=k[\\mathrm{NO}]^2[\\mathrm{O_2}]$?",
+      "back": "$k=5.0\\ \\mathrm{L^2\\,mol^{-2}\\,s^{-1}}$, from $k=0.010/(0.10^2\\times0.20)$.",
+      "hint": "Rearrange the rate law to solve for k.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qooy73",
+      "kind": "mistake",
+      "front": "Does a mechanism that matches the overall equation and rate data prove it is correct?",
+      "back": "No. It is **consistent** with the observations, but another sequence of steps can give the same overall equation and rate law.",
+      "hint": "Matching shows possibility, not proof.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q8f0rw",
+      "kind": "mistake",
+      "front": "Is the proposal NO+O₂→NO₃ (slow), then NO₃+NO→2NO₂ acceptable for these data?",
+      "back": "Reject it under these conditions. It predicts $\\mathrm{rate}=k[\\mathrm{NO}][\\mathrm{O_2}]$, but the data show second order in NO. Matching the overall equation alone is not enough.",
+      "hint": "Compare the predicted exponent of NO with the data.",
+      "sectionId": "s4"
+    }
+  ]
+}

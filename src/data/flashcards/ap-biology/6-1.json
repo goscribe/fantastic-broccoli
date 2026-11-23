@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "DNA and RNA structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:51.770Z",
+  "cards": [
+    {
+      "id": "0hrstc7",
+      "kind": "concept",
+      "front": "Where is genetic information actually stored in a DNA molecule?",
+      "back": "In the **base sequence**, the order of the four bases along a strand. The repeating sugar-phosphate backbone supports the strand but does not encode the information.",
+      "hint": "Think about what varies from one gene to another.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "154lvi9",
+      "kind": "concept",
+      "front": "Which bases pair in DNA, and what holds each pair together?",
+      "back": "**Complementary base pairing**: adenine with thymine and cytosine with guanine, held by **hydrogen bonds**. This lets one strand specify the sequence of the other.",
+      "hint": "Each base has one specific partner.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yn6tbb",
+      "kind": "concept",
+      "front": "What are the three parts of a nucleotide, and how do nucleotides join into a strand?",
+      "back": "A **nucleotide** has a phosphate group, a five-carbon sugar, and a nitrogenous base. Bonds between sugars and phosphates link nucleotides into a repeating **sugar-phosphate backbone** with bases extending out.",
+      "hint": "Count the parts before naming the bonds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16xuqki",
+      "kind": "term",
+      "front": "What is the difference between deoxyribose and ribose?",
+      "back": "**Deoxyribose** is the five-carbon sugar in DNA. **Ribose** is the sugar in RNA. Ribose has an oxygen atom at a position where deoxyribose has hydrogen.",
+      "hint": "Look at one specific carbon position.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0382ads",
+      "kind": "concept",
+      "front": "Which base replaces thymine in RNA, and what does it pair with?",
+      "back": "**Uracil** replaces thymine in RNA and pairs with adenine. RNA cytosine still pairs with guanine.",
+      "hint": "Compare the base lists of DNA and RNA.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sfy8c2",
+      "kind": "mistake",
+      "front": "A student says RNA adenine pairs with DNA adenine when the two meet. What is wrong?",
+      "back": "Wrong: RNA adenine pairs with DNA **thymine**, and RNA **uracil** pairs with DNA adenine. Always name both molecules when giving a pairing rule.",
+      "hint": "Check which base sits on which molecule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sndm9q",
+      "kind": "mistake",
+      "front": "A student says the bases form the backbone of DNA. What is the correct picture?",
+      "back": "Wrong: the **sugar-phosphate backbones** form the outside of the two strands. The bases project inward from the backbones and pair across the double helix.",
+      "hint": "Which part faces outward in the helix?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "143t250",
+      "kind": "concept",
+      "front": "What does it mean that the two DNA strands are antiparallel?",
+      "back": "The strands run in **opposite directions**: one runs 5′ to 3′ and the other 3′ to 5′. Each strand's ends are named for positions on its sugar.",
+      "hint": "Think about which way each strand points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14fndjm",
+      "kind": "process",
+      "front": "How can DNA pass on a copy of its base sequence?",
+      "back": "1) The strands **separate**, breaking hydrogen bonds between paired bases. 2) Each exposed base sequence acts as a **template**. 3) Complementary pairing guides formation of a matching strand.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "069qe96",
+      "kind": "term",
+      "front": "What does messenger RNA do?",
+      "back": "**Messenger RNA** carries a copy of gene information from DNA and is used to make a protein.",
+      "hint": "Think about what it carries.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08166gm",
+      "kind": "term",
+      "front": "What is a gene, in terms of DNA?",
+      "back": "A **gene** is a DNA sequence that can produce a functional RNA or protein product.",
+      "hint": "It is a sequence of bases, not a single base.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07xqy4s",
+      "kind": "concept",
+      "front": "How do the usual strand structures of DNA and RNA differ?",
+      "back": "DNA is usually **double-stranded**, forming a double helix. RNA is usually **single-stranded**. These are common structures, not absolute rules for every molecule.",
+      "hint": "Think about the shape of DNA.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xivieu",
+      "kind": "concept",
+      "front": "How do the main roles of DNA and RNA differ?",
+      "back": "DNA is the **main long-term store** of genetic information. RNA helps use that information: messenger RNA carries gene copies for protein production, while ribosomal and transfer RNA help build proteins.",
+      "hint": "Compare storing information with using it.",
+      "sectionId": "s3"
+    }
+  ]
+}

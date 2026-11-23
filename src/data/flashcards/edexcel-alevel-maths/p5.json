@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p5",
+  "topicCode": "P5",
+  "topicName": "Trigonometry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:43.013Z",
+  "cards": [
+    {
+      "id": "1l4hja6",
+      "kind": "formula",
+      "front": "Which ratio gives $\\sin\\theta$ in a right-angled triangle?",
+      "back": "$\\sin\\theta=\\frac{\\mathrm{opp}}{\\mathrm{hyp}}$, the **opposite** side over the hypotenuse. Cosine is adjacent over hypotenuse, and tangent is opposite over adjacent.",
+      "hint": "Label the sides relative to $\\theta$ before reading off the ratio.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oikmho",
+      "kind": "concept",
+      "front": "When should you use the cosine rule rather than the sine rule in a triangle?",
+      "back": "Use the **cosine rule** when you know two sides and the angle between them, or all three sides. The sine rule needs a side and its opposite angle.",
+      "hint": "Compare what you know: an angle and its opposite side, or two sides around an angle?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pkb1nb",
+      "kind": "process",
+      "front": "How do you find every solution of a trig equation in a given interval?",
+      "back": "Find the **principal value** from the inverse function, use symmetry for a second solution in one cycle, add or subtract periods to cover the interval, then discard values outside it.",
+      "hint": "Start with what your calculator gives you.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "181wj0o",
+      "kind": "term",
+      "front": "What is a radian?",
+      "back": "The **angle** at the centre of a circle when the arc length equals the radius. A full turn is $2\\pi$ radians, so $180^{\\circ}=\\pi$ radians.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y1qp29",
+      "kind": "formula",
+      "front": "What are the arc length and sector area formulae for a sector of radius $r$ and angle $\\theta$?",
+      "back": "Arc length $=r\\theta$ and sector area $=\\frac{1}{2}r^2\\theta$, where $\\theta$ must be in **radians**.",
+      "hint": "Both formulae need the angle in one particular unit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "096zd8i",
+      "kind": "mistake",
+      "front": "A student uses $60^{\\circ}$ directly in the arc length formula $r\\theta$. What is wrong?",
+      "back": "**Degrees** cannot be used in these formulae. Convert first by multiplying by $\\frac{\\pi}{180}$, so $60^{\\circ}$ becomes $\\frac{\\pi}{3}$ radians.",
+      "hint": "Check the unit the formula expects.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dkasi8",
+      "kind": "example",
+      "front": "In a triangle, $b=8\\,\\mathrm{cm}$, $c=11\\,\\mathrm{cm}$ and $A=60^{\\circ}$. What is $a$, to 2 decimal places?",
+      "back": "$a^2=64+121-88=97$, so $a\\approx9.85\\,\\mathrm{cm}$.",
+      "hint": "Start with the cosine rule, since you have two sides and the angle between them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rh2eh6",
+      "kind": "mistake",
+      "front": "Why can the sine rule give two possible angles?",
+      "back": "Sine of $\\theta$ and sine of $180^{\\circ}-\\theta$ are equal, so both may fit. Keep the one that makes the angles in the triangle sum to $180^{\\circ}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c4p0fd",
+      "kind": "concept",
+      "front": "How do the period and range of $y=\\tan x$ differ from those of $y=\\sin x$?",
+      "back": "$\\tan x$ has period $180^{\\circ}$ and takes all real values, with asymptotes where $\\cos x=0$. $\\sin x$ has period $360^{\\circ}$ and range $-1\\le y\\le1$.",
+      "hint": "Think about what tangent is built from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u9lq7f",
+      "kind": "term",
+      "front": "What is an identity?",
+      "back": "An **identity** is true for every value of the variable where both sides are defined, written with $\\equiv$. An equation holds only for particular values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uph0ej",
+      "kind": "formula",
+      "front": "What is the Pythagorean identity?",
+      "back": "$\\sin^2\\theta+\\cos^2\\theta\\equiv1$ for every $\\theta$. Rearranged, $\\sin^2\\theta=1-\\cos^2\\theta$ and $\\cos^2\\theta=1-\\sin^2\\theta$.",
+      "hint": "Think about which form lets you swap one function for the other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "165u4ig",
+      "kind": "example",
+      "front": "How do you start proving $\\frac{\\sin^2x}{1-\\sin^2x}\\equiv\\tan^2x$?",
+      "back": "Replace $1-\\sin^2x$ with $\\cos^2x$, giving $\\frac{\\sin^2x}{\\cos^2x}$, which equals $\\tan^2x$ by the tangent identity.",
+      "hint": "Which identity links $1-\\sin^2x$ to another function?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1oiofkw",
+      "kind": "mistake",
+      "front": "Why is it risky to divide both sides of an equation by a common factor such as $\\cos x$?",
+      "back": "Dividing by $\\cos x$ loses every solution where $\\cos x=0$. Factorise instead, then solve each factor separately.",
+      "hint": "Think about which values make the factor equal to zero.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1qmzuas",
+      "kind": "example",
+      "front": "Solve $\\cos x=-0.5$ for $0^{\\circ}\\le x\\le360^{\\circ}$. What are the solutions?",
+      "back": "$x=120^{\\circ}$ or $x=240^{\\circ}$. The principal value is $120^{\\circ}$, and $360^{\\circ}-120^{\\circ}$ gives the second solution.",
+      "hint": "Start with the inverse cosine of $-0.5$.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Ecosystem services",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:26.967Z",
+  "cards": [
+    {
+      "id": "0ns45y0",
+      "kind": "term",
+      "front": "What are ecosystem services?",
+      "back": "Ecosystem services are the **benefits** people get from natural systems, such as clean water, food, and recreation. Nobody builds or runs these systems, yet people rely on them every day.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11welgh",
+      "kind": "concept",
+      "front": "What are the four types of ecosystem services?",
+      "back": "The four types are **provisioning**, **regulating**, **supporting**, and **cultural** services. Scientists use these four groups to sort every benefit people get from ecosystems.",
+      "hint": "Two types supply physical things, and two do not.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gz4b4k",
+      "kind": "concept",
+      "front": "Why does draining a wetland harm people?",
+      "back": "Wetlands filter pollutants and absorb floodwater, so draining one lowers water quality and can worsen **flooding**. Replacing these services with built structures or treatment plants can be expensive.",
+      "hint": "Think about what a wetland does for water and for floods.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xmwvtr",
+      "kind": "term",
+      "front": "What are provisioning services?",
+      "back": "**Provisioning services** are the material goods people take directly from nature, such as food, fresh water, timber, fibers, and medicines.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rffnd4",
+      "kind": "term",
+      "front": "What are regulating services?",
+      "back": "**Regulating services** control environmental conditions that people depend on, such as water quality, flooding, climate, and pest numbers. They often work quietly in the background.",
+      "hint": "Think of benefits you rarely notice day to day.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16f1k3x",
+      "kind": "example",
+      "front": "Which regulating service do mangrove forests provide to coasts?",
+      "back": "Mangroves provide a **buffer** that protects coasts against storm waves.",
+      "hint": "Think about what happens at the edge of the sea during storms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n87h6r",
+      "kind": "term",
+      "front": "What are supporting services?",
+      "back": "**Supporting services** are the basic processes that keep ecosystems functioning, such as nutrient cycling, soil formation, and photosynthesis. Every other type of service depends on them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uace90",
+      "kind": "term",
+      "front": "What are cultural services?",
+      "back": "**Cultural services** are the nonmaterial benefits people gain from ecosystems, such as recreation, beauty, education, and spiritual value.",
+      "hint": "Think of benefits that are not physical.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07s8zn4",
+      "kind": "example",
+      "front": "Which service type does an ocean fish stock belong to?",
+      "back": "**Provisioning**, because the fish supply food and income for coastal communities.",
+      "hint": "Ask whether people harvest this benefit or whether it works quietly in the background.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vx2bvl",
+      "kind": "mistake",
+      "front": "Why is naming a forest as a service wrong?",
+      "back": "A forest is the **provider**, not the service. The service is what the forest does for people, such as filtering water or storing carbon.",
+      "hint": "Separate the thing that provides a benefit from the benefit itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "093uwo0",
+      "kind": "concept",
+      "front": "How does biodiversity relate to ecosystem services?",
+      "back": "Greater **biodiversity** among genes, species, and ecosystems helps ecosystems keep working when conditions change. This is why healthy ecosystems usually provide more services than damaged ones.",
+      "hint": "Think about what happens to an ecosystem when conditions shift.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qdu2ul",
+      "kind": "concept",
+      "front": "How can losing one ecosystem service affect others?",
+      "back": "Damage to one service can spread to others. For example, **soil loss** can lower crop yields and pollute nearby streams.",
+      "hint": "Think about soil's role in farming and in water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ji8p0t",
+      "kind": "process",
+      "front": "What three steps should you follow when asked how ecosystems support people?",
+      "back": "First, **name the service type**. Second, give a specific example. Third, say what **benefit** people gain.",
+      "sectionId": "s5"
+    }
+  ]
+}

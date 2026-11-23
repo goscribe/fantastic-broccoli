@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-1",
+  "topicCode": "9.1",
+  "topicName": "Stratospheric ozone depletion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:05.210Z",
+  "cards": [
+    {
+      "id": "17bqhh7",
+      "kind": "concept",
+      "front": "Trace the chain that links people releasing CFCs to more harmful UV light reaching the ground.",
+      "back": "CFCs supply **chlorine**, chlorine destroys ozone, and less ozone lets more harmful UV-B reach the surface.",
+      "hint": "Start with the human-made chemical that is released."
+    },
+    {
+      "id": "0n973jr",
+      "kind": "concept",
+      "front": "Why does the ozone layer protect living things?",
+      "back": "Stratospheric **ozone** absorbs most of the harmful UV-B before it reaches the ground, where it could damage DNA in living cells.",
+      "hint": "Think about where the harmful light is stopped.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hnbdp0",
+      "kind": "concept",
+      "front": "Why can one chlorine atom destroy many ozone molecules?",
+      "back": "Chlorine is a **catalyst**: it is released again after each reaction, so it keeps attacking ozone until it is locked into other compounds.",
+      "hint": "Follow one chlorine atom through both reactions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lnibvs",
+      "kind": "term",
+      "front": "Which layer of the atmosphere contains most of Earth's ozone?",
+      "back": "The **stratosphere**, the layer above the lowest layer, the troposphere, where weather happens.",
+      "hint": "Think about where weather does not happen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pmkenr",
+      "kind": "mistake",
+      "front": "Why is ozone near the ground not a protection from UV light?",
+      "back": "Ground-level ozone is a **pollutant** that irritates the lungs. Only stratospheric ozone protects life; ozone is not harmful or helpful in every location.",
+      "hint": "Compare where the ozone is with what it does.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1skw1yk",
+      "kind": "term",
+      "front": "What is ultraviolet radiation?",
+      "back": "**Ultraviolet radiation** is electromagnetic radiation with shorter wavelengths than visible light, and its high-energy forms can damage DNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ppmqnc",
+      "kind": "term",
+      "front": "What is a chlorofluorocarbon?",
+      "back": "A **chlorofluorocarbon** (CFC) is a human-made compound of chlorine, fluorine, and carbon, once widely used as a coolant, propellant, and foam-blowing agent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ns5v0j",
+      "kind": "process",
+      "front": "Which sources release ozone-depleting chemicals in the stratosphere?",
+      "back": "Old **refrigerators**, air conditioners, spray cans, and foam insulation (CFCs); fire extinguishers (halons); soil and crop **fumigants** (methyl bromide); and electronics and metal cleaning solvents (chlorine compounds).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nzj2q9",
+      "kind": "concept",
+      "front": "Why does a CFC released near the ground still damage ozone high above it?",
+      "back": "CFCs react little in the lowest layer, so they **persist** and slowly drift up to the stratosphere, where UV light breaks them apart.",
+      "hint": "Consider how long CFCs survive in the lower atmosphere.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0guvqeh",
+      "kind": "formula",
+      "front": "Which reaction shows chlorine atoms attacking ozone in the stratosphere?",
+      "back": "$\\mathrm{Cl(g) + O_3(g) \\rightarrow ClO(g) + O_2(g)}$. Chlorine reacts with **ozone** to form chlorine monoxide and ordinary oxygen.",
+      "hint": "Look for the species that reacts with ozone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wvxot1",
+      "kind": "process",
+      "front": "What are the steps by which CFCs lead to ozone destruction in the stratosphere?",
+      "back": "1) **UV light** breaks the CFC and frees chlorine. 2) Chlorine attacks ozone, forming ClO and O2. 3) ClO reacts with a free oxygen atom, releasing chlorine again. 4) The cycle repeats until chlorine is locked away.",
+      "hint": "Start with what breaks the CFC molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07z6pku",
+      "kind": "term",
+      "front": "What is the ozone hole?",
+      "back": "The **ozone hole** is a large region of the stratosphere over Antarctica where ozone levels fall sharply each spring, mostly around September and October.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08319d1",
+      "kind": "concept",
+      "front": "Why does the Antarctic ozone hole form in spring rather than during winter?",
+      "back": "Cold winter air forms **polar stratospheric clouds**, which convert chlorine into reactive forms. Sunlight returning in spring releases chlorine atoms, and ozone falls quickly.",
+      "hint": "Think about what the cold, dark winter air does to chlorine compounds.",
+      "sectionId": "s5"
+    }
+  ]
+}

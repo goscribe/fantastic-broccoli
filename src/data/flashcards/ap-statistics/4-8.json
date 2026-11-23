@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-8",
+  "topicCode": "4.8",
+  "topicName": "Claims about a difference of means",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:02.688Z",
+  "cards": [
+    {
+      "id": "016zk8n",
+      "kind": "term",
+      "front": "What is a plausible value for a difference of means?",
+      "back": "A **plausible value** is any value of $\\mu_1-\\mu_2$ inside the confidence interval, because the data are consistent with it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ialims",
+      "kind": "concept",
+      "front": "How does the position of 0 in a 95% interval for $\\mu_1-\\mu_2$ show whether the means differ?",
+      "back": "If the whole interval is above 0, group 1 has the larger mean; if it is below 0, group 2 does. If 0 is inside, there is **no convincing evidence** of a difference.",
+      "hint": "Think about where the claim of equal means sits on the number line.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "052oc0t",
+      "kind": "formula",
+      "front": "How is the confidence level $C$ linked to the significance level $\\alpha$ for an interval matching a two-sided test?",
+      "back": "$\\alpha=1-\\frac{C}{100}$, so a 95% interval matches $\\alpha=0.05$.",
+      "hint": "Work out what share of results is left outside the interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c1x0dd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an interval containing 0 shows the two means are equal?",
+      "back": "**Zero** is only one plausible value among many. The interval shows 0 is consistent with the data, not that the means are equal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10qqw6t",
+      "kind": "example",
+      "front": "What conclusion does the 95% interval $(-0.8,\\ 3.6)$ hours for $\\mu_A-\\mu_B$ support about study times?",
+      "back": "There is **no convincing evidence** that true mean study times differ, because 0 is a plausible value inside the interval.",
+      "hint": "Check whether the hypothesized difference lies inside or outside the interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02pubnv",
+      "kind": "example",
+      "front": "For a 95% interval of $(2.1,\\ 9.5)$ points for group 1 minus group 2, which group has the higher mean?",
+      "back": "Group 1, by between 2.1 and 9.5 points. The true gap could still be small or large.",
+      "hint": "The sign of both endpoints gives the direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kmjbi8",
+      "kind": "term",
+      "front": "What does practically significant mean for a difference between two means?",
+      "back": "A difference is **practically significant** when it is large enough to matter in the real-world context of the study.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kpynm4",
+      "kind": "concept",
+      "front": "Which design feature allows cause-and-effect conclusions about the treatments in a study?",
+      "back": "**Random assignment**, which uses chance to place subjects into treatment groups. Random sampling only supports generalizing to the populations sampled.",
+      "hint": "Compare how subjects are chosen with how they are placed into groups.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wikzsf",
+      "kind": "term",
+      "front": "What is a confounding variable?",
+      "back": "A **confounding variable** is related to both group and response, so its effect cannot be separated from the group effect.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1at7e2g",
+      "kind": "mistake",
+      "front": "Why can't a 95% interval for means tell you about one person's value?",
+      "back": "The interval describes **population means**, which vary much less than individual values, so it says nothing about a single individual.",
+      "hint": "Compare the spread of averages with the spread of single observations.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mgxq41",
+      "kind": "process",
+      "front": "What are the steps to decide a two-sided test at $\\alpha=0.05$ from a 95% interval for $\\mu_1-\\mu_2$?",
+      "back": "1) Note the hypothesized difference, usually 0. 2) Check whether it lies inside the interval. 3) If outside, reject $H_0$; if inside, fail to reject $H_0$.",
+      "hint": "Start with the claim you are testing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qadylm",
+      "kind": "term",
+      "front": "What is the confidence level of an interval?",
+      "back": "The **confidence level** is the long-run percentage of intervals, built the same way from repeated random samples, that capture the true parameter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g09xo8",
+      "kind": "concept",
+      "front": "What happens to the stated confidence level if the sample is not random or small samples are strongly skewed?",
+      "back": "The **stated confidence level** may be wrong, so conclusions drawn from the interval are less reliable.",
+      "hint": "Think about the conditions the interval method depends on.",
+      "sectionId": "s5"
+    }
+  ]
+}

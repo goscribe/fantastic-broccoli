@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "9-2",
+  "topicCode": "9.2",
+  "topicName": "The ideal gas law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:59.625Z",
+  "cards": [
+    {
+      "id": "1nnm42j",
+      "kind": "formula",
+      "front": "What equation links pressure, volume, amount and temperature for an ideal gas?",
+      "back": "$PV=nRT$, where $P$ is pressure in Pa, $V$ is volume in m³, $n$ is amount in mol, $T$ is **absolute temperature** in K, and $R=8.314\\,\\mathrm{J/(mol\\,K)}$.",
+      "hint": "Every symbol here has an SI unit worth remembering.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07m1sx9",
+      "kind": "concept",
+      "front": "Why must temperature be in kelvins when you use the gas law?",
+      "back": "The kelvin scale starts at **absolute zero**, so gas quantities are proportional to kelvin temperature. The Celsius zero is arbitrary, so using it gives wrong ratios.",
+      "hint": "Think about where the zero point of each scale sits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1k3jdxk",
+      "kind": "process",
+      "front": "How do you solve a problem where a fixed amount of gas moves from one state to another?",
+      "back": "Use $\\frac{P_1V_1}{T_1}=\\frac{P_2V_2}{T_2}$. Convert temperatures to kelvin, keep units matched on both sides, then solve for the unknown. The **gas constant** cancels out.",
+      "hint": "Which quantities stay fixed between the two states?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "186jjd5",
+      "kind": "term",
+      "front": "What is an ideal gas?",
+      "back": "An **ideal gas** is a model gas whose particles are tiny compared with the spaces between them, collide elastically, and exert no forces on each other between collisions.",
+      "hint": "It is a simplified model, not a real gas.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h86ipk",
+      "kind": "mistake",
+      "front": "If you double a gas's Celsius temperature, does its pressure double?",
+      "back": "No. Only the **kelvin** temperature is proportional to pressure at constant volume, and doubling the Celsius value does not double the absolute temperature.",
+      "hint": "Convert to kelvin before comparing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01s7m1n",
+      "kind": "example",
+      "front": "Find the pressure of 0.800 mol of ideal gas at 27 °C in a rigid 0.0200 m³ container.",
+      "back": "**$9.98\\times10^{4}$ Pa** (about 99.8 kPa). Convert to 300 K, then use $P=\\frac{nRT}{V}$.",
+      "hint": "Start by converting 27 °C to kelvin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pobfmy",
+      "kind": "example",
+      "front": "A sealed rigid tank is at $2.0\\times10^{5}$ Pa and 20 °C. It warms to 50 °C. What is the new pressure?",
+      "back": "**$2.2\\times10^{5}$ Pa**. Volume is constant, so $P_2=P_1\\frac{T_2}{T_1}$ with $T_1=293$ K and $T_2=323$ K.",
+      "hint": "Which quantity is held constant here?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v0bm59",
+      "kind": "formula",
+      "front": "For a fixed amount of gas at constant temperature, what relation holds between pressure and volume?",
+      "back": "$P_1V_1=P_2V_2$. The **product** of pressure and volume stays the same, so doubling the volume halves the pressure.",
+      "hint": "Look at the special cases in the ratio form.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "004vrbm",
+      "kind": "concept",
+      "front": "In what conditions does a real gas behave most like an ideal gas?",
+      "back": "At **low pressure**, where particles are far apart, and at **high temperature**, where attractions are small compared with kinetic energy.",
+      "hint": "Think about crowding and speed of particles.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04de435",
+      "kind": "mistake",
+      "front": "Can you apply the ideal gas law to a gas close to the temperature where it condenses?",
+      "back": "No. Near condensation a **real gas** departs strongly from ideal behavior, because particle volume and attractions between particles are no longer negligible.",
+      "hint": "Ask whether attractions are still small.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08t4alv",
+      "kind": "formula",
+      "front": "What is the particle-count form of the ideal gas law?",
+      "back": "$PV=Nk_\\mathrm{B}T$, where $N$ is the **number of particles** and $k_\\mathrm{B}$ is the Boltzmann constant. It is equivalent to $PV=nRT$.",
+      "hint": "Compare it with the mole-based version.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g1ucbi",
+      "kind": "term",
+      "front": "What is a mole?",
+      "back": "The **mole** is the SI unit of amount of substance. One mole contains $6.022\\times10^{23}$ particles.",
+      "hint": "It counts particles in large groups.",
+      "sectionId": "s2"
+    }
+  ]
+}

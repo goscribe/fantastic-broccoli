@@ -1,19 +1,22 @@
 "use client";
 import { buttonClass } from "@/components/ui/button";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight, Loader2 } from "lucide-react";
-import { setAvailability, updateStudyPlan, type AvailabilitySlot, type StudyPlan } from "@/lib/api/planner";
+import { setAvailability, type AvailabilitySlot, type StudyPlan } from "@/lib/api/planner";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { toastError } from "@/lib/toast";
 
 const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 const ORDER = [1, 2, 3, 4, 5, 6, 0];
-const STEPS = ["free", "goal", "exam", "done"] as const;
+// Only the free times: minutes per day come from the exam planner, the exam
+// date lives only in the exam planner, and the study time from the habit prompt.
+const STEPS = ["free", "done"] as const;
 type Step = (typeof STEPS)[number];
 
-/** Runs right after the calendar connects, and again from the gear: one question per screen, flip back and forth, save at the end. */
+/** The week setup: when you are free, then a summary; saved at the end. Opens in Planner › Timetable after the calendar connects (and with ?setup=1), and from home's week banner (/?setup=1). */
 export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { plan: StudyPlan; start?: Step; onClose: () => void; onSaved: () => void }) {
   const [step, setStep] = useState<Step>(start);
   const initial = (plan.availability ?? null) as AvailabilitySlot[] | null;
@@ -25,9 +28,6 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
     }
     return out;
   });
-  const [goal, setGoal] = useState(plan.dailyGoalMin);
-  const [examTitle, setExamTitle] = useState(plan.examTitle ?? "");
-  const [examDate, setExamDate] = useState(plan.examDate ? new Date(plan.examDate).toISOString().slice(0, 10) : "");
   const [saving, setSaving] = useState(false);
   const idx = STEPS.indexOf(step);
 
@@ -35,7 +35,6 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
     setSaving(true);
     try {
       await setAvailability(ORDER.filter((wd) => rows[wd].on).map((wd) => ({ weekday: wd, start: rows[wd].start, end: rows[wd].end })));
-      await updateStudyPlan({ dailyGoalMin: goal, examTitle: examTitle.trim() || null, examDate: examDate || null });
       onSaved();
     } catch (e) {
       toastError(e, "Couldn't save your plan");
@@ -43,9 +42,13 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
     }
   };
 
-  return (
-    <div className="fixed inset-0 z-50 grid place-items-center bg-black/30 p-4" onClick={onClose}>
-      <div className="w-full max-w-[440px] rounded-2xl border border-border bg-card p-6" onClick={(e) => e.stopPropagation()}>
+  // Portalled: home opens this from inside its banner, whose stacking context would let later cards paint over it.
+  // Only ever opened on the client (a tap or a query param read in the browser).
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[100] grid grid-cols-[minmax(0,440px)] place-content-center bg-black/30 p-4" onClick={onClose}>
+      <div className="w-full min-w-0 rounded-2xl border border-border bg-card p-5 sm:p-6" onClick={(e) => e.stopPropagation()}>
         <div className="mb-4 flex items-center justify-center gap-1.5">
           {STEPS.map((s, i) => (
             <button key={s} type="button" onClick={() => setStep(s)} aria-label={`Step ${i + 1}`} className={cn("h-1.5 rounded-full transition-all", s === step ? "w-8 bg-accent" : i < idx ? "w-4 bg-accent/50" : "w-4 bg-muted")} />
@@ -61,44 +64,17 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
               {ORDER.map((wd, i) => {
                 const r = rows[wd];
                 return (
-                  <div key={wd} className="flex items-center gap-3">
-                    <label className="flex w-[72px] items-center gap-2 text-[13.5px] font-semibold">
+                  <div key={wd} className="flex items-center gap-2 sm:gap-3">
+                    <label className="flex w-[64px] shrink-0 items-center gap-2 text-[13.5px] font-semibold">
                       <input type="checkbox" checked={r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, on: e.target.checked } })} className="size-4 accent-[var(--accent)]" />
                       {DAY[i]}
                     </label>
-                    <Input type="time" value={r.start} disabled={!r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, start: e.target.value } })} className="h-9 flex-1" />
-                    <span className="text-faint">–</span>
-                    <Input type="time" value={r.end} disabled={!r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, end: e.target.value } })} className="h-9 flex-1" />
+                    <Input type="time" value={r.start} disabled={!r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, start: e.target.value } })} className="h-9 min-w-0 flex-1 px-2 text-[13px] max-sm:[&::-webkit-calendar-picker-indicator]:hidden sm:text-[14px]" />
+                    <span className="shrink-0 text-faint">–</span>
+                    <Input type="time" value={r.end} disabled={!r.on} onChange={(e) => setRows({ ...rows, [wd]: { ...r, end: e.target.value } })} className="h-9 min-w-0 flex-1 px-2 text-[13px] max-sm:[&::-webkit-calendar-picker-indicator]:hidden sm:text-[14px]" />
                   </div>
                 );
               })}
-            </div>
-          </>
-        )}
-
-        {step === "goal" && (
-          <>
-            <Image src="/design/cat3-flame.webp" alt="" width={344} height={400} unoptimized className="cat-bob mx-auto h-16 w-auto" />
-            <h2 className="mt-2 text-center text-[20px] font-bold">How much per day?</h2>
-            <p className="mt-1 text-center text-[13px] text-muted-foreground">A realistic amount to plan for each day. (A streak day is one finished activity.)</p>
-            <div className="mt-5 grid grid-cols-4 gap-2">
-              {[15, 25, 45, 60].map((m) => (
-                <button key={m} type="button" onClick={() => setGoal(m)} className={cn("rounded-xl border py-3 text-[15px] font-bold", goal === m ? "border-accent bg-accent-soft text-accent" : "border-border hover:border-border-strong")}>
-                  {m} <span className="text-[11px] font-semibold text-faint">min</span>
-                </button>
-              ))}
-            </div>
-          </>
-        )}
-
-        {step === "exam" && (
-          <>
-            <Image src="/design/cat3-trophy.webp" alt="" width={413} height={400} unoptimized className="cat-bob mx-auto h-16 w-auto" />
-            <h2 className="mt-2 text-center text-[20px] font-bold">Working towards an exam?</h2>
-            <p className="mt-1 text-center text-[13px] text-muted-foreground">The plan ramps up as the date gets closer. Skip if not.</p>
-            <div className="mt-5 space-y-2">
-              <Input value={examTitle} onChange={(e) => setExamTitle(e.target.value)} placeholder="e.g. IB May 2027" />
-              <Input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)} />
             </div>
           </>
         )}
@@ -108,10 +84,9 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
             <Image src="/design/cat3-cheer.webp" alt="" width={363} height={400} unoptimized className="cat-wiggle mx-auto h-16 w-auto" />
             <h2 className="mt-2 text-center text-[20px] font-bold">Here&apos;s your plan</h2>
             <ul className="mt-4 space-y-2 text-[13.5px]">
-              <li className="flex justify-between rounded-xl bg-muted px-3 py-2"><span className="text-muted-foreground">Free</span><button type="button" onClick={() => setStep("free")} className="font-semibold text-accent">{ORDER.filter((wd) => rows[wd].on).length} days · {rows[ORDER.find((wd) => rows[wd].on) ?? 1].start}–{rows[ORDER.find((wd) => rows[wd].on) ?? 1].end}</button></li>
-              <li className="flex justify-between rounded-xl bg-muted px-3 py-2"><span className="text-muted-foreground">Daily goal</span><button type="button" onClick={() => setStep("goal")} className="font-semibold text-accent">{goal} min</button></li>
-              <li className="flex justify-between rounded-xl bg-muted px-3 py-2"><span className="text-muted-foreground">Exam</span><button type="button" onClick={() => setStep("exam")} className="font-semibold text-accent">{examTitle.trim() ? `${examTitle.trim()}${examDate ? ` · ${examDate}` : ""}` : "none"}</button></li>
+              <li className="flex justify-between rounded-xl bg-muted px-3 py-2"><span className="text-muted-foreground">Free to study</span><button type="button" onClick={() => setStep("free")} className="font-semibold text-accent">{ORDER.filter((wd) => rows[wd].on).length} days · {rows[ORDER.find((wd) => rows[wd].on) ?? 1].start}–{rows[ORDER.find((wd) => rows[wd].on) ?? 1].end}</button></li>
             </ul>
+            <p className="mt-3 text-center text-[12.5px] text-muted-foreground">How long you study each day and your exam dates are set in the Plan and Exams tabs.</p>
           </>
         )}
 
@@ -130,6 +105,7 @@ export function PlanSetupWizard({ plan, start = "free", onClose, onSaved }: { pl
           )}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

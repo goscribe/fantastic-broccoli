@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-6",
+  "topicCode": "8.6",
+  "topicName": "Area between curves with several intersections",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:51.643Z",
+  "cards": [
+    {
+      "id": "1bjfru1",
+      "kind": "concept",
+      "front": "Why must you split the area between two curves at their intersection points?",
+      "back": "Each section between consecutive **split points** gets its own integral, because the curve order can change at an intersection. Each integrand then stays nonnegative.",
+      "hint": "Think about what happens to top and bottom when the curves cross.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s8ajnc",
+      "kind": "formula",
+      "front": "What integral gives the area on one section between consecutive intersections $x=a$ and $x=b$?",
+      "back": "$\\int_{a}^{b}(\\text{top}-\\text{bottom})\\,dx$, where the **top curve** and **bottom curve** are found by testing a point inside $(a,b)$.",
+      "hint": "Top minus bottom, always. Limits come from the intersection values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0w7v3vu",
+      "kind": "mistake",
+      "front": "Why is one integral of the difference across the whole region wrong for enclosed area?",
+      "back": "Where the difference is negative and positive, the contributions **cancel**, giving signed accumulation. Area needs separate nonnegative sections added together.",
+      "hint": "Consider $x-x^3$ on $[-1,1]$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dxvwkf",
+      "kind": "term",
+      "front": "What is an intersection point of two curves?",
+      "back": "An **intersection point** is a point where two curves have the same coordinates. Find it by setting the two function expressions equal and solving for $x$.",
+      "hint": "Same x-value, same y-value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ebt3x7",
+      "kind": "process",
+      "front": "How do you find which curve is on top between two consecutive intersections?",
+      "back": "Pick a test $x$-value inside the interval and evaluate both functions. The larger $y$-value belongs to the **top curve**.",
+      "hint": "Choose a value strictly between the intersection points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02jw3y6",
+      "kind": "concept",
+      "front": "Why is a sketch not enough to establish which curve is higher on each interval?",
+      "back": "A sketch helps, but **test values** establish the order. Curves can switch order at an intersection inside the region, so the sketch may miss it.",
+      "hint": "Test values are the proof; the sketch is a check.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yjn1ch",
+      "kind": "example",
+      "front": "Solve $x^3=x$ to find all intersection values of $y=x^3$ and $y=x$.",
+      "back": "$x=-1,0,1$. Move terms to get $x^3-x=0$, factor as $x(x-1)(x+1)=0$, then solve each factor.",
+      "hint": "Move everything to one side and factor out x first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e71nix",
+      "kind": "formula",
+      "front": "Write the total enclosed area between $y=x^3$ and $y=x$ as a sum of integrals.",
+      "back": "$A=\\int_{-1}^{0}(x^3-x)\\,dx+\\int_{0}^{1}(x-x^3)\\,dx$. Each integrand is top minus bottom on its own section.",
+      "hint": "Use the split points $-1$, $0$, and $1$ as limits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11monit",
+      "kind": "example",
+      "front": "Find the area enclosed by $y=x$ and $y=x^3$ when both axes measure centimeters.",
+      "back": "$\\frac12\\,\\mathrm{cm^2}$. Each section gives $\\frac14$, and the two areas add to $\\frac12$.",
+      "hint": "Evaluate each section separately, then add.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ukqoa8",
+      "kind": "term",
+      "front": "What is the total area between curves?",
+      "back": "The **total area** is the sum of the nonnegative areas of all sections between the curves. It is not a signed accumulation.",
+      "hint": "Every section counts as positive area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "140v10x",
+      "kind": "term",
+      "front": "What are split points?",
+      "back": "**Split points** are intersection values used as the boundaries between separate area integrals.",
+      "hint": "They are where the integrals start and stop.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yfjor4",
+      "kind": "mistake",
+      "front": "Is it enough to find only the outermost intersections before setting up area integrals?",
+      "back": "No. An inner **intersection** can change which curve is on top, so find every intersection before setting limits.",
+      "hint": "Look for crossings between the outer ones.",
+      "sectionId": "s1"
+    }
+  ]
+}

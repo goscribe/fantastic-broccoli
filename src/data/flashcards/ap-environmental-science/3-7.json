@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-7",
+  "topicCode": "3.7",
+  "topicName": "Total fertility rate",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:39.283Z",
+  "cards": [
+    {
+      "id": "1nbphe0",
+      "kind": "term",
+      "front": "What is the total fertility rate (TFR)?",
+      "back": "The **average number of children** a woman would have in her lifetime, based on birth rates at each age. It lets countries be compared using one number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a37jkp",
+      "kind": "concept",
+      "front": "Why is replacement level fertility slightly above $2$ children per woman?",
+      "back": "Some children die before they can have children of their own, and slightly more boys than girls are born, so about $2.1$ children are needed to replace two parents.",
+      "hint": "Consider what might happen to children before adulthood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zfgpp2",
+      "kind": "concept",
+      "front": "What happens to a population while its TFR stays above replacement level?",
+      "back": "It **grows**, because each generation is larger than the last and the added people go on to have children of their own.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kas1kd",
+      "kind": "example",
+      "front": "Age-group rates of 30, 100, 120, 80, 40, 10 and 2 births per 1,000 women in one year: what is the TFR?",
+      "back": "**1.91 children per woman**. The seven rates sum to $382$, which times $5$ gives $1{,}910$ births per 1,000 women, then $\\frac{1{,}910}{1{,}000}=1.91$.",
+      "hint": "Think about how many years each age group covers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ed2lut",
+      "kind": "mistake",
+      "front": "Why is the birth rate not the same as the total fertility rate?",
+      "back": "The **birth rate** counts births per 1,000 people per year, while TFR is the average number of children per woman over her lifetime. A country with many young adults can have a high birth rate and a low TFR.",
+      "hint": "Compare who is counted in each measure.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13fcnn0",
+      "kind": "term",
+      "front": "What is the infant mortality rate?",
+      "back": "The **number of deaths of children under age one** per 1,000 live births in a year.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gygryz",
+      "kind": "concept",
+      "front": "How does a high infant mortality rate tend to affect a country's TFR?",
+      "back": "It tends to **raise** the TFR, because parents have more children so that some of them survive.",
+      "hint": "Think about how parents plan when survival is uncertain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gm9zh5",
+      "kind": "term",
+      "front": "What is family planning?",
+      "back": "The use of **education and contraception services** that let people choose whether and when to have children.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vrcteg",
+      "kind": "concept",
+      "front": "Why does longer schooling for girls tend to lower a country's TFR?",
+      "back": "Girls who stay in school **marry later and find paid work**, which raises the cost of having children. They also gain access to family planning, so they can choose smaller families.",
+      "hint": "Consider how a career changes the cost of raising children.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hk5c39",
+      "kind": "concept",
+      "front": "Why do large families often have clear value in rural farming areas?",
+      "back": "Children **provide farm labor and old-age support** for their parents, so more children bring economic benefit to the household.",
+      "hint": "Think about what children can contribute to a household's work.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02azbqn",
+      "kind": "concept",
+      "front": "Why can a country with a TFR below replacement level still gain people?",
+      "back": "**Migration** adds people to the population without any births, so the total can keep growing even while each generation is smaller.",
+      "hint": "Consider a source of population change other than births and deaths.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jfq23a",
+      "kind": "mistake",
+      "front": "Why does a falling TFR not stop population growth at once?",
+      "back": "Population size also depends on **deaths, migration and the number of women of reproductive age**. Growth can continue for decades after fertility falls.",
+      "hint": "Think about what else sets population size besides births per woman.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bhtu1b",
+      "kind": "term",
+      "front": "What is population momentum?",
+      "back": "The **delayed effect** where a young population keeps births high as many women reach reproductive age, so growth continues for decades after TFR reaches replacement level.",
+      "hint": "Think about the age structure of a country with many young people.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mk7rqu",
+      "kind": "concept",
+      "front": "How do governments try to influence fertility?",
+      "back": "They **offer family planning services or limit family size**, or they **pay families or provide childcare** to encourage births. These policies work alongside education, health and income.",
+      "sectionId": "s5"
+    }
+  ]
+}

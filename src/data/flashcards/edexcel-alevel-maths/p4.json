@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p4",
+  "topicCode": "P4",
+  "topicName": "Sequences and series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:30.779Z",
+  "cards": [
+    {
+      "id": "11wjl9o",
+      "kind": "concept",
+      "front": "How does an arithmetic sequence differ from a geometric sequence?",
+      "back": "An **arithmetic** sequence adds a common difference $d$ at each step, while a **geometric** sequence multiplies by a common ratio $r$ at each step.",
+      "hint": "Compare the operation that links each term to the next."
+    },
+    {
+      "id": "00vdp10",
+      "kind": "formula",
+      "front": "What is the $n$th term of an arithmetic sequence with first term $a$ and common difference $d$?",
+      "back": "$u_n=a+(n-1)d$, where $n-1$ is the number of steps from the first term to the $n$th term.",
+      "hint": "Count how many steps are needed to reach term $n$ from term 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c2mije",
+      "kind": "formula",
+      "front": "What is the sum $S_n$ of the first $n$ terms of a geometric series when $r\\neq1$?",
+      "back": "$S_n=\\frac{a(1-r^n)}{1-r}$, where $a$ is the first term, $r$ is the common ratio and $n$ is the number of terms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14q328i",
+      "kind": "formula",
+      "front": "What is the formula for the sum $S_n$ of the first $n$ terms of an arithmetic series?",
+      "back": "$S_n=\\frac{n}{2}\\left[2a+(n-1)d\\right]$, where $a$ is the first term and $d$ is the common difference.",
+      "hint": "Start from the $n$th term formula you already know.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19z5ta3",
+      "kind": "formula",
+      "front": "What is the $n$th term of a geometric sequence with first term $a$ and common ratio $r$?",
+      "back": "$u_n=ar^{n-1}$, because the $n$th term has $n-1$ multiplications by $r$ after the first term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v8uu3j",
+      "kind": "example",
+      "front": "Find the 8th term of the geometric sequence 3, 6, 12, 24, …",
+      "back": "$u_8=384$, since $a=3$, $r=2$ and $u_8=3\\times2^7=3\\times128$.",
+      "hint": "Find the common ratio first by dividing one term by the one before.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12xhau3",
+      "kind": "example",
+      "front": "Find the sum of the first 8 terms of the geometric sequence 3, 6, 12, 24, …",
+      "back": "$S_8=765$, from $S_8=\\frac{3(1-2^8)}{1-2}=\\frac{-765}{-1}$.",
+      "hint": "Identify $a$, $r$ and $n$ before substituting into the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wcuwid",
+      "kind": "term",
+      "front": "How is the $n$th term of a sequence written?",
+      "back": "$u_n$ is the **$n$th term**, and $u_{n+1}$ is the term that comes after it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "179upi9",
+      "kind": "process",
+      "front": "How do you find the first few terms of a sequence given $u_1$ and a term-to-term rule?",
+      "back": "Start with $u_1$ and substitute each term into the rule to get the next one. For $u_1=3$ and $u_{n+1}=2u_n-1$, the terms are 3, 5, 9, 17.",
+      "hint": "Work forward one term at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ix8ta0",
+      "kind": "term",
+      "front": "What does the lower limit of a sigma sum tell you?",
+      "back": "The **lower limit** is the value where the counter $k$ starts, and each value up to the **upper limit** is substituted into the rule for $u_k$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nhxx6z",
+      "kind": "example",
+      "front": "Evaluate $\\sum_{k=1}^{20}(4k+3)$.",
+      "back": "$900$. The series is arithmetic with $a=7$, $d=4$ and $n=20$, so $S_{20}=\\frac{20}{2}\\left[2(7)+19(4)\\right]=900$.",
+      "hint": "Check the first term and the common difference before using the sum formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q8ur30",
+      "kind": "mistake",
+      "front": "How many terms does $\\sum_{k=3}^{8}$ contain?",
+      "back": "**6** terms. The count is the upper limit minus the lower limit plus 1, so it is not 8 just because the upper limit is 8.",
+      "hint": "Try listing the values of $k$ from 3 up to 8.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05ratv7",
+      "kind": "concept",
+      "front": "What happens to the sum of a geometric series when $|r|<1$?",
+      "back": "The terms shrink towards zero, so the total approaches a fixed value, $S_\\infty=\\frac{a}{1-r}$.",
+      "hint": "Think about how big each new term becomes as more terms are added.",
+      "sectionId": "s5"
+    }
+  ]
+}

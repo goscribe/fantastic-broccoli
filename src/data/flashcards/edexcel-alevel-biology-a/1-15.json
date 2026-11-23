@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-15",
+  "topicCode": "1.15",
+  "topicName": "Blood lipids and health",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:47.404Z",
+  "cards": [
+    {
+      "id": "1ivhwbs",
+      "kind": "process",
+      "front": "What happens, in order, when too much LDL cholesterol builds up in an artery wall?",
+      "back": "LDL cholesterol enters the artery wall and collects as an **atheroma**. The atheroma narrows the artery and makes it less flexible, so less blood and oxygen reach the heart muscle. This can cause chest pain, raise blood pressure, or allow a clot to block the artery.",
+      "hint": "Start with where the cholesterol goes once it leaves the blood.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xmb4bc",
+      "kind": "concept",
+      "front": "Why does the balance between LDL and HDL matter more than either level on its own?",
+      "back": "Risk depends on the ratio. HDL removes cholesterol from tissues, while LDL delivers it, so high LDL with low HDL is the least favourable balance.",
+      "hint": "Think about what each particle does with cholesterol.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fvh65c",
+      "kind": "term",
+      "front": "What is a low-density lipoprotein (LDL)?",
+      "back": "A **low-density lipoprotein** has a high proportion of lipid to protein and carries cholesterol from the liver to body tissues. High LDL concentration is linked to higher risk of coronary heart disease.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1trbkxi",
+      "kind": "term",
+      "front": "What is a high-density lipoprotein (HDL)?",
+      "back": "A **high-density lipoprotein** has more protein than lipid, which makes it denser. It carries cholesterol from body tissues back to the liver, and high HDL concentration is linked to lower risk.",
+      "hint": "Compare its protein content with LDL.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kyr5ek",
+      "kind": "concept",
+      "front": "Why must lipids be carried in blood inside lipoproteins?",
+      "back": "Lipids do not dissolve in water, and blood plasma is mostly water. Proteins on the outside of a lipoprotein interact with water, so the lipids inside can travel freely.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yip2uw",
+      "kind": "term",
+      "front": "What is a lipoprotein?",
+      "back": "A **lipoprotein** is a particle made of lipids and proteins. Its outer proteins interact with water, while lipids such as triglycerides and cholesterol sit inside.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1db9gqn",
+      "kind": "term",
+      "front": "What is cholesterol and where does the body get it?",
+      "back": "**Cholesterol** is a lipid. The liver makes some and some comes from food. Cells need it for their membranes, and the body uses it to make certain hormones.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yzppeh",
+      "kind": "mistake",
+      "front": "Why is it wrong to say cholesterol is harmful in itself?",
+      "back": "Cholesterol is needed for cell membranes and some hormones. Problems arise from **too much cholesterol** carried in the wrong particles, such as LDL.",
+      "hint": "Think about what the body uses cholesterol for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00z6uju",
+      "kind": "mistake",
+      "front": "Why is it incorrect to call LDL and HDL types of cholesterol?",
+      "back": "LDL and HDL are **lipoproteins**, which are particles. Cholesterol is one of the lipids they carry.",
+      "hint": "Consider what LDL is made of.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0edg7d0",
+      "kind": "term",
+      "front": "What is an atheroma?",
+      "back": "An **atheroma** is a fatty deposit, containing cholesterol, that builds up in an artery wall. It narrows the artery and makes the wall less flexible.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bjx13x",
+      "kind": "term",
+      "front": "What is coronary heart disease?",
+      "back": "**Coronary heart disease** is a condition in which the arteries supplying the heart muscle are narrowed, which reduces blood flow to the muscle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1md53vv",
+      "kind": "concept",
+      "front": "How does changing diet affect LDL concentration in blood?",
+      "back": "Eating a lot of **saturated fat** tends to raise LDL concentration. Replacing some saturated fat with unsaturated fat tends to lower it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y96igl",
+      "kind": "term",
+      "front": "What is a risk factor?",
+      "back": "A **risk factor** is a characteristic or behaviour associated with an increased chance of developing a disease. It shows an association, not a certainty.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vz0svx",
+      "kind": "mistake",
+      "front": "Why is it wrong to write that high LDL always causes coronary heart disease?",
+      "back": "High LDL **increases the risk** of coronary heart disease, but it does not always cause it. Some people with high LDL stay healthy, and people with low LDL can still develop disease, for example through smoking.",
+      "hint": "Think about the difference between association and certainty.",
+      "sectionId": "s5"
+    }
+  ]
+}

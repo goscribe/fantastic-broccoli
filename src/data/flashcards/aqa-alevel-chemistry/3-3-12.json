@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-12",
+  "topicCode": "3.3.12",
+  "topicName": "Polymers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:33.347Z",
+  "cards": [
+    {
+      "id": "0bmr5op",
+      "kind": "concept",
+      "front": "What happens to the double bonds of alkene monomers during addition polymerisation?",
+      "back": "The **double bonds open** and each monomer joins its neighbours to form a chain. Nothing is lost, so the polymer is the only product.",
+      "hint": "Think about what the bond between the two carbons becomes as monomers link.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cxl76t",
+      "kind": "concept",
+      "front": "Why does condensation polymerisation release a second product, unlike addition polymerisation?",
+      "back": "Each link forms when two **functional groups** react, releasing a small molecule, usually water. Addition polymerisation has no such step.",
+      "hint": "Think about what happens at the two ends of each monomer when they react.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h4fgc1",
+      "kind": "concept",
+      "front": "Why are polyamide fibres usually stronger than polyester fibres?",
+      "back": "Polyamide chains have **hydrogen bonds** between N-H and C=O groups on neighbouring chains. Polyesters have no N-H groups, so only weaker dipole-dipole forces act between their chains.",
+      "hint": "Compare the groups present in each polymer's chain.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uqohbc",
+      "kind": "term",
+      "front": "What is a repeating unit?",
+      "back": "The **smallest section of a polymer chain** that repeats along its length.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zwktpz",
+      "kind": "process",
+      "front": "What steps turn an alkene monomer into its repeating unit?",
+      "back": "Change the C=C **double bond to a single bond**, keep the two former double-bond carbons in the main chain, place side groups above and below, then add open bonds and brackets with $n$ outside.",
+      "hint": "Start by looking at the double bond in the monomer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k7mplv",
+      "kind": "example",
+      "front": "What is the repeating unit of poly(propene)?",
+      "back": "$[{-}CH(CH_3){-}CH_2{-}]_n$, with the **CH3 group** as a side group hanging off the main chain.",
+      "hint": "Draw propene first, then convert its double bond.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gwaa78",
+      "kind": "mistake",
+      "front": "A student says condensation polymerisation gives only the polymer. What is wrong with this?",
+      "back": "This is wrong. Condensation always releases a **small molecule**, such as water, at each link, while addition polymerisation gives only the polymer.",
+      "hint": "Compare with what addition polymerisation produces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05rp9h1",
+      "kind": "term",
+      "front": "What is a dicarboxylic acid?",
+      "back": "A compound with a **carboxyl group at each end** of its carbon chain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dady92",
+      "kind": "formula",
+      "front": "Which link forms when a diol reacts with a dicarboxylic acid?",
+      "back": "An **ester link**, $-COO-$, formed as water is lost from each hydroxyl and carboxyl pair.",
+      "hint": "Each hydroxyl group reacts with a carboxyl group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04qpo30",
+      "kind": "concept",
+      "front": "Why can polyesters be broken down more easily than addition polymers?",
+      "back": "Their ester links are **polar** and can be hydrolysed by water, and acids or alkalis speed this up. Addition polymers have no such weak points.",
+      "hint": "Compare the bonds in the chain with the carbon-carbon bonds of addition polymers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iveq5r",
+      "kind": "formula",
+      "front": "Which link joins the monomers in a polyamide?",
+      "back": "An **amide link**, $-CONH-$, formed when an amine group reacts with a carboxyl group and water is lost.",
+      "hint": "Think about the end groups of the diamine.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gsmwqd",
+      "kind": "example",
+      "front": "Why is nylon-6,6 named as it is?",
+      "back": "Each monomer, hexane-1,6-diamine and hexanedioic acid, has **six carbon atoms**, which gives the name.",
+      "hint": "Count the carbons in each monomer's name.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xk86qf",
+      "kind": "concept",
+      "front": "Why do addition polymers persist in the environment?",
+      "back": "They have **strong carbon-carbon bonds** and no polar groups for water to attack, so they are not biodegradable.",
+      "hint": "Think about what water or microorganisms could attack.",
+      "sectionId": "s6"
+    }
+  ]
+}

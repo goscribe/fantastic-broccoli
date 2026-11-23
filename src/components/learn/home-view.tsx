@@ -23,6 +23,7 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
 import "@/app/design/design.css";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 /** The same buckets as the banner's sky (src/lib/daypart.ts), so the words and the scene agree. */
 const GREETING: Record<Daypart, string> = {
@@ -76,14 +77,16 @@ export function HomeView({ summary }: { summary: HomeSummary }) {
       const fileIds = await uploadFiles(target, list);
       analyzeFiles(target, fileIds).catch(() => {});
       emitTreeChanged();
-      const session = await createStudySession({
-        workspaceId: target,
-        title: workspaceTitleFromFiles(list),
-        depth: "light",
-        durationMinutes: 5,
-        quickStart: true,
-        topics: list.map((f) => fileBasename(f.name)).filter(Boolean).join(", ").slice(0, 2000) || undefined,
-      });
+      const session = await createStudySession(
+        await chooseStudyLength({
+          workspaceId: target,
+          title: workspaceTitleFromFiles(list),
+          depth: "light" as const,
+          durationMinutes: 5,
+          quickStart: true,
+          topics: list.map((f) => fileBasename(f.name)).filter(Boolean).join(", ").slice(0, 2000) || undefined,
+        }),
+      );
       router.push(session ? `/workspace/${target}/session/${session.id}` : `/workspace/${target}`);
     } catch (e) {
       toastError(e, "Upload failed");
@@ -151,11 +154,11 @@ function DueCard({ due, action }: { due: HomeSummary["due"]; action: HomeSummary
       <div className="text-[16px] font-extrabold">Due for review</div>
       <div className="mt-2 flex items-baseline gap-3">
         <span className="text-[40px] font-extrabold leading-none tabular-nums">{cards}</span>
-        <div className="text-[13px] leading-snug text-muted-foreground">
+        <div className="text-small text-muted-foreground">
           {cards ? `flashcards due today, about ${Math.max(1, Math.round(cards / 3))} min` : "No flashcards due right now"}
         </div>
       </div>
-      {also.length > 0 && <p className="mt-2 text-[12.5px] font-semibold text-muted-foreground">Also {also.join(" · ")}</p>}
+      {also.length > 0 && <p className="mt-2 text-caption font-semibold text-muted-foreground">Also {also.join(" · ")}</p>}
       <Link href="/flashcards/review" className="mt-3.5 inline-flex h-10 w-full items-center justify-center rounded-full bg-muted text-[14px] font-semibold hover:bg-accent-soft">
         {cards ? "Review now" : "Browse flashcards"}
       </Link>
@@ -175,10 +178,10 @@ function HomeCatCard() {
       </span>
       <span className="min-w-0 flex-1">
         <span className="flex items-center justify-between gap-2">
-          <span className="text-[14px] font-bold">{t("rewards.homeTitle")}</span>
-          <span className="text-[12.5px] font-bold tabular-nums text-foreground">{t("rewards.ptsValue").replace("{n}", String(shop.balance))}</span>
+          <span className="text-ui font-bold">{t("rewards.homeTitle")}</span>
+          <span className="text-caption font-bold tabular-nums text-foreground">{t("rewards.ptsValue").replace("{n}", String(shop.balance))}</span>
         </span>
-        <span className={cn("mt-0.5 block text-[12px] leading-snug", shop.affordable ? "font-semibold text-accent-dim" : "text-muted-foreground")}>
+        <span className={cn("mt-0.5 block text-caption leading-snug", shop.affordable ? "font-semibold text-accent-dim" : "text-muted-foreground")}>
           {shop.affordable ? `${t("rewards.homeAfford")} →` : t("rewards.homeBody")}
         </span>
       </span>

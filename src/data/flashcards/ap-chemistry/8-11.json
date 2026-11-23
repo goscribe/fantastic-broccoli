@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-11",
+  "topicCode": "8.11",
+  "topicName": "pH and solubility",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:22.194Z",
+  "cards": [
+    {
+      "id": "17mg620",
+      "kind": "concept",
+      "front": "What happens to a solid salt's solubility when another reaction removes one of its dissolved ions?",
+      "back": "More solid **dissolves** to replace the removed ions, so the amount that can dissolve increases. The equilibrium shifts toward the dissolved ions.",
+      "hint": "Follow the equilibrium: what does the solid do when ions are removed?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w84cz0",
+      "kind": "concept",
+      "front": "Why does adding acid increase the solubility of calcium carbonate?",
+      "back": "**Hydrogen ions** react with dissolved carbonate ions, removing them. This shifts the dissolution equilibrium toward dissolved calcium and carbonate, so more solid dissolves.",
+      "hint": "Which ion in the equilibrium does H$^+$ react with?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rhpmw7",
+      "kind": "concept",
+      "front": "Which salts does acid generally make more soluble, and which show little direct pH effect?",
+      "back": "Salts whose anions react with acid, such as **carbonate** and **hydroxide** salts, become more soluble. Salts whose ions do not react appreciably with acid, like chlorides, show little direct pH effect.",
+      "hint": "Ask whether the anion reacts with H$^+$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "169qddb",
+      "kind": "term",
+      "front": "What is the solubility equilibrium?",
+      "back": "The **reversible balance** between an undissolved ionic solid and its dissolved ions in a saturated solution.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01e8nh9",
+      "kind": "term",
+      "front": "What is the solubility product, $K_{sp}$?",
+      "back": "The **equilibrium constant** for an ionic solid dissolving into its ions. At a fixed temperature it stays constant even when pH changes the dissolved concentrations.",
+      "hint": "Think about what changes with temperature.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l1wc2h",
+      "kind": "term",
+      "front": "What is an acidic solution?",
+      "back": "A solution with a **higher hydronium ion concentration** than a neutral solution at the same temperature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0htux9t",
+      "kind": "concept",
+      "front": "Why does acid make a metal hydroxide more soluble?",
+      "back": "H$^+$ reacts with **hydroxide ions** to form water, removing OH$^-$. The dissolution equilibrium shifts toward the dissolved ions, so the solid becomes more soluble.",
+      "hint": "Which ion does H$^+$ combine with?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z52h47",
+      "kind": "concept",
+      "front": "What does adding hydroxide do to a metal hydroxide's solubility, and why?",
+      "back": "It **decreases** solubility. Hydroxide is already a dissolved ion in the equilibrium, so adding it shifts the equilibrium toward the solid.",
+      "hint": "Compare this with the common-ion effect.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r4qzqy",
+      "kind": "term",
+      "front": "What is the common-ion effect?",
+      "back": "A **shift in an equilibrium** caused by adding an ion that is already present in that equilibrium.",
+      "hint": "Look at what is already in the dissolution equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xkc6eg",
+      "kind": "process",
+      "front": "What are the three steps to predict how pH changes a salt's solubility?",
+      "back": "1) Write the **dissolution equation**. 2) Check whether added H$^+$ consumes its anion or added OH$^-$ is one of its ions. 3) Predict the equilibrium shift and the change in solubility.",
+      "hint": "Start with the equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12nfuhd",
+      "kind": "mistake",
+      "front": "A student says the solubility increased, so Ksp must have increased. What is wrong?",
+      "back": "**Ksp** is constant at a fixed temperature. Solubility changes come from shifts in equilibrium concentrations, not from a new Ksp value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19y2ekn",
+      "kind": "mistake",
+      "front": "A student says acid will increase the solubility of a chloride salt because acid increases solubility of salts. What is wrong?",
+      "back": "Chloride does **not** react appreciably with H$^+$ in water, so acid gives little direct increase. Always identify the dissolved anion before predicting an acid's effect.",
+      "hint": "Check whether the anion reacts with acid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yp42kv",
+      "kind": "mistake",
+      "front": "A student says every increase in pH lowers every salt's solubility. Why is that wrong?",
+      "back": "Predictions only cover the stated ion reactions. Some metal ions form **soluble species** with excess hydroxide, so their behavior can be more complex.",
+      "hint": "Think about metal ions with excess OH$^-$.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-4",
+  "topicCode": "9.4",
+  "topicName": "Differentiating vector-valued functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:00.404Z",
+  "cards": [
+    {
+      "id": "1w11gyc",
+      "kind": "concept",
+      "front": "What does the derivative of a position vector tell you about a moving object?",
+      "back": "It gives the **velocity** vector, $\\mathbf{v}(t)=\\mathbf{r}'(t)$. Its components are the horizontal and vertical rates of change, and its direction is the direction of travel.",
+      "hint": "Think about the drone example.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jpp1xx",
+      "kind": "formula",
+      "front": "How do you differentiate a vector-valued function $\\mathbf{r}(t)=\\langle x(t),y(t)\\rangle$?",
+      "back": "Differentiate **each component** separately and keep the angle brackets: $\\mathbf{r}'(t)=\\langle x'(t),y'(t)\\rangle$. The usual rules, such as the product and chain rules, apply inside each component.",
+      "hint": "Work one component at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kx9db2",
+      "kind": "concept",
+      "front": "What is a tangent vector to a path at $t=a$, and which way does it point?",
+      "back": "It is $\\mathbf{r}'(a)$, as long as it is not the **zero vector**. It points along the path in the direction of motion.",
+      "hint": "Motion goes along the path, not across it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i9y9ze",
+      "kind": "term",
+      "front": "What is a vector-valued function?",
+      "back": "A **vector-valued function** gives a vector for each value of $t$, such as $\\mathbf{r}(t)=\\langle x(t),y(t)\\rangle$. The functions $x(t)$ and $y(t)$ are its components.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mj06lj",
+      "kind": "formula",
+      "front": "For a particle with velocity $\\mathbf{v}(t)=\\langle x'(t),y'(t)\\rangle$, what is its speed?",
+      "back": "The **speed** is the length of the velocity vector: $\\sqrt{(x'(t))^2+(y'(t))^2}$.",
+      "hint": "Use the Pythagorean idea on the components.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "021piao",
+      "kind": "example",
+      "front": "Differentiate $\\mathbf{r}(t)=\\langle te^t,\\cos3t\\rangle$.",
+      "back": "$\\mathbf{r}'(t)=\\langle(1+t)e^t,\\ -3\\sin3t\\rangle$. The product rule gives the first component and the chain rule gives the second.",
+      "hint": "Product rule first, then chain rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0opdwpc",
+      "kind": "example",
+      "front": "Find a tangent vector and the tangent line to $\\mathbf{r}(t)=\\langle t^2,t^3\\rangle$ at $t=2$.",
+      "back": "A tangent vector is $\\langle4,12\\rangle$. The tangent line is $y=3x-4$, passing through $(4,8)$ with slope $3$.",
+      "hint": "Find the point $\\mathbf{r}(2)$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kqv7ai",
+      "kind": "process",
+      "front": "What are the steps to find the tangent line to a path at $t=a$?",
+      "back": "Find the point $\\mathbf{r}(a)$. Find $\\mathbf{r}'(a)$ and the slope $\\frac{y'(a)}{x'(a)}$ if $x'(a)\\ne0$. Then use point-slope form through the point.",
+      "hint": "Three steps: point, slope, line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rc8wi6",
+      "kind": "mistake",
+      "front": "Does a tangent vector need to have length 1?",
+      "back": "**No**. Its length is the speed at that moment, so it can be any nonzero length. It only needs to be nonzero and point along the path.",
+      "hint": "Length and direction are different things.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05qeqit",
+      "kind": "mistake",
+      "front": "Is it enough to give only one component as the derivative of a vector-valued function?",
+      "back": "**No**. The derivative is a vector, so both components are needed. An answer with only one component is incomplete.",
+      "hint": "Check how many components the original function had.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mjyp1p",
+      "kind": "example",
+      "front": "A particle has $\\mathbf{r}(t)=\\langle\\cos t,\\sin t\\rangle$. Describe its motion at $t=\\frac{\\pi}{2}$.",
+      "back": "It is at the top of the circle, $\\langle0,1\\rangle$. Its velocity is $\\langle-1,0\\rangle$, so it moves **left** with speed 1.",
+      "hint": "Evaluate $\\mathbf{r}'$ at $t=\\frac{\\pi}{2}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gn1adq",
+      "kind": "concept",
+      "front": "If $\\mathbf{r}(t)$ is in meters and $t$ is in seconds, how should you interpret $\\mathbf{r}'(a)$?",
+      "back": "Give the **time**, both components, and the units. For example, $\\langle-2,5\\rangle$ at $t=3$ s means $\\langle-2,5\\rangle\\,\\mathrm{m/s}$.",
+      "hint": "Units of velocity are position units per time unit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ge854b",
+      "kind": "concept",
+      "front": "Why is the speed of $\\mathbf{r}(t)=\\langle\\cos t,\\sin t\\rangle$ equal to 1 at every time?",
+      "back": "Because $\\sqrt{\\sin^2t+\\cos^2t}=1$. The **speed stays constant**, and only the direction of motion changes.",
+      "hint": "Use a trig identity.",
+      "sectionId": "s5"
+    }
+  ]
+}

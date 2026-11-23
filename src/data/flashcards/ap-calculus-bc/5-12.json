@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-12",
+  "topicCode": "5.12",
+  "topicName": "Behaviour of implicit relations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:35.312Z",
+  "cards": [
+    {
+      "id": "03mavy4",
+      "kind": "concept",
+      "front": "When differentiating an implicit equation, why does a term like $y^2$ get an extra $\\frac{dy}{dx}$ factor?",
+      "back": "Because **the chain rule** applies: $y$ is treated as depending on $x$, so the derivative of $y^2$ is $2y\\frac{dy}{dx}$. Each derivative of a term containing $y$ needs this factor.",
+      "hint": "Treat y as a function of x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d4fbm1",
+      "kind": "formula",
+      "front": "For $x^2+y^2=25$, what is $\\frac{dy}{dx}$, and where is it valid?",
+      "back": "$\\frac{dy}{dx}=-\\frac{x}{y}$, valid where $y\\ne0$. Differentiate both sides with respect to $x$, collect the $\\frac{dy}{dx}$ terms, then solve for them.",
+      "hint": "Start by differentiating both sides.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i8zt2l",
+      "kind": "process",
+      "front": "What are the steps to find the tangent slope at a point on an implicit curve?",
+      "back": "**Check** the point satisfies the original equation, **differentiate** implicitly, **solve** for $\\frac{dy}{dx}$, then **substitute** the point's coordinates.",
+      "hint": "Verify the point before using the formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d1cm1y",
+      "kind": "term",
+      "front": "What is an implicit relation?",
+      "back": "An **implicit relation** is a condition that coordinates must satisfy. It specifies points through an equation without isolating one variable, such as $x^2+y^2=25$.",
+      "hint": "Think of a circle's equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "146hl64",
+      "kind": "term",
+      "front": "What is a branch of an implicit relation?",
+      "back": "A **branch** is a portion of the relation where one $y$-value corresponds to each nearby $x$-value. Locally, $y$ can then be treated as a function of $x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08xic7v",
+      "kind": "concept",
+      "front": "Why does $x^2+y^2=25$ fail to define $y$ as one function of $x$?",
+      "back": "At many $x$-values there are **two** $y$-values, so the whole circle cannot be one function of $x$. Only a local portion, a branch, can be treated that way.",
+      "hint": "Try x = 0.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "139pj12",
+      "kind": "mistake",
+      "front": "Why is differentiating $y^2$ as $2y$ a mistake?",
+      "back": "It **omits the chain-rule factor**. The correct derivative is $2y\\frac{dy}{dx}$, and the missing factor changes every slope.",
+      "hint": "What depends on what?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1osbj2j",
+      "kind": "example",
+      "front": "Find the tangent slope to $x^2+y^2=25$ at $(3,4)$.",
+      "back": "The slope is $-\\frac{3}{4}$. Check that $3^2+4^2=25$, then use $\\frac{dy}{dx}=-\\frac{x}{y}$ with $x=3$ and $y=4$.",
+      "hint": "Substitute after solving for dy/dx.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "099x19g",
+      "kind": "concept",
+      "front": "What does a negative tangent slope tell you about nearby points?",
+      "back": "**$y$ decreases** as $x$ increases near the point. This applies only to the branch through that point, not to both branches at once.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wg7qd5",
+      "kind": "mistake",
+      "front": "Is a derivative formula enough to show a point lies on the curve?",
+      "back": "**No.** The derivative formula alone does not establish that the point lies on the curve. First check the point satisfies the original equation.",
+      "hint": "Test the original equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fcvji0",
+      "kind": "term",
+      "front": "What is a horizontal tangent?",
+      "back": "A **horizontal tangent** is a tangent line with **slope zero**. In a fraction form of $\\frac{dy}{dx}$, look for a zero numerator with a nonzero denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jx3jpw",
+      "kind": "example",
+      "front": "Where does $x^2+y^2=25$ have horizontal tangents?",
+      "back": "At $(0,5)$ and $(0,-5)$. Here $x=0$ makes $-\\frac{x}{y}$ zero, and $y\\ne0$ at both points.",
+      "hint": "Set the numerator to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08qfjif",
+      "kind": "concept",
+      "front": "Where is $\\frac{dy}{dx}$ undefined on $x^2+y^2=25$, and what does that show?",
+      "back": "At $(5,0)$ and $(-5,0)$, the numerator is nonzero and the denominator is zero. The curve therefore has a **vertical tangent** there.",
+      "hint": "Check the original equation at both points.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rbl9du",
+      "kind": "mistake",
+      "front": "Does a zero denominator always mean a vertical tangent?",
+      "back": "**No.** If the numerator and denominator both vanish, investigate the point further before concluding there is a vertical tangent.",
+      "sectionId": "s4"
+    }
+  ]
+}

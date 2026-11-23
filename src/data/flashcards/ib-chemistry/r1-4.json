@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r1-4",
+  "topicCode": "R1.4",
+  "topicName": "Entropy and spontaneity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:27.670Z",
+  "cards": [
+    {
+      "id": "0qaqnj8",
+      "kind": "concept",
+      "front": "At constant temperature and pressure, what does a negative Gibbs free energy change tell you about a reaction?",
+      "back": "A **negative** $\\Delta G$ means the reaction is thermodynamically spontaneous in the direction written. A positive value means the reverse direction is favoured, and zero means equilibrium.",
+      "hint": "Think about which sign shows the favoured direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "057rtya",
+      "kind": "concept",
+      "front": "What does entropy, $S$, describe?",
+      "back": "**Entropy** describes how widely energy can be distributed among a system's possible arrangements. More possible arrangements and energy sharing means higher entropy.",
+      "hint": "Think about arrangements and energy spread, not just messiness.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ltj2s1",
+      "kind": "formula",
+      "front": "How is Gibbs free energy change related to enthalpy change and entropy change at constant temperature?",
+      "back": "$\\Delta G=\\Delta H-T\\Delta S$, where $\\Delta G$ is the **Gibbs free energy change**, $\\Delta H$ the enthalpy change, $T$ the temperature in kelvin and $\\Delta S$ the entropy change. $\\Delta H$ and $T\\Delta S$ must use matching energy units.",
+      "hint": "Check the units of entropy before you subtract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wlwvek",
+      "kind": "term",
+      "front": "What does spontaneous mean in chemistry?",
+      "back": "A **spontaneous** change is thermodynamically favoured under the stated conditions. It says nothing about how fast the change occurs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "118c94c",
+      "kind": "term",
+      "front": "How is the entropy change, $\\Delta S$, defined?",
+      "back": "The **entropy change** is the entropy of the products minus the entropy of the reactants. It can be positive or negative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u99ppd",
+      "kind": "concept",
+      "front": "How can you predict the sign of $\\Delta S$ for a reaction from its balanced equation?",
+      "back": "Count the **gas particles** on each side. More gas particles usually gives a positive $\\Delta S$; fewer usually gives a negative $\\Delta S$.",
+      "hint": "Count gas particles, not different substances.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0efsw7l",
+      "kind": "concept",
+      "front": "Which phase changes increase entropy, and why?",
+      "back": "**Melting** and **vaporisation** have positive $\\Delta S$ because the particles become less constrained. Freezing and condensation have negative values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16wn05z",
+      "kind": "mistake",
+      "front": "A student says entropy is simply a measure of disorder, so that is enough. What is wrong with this?",
+      "back": "**Disorder** is not an adequate description. Entropy is about the possible arrangements of a system and how widely energy can be distributed.",
+      "hint": "Focus on arrangements and energy spread.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cz7klz",
+      "kind": "mistake",
+      "front": "A student says a reaction with negative $\\Delta G$ must be fast. Why is this wrong?",
+      "back": "**Spontaneous** does not mean fast. The sign of $\\Delta G$ gives only the direction of change, and a high activation energy can make a spontaneous reaction very slow.",
+      "hint": "Separate direction from rate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wvbpin",
+      "kind": "mistake",
+      "front": "A student uses $\\Delta S$ in J K⁻¹ mol⁻¹ directly with $\\Delta H$ in kJ mol⁻¹ in $\\Delta G=\\Delta H-T\\Delta S$. What goes wrong?",
+      "back": "The **units do not match**. Convert $\\Delta S$ to kJ K⁻¹ mol⁻¹ by dividing by 1000, so $T\\Delta S$ is in kJ mol⁻¹ like $\\Delta H$.",
+      "hint": "Check the prefix before subtracting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lr8rl2",
+      "kind": "concept",
+      "front": "How do you find the threshold temperature for a reaction?",
+      "back": "Set $\\Delta G=0$, so $T=\\frac{\\Delta H}{\\Delta S}$. This assumes $\\Delta H$ and $\\Delta S$ stay approximately constant over the temperature range.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19pt5le",
+      "kind": "concept",
+      "front": "When both $\\Delta H$ and $\\Delta S$ are positive, how does temperature affect spontaneity?",
+      "back": "**Higher** temperatures favour spontaneity. The positive $T\\Delta S$ term grows with temperature and can outweigh the positive $\\Delta H$.",
+      "hint": "Look at how the $T\\Delta S$ term changes with temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xl4xi6",
+      "kind": "example",
+      "front": "Find $\\Delta G$ at 500 K when $\\Delta H=+40$ kJ mol⁻¹ and $\\Delta S=+100$ J K⁻¹ mol⁻¹. Is the forward reaction spontaneous?",
+      "back": "$\\Delta G=-10$ kJ mol⁻¹. Convert $\\Delta S$ to 0.100 kJ K⁻¹ mol⁻¹, so $T\\Delta S=50$ kJ mol⁻¹ and $\\Delta G=40-50$. The forward reaction is spontaneous at 500 K.",
+      "hint": "Convert the entropy to kJ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14u0pvf",
+      "kind": "example",
+      "front": "Calculate $\\Delta G$ at 300 K when $\\Delta H=-20$ kJ mol⁻¹ and $\\Delta S=-50$ J K⁻¹ mol⁻¹. Is the forward reaction spontaneous?",
+      "back": "$\\Delta G=-5$ kJ mol⁻¹, so the forward reaction is spontaneous at 300 K. First convert $\\Delta S$ to -0.050 kJ K⁻¹ mol⁻¹, then $\\Delta G=-20-(300)(-0.050)$.",
+      "hint": "Convert the entropy units first.",
+      "sectionId": "s4"
+    }
+  ]
+}

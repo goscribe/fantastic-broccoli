@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-13",
+  "topicCode": "3.13",
+  "topicName": "Scalar and vector products",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:45.869Z",
+  "cards": [
+    {
+      "id": "1oauz39",
+      "kind": "concept",
+      "front": "What does the scalar product of two vectors give, and how is it found?",
+      "back": "A **single number**. Multiply matching components, then add the results. In three dimensions, $\\mathbf{v}\\cdot\\mathbf{w}=v_1w_1+v_2w_2+v_3w_3$.",
+      "hint": "Think about whether the result is a number or a vector.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00nzxbm",
+      "kind": "formula",
+      "front": "How is the angle $\\theta$ between two non-zero vectors found using the scalar product?",
+      "back": "$\\cos\\theta=\\frac{\\mathbf{v}\\cdot\\mathbf{w}}{|\\mathbf{v}||\\mathbf{w}|}$, where $|\\mathbf{v}|$ and $|\\mathbf{w}|$ are the **magnitudes** (lengths) of the vectors.",
+      "hint": "Rearrange $\\mathbf{v}\\cdot\\mathbf{w}=|\\mathbf{v}||\\mathbf{w}|\\cos\\theta$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05fizev",
+      "kind": "concept",
+      "front": "What does a scalar product of zero tell you about two non-zero vectors?",
+      "back": "They are **perpendicular**, because $\\cos\\theta=0$ means $\\theta=90^{\\circ}$.",
+      "hint": "What is the value of $\\cos 90^{\\circ}$?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j0wnt7",
+      "kind": "term",
+      "front": "What is the vector product $\\mathbf{v}\\times\\mathbf{w}$ of two three-dimensional vectors?",
+      "back": "A **vector** perpendicular to both $\\mathbf{v}$ and $\\mathbf{w}$. Its direction follows the right-hand rule.",
+      "hint": "Compare the type of result with the scalar product.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12k27pt",
+      "kind": "formula",
+      "front": "What are the components of $\\mathbf{v}\\times\\mathbf{w}$?",
+      "back": "$\\begin{pmatrix}v_2w_3-v_3w_2\\\\ v_3w_1-v_1w_3\\\\ v_1w_2-v_2w_1\\end{pmatrix}$. Each component is a difference of two products.",
+      "hint": "Work through the three components in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wdx5c1",
+      "kind": "mistake",
+      "front": "Is $\\mathbf{w}\\times\\mathbf{v}$ the same as $\\mathbf{v}\\times\\mathbf{w}$?",
+      "back": "No. Swapping the vectors **reverses** the direction, so $\\mathbf{w}\\times\\mathbf{v}=-(\\mathbf{v}\\times\\mathbf{w})$. Order matters.",
+      "hint": "Think about the right-hand rule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07953th",
+      "kind": "formula",
+      "front": "What does $|\\mathbf{v}\\times\\mathbf{w}|$ equal, and what does it represent?",
+      "back": "$|\\mathbf{v}||\\mathbf{w}|\\sin\\theta$, which is the **area** of the parallelogram with sides $\\mathbf{v}$ and $\\mathbf{w}$.",
+      "hint": "The base is $|\\mathbf{v}|$. What is the height?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qnwfc3",
+      "kind": "concept",
+      "front": "How is the area of a triangle with sides $\\mathbf{v}$ and $\\mathbf{w}$ found using the vector product?",
+      "back": "Take **half** the parallelogram area: $\\frac{1}{2}|\\mathbf{v}\\times\\mathbf{w}|$. If the vectors are parallel, the area is zero.",
+      "hint": "Two copies of the triangle make the parallelogram.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1edinfe",
+      "kind": "mistake",
+      "front": "A student writes $\\mathbf{v}\\cdot\\mathbf{w}$ as a column vector. What is wrong?",
+      "back": "The scalar product is a **number**, not a vector. Multiply matching components, add, and give a single value.",
+      "hint": "Check what type of result the scalar product gives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07x8o77",
+      "kind": "example",
+      "front": "Find $\\mathbf{v}\\cdot\\mathbf{w}$ for $\\mathbf{v}=\\begin{pmatrix}2\\\\3\\\\1\\end{pmatrix}$ and $\\mathbf{w}=\\begin{pmatrix}4\\\\-1\\\\5\\end{pmatrix}$.",
+      "back": "$\\mathbf{v}\\cdot\\mathbf{w}=8-3+5=10$, a single number.",
+      "hint": "Multiply matching components first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17x2pjx",
+      "kind": "example",
+      "front": "Find the value of $k$ that makes $\\begin{pmatrix}2\\\\k\\\\1\\end{pmatrix}$ and $\\begin{pmatrix}3\\\\4\\\\-2\\end{pmatrix}$ perpendicular.",
+      "back": "$k=-1$, since $6+4k-2=0$ simplifies to $4k+4=0$.",
+      "hint": "Set the scalar product equal to zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0di2gff",
+      "kind": "example",
+      "front": "What is the area of a triangle with sides $\\mathbf{v}=\\begin{pmatrix}1\\\\2\\\\3\\end{pmatrix}$ cm and $\\mathbf{w}=\\begin{pmatrix}4\\\\5\\\\6\\end{pmatrix}$ cm?",
+      "back": "About $3.67\\,\\mathrm{cm^2}$. $\\mathbf{v}\\times\\mathbf{w}=\\begin{pmatrix}-3\\\\6\\\\-3\\end{pmatrix}$ has magnitude $\\sqrt{54}\\approx7.35$, then halve it.",
+      "hint": "Find the vector product first, then its magnitude.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10efjca",
+      "kind": "process",
+      "front": "What steps find the angle between two vectors?",
+      "back": "1) Find the scalar product. 2) Find both magnitudes. 3) Substitute into $\\cos\\theta$. 4) Take the inverse cosine, in degree mode.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    }
+  ]
+}

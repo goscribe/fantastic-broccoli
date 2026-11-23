@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-11",
+  "topicCode": "1.11",
+  "topicName": "Partial fractions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:57.074Z",
+  "cards": [
+    {
+      "id": "0a2niu8",
+      "kind": "term",
+      "front": "What are partial fractions?",
+      "back": "**Partial fractions** are simpler fractions, each with a lower-degree denominator, whose sum equals the original rational function. Splitting them reverses adding fractions.",
+      "hint": "Think of reversing the addition of two fractions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kqsknt",
+      "kind": "process",
+      "front": "How do you split a proper fraction $\\frac{px+q}{(x-a)(x-b)}$ with distinct linear factors?",
+      "back": "Write $\\frac{A}{x-a}+\\frac{B}{x-b}$, clear the denominators, then substitute $x=a$ and $x=b$ to find $A$ and $B$. Each substitution leaves one unknown.",
+      "hint": "Which values of x make one of the two terms vanish?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "020vp7h",
+      "kind": "concept",
+      "front": "Why split a rational function into partial fractions before integrating it?",
+      "back": "A rational function rarely integrates directly, but each simpler term does. Each linear term integrates to a **logarithm**, so the split makes the integral manageable.",
+      "hint": "Compare the difficulty of integrating one fraction with integrating simpler ones.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1e85bzu",
+      "kind": "concept",
+      "front": "Why does $(x+1)^2$ need two terms, $\\frac{A}{x+1}$ and $\\frac{B}{(x+1)^2}$?",
+      "back": "A **repeated factor** needs one term for each power up to its exponent. The first term is essential, since without it the numerator could not contain an $x$ term.",
+      "hint": "Consider every power from 1 up to the exponent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i1xplz",
+      "kind": "mistake",
+      "front": "Is $\\frac{1}{(x-1)(x+2)}$ the same as $\\frac{1}{x-1}+\\frac{1}{x+2}$?",
+      "back": "**No**. $\\frac{1}{x-1}+\\frac{1}{x+2}$ equals $\\frac{2x+1}{(x-1)(x+2)}$. Giving each factor the same numerator is wrong.",
+      "hint": "Add the two right-hand fractions over a common denominator.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l3o5xm",
+      "kind": "mistake",
+      "front": "Why can substituting $x=-1$ alone not find all constants in $\\frac{3x+5}{(x+1)^2}$?",
+      "back": "Substituting a root finds only one constant for a **repeated factor**. Compare coefficients of $x$ or use another value of $x$ to find the rest.",
+      "hint": "How many unknowns does one substitution remove?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19lmldh",
+      "kind": "mistake",
+      "front": "What must you do first with $\\frac{x^2}{(x-1)(x+1)}$ before splitting it?",
+      "back": "**Divide** first, because the numerator and denominator both have degree 2. Then $\\frac{x^2}{x^2-1}=1+\\frac{1}{x^2-1}$, and split the proper remainder.",
+      "hint": "Compare the degrees of the numerator and denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06nyn3r",
+      "kind": "formula",
+      "front": "What is $\\int\\frac{1}{x-a}\\,\\mathrm{d}x$?",
+      "back": "$\\ln|x-a|+C$. The **modulus** signs are needed because $x-a$ may be negative.",
+      "hint": "Each linear term gives a logarithm.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mjlavg",
+      "kind": "formula",
+      "front": "What is $\\int\\frac{1}{(x-a)^2}\\,\\mathrm{d}x$?",
+      "back": "$-\\frac{1}{x-a}+C$. A squared factor gives a power, not a logarithm, because $(x-a)^{-2}$ integrates to a negative power.",
+      "hint": "Integrate the power of $x-a$ term by term.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sdqi3o",
+      "kind": "example",
+      "front": "Express $\\frac{5x+1}{(x-1)(x+2)}$ in partial fractions.",
+      "back": "$\\frac{2}{x-1}+\\frac{3}{x+2}$. Substituting $x=1$ gives $A=2$, and substituting $x=-2$ gives $B=3$.",
+      "hint": "Substitute the roots x=1 and x=-2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0le7wqx",
+      "kind": "example",
+      "front": "Integrate $\\frac{5x+1}{(x-1)(x+2)}$ with respect to $x$.",
+      "back": "$2\\ln|x-1|+3\\ln|x+2|+C$, using the partial fractions $\\frac{2}{x-1}+\\frac{3}{x+2}$.",
+      "hint": "Integrate each partial fraction separately.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0s8lw37",
+      "kind": "term",
+      "front": "What is a telescoping series?",
+      "back": "A **telescoping series** is one in which most terms cancel in pairs, leaving only a few terms to add. Splitting each term often creates this cancellation.",
+      "hint": "Write out the first few terms to see the pattern.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1p4xl04",
+      "kind": "example",
+      "front": "Calculate $\\sum_{k=1}^{20}\\frac{1}{k(k+1)}$.",
+      "back": "$\\frac{20}{21}$. Split each term as $\\frac{1}{k}-\\frac{1}{k+1}$, so the middle terms cancel, leaving $1-\\frac{1}{21}$.",
+      "hint": "Write the first three and last two terms.",
+      "sectionId": "s6"
+    }
+  ]
+}

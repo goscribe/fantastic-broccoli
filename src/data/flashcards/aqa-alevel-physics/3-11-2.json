@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-11-2",
+  "topicCode": "3.11.2",
+  "topicName": "Thermodynamics and engines",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:56.077Z",
+  "cards": [
+    {
+      "id": "0i9185y",
+      "kind": "formula",
+      "front": "What does the first law of thermodynamics state, as an equation?",
+      "back": "$Q=\\Delta U+W$: the heat supplied to a gas equals the rise in its **internal energy** plus the work done by the gas.",
+      "hint": "Think about where the energy entering a gas can end up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l86o4j",
+      "kind": "concept",
+      "front": "What does the area under a pV curve represent?",
+      "back": "The **work done** by the gas in an expansion, or the work done on it in a compression. A larger pressure or volume change gives a larger area.",
+      "hint": "Think about the units of pressure multiplied by volume.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t4r63g",
+      "kind": "formula",
+      "front": "How is the efficiency of a heat engine calculated?",
+      "back": "$\\frac{W}{Q_\\mathrm{H}}$: the useful work output divided by the heat input from the hot source. It has no unit.",
+      "hint": "Compare what you get out with what you put in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u05sa9",
+      "kind": "term",
+      "front": "What is the internal energy of a gas?",
+      "back": "**Internal energy** is the sum of the random kinetic and potential energies of its molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14bc3tz",
+      "kind": "term",
+      "front": "What is a heat engine?",
+      "back": "A **heat engine** takes in heat from a hot source, does work, and rejects heat to a cold sink.",
+      "hint": "Think about the two reservoirs it connects.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ritquv",
+      "kind": "concept",
+      "front": "What does the first law reduce to in an adiabatic change?",
+      "back": "$W=-\\Delta U$, because no heat enters or leaves the gas, so $Q=0$.",
+      "hint": "Substitute the condition of no heat flow into the first law.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0adwqww",
+      "kind": "formula",
+      "front": "Which expression gives the maximum theoretical efficiency of an engine working between kelvin temperatures?",
+      "back": "$\\frac{T_\\mathrm{H}-T_\\mathrm{C}}{T_\\mathrm{H}}$, with both temperatures in kelvin. A larger temperature difference raises the limit.",
+      "hint": "Think about what fraction of the hot temperature is left over.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lxwb4d",
+      "kind": "example",
+      "front": "A gas expands at constant pressure $1.5\\times10^{5}\\,\\mathrm{Pa}$ by $3.0\\times10^{-3}\\,\\mathrm{m^3}$ and absorbs $700\\,\\mathrm{J}$. What is $\\Delta U$?",
+      "back": "$\\Delta U=+250\\,\\mathrm{J}$. The work done by the gas is $450\\,\\mathrm{J}$, so $\\Delta U=700-450$.",
+      "hint": "Find the work done by the gas first, from its pressure and volume change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15vi0rx",
+      "kind": "example",
+      "front": "A rectangular pV cycle spans $1.0\\times10^{5}$ to $3.0\\times10^{5}\\,\\mathrm{Pa}$ and $1.0\\times10^{-3}$ to $3.0\\times10^{-3}\\,\\mathrm{m^3}$. Net work per cycle?",
+      "back": "$400\\,\\mathrm{J}$, the enclosed area: $2.0\\times10^{5}\\times2.0\\times10^{-3}$.",
+      "hint": "Consider what the enclosed area of the rectangle measures.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0celrh5",
+      "kind": "example",
+      "front": "An engine takes $2000\\,\\mathrm{J}$ from a hot source and rejects $1400\\,\\mathrm{J}$ to a cold sink per cycle. What is its efficiency?",
+      "back": "0.30, or 30%. The work done is $600\\,\\mathrm{J}$, and $\\frac{600}{2000}=0.30$.",
+      "hint": "Work out the useful work first, from heat in and heat out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v61xkx",
+      "kind": "mistake",
+      "front": "Why must temperatures be converted to kelvin when calculating maximum efficiency?",
+      "back": "Celsius values give a wrong, far too high limit: $\\frac{200}{227}\\approx0.88$ instead of 0.40 for $227\\,^{\\circ}\\mathrm{C}$ and $27\\,^{\\circ}\\mathrm{C}$. Use absolute temperatures.",
+      "hint": "Think about where the zero point of each scale sits.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0aioonu",
+      "kind": "concept",
+      "front": "How does the diesel cycle add heat differently from the Otto cycle?",
+      "back": "The diesel cycle adds heat at **constant pressure** as fuel burns, whereas the Otto cycle adds heat at constant volume from a spark.",
+      "hint": "Think about which quantity stays fixed during the heating step.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0um4uzx",
+      "kind": "process",
+      "front": "What are the four steps of the idealised Otto cycle, in order?",
+      "back": "Adiabatic compression, constant-volume heating from the spark, adiabatic expansion, then constant-volume cooling.",
+      "hint": "Start with what happens to the fuel–air mixture first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0s61sad",
+      "kind": "mistake",
+      "front": "Why is a real engine's efficiency always below its maximum theoretical value?",
+      "back": "Friction wastes energy as heat, heat is lost to the surroundings, and combustion may be incomplete.",
+      "hint": "Think about losses that happen outside the ideal cycle.",
+      "sectionId": "s5"
+    }
+  ]
+}

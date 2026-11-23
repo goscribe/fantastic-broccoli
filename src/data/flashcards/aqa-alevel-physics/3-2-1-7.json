@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-1-7",
+  "topicCode": "3.2.1.7",
+  "topicName": "Conservation laws",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:58.224Z",
+  "cards": [
+    {
+      "id": "1orehy5",
+      "kind": "concept",
+      "front": "Which quantities must have the same total before and after every particle interaction?",
+      "back": "**Charge**, **baryon number** and **lepton number** are always conserved. Each total is the same before and after the interaction.",
+      "hint": "Think back to the coins and note analogy at the start of the topic."
+    },
+    {
+      "id": "172xj58",
+      "kind": "concept",
+      "front": "Why can a proton-antiproton pair be created from energy, while a lone proton cannot?",
+      "back": "The pair has baryon number $+1-1=0$, the same as before. A lone proton would give a total of $+1$, which breaks **baryon number** conservation.",
+      "hint": "Add the baryon numbers of the particles on each side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "113rpfe",
+      "kind": "term",
+      "front": "What is the lepton number, $L$, of a particle?",
+      "back": "It is **+1** for each lepton, **−1** for each antilepton and 0 for all other particles.",
+      "hint": "Compare a lepton with its antiparticle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nbjxsx",
+      "kind": "term",
+      "front": "What is a conserved quantity?",
+      "back": "A **conserved quantity** is a property whose total value is the same before and after an interaction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lqihxw",
+      "kind": "example",
+      "front": "What is the total charge before an electron meets a positron?",
+      "back": "$-1e+1e=0$. The photons produced carry no charge, so the total after is also 0.",
+      "hint": "Add the signs of the two particles' charges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ha0ehx",
+      "kind": "example",
+      "front": "Which particle is missing from the proton decay $p\\to n+e^+$ so that every conservation law holds?",
+      "back": "An **electron neutrino**, $\\nu_e$, with $L=+1$. Without it, lepton number goes from 0 to $-1$, so the decay is forbidden as written.",
+      "hint": "Check the lepton number on each side of the arrow.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i4jn5p",
+      "kind": "mistake",
+      "front": "Why is checking only charge not enough when testing a particle reaction?",
+      "back": "A reaction can conserve charge yet still break **baryon number** or **lepton number**. Each quantity must be compared separately.",
+      "hint": "Count how many quantities the note tracks.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cfyvf3",
+      "kind": "process",
+      "front": "What are the four steps for checking whether a particle reaction is possible?",
+      "back": "1) Write charge, $B$ and $L$ under each particle. 2) Add the values left of the arrow. 3) Add the values right of the arrow. 4) Compare the totals for each quantity separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10w9ltx",
+      "kind": "term",
+      "front": "What is the strangeness, $S$, of a particle?",
+      "back": "It is the number of **anti-strange quarks** minus the number of **strange quarks** it contains.",
+      "hint": "Compare a strange quark with an anti-strange quark.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1o419m5",
+      "kind": "concept",
+      "front": "How can strangeness change in a weak interaction?",
+      "back": "It can change by **0, +1 or −1**. Strangeness is only conserved in **strong** interactions.",
+      "hint": "Compare the weak interaction with the strong interaction.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1o8uvql",
+      "kind": "example",
+      "front": "What is the muon-type lepton number after the decay $\\mu^-\\to e^-+\\bar{\\nu}_e+\\nu_\\mu$?",
+      "back": "**+1**, from the $\\nu_\\mu$ alone, matching the start. The electron-type total is $+1-1+0=0$, also matching the start.",
+      "hint": "Check the bar over each neutrino symbol before adding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bn0jgj",
+      "kind": "mistake",
+      "front": "Why can a proton not decay into a positron and a neutral pion, $\\pi^0$?",
+      "back": "Charge is conserved at $+1e$, but baryon number falls from $+1$ to 0. The positron and the meson both have $B=0$, so the decay is forbidden.",
+      "hint": "Look at the baryon number of each product.",
+      "sectionId": "s2"
+    }
+  ]
+}

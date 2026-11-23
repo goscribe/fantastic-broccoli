@@ -11,10 +11,11 @@ import {
   Flame,
   LayoutDashboard,
   Library,
+  MessageSquareText,
   ScrollText,
   Sparkles,
-  MessageSquareText,
   Star,
+  Trophy,
   Users,
 } from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -27,6 +28,7 @@ const NAV = [
   { href: "/admin/workspaces", label: "Workspaces", icon: Library },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/quality", label: "Quality", icon: Sparkles },
+  { href: "/admin/benchmark", label: "Benchmark", icon: Trophy },
   { href: "/admin/frustration", label: "Frustration", icon: Flame },
   { href: "/admin/ratings", label: "Ratings", icon: Star },
   { href: "/admin/feedback", label: "Feedback", icon: MessageSquareText },

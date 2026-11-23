@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-7",
+  "topicCode": "8.7",
+  "topicName": "Volumes: square and rectangle cross sections",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:54.682Z",
+  "cards": [
+    {
+      "id": "1utcv7u",
+      "kind": "concept",
+      "front": "How does slicing a solid perpendicular to the x-axis lead to a volume integral?",
+      "back": "Add up the **slice areas**. Each thin slice has volume $A(x)\\Delta x$, and making the slices thinner gives $V=\\int_a^b A(x)\\,dx$.",
+      "hint": "Think about thin slices and what happens as they get thinner.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mzxj0e",
+      "kind": "formula",
+      "front": "For a base between two curves with $f(x)\\geq g(x)$, what is the width $b(x)$ of a cross section?",
+      "back": "$b(x)=f(x)-g(x)$, the **vertical distance** between the upper curve and the lower curve at that x-value.",
+      "hint": "Upper curve minus lower curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hec71l",
+      "kind": "formula",
+      "front": "For square cross sections with side $b(x)$, what is the volume integral?",
+      "back": "$V=\\int_a^b [b(x)]^2\\,dx$, because the **side length** is $b(x)$ so the area is $A(x)=[b(x)]^2$.",
+      "hint": "Area of a square is side squared.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dylxej",
+      "kind": "process",
+      "front": "What are the steps to set up a volume with cross sections perpendicular to the x-axis?",
+      "back": "1) Find the slice area $A(x)$ first. 2) Write $V=\\int_a^b A(x)\\,dx$ using the x-limits of the base. 3) Evaluate the integral.",
+      "hint": "State the area before writing the integral.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wpwcj1",
+      "kind": "mistake",
+      "front": "A student takes the width as lower curve minus upper curve. What goes wrong?",
+      "back": "The **width is negative**, which cannot be an area. Subtract the lower curve from the upper curve, or split the interval where the curves cross.",
+      "hint": "Which curve should come first in the subtraction?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l9uwxl",
+      "kind": "mistake",
+      "front": "A student squares each curve separately, writing $f(x)^2-g(x)^2$ for a square's area. Why is this wrong?",
+      "back": "The side is the **whole difference** between the curves, so $A(x)=[f(x)-g(x)]^2$. Square the difference, not each curve.",
+      "hint": "The side length is a single segment between the curves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s46mz6",
+      "kind": "example",
+      "front": "The base lies between $y=x$ and $y=x^2$ for $0\\leq x\\leq 1$, with square cross sections perpendicular to the x-axis. What is the volume?",
+      "back": "$\\frac{1}{30}$ cubic units. The side is $x-x^2$, so $V=\\int_0^1 (x-x^2)^2\\,dx$.",
+      "hint": "On this interval, which curve is higher?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g04eim",
+      "kind": "term",
+      "front": "What is a cross section perpendicular to the x-axis?",
+      "back": "A **slice** of the solid made at a fixed x-value. Its shape gives the area $A(x)$ used in the volume integral.",
+      "hint": "Imagine cutting the solid at one x-value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15do1gm",
+      "kind": "concept",
+      "front": "Why can't a rectangular cross section always be treated as a square?",
+      "back": "A rectangle has a separate **height** $h(x)$ as well as a base, so $A(x)=b(x)h(x)$. Only equal dimensions make it a square.",
+      "hint": "How many dimensions does a rectangle need?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "062prpd",
+      "kind": "formula",
+      "front": "For rectangular cross sections with base $b(x)$ and height $h(x)$, what is the volume integral?",
+      "back": "$V=\\int_a^b b(x)h(x)\\,dx$, because each area is $A(x)=b(x)h(x)$.",
+      "hint": "Multiply the two dimensions at each x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hdhl16",
+      "kind": "example",
+      "front": "The same base region is between $y=x$ and $y=x^2$ on $[0,1]$. Each rectangle's height is twice its base. What is the volume?",
+      "back": "$\\frac{1}{15}$ cubic units. The area is $2(x-x^2)^2$, so $V=\\int_0^1 2(x-x^2)^2\\,dx$.",
+      "hint": "Write the height as $2b(x)$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wc0uij",
+      "kind": "concept",
+      "front": "What must you do if the two bounding curves switch order inside the interval?",
+      "back": "**Split** the integral at the intersection point. On each piece, subtract the lower curve from the upper curve so the width is nonnegative.",
+      "hint": "Where do the two curves meet?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bwy13i",
+      "kind": "term",
+      "front": "What is the side length of a square cross section?",
+      "back": "The **length of the segment** between the two curves in the base region, which equals $b(x)$.",
+      "hint": "Look at the base region, not the solid's height.",
+      "sectionId": "s3"
+    }
+  ]
+}

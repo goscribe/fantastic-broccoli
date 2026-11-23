@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Verifying solutions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:41.555Z",
+  "cards": [
+    {
+      "id": "05dmmb7",
+      "kind": "concept",
+      "front": "What must be true for a function to be a solution of a differential equation?",
+      "back": "The equation must be **true at every point** of the interval being checked. The function must also be differentiable. Matching at one input is not enough.",
+      "hint": "One matching value is not enough.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ur9pv8",
+      "kind": "process",
+      "front": "What are the steps to verify whether a proposed function solves a differential equation?",
+      "back": "1) **Differentiate** the proposed function as needed. 2) Substitute the function for $y$ and its derivative for $\\frac{dy}{dx}$. 3) Simplify both sides and compare them over the whole interval.",
+      "hint": "Write the derivatives down before substituting anything."
+    },
+    {
+      "id": "0l3gjtb",
+      "kind": "mistake",
+      "front": "If $y=x^2+3$, why is it wrong to substitute $x^2+3$ for both $y$ and $\\frac{dy}{dx}$?",
+      "back": "**Keep the derivative separate.** Here $\\frac{dy}{dx}=2x$, so $2x$ replaces $\\frac{dy}{dx}$, and $x^2+3$ replaces only $y$.",
+      "hint": "Find the derivative first, then decide what replaces each symbol.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lgbg6o",
+      "kind": "term",
+      "front": "What is a differential equation?",
+      "back": "An equation that relates an **unknown function** to one or more of its derivatives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fm2dpk",
+      "kind": "term",
+      "front": "What is a counterexample when verifying a solution?",
+      "back": "An **allowed input** where the substituted sides differ. One counterexample shows the function is not a solution on the interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "089480u",
+      "kind": "concept",
+      "front": "Why must you check the domain when verifying a solution?",
+      "back": "The function and every expression in the equation must be **defined** on the claimed interval. Equality at only isolated inputs does not establish a solution on an interval.",
+      "hint": "Check where each expression is defined.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c9qef2",
+      "kind": "example",
+      "front": "Does $y=2e^{3x}$ solve $\\frac{dy}{dx}=3y$ for all real $x$?",
+      "back": "**Yes**. Here $\\frac{dy}{dx}=6e^{3x}$ and $3y=6e^{3x}$, which match for every real $x$.",
+      "hint": "Differentiate first, then substitute into the right side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17tpxcn",
+      "kind": "example",
+      "front": "Does $y=x^2+1$ solve $\\frac{dy}{dx}=y$ at $x=0$?",
+      "back": "**No**. At $x=0$, $\\frac{dy}{dx}=2x=0$, but $y=1$, so the two sides differ.",
+      "hint": "Evaluate both sides at x = 0.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10paqwq",
+      "kind": "example",
+      "front": "Does $y=e^{2x}$ solve $\\frac{d^2y}{dx^2}=4y$ for all real $x$?",
+      "back": "**Yes**. The second derivative is $4e^{2x}$, which equals $4y$ for every real $x$.",
+      "hint": "Differentiate twice before comparing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bbkcw5",
+      "kind": "term",
+      "front": "What is a second-order derivative?",
+      "back": "The **derivative of the first derivative** of a function, written as $\\frac{d^2y}{dx^2}$ for a function $y$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cws1sh",
+      "kind": "term",
+      "front": "What is an identity in this topic?",
+      "back": "An **equality** that holds for every allowed value of its variable, such as every $x$ in the stated interval.",
+      "sectionId": "s3"
+    }
+  ]
+}

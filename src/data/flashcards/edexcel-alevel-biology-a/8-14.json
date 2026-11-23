@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-14",
+  "topicCode": "8.14",
+  "topicName": "Brain chemical imbalances",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:25.114Z",
+  "cards": [
+    {
+      "id": "057o3i6",
+      "kind": "concept",
+      "front": "What determines how strongly a synapse passes a signal?",
+      "back": "The **amount of neurotransmitter** available, the **number of receptors** that respond, and how quickly transmitter is removed from the cleft. Changing any one of these changes the signal.",
+      "hint": "Think about the sending side, the receiving side and what happens afterwards.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m6fpo9",
+      "kind": "process",
+      "front": "What is the sequence that leads from neurone loss to the symptoms of Parkinson's disease?",
+      "back": "1) Dopamine-releasing neurones in movement pathways die. 2) Less **dopamine** is released at their synapses. 3) Movement signals become weaker, causing tremor, stiffness and slow movement.",
+      "hint": "Start with the cells at the beginning of the chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0plnoru",
+      "kind": "concept",
+      "front": "Why can drugs that change a transmitter's level cause side effects?",
+      "back": "Transmitters work throughout the brain, so a drug also affects regions beyond the one being treated. For example, dopamine-raising drugs can sometimes cause hallucinations.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hj7rt1",
+      "kind": "term",
+      "front": "What is a neurotransmitter?",
+      "back": "A **neurotransmitter** is a chemical released at a synapse that binds to receptors on the receiving cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d11ice",
+      "kind": "term",
+      "front": "What is a receptor protein?",
+      "back": "A **receptor protein** is a membrane protein with a binding site that fits a specific neurotransmitter.",
+      "hint": "Think about the receiving cell's surface.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lrjclo",
+      "kind": "term",
+      "front": "What is dopamine and what pathways does it act in?",
+      "back": "**Dopamine** is a neurotransmitter released by neurones in pathways that control movement, reward and some aspects of mood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13dio8x",
+      "kind": "term",
+      "front": "What is Parkinson's disease?",
+      "back": "**Parkinson's disease** is a progressive disorder caused by the loss of dopamine-releasing neurones, producing tremor, slow movement and muscle stiffness.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ik9j7f",
+      "kind": "term",
+      "front": "What is serotonin and what does it regulate?",
+      "back": "**Serotonin** is a neurotransmitter involved in regulating mood, sleep and appetite.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1blputr",
+      "kind": "concept",
+      "front": "In schizophrenia, what change in dopamine pathways is linked to hallucinations?",
+      "back": "**Overactivity** of some dopamine pathways is linked to symptoms such as hallucinations and disordered thinking.",
+      "hint": "Look at the table in the schizophrenia part of the note.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0frj3p1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that one brain chemical controls a behaviour?",
+      "back": "No behaviour is controlled by a single chemical. **Many transmitters and brain regions** act together to produce it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mwhp0e",
+      "kind": "term",
+      "front": "What is reuptake at a synapse?",
+      "back": "**Reuptake** is the process by which transporter proteins take neurotransmitter back into the sending neurone, ending its action at the synapse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v9s8v1",
+      "kind": "process",
+      "front": "What happens at the synapse when a drug blocks serotonin reuptake?",
+      "back": "The drug blocks the **transporters** that normally take serotonin back into the sending neurone. Serotonin stays in the cleft longer, so receptors on the receiving cell are stimulated more.",
+      "hint": "Start with what the transporters normally do.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13qfot7",
+      "kind": "mistake",
+      "front": "Why is restoring a chemical level not the same as curing a disorder?",
+      "back": "A treatment that restores a chemical level is **not a cure**. Neurone loss or other causes may continue, so symptoms can return.",
+      "sectionId": "s5"
+    }
+  ]
+}

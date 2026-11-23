@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "DNA replication",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:44.138Z",
+  "cards": [
+    {
+      "id": "04omoel",
+      "kind": "concept",
+      "front": "How does each separated DNA strand end up guiding the making of a new strand?",
+      "back": "**Helicase** breaks the hydrogen bonds between paired bases, separating the two strands. Each separated strand then serves as a template, and its base sequence determines which nucleotides are added to the new strand.",
+      "hint": "Think about what the bases on a template tell the incoming nucleotides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d7582e",
+      "kind": "concept",
+      "front": "Why are the leading and lagging strands copied in different ways?",
+      "back": "**DNA polymerase** can only add nucleotides in the $5'\\rightarrow3'$ direction, and the two template strands run in opposite directions. The leading strand grows continuously toward the fork, while the lagging strand forms short fragments away from it.",
+      "hint": "Start with the direction DNA polymerase can build in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fzs9jz",
+      "kind": "term",
+      "front": "What does semiconservative replication mean?",
+      "back": "Each new DNA molecule contains **one original strand** and **one newly synthesized strand**. Each original strand acts as a guide for building its partner.",
+      "hint": "Count how many strands in each molecule are old.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pm6qnn",
+      "kind": "process",
+      "front": "What is the order of early steps when DNA replication begins at an origin?",
+      "back": "The origin opens the double helix. Helicase separates the strands to form a fork. Topoisomerase relieves twisting strain ahead of the fork. Primase makes an RNA primer, and DNA polymerase extends it.",
+      "hint": "Work from the origin outward to the primer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03mj6m0",
+      "kind": "concept",
+      "front": "Why does DNA polymerase need primase?",
+      "back": "**Primase** makes a short RNA primer that provides a starting point. DNA polymerase needs this because it can only extend an existing strand.",
+      "hint": "What can DNA polymerase not do on its own?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jdb8b1",
+      "kind": "term",
+      "front": "What are Okazaki fragments?",
+      "back": "**Okazaki fragments** are the short sections of newly made DNA on the lagging strand. Each one is extended away from the opening fork after its own primer is laid down.",
+      "hint": "Think about where the lagging strand is made in pieces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04jh6xw",
+      "kind": "process",
+      "front": "How are the gaps in the lagging strand filled and sealed?",
+      "back": "The RNA primers are removed and replaced with DNA. Then **DNA ligase** seals the breaks between neighboring fragments by joining the sugar-phosphate backbone.",
+      "hint": "Three steps: remove, replace, seal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nhuuvx",
+      "kind": "term",
+      "front": "What is DNA ligase's role in replication?",
+      "back": "**DNA ligase** joins neighboring DNA fragments by sealing breaks in the sugar-phosphate backbone. This completes the lagging strand.",
+      "hint": "Think about what joins the fragments together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ioydlq",
+      "kind": "term",
+      "front": "What is proofreading?",
+      "back": "**Proofreading** is DNA polymerase checking newly added nucleotides and removing an incorrectly paired one before it continues synthesis. It reduces copying errors during replication.",
+      "hint": "When does the check happen, during or after synthesis?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ezj25a",
+      "kind": "mistake",
+      "front": "Does helicase break the covalent bonds along each strand's backbone?",
+      "back": "No. Helicase breaks the **hydrogen bonds** between paired bases. The covalent bonds along each strand's backbone stay intact.",
+      "hint": "Which bonds link bases across the two strands?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h0e34w",
+      "kind": "mistake",
+      "front": "Does complementary base pairing make DNA replication error-free?",
+      "back": "No. Base pairing supports accurate copying, but it does not make replication error-free. Proofreading and mismatch repair reduce errors without preventing every one.",
+      "hint": "Ask whether the answer is always yes or only greatly improves accuracy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "102pval",
+      "kind": "term",
+      "front": "What is mismatch repair?",
+      "back": "**Mismatch repair** recognizes and replaces incorrectly paired nucleotides that remain after DNA replication. It is a repair step that happens after copying.",
+      "hint": "Contrast it with proofreading, which happens during synthesis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i8cxd4",
+      "kind": "term",
+      "front": "What is topoisomerase's role at a replication fork?",
+      "back": "**Topoisomerase** relieves the twisting strain that builds ahead of the fork by cutting, rotating, and rejoining DNA.",
+      "hint": "Think about the strain building up ahead of the opening fork.",
+      "sectionId": "s1"
+    }
+  ]
+}

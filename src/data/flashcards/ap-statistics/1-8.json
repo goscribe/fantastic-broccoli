@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Boxplots and summary graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:02.548Z",
+  "cards": [
+    {
+      "id": "0io0hgv",
+      "kind": "term",
+      "front": "What is the five-number summary of a data set?",
+      "back": "The **minimum**, first quartile $Q_1$, median, third quartile $Q_3$, and maximum, listed in order. Together they split the ordered data into four parts of about a quarter each.",
+      "hint": "Five values, listed from smallest to largest.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ilp5lh",
+      "kind": "concept",
+      "front": "What do the whiskers and the separate points show on a boxplot?",
+      "back": "Each **whisker** runs to the smallest or largest value that is not an outlier. Values beyond the 1.5 IQR fences are **outliers** and are plotted as separate points.",
+      "hint": "Compare each value with the fences.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eaunfq",
+      "kind": "concept",
+      "front": "How can you read spread and skew from a boxplot?",
+      "back": "A longer **box** means a wider middle half (the IQR). A median close to $Q_1$ with a longer upper whisker suggests skew right, while a median near the middle with equal whiskers suggests symmetry.",
+      "hint": "Look at where the median sits and how long each whisker is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fs90qi",
+      "kind": "process",
+      "front": "What are the steps to draw a boxplot?",
+      "back": "1) Draw an evenly scaled number line labeled with the variable and units. 2) Draw the **box** from $Q_1$ to $Q_3$ with a line at the median. 3) Calculate the fences and mark any outliers as points. 4) Extend the whiskers to the most extreme values that are not outliers.",
+      "hint": "Start with the scale, then the box.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kdbmsc",
+      "kind": "example",
+      "front": "Eleven students solve a puzzle in 7, 9, 10, 12, 13, 15, 16, 18, 20, 22 and 41 minutes. What is the five-number summary?",
+      "back": "7, 10, 15, 20 and 41 minutes. The median is the 6th value, 15, so the lower half gives $Q_1=10$ and the upper half gives $Q_3=20$.",
+      "hint": "With an odd count, leave the median out of both halves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xmky2q",
+      "kind": "example",
+      "front": "For the puzzle times, with $Q_1=10$ and $Q_3=20$, what are the fences and is 41 an outlier?",
+      "back": "$\\mathrm{IQR}=10$, so the fences are $-5$ and $35$. The value 41 lies beyond 35, so it is an **outlier**, and the upper whisker stops at 22.",
+      "hint": "Multiply the IQR by 1.5 before adding or subtracting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ypw3el",
+      "kind": "formula",
+      "front": "How are the IQR and the outlier fences calculated?",
+      "back": "$\\mathrm{IQR}=Q_3-Q_1$. The fences are $Q_1-1.5\\times\\mathrm{IQR}$ and $Q_3+1.5\\times\\mathrm{IQR}$, and any value beyond either fence is an **outlier**.",
+      "hint": "Find the IQR first, then the fences.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17jti9d",
+      "kind": "mistake",
+      "front": "Does a longer box on a boxplot mean there are more observations in it?",
+      "back": "No. Each part of the boxplot holds about 25% of the observations. A longer **box** covers a wider range of values, not more data.",
+      "hint": "Think about what the box length measures.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08jadz2",
+      "kind": "concept",
+      "front": "Why would you pair a boxplot with a histogram?",
+      "back": "A boxplot gives the quartiles and outliers at a glance, while a **histogram** shows the shape of how values are arranged. Boxplots are especially useful for comparing several groups side by side on one scale.",
+      "hint": "Each graph hides something the other shows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02rrw7e",
+      "kind": "mistake",
+      "front": "Can a boxplot show whether a distribution has two peaks?",
+      "back": "No. A boxplot shows only the five-number summary and any outliers, so **peaks** and gaps are hidden, and two very different shapes can share the same boxplot.",
+      "hint": "Which five numbers does a boxplot use?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t777sj",
+      "kind": "example",
+      "front": "A boxplot of delivery times has minimum 12, Q1=20, median 26, Q3=40, maximum 55 and no separate points. How would you describe the distribution?",
+      "back": "Skewed right, with no outliers, a median of 26 minutes, an IQR of 20 minutes and a range of 43 minutes. The upper fence is 70, so 55 is inside it, and the upper whisker is longer.",
+      "hint": "Check the fences before claiming there are no outliers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1abj2mb",
+      "kind": "mistake",
+      "front": "Can you say a boxplot has no outliers without checking anything?",
+      "back": "No. A claim about outliers needs evidence. Calculate the IQR and fences, then show the minimum and maximum both lie inside them.",
+      "hint": "What must you calculate before making the claim?",
+      "sectionId": "s5"
+    }
+  ]
+}

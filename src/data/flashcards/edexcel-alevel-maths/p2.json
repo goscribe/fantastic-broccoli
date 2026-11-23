@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p2",
+  "topicCode": "P2",
+  "topicName": "Algebra and functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:29.778Z",
+  "cards": [
+    {
+      "id": "0bk0et7",
+      "kind": "concept",
+      "front": "Why does factorising let you solve a quadratic equation $ax^2+bx+c=0$ quickly?",
+      "back": "Once the expression is written as a product of factors equal to zero, **one of the factors must be zero**, so you set each bracket to zero and solve. Move every term to one side first.",
+      "hint": "Think about what must be true when two numbers multiply to give zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g9cztw",
+      "kind": "concept",
+      "front": "What does the discriminant $b^2-4ac$ tell you about a quadratic equation?",
+      "back": "Its sign gives the **number of real roots**: positive means two distinct real roots, zero means one repeated root, and negative means no real roots.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0np9jin",
+      "kind": "concept",
+      "front": "What is the difference between expanding and factorising an expression?",
+      "back": "**Expanding** multiplies out brackets to give a sum of terms, while **factorising** reverses this by writing the sum as a product of brackets.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00n65fl",
+      "kind": "process",
+      "front": "What are the steps for factorising $2x^2+7x+3$ by splitting the middle term?",
+      "back": "Find two numbers that multiply to $2\\times3=6$ and add to 7, which are 6 and 1. Split the middle term, group in pairs, and take out the common bracket to get $(2x+1)(x+3)$.",
+      "hint": "Start by multiplying the first and last coefficients together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q16isx",
+      "kind": "example",
+      "front": "Solve $x^2-5x-14=0$ by factorising.",
+      "back": "$x=7$ or $x=-2$, from $(x-7)(x+2)=0$.",
+      "hint": "What two numbers multiply to the constant term and add to the middle one?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lu1m6m",
+      "kind": "mistake",
+      "front": "Why is dividing both sides of $x^2=3x$ by $x$ a mistake?",
+      "back": "Dividing by $x$ **loses the root $x=0$**. Move every term to one side and factorise to find all roots.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "144tksw",
+      "kind": "formula",
+      "front": "What is the quadratic formula for the roots of $ax^2+bx+c=0$, and what condition applies to $a$?",
+      "back": "$x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$, where $a\\neq0$. It comes from completing the square on the general quadratic.",
+      "hint": "It is the general result of completing the square on $ax^2+bx+c=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vn8nxr",
+      "kind": "example",
+      "front": "Solve $x^2+6x+2=0$ by completing the square, leaving the answers as surds.",
+      "back": "Write $(x+3)^2-9+2=0$, so $(x+3)^2=7$. Then $x=-3\\pm\\sqrt{7}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19p2qtc",
+      "kind": "concept",
+      "front": "What does a negative index mean?",
+      "back": "A negative index means a **reciprocal**, so $a^{-n}=\\frac{1}{a^n}$. For example, $5^{-2}=\\frac{1}{25}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vmdil7",
+      "kind": "mistake",
+      "front": "Why is $(2x)^3$ not equal to $2x^3$?",
+      "back": "The index applies to **everything inside the bracket**, so $(2x)^3=8x^3$. The 2 is cubed too.",
+      "hint": "Ask which parts of the expression the power multiplies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l4hdpp",
+      "kind": "term",
+      "front": "What is a surd?",
+      "back": "A **surd** is a root, such as $\\sqrt{2}$, that cannot be written as a fraction of integers, so it stays in exact form.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q9n9bu",
+      "kind": "process",
+      "front": "What do you multiply top and bottom by to rationalise the denominator of $\\frac{1}{4-\\sqrt{2}}$?",
+      "back": "Multiply by $4+\\sqrt{2}$. The denominator becomes $(4-\\sqrt{2})(4+\\sqrt{2})=16-2=14$, which contains no surd.",
+      "hint": "Think about the difference of two squares.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1toxdwu",
+      "kind": "concept",
+      "front": "What is an asymptote, and which asymptotes does $y=\\frac{1}{x}$ have?",
+      "back": "An **asymptote** is a line that a curve approaches without touching. The graph $y=\\frac{1}{x}$ has the x-axis and the y-axis as asymptotes.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1gj61lp",
+      "kind": "example",
+      "front": "What are the turning point and roots of the curve $y=(x-2)^2-1$?",
+      "back": "The **turning point** is $(2,-1)$, and the roots are $x=1$ and $x=3$, where the curve meets the x-axis.",
+      "hint": "Completing the square shows the turning point directly.",
+      "sectionId": "s6"
+    }
+  ]
+}

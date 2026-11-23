@@ -1,5 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
 import type { Folder } from "@/types";
 
 export function countWorkspaces(folder: Folder): number {
@@ -8,6 +8,15 @@ export function countWorkspaces(folder: Folder): number {
     (folder.folders?.reduce((sum, f) => sum + countWorkspaces(f), 0) ?? 0)
   );
 }
+
+/*
+ * The body type scale (text-read / text-ui / text-small / text-caption, from
+ * tokens.css) are font sizes: without this, tailwind-merge reads them as text
+ * colours and drops them next to `text-muted-foreground`.
+ */
+const twMerge = extendTailwindMerge({
+  extend: { theme: { text: ["read", "ui", "small", "caption"] } },
+});
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

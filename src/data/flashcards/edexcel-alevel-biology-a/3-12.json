@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-12",
+  "topicCode": "3.12",
+  "topicName": "Cell specialisation by gene expression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:31.534Z",
+  "cards": [
+    {
+      "id": "0cyycpw",
+      "kind": "concept",
+      "front": "Why can a muscle cell and a nerve cell look so different when they carry the same genes?",
+      "back": "They express different genes, so they make different **proteins**. Gene expression decides which proteins a cell contains, and those proteins decide how the cell works.",
+      "hint": "Think about what the cells use, not what they contain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0muuo2u",
+      "kind": "concept",
+      "front": "How does a transcription factor switch a gene on?",
+      "back": "It binds to the **promoter** beside the gene and helps RNA polymerase attach and start work. More mRNA is then made from that gene.",
+      "hint": "Start at the region of DNA just before a gene.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jlebyh",
+      "kind": "concept",
+      "front": "Why do cells in different positions in an embryo become different cell types?",
+      "back": "They receive different **signals**, which activate different transcription factors. Each cell therefore expresses different genes from the same zygote.",
+      "hint": "Consider what the cells are exposed to in different places.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1afc6d1",
+      "kind": "term",
+      "front": "What is a specialised cell?",
+      "back": "A **specialised cell** is a differentiated cell whose structure and proteins suit it to a particular function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1quoew5",
+      "kind": "term",
+      "front": "What is differentiation?",
+      "back": "**Differentiation** is the process by which an unspecialised cell becomes specialised for a particular function.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vawked",
+      "kind": "term",
+      "front": "What is a promoter?",
+      "back": "A **promoter** is a region of DNA beside a gene where transcription factors and RNA polymerase bind to control transcription.",
+      "hint": "Where on the DNA would a control protein sit?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bp2mjc",
+      "kind": "term",
+      "front": "What is RNA polymerase?",
+      "back": "**RNA polymerase** is the enzyme that joins RNA nucleotides to make an mRNA strand complementary to a DNA template.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06dbacu",
+      "kind": "concept",
+      "front": "How does the haemoglobin in a red blood cell suit its job?",
+      "back": "Red blood cells are full of **haemoglobin**, so they can carry a large amount of oxygen.",
+      "hint": "Think about what the cell makes in huge amounts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qj3lmp",
+      "kind": "concept",
+      "front": "Why does a palisade mesophyll cell contain many chloroplasts?",
+      "back": "More **chloroplasts** absorb more light, which increases the rate of photosynthesis.",
+      "hint": "Link the feature to the function it supports.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1869xuv",
+      "kind": "concept",
+      "front": "How does a root hair cell's long, thin extension suit its function?",
+      "back": "It gives the cell a large **surface area** for absorbing water and mineral ions from the soil.",
+      "hint": "Compare it with a flat, compact cell shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05krv7z",
+      "kind": "process",
+      "front": "What are the steps by which an outside signal changes which genes are transcribed?",
+      "back": "A **signal** reaches the cell, a particular transcription factor becomes active, it binds to the promoter of a particular gene, and transcription of that gene rises or falls.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yvkf4u",
+      "kind": "mistake",
+      "front": "What is wrong with the idea that a specialised cell has lost the genes it does not use?",
+      "back": "The genes stay in its **DNA** but are not expressed. Control happens at transcription, so no genes need to be lost.",
+      "hint": "Where is the control in gene use happening?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "004qzmx",
+      "kind": "concept",
+      "front": "Why can a single cell from a mature plant grow into a whole new plant in tissue culture?",
+      "back": "The cell still carries every gene the plant needs, so it can switch on the genes needed to make other cell types.",
+      "hint": "Think about what the cell's DNA still contains.",
+      "sectionId": "s5"
+    }
+  ]
+}

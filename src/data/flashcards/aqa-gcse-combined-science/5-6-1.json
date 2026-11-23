@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-6-1",
+  "topicCode": "5.6.1",
+  "topicName": "Rate of reaction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:47.753Z",
+  "cards": [
+    {
+      "id": "0vbrx7t",
+      "kind": "formula",
+      "front": "Which equation gives the mean rate of reaction?",
+      "back": "Mean rate = $\\frac{\\text{change in amount}}{\\text{time interval}}$, for example in $\\mathrm{cm^3/s}$ or $\\mathrm{g/s}$. The units show which quantity changed and over what time.",
+      "hint": "Think about dividing a change by the time it took.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1trckfy",
+      "kind": "concept",
+      "front": "Why does increasing temperature speed up a reaction?",
+      "back": "Particles gain **energy**, move faster and collide more often. A greater proportion of collisions then have enough energy to react.",
+      "hint": "Consider what happens to particle movement and collision energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12dt1jr",
+      "kind": "concept",
+      "front": "How does a catalyst increase the rate of a reaction?",
+      "back": "It provides a different route with a lower **activation energy**, so more collisions produce a reaction. It is not used up overall.",
+      "hint": "Consider the energy barrier particles must overcome, not extra energy supplied.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1njyvic",
+      "kind": "term",
+      "front": "What is a mean rate?",
+      "back": "The **average** change in a measured amount over a chosen time interval. It does not show whether the reaction sped up or slowed down within that interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "114bx17",
+      "kind": "concept",
+      "front": "What does the gradient of an amount–time graph show?",
+      "back": "The **rate of reaction** at that point. A steeper line means a faster change, and a horizontal line means the measured amount has stopped changing.",
+      "hint": "Think about what slope means on a graph of amount against time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12wh6hl",
+      "kind": "example",
+      "front": "Calculate the mean rate when 36 cm³ of gas forms in 90 seconds.",
+      "back": "The mean rate is **0.40 cm³/s**, since $\\frac{36}{90}=0.40$.",
+      "hint": "Divide the change in gas volume by the time taken.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05kfzgt",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a higher concentration gives each particle more energy?",
+      "back": "A higher concentration puts more particles in each unit of volume, so they **collide more often**. The energy of each particle is unchanged.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1recn43",
+      "kind": "concept",
+      "front": "How does increasing the pressure of reacting gases affect the rate?",
+      "back": "It packs gas particles closer together, so they **collide more often** and the rate increases. This applies only when gaseous reactants are involved.",
+      "hint": "Compare how close particles are in a small container with a large one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19e7pc9",
+      "kind": "concept",
+      "front": "Why does a powder react faster than a lump of the same mass?",
+      "back": "The powder has a greater **exposed surface area**, so more particles are available to collide with the other reactant each second.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c5d1fk",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a powder produces a greater final amount of product?",
+      "back": "Surface area changes the **rate**, not the amount of product. The same amounts of reactants that react completely still give the same final product amount.",
+      "hint": "Think about what surface area actually changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1582tda",
+      "kind": "term",
+      "front": "What is activation energy?",
+      "back": "The **minimum energy** reacting particles need in a collision for a reaction to occur.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dzj66x",
+      "kind": "term",
+      "front": "What are enzymes?",
+      "back": "**Enzymes** are biological catalysts that speed up reactions in living organisms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1glqmwl",
+      "kind": "example",
+      "front": "What is the rate of reaction if the measured amount stops changing?",
+      "back": "The rate is **zero**, because a measured amount that does not change has a rate of change of zero.",
+      "hint": "Put a change of zero into the rate equation.",
+      "sectionId": "s1"
+    }
+  ]
+}

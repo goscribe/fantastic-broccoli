@@ -29,6 +29,31 @@ import {
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/reminders";
+import { claimEndScreenAsk } from "@/lib/wall";
+import { fetchStudyPlan, updateStudyPlan } from "@/lib/api/planner";
+import { plannerWindowFromStudyTime } from "@/lib/reminders";
+
+/**
+ * Feeds the study time into the week planner: its study window starts at the
+ * time the student gave, unless they already set their own window or free
+ * times (only the server's untouched default is replaced). Best effort.
+ */
+async function syncPlannerWindow(minute: number): Promise<void> {
+  try {
+    const plan = await fetchStudyPlan();
+    const win = plannerWindowFromStudyTime(plan, minute);
+    if (!win) return;
+    let timezone: string | undefined;
+    try {
+      timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    } catch {
+      timezone = undefined;
+    }
+    await updateStudyPlan({ ...win, ...(timezone ? { timezone } : {}) });
+  } catch {
+    // Old server or offline: the planner keeps its default window.
+  }
+}
 
 /** Let the debrief's celebration land before asking anything. */
 const SHOW_AFTER_MS = 1400;
@@ -41,11 +66,14 @@ const SHOW_AFTER_MS = 1400;
  * the reminders API simply show nothing.
  */
 export function HabitPrompt({
+  sessionId,
   accuracy,
   activitiesDone,
   subjectTitle,
   showAfterMs = SHOW_AFTER_MS,
 }: {
+  /** The end screen this asks on: it holds that screen's one ask, so the subscribe wall never opens over it. */
+  sessionId?: string;
   accuracy: number | null | undefined;
   activitiesDone: number;
   subjectTitle?: string;
@@ -76,9 +104,13 @@ export function HabitPrompt({
     });
     const planned = decided.current;
     if (planned.length === 0) return;
-    const timer = window.setTimeout(() => setSteps(planned), showAfterMs);
+    const timer = window.setTimeout(() => {
+      // One ask per end screen; the habit prompt goes first.
+      if (sessionId && !claimEndScreenAsk(sessionId, "habit")) return;
+      setSteps(planned);
+    }, showAfterMs);
     return () => window.clearTimeout(timer);
-  }, [prefs, canInstall, accuracy, activitiesDone, showAfterMs]);
+  }, [prefs, canInstall, accuracy, activitiesDone, showAfterMs, sessionId]);
 
   if (!prefs || !steps || steps.length === 0) return null;
   return (
@@ -158,6 +190,8 @@ export function HabitSheet({
           } catch {
             // Old server or offline: the default time still applies.
           }
+          // The one "when do you study" answer also places the planner's study window.
+          void syncPlannerWindow(minute);
           next();
         }}
       />
@@ -305,7 +339,7 @@ function PushStep({
       {/* What it will look like: one calm notification, not a feed. */}
       <div className="mt-5 rounded-2xl bg-muted/70 p-3" aria-hidden>
         <div className="flex items-start gap-3 rounded-xl bg-card p-3 shadow-sm">
-          <Image src="/icons/icon-192.png" alt="" width={36} height={36} className="size-9 shrink-0 rounded-[10px] border border-border" />
+          <Image src="/icons/hp-maskable-192.png" alt="" width={36} height={36} className="size-9 shrink-0 rounded-[10px] border border-border" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2 text-[11.5px] text-muted-foreground">
               <span className="font-semibold uppercase tracking-wide">Scribe</span>
@@ -362,7 +396,7 @@ function IosInstallStep({ onDone }: { onDone: () => void }) {
   const steps: Array<{ key: string; icon: ReactNode }> = [
     { key: "remind.iosStep1", icon: <Share className="size-[18px] text-[#007aff]" /> },
     { key: "remind.iosStep2", icon: <SquarePlus className="size-[18px]" /> },
-    { key: "remind.iosStep3", icon: <Image src="/icons/icon-192.png" alt="" width={22} height={22} className="rounded-[6px]" /> },
+    { key: "remind.iosStep3", icon: <Image src="/icons/hp-maskable-192.png" alt="" width={22} height={22} className="rounded-[6px]" /> },
   ];
   return (
     <>
@@ -395,7 +429,7 @@ function AndroidInstallStep({ onSkip, onInstall }: { onSkip: () => void; onInsta
     <>
       <StepHeader pose="cheer" title={t("remind.installTitle")} sub={t("remind.installSub")} />
       <div className="mt-5 flex justify-center" aria-hidden>
-        <Image src="/icons/icon-192.png" alt="" width={72} height={72} className="size-[72px] rounded-[20px] border border-border shadow-sm" />
+        <Image src="/icons/hp-maskable-192.png" alt="" width={72} height={72} className="size-[72px] rounded-[20px] border border-border shadow-sm" />
       </div>
       <div className="mt-5 space-y-1">
         <Button size="lg" className="w-full text-[15px]" onClick={() => void onInstall()}>

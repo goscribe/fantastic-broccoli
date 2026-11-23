@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Linear momentum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:44.145Z",
+  "cards": [
+    {
+      "id": "1uw74dz",
+      "kind": "concept",
+      "front": "What is linear momentum, and how is it calculated?",
+      "back": "**Linear momentum** is the product of mass and velocity, $\\vec{p}=m\\vec{v}$. It measures how hard an object's motion is to change.",
+      "hint": "Think of a bowling ball and a tennis ball moving at the same speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pxhe5o",
+      "kind": "formula",
+      "front": "What equation gives momentum, and what are its units?",
+      "back": "$\\vec{p}=m\\vec{v}$, where $m$ is mass in kg and $\\vec{v}$ is velocity in m/s. The SI unit is $\\mathrm{kg\\,m/s}$.",
+      "hint": "Think about which two quantities are multiplied together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0961p3r",
+      "kind": "concept",
+      "front": "Which way does an object's momentum point compared with its velocity?",
+      "back": "The **same way** as its velocity. Mass is always positive, so multiplying by it does not change the direction.",
+      "hint": "Think about what multiplying a vector by a positive number does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04vkpxi",
+      "kind": "term",
+      "front": "What is a vector?",
+      "back": "A **vector** is a quantity with both magnitude and direction. In one dimension, the direction is shown by a positive or negative sign.",
+      "hint": "Compare it with a scalar such as mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00v4z0x",
+      "kind": "mistake",
+      "front": "Does a negative momentum mean a smaller momentum?",
+      "back": "No. A **negative** momentum means the motion is opposite to the chosen positive direction. Its size can still be large.",
+      "hint": "Think about what the sign shows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g8w3y7",
+      "kind": "example",
+      "front": "A 0.15 kg ball moves east at 20 m/s. What is its momentum?",
+      "back": "$3.0\\,\\mathrm{kg\\,m/s}$ east, from $p=(0.15)(20)$.",
+      "hint": "Use $p=mv$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cycz4y",
+      "kind": "concept",
+      "front": "Why can't you judge momentum from speed or mass alone?",
+      "back": "Momentum is the **product** of mass and speed, so both matter. A fast light object can have less momentum than a slow heavy one.",
+      "hint": "Compare the tennis ball with the small car.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z79owa",
+      "kind": "example",
+      "front": "Which has more momentum: a 0.060 kg tennis ball at 30 m/s or a 6.0 kg bowling ball at 5.0 m/s?",
+      "back": "The **bowling ball**, with $30\\,\\mathrm{kg\\,m/s}$, against $1.8\\,\\mathrm{kg\\,m/s}$ for the tennis ball.",
+      "hint": "Calculate $mv$ for each object.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qk2b2v",
+      "kind": "mistake",
+      "front": "Does doubling an object's speed affect momentum and kinetic energy by the same amount?",
+      "back": "No. Doubling speed **doubles** momentum $mv$ but **quadruples** kinetic energy $\\frac{1}{2}mv^2$.",
+      "hint": "Look at how speed appears in each formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07eufcb",
+      "kind": "example",
+      "front": "Cart A (2.0 kg, 3.0 m/s right) and cart B (1.0 kg, 4.0 m/s left). What is the total momentum, with right positive?",
+      "back": "$+2.0\\,\\mathrm{kg\\,m/s}$, so 2.0 kg m/s to the right. Add $+6.0$ and $-4.0$.",
+      "hint": "Give each momentum its sign first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mikbuo",
+      "kind": "process",
+      "front": "How do you find the total momentum of several objects moving in one dimension?",
+      "back": "**List** each object's signed momentum relative to one chosen positive direction, then **add** them.",
+      "hint": "Choose the positive direction before you start.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j610xf",
+      "kind": "formula",
+      "front": "How do you find an object's velocity from its momentum and mass?",
+      "back": "$v=\\frac{p}{m}$, where $p$ is in $\\mathrm{kg\\,m/s}$ and $m$ is in kg. The sign of $p$ gives the direction.",
+      "hint": "Rearrange $p=mv$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b90wyz",
+      "kind": "example",
+      "front": "A 6.0 kg object has momentum 24 kg m/s west. What is its velocity, with east positive?",
+      "back": "$-4.0\\,\\mathrm{m/s}$, or 4.0 m/s west, from $v=\\frac{-24}{6.0}$.",
+      "hint": "Remember which direction you chose as positive.",
+      "sectionId": "s4"
+    }
+  ]
+}

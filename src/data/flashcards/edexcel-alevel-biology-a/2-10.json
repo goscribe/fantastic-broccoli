@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Enzymes and activation energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:10.079Z",
+  "cards": [
+    {
+      "id": "0picyb4",
+      "kind": "concept",
+      "front": "How does an enzyme speed up a reaction at the same temperature?",
+      "back": "An enzyme provides an alternative route with a lower **activation energy**, so more molecules have enough energy to react in a given time.",
+      "hint": "Picture the small hill reactant molecules must roll over before they can change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19qvsnu",
+      "kind": "term",
+      "front": "What is the active site of an enzyme?",
+      "back": "The **active site** is the small region of the enzyme with a particular shape and pattern of charges, where the substrate binds to form the enzyme–substrate complex.",
+      "hint": "Think about where on the enzyme the substrate meets it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qanxgi",
+      "kind": "concept",
+      "front": "Why does enzyme activity fall quickly above the optimum temperature?",
+      "back": "Vibrations break the weak bonds holding the enzyme's shape, so the active site changes and the substrate no longer fits. This permanent change is **denaturation**.",
+      "hint": "Think about what holds the enzyme folded and what extra energy does to it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13hpd22",
+      "kind": "mistake",
+      "front": "What is wrong with saying that an enzyme gives the reactants energy?",
+      "back": "An enzyme does not supply energy. It lowers the **activation energy** barrier, and the overall energy change of the reaction stays the same.",
+      "hint": "Compare the energy of the reactants and products with and without the enzyme.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pokk6e",
+      "kind": "mistake",
+      "front": "What is wrong with calling a cold enzyme denatured?",
+      "back": "Cooling does not denature an enzyme. Low temperature only slows collisions, so activity returns when the mixture warms. **Denaturation** is permanent.",
+      "hint": "Think about whether the change can be reversed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hvarn9",
+      "kind": "term",
+      "front": "What is the induced fit model?",
+      "back": "**Induced fit** is the slight change in shape of the active site on binding, which makes it fit the substrate more closely and strains bonds in the substrate.",
+      "hint": "Think about what happens to the active site as the substrate arrives.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wk9pjp",
+      "kind": "process",
+      "front": "What are the steps of an enzyme-catalysed reaction at the active site?",
+      "back": "1) Substrate binds to the active site, forming the enzyme–substrate complex. 2) The active site shifts shape (induced fit). 3) Products form and leave. 4) The enzyme binds another substrate.",
+      "hint": "Start with the first molecule that meets the enzyme.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0afl173",
+      "kind": "concept",
+      "front": "Why does the rate stop rising at high substrate concentration?",
+      "back": "All the active sites are occupied at once, so extra substrate cannot bind. Another factor, such as enzyme concentration, then becomes the **limiting factor**.",
+      "hint": "Think about how many active sites are still free.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0510z8p",
+      "kind": "concept",
+      "front": "Why does doubling enzyme concentration raise the plateau of a rate graph?",
+      "back": "It doubles the number of active sites, so more substrate can be converted at once, provided substrate is plentiful.",
+      "hint": "Think about what limits the plateau once substrate is abundant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "163gggq",
+      "kind": "formula",
+      "front": "Which formula gives the initial rate from a tangent on a progress curve, and what are its units?",
+      "back": "**Initial rate** = $\\frac{\\Delta V}{\\Delta t}$, where $\\Delta V$ is change in volume in $\\mathrm{cm^{3}}$ and $\\Delta t$ is change in time in $\\mathrm{s}$, giving $\\mathrm{cm^{3}\\,s^{-1}}$.",
+      "hint": "Which two values do you read from the tangent?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0u72l80",
+      "kind": "example",
+      "front": "A tangent at time zero passes through (0 s, 0 $\\mathrm{cm^{3}}$) and (20 s, 15 $\\mathrm{cm^{3}}$). What is the initial rate?",
+      "back": "$0.75\\,\\mathrm{cm^{3}\\,s^{-1}}$, found as $\\frac{15\\,\\mathrm{cm^{3}}}{20\\,\\mathrm{s}}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1kv36nu",
+      "kind": "concept",
+      "front": "Why is a progress curve steepest at the start?",
+      "back": "Substrate is plentiful, so collisions are frequent. The curve flattens as substrate runs out and becomes horizontal when all the substrate is converted.",
+      "hint": "Think about how much substrate is left at the start.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0we1h4j",
+      "kind": "concept",
+      "front": "How does pH change the activity of an enzyme?",
+      "back": "A change in pH alters charges on the enzyme's amino acids, disrupting the bonds that hold its shape. Each enzyme has an **optimum pH**, and extremes of pH denature it.",
+      "hint": "Compare this with how temperature affects the same bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00uyr5h",
+      "kind": "term",
+      "front": "What is an enzyme?",
+      "back": "An **enzyme** is a biological catalyst, usually a protein made by living cells, that speeds up reactions without being used up, so one molecule can work repeatedly.",
+      "sectionId": "s1"
+    }
+  ]
+}

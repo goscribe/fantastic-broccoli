@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-4",
+  "topicCode": "10.4",
+  "topicName": "Electric potential energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:28.066Z",
+  "cards": [
+    {
+      "id": "00c3eeo",
+      "kind": "term",
+      "front": "What is electric potential energy, and what is its unit?",
+      "back": "**Electric potential energy** $U_E$ is the energy stored in a system of charges because of their arrangement. It is measured in **joules**.",
+      "hint": "Think of lifting a book onto a shelf.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06d2gld",
+      "kind": "formula",
+      "front": "What is the formula for the potential energy of two point charges, and what does each symbol mean?",
+      "back": "$U_E=\\frac{kq_1q_2}{r}$, where $k=9.0\\times10^9\\,\\mathrm{N\\,m^2/C^2}$, $q_1$ and $q_2$ are the charges in coulombs, and $r$ is the separation in metres. $U_E$ is in **joules**.",
+      "hint": "Keep the sign of each charge in the product.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "193o510",
+      "kind": "formula",
+      "front": "How is the work done by the electric force linked to the change in potential energy?",
+      "back": "$W_\\mathrm{field}=-\\Delta U_E$, where $\\Delta U_E$ is final minus initial. Positive work **lowers** the potential energy.",
+      "hint": "Think about the sign of the work first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11rv1gw",
+      "kind": "concept",
+      "front": "How does $U_E$ change as the separation shrinks for like charges compared with unlike charges?",
+      "back": "For **like** charges, $U_E$ increases as $r$ decreases. For **unlike** charges, $U_E$ decreases and becomes more negative.",
+      "hint": "Think about whether the charges attract or repel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0odmpow",
+      "kind": "mistake",
+      "front": "A student says one charge in a pair stores the potential energy. What is wrong with this?",
+      "back": "**Potential energy** belongs to the whole system. It describes the arrangement of the pair, not either charge alone.",
+      "hint": "Think about the book and Earth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0md8qb3",
+      "kind": "mistake",
+      "front": "A student drops the signs of the charges in $kq_1q_2/r$. What goes wrong?",
+      "back": "The **sign** of $U_E$ is lost, so attraction and repulsion look the same. Keep each charge's sign in $q_1q_2$.",
+      "hint": "Which sign does like charges give?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0syu2zy",
+      "kind": "process",
+      "front": "What are the steps for finding the change in potential energy of two point charges?",
+      "back": "**Find each energy separately** with $U_E=\\frac{kq_1q_2}{r}$ at the initial and final separations, then subtract initial from final. This keeps the signs visible.",
+      "hint": "Work out $kq_1q_2$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mkpvjr",
+      "kind": "example",
+      "front": "Charges +3.0 μC and +2.0 μC move slowly from 0.50 m apart to 0.20 m apart. Find $\\Delta U_E$ and $W_\\mathrm{field}$.",
+      "back": "$\\Delta U_E\\approx+0.16\\,\\mathrm{J}$ and $W_\\mathrm{field}\\approx-0.16\\,\\mathrm{J}$. The outside agent does positive work against the repulsion, so the energy **rises**.",
+      "hint": "Start with $kq_1q_2=5.4\\times10^{-2}\\,\\mathrm{J\\,m}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1unhfor",
+      "kind": "example",
+      "front": "Charges +4.0 μC and +1.0 μC are moved slowly from 0.60 m apart to 0.20 m apart. What is the work done by the electric force?",
+      "back": "$W_\\mathrm{field}=-0.12\\,\\mathrm{J}$. Here $U_{E,\\mathrm{i}}=0.060\\,\\mathrm{J}$ and $U_{E,\\mathrm{f}}=0.18\\,\\mathrm{J}$, so $\\Delta U_E=+0.12\\,\\mathrm{J}$.",
+      "hint": "Find $U_E$ at each separation, then subtract.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09oqzcf",
+      "kind": "example",
+      "front": "Find $U_E$ for $+2.0\\times10^{-6}\\,\\mathrm{C}$ and $-3.0\\times10^{-6}\\,\\mathrm{C}$ placed 0.30 m apart.",
+      "back": "$U_E=-0.18\\,\\mathrm{J}$. The product $q_1q_2$ is negative because the charges are unlike, so the energy is negative.",
+      "hint": "Check the sign of $q_1q_2$ before calculating.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nqe4u3",
+      "kind": "process",
+      "front": "What happens to the kinetic energy and potential energy of two like charges released from rest as they move far apart?",
+      "back": "Their **kinetic energy** rises while $U_E$ falls toward zero. With only electric forces acting, $\\Delta K+\\Delta U_E=0$.",
+      "hint": "Which way does the electric force push them?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fyem9t",
+      "kind": "mistake",
+      "front": "A student thinks the pair creates extra energy as the charges fly apart. What is wrong?",
+      "back": "**No energy is created.** The kinetic energy gained equals the potential energy lost, so the total stays constant.",
+      "hint": "Check the energy balance.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uevbr2",
+      "kind": "concept",
+      "front": "For a charge moved slowly by an outside agent, with no change in kinetic energy, how is the agent's work related to $\\Delta U_E$?",
+      "back": "$W_\\mathrm{ext}=+\\Delta U_E$. The agent does **positive** work when the stored energy rises.",
+      "hint": "Compare with the work done by the electric force.",
+      "sectionId": "s3"
+    }
+  ]
+}

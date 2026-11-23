@@ -7,6 +7,7 @@
  * the tab closes still arrive.
  */
 import { apiUrl } from "./api/config";
+import type { WallReason, WallVariant } from "./wall";
 
 export type FunnelEvent =
   | "first_run.viewed"
@@ -19,7 +20,7 @@ export type FunnelEvent =
   | "first_run.left_while_waiting"
   | "quick5.started"
   | "quick5.finished"
-  /** Home's one "Today" button was tapped; `action` says which one it was. */
+  /** Home's banner was tapped: its one "Today" button, a study time on the week, or the planner; `action` says which. */
   | "home.today_tapped"
   /** A note opened in the in-app reader; notes attached to / removed from a subject; a session started from an attached note. */
   | "notes.opened_in_app"
@@ -38,7 +39,13 @@ export type FunnelEvent =
   | "tour.shown"
   | "tour.closed"
   /** A search ran; `hasLocalResults` says whether the free local index found anything. */
-  | "search.query";
+  | "search.query"
+  /** Subscribe wall: shown (`reason`, `variant`), dismissed, or checkout opened from it (a trial, or the pass when `variant` is "exam_pass"). */
+  | "wall.shown"
+  | "wall.dismissed"
+  | "wall.trial_started"
+  /** Coursework grader screen opened (the server records review_requested / review_completed / limit_hit itself). */
+  | "grader.opened";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
@@ -46,7 +53,12 @@ export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "rev
 /** Where a notes event happened. */
 export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run";
 
-export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue";
+/**
+ * What was tapped in home's banner (the server's TODAY_ACTIONS). The one
+ * button: "mistakes" | "plan" | "quick5" | "upload" | "continue". The week
+ * around it: a study time on a day ("week_item") or the planner ("planner").
+ */
+export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue" | "week_item" | "planner";
 
 export type FirstRunOption = "upload" | "camera" | "topic" | "paste" | "curriculum" | "skip";
 
@@ -68,6 +80,10 @@ export interface FunnelProps {
   seconds?: number;
   /** search.query: the free local index returned at least one row. */
   hasLocalResults?: boolean;
+  /** wall.*: why the wall opened (server WALL_REASONS). */
+  reason?: WallReason;
+  /** wall.*: which wall layout (server WALL_VARIANTS). */
+  variant?: WallVariant;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

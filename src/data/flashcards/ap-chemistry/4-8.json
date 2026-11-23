@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-8",
+  "topicCode": "4.8",
+  "topicName": "Introduction to acid-base reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:36.491Z",
+  "cards": [
+    {
+      "id": "0cxjukl",
+      "kind": "term",
+      "front": "What is a Brønsted-Lowry acid, and what is a Brønsted-Lowry base?",
+      "back": "A **Brønsted-Lowry acid** donates a proton ($\\mathrm{H^+}$), and a **Brønsted-Lowry base** accepts one. The definition follows the proton itself.",
+      "hint": "Think about which way the proton moves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y2c81d",
+      "kind": "concept",
+      "front": "What makes two species a conjugate acid-base pair?",
+      "back": "They differ by **one proton**. An acid becomes its **conjugate base** after donating a proton, and a base becomes its **conjugate acid** after accepting one.",
+      "hint": "Compare the H count in the two formulas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19e127s",
+      "kind": "process",
+      "front": "How do you write a balanced proton-transfer equation?",
+      "back": "Identify the **donor** and **acceptor**, move one $\\mathrm{H^+}$ from donor to acceptor, then check that atoms and total charge balance on both sides.",
+      "hint": "Water is often the acceptor.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11vgper",
+      "kind": "term",
+      "front": "What is an Arrhenius acid?",
+      "back": "A substance that **increases hydronium ion concentration** ($\\mathrm{H_3O^+}$) when dissolved in water.",
+      "hint": "Focus on what happens in water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bkn7pr",
+      "kind": "term",
+      "front": "What is an Arrhenius base?",
+      "back": "A substance that **increases hydroxide ion concentration** ($\\mathrm{OH^-}$) when dissolved in water.",
+      "hint": "Compare with the Arrhenius acid definition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u6crt6",
+      "kind": "concept",
+      "front": "Why can the Brønsted-Lowry definition describe ammonia as a base, but the Arrhenius definition cannot describe it directly?",
+      "back": "Ammonia has no hydroxide, but it accepts a proton from water, raising $\\mathrm{OH^-}$. Brønsted-Lowry describes **proton transfer** itself, so it works beyond aqueous solutions.",
+      "hint": "Ammonia contains no OH group.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06t1rzi",
+      "kind": "concept",
+      "front": "Which reactions do the Arrhenius definitions not directly describe?",
+      "back": "Reactions **without water**. They do not describe every proton-transfer reaction.",
+      "hint": "Think about the solvent in the definitions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jwcv8b",
+      "kind": "mistake",
+      "front": "A student writes that an acid in water releases a free $\\mathrm{H^+}$ ion. What is wrong?",
+      "back": "An acid does not release a free proton. Write $\\mathrm{H_3O^+}$ to show that **water accepts** the proton.",
+      "hint": "Free protons are not stable in water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15vta77",
+      "kind": "mistake",
+      "front": "A student says a base becomes its conjugate base after accepting a proton. What is wrong?",
+      "back": "A base becomes its **conjugate acid** after accepting a proton. The conjugate base is what an acid becomes after donating one.",
+      "hint": "Check which direction the proton moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fo22yi",
+      "kind": "example",
+      "front": "In $\\mathrm{NH_3(aq)+H_2O(l)\\rightleftharpoons NH_4^+(aq)+OH^-(aq)}$, which species is the Brønsted-Lowry acid?",
+      "back": "**Water** is the acid because it donates a proton to ammonia. Ammonia is the base because it accepts that proton.",
+      "hint": "Look for the species that gives away H+.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vkv6bc",
+      "kind": "example",
+      "front": "Identify both conjugate acid-base pairs in the ammonia reaction with water.",
+      "back": "The pairs are $\\mathrm{H_2O/OH^-}$ and $\\mathrm{NH_4^+/NH_3}$. Each pair differs by one proton.",
+      "hint": "Pair each reactant with its product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19un20s",
+      "kind": "example",
+      "front": "Write the proton-transfer equation for acetic acid reacting with water, and name both conjugate pairs.",
+      "back": "$\\mathrm{CH_3COOH(aq)+H_2O(l)\\rightleftharpoons CH_3COO^-(aq)+H_3O^+(aq)}$. The pairs are $\\mathrm{CH_3COOH/CH_3COO^-}$ and $\\mathrm{H_3O^+/H_2O}$.",
+      "hint": "Acetic acid donates its proton to water.",
+      "sectionId": "s4"
+    }
+  ]
+}

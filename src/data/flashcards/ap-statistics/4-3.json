@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Claims from a mean interval",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:27.423Z",
+  "cards": [
+    {
+      "id": "14va663",
+      "kind": "concept",
+      "front": "What does it mean when a value lies inside a 95% confidence interval for a population mean?",
+      "back": "That value is a **plausible** value for the population mean $\\mu$. The data do not rule it out at 95% confidence, but they do not prove it either.",
+      "hint": "Think about what the data support, not one exact answer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00ct2bu",
+      "kind": "concept",
+      "front": "A claimed mean of 40 hours lies outside the 95% interval 36.8 to 39.6 hours. What does this tell you?",
+      "back": "The claim is **not plausible**, so the data give convincing evidence that $\\mu$ differs from 40. Every plausible value is below 40, so the direction is also shown.",
+      "hint": "Compare the claimed value with the interval's endpoints.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k4ve99",
+      "kind": "process",
+      "front": "What three parts should a complete written conclusion about a claim based on a confidence interval include?",
+      "back": "**Compare** the claimed value with the interval, **conclude** what it means for the population mean in context, and **qualify** with the confidence level and the population sampled.",
+      "hint": "Three steps, each starting with C or Q.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jjkf7c",
+      "kind": "term",
+      "front": "What is a confidence interval?",
+      "back": "A **confidence interval** is a range of values, built from sample data, that estimates a population parameter with a stated level of confidence.",
+      "hint": "Range built from a sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ilzd56",
+      "kind": "term",
+      "front": "What is convincing evidence against a claimed parameter value?",
+      "back": "**Convincing evidence** is data that make a claimed value implausible at the stated confidence level. A claimed value outside the interval is one example.",
+      "hint": "Think about claimed values outside the interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rmyl8m",
+      "kind": "formula",
+      "front": "How do you find the sample mean and margin of error from a confidence interval with a lower and upper bound?",
+      "back": "Sample mean $\\bar{x}=\\frac{\\mathrm{lower}+\\mathrm{upper}}{2}$ and margin of error $=\\frac{\\mathrm{upper}-\\mathrm{lower}}{2}$. Both are in the units of the data, here **hours**.",
+      "hint": "The mean is the midpoint; the margin is half the width.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lssn0i",
+      "kind": "example",
+      "front": "A 95% confidence interval for mean battery life is 36.8 to 39.6 hours. What is the sample mean and the margin of error?",
+      "back": "Sample mean is 38.2 hours, since $\\frac{36.8+39.6}{2}=38.2$. Margin of error is 1.4 hours, since $\\frac{39.6-36.8}{2}=1.4$.",
+      "hint": "Add the endpoints, then halve; subtract, then halve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "188iqpw",
+      "kind": "concept",
+      "front": "What does a wide confidence interval tell you about the population mean?",
+      "back": "A wide interval has low **precision**: many values are plausible, so $\\mu$ is pinned down only loosely. A narrow interval pins $\\mu$ down closely.",
+      "hint": "Think about how many values stay plausible.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "179onji",
+      "kind": "mistake",
+      "front": "A student says a bigger sample fixes any problem with a confidence interval. What is wrong with this?",
+      "back": "**Sampling bias** is not removed by sample size. A larger sample only reduces random variation, so a huge biased sample still gives a misleading interval.",
+      "hint": "Separate random variation from bias.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ffsoqo",
+      "kind": "mistake",
+      "front": "A student says a 95% interval containing 38 hours proves the true mean is 38. What is the error?",
+      "back": "Wrong: 38 is only **plausible**, not proven. Many other values in the interval are also plausible, and a new random sample would give a different interval.",
+      "hint": "How many values are inside the interval?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vz1ywa",
+      "kind": "concept",
+      "front": "Does a 95% confidence interval for the mean describe the range of individual battery lives?",
+      "back": "No. It describes the population **mean**, not individual values, and it applies only to the population that was sampled.",
+      "hint": "Mean versus individual values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08bzfvo",
+      "kind": "concept",
+      "front": "Why can a 95% confidence interval still miss the true population mean?",
+      "back": "About **5%** of 95% intervals do not contain $\\mu$, so even a correctly built interval can miss the true mean.",
+      "hint": "What does the 95% level mean over many samples?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10dtyri",
+      "kind": "example",
+      "front": "Using the interval 36.8 to 39.6 hours at 95% confidence, what can you conclude about a claim that mean battery life is 38 hours?",
+      "back": "38 lies inside the interval, so it is **plausible**. The data are consistent with 38 but do not prove it. State the population and the 95% level.",
+      "hint": "Is 38 between the endpoints?",
+      "sectionId": "s2"
+    }
+  ]
+}

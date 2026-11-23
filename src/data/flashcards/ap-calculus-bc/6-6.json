@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "Properties of definite integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:34.353Z",
+  "cards": [
+    {
+      "id": "1ag1jsb",
+      "kind": "formula",
+      "front": "What does linearity let you do with $\\int_a^b[Af(x)+Bg(x)]\\,dx$ for constants $A$ and $B$?",
+      "back": "Split it into $A\\int_a^b f(x)\\,dx+B\\int_a^b g(x)\\,dx$. Constant factors move outside the integral, and both terms keep the same limits.",
+      "hint": "Think about what you can do term by term.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tvt6cu",
+      "kind": "concept",
+      "front": "How can you split $\\int_a^b f(x)\\,dx$ at a point $c$?",
+      "back": "Use $\\int_a^b f(x)\\,dx=\\int_a^c f(x)\\,dx+\\int_c^b f(x)\\,dx$. The first piece ends where the second begins, and this still works if $c$ lies outside $[a,b]$.",
+      "hint": "Read the limits in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kqoa7w",
+      "kind": "concept",
+      "front": "What do even and odd functions give over opposite limits from $-a$ to $a$?",
+      "back": "**Even** $f$: $\\int_{-a}^a f(x)\\,dx=2\\int_0^a f(x)\\,dx$. **Odd** $f$: $\\int_{-a}^a f(x)\\,dx=0$, because the contributions cancel.",
+      "hint": "Use $f(-x)=f(x)$ or $f(-x)=-f(x)$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19s6591",
+      "kind": "term",
+      "front": "What is $\\int_a^b c\\,dx$ for a constant function $c$?",
+      "back": "$c(b-a)$. The result is signed, so it can be negative.",
+      "hint": "Think of the area of a rectangle with signed height.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0t1jd8k",
+      "kind": "mistake",
+      "front": "Is $\\int_a^b f(x)g(x)\\,dx$ equal to the product of $\\int_a^b f(x)\\,dx$ and $\\int_a^b g(x)\\,dx$?",
+      "back": "No. Linearity applies to sums and constant factors only, so a product of integrands generally does not split into a product of integrals.",
+      "hint": "Linearity covers sums, not products.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jcozop",
+      "kind": "term",
+      "front": "What does reversing the limits of integration do to a definite integral?",
+      "back": "It **reverses the sign**: $\\int_b^a f(x)\\,dx=-\\int_a^b f(x)\\,dx$. If the limits are equal, the integral is $0$.",
+      "hint": "Swap the limits and look at the sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0olj27v",
+      "kind": "mistake",
+      "front": "Why is $\\int_2^5 f(x)\\,dx+\\int_7^5 f(x)\\,dx$ not simply $\\int_2^7 f(x)\\,dx$?",
+      "back": "Reversing the second integral gives $\\int_2^5 f(x)\\,dx-\\int_5^7 f(x)\\,dx$. The minus sign remains, so the difference cannot be written as one integral over $[2,7]$.",
+      "hint": "Reverse the second limits first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zwx9ru",
+      "kind": "mistake",
+      "front": "Can $\\int_1^3 f(x)\\,dx+\\int_4^5 f(x)\\,dx$ be combined into one definite integral?",
+      "back": "No. Adjacent intervals must share an endpoint. A gap does not disappear, so the two pieces do not join into a single integral.",
+      "hint": "Check whether one endpoint matches the next starting point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17p9ts8",
+      "kind": "process",
+      "front": "What must you check before combining two definite integrals into one?",
+      "back": "Check that the integrands match and that the limits connect in order, so the first interval ends where the second begins. Reverse limits first if needed.",
+      "hint": "Two checks, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zey61f",
+      "kind": "example",
+      "front": "Given $\\int_1^3 f(x)\\,dx=4$ and $\\int_3^6 f(x)\\,dx=-2$, find $\\int_1^6(2f(x)+1)\\,dx$.",
+      "back": "**9**. Additivity gives $\\int_1^6 f(x)\\,dx=2$, so $2(2)+(6-1)=9$.",
+      "hint": "Combine the two pieces first, then apply linearity.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rde4aa",
+      "kind": "example",
+      "front": "Evaluate $\\int_{-2}^{2}(3x^2+2x)\\,dx$ using symmetry and linearity.",
+      "back": "**16**. The $2x$ term is odd, so it gives $0$. The $3x^2$ term gives $6\\int_0^2 x^2\\,dx=6\\left[\\frac{x^3}{3}\\right]_0^2=16$.",
+      "hint": "Check each term for even or odd symmetry separately.",
+      "sectionId": "s4"
+    }
+  ]
+}

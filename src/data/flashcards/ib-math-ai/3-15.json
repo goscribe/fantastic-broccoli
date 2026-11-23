@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-15",
+  "topicCode": "3.15",
+  "topicName": "Adjacency matrices",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:45.278Z",
+  "cards": [
+    {
+      "id": "1cr0up0",
+      "kind": "term",
+      "front": "What is an adjacency matrix?",
+      "back": "A **square matrix** with vertices along both rows and columns, where the entry in row $i$, column $j$ counts the edges from vertex $i$ to vertex $j$.",
+      "hint": "Think about what the rows and columns are labelled with.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uvkqqi",
+      "kind": "concept",
+      "front": "What does the entry in row $i$, column $j$ of $\\mathbf{M}^k$ count?",
+      "back": "The **number of walks of length $k$** from vertex $i$ to vertex $j$. A zero means no such walk exists.",
+      "hint": "Each extra power adds one more edge to the walk.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08m43dk",
+      "kind": "process",
+      "front": "What are the steps for building an adjacency matrix from a drawn graph?",
+      "back": "Label rows and columns with the vertices in one **fixed order**. Then fill the table cell by cell, row by row, writing the number of edges joining each row vertex and column vertex.",
+      "hint": "Start with the order of the vertices.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05qux6q",
+      "kind": "term",
+      "front": "When are two vertices called adjacent?",
+      "back": "When an **edge** joins them directly. In a simple graph, their entry in the adjacency matrix is 1.",
+      "hint": "Directly joined, with no vertex in between.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1emels1",
+      "kind": "process",
+      "front": "How do you find the degree of a vertex from its adjacency matrix?",
+      "back": "Add the **entries in its row**. The row sum is the degree of that vertex.",
+      "hint": "Look at one row at a time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zt2qox",
+      "kind": "concept",
+      "front": "What do you know about the main diagonal and symmetry for a simple undirected graph?",
+      "back": "The **main diagonal** is all zeros, since there are no loops. The matrix is **symmetric** because each edge works in both directions.",
+      "hint": "Consider loops and the direction of each edge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xtzjkz",
+      "kind": "example",
+      "front": "A simple graph has row sums 2, 3, 3, 2 and 2. How many edges does it have, and what is the degree of the second vertex?",
+      "back": "**6 edges**, and the second vertex has degree 3. The total $2+3+3+2+2=12$ is twice the number of edges.",
+      "hint": "The sum of all entries counts each edge twice.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ld4haf",
+      "kind": "term",
+      "front": "What is a directed graph?",
+      "back": "A graph in which each edge has a **direction**, shown by an arrow from one vertex to another, like a one-way street.",
+      "hint": "Compare it with an undirected graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jm9v4p",
+      "kind": "mistake",
+      "front": "Why can't you assume the adjacency matrix of a directed graph is symmetric?",
+      "back": "Entries count edges in **one direction only**, so row $i$, column $j$ can differ from row $j$, column $i$. Symmetry is guaranteed only for undirected graphs.",
+      "hint": "Does every edge have a matching edge going back?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xc9jud",
+      "kind": "formula",
+      "front": "For a simple graph, what do the diagonal entries of $\\mathbf{M}^2$ tell you?",
+      "back": "The **degrees** of the vertices. Each diagonal entry counts walks of length 2 from a vertex back to itself.",
+      "hint": "Walks of length 2 that return to the start.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zn85yc",
+      "kind": "example",
+      "front": "For the graph with edges PQ, PR, QR and RS, how many walks of length 2 go from P to S?",
+      "back": "**1 walk**: P to R to S. This is the entry in row P, column S of $\\mathbf{M}^2$.",
+      "hint": "Find a route with exactly two edges.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hx7a5g",
+      "kind": "mistake",
+      "front": "A student says the number of walks of length 2 from vertex $i$ to vertex $j$ is the $(i,j)$ entry of $\\mathbf{M}$. What is wrong?",
+      "back": "The $(i,j)$ entry of $\\mathbf{M}$ counts **edges**, which are walks of length 1. Walks of length 2 come from the $(i,j)$ entry of $\\mathbf{M}^2$.",
+      "hint": "Which power matches the walk length?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "002yhlo",
+      "kind": "process",
+      "front": "How do you find the number of walks of a given length between two vertices?",
+      "back": "Raise the matrix to that **power**, then read the entry in the row of the start vertex and the column of the end vertex.",
+      "hint": "Note the vertex order and the power $k$ first.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "PCR",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:30.401Z",
+  "cards": [
+    {
+      "id": "1itsqqe",
+      "kind": "term",
+      "front": "What is the polymerase chain reaction (PCR)?",
+      "back": "A technique that makes many copies of a chosen DNA sequence, using a **heat-stable DNA polymerase** and repeated temperature cycles.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ibh30p",
+      "kind": "process",
+      "front": "What are the three temperature steps of one PCR cycle, in order?",
+      "back": "**Denaturing** at about $95\\,^{\\circ}\\text{C}$ separates the strands, **annealing** at about $55\\,^{\\circ}\\text{C}$ lets primers bind, then **extension** at about $72\\,^{\\circ}\\text{C}$ builds new strands.",
+      "hint": "Start with what heat does to the double helix.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "174s62v",
+      "kind": "formula",
+      "front": "What does the PCR copy-number equation say, and what does each symbol mean?",
+      "back": "$N=N_0\\times2^{n}$: $N$ is the number of copies after $n$ cycles, $N_0$ is the starting number of copies, and $n$ is the number of cycles.",
+      "hint": "Think about how the copies change each time one cycle finishes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n64jww",
+      "kind": "concept",
+      "front": "Why is Taq polymerase used in PCR instead of a DNA polymerase from human cells?",
+      "back": "**Taq polymerase** is heat-stable, so it is not denatured at $95\\,^{\\circ}\\text{C}$. It is added once and stays active through every cycle.",
+      "hint": "Think about what high temperature does to ordinary enzymes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vq4evi",
+      "kind": "term",
+      "front": "What is a primer in PCR?",
+      "back": "A **primer** is a short single-stranded DNA sequence that matches one end of the target, giving DNA polymerase a starting point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s58zw3",
+      "kind": "concept",
+      "front": "Which five components make up a PCR reaction mixture?",
+      "back": "**Template DNA**, two **primers**, free DNA nucleotides (A, T, C and G), **Taq polymerase**, and a buffer solution that keeps the pH constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "177zlps",
+      "kind": "concept",
+      "front": "Which end of a primer does Taq polymerase add nucleotides to?",
+      "back": "The **3′ end**. It builds a new strand complementary to the template from there.",
+      "hint": "Recall the direction in which DNA polymerase always builds new strands.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1m9925o",
+      "kind": "example",
+      "front": "A PCR tube starts with 4 copies of the target sequence. How many copies are there after 10 cycles, if every copy doubles each cycle?",
+      "back": "**4096** copies. Using $N=N_0\\times2^{n}$: $N=4\\times2^{10}=4\\times1024=4096$ (about $4.1\\times10^{3}$).",
+      "hint": "Put $n=10$ into the doubling equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eqel20",
+      "kind": "mistake",
+      "front": "A student says each three-step cycle triples the copies because it has three steps. What is wrong?",
+      "back": "Each complete **cycle**, not each step, doubles the copies once. Ten cycles give $2^{10}$ doublings, not $2^{30}$.",
+      "hint": "Count how many times the whole cycle runs, not the steps inside it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hcijop",
+      "kind": "concept",
+      "front": "Why do real PCR reactions produce fewer copies than the ideal doubling predicts?",
+      "back": "Not every molecule is copied in every cycle, and reagents are eventually used up. Later cycles slow down and the copy number levels off.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wg3j3o",
+      "kind": "mistake",
+      "front": "Why is it wrong to say PCR shows whose DNA a sample contains?",
+      "back": "PCR **only makes copies** of the target sequence. It does not read the DNA or identify its owner, so a separate analysis step is needed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kqcgbv",
+      "kind": "term",
+      "front": "What is a negative control in PCR, and what does it show?",
+      "back": "A **negative control** is a reaction mixture without template DNA. If it shows copies, contamination has occurred.",
+      "hint": "Think about what the tube should contain and what it should not produce.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ljwfr7",
+      "kind": "concept",
+      "front": "Why is contamination such a serious risk in PCR?",
+      "back": "PCR is so sensitive that it can copy a **single stray molecule**, such as a skin flake or a drop of saliva from the operator, which can ruin the result.",
+      "hint": "Consider how little DNA PCR needs to start from.",
+      "sectionId": "s5"
+    }
+  ]
+}

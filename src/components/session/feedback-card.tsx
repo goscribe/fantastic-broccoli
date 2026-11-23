@@ -47,12 +47,12 @@ export function FeedbackCard({
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-1">
             <span className={cn("text-[20px] font-extrabold", ok ? "text-emerald-800" : "text-rose-800")}>{title}</span>
             {ok && (
-              <span className="text-[13.5px] font-extrabold tabular-nums text-emerald-800/80">+{xpShown} pts</span>
+              <span className="text-small font-extrabold tabular-nums text-emerald-800/80">+{xpShown} pts</span>
             )}
           </div>
         </div>
-        {message && <div className="relative mt-3.5 text-[15px] leading-6 text-foreground/80 sm:pr-24">{message}</div>}
-        {note && <p className="relative mt-2 text-[12.5px] font-bold text-rose-800">{note}</p>}
+        {message && <div className="relative mt-3.5 text-ui text-foreground/80 sm:pr-24">{message}</div>}
+        {note && <p className="relative mt-2 text-caption font-bold text-rose-800">{note}</p>}
         <div className="relative mt-4 flex items-center gap-2.5">
           {secondary && onSecondary && (
             <Button variant="ghost" size="sm" onClick={onSecondary} className="h-12 flex-1 rounded-[var(--r-button)] bg-muted sm:flex-none">

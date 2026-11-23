@@ -95,6 +95,15 @@
   --font-sans: var(--font-nunito);
   --font-mono: var(--font-geist-mono);
   --radius: var(--radius);
+  /* Body type scale (values and rules in design/tokens.css). */
+  --text-read: var(--fs-read, 17px);
+  --text-read--line-height: var(--lh-read, 1.6);
+  --text-ui: var(--fs-ui, 15px);
+  --text-ui--line-height: var(--lh-ui, 1.5);
+  --text-small: var(--fs-small, 13px);
+  --text-small--line-height: var(--lh-small, 1.45);
+  --text-caption: var(--fs-caption, 12px);
+  --text-caption--line-height: var(--lh-caption, 1.35);
 }
 
 body {
@@ -183,6 +192,22 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   animation: fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
+/* The Copilot tab's speech bubble: a small step in from the cat. */
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateX(8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-bubble-in {
+  animation: bubble-in 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  transform-origin: right center;
+}
+
 @keyframes float-y {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
@@ -220,6 +245,20 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   50% { opacity: 0.3; }
 }
 .animate-pulse-dot {
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+/* Streaming chat text: a blinking caret at the end of the last line, not on a line of its own. */
+.chat-caret > :last-child:not(ul, ol, table, pre, div)::after,
+.chat-caret > :is(ul, ol):last-child > li:last-child::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 0.95em;
+  margin-left: 2px;
+  border-radius: 1px;
+  vertical-align: -0.1em;
+  background: var(--accent);
   animation: pulse-dot 1.2s ease-in-out infinite;
 }
 
@@ -529,6 +568,7 @@ input[type="range"].param-slider:active::-moz-range-thumb {
 @media (prefers-reduced-motion: reduce) {
   .animate-streak-pop,
   .animate-fade-up,
+  .animate-bubble-in,
   .cat-wiggle,
   .cat-bob,
   .cat-float,
@@ -538,4 +578,95 @@ input[type="range"].param-slider:active::-moz-range-thumb {
   .design-bounce {
     animation: none !important;
   }
+}
+
+/* Study length slider: the filled part of the track and the thumb take the
+   length's colour (teal for a short session, red for a long one). */
+.study-length-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+  touch-action: pan-y;
+}
+.study-length-range::-webkit-slider-runnable-track {
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--study-length-color) var(--study-length-fill), var(--border) var(--study-length-fill));
+}
+.study-length-range::-moz-range-track {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--border);
+}
+.study-length-range::-moz-range-progress {
+  height: 10px;
+  border-radius: 999px;
+  background: var(--study-length-color);
+}
+.study-length-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -9px;
+  height: 28px;
+  width: 28px;
+  border-radius: 999px;
+  background: #fff;
+  border: 4px solid var(--study-length-color);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.18);
+}
+.study-length-range::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 999px;
+  background: #fff;
+  border: 4px solid var(--study-length-color);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.18);
+}
+.study-length-range:focus-visible {
+  outline: none;
+}
+.study-length-range:focus-visible::-webkit-slider-thumb {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+.study-length-range:focus-visible::-moz-range-thumb {
+  outline: 3px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Voice scribe: an answer box just written into. */
+[data-voice-flash],
+[data-rich-answer]:has([data-voice-flash]) .rich-answer {
+  animation: voice-flash 0.9s ease;
+}
+@keyframes voice-flash {
+  0% { background-color: var(--accent-soft); box-shadow: 0 0 0 3px var(--accent); }
+}
+
+/* Rich answer boxes (Tiptap): lines without paragraph gaps, the placeholder, maths chips. */
+.rich-answer p {
+  margin: 0;
+}
+.rich-answer p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: var(--faint);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.rich-answer [data-type="inline-math"] {
+  display: inline-block;
+  padding: 0 3px;
+  margin: 0 1px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.15s;
+}
+.rich-answer [data-type="inline-math"]:hover,
+.rich-answer [data-type="inline-math"].ProseMirror-selectednode {
+  background-color: var(--accent-soft);
+}
+.rich-answer[contenteditable="false"] [data-type="inline-math"] {
+  cursor: default;
 }

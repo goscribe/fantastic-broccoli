@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Linear and rotational motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:43.586Z",
+  "cards": [
+    {
+      "id": "04jls39",
+      "kind": "concept",
+      "front": "What is the core link between rotational and linear motion in this topic?",
+      "back": "Each linear motion quantity has a **rotational** partner: position $x$ pairs with angle $\\theta$, velocity $v$ with angular velocity $\\omega$, and acceleration $a$ with angular acceleration $\\alpha$. The constant-acceleration equations keep the same form.",
+      "hint": "Compare the two columns of the motion variables table.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17moc35",
+      "kind": "formula",
+      "front": "What links a point's linear speed on a spinning object to the object's angular velocity?",
+      "back": "**Tangential speed** $v_t=r\\omega$, where $r$ is the point's distance from the axis in m and $\\omega$ is in rad/s. Every point shares the same $\\omega$, but points farther from the axis move faster.",
+      "hint": "Think about how far the point is from the axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0unca1n",
+      "kind": "concept",
+      "front": "Why does a point on a wheel turning at constant angular velocity still accelerate?",
+      "back": "Its **direction of velocity** keeps changing as it moves in a circle. This **centripetal acceleration** points toward the center, with magnitude $a_c=\\omega^2 r=v^2/r$.",
+      "hint": "Velocity includes direction, not just speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s6tcjg",
+      "kind": "term",
+      "front": "What is rotational inertia $I$?",
+      "back": "An object's **resistance to changes in its rotation**. It depends on the object's mass and how that mass is spread about the axis.",
+      "hint": "It is the rotational partner of mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pxqrhu",
+      "kind": "term",
+      "front": "How does translational motion differ from rotational motion?",
+      "back": "In **translational motion** every point moves the same way. In **rotational motion** an object turns about an axis, so its points move in circles around that axis.",
+      "hint": "Think of a box sliding versus a spinning top.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zn765e",
+      "kind": "formula",
+      "front": "What is the rotational form of Newton's second law?",
+      "back": "$\\tau_{net}=I\\alpha$. Net **torque**, the twisting effect of a force about an axis, equals rotational inertia times angular acceleration.",
+      "hint": "Replace F with torque, m with I, and a with alpha.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o0btaw",
+      "kind": "mistake",
+      "front": "Is torque the rotational partner of mass? Explain.",
+      "back": "No. **Torque** pairs with force, and **rotational inertia** pairs with mass. Mixing these up gives the wrong rotational equation.",
+      "hint": "Check which linear quantity each rotational quantity replaces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03ry409",
+      "kind": "formula",
+      "front": "What is angular momentum for an object turning about a fixed axis?",
+      "back": "$L=I\\omega$. **Angular momentum** is the rotational partner of linear momentum $p=mv$, built from rotational inertia and angular velocity.",
+      "hint": "Compare with $p=mv$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kwz0qk",
+      "kind": "example",
+      "front": "A point 0.40 m from the axis of a disk has $\\omega=7.0$ rad/s and $\\alpha=1.5$ rad/s$^2$. What are its tangential speed and tangential acceleration?",
+      "back": "Speed is 2.8 m/s and tangential acceleration is 0.60 m/s$^2$, from $v_t=r\\omega=(0.40)(7.0)$ and $a_t=r\\alpha=(0.40)(1.5)$.",
+      "hint": "Use r times each angular value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1z12cw4",
+      "kind": "example",
+      "front": "A point 0.50 m from the axis of a disk turns at a constant 6.0 rad/s. What is its centripetal acceleration?",
+      "back": "$18$ m/s$^2$ toward the center, from $a_c=\\omega^2 r=(6.0)^2(0.50)$. Its tangential speed is 3.0 m/s.",
+      "hint": "Use $\\omega^2 r$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o9tyfh",
+      "kind": "mistake",
+      "front": "Does constant angular velocity mean a point on the object has zero acceleration?",
+      "back": "No. Constant $\\omega$ means $\\alpha=0$, but each point still has **centripetal acceleration** $\\omega^2 r$ because its direction keeps changing.",
+      "hint": "Separate angular acceleration from linear acceleration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13bd2ut",
+      "kind": "process",
+      "front": "What steps should you follow to classify the motion of a real object?",
+      "back": "First name the type: **translation**, **rotation**, or both. Then name the **axis of rotation**, and check whether the object's points are moving in circles.",
+      "hint": "Think about what the object is doing and where it turns.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bxo6uq",
+      "kind": "concept",
+      "front": "For a wheel rolling without slipping, how do the speeds of the contact point, center, and top compare?",
+      "back": "The **contact point** is momentarily at rest, the center moves at $v=r\\omega$, and the top moves at $2v$.",
+      "hint": "Rolling without slipping links translation and rotation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lkynof",
+      "kind": "example",
+      "front": "A bicycle wheel of radius 0.35 m rolls without slipping at 7.0 m/s. What is its angular velocity?",
+      "back": "$20$ rad/s, from $\\omega=\\frac{v}{r}=\\frac{7.0}{0.35}$.",
+      "hint": "Rearrange $v=r\\omega$.",
+      "sectionId": "s5"
+    }
+  ]
+}

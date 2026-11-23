@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Scientific notation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:49.558Z",
+  "cards": [
+    {
+      "id": "1yly1y9",
+      "kind": "term",
+      "front": "What is standard form, and what conditions must a number $a\\times10^{k}$ meet to be in it?",
+      "back": "**Standard form** writes a non-zero number as $a\\times10^{k}$, where $1\\le a<10$ and $k$ is an integer. Large numbers get a positive $k$; numbers between 0 and 1 get a negative $k$.",
+      "hint": "Think about the size of the front number and the type of power.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11a7icz",
+      "kind": "concept",
+      "front": "How do you multiply two numbers written in standard form?",
+      "back": "Multiply the front numbers and **add** the powers of ten: $(a\\times10^{m})(b\\times10^{n})=ab\\times10^{m+n}$. Then shift the point if the front number falls outside $1\\le a<10$.",
+      "hint": "Treat the front numbers and the powers of ten as two separate jobs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kij98s",
+      "kind": "term",
+      "front": "What is a significant figure?",
+      "back": "A **significant figure** is a digit that contributes to a value's precision. Count from the first non-zero digit on the left.",
+      "hint": "Where do you start counting?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nrj01z",
+      "kind": "process",
+      "front": "What are the three steps to convert a number into standard form?",
+      "back": "1) Place the decimal point after the first non-zero digit. 2) Count the places the point has moved. 3) Write that count as $k$: positive for a large number, negative for a small one.",
+      "hint": "The count of moved places becomes the power.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1miim4l",
+      "kind": "formula",
+      "front": "What is the rule for dividing $a\\times10^{m}$ by $b\\times10^{n}$?",
+      "back": "$\\frac{a\\times10^{m}}{b\\times10^{n}}=\\frac{a}{b}\\times10^{m-n}$. Divide the front numbers and **subtract** the powers.",
+      "hint": "Compare with the rule for multiplication.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0q45gjp",
+      "kind": "example",
+      "front": "Write $0.00072$ in standard form.",
+      "back": "$7.2\\times10^{-4}$. The decimal point moves 4 places right, so the power is $-4$.",
+      "hint": "Count the places the point moves to reach 7.2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l9359q",
+      "kind": "mistake",
+      "front": "Is $12\\times10^{3}$ written in standard form?",
+      "back": "No. The front number **12** is not less than 10. Rewrite it as $1.2\\times10^{4}$.",
+      "hint": "Check the size of the front number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06zezzi",
+      "kind": "example",
+      "front": "Calculate $(3.2\\times10^{5})\\times(4.5\\times10^{-2})$ and give the answer in standard form.",
+      "back": "$1.44\\times10^{4}$. Multiply $3.2\\times4.5=14.4$, add the powers to get $14.4\\times10^{3}$, then move the point one place left and raise the power by 1.",
+      "hint": "Check whether your front number is between 1 and 10.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v5udu5",
+      "kind": "concept",
+      "front": "Do leading zeros count as significant figures?",
+      "back": "No. Leading zeros only **locate the decimal point**, so they say nothing about precision.",
+      "hint": "Think about what the zeros before the first non-zero digit actually tell you.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j18z7p",
+      "kind": "example",
+      "front": "How many significant figures does $0.004038$ have?",
+      "back": "4. The digits 4, 3 and 8 count, and the zero between 4 and 3 counts because it sits between non-zero digits.",
+      "hint": "Ignore the leading zeros.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cxttyf",
+      "kind": "mistake",
+      "front": "Why is writing 2500 a poor way to show its precision?",
+      "back": "Plain 2500 could have two, three or four significant figures. Write $2.50\\times10^{3}$ to show it has three.",
+      "hint": "Trailing zeros in a whole number are ambiguous.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xhmpnl",
+      "kind": "process",
+      "front": "How do you estimate the answer to a product before calculating it exactly?",
+      "back": "Round each number to **1 significant figure**, calculate with those values, then compare with the exact answer. A large gap signals an error in the working.",
+      "hint": "Use rounded values only for the estimate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13k1vr6",
+      "kind": "example",
+      "front": "Estimate $(4.8\\times10^{3})\\times(2.1\\times10^{5})$ by rounding each number to 1 significant figure.",
+      "back": "$1\\times10^{9}$. Rounding gives $5\\times10^{3}$ and $2\\times10^{5}$, so $10\\times10^{8}=1\\times10^{9}$. The exact value is $1.01\\times10^{9}$.",
+      "hint": "Multiply the rounded front numbers, then add the powers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11acloj",
+      "kind": "concept",
+      "front": "When should you round a value in a multi-step calculation?",
+      "back": "Only at the **end**. Keep full calculator values during working, then round to 3 significant figures unless told otherwise.",
+      "hint": "Rounding early can make the final answer less accurate.",
+      "sectionId": "s5"
+    }
+  ]
+}

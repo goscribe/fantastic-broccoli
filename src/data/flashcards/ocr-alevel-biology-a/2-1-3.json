@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "2-1-3",
+  "topicCode": "2.1.3",
+  "topicName": "Nucleotides and nucleic acids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:29.508Z",
+  "cards": [
+    {
+      "id": "0mzcuh5",
+      "kind": "concept",
+      "front": "Which bases pair across the two DNA strands, and how many hydrogen bonds does each pair form?",
+      "back": "**Complementary base pairing**: adenine pairs with thymine by two hydrogen bonds, and cytosine pairs with guanine by three. A purine always pairs with a pyrimidine, which keeps the strands evenly spaced.",
+      "hint": "Compare the number of rings in each base type.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04o1i2b",
+      "kind": "concept",
+      "front": "What does semi-conservative replication mean for each new DNA molecule?",
+      "back": "Each new molecule keeps **one original strand** and gains **one new strand**. The heavy and light nitrogen experiment supported this pattern.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y59vop",
+      "kind": "concept",
+      "front": "Why does a cell make an RNA copy of a gene instead of using the DNA directly?",
+      "back": "DNA stays protected in the nucleus as a long-term store. RNA is a **disposable working copy** that can be made in many copies and broken down when no longer needed.",
+      "hint": "Compare how long each molecule needs to last.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0de14e5",
+      "kind": "term",
+      "front": "What are the three parts of a nucleotide?",
+      "back": "A **phosphate group**, a five-carbon sugar and a nitrogen-containing base.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ctjdet",
+      "kind": "term",
+      "front": "What type of bond joins nucleotides together within one strand?",
+      "back": "A **phosphodiester bond**, formed by a condensation reaction between the phosphate group of one nucleotide and the sugar of the next.",
+      "hint": "Remember that these bonds lie within a strand, not between strands.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0firwi8",
+      "kind": "term",
+      "front": "What does DNA helicase do during replication?",
+      "back": "DNA helicase breaks the **hydrogen bonds** between complementary bases, so the double helix unwinds and each strand can act as a template.",
+      "hint": "Compare it with the enzyme that joins the new nucleotides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fmt97b",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that DNA polymerase unwinds the double helix?",
+      "back": "Unwinding is done by **DNA helicase**. DNA polymerase joins free nucleotides into a new strand using phosphodiester bonds, and it adds them only to the 3′ end.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0arct62",
+      "kind": "concept",
+      "front": "How do the sugar and bases of RNA differ from those of DNA?",
+      "back": "RNA contains **ribose** instead of deoxyribose and uses **uracil** instead of thymine. RNA is usually a single strand and is much shorter than DNA.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hi6cxj",
+      "kind": "term",
+      "front": "What does RNA polymerase do during transcription?",
+      "back": "RNA polymerase moves along the **template strand** and joins complementary RNA nucleotides with phosphodiester bonds, building the new strand from 5′ to 3′.",
+      "hint": "Think about which strand it reads and which direction it builds.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y5mcf8",
+      "kind": "example",
+      "front": "A template strand reads 3′-TACGGATC-5′. What is the mRNA sequence, written 5′ to 3′?",
+      "back": "5′-AUGCCUAG-3′. Each template base is paired with its RNA complement, with adenine pairing with uracil, and the result is read from 5′ to 3′.",
+      "hint": "Remember that the mRNA runs antiparallel to the template.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uymzne",
+      "kind": "process",
+      "front": "What are the steps by which a ribosome builds a polypeptide from mRNA?",
+      "back": "The mRNA binds a ribosome. A tRNA with the matching anticodon brings its amino acid to the first codon, and a second tRNA binds. A **peptide bond** joins the amino acids, the ribosome moves one codon at a time, and a stop codon releases the chain.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0kpgejc",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that tRNA carries the genetic code?",
+      "back": "tRNA carries an amino acid, and its **anticodon** pairs with a codon. The code itself is carried by mRNA.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0w4t7pr",
+      "kind": "concept",
+      "front": "What is the structural role of rRNA, and where does that structure take part in translation?",
+      "back": "rRNA combines with proteins to build the **ribosome**, the site where polypeptides are assembled from amino acids.",
+      "hint": "Think about where translation takes place in the cell.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "0sgna4q",
+      "kind": "term",
+      "front": "What structure defines a purine base?",
+      "back": "A **purine** has a double-ring structure. Adenine and guanine are the purines.",
+      "sectionId": "s1"
+    }
+  ]
+}

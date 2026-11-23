@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Why animals need a circulation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:40.182Z",
+  "cards": [
+    {
+      "id": "1h5hd18",
+      "kind": "concept",
+      "front": "Why is diffusion enough to supply a single-celled organism with what it needs?",
+      "back": "Every part of the cell lies only a **tiny distance** from the surface, so particles diffusing across the surface reach all of it fast enough.",
+      "hint": "Think about how far particles must travel from the surface to the cell's centre.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i2hzaf",
+      "kind": "concept",
+      "front": "Why does the surface area to volume ratio fall as an organism grows larger?",
+      "back": "**Volume increases faster than surface area**, so each unit of body volume has less surface through which to be supplied.",
+      "hint": "Compare how quickly volume and surface area grow as the length of the body increases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qnaiut",
+      "kind": "concept",
+      "front": "How does a circulatory system overcome the problem of slow diffusion over long distances?",
+      "back": "It uses **mass flow**: a pumped fluid moves the whole body fluid in one direction, which is fast over long distances.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19kjgi9",
+      "kind": "term",
+      "front": "What is the diffusion distance?",
+      "back": "The **distance a substance must cover by diffusion** between where it starts and where it is needed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15bi6zd",
+      "kind": "concept",
+      "front": "How does doubling the diffusion distance change the time taken for diffusion?",
+      "back": "It makes the journey about **four times longer**, because the average time rises roughly with the square of the distance.",
+      "hint": "Think about which power of the distance the time depends on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p4vpnb",
+      "kind": "term",
+      "front": "What is the metabolic rate of an organism?",
+      "back": "The **amount of energy an organism uses in a given time**, which reflects how fast its cells respire.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q9svwh",
+      "kind": "formula",
+      "front": "What is the formula for the surface area to volume ratio of a cube with side length $l$, and what units does it have?",
+      "back": "$\\frac{\\text{surface area}}{\\text{volume}}=\\frac{6l^2}{l^3}$, where $l$ is in $\\mathrm{cm}$, giving a ratio in $\\mathrm{cm^{-1}}$ because surface area is $6l^2$ in $\\mathrm{cm^2}$ and volume is $l^3$ in $\\mathrm{cm^3}$.",
+      "hint": "Write down the surface area and the volume of a cube first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sgjn9x",
+      "kind": "example",
+      "front": "How many times smaller is the surface area to volume ratio of a 4 cm cube than that of a 1 cm cube?",
+      "back": "**Four times smaller**: the 1 cm cube has $6\\,\\mathrm{cm^{-1}}$ and the 4 cm cube has $1.5\\,\\mathrm{cm^{-1}}$, and $\\frac{6}{1.5}=4$.",
+      "hint": "Work out $\\frac{6l^2}{l^3}$ for each side length before comparing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ygvo9i",
+      "kind": "concept",
+      "front": "Why does diffusion still matter inside an animal that has a circulatory system?",
+      "back": "It acts over the **very short distance between blood and cells**, and continuous flow keeps the concentration gradients steep at exchange surfaces.",
+      "hint": "Think about where the final exchange of substances takes place.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fn1lvm",
+      "kind": "concept",
+      "front": "Why does blood flow more slowly and with less control in an open system than in a closed system?",
+      "back": "In an open system blood leaves the vessels into body cavities at **low pressure**; a closed system keeps blood in vessels under higher pressure, so it can be directed quickly.",
+      "hint": "Think about where the blood is kept in each system and the pressure it is under.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ebt418",
+      "kind": "mistake",
+      "front": "A student answers a comparison question by describing only open systems. Why does this lose marks?",
+      "back": "A comparison needs a feature of **both systems in the same answer**; describing only one side earns no comparison mark.",
+      "hint": "Look at what the question asks you to do with the two systems.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ul9ehz",
+      "kind": "mistake",
+      "front": "What is wrong with thinking that a double circulation means an animal has two hearts?",
+      "back": "A double circulation means blood passes through the **same heart twice** on each circuit, returning to it between the lungs and the body.",
+      "hint": "Count how many times blood enters the heart during one complete circuit.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0082i2k",
+      "kind": "concept",
+      "front": "Why does a double circulation suit a mammal better than a single circulation?",
+      "back": "Blood returns to the heart after the lungs, so the **heart raises the pressure again**; tissues then receive blood faster, supporting a high metabolic rate.",
+      "hint": "Compare what happens to the pressure of blood after the gills in a fish.",
+      "sectionId": "s6"
+    }
+  ]
+}

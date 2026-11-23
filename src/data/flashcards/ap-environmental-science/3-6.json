@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Age structure diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:32.432Z",
+  "cards": [
+    {
+      "id": "1vmyy5y",
+      "kind": "concept",
+      "front": "What does a pyramid-shaped age structure diagram with a wide base predict about a population?",
+      "back": "**Rapid growth**, because a very large pre-reproductive group will soon enter the reproductive years and have children.",
+      "hint": "Look at which age group is largest at the bottom of the diagram.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02hvo67",
+      "kind": "concept",
+      "front": "Why is the size of the pre-reproductive group a key clue to future growth?",
+      "back": "Those **children** will soon enter the reproductive group and have children of their own, so future births are likely to rise.",
+      "hint": "Follow the young people forward through the age groups over time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bhtu1b",
+      "kind": "term",
+      "front": "What is population momentum?",
+      "back": "Continued **population growth** after birth rates fall, because a large pre-reproductive group is moving into the reproductive years.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ltlmd8",
+      "kind": "term",
+      "front": "What is an age structure diagram?",
+      "back": "A **bar graph** showing how many individuals, or what percent, fall in each age group, with the youngest group at the bottom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sadqro",
+      "kind": "term",
+      "front": "Which ages make up the reproductive group?",
+      "back": "Ages **15 to 44**, when most births occur.",
+      "hint": "Compare with the pre-reproductive group, which covers the younger ages.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ivrs67",
+      "kind": "term",
+      "front": "Which ages make up the post-reproductive group?",
+      "back": "Ages **45 and older**, when few births occur.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pxwr3m",
+      "kind": "mistake",
+      "front": "Why is a narrow base not proof that a population is already shrinking?",
+      "back": "A narrow base predicts **future decline**, because smaller groups will replace larger ones. The population may not be shrinking yet.",
+      "hint": "Think about what the age groups will do over time, not only what they are now.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qydbe6",
+      "kind": "concept",
+      "front": "Why does a large post-reproductive group point toward decline?",
+      "back": "Deaths rise while births stay low, so there are fewer young people to replace the older generation.",
+      "hint": "Consider how many people in this group are still having children.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l80ivf",
+      "kind": "concept",
+      "front": "Why can an age structure diagram not give an exact future population size?",
+      "back": "**Migration** and later changes in birth and death rates also change population size, and the diagram shows only current age groups.",
+      "hint": "Think about what the diagram does not show.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c4t5xn",
+      "kind": "example",
+      "front": "A country has $14$ million people aged 0 to 14, $22$ million aged 15 to 44 and $4$ million aged 45 or older. What percent are aged 15 to 44?",
+      "back": "**55%**. The total is $40$ million, and $\\frac{22}{40}\\times100=55\\%$.",
+      "hint": "Find the total population first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fgkud2",
+      "kind": "formula",
+      "front": "What formula gives the percent share of an age group in a population?",
+      "back": "$\\frac{\\text{group size}}{\\text{total population}}\\times100$, which gives a **percent** (%).",
+      "hint": "Think about dividing a part by the whole.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16k10o5",
+      "kind": "mistake",
+      "front": "What should you check if your three age group percentages do not add to 100%?",
+      "back": "Recheck the **total population**, because the shares should always sum to 100%.",
+      "hint": "Work backwards from the total you added up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o1kses",
+      "kind": "process",
+      "front": "What steps should you follow when predicting a population's trend from its age structure?",
+      "back": "Name the **largest group**, say what it will do over the next 20 years, then state the trend: growth, steady or decline.",
+      "hint": "Start with the group that stands out most on the diagram.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "006rxli",
+      "kind": "concept",
+      "front": "Which age structure shape predicts stable or slow growth?",
+      "back": "A **straight-sided column**, where the pre-reproductive group is similar in size to the other groups.",
+      "hint": "Compare the width of the base with the width of the rest of the bars.",
+      "sectionId": "s3"
+    }
+  ]
+}

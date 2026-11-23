@@ -32,6 +32,8 @@ export interface TextPart {
   id: string;
   text: string;
   done: boolean;
+  /** What the assistant is doing right now ("Searching your study sessions"), shown as a quiet status line, not as text. */
+  status?: string;
 }
 
 export type EmbedSpec =

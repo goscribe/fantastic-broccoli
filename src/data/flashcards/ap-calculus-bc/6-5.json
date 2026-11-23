@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Behaviour of accumulation functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:28.426Z",
+  "cards": [
+    {
+      "id": "0bfo8zy",
+      "kind": "concept",
+      "front": "What does the rate function r tell you about the accumulation graph A?",
+      "back": "The rate $r(x)$ is the **slope** of $A$ at $x$, since $A'(x)=r(x)$ when $r$ is continuous. Rate values shape the curve; they are not the curve itself.",
+      "hint": "Think about what the slope of A represents.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17thb87",
+      "kind": "formula",
+      "front": "How is an accumulation function written, and what is its value at the fixed starting point?",
+      "back": "$A(x)=\\int_a^x r(t)\\,dt$, where $a$ is the **fixed** start and $x$ is the moving upper limit. $A(a)=0$ because no change has accumulated yet.",
+      "hint": "Which endpoint stays fixed?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oere0w",
+      "kind": "concept",
+      "front": "How does the sign of the rate decide whether A increases or decreases?",
+      "back": "A is **increasing** where $r(x)>0$ and **decreasing** where $r(x)<0$. It is constant on an interval only if $r(x)=0$ throughout that interval.",
+      "hint": "Compare the rate's sign to the direction of A.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ckrss2",
+      "kind": "term",
+      "front": "What is an accumulation function?",
+      "back": "An **accumulation function** gives the signed total change from a fixed starting value to a moving endpoint, written as the integral of a rate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0t02k45",
+      "kind": "term",
+      "front": "What is the upper limit of an accumulation function?",
+      "back": "The **upper limit** is the variable endpoint $x$ of the integral. Moving it right adds the signed area under the rate graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kaif6z",
+      "kind": "concept",
+      "front": "What does $A''(x)$ tell you, and how does it relate to the rate?",
+      "back": "$A''(x)=r'(x)$. When $r$ is increasing, $A$ bends **upward**; when $r$ is decreasing, $A$ bends **downward**.",
+      "hint": "Concavity depends on how the slopes change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dkbpw2",
+      "kind": "mistake",
+      "front": "Does a negative rate mean the accumulated value A is negative?",
+      "back": "No. A **negative rate** means $A$ is decreasing. The value of $A$ depends on the total signed area accumulated so far, not on the rate alone.",
+      "hint": "Separate the rate from the accumulated total.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qh4xd8",
+      "kind": "process",
+      "front": "What are the steps to sketch an accumulation graph from a rate graph?",
+      "back": "Start at $A(a)=0$. Use signed areas to locate other values of $A$. Then use the rate's sign and size to shape the curve between those points.",
+      "hint": "Start from a known point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03xsxf0",
+      "kind": "example",
+      "front": "Let $r(x)=2-x$ and $A(x)=\\int_0^x r(t)\\,dt$. What is $A(3)$?",
+      "back": "$A(3)=\\frac{3}{2}$. Integrate $2t-\\frac{t^2}{2}$ from 0 to 3 to get $6-\\frac{9}{2}=\\frac{3}{2}$.",
+      "hint": "Find an antiderivative first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19bui70",
+      "kind": "example",
+      "front": "For $r(x)=2-x$ on $0\\leq x\\leq4$, where does $A$ have its maximum?",
+      "back": "At $x=2$. The rate changes from positive to negative there, so $A$ increases up to $x=2$ and then decreases.",
+      "hint": "Where does the rate cross zero?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ffv798",
+      "kind": "concept",
+      "front": "What is a stationary point of an accumulation function?",
+      "back": "A **stationary point** is where $A'(x)=0$, meaning the rate is zero. If the rate changes from positive to negative there, $A$ has a local maximum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hn5ye6",
+      "kind": "concept",
+      "front": "If the rate touches zero but stays positive on both sides, what does A do?",
+      "back": "A has a **stationary point** where the rate is zero, but it keeps increasing on both sides because the rate does not change sign.",
+      "hint": "Does the sign of the rate change?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05k254e",
+      "kind": "concept",
+      "front": "What happens to A when the upper limit moves right over an area below the axis?",
+      "back": "The **signed area** is negative, so it subtracts from $A$. Area above the axis adds to $A$.",
+      "sectionId": "s1"
+    }
+  ]
+}

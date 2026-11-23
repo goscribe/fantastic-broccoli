@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Power",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:36.632Z",
+  "cards": [
+    {
+      "id": "0q2cc4n",
+      "kind": "term",
+      "front": "What is power in physics?",
+      "back": "**Power** is the rate at which work is done or energy is transferred. Average power is work done divided by the time taken.",
+      "hint": "Think about how quickly, not how much.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xcu1al",
+      "kind": "formula",
+      "front": "Which equation gives average power from work and time, and what do the symbols mean?",
+      "back": "$P=\\frac{W}{\\Delta t}$, where $P$ is power in **watts**, $W$ is work in joules, and $\\Delta t$ is time in seconds.",
+      "hint": "Work divided by the time taken.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pqc7zh",
+      "kind": "formula",
+      "front": "How is power linked to force and speed when the force acts along the motion?",
+      "back": "$P=Fv$, power equals force times speed. If the force makes an angle $\\theta$ with the velocity, use $P=Fv\\cos\\theta$.",
+      "hint": "Divide $Fd$ by time to see where it comes from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1heeip4",
+      "kind": "concept",
+      "front": "Why do two people doing the same work on stairs have different power outputs?",
+      "back": "The **time** taken is different. The runner does the same work in less time, so has greater power.",
+      "hint": "Same work, different time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14n6qy3",
+      "kind": "term",
+      "front": "What is a watt?",
+      "back": "A **watt** is one joule of energy transferred per second, so $1\\,\\mathrm{W}=1\\,\\mathrm{J\\,s^{-1}}$.",
+      "hint": "Energy per unit time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i5dval",
+      "kind": "process",
+      "front": "What are the steps to find average power when a load is lifted at steady speed?",
+      "back": "1) Find the work, $W=mg\\Delta h$. 2) Divide by the time taken, $P=\\frac{W}{\\Delta t}$. 3) Substitute SI units and calculate.",
+      "hint": "Start with gravitational potential energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jvf5gn",
+      "kind": "example",
+      "front": "A 60 kg student climbs stairs that rise 3.0 m in 4.0 s at steady speed. What is the average power? Use $g=9.8\\,\\mathrm{m/s^2}$.",
+      "back": "About **441 W**, or $4.4\\times10^{2}\\,\\mathrm{W}$. Work is $(60)(9.8)(3.0)=1764\\,\\mathrm{J}$, and $1764\\div4.0=441\\,\\mathrm{W}$.",
+      "hint": "Find the work first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e4zufm",
+      "kind": "example",
+      "front": "A constant 2000 N force moves a car along its motion at a steady 25 m/s. What is the power?",
+      "back": "**50 kW**, or $5.0\\times10^{4}\\,\\mathrm{W}$. Use $P=Fv=(2000)(25)$.",
+      "hint": "The force is along the velocity, so use $P=Fv$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jfz46v",
+      "kind": "mistake",
+      "front": "Does a car moving at steady speed have zero engine power?",
+      "back": "**No**. The engine force balances resistance, so the engine still does work against that resistance and delivers power.",
+      "hint": "Think about resistance forces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lndosh",
+      "kind": "mistake",
+      "front": "Does a higher power rating always mean a device uses more energy?",
+      "back": "**No**. Energy is $E=P\\Delta t$, so a 20 W bulb on for 10 s uses 200 J, more than a 100 W bulb on for 1 s, which uses 100 J.",
+      "hint": "Energy depends on time as well as power.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14ofzfy",
+      "kind": "concept",
+      "front": "What does the slope of a graph of work against time show?",
+      "back": "The **power**, because slope equals work divided by time.",
+      "hint": "Slope is change in y over change in x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16qqxhn",
+      "kind": "term",
+      "front": "What is instantaneous power?",
+      "back": "The **rate of energy transfer at a single moment**, found from $P=Fv\\cos\\theta$ using the velocity at that moment.",
+      "hint": "Think of one instant, not an average.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vpgxv1",
+      "kind": "example",
+      "front": "A crane lifts a 500 kg load 12 m at steady speed in 20 s. What is the average power? Use $g=9.8\\,\\mathrm{m/s^2}$.",
+      "back": "About **2.9 × 10³ W**. Work is $(500)(9.8)(12)=58\\,800\\,\\mathrm{J}$, and $58\\,800\\div20=2940\\,\\mathrm{W}$.",
+      "hint": "Work first, then divide by time.",
+      "sectionId": "s2"
+    }
+  ]
+}

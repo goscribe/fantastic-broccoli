@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-11",
+  "topicCode": "8.11",
+  "topicName": "Washer method about the x- or y-axis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:55.218Z",
+  "cards": [
+    {
+      "id": "05df9gd",
+      "kind": "concept",
+      "front": "What solid does revolving a region with a gap around an axis form, and what is the area of one of its slices?",
+      "back": "A **washer**: a circle with a circular hole. Its area is $\\pi(R^2-r^2)$, where $R$ is the outer radius and $r$ is the inner radius.",
+      "hint": "Think of an outer circle with an inner circle cut out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j87ydd",
+      "kind": "concept",
+      "front": "How do you turn washer areas into the volume of a solid of revolution?",
+      "back": "**Integrate** the washer areas across the region. Adding thin washers along the axis gives the volume as a definite integral.",
+      "hint": "Thin slices, then add them up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gxaoxm",
+      "kind": "mistake",
+      "front": "A student writes the washer area as $\\pi(R-r)^2$. What is wrong?",
+      "back": "**Subtract the squared radii**, not the squared difference. The correct area is $\\pi(R^2-r^2)$.",
+      "hint": "Square each radius first, then subtract.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u1mum0",
+      "kind": "term",
+      "front": "What is the outer radius of a washer?",
+      "back": "The **outer radius** is the distance from the axis of rotation to the farther edge of the slice.",
+      "hint": "Measure from the axis to the far edge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w6wyzb",
+      "kind": "term",
+      "front": "What is the inner radius of a washer?",
+      "back": "The **inner radius** is the distance from the axis of rotation to the nearer edge of the slice.",
+      "hint": "It is the radius of the hole.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hncd89",
+      "kind": "process",
+      "front": "How do you set up a washer integral for rotation about the x-axis?",
+      "back": "Use **vertical slices** and integrate in $x$. The upper function gives $R(x)$ and the lower gives $r(x)$, when both lie above the x-axis.",
+      "hint": "Which way do the slices run?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yqyjph",
+      "kind": "process",
+      "front": "How do you set up a washer integral for rotation about the y-axis, for a region to the right of the axis?",
+      "back": "Use **horizontal slices** and integrate in $y$. The right boundary gives $R(y)$ and the left boundary gives $r(y)$.",
+      "hint": "Rewrite boundaries as $x$ in terms of $y$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nk0lyc",
+      "kind": "formula",
+      "front": "What does $V=\\pi\\int_a^b(R^2-r^2)\\,dx$ mean for rotation about the x-axis?",
+      "back": "$V$ is the volume, $R$ and $r$ are the outer and inner radii written as functions of $x$, and $a$ and $b$ are the endpoints along the x-axis. Volume is in cubic units.",
+      "hint": "Each symbol has a job; check the variable.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bx65rz",
+      "kind": "mistake",
+      "front": "A student uses $dx$ to find the volume about the y-axis. What goes wrong?",
+      "back": "The **variable** is wrong. Rotation about the y-axis uses horizontal slices, so integrate with respect to $y$ and write the radii as functions of $y$.",
+      "hint": "Match the variable to the slice direction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rbuj0a",
+      "kind": "example",
+      "front": "Find the volume when the region between $y=x$ and $y=x^2$, for $0\\leq x\\leq1$, is rotated about the x-axis.",
+      "back": "$\\frac{2\\pi}{15}$ cubic units, from $V=\\pi\\int_0^1(x^2-x^4)\\,dx$.",
+      "hint": "Here $R(x)=x$ and $r(x)=x^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "153yg4i",
+      "kind": "example",
+      "front": "Find the volume when the region between $x=\\sqrt{y}$ and $x=y$, for $0\\leq y\\leq1$, is rotated about the y-axis.",
+      "back": "$\\frac{\\pi}{6}$ cubic units, from $V=\\pi\\int_0^1(y-y^2)\\,dy$.",
+      "hint": "Here $R(y)=\\sqrt{y}$ and $r(y)=y$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kncdkc",
+      "kind": "concept",
+      "front": "Why must the radius functions use the same variable as the integral?",
+      "back": "Because the integral adds slices along one variable. If you integrate in $x$, the radii must be functions of $x$, so the setup stays consistent.",
+      "hint": "The integral's variable sets the radii.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-8",
+  "topicCode": "6.8",
+  "topicName": "Enthalpy of formation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:59.216Z",
+  "cards": [
+    {
+      "id": "184vh2a",
+      "kind": "term",
+      "front": "What is the standard enthalpy of formation, ΔH_f°?",
+      "back": "The **enthalpy change** when one mole of a substance forms from its elements in their standard states. It is usually given at 25 °C and 1 bar.",
+      "hint": "Think about making exactly one mole from elements.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01g1qm0",
+      "kind": "formula",
+      "front": "How do you calculate the standard reaction enthalpy, ΔH_rxn°, from formation values?",
+      "back": "$\\Delta H_{\\mathrm{rxn}}^\\circ=\\sum n\\Delta H_f^\\circ(\\text{products})-\\sum n\\Delta H_f^\\circ(\\text{reactants})$. Here **n** is each substance's balanced coefficient; products minus reactants.",
+      "hint": "Products first, then subtract reactants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03aac6c",
+      "kind": "concept",
+      "front": "Why is the formation enthalpy of an element in its standard elemental form zero?",
+      "back": "It is the **reference value** for that element at the stated conditions. Zero does not mean the element has no energy; it is simply the baseline.",
+      "hint": "It is a reference point, not an energy content claim.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m7znpq",
+      "kind": "mistake",
+      "front": "A student says every pure element has ΔH_f° = 0. What is wrong?",
+      "back": "Only the element's **specified standard form** gets zero. For example, O(g) is not oxygen's standard form, and diamond is not carbon's standard form under these conditions.",
+      "hint": "Check both formula and physical state.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ej2yfm",
+      "kind": "concept",
+      "front": "Why must the physical state of a substance match the formation value you use?",
+      "back": "Different states have different enthalpy values, so H2O(g) cannot replace H2O(l). Water vapor forming gives a **different enthalpy change** than liquid water forming.",
+      "hint": "Same compound, different state, different value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lsaxvp",
+      "kind": "formula",
+      "front": "In a formation equation, how many moles of product must form?",
+      "back": "**Exactly one mole** of the substance. Fractional coefficients are allowed, as in $\\mathrm{H_2(g)+\\tfrac{1}{2}O_2(g)\\rightarrow H_2O(l)}$.",
+      "hint": "Fractions are fine, but the product amount is fixed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13lh5z5",
+      "kind": "example",
+      "front": "Calculate ΔH_rxn° for CH4(g) + 2O2(g) → CO2(g) + 2H2O(l), given ΔH_f° values in kJ/mol: CH4(g) −74.8, CO2(g) −393.5, H2O(l) −285.8.",
+      "back": "**−890.3 kJ** for the reaction as written. Products: −393.5 + 2(−285.8) = −965.1 kJ; reactants: −74.8 + 2(0) = −74.8 kJ; subtract: −965.1 − (−74.8) = −890.3 kJ.",
+      "hint": "O2 is an element in its standard state, so its value is zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "038hq4u",
+      "kind": "example",
+      "front": "If every coefficient in the methane combustion equation doubles, what is the new ΔH_rxn°?",
+      "back": "**−1780.6 kJ**. Doubling the coefficients doubles the reaction amounts, so the enthalpy change doubles from −890.3 kJ.",
+      "hint": "Think about how the amounts scale with coefficients.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sckef8",
+      "kind": "concept",
+      "front": "What happens to ΔH_rxn° if a reaction is reversed?",
+      "back": "Its **sign changes**. The reversed reaction has the same magnitude but opposite direction, so the enthalpy change is reversed.",
+      "hint": "Direction of the equation matters.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08ctzwo",
+      "kind": "process",
+      "front": "What steps should you follow before calculating a reaction enthalpy from formation values?",
+      "back": "1) Check the equation is **balanced**. 2) Match each substance to the correct formation value with the right physical state. 3) Write the coefficient beside each value. 4) Compute products minus reactants.",
+      "hint": "Check, match, multiply, then subtract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qo8vq3",
+      "kind": "term",
+      "front": "What is a standard state?",
+      "back": "A **specified reference form** of a substance at a standard pressure, usually 1 bar, and a stated temperature such as 25 °C.",
+      "hint": "Reference conditions for comparing values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "165gi4g",
+      "kind": "concept",
+      "front": "Does the zero rule for elements apply to compounds, and why?",
+      "back": "No. The zero rule **does not apply** to compounds because a compound is made from more than one element. Zero is only assigned to an element's specified standard form.",
+      "hint": "Count how many elements are involved.",
+      "sectionId": "s2"
+    }
+  ]
+}

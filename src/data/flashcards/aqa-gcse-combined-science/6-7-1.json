@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-7-1",
+  "topicCode": "6.7.1",
+  "topicName": "Magnets and magnetic fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:30.944Z",
+  "cards": [
+    {
+      "id": "0vae43t",
+      "kind": "term",
+      "front": "What is a magnetic field?",
+      "back": "The **region** where a magnet exerts a force on magnetic materials or other magnets. It is present throughout the space around the magnet, not only along the drawn lines.",
+      "hint": "Think about where a force acts, and on what.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f04dtw",
+      "kind": "concept",
+      "front": "Why does a permanent magnet keep its magnetism while an induced magnet does not?",
+      "back": "A **permanent magnet** produces its own field and keeps its magnetism without another magnet nearby. An **induced magnet** usually loses most or all of its magnetism once the inducing field is removed.",
+      "hint": "Compare what each one needs from a nearby magnet to stay magnetised.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w56c54",
+      "kind": "concept",
+      "front": "Which way do the arrows on field lines point?",
+      "back": "The direction a **free north pole** would move at that point. This gives one direction at every point outside the magnet.",
+      "hint": "Think about what a released magnetic pole would do.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pw9z8y",
+      "kind": "term",
+      "front": "What is a magnetic material?",
+      "back": "A **magnetic material** is a substance that is attracted to a magnet. Iron, steel, nickel and cobalt are examples.",
+      "hint": "Think about which metals respond to a magnet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xyr87b",
+      "kind": "term",
+      "front": "What is an induced magnet?",
+      "back": "A **magnetic material** that becomes magnetised when placed in a magnetic field. The end nearest a magnet becomes the opposite pole, so the two attract.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01v29jr",
+      "kind": "mistake",
+      "front": "Why can attraction alone not prove that an object is a permanent magnet?",
+      "back": "An **unmagnetised magnetic material** is also attracted by a magnet. Attraction only shows the object is magnetic, so a repulsion test is needed.",
+      "hint": "Think about what else a magnet pulls on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h6okpi",
+      "kind": "process",
+      "front": "How do you test whether a suspected object is a permanent magnet?",
+      "back": "Bring each pole of a known magnet near the object in turn. **Repulsion** with one pole shows the object is a magnet.",
+      "hint": "Think about which reaction an ordinary magnetic material cannot produce.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jq4vzq",
+      "kind": "term",
+      "front": "What is a plotting compass used for?",
+      "back": "A **small compass** used to find the direction of a magnetic field at its position.",
+      "hint": "Think about what the needle tells you at one spot.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k9vf7y",
+      "kind": "process",
+      "front": "How do you use a plotting compass to map a magnet's field direction?",
+      "back": "Place it beside the magnet and let the needle settle. Read the direction shown by the **north-pointing end** of the needle, then move the compass to other positions and repeat.",
+      "hint": "Think about what the needle does when left alone.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00k34fe",
+      "kind": "concept",
+      "front": "Why are field lines drawn closer together near the poles of a bar magnet?",
+      "back": "Closer lines show a **stronger field**. The field of a bar magnet is strongest near its poles.",
+      "hint": "Think about what spacing tells you about the force on a pole.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q0jrjh",
+      "kind": "concept",
+      "front": "Why does a compass needle point roughly towards geographic north?",
+      "back": "**Earth's magnetic field** aligns the needle with the local field. Its overall shape is similar to the field around a bar magnet.",
+      "hint": "Think about what the planet itself produces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0btfmsi",
+      "kind": "mistake",
+      "front": "Why might a compass not point exactly to geographic north?",
+      "back": "**Magnetic north** is not exactly the same direction as geographic north, and the difference depends on location. Nearby magnetic materials or electrical equipment can also affect the reading.",
+      "hint": "Consider where you are standing and what is nearby.",
+      "sectionId": "s4"
+    }
+  ]
+}

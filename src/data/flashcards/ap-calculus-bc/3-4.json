@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Derivatives of inverse trig functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:18.766Z",
+  "cards": [
+    {
+      "id": "0gl46vf",
+      "kind": "formula",
+      "front": "What is the derivative of arcsin x for -1 < x < 1?",
+      "back": "$\\frac{1}{\\sqrt{1-x^2}}$. The **square root** in the denominator is positive, so arcsine increases on this interval.",
+      "hint": "Think about what the denominator does near x = -1 and x = 1.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hss4pn",
+      "kind": "formula",
+      "front": "What is the derivative of arctan x, and for which inputs does it hold?",
+      "back": "$\\frac{1}{1+x^2}$ for **every real** x. The denominator is always positive, so arctangent always increases.",
+      "hint": "Compare it with arcsine: is there a square root here?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04di1vz",
+      "kind": "concept",
+      "front": "How do you differentiate an inverse trig function of an expression u(x)?",
+      "back": "Use the **chain rule**: multiply the derivative formula by $u'(x)$. For example, $\\frac{d}{dx}(\\arctan u)=\\frac{u'}{1+u^2}$.",
+      "hint": "Apply the outer formula, then multiply by the inner derivative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lh6v5y",
+      "kind": "formula",
+      "front": "What is the derivative of arccos x for -1 < x < 1?",
+      "back": "$-\\frac{1}{\\sqrt{1-x^2}}$. It is the **negative** of the arcsine derivative, because arccosine decreases as x increases.",
+      "hint": "Compare it with the arcsine derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d7ru9x",
+      "kind": "term",
+      "front": "What does the arcsine function return?",
+      "back": "The **angle** in $[-\\pi/2,\\pi/2]$ whose sine equals its input. Its inputs lie in $[-1,1]$.",
+      "hint": "Think of it as sine run in reverse on a restricted interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1viaajk",
+      "kind": "term",
+      "front": "What angle does arccosine return, and what is its output range?",
+      "back": "The **angle** in $[0,\\pi]$ whose cosine equals its input. Its inputs also lie in $[-1,1]$.",
+      "hint": "Its range is different from arcsine's.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09qm4jn",
+      "kind": "term",
+      "front": "What does the arctangent function return, and what inputs does it accept?",
+      "back": "The **angle** in $(-\\pi/2,\\pi/2)$ whose tangent equals its input. Every real number is a valid input.",
+      "hint": "Compare its input set with arcsine's.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mj2sav",
+      "kind": "mistake",
+      "front": "Is arcsin x the same as 1/sin x?",
+      "back": "No. **Arcsine** reverses sine on a restricted interval; it is not a reciprocal, so $1/\\sin x$ is a different function.",
+      "hint": "Arcsine is an inverse function, not a reciprocal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06t7swh",
+      "kind": "concept",
+      "front": "Why does the arcsine derivative fail to exist at x = 1?",
+      "back": "At $x=1$ the denominator $\\sqrt{1-x^2}$ equals **zero**, so the derivative is undefined. The same happens at $x=-1$.",
+      "hint": "Consider which part of the derivative formula could cause trouble at the endpoints.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12ox1dz",
+      "kind": "example",
+      "front": "Find dy/dx if y = arctan(3x^2), then its value at x = 1.",
+      "back": "$\\frac{dy}{dx}=\\frac{6x}{1+9x^4}$, and at $x=1$ it equals $\\frac{3}{5}$. The **inner derivative** $6x$ is the extra factor.",
+      "hint": "Set u = 3x^2 first, then find u'.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17ybdgz",
+      "kind": "example",
+      "front": "Differentiate arccos(2x) and state the x-values where the formula applies.",
+      "back": "$-\\frac{2}{\\sqrt{1-4x^2}}$, valid for $-\\frac{1}{2}<x<\\frac{1}{2}$, so that $|2x|<1$.",
+      "hint": "The input must stay strictly between -1 and 1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qy13qh",
+      "kind": "mistake",
+      "front": "What must you check before using the arcsine or arccosine derivative formula on u(x)?",
+      "back": "That $|u(x)|<1$ strictly. Arctangent has **no such restriction**, since its formula works for every real input.",
+      "hint": "The restriction comes from the square root.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07mlz36",
+      "kind": "concept",
+      "front": "Why is the arccos derivative negative while the arcsin derivative is positive?",
+      "back": "Arccosine **decreases** as its input increases, while arcsine increases. On $[-1,1]$, $\\arcsin x+\\arccos x=\\pi/2$, so they differ only by sign.",
+      "hint": "Think about the shape of each graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yv7epa",
+      "kind": "concept",
+      "front": "Where is the arctangent derivative largest, and what happens for large |x|?",
+      "back": "It is largest at $x=0$, where it equals $1$. As $|x|$ grows, it approaches **zero**, so the graph becomes flatter.",
+      "hint": "Look for the input that makes the denominator $1+x^2$ as small as possible.",
+      "sectionId": "s3"
+    }
+  ]
+}

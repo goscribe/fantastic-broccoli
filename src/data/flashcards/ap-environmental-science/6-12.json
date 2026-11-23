@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-12",
+  "topicCode": "6.12",
+  "topicName": "Wind energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:24.246Z",
+  "cards": [
+    {
+      "id": "06rrfnp",
+      "kind": "concept",
+      "front": "How does a wind turbine turn moving air into electricity?",
+      "back": "Moving air pushes on the **blades**, turning the shaft. The shaft drives a generator that converts the energy of motion into electrical energy. No fuel is burned.",
+      "hint": "Follow the energy from the air to the wire.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jhysw5",
+      "kind": "concept",
+      "front": "Why does a small rise in wind speed change turbine output so much?",
+      "back": "Power in wind rises with the **cube** of wind speed, so doubling the speed gives eight times the power, not double.",
+      "hint": "Compare how output changes with wind speed versus blade length.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wfmsfd",
+      "kind": "formula",
+      "front": "What is the formula for capacity factor, and what does it show?",
+      "back": "$\\mathrm{capacity\\ factor}=\\frac{\\mathrm{actual\\ energy}}{\\mathrm{maximum\\ energy}}\\times100\\%$. It shows how close a turbine gets to its **maximum** possible output, as a percentage.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q8wy7b",
+      "kind": "process",
+      "front": "What order do energy changes follow from the wind to the power line?",
+      "back": "**Moving air** turns the blades, then the hub and shaft carry the rotation, a gearbox may speed it up, the generator makes electricity, and the transformer and cables send it to the grid.",
+      "hint": "Start at the blades and follow the shaft.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06ntsy7",
+      "kind": "term",
+      "front": "What is a generator in a wind turbine?",
+      "back": "A **generator** is a device that converts mechanical energy into electrical energy by moving conductors through a magnetic field.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1evdnwz",
+      "kind": "example",
+      "front": "A 2.0 MW turbine makes 4,380 MWh in a year of 8,760 hours. What is its capacity factor?",
+      "back": "**25%**. Maximum energy is $2.0\\,\\mathrm{MW}\\times8{,}760\\,\\mathrm{h}=17{,}520\\,\\mathrm{MWh}$, and $\\frac{4{,}380}{17{,}520}\\times100\\%=25\\%$.",
+      "hint": "Start by finding the maximum possible energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dmgk6t",
+      "kind": "concept",
+      "front": "How does blade length change the energy a turbine can catch?",
+      "back": "Swept area grows with the **square** of blade length, so doubling the blade length gives four times the swept area.",
+      "hint": "Think about the shape the blades sweep through.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05oxspg",
+      "kind": "concept",
+      "front": "Why are turbines in a wind farm spaced apart?",
+      "back": "Each turbine slows the air behind it, so placing them close together would **starve** the next turbine of wind.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11g6k1i",
+      "kind": "concept",
+      "front": "Why might developers choose offshore sites despite higher costs?",
+      "back": "Offshore wind is often stronger and smoother, which can **partly offset** the higher cost to build and maintain turbines.",
+      "hint": "Weigh the extra wind against the extra money spent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12x5mu9",
+      "kind": "term",
+      "front": "What does intermittent mean for a power source?",
+      "back": "**Intermittent** describes a source whose output starts, stops or varies, so it does not supply power at a steady rate.",
+      "hint": "Think about how wind behaves from hour to hour.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "00vmvxd",
+      "kind": "mistake",
+      "front": "Why is renewable energy not the same as having no environmental impact?",
+      "back": "Renewable means the fuel does not run out, but turbines can kill birds and bats and change views, so **impacts** still exist.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "12jdqjq",
+      "kind": "concept",
+      "front": "How can grids keep supplying power during calm periods?",
+      "back": "Use **storage**, such as batteries, to hold surplus power, along with a mix of other sources and wider grid connections.",
+      "hint": "Think about what happens to power when the wind drops.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "02dvlbg",
+      "kind": "concept",
+      "front": "Why is a capacity factor below 100% normal for wind power?",
+      "back": "Wind rises and falls, and turbines shut down in very weak or dangerously strong wind, so output stays below the **maximum**.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-2",
+  "topicCode": "14.2",
+  "topicName": "Periodic waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:31.509Z",
+  "cards": [
+    {
+      "id": "14ajbpt",
+      "kind": "formula",
+      "front": "Which equation links wave speed, frequency, and wavelength, and what unit does each quantity use?",
+      "back": "**$v = f\\lambda$**: wave speed $v$ in m/s equals frequency $f$ in Hz times wavelength $\\lambda$ in m. In one period a wave moves forward one wavelength, so this holds for any periodic wave.",
+      "hint": "Think about how far a wave travels in one period.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ar4ldj",
+      "kind": "formula",
+      "front": "How are period $T$ and frequency $f$ related, and what unit does each use?",
+      "back": "**$f = \\frac{1}{T}$**: frequency is the inverse of period. Period is in seconds and frequency is in hertz, where 1 Hz means one cycle per second.",
+      "hint": "Check the units to tell the two apart.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0goft6s",
+      "kind": "concept",
+      "front": "If the source frequency doubles in the same medium, what happens to the wavelength?",
+      "back": "The **wavelength halves**. The medium sets the wave speed, so $v = f\\lambda$ stays constant and a larger $f$ needs a smaller $\\lambda$.",
+      "hint": "Which quantity does the medium set, and which does the source set?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xw3wx9",
+      "kind": "term",
+      "front": "What is a periodic wave?",
+      "back": "A **periodic wave** is a wave in which each point of the medium repeats the same motion at regular time intervals.",
+      "hint": "Think of ripples from a steady swimmer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l8t9ya",
+      "kind": "term",
+      "front": "What is the wavelength of a periodic wave?",
+      "back": "The **wavelength** $\\lambda$ is the distance between two successive matching points, such as adjacent crests, measured in meters.",
+      "hint": "Measure a repeat of the shape in space.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15f38f1",
+      "kind": "term",
+      "front": "What is the period of a wave?",
+      "back": "The **period** $T$ is the time for one complete cycle of oscillation, measured in seconds.",
+      "hint": "Follow one point on the rope through one full up-and-down motion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "142gw79",
+      "kind": "term",
+      "front": "What is the amplitude of a wave?",
+      "back": "The **amplitude** $A$ is the maximum displacement from the equilibrium position, measured in meters.",
+      "hint": "Measure from the rest line to a crest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ycf29i",
+      "kind": "mistake",
+      "front": "A student measures amplitude as the distance from trough to crest. What is wrong?",
+      "back": "That distance is **twice the amplitude**. Amplitude is measured from the rest line to a crest or to a trough.",
+      "hint": "Where is the zero level on the wave?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v6ntc9",
+      "kind": "concept",
+      "front": "Does a larger amplitude change the wave speed?",
+      "back": "**No**. A larger amplitude means the wave carries more energy, but the wave speed is unchanged.",
+      "hint": "Separate energy carried from how fast the wave moves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16zn1ds",
+      "kind": "example",
+      "front": "A rope wave has frequency 2.5 Hz and travels at 4.0 m/s. What is its wavelength?",
+      "back": "**1.6 m**. Rearrange $v = f\\lambda$ to $\\lambda = \\frac{v}{f}$, so $\\lambda = \\frac{4.0}{2.5} = 1.6\\,\\mathrm{m}$.",
+      "hint": "Rearrange the wave speed equation first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "130lhzn",
+      "kind": "example",
+      "front": "A wave has period 0.040 s and wavelength 0.30 m. What is its speed?",
+      "back": "**7.5 m/s**. First $f = \\frac{1}{0.040\\,\\mathrm{s}} = 25\\,\\mathrm{Hz}$, then $v = f\\lambda = (25)(0.30) = 7.5\\,\\mathrm{m/s}$.",
+      "hint": "Convert the period to frequency before using $v = f\\lambda$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vksgte",
+      "kind": "process",
+      "front": "How do you find the period from a graph of displacement against time?",
+      "back": "Measure the **horizontal distance between two successive crests**. That distance is the period $T$, and then $f = \\frac{1}{T}$.",
+      "hint": "Which axis is time on this graph?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1szh9ba",
+      "kind": "mistake",
+      "front": "A student reads the wavelength from a displacement-against-time graph. Why is this wrong?",
+      "back": "That graph's horizontal axis is **time**, so it gives the period, not the wavelength. Wavelength comes from a displacement-against-position graph.",
+      "hint": "Check the horizontal axis first.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -52,7 +52,7 @@ export function SessionStepLabel({
         .replace("{total}", String(total));
   return (
     <p
-      className={cn("flex min-w-0 items-baseline gap-1.5 text-[13px] font-semibold leading-none tabular-nums", className)}
+      className={cn("flex min-w-0 items-baseline gap-1.5 text-small font-semibold leading-none tabular-nums", className)}
       aria-live="polite"
     >
       {label && <span className="shrink-0 text-foreground">{label}</span>}
@@ -193,15 +193,15 @@ export function ActivityRewardCard({
           </svg>
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-[15px] font-bold leading-tight">{message}</p>
+          <p className="text-ui font-bold leading-tight">{message}</p>
           {bonusLine && (
-            <p className="mt-0.5 text-[12px] font-medium leading-tight text-muted-foreground">
+            <p className="mt-0.5 text-caption font-medium leading-tight text-muted-foreground">
               {bonusLine}
             </p>
           )}
         </div>
         {pill && (
-          <span className="animate-pts-rise shrink-0 text-[13px] font-extrabold tabular-nums text-foreground">{pill}</span>
+          <span className="animate-pts-rise shrink-0 text-small font-extrabold tabular-nums text-foreground">{pill}</span>
         )}
       </div>
       <button

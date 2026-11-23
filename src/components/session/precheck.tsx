@@ -351,7 +351,7 @@ export function SessionPrecheck({
       {/* Header: mascot, title, skip */}
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <p className={cn("font-semibold text-accent", hero ? "text-[13px] leading-snug" : "text-[11px] uppercase tracking-wide")}>
+          <p className={cn("text-accent", hero ? "text-[12px] font-bold uppercase tracking-wide" : "text-[11px] font-semibold uppercase tracking-wide")}>
             {t("prof.checkTitle")}
           </p>
           {hero && isFirst ? (

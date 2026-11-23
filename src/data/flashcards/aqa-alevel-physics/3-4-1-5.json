@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-5",
+  "topicCode": "3.4.1.5",
+  "topicName": "Newton's laws of motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:12.919Z",
+  "cards": [
+    {
+      "id": "10ppdai",
+      "kind": "concept",
+      "front": "What does Newton's first law say about an object's motion?",
+      "back": "An object stays at **rest** or keeps moving at constant velocity unless a **resultant force** acts on it. A zero resultant force means no change in velocity.",
+      "hint": "Think about the puck sliding on very smooth ice.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pmocdt",
+      "kind": "formula",
+      "front": "Which equation links resultant force, mass and acceleration for constant mass?",
+      "back": "$F=ma$, where $F$ is the **resultant force** in $\\mathrm{N}$, $m$ is the mass in $\\mathrm{kg}$ and $a$ is the acceleration in $\\mathrm{m\\,s^{-2}}$. The acceleration points in the same direction as the resultant force.",
+      "hint": "Compare a pushed trolley with a loaded one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jlrzfp",
+      "kind": "concept",
+      "front": "What does Newton's third law say about forces between two objects?",
+      "back": "If object A exerts a force on object B, then B exerts an equal and opposite force on A. These two forces form a **force pair**.",
+      "hint": "Think about two skaters pushing apart on smooth ice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ji92h0",
+      "kind": "term",
+      "front": "What is acceleration?",
+      "back": "The **rate of change of velocity** with time, measured in $\\mathrm{m\\,s^{-2}}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ulwfv2",
+      "kind": "term",
+      "front": "What is one newton in terms of base units?",
+      "back": "The **newton** is the force that gives a $1\\,\\mathrm{kg}$ mass an acceleration of $1\\,\\mathrm{m\\,s^{-2}}$, so $1\\,\\mathrm{N}=1\\,\\mathrm{kg\\,m\\,s^{-2}}$.",
+      "hint": "Rearrange $F=ma$ to find the unit of force.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cgcvrk",
+      "kind": "concept",
+      "front": "How are two opposite forces combined to find the resultant force?",
+      "back": "Forces have direction, so **opposite forces subtract**. Equal opposite forces give a resultant of zero.",
+      "hint": "Remember that forces are vectors.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13jqbu3",
+      "kind": "mistake",
+      "front": "What mistake is made when saying a moving object needs a resultant force to keep moving?",
+      "back": "A resultant force is needed only to **change** velocity. A moving object at constant velocity has a resultant force of zero.",
+      "hint": "Check what the first law says about constant velocity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iari66",
+      "kind": "process",
+      "front": "What are the four steps for solving a second-law problem with several forces?",
+      "back": "1) Draw every force acting on the object. 2) Choose one direction as **positive**. 3) Add the forces with signs to find the resultant force. 4) Divide the resultant force by the mass to find $a$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qmqy56",
+      "kind": "example",
+      "front": "What is the acceleration of a $1500\\,\\mathrm{kg}$ car with a $4200\\,\\mathrm{N}$ forwards driving force and $1200\\,\\mathrm{N}$ of resistive forces backwards?",
+      "back": "$a=2.0\\,\\mathrm{m\\,s^{-2}}$ forwards. The resultant force is $4200-1200=3000\\,\\mathrm{N}$, and $a=\\frac{3000\\,\\mathrm{N}}{1500\\,\\mathrm{kg}}$.",
+      "hint": "Start by finding the resultant force, taking forwards as positive.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h7yjb1",
+      "kind": "mistake",
+      "front": "Why are the Earth's pull on a book and the table's upward push on it not a third-law force pair?",
+      "back": "Both forces act on the **same object**, the book. A third-law pair acts on two different objects; the partner of the Earth's pull is the book's pull on the Earth.",
+      "hint": "Ask which object each force acts on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hx7wbw",
+      "kind": "concept",
+      "front": "What four features must a third-law force pair have?",
+      "back": "The forces are **equal in size**, **opposite in direction**, the **same type** of force, and act on **different objects**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "065zvb1",
+      "kind": "concept",
+      "front": "How does walking show the third law producing forward motion?",
+      "back": "Your foot pushes back on the ground, so the ground pushes you forwards with an equal force. If this exceeds the resistive forces, the resultant is forwards and you accelerate by the second law.",
+      "hint": "Think about which object the forward force acts on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uwudmt",
+      "kind": "concept",
+      "front": "What is the general form of Newton's second law using momentum?",
+      "back": "The resultant force equals the **rate of change of momentum**, $F=\\frac{\\Delta (mv)}{\\Delta t}$. This also covers cases where mass changes, such as a rocket burning fuel.",
+      "hint": "Momentum is mass multiplied by velocity.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-14",
+  "topicCode": "3.3.14",
+  "topicName": "Organic synthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:44.890Z",
+  "cards": [
+    {
+      "id": "1mkwlw8",
+      "kind": "concept",
+      "front": "Why do chemists plan a multi-step synthetic route rather than a single reaction?",
+      "back": "Few targets can be made in one step, so each step changes one **functional group** into another, with its own reagent and conditions.",
+      "hint": "Think about how many groups a target might need changing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1x5yxa9",
+      "kind": "example",
+      "front": "A three-step synthesis has yields of 80%, 70% and 60%. What is the overall percentage yield?",
+      "back": "About **34%**. Multiply the fractions: $0.80\\times0.70\\times0.60=0.336$, so the yield is $33.6\\%$.",
+      "hint": "Consider what happens to product lost at each step.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1yhwnmq",
+      "kind": "mistake",
+      "front": "A student says heating bromoethane with ethanolic hydroxide ions gives ethanol. What is wrong?",
+      "back": "Ethanolic conditions favour **elimination**, giving ethene. Aqueous hydroxide ions give ethanol by substitution.",
+      "hint": "Compare the solvent in each set of conditions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pst7w4",
+      "kind": "formula",
+      "front": "Which equation gives the percentage yield of a reaction?",
+      "back": "$\\mathrm{percentage\\,yield}=\\frac{\\mathrm{actual\\,amount}}{\\mathrm{theoretical\\,amount}}\\times100\\%$. The **theoretical amount** is the maximum product the reaction could give.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ac87q6",
+      "kind": "process",
+      "front": "Which steps purify a liquid product after a reaction, in order?",
+      "back": "Wash in a **separating funnel**, dry with anhydrous calcium chloride, then redistil.",
+      "hint": "Remove water-soluble impurities first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1m19a2x",
+      "kind": "term",
+      "front": "What is an elimination reaction?",
+      "back": "A reaction where a small molecule, such as HBr or water, is removed to leave a **double bond**.",
+      "hint": "Compare it with substitution, where one group replaces another.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06c9yq7",
+      "kind": "process",
+      "front": "Which conditions give an aldehyde when a primary alcohol is oxidised?",
+      "back": "Acidified potassium dichromate(VI) with **distillation**, collecting the aldehyde as it forms.",
+      "hint": "The product must leave the flask before it can react again.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gbu3iz",
+      "kind": "process",
+      "front": "Which conditions oxidise a primary alcohol all the way to a carboxylic acid?",
+      "back": "Excess acidified potassium dichromate(VI) heated under **reflux**, so the aldehyde is oxidised further.",
+      "hint": "Think about what happens to a product that stays in the flask.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wvfke6",
+      "kind": "concept",
+      "front": "Which reagent reduces an aldehyde or ketone to an alcohol?",
+      "back": "**NaBH4** in aqueous solution. An aldehyde gives a primary alcohol, and a ketone gives a secondary alcohol.",
+      "hint": "This step is the reverse of oxidation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ymzyvu",
+      "kind": "process",
+      "front": "How can a halogenoalkane be converted into a compound with one more carbon atom?",
+      "back": "Heat it with potassium cyanide in ethanol to form a **nitrile**, which adds one carbon to the chain.",
+      "hint": "Think about which reagent brings a carbon atom into the molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dqg778",
+      "kind": "concept",
+      "front": "What does a nitrile become when it is heated with dilute acid?",
+      "back": "A **carboxylic acid**, formed by hydrolysis, with an ammonium salt also produced.",
+      "hint": "Consider what the C≡N group turns into.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ywwbeg",
+      "kind": "concept",
+      "front": "What temperature limit applies when nitrating benzene to nitrobenzene?",
+      "back": "Keep it **below 55 °C**, using concentrated nitric and sulfuric acids. Low temperature stops more than one nitro group joining the ring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yu0jwm",
+      "kind": "process",
+      "front": "How is nitrobenzene reduced to phenylamine?",
+      "back": "Heat under reflux with **tin** and concentrated hydrochloric acid, then add excess sodium hydroxide.",
+      "hint": "Think about what the nitro group becomes.",
+      "sectionId": "s5"
+    }
+  ]
+}

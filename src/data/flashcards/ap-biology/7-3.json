@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Artificial selection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:49.002Z",
+  "cards": [
+    {
+      "id": "16z8fdy",
+      "kind": "term",
+      "front": "What is artificial selection?",
+      "back": "**Artificial selection** is humans choosing organisms with desired inherited traits to reproduce, so those traits become more common in later generations.",
+      "hint": "Think about who decides which organisms breed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gqae28",
+      "kind": "concept",
+      "front": "Why must a trait have a heritable component before breeders can change it across generations?",
+      "back": "Only **inherited** differences pass from parents to offspring. Differences caused by conditions such as food or growing space are not passed on, so selection cannot change them over generations.",
+      "hint": "What gets passed to the next generation?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vpd1r4",
+      "kind": "concept",
+      "front": "Why can repeatedly breeding a few similar parents reduce genetic diversity?",
+      "back": "Only alleles carried by the chosen parents reach the next generation. Other **alleles** may become rare or disappear, lowering diversity within the breed or crop variety.",
+      "hint": "Which alleles can be passed on?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "124dvyf",
+      "kind": "process",
+      "front": "What are the steps of selective breeding?",
+      "back": "1) Identify organisms showing a desired trait. 2) Let them reproduce. 3) Select offspring showing that trait. Repeat over generations, and assess offspring because conditions can also affect appearance.",
+      "hint": "It is a repeated cycle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01vef1t",
+      "kind": "mistake",
+      "front": "A plant grows larger leaves after extra fertilizer. Why is it wrong to say it will pass on larger leaves?",
+      "back": "Fertilizer changes appearance but not **inherited** genes. Selection only works on inherited variation, so the larger leaves are not passed to later generations.",
+      "hint": "Is the trait caused by genes or by conditions?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h9p9in",
+      "kind": "term",
+      "front": "What is natural selection?",
+      "back": "**Natural selection** occurs when inherited traits affect survival and reproduction under environmental conditions. The environment, not a human, determines which traits are favored.",
+      "hint": "Compare with who chooses in artificial selection.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "191nji2",
+      "kind": "term",
+      "front": "What is genetic diversity?",
+      "back": "**Genetic diversity** is the variety of alleles present among the members of a population.",
+      "hint": "Think about variety, not number of organisms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rv1ddr",
+      "kind": "term",
+      "front": "What is inbreeding?",
+      "back": "**Inbreeding** is reproduction between close relatives. It increases the chance that offspring inherit matching recessive alleles.",
+      "hint": "Focus on who the parents are related to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02xbpjn",
+      "kind": "concept",
+      "front": "What risks does low genetic diversity create for a selected population?",
+      "back": "It limits the variation available for future selection and can leave the population **vulnerable** when conditions change, such as a new disease. Inbreeding can also make harmful recessive alleles more likely together. These are risks, not certainties.",
+      "hint": "Think about what happens when conditions change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hfn7kl",
+      "kind": "mistake",
+      "front": "Why is selecting a crop only for large fruit a weak breeding strategy?",
+      "back": "It ignores other traits, so the crop may lack **disease resistance**. A change in conditions can expose that weakness. Breeders should select for several useful traits.",
+      "hint": "What else might the crop need?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eyep5v",
+      "kind": "concept",
+      "front": "How can breeders keep more variation in a breeding program?",
+      "back": "They choose parents from different lines, keep a broad breeding population, and select several useful traits. **Crossbreeding** between distinct lines can also introduce alleles that were uncommon or absent in one line.",
+      "hint": "Think about where new alleles can come from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05nv7ps",
+      "kind": "term",
+      "front": "What is crossbreeding?",
+      "back": "**Crossbreeding** is reproduction between organisms from distinct breeding lines. It can introduce alleles that were uncommon or absent in one line.",
+      "hint": "Compare lines, not species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1isgv4h",
+      "kind": "term",
+      "front": "What is variation?",
+      "back": "**Variation** consists of differences in traits among individuals in a population. Breeders need it because selection works on existing differences.",
+      "hint": "Think about how individuals differ.",
+      "sectionId": "s4"
+    }
+  ]
+}

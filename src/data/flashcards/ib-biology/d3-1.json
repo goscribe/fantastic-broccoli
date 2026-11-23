@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d3-1",
+  "topicCode": "D3.1",
+  "topicName": "Reproduction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:09.700Z",
+  "cards": [
+    {
+      "id": "05p6qv6",
+      "kind": "concept",
+      "front": "How does sexual reproduction produce genetic variation that asexual reproduction usually does not?",
+      "back": "Sexual reproduction fuses **gametes** from two parents, so offspring receive genetic information from both. This produces genetic variation. Asexual offspring are usually genetically identical to the single parent.",
+      "hint": "Think about how many parents contribute genetic material.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i1r0oj",
+      "kind": "process",
+      "front": "Outline the hormonal sequence that leads to ovulation and then maintains the uterine lining.",
+      "back": "The pituitary releases **FSH**, which stimulates a follicle to develop. The follicle releases oestrogen, which rebuilds the lining. Sustained high oestrogen triggers an **LH** surge, causing ovulation. The emptied follicle becomes the corpus luteum, which releases progesterone to maintain the lining.",
+      "hint": "Follow the order: pituitary, follicle, surge, corpus luteum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14gv8u3",
+      "kind": "concept",
+      "front": "How does the placenta exchange substances between mother and fetus, and do the two bloods mix?",
+      "back": "**Oxygen and nutrients** pass from maternal blood to foetal blood. Carbon dioxide and other wastes move in the opposite direction. Maternal and foetal blood normally remain **separate**.",
+      "hint": "State the direction of movement for each substance.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13domsk",
+      "kind": "term",
+      "front": "What is a zygote, and how is it formed?",
+      "back": "A **zygote** is the single cell formed when a sperm and an egg fuse during fertilisation. Their nuclei combine to give the usual chromosome number.",
+      "hint": "It is the first cell of a new organism.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12thxvv",
+      "kind": "mistake",
+      "front": "A student says menstruation is when the egg is released. What is wrong with this?",
+      "back": "**Ovulation** is the release of the egg. **Menstruation** is the shedding of part of the uterine lining. These are different events.",
+      "hint": "Compare what is released in each event.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t3xpe9",
+      "kind": "process",
+      "front": "Outline the events from fertilisation to implantation.",
+      "back": "A sperm enters the egg and the nuclei combine to form a **zygote**. The zygote divides repeatedly as it travels towards the uterus. It forms a **blastocyst**, which implants in the thickened uterine lining.",
+      "hint": "Start with the fusion of gametes in the fallopian tube.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j39bh3",
+      "kind": "term",
+      "front": "What is a blastocyst?",
+      "back": "An early developmental stage: a ball of cells with an **outer layer** and an **inner cell group**. It implants in the uterine lining.",
+      "hint": "Think about the stage after repeated cell division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0up89h6",
+      "kind": "concept",
+      "front": "Why does the testes' position in the scrotum matter?",
+      "back": "The scrotum holds the **testes outside the body**, which helps keep them cooler. The testes produce sperm and testosterone.",
+      "hint": "Consider where the testes sit relative to the rest of the body.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ja9ygy",
+      "kind": "term",
+      "front": "At what point does the developing human become a fetus?",
+      "back": "Once the **main organs have begun forming**, after implantation and early cell specialisation. It remains a fetus until birth.",
+      "hint": "It is defined by organ development, not by age.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fr3mpd",
+      "kind": "mistake",
+      "front": "A student claims asexual offspring are always genetically identical to the parent. Is this correct?",
+      "back": "No. Asexual offspring are **usually** identical, but **mutations** can introduce differences.",
+      "hint": "Think about exceptions to a rule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07ickm2",
+      "kind": "concept",
+      "front": "What role does hCG play in early pregnancy?",
+      "back": "An early embryo releases **hCG**, which maintains the corpus luteum. This continues until the **placenta** produces enough hormones to support pregnancy.",
+      "hint": "Link hCG to the corpus luteum and the placenta.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01ysfkf",
+      "kind": "term",
+      "front": "What is the umbilical cord?",
+      "back": "The structure containing **blood vessels** that carries foetal blood between the fetus and the placenta.",
+      "hint": "It connects the fetus to the placenta.",
+      "sectionId": "s5"
+    }
+  ]
+}

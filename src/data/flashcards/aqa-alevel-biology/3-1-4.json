@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-4",
+  "topicCode": "3.1.4",
+  "topicName": "Proteins and enzymes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:01.256Z",
+  "cards": [
+    {
+      "id": "0nzxfmd",
+      "kind": "concept",
+      "front": "Why does an enzyme speed up a reaction without being used up?",
+      "back": "An enzyme is a biological catalyst. Its substrate binds at the **active site**, forming an enzyme–substrate complex that lowers activation energy. Products then leave, so the enzyme can act again.",
+      "hint": "Think about where the substrate attaches and what happens to the enzyme afterwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00bohn3",
+      "kind": "concept",
+      "front": "How does a protein's amino acid sequence determine its final shape?",
+      "back": "The **primary structure** sets which R groups occur along the chain. Their properties influence how the polypeptide folds into secondary and tertiary structure.",
+      "hint": "Consider what the R groups do along the chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x54kq9",
+      "kind": "concept",
+      "front": "Why does heating an enzyme above its optimum temperature reduce its activity?",
+      "back": "Heat disrupts the bonds that maintain the enzyme's shape, so the **active site** changes. This loss of shape and function is **denaturation**.",
+      "hint": "Think about which bonds hold the protein in shape.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pn3vv9",
+      "kind": "term",
+      "front": "What is a peptide bond?",
+      "back": "A **peptide bond** is the covalent link formed between the carboxyl group of one amino acid and the amino group of another, releasing water.",
+      "hint": "Think about which two groups react with each other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1badxy1",
+      "kind": "mistake",
+      "front": "A student says the R group forms the peptide bond. Why is this wrong?",
+      "back": "The R group does not form the peptide bond. The **amino** and **carboxyl** groups react, releasing water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o10lvc",
+      "kind": "term",
+      "front": "What does hydrolysis do to a peptide bond?",
+      "back": "**Hydrolysis** breaks a peptide bond by adding a water molecule. It is the reverse of the reaction that forms the bond.",
+      "hint": "Compare it with the reaction that forms the bond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hlaxa9",
+      "kind": "concept",
+      "front": "Which bonds hold alpha helices and beta pleated sheets in shape?",
+      "back": "**Hydrogen bonds** between parts of the polypeptide backbone. These bonds involve the backbone rather than the R groups.",
+      "hint": "Think about which part of the amino acid the bonds involve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03zhijf",
+      "kind": "concept",
+      "front": "How does haemoglobin's structure relate to its function?",
+      "back": "It has four polypeptide chains with **haem groups** that bind oxygen. This shape allows oxygen to be loaded and unloaded.",
+      "hint": "Think about what the four chains carry.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09sasry",
+      "kind": "concept",
+      "front": "Why does collagen resist pulling forces in tissues?",
+      "back": "Its **three polypeptide chains** are wound together. Bonds between neighbouring collagen molecules add strength.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18onwcz",
+      "kind": "term",
+      "front": "What is induced fit?",
+      "back": "**Induced fit** is a change in the active site's shape when a substrate binds, which helps the enzyme catalyse its reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09a0uho",
+      "kind": "example",
+      "front": "An enzyme produces $45\\,\\mathrm{\\mu mol}$ of product in $5\\,\\mathrm{min}$. What is its average rate?",
+      "back": "$9\\,\\mathrm{\\mu mol\\,min^{-1}}$. Rate is the amount of product divided by time: $45\\,\\mathrm{\\mu mol}\\div5\\,\\mathrm{min}$.",
+      "hint": "Rate compares the product formed with a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dhf5p5",
+      "kind": "mistake",
+      "front": "A student says a low reaction rate always means the enzyme has denatured. What is wrong with this?",
+      "back": "Not always. Cooling usually slows activity without denaturing the enzyme, because the enzyme's **structure stays intact**.",
+      "hint": "Think about what cooling does to molecular movement compared with heating.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0elimqu",
+      "kind": "concept",
+      "front": "Why can changing pH reduce enzyme activity?",
+      "back": "It alters the charges on amino acid **R groups**, which can disrupt bonds and change the active site. Extreme pH may denature the enzyme.",
+      "hint": "Think about what charges sit on the R groups.",
+      "sectionId": "s5"
+    }
+  ]
+}

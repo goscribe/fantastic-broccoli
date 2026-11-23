@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Tragedy of the commons",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:51.356Z",
+  "cards": [
+    {
+      "id": "1lwu4vm",
+      "kind": "concept",
+      "front": "Why does each farmer on a shared pasture keep adding animals even when the grass is being overgrazed?",
+      "back": "Each farmer keeps the full gain from an extra animal, while the damage from extra grazing is spread across all farmers, so each one has a reason to keep adding.",
+      "hint": "Think about who keeps the profit of one extra animal and who absorbs the harm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b2o8g9",
+      "kind": "concept",
+      "front": "How does overuse push a renewable resource toward depletion?",
+      "back": "When total use is greater than the rate of renewal, the stock shrinks and catches or supplies fall. Users often work harder to compensate, which speeds up **depletion**.",
+      "hint": "Compare total use with how fast the resource can replace itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04tmmw0",
+      "kind": "term",
+      "front": "What is the **sustainable yield** of a renewable resource?",
+      "back": "The **sustainable yield** is the maximum amount that can be harvested indefinitely without reducing the resource's ability to renew.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mqn02x",
+      "kind": "term",
+      "front": "What is a **commons**?",
+      "back": "A **commons** is a resource, such as fish, groundwater, or air, that many people use and no one individual owns or controls.",
+      "hint": "Think about who owns the village pasture.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17xsmww",
+      "kind": "term",
+      "front": "What do we call the pattern where users following their own short-term interest overuse a shared resource?",
+      "back": "The **tragedy of the commons**. The resource is depleted or degraded, so everyone ends up worse off.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1foo3ey",
+      "kind": "example",
+      "front": "Which shared resource in international waters is overused when many fleets catch the same fish?",
+      "back": "**Ocean fish stocks**, since many fleets harvest the same fish and the stock can shrink.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1anfesq",
+      "kind": "mistake",
+      "front": "Why is it wrong to think the tragedy of the commons only affects land resources?",
+      "back": "It applies to any shared resource, including **air, water, and fish**. Overuse can harm all of them.",
+      "hint": "Think about what other shared resources people use.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yat6r6",
+      "kind": "concept",
+      "front": "Why do shared air and rivers lose quality when many users add waste?",
+      "back": "They can absorb some waste, but when many users add waste the shared system fills up and its quality drops.",
+      "hint": "Think about how much a system can take in before it is full.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qs8sxb",
+      "kind": "term",
+      "front": "What is a **regulation** used to manage a commons?",
+      "back": "A **regulation** is a legal rule, made by a government, that limits how a resource may be used and by whom.",
+      "hint": "Think about who makes the rules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19ktgqj",
+      "kind": "term",
+      "front": "What is **privatization** of a shared resource?",
+      "back": "**Privatization** is transferring the resource to private owners, who control its use and bear the costs of any damage.",
+      "hint": "Compare who pays for damage here with a commons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zhepjm",
+      "kind": "mistake",
+      "front": "Why is privatization hard to use as a fix for air or the open ocean?",
+      "back": "Air cannot be split into owned parcels, and the open ocean is also hard to divide, so the owner-pays method is hard to apply.",
+      "hint": "Think about whether a resource can be divided into pieces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0e4oujn",
+      "kind": "concept",
+      "front": "What is the main weakness of regulation as a way to limit overuse?",
+      "back": "It needs **monitoring and penalties**, because rules fail when nobody checks them.",
+      "hint": "Consider what makes a rule actually work in practice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q7oaps",
+      "kind": "term",
+      "front": "What is **community-based management** of a commons?",
+      "back": "A system in which the users of a resource make and enforce their own rules for sharing it.",
+      "hint": "Think about who sets the limits instead of a distant government.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -104,10 +104,10 @@ export function NoteMaterialCard({
         <SubjectArt family={family} className="!bottom-[-18%] !right-[-12%] !h-[92%]" />
         <span className="absolute bottom-2.5 left-3 right-3 block text-[22px] font-black leading-none text-white sm:text-[26px]">{note.topicCode}</span>
       </Link>
-      <Link href={href} className="mt-2.5 block truncate px-1 text-[14.5px] font-semibold hover:text-accent" title={label}>
+      <Link href={href} className="mt-2.5 block truncate px-1 text-ui font-semibold hover:text-accent" title={label}>
         {label}
       </Link>
-      <div className="flex items-center gap-1 truncate px-1 pb-1 text-[12px] text-faint">
+      <div className="flex items-center gap-1 truncate px-1 pb-1 text-caption text-faint">
         {note.state === "locked" && <Lock className="size-3 shrink-0" strokeWidth={2.5} aria-hidden="true" />}
         <span className="truncate">
           Scribe note · {state ?? note.courseTitle}
@@ -155,8 +155,8 @@ export function AddMaterialMenu({ uploading, onUpload, onNotes }: { uploading: b
               onUpload();
             }}
           >
-            <span className="text-[14px] font-bold">Upload files</span>
-            <span className="text-[12px] text-faint">PDF, slides, photos of notes</span>
+            <span className="text-ui font-bold">Upload files</span>
+            <span className="text-caption text-faint">PDF, slides, photos of notes</span>
           </button>
           <button
             type="button"
@@ -167,8 +167,8 @@ export function AddMaterialMenu({ uploading, onUpload, onNotes }: { uploading: b
               onNotes();
             }}
           >
-            <span className="text-[14px] font-bold">From Scribe notes</span>
-            <span className="text-[12px] text-faint">Our notes for your course</span>
+            <span className="text-ui font-bold">From Scribe notes</span>
+            <span className="text-caption text-faint">Our notes for your course</span>
           </button>
         </div>
       )}

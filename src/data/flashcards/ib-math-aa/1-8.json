@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Infinite geometric series",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:53.343Z",
+  "cards": [
+    {
+      "id": "1d0x7jb",
+      "kind": "concept",
+      "front": "For an infinite geometric series, what decides whether the partial sums settle to a finite value?",
+      "back": "The **common ratio** $r$. The series converges when $|r|<1$. If $r\\ge1$ or $r\\le-1$, it diverges.",
+      "hint": "Think about whether the terms shrink.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07jjjji",
+      "kind": "formula",
+      "front": "What is the formula for the sum to infinity of a convergent geometric series, and when is it valid?",
+      "back": "$S_\\infty=\\frac{u_1}{1-r}$, where $u_1$ is the first term and $r$ is the common ratio. It is valid only when $|r|<1$.",
+      "hint": "The denominator is one minus the ratio.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "097x2yb",
+      "kind": "process",
+      "front": "What steps should you follow to find the sum to infinity of a geometric series?",
+      "back": "Find $r$ by dividing a term by the one before. Check that $|r|<1$. Then substitute into $S_\\infty=\\frac{u_1}{1-r}$ and simplify.",
+      "hint": "The order matters: check the condition first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r94au1",
+      "kind": "term",
+      "front": "What is the common ratio of a geometric sequence?",
+      "back": "The **common ratio** $r$ is the constant $\\frac{u_{n+1}}{u_n}$, found by dividing any term by the term before it.",
+      "hint": "It is a division, not a subtraction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0guzwfj",
+      "kind": "term",
+      "front": "What is a convergent series?",
+      "back": "A **convergent series** is one whose partial sums approach a single finite value as $n$ increases without limit.",
+      "hint": "Compare with a divergent series.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eutkw2",
+      "kind": "mistake",
+      "front": "A student finds the ratio of 12, 4, 4/3 by subtracting: 4 − 12 = −8. What is wrong?",
+      "back": "Subtracting is the wrong method. The **ratio** comes from division: $r=\\frac{4}{12}=\\frac{1}{3}$.",
+      "hint": "Which operation gives the multiplier between terms?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v4rd4q",
+      "kind": "mistake",
+      "front": "A student uses $S_\\infty=\\frac{u_1}{1-r}$ on $1+2+4+\\cdots$ and gets −1. Why is this not a valid sum?",
+      "back": "The series is **divergent**, since $|r|=2\\ge1$. The formula gives a number, but the series has no sum, so −1 is meaningless.",
+      "hint": "Check the condition on $r$ before using the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a6go77",
+      "kind": "example",
+      "front": "Find $S_\\infty$ for $12+4+\\frac{4}{3}+\\cdots$.",
+      "back": "**18**. Here $r=\\frac{1}{3}$ and $|r|<1$, so $S_\\infty=\\frac{12}{1-\\frac{1}{3}}=18$.",
+      "hint": "Find the ratio by division first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06jxenf",
+      "kind": "example",
+      "front": "For the series $4+4x+4x^2+\\cdots$, for which values of $x$ does it converge?",
+      "back": "**$-1<x<1$**. The ratio is $r=x$, and convergence needs $|x|<1$.",
+      "hint": "Write the condition on the ratio as an inequality.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iphuh4",
+      "kind": "example",
+      "front": "A ball dropped from 2.0 m rebounds to 60% of its previous height each time. What total distance does it travel before it stops?",
+      "back": "**8.0 m**. The rebounds sum to $\\frac{1.2}{1-0.6}=3.0$ m, each travelled twice, so $2.0+2\\times3.0=8.0$ m.",
+      "hint": "Count each rebound twice: up and down.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1oenp64",
+      "kind": "example",
+      "front": "Write $0.363636\\ldots$ as a fraction in its simplest form.",
+      "back": "**$\\frac{4}{11}$**. Write it as $0.36+0.0036+\\cdots$, so $u_1=0.36$ and $r=0.01$, giving $\\frac{0.36}{0.99}=\\frac{4}{11}$.",
+      "hint": "Split the decimal into a sum of shrinking terms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0f79w6x",
+      "kind": "concept",
+      "front": "Why can the bouncing ball make infinitely many bounces yet travel a finite distance?",
+      "back": "Each **rebound** is smaller than the one before, so the heights shrink fast enough for the total distance to stay finite.",
+      "hint": "Look at how the ratio compares with 1.",
+      "sectionId": "s5"
+    }
+  ]
+}

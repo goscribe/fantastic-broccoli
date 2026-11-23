@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Functions, domain and range",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:04.937Z",
+  "cards": [
+    {
+      "id": "17oufxr",
+      "kind": "term",
+      "front": "What is a function?",
+      "back": "A rule that gives **exactly one output** for each input in its domain. Different inputs may share the same output.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m2rggq",
+      "kind": "term",
+      "front": "What is the range of a function?",
+      "back": "The set of **outputs** that the function actually produces, which depends on both the rule and the domain.",
+      "hint": "Read it as the outputs, not the inputs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w6fjw4",
+      "kind": "concept",
+      "front": "How can you tell from a graph whether it shows a function?",
+      "back": "Use the **vertical line test**. If any vertical line meets the graph more than once, one input has two outputs, so it is not a function.",
+      "hint": "Imagine sliding a ruler up and down the graph.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0czq8fn",
+      "kind": "example",
+      "front": "Given $f(x)=3x^2-x$, what is $f(-2)$?",
+      "back": "$f(-2)=14$. Replace $x$ with $-2$, square first: $3(4)+2=14$.",
+      "hint": "Square before you add or subtract.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02o2v1c",
+      "kind": "mistake",
+      "front": "What does the symbol $f(x)$ mean, and not $f\\times x$?",
+      "back": "It is the **output** of $f$ for the input $x$, not $f$ multiplied by $x$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ay476a",
+      "kind": "example",
+      "front": "For $f(x)=x^2$ with domain $\\{-1,0,1,2\\}$, what is the range?",
+      "back": "Range $\\{0,1,4\\}$. Square each input, then list each different output once.",
+      "hint": "Write repeated outputs only once.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u679d0",
+      "kind": "process",
+      "front": "What are the steps to check whether a mapping is a function?",
+      "back": "1. Look at each input. 2. Check that it leads to **one** output only. 3. Accept many-to-one pairs, since different inputs may share an output.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18lpe0a",
+      "kind": "mistake",
+      "front": "Is a mapping with $4\\to2$ and $4\\to-2$ a function?",
+      "back": "No. The input $4$ has two outputs, so it is a **one-to-many** mapping and fails. Many-to-one mappings are still functions.",
+      "hint": "Count the outputs for each input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05cxdbq",
+      "kind": "term",
+      "front": "What is an interval?",
+      "back": "A set of values from a **lower** endpoint to an **upper** endpoint, written with brackets.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1op9si7",
+      "kind": "concept",
+      "front": "What do square and round brackets mean in interval notation?",
+      "back": "**Square** brackets include the endpoint and **round** brackets exclude it. Infinity always takes a round bracket.",
+      "hint": "Think about whether the endpoint is reached.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wq4wcw",
+      "kind": "mistake",
+      "front": "Is $[2,\\infty]$ the correct notation for $x\\ge2$?",
+      "back": "No. Infinity cannot be reached, so write $[2,\\infty)$ with a round bracket.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0otfnmb",
+      "kind": "formula",
+      "front": "For $f(x)=\\sqrt{x-2}$, what condition must the expression under the root meet?",
+      "back": "$x-2\\ge0$, so $x\\ge2$ and the domain is $[2,\\infty)$. The expression under a square root cannot be negative.",
+      "hint": "Solve the inequality under the root.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15wwndr",
+      "kind": "example",
+      "front": "Find the domain and range of $f(x)=\\sqrt{x-2}$ in interval notation.",
+      "back": "Domain $[2,\\infty)$ and range $[0,\\infty)$. At $x=2$, $f(2)=0$, and the output never goes below $0$.",
+      "hint": "Start with the domain, then find the smallest output.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lnev59",
+      "kind": "example",
+      "front": "Find the domain of $f(x)=\\frac{1}{x-3}$ in interval notation.",
+      "back": "$x\\ne3$, so the domain is $(-\\infty,3)\\cup(3,\\infty)$. The denominator cannot be zero.",
+      "hint": "Which input makes the denominator zero?",
+      "sectionId": "s5"
+    }
+  ]
+}

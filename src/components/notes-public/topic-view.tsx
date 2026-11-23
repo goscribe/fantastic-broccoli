@@ -24,6 +24,8 @@ import { splitInline } from "@/lib/notes-public/inline-split";
 import { topicKey } from "@/lib/notes-public/progress";
 import { readingMinutes } from "@/lib/notes-public/reading";
 import { cn } from "@/lib/utils";
+import { Flashcards } from "@/components/notes-public/flashcards";
+import type { FlashcardSet } from "@/lib/notes-public/flashcard-deck";
 
 /**
  * One topic's note page: the subject band, the note (numbered sections,
@@ -96,7 +98,20 @@ function questionCard(q: PublicQuestion, number: number, placement: "inline" | "
   );
 }
 
-export function TopicView({ course, unit, data, app }: { course: PublicCourse; unit: PublicUnit; data: PublicTopic; app?: AppReaderProps }) {
+export function TopicView({
+  course,
+  unit,
+  data,
+  app,
+  flashcards,
+}: {
+  course: PublicCourse;
+  unit: PublicUnit;
+  data: PublicTopic;
+  app?: AppReaderProps;
+  /** The topic's free flashcards, rendered on the server (public page). The in-app reader leaves it out and the deck fetches its cards. */
+  flashcards?: FlashcardSet | null;
+}) {
   const { topic, note, questions } = data;
   const paths = app?.paths ?? PUBLIC_NOTE_PATHS;
   // The two-column layout (note + "On this page" rail) needs ~1050px of content: the app shell's sidebar takes 256px of the window first.
@@ -123,6 +138,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
     ? [
         ...note.content.sections.map((s) => ({ anchor: `sec-${s.id}`, sectionId: s.id, kind: "section" as const, label: <RichText text={s.heading} /> })),
         ...(note.content.recall.length ? [{ anchor: "sec-recall", kind: "recall" as const, label: "Check your recall" }] : []),
+        ...(flashcards?.total ? [{ anchor: "flashcards", kind: "flashcards" as const, label: `Flashcards: ${flashcards.total} cards` }] : []),
         ...(questions.length ? [{ anchor: "practice", kind: "practice" as const, label: `Practice: ${questions.length} questions` }] : []),
       ]
     : [];
@@ -157,7 +173,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
             <h2 id="h-practice" className="pr-[84px] text-[30px] font-black leading-[1.05] text-foreground sm:pr-[120px] sm:text-[38px]">
               Try {questions.length === 1 ? "a practice question" : `${questions.length} practice questions`}
             </h2>
-            <p className="mt-2.5 max-w-[440px] pr-[84px] text-[16px] font-semibold leading-snug text-foreground/75 sm:pr-[120px] sm:text-[17px]">
+            <p className="mt-2.5 max-w-[440px] pr-[84px] text-read font-semibold text-foreground/75 sm:pr-[120px]">
               Tap an answer to see if you&apos;re right and the worked explanation.
             </p>
           </div>
@@ -188,7 +204,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
         >
           <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
           {/* Top line, like a paper's: the course and where this sits in it. */}
-          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-[14px] font-bold leading-snug text-white/90 sm:min-h-0 sm:pr-0">
+          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
             <span>
               <span className="font-extrabold text-white">{course.title}</span> · {unitTitle(course, unit)}
             </span>
@@ -197,7 +213,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
           <h1 className={cn("nl-rise mt-2 text-[34px] font-black leading-[1.04] sm:mt-3 sm:text-[50px] lg:text-[56px]", !note && "text-balance")} style={stagger(1)}>
             <span className="text-white/75">{topic.code}</span> {topic.name}
           </h1>
-          <p className="nl-rise mt-3 text-[17px] font-semibold leading-[1.4] text-white/95 sm:text-[20px]" style={stagger(2)}>
+          <p className="nl-rise mt-3 text-read font-semibold text-white/95" style={stagger(2)}>
             {note ? <RichText text={note.content.objectiveLine} /> : "Scribe's note for this topic is on its way. Here is what it covers."}
           </p>
           <ul className="nl-meta nl-rise mt-3.5" style={stagger(3)}>
@@ -261,10 +277,21 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                       ))}
                     </ul>
                   </div>
-                  <p className="mt-4 text-[14.5px] font-semibold text-muted-foreground">Scribe&apos;s note for this topic is on its way.</p>
+                  <p className="mt-4 text-ui font-semibold text-muted-foreground">Scribe&apos;s note for this topic is on its way.</p>
                 </section>
                 {app ? app.emptyNote : <SignedInNoteFallback courseId={course.id} topicId={topic.id} />}
               </>
+            )}
+
+            {!locked && (
+              <Flashcards
+                courseId={course.id}
+                topicId={topic.id}
+                topicName={topic.name}
+                initial={app ? undefined : (flashcards ?? null)}
+                signupHref={signupHref}
+                loginHref={`/login?redirect=${encodeURIComponent(`${path}#flashcards`)}`}
+              />
             )}
 
             {questions.length > 0 && !locked && (
@@ -274,7 +301,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                   <h2 id="h-practice" className="text-[30px] font-black leading-[1.05] text-foreground sm:text-[38px]">
                     Practice this topic
                   </h2>
-                  <p className="mt-2.5 max-w-[440px] pr-[84px] text-[16px] font-semibold leading-snug text-foreground/75 sm:pr-[120px] sm:text-[17px]">
+                  <p className="mt-2.5 max-w-[440px] pr-[84px] text-read font-semibold text-foreground/75 sm:pr-[120px]">
                     {`${questions.length} quick-fire multiple-choice questions, easy to hard. `}Tap an answer to see if you&apos;re right and the worked explanation.
                     {note?.content.recall.length ? " (The written questions with mark schemes are under “Check your recall” above.)" : ""}
                   </p>
@@ -295,7 +322,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                 <h2 id="h-finish" className="pr-[80px] text-[28px] font-black leading-[1.06] text-foreground sm:text-[36px]">
                   Now make it stick
                 </h2>
-                <p className="mt-2.5 max-w-[440px] pr-[80px] text-[16px] font-semibold leading-snug text-foreground/75 sm:pr-[120px] sm:text-[17px]">
+                <p className="mt-2.5 max-w-[440px] pr-[80px] text-read font-semibold text-foreground/75 sm:pr-[120px]">
                   Five quick questions on {topic.name} while it is fresh, or keep going with the next topic.
                 </p>
                 <div className="mt-5 flex flex-col gap-3">
@@ -317,8 +344,8 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                 {next && (
                   <Link href={paths.topic(course.id, next)} className="nl-card nl-lift group flex items-center gap-3 px-4 py-4 sm:order-2">
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[13px] font-extrabold text-muted-foreground">Next topic</span>
-                      <span className="mt-0.5 block text-[17px] font-extrabold leading-snug text-foreground">
+                      <span className="block text-small font-extrabold text-muted-foreground">Next topic</span>
+                      <span className="mt-0.5 block text-read font-extrabold text-foreground">
                         {next.code} {next.name}
                       </span>
                     </span>
@@ -329,8 +356,8 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                   <Link href={paths.topic(course.id, prev)} className="nl-card nl-lift group flex items-center gap-3 px-4 py-4 sm:order-1">
                     <ArrowLeft className="size-5 shrink-0 text-muted-foreground" strokeWidth={2.75} aria-hidden="true" />
                     <span className="min-w-0 flex-1">
-                      <span className="block text-[13px] font-extrabold text-muted-foreground">Previous topic</span>
-                      <span className="mt-0.5 block text-[17px] font-extrabold leading-snug text-foreground">
+                      <span className="block text-small font-extrabold text-muted-foreground">Previous topic</span>
+                      <span className="mt-0.5 block text-read font-extrabold text-foreground">
                         {prev.code} {prev.name}
                       </span>
                     </span>
@@ -339,7 +366,7 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
               </div>
               {unit.topics.length > 1 && (
                 <div className="mt-8">
-                  <p className="text-[14px] font-extrabold text-muted-foreground">
+                  <p className="text-ui font-extrabold text-muted-foreground">
                     More in{" "}
                     <Link href={paths.unit(course.id, unit)} className="text-accent hover:text-accent-dim">
                       {unitTitle(course, unit)}
@@ -350,14 +377,14 @@ export function TopicView({ course, unit, data, app }: { course: PublicCourse; u
                   </div>
                 </div>
               )}
-              <p className="mt-5 text-[14.5px]">
+              <p className="mt-5 text-ui">
                 <Link href={paths.course(course.id)} className="font-extrabold text-accent hover:text-accent-dim">
                   All {course.title} topics →
                 </Link>
               </p>
             </nav>
 
-            <footer className="mt-8 flex flex-col gap-1 text-[12.5px] leading-snug text-faint">
+            <footer className="mt-8 flex flex-col gap-1 text-small text-faint">
               {note && (
                 <p>
                   {note.label === "reviewed"

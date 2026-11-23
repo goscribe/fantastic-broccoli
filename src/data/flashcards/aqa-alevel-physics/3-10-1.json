@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-10-1",
+  "topicCode": "3.10.1",
+  "topicName": "Physics of the eye",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:07.997Z",
+  "cards": [
+    {
+      "id": "0u1ln8y",
+      "kind": "concept",
+      "front": "Which part of the eye does most of the bending of light before it reaches the retina?",
+      "back": "The **cornea** does most of the refraction, because its transparent curved front bends light strongly. The lens then fine-tunes the focus.",
+      "hint": "Compare the outer transparent layer with the lens behind the iris.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o2toa8",
+      "kind": "concept",
+      "front": "How does the eye change its focus from a distant object to a near one?",
+      "back": "**Accommodation**: the ciliary muscles contract, the lens becomes thicker, its focal length falls and its power rises.",
+      "hint": "Think about which structure is muscle around the lens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l5kfnw",
+      "kind": "formula",
+      "front": "Which equation links lens power $P$ to focal length $f$, with $f$ in metres?",
+      "back": "$P=\\frac{1}{f}$. This gives $P$ in **dioptres** (D) when $f$ is in metres.",
+      "hint": "Think about taking the reciprocal of the focal length.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xcpnb2",
+      "kind": "term",
+      "front": "What is one dioptre equal to?",
+      "back": "**1 D** equals $1\\,\\mathrm{m^{-1}}$, the reciprocal of one metre.",
+      "hint": "Work out 1 divided by a length in metres.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v7gsz8",
+      "kind": "mistake",
+      "front": "Why is lens power in dioptres not the same quantity as power in watts?",
+      "back": "Lens power is the reciprocal of focal length. Power in watts is the rate at which work is done or energy is transferred.",
+      "hint": "Compare what each quantity measures, not the symbol used.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07yxtin",
+      "kind": "example",
+      "front": "What is the power of a converging lens with a focal length of 20 cm?",
+      "back": "$+5.0\\,\\mathrm{D}$. Convert to $0.20\\,\\mathrm{m}$, then $P=\\frac{1}{0.20\\,\\mathrm{m}}=5.0\\,\\mathrm{D}$.",
+      "hint": "Convert the length into metres first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mcye7x",
+      "kind": "concept",
+      "front": "Describe the image that forms on the retina.",
+      "back": "The image is **real**, **inverted** and **smaller** than the object. The brain interprets it as upright.",
+      "hint": "Think about how the light crosses over before it lands on the retina.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ul8hc0",
+      "kind": "concept",
+      "front": "Why do rods and cones work in different light levels?",
+      "back": "**Rods** work in dim light but give no colour. **Cones** need brighter light and give colour vision.",
+      "hint": "Think about the brightness needed and whether colour is seen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17nd9vq",
+      "kind": "term",
+      "front": "What is the near point of the eye?",
+      "back": "The **near point** is the closest distance at which the eye can form a clear image, about 25 cm for a normal adult.",
+      "hint": "Compare it with the far point, the other limit of accommodation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v1p1d6",
+      "kind": "concept",
+      "front": "Why does a person with myopia see distant objects as blurred?",
+      "back": "Their image of a distant object forms in front of the retina, because the eye is too long or the lens too powerful.",
+      "hint": "Compare where the image forms with where the retina is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1308g7u",
+      "kind": "concept",
+      "front": "Which type of lens corrects long sight, and why does it work?",
+      "back": "A **converging** lens adds the focusing power the eye lacks, so near objects focus on the retina.",
+      "hint": "Think about whether the eye focuses too weakly or too strongly.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wir55v",
+      "kind": "formula",
+      "front": "Which equation links object distance $u$, image distance $v$ and focal length $f$?",
+      "back": "$\\frac{1}{u}+\\frac{1}{v}=\\frac{1}{f}$. A real image has positive $v$, and a virtual image has negative $v$.",
+      "hint": "Think about the thin lens formula used for real and virtual images.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "064ozrx",
+      "kind": "example",
+      "front": "A long-sighted person has a near point of 1.0 m. What lens power lets them read at 0.25 m?",
+      "back": "$+3.0\\,\\mathrm{D}$. Using $\\frac{1}{f}=\\frac{1}{0.25}+\\frac{1}{-1.0}=4.0-1.0$, so $P=+3.0\\,\\mathrm{D}$.",
+      "hint": "The virtual image is at the near point, so $v$ is negative.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oazfsm",
+      "kind": "term",
+      "front": "What is the far point of a normal adult eye?",
+      "back": "**Infinity**. It is the greatest distance at which the eye can still form a clear image.",
+      "hint": "Think about the other end of the range from the near point.",
+      "sectionId": "s2"
+    }
+  ]
+}

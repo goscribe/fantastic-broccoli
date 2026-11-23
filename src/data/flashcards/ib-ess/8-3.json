@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Urban air pollution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:45.133Z",
+  "cards": [
+    {
+      "id": "0fb5xhb",
+      "kind": "concept",
+      "front": "Where does most urban air pollution come from?",
+      "back": "Mostly from **burning fuel**: road transport exhaust, power stations and factories, and heating or cooking with coal, wood or waste. Construction and road dust also add to it.",
+      "hint": "Think about what cities pack into a small area.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o893y8",
+      "kind": "concept",
+      "front": "How does photochemical smog form, and when is it worst?",
+      "back": "Sunlight acts on nitrogen oxides and fuel vapours to form **ground-level ozone**, a secondary pollutant. Smog is worst on warm, sunny, still days after the morning traffic.",
+      "hint": "Primary pollutants react in the air, not at the source.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uu7la3",
+      "kind": "concept",
+      "front": "Why is preventing pollution better than cleaning it up afterwards?",
+      "back": "**Prevention** stops pollution being made at all, so it is the best of the three levels. Controlling release with filters comes next, and restoring damage, such as liming lakes, comes last.",
+      "hint": "Compare reducing the activity with fitting filters.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o1zkjb",
+      "kind": "term",
+      "front": "What is acid deposition?",
+      "back": "The transfer of **acids** from the air to the ground, as rain or as dry particles. The acids form when sulfur dioxide and nitrogen oxides dissolve in water in the air.",
+      "hint": "Think about which gases form acids in water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d7um6s",
+      "kind": "process",
+      "front": "What are the steps by which acid deposition forms and harms the environment?",
+      "back": "1) Fuel burning releases sulfur dioxide and nitrogen oxides. 2) They dissolve in water in the air to form acids. 3) The acids fall as rain or dry particles. 4) They damage trees, acidify lakes and corrode buildings.",
+      "hint": "Start with the release from burning fuel.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12m17l4",
+      "kind": "term",
+      "front": "What is particulate matter, and what does PM2.5 mean?",
+      "back": "**Particulate matter** is tiny solid or liquid particles suspended in air. PM2.5 means particles 2.5 micrometres across or smaller, which reach deep into the lungs.",
+      "hint": "The number in PM2.5 is a size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yc5zmr",
+      "kind": "concept",
+      "front": "Why do some cities trap their pollution?",
+      "back": "In a **temperature inversion**, a layer of warm air sits above cooler air near the ground and acts like a lid. Pollutants cannot rise, so they build up, especially in basins or valleys in calm weather.",
+      "hint": "Normally warm air near the ground rises.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rh2sic",
+      "kind": "formula",
+      "front": "Which formula gives the percentage change in a pollutant concentration?",
+      "back": "$\\frac{\\mathrm{final}-\\mathrm{initial}}{\\mathrm{initial}}\\times100$. The result is a **percentage change**, and a negative value means the concentration fell.",
+      "hint": "Change divided by the starting value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a2wnfj",
+      "kind": "example",
+      "front": "A city's mean PM2.5 falls from 40 to 28 micrograms per cubic metre. What is the percentage change?",
+      "back": "$-30\\%$, a 30% fall. Working: $\\frac{28-40}{40}\\times100=-30$.",
+      "hint": "Find the change first, then divide by the initial value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p04c9g",
+      "kind": "mistake",
+      "front": "A student says acid deposition only harms the area next to the factory. Why is this wrong?",
+      "back": "Harm is **not limited to the source**. Winds can carry acidic pollutants far downwind, so damage can occur in other regions.",
+      "hint": "Think about where the wind blows the pollutants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uy6e6y",
+      "kind": "term",
+      "front": "What is a bioindicator?",
+      "back": "A **bioindicator** is an organism or community whose presence, absence or health shows the quality of its environment. Lichens are sensitive to sulfur dioxide, so few lichens may signal polluted air.",
+      "hint": "Think of a living thing that reacts to pollution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q2bfun",
+      "kind": "term",
+      "front": "What is a low-emission zone?",
+      "back": "An area where vehicles that exceed set **emission standards** are banned or must pay a charge. It keeps the most polluting vehicles out of the area.",
+      "hint": "It targets vehicles, not factories.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0483cxn",
+      "kind": "concept",
+      "front": "Why do policies such as traffic charges succeed or fail?",
+      "back": "They work when they are **enforced** and publicly supported. Charges can cut traffic but may burden low-income drivers if no affordable alternative exists. Limits help only when monitoring and penalties are real.",
+      "hint": "Give one benefit, one limitation and a judgement.",
+      "sectionId": "s6"
+    }
+  ]
+}

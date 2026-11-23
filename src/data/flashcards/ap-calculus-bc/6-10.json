@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-10",
+  "topicCode": "6.10",
+  "topicName": "Long division and completing the square",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:33.193Z",
+  "cards": [
+    {
+      "id": "06tpai0",
+      "kind": "concept",
+      "front": "When should you use polynomial long division before integrating a rational function?",
+      "back": "Use it when the numerator's degree is at least the denominator's degree. It rewrites the function as a **polynomial plus a simpler fraction**, which is often easier to integrate.",
+      "hint": "Compare the degrees of the top and bottom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sqnq3n",
+      "kind": "concept",
+      "front": "What does completing the square do to a quadratic denominator, and when does it lead to arctan?",
+      "back": "It rewrites the quadratic as a squared binomial plus a constant. A positive constant gives a **sum-of-squares form**, which makes the inverse tangent integral recognizable.",
+      "hint": "Look at the sign of the leftover constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j31lie",
+      "kind": "formula",
+      "front": "What is the inverse tangent pattern for $\\int\\frac{du}{u^2+a^2}$?",
+      "back": "$\\frac{1}{a}\\arctan\\left(\\frac{u}{a}\\right)+C$, for $a>0$. Here $u$ is the variable and $a$ is the positive constant. Differentiate to check any constant factor.",
+      "hint": "Identify $u$ and $a$ in the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09reb61",
+      "kind": "term",
+      "front": "What is a rational function?",
+      "back": "A **rational function** is a quotient of two polynomials. It is defined wherever its denominator is nonzero.",
+      "hint": "Think of a fraction built from polynomials.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m4cso4",
+      "kind": "process",
+      "front": "What are the steps of polynomial long division for a rational function?",
+      "back": "Divide the leading terms, multiply the result by the denominator, and subtract. Repeat until the remainder has lower degree than the denominator, then write polynomial plus remainder over the original denominator.",
+      "hint": "Count the repeats until the remainder is small.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qzkt8i",
+      "kind": "mistake",
+      "front": "Why is it wrong to drop a nonzero remainder after long division?",
+      "back": "Dropping it changes the integrand. You must **divide the remainder by the original denominator** and include that fraction in the rewritten expression.",
+      "hint": "What did the division leave behind?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16k2zf7",
+      "kind": "formula",
+      "front": "What is the integral of $\\frac{1}{x+1}$?",
+      "back": "$\\ln|x+1|+C$. A constant over a linear denominator gives a **logarithmic antiderivative**. Keep the absolute value bars.",
+      "hint": "Think about the logarithm form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vg7704",
+      "kind": "example",
+      "front": "Find $\\int\\frac{x^2+1}{x+1}\\,dx$ using long division.",
+      "back": "$\\frac{x^2}{2}-x+2\\ln|x+1|+C$, for $x\\ne-1$. Division first gives $x-1+\\frac{2}{x+1}$.",
+      "hint": "First divide $x^2+1$ by $x+1$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1emvr5p",
+      "kind": "process",
+      "front": "How do you complete the square for $x^2+bx+c$?",
+      "back": "Halve the coefficient of $x$, square it, and adjust the constant: $x^2+bx+c=(x+\\frac{b}{2})^2+c-\\frac{b^2}{4}$. If the leading coefficient is not one, factor it out first.",
+      "hint": "Start with the coefficient of $x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l5t51r",
+      "kind": "term",
+      "front": "What is a sum-of-squares form?",
+      "back": "A **sum-of-squares form** is a squared variable expression plus a positive squared constant, such as $(x-h)^2+a^2$.",
+      "hint": "Look for a square plus a positive square.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k22df4",
+      "kind": "mistake",
+      "front": "Does completing the square change the values of the function?",
+      "back": "No. It only **rewrites the denominator** in a different form. The function's values stay the same.",
+      "hint": "Compare the two forms of the same expression.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qlup6s",
+      "kind": "example",
+      "front": "Find $\\int\\frac{1}{x^2+4x+8}\\,dx$.",
+      "back": "$\\frac{1}{2}\\arctan\\left(\\frac{x+2}{2}\\right)+C$. Completing the square gives $(x+2)^2+4$, so $a=2$.",
+      "hint": "Complete the square in the denominator first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d0s69v",
+      "kind": "concept",
+      "front": "Why does the antiderivative $\\frac{1}{2}\\arctan\\left(\\frac{x+2}{2}\\right)+C$ work for every real $x$?",
+      "back": "Because the denominator $(x+2)^2+4$ is always positive, so the function is defined for all real $x$.",
+      "hint": "Look at the sum of squares.",
+      "sectionId": "s4"
+    }
+  ]
+}

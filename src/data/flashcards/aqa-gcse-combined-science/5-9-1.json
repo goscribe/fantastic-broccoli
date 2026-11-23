@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-9-1",
+  "topicCode": "5.9.1",
+  "topicName": "Composition and evolution of the atmosphere",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:58.022Z",
+  "cards": [
+    {
+      "id": "1uvbovk",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that today's air is mostly oxygen?",
+      "back": "Air is not mostly oxygen. **Nitrogen** is its largest component, at about $78\\%$ of dry air, while **oxygen** makes up about $21\\%$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1eqhemt",
+      "kind": "concept",
+      "front": "What gases did intense volcanic activity release into the early atmosphere?",
+      "back": "Intense **volcanic activity** released **carbon dioxide** and water vapour, with nitrogen also present. There was little or no oxygen.",
+      "hint": "Think about where these gases came from inside Earth.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1iykfyd",
+      "kind": "concept",
+      "front": "How did photosynthesis change the amount of oxygen in the atmosphere?",
+      "back": "Early algae in water, and later plants on land, took in carbon dioxide and released **oxygen**. Over a very long time, oxygen built up in the air.",
+      "hint": "Consider what photosynthesis takes in and what it gives out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xvvpgn",
+      "kind": "concept",
+      "front": "What did water vapour form as Earth cooled?",
+      "back": "As Earth cooled, water vapour **condensed** into liquid water, which collected to form the **oceans**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pby1ap",
+      "kind": "concept",
+      "front": "Why did atmospheric carbon dioxide start to fall once oceans had formed?",
+      "back": "Carbon dioxide could **dissolve** in seawater, which began a long decline in its level in the atmosphere.",
+      "hint": "Think about what the cooling water did.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08qns6j",
+      "kind": "process",
+      "front": "Describe how marine organisms removed carbon dioxide from the atmosphere.",
+      "back": "Carbon dioxide dissolved in the oceans. Marine organisms used the dissolved carbon compounds to make **shells** and skeletons. Their remains formed **carbonate rocks**, such as limestone, which locked away the carbon.",
+      "hint": "Follow the carbon from seawater to rock.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0or0dw9",
+      "kind": "concept",
+      "front": "How did buried organisms help store carbon for long periods?",
+      "back": "When dead organisms were buried without fully decaying, their carbon stayed stored. Over long periods, some buried material formed **fossil fuels**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uj7f9n",
+      "kind": "term",
+      "front": "What is aerobic respiration?",
+      "back": "Aerobic respiration is the process that **releases energy** from food using oxygen. Organisms that use it became widespread later on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h172ny",
+      "kind": "concept",
+      "front": "Why are the standard dry-air percentages given without water vapour?",
+      "back": "The amount of **water vapour** changes with conditions, so the usual percentages describe air without it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "053s6gi",
+      "kind": "mistake",
+      "front": "Why is it wrong to think that carbon dioxide disappeared from the atmosphere?",
+      "back": "Carbon dioxide did not disappear. It **remains** in the air today, while much carbon is stored in rocks and other materials.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c8fimw",
+      "kind": "term",
+      "front": "What is volcanic activity?",
+      "back": "Volcanic activity is the release of **molten rock** and gases from inside Earth.",
+      "hint": "Think about what comes out of a volcano.",
+      "sectionId": "s2"
+    }
+  ]
+}

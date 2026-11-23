@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Irrigation methods",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:04.873Z",
+  "cards": [
+    {
+      "id": "1tw1rnn",
+      "kind": "concept",
+      "front": "Why is drip irrigation the most water-efficient of the four main methods?",
+      "back": "It releases water slowly through tiny holes right at plant **roots**, so little evaporates and almost none runs off.",
+      "hint": "Compare where the water ends up with where it lands in flood or spray systems.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nqzb6l",
+      "kind": "concept",
+      "front": "Why can cheaper, more efficient irrigation still fail to save total water?",
+      "back": "Farmers may irrigate more land or grow thirstier crops, so total use stays the same or rises. Limits on **withdrawals** make the savings reliable.",
+      "hint": "Think about what farmers might do with the water they no longer lose.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04up1xk",
+      "kind": "concept",
+      "front": "How can pumping groundwater for irrigation cause wells to run dry?",
+      "back": "Pumping faster than natural refilling lowers the **water table** in the aquifer until wells no longer reach water.",
+      "hint": "Think about what happens to the water level when more leaves than enters.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mqoxf9",
+      "kind": "term",
+      "front": "What is irrigation efficiency?",
+      "back": "The **percentage** of applied water that crops take up, rather than losing it to evaporation, runoff, or deep drainage.",
+      "hint": "Focus on the share that reaches the roots, not the total amount applied.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02qpg6i",
+      "kind": "term",
+      "front": "What is salinization in irrigated soil?",
+      "back": "The **buildup of salts** in soil, left behind when irrigation water evaporates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06x9irp",
+      "kind": "mistake",
+      "front": "Why is it wrong to think salt buildup in soil comes only from seawater?",
+      "back": "Ordinary irrigation water already holds small amounts of dissolved **salt**, which concentrate in the soil as the water evaporates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yuhi40",
+      "kind": "term",
+      "front": "Why does waterlogging harm crop roots?",
+      "back": "Too much water fills the **air spaces** in soil, so roots get too little oxygen.",
+      "hint": "Roots need air as well as water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qfzu8f",
+      "kind": "concept",
+      "front": "Why do flood and furrow systems waste so much water?",
+      "back": "They rely on gravity and leave water on the surface for a long time, so much of it evaporates or drains past the roots. Uneven land makes this worse.",
+      "hint": "Think about how long the water sits on the surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uku451",
+      "kind": "term",
+      "front": "What is spray irrigation?",
+      "back": "A method that pushes pressurized water through pipes to **sprinklers** that spray it over crops like rain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "196lvat",
+      "kind": "concept",
+      "front": "When should farmers water their crops to cut evaporation, and why?",
+      "back": "Early in the morning or at night, because less water is lost to **evaporation** at those times.",
+      "hint": "Think about the time of day when the sun is lowest.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j7lh0q",
+      "kind": "example",
+      "front": "If drip tubing cuts water use per field by 40 percent but the irrigated area grows by 80 percent, what is the total change?",
+      "back": "$0.60 \\times 1.80 = 1.08$ of the original, an **8 percent rise** in total water use.",
+      "hint": "Multiply the remaining share of water per field by the new area.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gp6cbk",
+      "kind": "term",
+      "front": "How does a soil moisture sensor reduce water waste?",
+      "back": "It measures the **water content** of soil so irrigation is applied only when plants need it.",
+      "hint": "Think about timing water to crop need rather than a fixed schedule.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rujkbc",
+      "kind": "term",
+      "front": "What is irrigation?",
+      "back": "The **artificial application** of water to land to support crop growth where natural rainfall is not enough.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13za9xe",
+      "kind": "concept",
+      "front": "Which pollutants does runoff from irrigated fields carry into streams?",
+      "back": "**Fertilizer, pesticides, and sediment** that leave the fields with the water.",
+      "hint": "Think about what farmers add to crops and soil.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r2-1",
+  "topicCode": "R2.1",
+  "topicName": "Amount of chemical change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:28.717Z",
+  "cards": [
+    {
+      "id": "08ji0zb",
+      "kind": "concept",
+      "front": "Why must masses be converted to moles before using the ratio from a balanced equation?",
+      "back": "Coefficients give a ratio of **moles**, not masses. Different substances have different molar masses, so convert each mass using $n=\\frac{m}{M}$ first.",
+      "hint": "Coefficients count particles, and particles of different substances have different masses.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13o0fw6",
+      "kind": "concept",
+      "front": "Why does the limiting reactant set the maximum amount of product?",
+      "back": "The **limiting reactant** runs out first, so it caps how much product can form while the other reactant is in excess. Work out the product from each reactant and take the smaller amount.",
+      "hint": "Ask which reactant would run out first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pixx2p",
+      "kind": "concept",
+      "front": "How does atom economy differ from percentage yield?",
+      "back": "**Atom economy** uses masses from the balanced equation, so it reflects the chemistry alone. **Percentage yield** uses the amount actually obtained, so a reaction can have high atom economy but low percentage yield.",
+      "hint": "One comes from the equation, the other from the lab result.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00hu1lb",
+      "kind": "term",
+      "front": "What is a mole ratio?",
+      "back": "The **mole ratio** is the ratio of amounts in moles given by the coefficients of a balanced equation.",
+      "hint": "Look at the numbers in front of the formulas.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tr06ci",
+      "kind": "term",
+      "front": "What is the theoretical yield?",
+      "back": "The **theoretical yield** is the maximum product amount predicted from the limiting reactant, assuming it reacts completely.",
+      "hint": "Assume the limiting reactant is fully used up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tf9io4",
+      "kind": "process",
+      "front": "What are the steps to find the theoretical yield of a product from two known reactant masses?",
+      "back": "1) Convert each mass to moles with $n=\\frac{m}{M}$. 2) Use the equation ratio to find the limiting reactant. 3) Use its moles to find product moles. 4) Convert to mass with $m=nM$.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13i1bp5",
+      "kind": "formula",
+      "front": "What does $n=cV$ give, and what units must the volume use?",
+      "back": "It gives the **amount** in moles of dissolved substance, where $c$ is concentration in $\\mathrm{mol\\,dm^{-3}}$ and $V$ is volume in $\\mathrm{dm^3}$.",
+      "hint": "Check the volume unit before you calculate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fktvd7",
+      "kind": "formula",
+      "front": "How do you find the moles of a gas from its volume?",
+      "back": "Use $n=\\frac{V}{V_m}$, where $V_m$ is the **molar volume** at the stated conditions. The value depends on temperature and pressure, so use the one given.",
+      "hint": "Molar volume changes with conditions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18dmsw3",
+      "kind": "formula",
+      "front": "What is the formula for percentage yield, and what must both yields share?",
+      "back": "$\\text{percentage yield}=\\frac{\\text{actual yield}}{\\text{theoretical yield}}\\times100\\%$. Both yields must use the **same unit**.",
+      "hint": "Actual divided by theoretical, then times 100.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11to9dp",
+      "kind": "mistake",
+      "front": "Why is a measured product mass above the theoretical yield a warning sign?",
+      "back": "It suggests **contamination**, retained solvent or a measurement error, because the product cannot exceed the theoretical yield if the reaction is correctly analysed.",
+      "hint": "Think about what extra mass could be in the sample.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09a6kkr",
+      "kind": "mistake",
+      "front": "Can you put the actual yield into an atom economy calculation?",
+      "back": "No. Use masses from the **balanced equation**, multiplied by their coefficients. The actual yield belongs in percentage yield, not atom economy.",
+      "hint": "Which calculation uses lab results?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1det7bw",
+      "kind": "example",
+      "front": "Mg 4.80 g and O2 2.40 g react as 2Mg + O2 → 2MgO (molar masses 24.0, 32.0, 40.0 g mol⁻¹). Which is limiting, and what is the theoretical mass of MgO?",
+      "back": "**Oxygen** is limiting. It gives 0.0750 mol O2, so 0.150 mol MgO, and $0.150\\times40.0=6.00$ g of MgO.",
+      "hint": "Compare the moles with the 2:1 ratio.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-14",
+  "topicCode": "4.14",
+  "topicName": "Bacterial growth and plant antimicrobials",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:53.390Z",
+  "cards": [
+    {
+      "id": "1yugnmn",
+      "kind": "concept",
+      "front": "Which four phases does a closed bacterial culture pass through, in order?",
+      "back": "**Lag**, exponential, stationary, then death phase. Numbers change little at first, then rise fastest, level off, and finally fall.",
+      "hint": "Think about how the numbers change over time on the growth graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rz301x",
+      "kind": "formula",
+      "front": "Which equation links the final number of cells to the starting number and the number of divisions?",
+      "back": "$N=N_0\\times2^{n}$, where $N$ is the final number of cells, $N_0$ is the starting number, and $n$ is the number of divisions. Each division doubles the count.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06ca4si",
+      "kind": "concept",
+      "front": "Why does a clear zone of inhibition around a disc show that an extract works?",
+      "back": "Bacteria cannot grow in the area around the disc, so the extract must be stopping or killing them there. A larger zone suggests a stronger effect.",
+      "hint": "Think about where the bacteria are missing on the agar.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0pffo6a",
+      "kind": "term",
+      "front": "What is binary fission?",
+      "back": "The division of one bacterial cell into **two** genetically identical daughter cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07f5b30",
+      "kind": "term",
+      "front": "What is the generation time of a bacterial population?",
+      "back": "The **time taken for the number of cells to double**. For some bacteria in good conditions it is about 20 minutes.",
+      "hint": "Compare it with the doubling pattern in the exponential phase.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dho1vf",
+      "kind": "example",
+      "front": "How many cells are there after 3 hours of exponential growth from 50 cells, with a 30-minute generation time?",
+      "back": "6 divisions, since $n=\\frac{180\\,\\mathrm{min}}{30\\,\\mathrm{min}}=6$. Then $N=50\\times2^{6}=3200$ cells.",
+      "hint": "Convert hours to minutes before dividing by the generation time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1is7j3x",
+      "kind": "example",
+      "front": "What is the area of a clear zone of inhibition with a diameter of 12 mm?",
+      "back": "The radius is $6\\,\\mathrm{mm}$. Then $A=\\pi r^{2}=\\pi\\times36\\approx113\\,\\mathrm{mm^2}$.",
+      "hint": "Start by finding the radius from the diameter.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "11gf3g7",
+      "kind": "mistake",
+      "front": "Why is sealing a culture dish completely with tape a mistake?",
+      "back": "Air must be able to enter the dish. A sealed dish can let **anaerobic** bacteria grow, and some of these may cause disease. Tape only a few places.",
+      "hint": "Think about what the bacteria need from the air around them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ofwgqi",
+      "kind": "process",
+      "front": "Which precautions keep unwanted microbes out of a bacterial culture?",
+      "back": "Sterilise equipment and media, wipe the bench with disinfectant, work near a Bunsen flame, open containers briefly, tape the lid, and incubate upside down at about $25\\,^{\\circ}\\mathrm{C}$.",
+      "hint": "Think about the equipment, the bench and the dish itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15wcaal",
+      "kind": "concept",
+      "front": "How can a plant antimicrobial stop a bacterial cell from growing?",
+      "back": "It can **damage the cell wall** so the cell bursts by osmosis, **damage the cell membrane** so contents leak out, or **block an enzyme** needed for metabolism.",
+      "hint": "Consider which structures of the cell could be targeted.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ujhbnp",
+      "kind": "term",
+      "front": "What is an antimicrobial?",
+      "back": "A **substance that kills microorganisms or stops them growing**. Garlic is a familiar example from plants.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1iduxib",
+      "kind": "concept",
+      "front": "Why does the number of living cells stop rising in the stationary phase?",
+      "back": "Nutrients run out and waste builds up, so deaths begin to match divisions. The total stays roughly constant.",
+      "hint": "Think about what happens to the nutrients as the culture gets older.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zilb3w",
+      "kind": "process",
+      "front": "How would you test whether a plant extract inhibits bacterial growth?",
+      "back": "Spread bacteria evenly over agar, place discs soaked in the extract on it, and add a control disc soaked only in solvent. Incubate, then measure the clear zones.",
+      "hint": "Think about what you need to compare the extract against.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "16ox74y",
+      "kind": "concept",
+      "front": "What happens to the cells and their numbers in the lag phase?",
+      "back": "The cells adjust to the medium and make enzymes, so the **number of cells barely changes**.",
+      "hint": "Think about what cells must do before they can start dividing quickly.",
+      "sectionId": "s2"
+    }
+  ]
+}

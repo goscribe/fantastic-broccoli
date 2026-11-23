@@ -44,7 +44,7 @@ export function CourseUnits({
                   unitTitle(course, u)
                 )}
               </h2>
-              <p className="mt-0.5 text-[13.5px] font-bold text-muted-foreground">
+              <p className="mt-0.5 text-small font-bold text-muted-foreground">
                 {u.topics.length} topics
                 {u.topics.some((t) => t.note) ? ` · ${u.topics.filter((t) => t.note).length} notes` : ""}
               </p>

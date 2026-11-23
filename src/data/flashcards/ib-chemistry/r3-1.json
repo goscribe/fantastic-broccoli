@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r3-1",
+  "topicCode": "R3.1",
+  "topicName": "Proton transfer reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:27.806Z",
+  "cards": [
+    {
+      "id": "0x1bqh5",
+      "kind": "term",
+      "front": "What is a Brønsted–Lowry acid, and what is a Brønsted–Lowry base?",
+      "back": "A **Brønsted–Lowry acid** donates a proton, $\\mathrm{H^+}$. A **Brønsted–Lowry base** accepts a proton. Both take part in the same proton transfer.",
+      "hint": "Think about what happens to the proton in each role.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tscdfu",
+      "kind": "concept",
+      "front": "How do you identify the two conjugate acid–base pairs in a proton transfer?",
+      "back": "Compare each reactant with a product. The acid becomes its **conjugate base** after donating a proton, and the base becomes its **conjugate acid** after accepting one.",
+      "hint": "Pair each reactant with the product that differs from it by one proton.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y6m5ne",
+      "kind": "concept",
+      "front": "Why is water described as amphiprotic?",
+      "back": "Water can **accept** a proton and act as a base, forming $\\mathrm{H_3O^+}$, or **donate** a proton and act as an acid, forming $\\mathrm{OH^-}$. Its role depends on the substance it reacts with.",
+      "hint": "Consider the two reactions with HNO3 and with NH3.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "133xeku",
+      "kind": "example",
+      "front": "Identify the two conjugate acid–base pairs in $\\mathrm{HCl + H_2O \\rightarrow H_3O^+ + Cl^-}$.",
+      "back": "The pairs are $\\mathrm{HCl/Cl^-}$ and $\\mathrm{H_3O^+/H_2O}$. The two members of each pair differ by exactly one proton.",
+      "hint": "HCl loses a proton, so pair it with what it becomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ps4dnq",
+      "kind": "term",
+      "front": "What is a conjugate base?",
+      "back": "A **conjugate base** is the species formed when an acid loses a proton.",
+      "hint": "Think about what the acid turns into.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ul5hmm",
+      "kind": "term",
+      "front": "What is a conjugate acid?",
+      "back": "A **conjugate acid** is the species formed when a base gains a proton.",
+      "hint": "Think about what the base turns into.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "102vjwp",
+      "kind": "term",
+      "front": "What is the hydronium ion, and how does it form?",
+      "back": "The **hydronium ion**, $\\mathrm{H_3O^+}$, forms when water accepts a proton from an acid.",
+      "hint": "Which species gains the proton?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qbqi2s",
+      "kind": "concept",
+      "front": "Why is $\\mathrm{H_3O^+}$ written instead of a bare $\\mathrm{H^+}$ in solution?",
+      "back": "Writing **$\\mathrm{H_3O^+}$** shows that the proton has joined a water molecule. It does not stay as an isolated proton in solution.",
+      "hint": "Consider what a bare proton would do in water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ros8mf",
+      "kind": "mistake",
+      "front": "Must a Brønsted–Lowry acid contain oxygen?",
+      "back": "No. An acid does not need to contain oxygen. Its role is to **donate a proton**, whatever its composition.",
+      "hint": "Look at HCl in the first example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10efwrj",
+      "kind": "mistake",
+      "front": "A student says the members of a conjugate pair differ by a whole water molecule. What is wrong?",
+      "back": "They differ by exactly one **proton**, $\\mathrm{H^+}$, not by a whole water molecule. Check each pair by counting the protons.",
+      "hint": "Compare the two species in $\\mathrm{H_3O^+/H_2O}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pnrlrf",
+      "kind": "example",
+      "front": "In $\\mathrm{NH_3 + H_2O \\rightleftharpoons NH_4^+ + OH^-}$, what is the conjugate base of water?",
+      "back": "**$\\mathrm{OH^-}$**, the hydroxide ion. Water donates a proton to ammonia and becomes hydroxide. The pairs are $\\mathrm{NH_4^+/NH_3}$ and $\\mathrm{H_2O/OH^-}$.",
+      "hint": "Water is the species that loses a proton here.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0im4xq3",
+      "kind": "process",
+      "front": "What steps do you follow to decide whether water is acting as an acid or a base in a reaction?",
+      "back": "1) Find the species that donates a proton. 2) If water accepts it, water is a base and forms $\\mathrm{H_3O^+}$. 3) If water donates a proton, water is an acid and forms $\\mathrm{OH^-}$.",
+      "hint": "Start by asking which reactant gives away the proton."
+    }
+  ]
+}

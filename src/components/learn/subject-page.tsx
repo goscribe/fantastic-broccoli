@@ -38,6 +38,10 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import "@/app/design/design.css";
+import { chooseStudyLength } from "@/lib/study-length-client";
+import { PaperPicker } from "@/components/session/paper-picker";
+import { useI18n } from "@/lib/i18n";
+import "@/lib/i18n/practice-paper";
 
 const ACTIVITY_LABEL: Record<string, string> = {
   mcq: "Quick 5",
@@ -108,11 +112,14 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
   const [busy, setBusy] = useState<string | null>(null);
+  const [paperOpen, setPaperOpen] = useState(false);
+  const { t } = useI18n();
   const [selected, setSelected] = useState<Set<string>>(new Set());
   const [attachOpen, setAttachOpen] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const attached = useAttachedNotes(workspaceId);
-  const course = useSubjectCourse(workspaceId);
+  // Course progress is asked for once the subject is known to follow a course (most follow none).
+  const course = useSubjectCourse(workspaceId, loading && !workspace ? undefined : workspace);
   const notes = useNotesOutline(workspaceId);
   const startCourseTopic = useStartCourseTopic();
   const planStarter = useStartTask();
@@ -230,7 +237,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
           // A full session in this subject: the server adds its due questions as review activities.
           const labels = Array.from(new Set((review.data?.queue ?? []).filter((q) => q.type === "item").map((q) => q.label)));
           openSession(
-            await createStudySession({ workspaceId, title: `Review: ${title}`.slice(0, 200), depth: "light", durationMinutes: 10, topics: (labels.length ? labels : [title]).join(", ").slice(0, 2000) }),
+            await createStudySession(await chooseStudyLength({ workspaceId, title: `Review: ${title}`.slice(0, 200), depth: "light" as const, durationMinutes: 10, topics: (labels.length ? labels : [title]).join(", ").slice(0, 2000) })),
           );
         },
         "Couldn't start the review",
@@ -263,7 +270,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
           "next",
           async () => {
             const s = scope([]);
-            openSession(await createStudySession({ workspaceId, title: title || "Quick 5", depth: "light", durationMinutes: 5, quickStart: true, topics: s.topics }));
+            openSession(await createStudySession(await chooseStudyLength({ workspaceId, title: title || "Quick 5", depth: "light" as const, durationMinutes: 5, quickStart: true, topics: s.topics })));
           },
           "Couldn't start your 5 questions",
         );
@@ -280,14 +287,16 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
       async () => {
         const picked = materials.filter((m) => selected.has(m.id)).map((m) => m.title);
         openSession(
-          await createStudySession({
-            workspaceId,
-            title: text.length > 60 ? `${text.slice(0, 57).trimEnd()}…` : text,
-            description: text,
-            depth: "moderate",
-            durationMinutes: 25,
-            topics: [text, ...picked].join("\n").slice(0, 2000),
-          }),
+          await createStudySession(
+            await chooseStudyLength({
+              workspaceId,
+              title: text.length > 60 ? `${text.slice(0, 57).trimEnd()}…` : text,
+              description: text,
+              depth: "moderate" as const,
+              durationMinutes: 25,
+              topics: [text, ...picked].join("\n").slice(0, 2000),
+            }),
+          ),
         );
         setPrompt("");
       },
@@ -327,7 +336,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
       "session",
       async () => {
         const s = scope(picked.map((m) => m.title));
-        const created = await createStudySession({ workspaceId, title: s.title, depth: "moderate", durationMinutes: 25, topics: s.topics });
+        const created = await createStudySession(await chooseStudyLength({ workspaceId, title: s.title, depth: "moderate" as const, durationMinutes: 25, topics: s.topics }));
         const fromNotes = picked.filter((m) => attached.notes.has(m.id)).length;
         if (fromNotes > 0) trackFunnel("notes.attached_session_started", { from: "subject", noteCount: fromNotes }, workspaceId);
         openSession(created);
@@ -354,7 +363,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   if (loadError && !workspace) {
     return (
       <div className="mx-auto w-full max-w-[1180px] px-4 pb-12 pt-5 sm:px-6 sm:pt-6">
-        <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+        <Link href="/" className="text-caption font-semibold text-faint hover:text-accent">← Home</Link>
         <LoadError
           className="mt-10"
           onRetry={() => {
@@ -379,12 +388,12 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
       <input ref={fileRef} type="file" multiple accept={UPLOAD_ACCEPT} className="hidden" onChange={(e) => void onFiles(e.target.files)} />
       <div className="flex min-w-0 flex-1 flex-col gap-8">
         <div>
-          <Link href="/" className="text-[12px] font-semibold text-faint hover:text-accent">← Home</Link>
+          <Link href="/" className="text-caption font-semibold text-faint hover:text-accent">← Home</Link>
           {workspace ? (
             // The tile the student tapped on home, opened out: the subject's colour and art, where it stands, the one thing to do next.
             <SubjectBand match={title} stored={workspace.subjectFamily} seed={workspaceId} className="mt-2 !rounded-[var(--r-card)] px-[18px] py-4 sm:px-6 sm:py-5">
               <h1 title={title} className={cn("subject-band__title max-w-[66%] font-extrabold text-white", title.length > 40 ? "text-[18px] sm:text-[20px]" : "text-[22px] sm:text-[26px]", "leading-[1.15]")}>{title}</h1>
-              <p className="subject-tile__sub mt-1 max-w-[66%] text-[13px] font-semibold leading-snug">
+              <p className="subject-tile__sub mt-1 max-w-[66%] text-small font-semibold">
                 {badge && <span className="mr-1.5 inline-block rounded-full bg-white/25 px-2 py-px align-[1px] text-[11px] font-extrabold leading-[16px] text-white">{badge}</span>}
                 {materials.length} material{materials.length === 1 ? "" : "s"}
                 {sessions.length > 0 ? ` · ${sessionsDone} of ${sessions.length} sessions done` : ""}
@@ -396,7 +405,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
               )}
               {copy ? (
                 <>
-                  <p className="mt-3 max-w-[66%] text-[14px] font-semibold leading-snug text-white sm:max-w-[60%] sm:text-[14.5px]">{copy.sentence}</p>
+                  <p className="mt-3 max-w-[66%] text-ui font-semibold text-white sm:max-w-[60%]">{copy.sentence}</p>
                   <button type="button" onClick={startNext} disabled={nextBusy} className="subject-pill mt-3 h-10 max-w-full disabled:opacity-80">
                     <span className="truncate">{copy.cta}</span>
                     {nextBusy ? <Loader2 className="size-4 shrink-0 animate-spin" /> : <ChevronRight className="size-4 shrink-0" strokeWidth={2.6} />}
@@ -430,8 +439,11 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
               {busy === "ask" ? <Loader2 className="size-4 animate-spin" /> : <ArrowUp className="size-4" />}
             </button>
           </div>
-          {chips.length > 0 && (
+          {(
             <div className="mt-4 flex flex-wrap gap-2">
+              <button type="button" disabled={!!busy} onClick={() => setPaperOpen(true)} className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-left text-[12.5px] font-semibold hover:bg-muted disabled:opacity-60">
+                {t("paper.cta")}
+              </button>
               {chips.map((c) => (
                 <button key={c.id} type="button" disabled={!!busy} onClick={() => onChip(c.id)} className="inline-flex max-w-full items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-left text-[12.5px] font-semibold hover:bg-muted disabled:opacity-60">
                   {busy === "chip" && c.id === "flashcards" && <Loader2 className="size-3.5 animate-spin" />}
@@ -489,8 +501,8 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
                   <button type="button" onClick={() => toggleSelected(m.id)} className="block w-full rounded-xl text-left">
                     <MaterialThumb m={{ ...m, preview: m.preview ?? (previews[m.id] || undefined) }} />
                   </button>
-                  <div className="mt-2.5 truncate px-1 text-[14.5px] font-semibold">{m.title}</div>
-                  <div className="truncate px-1 pb-1 text-[12px] text-faint">{formatRelativeDate(m.updatedAt)}</div>
+                  <div className="mt-2.5 truncate px-1 text-ui font-semibold">{m.title}</div>
+                  <div className="truncate px-1 pb-1 text-caption text-faint">{formatRelativeDate(m.updatedAt)}</div>
                 </div>
               ),
             )}
@@ -503,11 +515,11 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
               >
                 <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} unoptimized className="cat-bob h-16 w-auto" />
                 <div>
-                  <div className="inline-flex items-center gap-1.5 text-[14.5px] font-semibold">
+                  <div className="inline-flex items-center gap-1.5 text-ui font-semibold">
                     {uploading && <Loader2 className="size-3.5 animate-spin" />}
                     Add material
                   </div>
-                  <div className="mt-0.5 text-[12px] text-faint">PDF · slides · photos of notes</div>
+                  <div className="mt-0.5 text-caption text-faint">PDF · slides · photos of notes</div>
                 </div>
               </button>
             )}
@@ -533,6 +545,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
         />
       </div>
 
+      {paperOpen && <PaperPicker workspaceId={workspaceId} onClose={() => setPaperOpen(false)} />}
       {picked.length > 0 && (
         <CatNudge count={picked.length} starting={busy === "session" ? "session" : busy === "deck" ? "flashcards" : null} onSession={() => void newSession()} onFlashcards={() => void makeDeck(picked, "deck")} onClear={() => setSelected(new Set())} />
       )}
@@ -573,11 +586,11 @@ function ReviewLine({
           <span className="text-[16px] font-extrabold">Review</span>
           <span className="text-[16px] font-extrabold tabular-nums text-faint">{summary.total}</span>
         </div>
-        <p className="mt-0.5 text-[13px] leading-snug text-muted-foreground">
+        <p className="mt-0.5 text-small text-muted-foreground">
           {reviewBreakdown(summary)}
         </p>
         {summary.mistakes > 0 && (
-          <Link href={`/mistakes?workspace=${encodeURIComponent(workspaceId)}`} className="mt-1 inline-block text-[12.5px] font-semibold text-accent hover:underline">
+          <Link href={`/mistakes?workspace=${encodeURIComponent(workspaceId)}`} className="mt-1 inline-block text-caption font-semibold text-accent hover:underline">
             See your mistakes
           </Link>
         )}
@@ -608,7 +621,7 @@ function CatNudge({
 }) {
   return (
     <div className="pointer-events-none fixed bottom-5 right-5 z-30 flex items-end gap-2 max-md:bottom-[calc(4.75rem+env(safe-area-inset-bottom))] animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-6 sm:right-6">
-      <div className="pointer-events-auto relative max-w-[260px] rounded-2xl border border-border bg-white px-4 py-3 text-[13.5px] leading-snug shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
+      <div className="pointer-events-auto relative max-w-[260px] rounded-2xl border border-border bg-white px-4 py-3 text-small shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
         {`${count} file${count === 1 ? "" : "s"} picked — ready when you are.`}
         <div className="mt-2.5 flex flex-wrap gap-1.5">
           <button type="button" disabled={!!starting} onClick={onSession} className={buttonClass({ size: "sm", className: "gap-1.5" })}>
@@ -677,7 +690,7 @@ function SessionList({
             </div>
           ))}
         {!loading && sessions.length === 0 && (
-          <div className="flex items-center gap-4 py-3 text-[14px] text-muted-foreground">
+          <div className="flex items-center gap-4 py-3 text-ui text-muted-foreground">
             <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-14 w-auto" />
             No sessions yet. New session builds one on the whole subject.
           </div>
@@ -695,16 +708,16 @@ function SessionList({
               </span>
               <div className="min-w-0 flex-1">
                 <div className="flex items-center gap-2">
-                  <span className="truncate text-[14px] font-semibold">{s.title}</span>
-                  {finished && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-[11px] font-semibold text-emerald-700">Done</span>}
-                  {s.generating && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-[11px] font-semibold text-accent">Building…</span>}
+                  <span className="truncate text-ui font-semibold">{s.title}</span>
+                  {finished && <span className="rounded-md bg-emerald-50 px-1.5 py-0.5 text-caption font-semibold text-emerald-700">Done</span>}
+                  {s.generating && <span className="rounded-md bg-accent-soft px-1.5 py-0.5 text-caption font-semibold text-accent">Building…</span>}
                 </div>
-                <div className="truncate text-[12px] text-faint">
+                <div className="truncate text-caption text-faint">
                   {s.durationMinutes} min
                   {next && !finished ? ` · next: ${activityLabel(next.type)}` : total ? ` · ${done}/${total} activities` : ""}
                 </div>
               </div>
-              <div className="hidden w-20 shrink-0 text-right text-[12px] text-faint sm:block">{formatRelativeDate(s.updatedAt)}</div>
+              <div className="hidden w-20 shrink-0 text-right text-caption text-faint sm:block">{formatRelativeDate(s.updatedAt)}</div>
               <Link
                 href={`/workspace/${workspaceId}/session/${s.id}`}
                 className={cn(

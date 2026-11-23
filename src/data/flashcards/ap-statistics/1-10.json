@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-10",
+  "topicCode": "1.10",
+  "topicName": "Investigative questions and data collection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:58.631Z",
+  "cards": [
+    {
+      "id": "0yp0pr8",
+      "kind": "concept",
+      "front": "What is the difference between a population and a sample?",
+      "back": "The **population** is the whole group the question is about. The **sample** is the part of that group you actually collect data from.",
+      "hint": "Think about who the conclusion is about versus who you asked.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w40ei5",
+      "kind": "concept",
+      "front": "Why can an experiment with random assignment support a cause-and-effect conclusion, but an observational study cannot?",
+      "back": "Random assignment of a **treatment** balances other differences between individuals, so the treatment can be credited with the effect. An observational study only shows an **association**.",
+      "hint": "Consider what other differences could explain the results.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1edb3v8",
+      "kind": "concept",
+      "front": "Why must a statistical question be one that expects variability in the answers?",
+      "back": "A **statistical question** is one that can be answered by collecting data that vary from individual to individual. A vague question with no measurable answer cannot be studied this way.",
+      "hint": "Would every person give the same answer?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0unhu66",
+      "kind": "term",
+      "front": "What is a census?",
+      "back": "A **census** is a data collection in which every member of the population is measured.",
+      "hint": "Compare it with a sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yjlahr",
+      "kind": "term",
+      "front": "What is a categorical variable?",
+      "back": "A **categorical variable** places each individual into one of several groups, such as grade level or a yes or no answer.",
+      "hint": "Think of labels or groups, not amounts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cfmwvo",
+      "kind": "term",
+      "front": "What is a quantitative variable?",
+      "back": "A **quantitative variable** takes numerical values with units, where arithmetic makes sense, such as hours slept.",
+      "hint": "Ask whether averaging the values would make sense.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m3yy2o",
+      "kind": "process",
+      "front": "What are the six steps in planning a statistical study, in order?",
+      "back": "Pose a statistical question; define the population and choose a sample; identify the variables and how to measure them; choose a data collection method and collect the data; analyze with graphs and statistics; interpret the results in context and state any limits.",
+      "hint": "The plan starts with the question and ends with interpreting results.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "195hm49",
+      "kind": "mistake",
+      "front": "Why is it wrong to define the population as the people who happen to be available?",
+      "back": "The **population** must be the group the question is about, not whoever is easy to reach. Define it by the question first, then choose a sample from it.",
+      "hint": "Who is the question really about?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kqwkxw",
+      "kind": "mistake",
+      "front": "Why should you decide how each variable is measured before collecting any data?",
+      "back": "Vague measures such as a lot or a little give inconsistent answers. Measure with clear **units**, such as hours to the nearest half hour, and write the plan down in advance.",
+      "hint": "What happens if two people answer the same question differently?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jdr9cg",
+      "kind": "example",
+      "front": "A teacher asks 40 of the 300 juniors at her school how many hours they work each week. What are the population and the sample?",
+      "back": "The **population** is all 300 juniors at the school. The **sample** is the 40 juniors who were asked.",
+      "hint": "Who is the whole group, and who was actually asked?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0504w78",
+      "kind": "example",
+      "front": "A study records each student's grade level and minutes of homework last night. Classify each variable.",
+      "back": "**Grade level** is categorical. **Minutes of homework** is quantitative.",
+      "hint": "Does the variable sort people into groups or give a number with units?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pmdplz",
+      "kind": "example",
+      "front": "In the start-time study of 800 students, what is the population and what type of variable is opinion on a later start time?",
+      "back": "The **population** is all 800 students at the school. Opinion is a **categorical** variable, with answers yes or no.",
+      "hint": "Look at how the question names the group of interest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c0ihuf",
+      "kind": "concept",
+      "front": "Which data collection method directly describes the whole population, and which only estimates it?",
+      "back": "A **census** directly describes the whole population because it measures every member. A **sample survey** only estimates the population, and only if the sample is chosen well.",
+      "hint": "Compare who is measured in each method.",
+      "sectionId": "s5"
+    }
+  ]
+}

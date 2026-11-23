@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-2",
+  "topicCode": "11.2",
+  "topicName": "Simple circuits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:15.769Z",
+  "cards": [
+    {
+      "id": "19esb7f",
+      "kind": "concept",
+      "front": "Why does a gap anywhere in a loop stop every element in that loop from working?",
+      "back": "Charge flows only around a **closed circuit**, a complete unbroken conducting loop. A gap opens the loop, so the current stops everywhere in it.",
+      "hint": "Think about where charge is allowed to travel.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1km7apn",
+      "kind": "concept",
+      "front": "What is the key difference between series and parallel connections for current and potential difference?",
+      "back": "Series elements share one path, so they carry the **same current** and their potential differences add to the battery's. Parallel branches share two end points, so each has the **same potential difference** and their currents add.",
+      "hint": "Ask which quantity is shared, then which one adds.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tkqhew",
+      "kind": "concept",
+      "front": "What does a battery do to charges, and what does a resistor do to them?",
+      "back": "A **battery** maintains a potential difference and raises the electric potential energy of charges. A **resistor** opposes the current and turns that energy into thermal energy.",
+      "hint": "One element adds energy, the other removes it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "024osaw",
+      "kind": "formula",
+      "front": "How is electric potential difference defined, and what is its unit?",
+      "back": "$\\Delta V = \\Delta U_E/q$ is the change in electric potential energy per unit charge. The unit is the **volt**, where $1\\,\\mathrm{V}=1\\,\\mathrm{J/C}$.",
+      "hint": "Energy divided by charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uhntjh",
+      "kind": "mistake",
+      "front": "Does current get used up as it passes through a resistor?",
+      "back": "No. The **same current** leaves as enters. What decreases is the electric potential energy of each charge.",
+      "hint": "Think about what the charges lose, not the charges themselves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jczyku",
+      "kind": "process",
+      "front": "How can you check which routes current can take in a circuit diagram?",
+      "back": "Trace the diagram with a finger from one battery terminal around to the other. Every path you can follow is a possible **route for current**.",
+      "hint": "Start at one battery terminal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xmt49f",
+      "kind": "example",
+      "front": "A battery supplies 0.90 A to two parallel resistors. The first carries 0.50 A. What current flows in the second?",
+      "back": "**0.40 A**. The total current equals the sum of the branch currents, so $I_2=I_\\mathrm{total}-I_1=0.90\\,\\mathrm{A}-0.50\\,\\mathrm{A}=0.40\\,\\mathrm{A}$.",
+      "hint": "Use the junction rule: currents in equal currents out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09efc5x",
+      "kind": "example",
+      "front": "Two resistors in series share a 9.0 V battery. The first has 3.5 V across it. What is the potential difference across the second?",
+      "back": "**5.5 V**. Series potential differences add to the battery's, so $9.0\\,\\mathrm{V}-3.5\\,\\mathrm{V}=5.5\\,\\mathrm{V}$.",
+      "hint": "Series voltages share the battery's total.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1infdov",
+      "kind": "concept",
+      "front": "Why does adding an identical lamp in series make every lamp dimmer?",
+      "back": "It increases the total **opposition to current**, so the current falls. Every lamp then carries less current and becomes dimmer.",
+      "hint": "Think about the total resistance of the loop.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z09pv5",
+      "kind": "mistake",
+      "front": "Does adding a new branch to a parallel circuit dim the lamps already in it?",
+      "back": "No. Each existing branch keeps the **same potential difference** as the battery, so it carries the same current as before. The battery just supplies more total current.",
+      "hint": "Each branch sees the battery's full potential difference.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aqqtai",
+      "kind": "term",
+      "front": "What is a junction in a circuit?",
+      "back": "A **junction** is a point where three or more conductors meet. Charge entering a junction equals charge leaving it.",
+      "hint": "Where branches split or join.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03o02p8",
+      "kind": "mistake",
+      "front": "If one lamp is removed from a parallel circuit, do all the others go out?",
+      "back": "Usually not. The other branches still form **closed circuits**, so those lamps stay lit. Only the removed branch is affected.",
+      "hint": "Compare with what happens in a series loop.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16a9i6l",
+      "kind": "concept",
+      "front": "Why do circuit diagrams usually ignore wire resistance?",
+      "back": "Real wires have a little resistance, but diagrams treat wires as **ideal** unless told otherwise.",
+      "hint": "Think about what the diagram is trying to show.",
+      "sectionId": "s1"
+    }
+  ]
+}

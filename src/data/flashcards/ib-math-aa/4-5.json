@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Probability concepts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:39.938Z",
+  "cards": [
+    {
+      "id": "1w8po70",
+      "kind": "formula",
+      "front": "How do you find the probability of an event when all outcomes are equally likely?",
+      "back": "$P(A)=\\frac{n(A)}{n(U)}$, where **n(A)** is the number of outcomes in the event and $n(U)$ is the number of outcomes in the sample space.",
+      "hint": "Compare the outcomes in the event with all outcomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tglvft",
+      "kind": "concept",
+      "front": "Why can theoretical and experimental probability give different answers?",
+      "back": "**Theoretical** probability comes from counting equally likely outcomes, while **experimental** probability is the relative frequency from actual trials, which change from one set of trials to the next.",
+      "hint": "Ask where each number comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p3vvyf",
+      "kind": "formula",
+      "front": "What is the relationship between P(A) and the probability of its complement A'?",
+      "back": "$P(A')=1-P(A)$, because every outcome is in **A** or in **A'**, never both, so their probabilities add to 1.",
+      "hint": "Think about what the two events cover together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a6faev",
+      "kind": "term",
+      "front": "What is a sample space?",
+      "back": "The **sample space** $U$ is the set of all possible outcomes of an experiment.",
+      "hint": "Think of every result that could happen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05g8wbx",
+      "kind": "term",
+      "front": "What is an event in probability?",
+      "back": "An **event** is a subset of the sample space, meaning a set of outcomes that interests us.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vut3xg",
+      "kind": "example",
+      "front": "A bag holds 5 red, 3 green and 2 blue counters. What is the probability of taking a green counter at random?",
+      "back": "$P(G)=\\frac{3}{10}=0.3$, since $n(U)=10$ and $n(G)=3$.",
+      "hint": "Find the total number of counters first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pmupjm",
+      "kind": "mistake",
+      "front": "A biased coin is tossed. Can you use $\\frac{n(A)}{n(U)}$ to find P(heads)?",
+      "back": "**No**: that formula works only when outcomes are equally likely, and a biased coin breaks this rule. Use experimental data from repeated trials instead.",
+      "hint": "Check the assumption behind the formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ogzpnu",
+      "kind": "term",
+      "front": "What is relative frequency?",
+      "back": "The **relative frequency** of an event is the number of times it occurs divided by the number of trials. It is also called experimental probability.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u7b9dx",
+      "kind": "concept",
+      "front": "What happens to relative frequency as the number of trials increases?",
+      "back": "It tends towards the **theoretical** probability, so larger numbers of trials give more reliable estimates.",
+      "hint": "Think about what more data does.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "020ktn3",
+      "kind": "process",
+      "front": "How do you find the probability of 'at least one' success?",
+      "back": "Find the probability of **none** occurring, then subtract it from 1: $P(\\text{at least one})=1-P(\\text{none})$. This is often much quicker.",
+      "hint": "Consider the complement of the event.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1akyfo1",
+      "kind": "formula",
+      "front": "How many occurrences do you expect in n trials of an event with probability P(A)?",
+      "back": "$n\\times P(A)$, the **expected number of occurrences**. It is a long-run average, not a guaranteed count.",
+      "hint": "Multiply the number of trials by the probability.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xpxw2z",
+      "kind": "example",
+      "front": "A drawing pin lands point up 42 times in 70 throws. About how many point-up results would you expect in 200 throws?",
+      "back": "About **120**: the relative frequency is $\\frac{42}{70}=0.6$, and $200\\times0.6=120$.",
+      "hint": "Find the relative frequency first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16xnr8p",
+      "kind": "mistake",
+      "front": "A fair die is rolled 12 times. Must it show exactly two sixes?",
+      "back": "**No**: the expected number is $12\\times\\frac{1}{6}=2$, but this is only an average. Each roll is separate, so one or three sixes would not be surprising.",
+      "hint": "Expected means average, not guaranteed.",
+      "sectionId": "s5"
+    }
+  ]
+}

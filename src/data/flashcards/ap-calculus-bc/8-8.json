@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-8",
+  "topicCode": "8.8",
+  "topicName": "Volumes: triangle and semicircle cross sections",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:01.254Z",
+  "cards": [
+    {
+      "id": "0v3twkt",
+      "kind": "concept",
+      "front": "How does a volume integral find the volume of a solid from its cross sections?",
+      "back": "It **adds** the cross-sectional areas: $V=\\int_a^b A(x)\\,dx$. Each thin slice contributes about its area times its thickness, and the integral sums them across the solid.",
+      "hint": "Think of many thin slices stacked along the axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1agmfpj",
+      "kind": "process",
+      "front": "What are the main steps to set up a volume integral with triangular or semicircular cross sections?",
+      "back": "First **find** the segment length across the base region. Then use the stated shape's formula to write the area $A(x)$. Finally integrate $\\int_a^b A(x)\\,dx$ over the interval.",
+      "hint": "Length first, then area, then integral."
+    },
+    {
+      "id": "08u1gq6",
+      "kind": "concept",
+      "front": "For a vertical segment in a base region, what length do you use for the cross section?",
+      "back": "Use the **vertical** length $f(x)-g(x)$, where $y=f(x)$ is the upper boundary and $y=g(x)$ is the lower boundary.",
+      "hint": "Subtract the lower boundary from the upper one.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "089vh2q",
+      "kind": "term",
+      "front": "What is a base region?",
+      "back": "The **base region** is the two-dimensional region whose segments set the dimensions of a solid's cross sections.",
+      "hint": "It sits under the solid, in a flat plane.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zmehk7",
+      "kind": "term",
+      "front": "What is a cross section of a solid?",
+      "back": "A **cross section** is the shape formed when a solid is sliced by a plane, here perpendicular to the chosen axis.",
+      "hint": "Imagine cutting the solid with a flat knife.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08gx30t",
+      "kind": "formula",
+      "front": "What is the area of an equilateral triangle with side length $s$, and what does each symbol mean?",
+      "back": "$A=\\frac{\\sqrt3}{4}s^2$, where $s$ is the **side length** of the triangle. Area is in square units if $s$ is in those units.",
+      "hint": "Use the side, not the height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0brev9e",
+      "kind": "formula",
+      "front": "What is the area of a triangle with base width $w$ and perpendicular height $t$?",
+      "back": "$A=\\frac12 wt$. If the height is $q$ times the base width, substitute $t=qw$ before integrating.",
+      "hint": "Half of base times height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12etk3y",
+      "kind": "formula",
+      "front": "What is the area of a semicircle whose diameter is $w$?",
+      "back": "$A=\\frac{\\pi}{8}w^2$, because the **radius** is $w/2$ and the area is $\\frac12\\pi(w/2)^2$.",
+      "hint": "Halve the circle, and the radius is half the diameter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10axtm2",
+      "kind": "mistake",
+      "front": "A student uses a semicircle's diameter $w$ directly as the radius in the area formula. What is wrong?",
+      "back": "The **diameter** must be divided by two first. The radius is $w/2$, so the area is $\\frac{\\pi}{8}w^2$, not $\\frac{\\pi}{2}w^2$ from using $w$ as the radius.",
+      "hint": "Check what the formula's radius is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bmiun5",
+      "kind": "formula",
+      "front": "How do you write the volume integral for slices perpendicular to the $y$-axis?",
+      "back": "$V=\\int_c^d A(y)\\,dy$, where $A(y)$ is the cross-sectional area written as a function of $y$ and $c$, $d$ are the lowest and highest values of the region.",
+      "hint": "Use horizontal lengths and integrate with respect to $y$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nfc76s",
+      "kind": "concept",
+      "front": "Why can two solids over the same base region have different volumes?",
+      "back": "They share the same segment length and limits, but the **shape formula** differs. A triangle's area and a semicircle's area for the same length are not equal.",
+      "hint": "Same length, different area formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uvwytc",
+      "kind": "example",
+      "front": "Base region between $y=x$, $y=0$, $x=0$, $x=2$ (cm). Slices perpendicular to the $x$-axis are equilateral triangles. Find the volume.",
+      "back": "$V=\\int_0^2\\frac{\\sqrt3}{4}x^2\\,dx=\\frac{2\\sqrt3}{3}\\,\\mathrm{cm^3}$. The side length is $x$.",
+      "hint": "Side length s equals x, so use the triangle area formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gwfe11",
+      "kind": "example",
+      "front": "Same base region as before (lengths in cm), but slices perpendicular to the $x$-axis are semicircles with diameter along the base. Find the volume.",
+      "back": "$V=\\int_0^2\\frac{\\pi}{8}x^2\\,dx=\\frac{\\pi}{3}\\,\\mathrm{cm^3}$. The diameter is $x$, so the radius is $x/2$.",
+      "hint": "Use the semicircle formula with w equal to x.",
+      "sectionId": "s4"
+    }
+  ]
+}

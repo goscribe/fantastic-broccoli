@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-7",
+  "topicCode": "3.7",
+  "topicName": "Solutions and mixtures",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:26.168Z",
+  "cards": [
+    {
+      "id": "1hjruk3",
+      "kind": "concept",
+      "front": "What is the difference between a homogeneous and a heterogeneous mixture?",
+      "back": "A **homogeneous** mixture has the same composition throughout a sample. A **heterogeneous** mixture has different proportions of its components in different regions.",
+      "hint": "Think about whether the composition is the same everywhere.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06wovw0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that salt disappears when it dissolves in water?",
+      "back": "The **dissolved solute** remains present as particles dispersed among the water molecules. It is unseen, not gone.",
+      "hint": "Consider where the salt particles go.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06pn3cb",
+      "kind": "concept",
+      "front": "How do water molecules keep dissolved ions separated in solution?",
+      "back": "Water molecules surround each separated ion, a process called **hydration**. Their oxygen ends face positive ions and their hydrogen ends face negative ions.",
+      "hint": "Think about which end of water faces which ion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qri64c",
+      "kind": "term",
+      "front": "What is the solute in a solution?",
+      "back": "The **solute** is the substance being dissolved. In salt water, salt is the solute.",
+      "hint": "It is the thing that gets dissolved.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a51njh",
+      "kind": "term",
+      "front": "What is the solvent in a solution?",
+      "back": "The **solvent** is the substance that dissolves the solute. It is usually present in greater amount, but the terms describe roles rather than fixed substances.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rduojx",
+      "kind": "term",
+      "front": "What is solvation?",
+      "back": "**Solvation** is the surrounding of separated solute particles by solvent particles. When water is the solvent, it is called hydration.",
+      "hint": "Think about what surrounds the particles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xeb9hd",
+      "kind": "process",
+      "front": "What happens, in order, when sodium chloride dissolves in water?",
+      "back": "1) The ions separate from the crystal. 2) Water molecules surround each ion. 3) The hydrated ions spread through the water, forming a **homogeneous** solution.",
+      "hint": "Start with the crystal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rvxea2",
+      "kind": "concept",
+      "front": "Which attractions change when a solute disperses into a solvent?",
+      "back": "Attractions among **solute** particles, among **solvent** particles, and between solute and solvent particles. Solvent particles also move apart to make room.",
+      "hint": "Count the three pairs of particles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mjql3j",
+      "kind": "mistake",
+      "front": "Does mixing two substances create a new substance?",
+      "back": "No. A **mixture** keeps its substances chemically distinct, even when they become hard to see.",
+      "hint": "Consider whether the original substances are still present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d52n8q",
+      "kind": "concept",
+      "front": "Why is salt water homogeneous but sand in water heterogeneous?",
+      "back": "Fully dissolved salt disperses evenly, so its composition is the same everywhere. Sand-rich and sand-poor regions remain in sand and water, making it **heterogeneous**.",
+      "hint": "Compare how evenly each substance is spread.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nphava",
+      "kind": "concept",
+      "front": "Can a solute and solvent both be gases?",
+      "back": "Yes. Air is a **gaseous solution** with several gases mixed uniformly.",
+      "hint": "Think of the air around you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06gvnv4",
+      "kind": "term",
+      "front": "What is a suspension?",
+      "back": "A **suspension** is a heterogeneous mixture with larger particles that remain dispersed only temporarily and may settle.",
+      "hint": "Think of sand stirred into water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e29lbp",
+      "kind": "mistake",
+      "front": "Does a mixture looking uniform prove that it is a solution?",
+      "back": "No. Check that the **composition** stays the same throughout and that the components are dispersed as individual particles. Appearance alone can mislead.",
+      "hint": "Appearance is not the only test.",
+      "sectionId": "s4"
+    }
+  ]
+}

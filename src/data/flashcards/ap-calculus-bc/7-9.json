@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-9",
+  "topicCode": "7.9",
+  "topicName": "Logistic models",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:40.752Z",
+  "cards": [
+    {
+      "id": "1m7gxxp",
+      "kind": "concept",
+      "front": "Why does a logistic model fit a population better than an exponential model over time?",
+      "back": "A logistic model includes **carrying capacity**, so growth slows as resources run short. When $P$ is small, $1-\\frac{P}{K}$ is close to 1 and early growth looks exponential.",
+      "hint": "Think about what happens to growth when food and space run short.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rep82k",
+      "kind": "formula",
+      "front": "What does each symbol mean in the logistic equation $\\frac{dP}{dt}=kP\\left(1-\\frac{P}{K}\\right)$?",
+      "back": "$P$ is the population, $t$ is time, $k>0$ is a constant controlling how fast early growth is, and $K$ is the **carrying capacity**, the largest population the environment can sustain.",
+      "hint": "Keep lowercase k and capital K apart.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r6f89h",
+      "kind": "concept",
+      "front": "Where is the population growth rate fastest in a logistic model?",
+      "back": "Growth is fastest when $P=\\frac{K}{2}$, half the carrying capacity. The rate there is $\\frac{kK}{4}$, which depends only on $k$ and $K$.",
+      "hint": "Treat the rate as a parabola in P and find its vertex.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0362f4c",
+      "kind": "term",
+      "front": "What is an equilibrium solution of a logistic equation?",
+      "back": "An **equilibrium solution** is a constant solution where the rate of change is zero. For the logistic model these are $P=0$ and $P=K$.",
+      "hint": "Which populations give a rate of zero?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zy4e1d",
+      "kind": "process",
+      "front": "How do you find the carrying capacity from $\\frac{dP}{dt}=0.3P-0.0005P^2$?",
+      "back": "Factor out $0.3P$ to get $0.3P\\left(1-\\frac{0.0005}{0.3}P\\right)$. Simplify $\\frac{0.0005}{0.3}=\\frac{1}{600}$, so **$K=600$**.",
+      "hint": "Match the form $kP(1-\\frac{P}{K})$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0prv8i5",
+      "kind": "concept",
+      "front": "What does the sign of $\\frac{dP}{dt}$ tell you when $0<P<K$ and when $P>K$?",
+      "back": "When $0<P<K$ the rate is **positive**, so the population increases toward $K$. When $P>K$ the rate is **negative**, so the population decreases toward $K$.",
+      "hint": "Look at the sign of the factor $1-\\frac{P}{K}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wink1g",
+      "kind": "example",
+      "front": "A deer herd satisfies $\\frac{dP}{dt}=0.2P\\left(1-\\frac{P}{800}\\right)$. At what herd size is growth fastest, and what is that rate?",
+      "back": "Growth is fastest at **400 deer**, at a rate of **40 deer/year**. This uses $P=\\frac{K}{2}=400$ and checks with $\\frac{kK}{4}=40$.",
+      "hint": "Identify K first, then find K over 2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s5whex",
+      "kind": "mistake",
+      "front": "A student says growth is fastest when the population reaches the carrying capacity. Why is this wrong?",
+      "back": "Fastest growth occurs at **$P=\\frac{K}{2}$**, not at $K$. At $P=K$ the rate of change is zero, so the population has stopped growing.",
+      "hint": "What is dP/dt when P equals K?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02npt06",
+      "kind": "concept",
+      "front": "Where does the concavity of a logistic solution change?",
+      "back": "The concavity changes at **$P=\\frac{K}{2}$**, which is an inflection point. This is the same population where growth is fastest.",
+      "hint": "Check the sign of the factor $1-\\frac{2P}{K}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dox2tu",
+      "kind": "example",
+      "front": "A trout population satisfies $\\frac{dP}{dt}=0.1P\\left(1-\\frac{P}{1200}\\right)$ with $P(0)=300$. What is $\\lim_{t\\to\\infty}P(t)$?",
+      "back": "The limit is **1200**. Since $P(0)=300$ is positive, the population levels off at the carrying capacity, so the lake supports about 1200 trout in the long run.",
+      "hint": "Does a positive starting population always approach K?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0d6iumz",
+      "kind": "concept",
+      "front": "What happens to a logistic population that starts at zero?",
+      "back": "It stays at **zero** for all time. Only a population starting at zero avoids levelling off at the carrying capacity, because no one is present to reproduce.",
+      "hint": "Think about whether zero is an equilibrium.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02oacg5",
+      "kind": "term",
+      "front": "What is the limiting value of a logistic solution P(t)?",
+      "back": "The **limiting value** is $\\lim_{t\\to\\infty}P(t)$, the level the solution approaches over a long time. For a positive starting population it equals $K$.",
+      "hint": "Think about the long-run behavior as t grows.",
+      "sectionId": "s5"
+    }
+  ]
+}

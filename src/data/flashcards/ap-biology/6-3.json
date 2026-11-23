@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Transcription and RNA processing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:46.162Z",
+  "cards": [
+    {
+      "id": "1hi6cxj",
+      "kind": "concept",
+      "front": "What does RNA polymerase do during transcription?",
+      "back": "It builds an **RNA** strand that matches a DNA template strand. It reads the template from $3'$ to $5'$ and adds RNA nucleotides from $5'$ to $3'$, each pairing with a template base.",
+      "hint": "Think about which strand is the template and which direction RNA grows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "018ncsc",
+      "kind": "concept",
+      "front": "Why is messenger RNA called an intermediate between DNA and protein?",
+      "back": "mRNA carries the gene's sequence from the nucleus to a **ribosome**, which reads its codons to help set the order of amino acids in a protein.",
+      "hint": "Follow the information from gene to ribosome.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z22l32",
+      "kind": "process",
+      "front": "What three changes turn eukaryotic pre-mRNA into mature mRNA?",
+      "back": "A modified **$5'$ cap** is added to the $5'$ end, a poly-A tail is added to the $3'$ end, and introns are removed by splicing while exons are joined.",
+      "hint": "Two changes happen at the ends; one happens in the middle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "130ylyy",
+      "kind": "term",
+      "front": "What is transcription?",
+      "back": "**Transcription** is the synthesis of RNA using a DNA strand as a template.",
+      "hint": "It makes RNA, not protein.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ech9rr",
+      "kind": "process",
+      "front": "What are the main steps of transcription, in order?",
+      "back": "**RNA polymerase** binds a promoter near the gene, separates a short stretch of DNA, builds RNA while reading the template, then releases the RNA when the gene ends.",
+      "hint": "Start at the promoter and finish at the end of the gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qgb9hx",
+      "kind": "term",
+      "front": "What is splicing?",
+      "back": "**Splicing** removes introns from pre-mRNA and joins the remaining exons.",
+      "hint": "Introns are removed; exons stay.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16ms0am",
+      "kind": "term",
+      "front": "What is a codon?",
+      "back": "A **codon** is a three-base sequence in mRNA that specifies an amino acid or signals the end of protein synthesis.",
+      "hint": "Ribosomes read mRNA in groups of this size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1br756l",
+      "kind": "concept",
+      "front": "What is the job of transfer RNA (tRNA)?",
+      "back": "tRNA brings **amino acids** to the ribosome. Its anticodon pairs with a matching mRNA codon, helping place the correct amino acid into a growing protein.",
+      "hint": "The anticodon reads the message; what does the tRNA carry?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17z7qnx",
+      "kind": "concept",
+      "front": "What does ribosomal RNA (rRNA) do?",
+      "back": "rRNA is a **structural and functional** part of the ribosome. It helps position mRNA and tRNAs and catalyzes bonds between amino acids.",
+      "hint": "Think about the ribosome's structure and its chemistry.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hbc1iz",
+      "kind": "mistake",
+      "front": "Is it correct that the entire pre-mRNA leaves the nucleus unchanged?",
+      "back": "No. Its ends are modified and introns are removed before the mature mRNA is exported to the cytoplasm.",
+      "hint": "Compare pre-mRNA with mature mRNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ysn0is",
+      "kind": "mistake",
+      "front": "Does RNA use thymine when it is built from a DNA template?",
+      "back": "No. RNA uses **uracil** instead of thymine, so uracil pairs with adenine in the RNA.",
+      "hint": "Which base replaces thymine in RNA?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1blgq77",
+      "kind": "example",
+      "front": "RNA polymerase reads the DNA template 3'-TAC-5'. What RNA sequence is built?",
+      "back": "The RNA is **5'-AUG-3'**. Each template base pairs with its RNA partner (A with U, T with A, C with G), and RNA is written $5'$ to $3'$.",
+      "hint": "Pair each template base, then write the RNA in the correct direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ydi3x1",
+      "kind": "mistake",
+      "front": "Does transcription assemble the protein?",
+      "back": "No. **Transcription** only makes the RNA copy of the gene. Ribosomes use mRNA to make protein.",
+      "hint": "Keep transcription and protein synthesis separate.",
+      "sectionId": "s3"
+    }
+  ]
+}

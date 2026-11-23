@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "L'Hospital's rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:13.338Z",
+  "cards": [
+    {
+      "id": "1mbb69q",
+      "kind": "concept",
+      "front": "Which two quotient forms allow direct use of L'Hospital's rule?",
+      "back": "The **$\\frac{0}{0}$** and **$\\frac{\\infty}{\\infty}$** forms. Other forms, such as $\\frac{5}{0}$, do not qualify directly and may need algebra first.",
+      "hint": "Think about what the numerator and denominator do in the limit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00twoaj",
+      "kind": "formula",
+      "front": "What does L'Hospital's rule say about $\\lim_{x\\to a}\\frac{f(x)}{g(x)}$ when its conditions hold?",
+      "back": "It equals $\\lim_{x\\to a}\\frac{f'(x)}{g'(x)}$, the limit of the **derivative quotient**. The derivative quotient's limit must exist or be infinite.",
+      "hint": "Differentiate the top and the bottom separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18rljtx",
+      "kind": "process",
+      "front": "What checks should you make before differentiating a quotient for L'Hospital's rule?",
+      "back": "Confirm the original form is $\\frac{0}{0}$ or $\\frac{\\infty}{\\infty}$, that both functions are differentiable near the point, and that $g'(x)$ is nonzero nearby. Show the form first.",
+      "hint": "There are three conditions plus one habit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qpb080",
+      "kind": "term",
+      "front": "What is an indeterminate form?",
+      "back": "An **indeterminate form** is an initial limit form that does not, by itself, determine the limit's value.",
+      "hint": "It is a form that cannot be settled by substitution alone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17bl415",
+      "kind": "term",
+      "front": "What is the derivative quotient?",
+      "back": "The **derivative quotient** is the numerator's derivative divided by the denominator's derivative, written $\\frac{f'(x)}{g'(x)}$.",
+      "hint": "Differentiate each part, not the whole fraction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i4zu7z",
+      "kind": "mistake",
+      "front": "You want $\\lim_{x\\to a}\\frac{f(x)}{g(x)}$ and apply the quotient rule to the whole fraction. Is that L'Hospital's rule?",
+      "back": "No. The **quotient rule** finds the derivative of a fraction. L'Hospital's rule needs the numerator and denominator differentiated separately.",
+      "hint": "Which derivative rule splits top and bottom?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gzixkn",
+      "kind": "example",
+      "front": "Evaluate $\\lim_{x\\to 0}\\frac{\\sin x}{x}$ using L'Hospital's rule.",
+      "back": "Substitution gives $\\frac{0}{0}$. Differentiating separately gives $\\lim_{x\\to 0}\\frac{\\cos x}{1}=1$, so the limit is $1$.",
+      "hint": "Check the form first, then differentiate top and bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z821lo",
+      "kind": "example",
+      "front": "Evaluate $\\lim_{x\\to 0}\\frac{e^x-1}{x}$ using L'Hospital's rule.",
+      "back": "Substitution gives $\\frac{0}{0}$. The derivative quotient is $\\frac{e^x}{1}$, which tends to $1$ as $x$ approaches $0$. The limit is $1$.",
+      "hint": "The denominator's derivative is $1$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zi3ppy",
+      "kind": "process",
+      "front": "What should you do if the derivative quotient is still a $\\frac{0}{0}$ form?",
+      "back": "Check the conditions for the new quotient. If L'Hospital's rule still applies, differentiate its numerator and denominator separately again.",
+      "hint": "Repeat the same checks each time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vk7hj9",
+      "kind": "term",
+      "front": "What is a zero-times-infinity form?",
+      "back": "A **zero-times-infinity form** occurs when one factor approaches zero and another grows without bound. It must be rewritten as a quotient before the rule applies.",
+      "hint": "Think of a product where one part shrinks and one part grows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jitzlv",
+      "kind": "process",
+      "front": "How do you handle $\\lim_{x\\to 0^+}x\\ln x$ before using L'Hospital's rule?",
+      "back": "Rewrite it as $\\frac{\\ln x}{1/x}$, which has an infinity-over-infinity form. Then check the conditions and differentiate the top and bottom separately.",
+      "hint": "Move one factor into the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dxw6a5",
+      "kind": "mistake",
+      "front": "Can you differentiate the two terms of a product or difference separately and call that L'Hospital's rule?",
+      "back": "No. **Do not** differentiate product or difference terms separately. First rewrite the expression as an eligible quotient, then apply the rule.",
+      "hint": "The rule works on quotients only.",
+      "sectionId": "s4"
+    }
+  ]
+}

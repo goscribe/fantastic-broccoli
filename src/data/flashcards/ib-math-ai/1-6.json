@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Approximation and error",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:20.032Z",
+  "cards": [
+    {
+      "id": "0xgs51r",
+      "kind": "concept",
+      "front": "Why does a rounded measurement not give one exact true value?",
+      "back": "A rounded value hides a **range** of true values. A length of 12 cm to the nearest centimetre means the true length lies between 11.5 cm and 12.5 cm, so it is an interval, not one number.",
+      "hint": "Think about what the rounding threw away.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1riuuy5",
+      "kind": "concept",
+      "front": "How do you find the bounds of a sum, difference, product or quotient of two rounded measurements?",
+      "back": "Use **matching ends**: lower with lower and upper with upper for $a+b$ and $a\\times b$. For $a-b$ the lower bound is $a_L-b_U$, and for $\\frac{a}{b}$ the lower bound is $\\frac{a_L}{b_U}$.",
+      "hint": "Subtraction and division flip one pair of ends.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ki4nqm",
+      "kind": "formula",
+      "front": "What is the formula for percentage error, and what does each symbol mean?",
+      "back": "$\\varepsilon=\\left|\\frac{v_A-v_E}{v_E}\\right|\\times100\\%$, where $v_A$ is the approximate value and $v_E$ is the exact value. The result is a **percentage** and is never negative.",
+      "hint": "Which value is the reference?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pdr0va",
+      "kind": "term",
+      "front": "What is the difference between a decimal place and a significant figure?",
+      "back": "A **decimal place** counts digits after the decimal point. A **significant figure** counts digits from the first non-zero digit onwards.",
+      "hint": "Where does each count start?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09osino",
+      "kind": "process",
+      "front": "What are the steps to round a number to a chosen accuracy?",
+      "back": "Find the **last digit you keep** and look at the digit just after it. If that digit is 5 or more, add 1 to the last kept digit; otherwise leave the last kept digit unchanged.",
+      "hint": "Only the next digit decides it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o1cxt8",
+      "kind": "example",
+      "front": "Round 0.0072648 to 3 significant figures.",
+      "back": "$0.00726$. The first non-zero digit is 7, so keep 7, 2 and 6. The next digit is 4, so the 6 stays.",
+      "hint": "Count from the first non-zero digit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dk1ws0",
+      "kind": "concept",
+      "front": "Which zeros in a number count as significant figures?",
+      "back": "Zeros **between** non-zero digits count, and zeros after the decimal point that follow a non-zero digit count. Zeros before the first non-zero digit do not. So 0.04050 has 4 significant figures.",
+      "hint": "Check where each zero sits relative to the other digits.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1amhhc3",
+      "kind": "term",
+      "front": "What is a lower bound of a rounded measurement?",
+      "back": "The **lower bound** is the least value that would round to the stated figure. It equals the stated value minus half the unit of accuracy.",
+      "hint": "Which direction is it from the stated value?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0x8pp0c",
+      "kind": "mistake",
+      "front": "Why is the range 11 to 13 wrong for 12 cm measured to the nearest centimetre?",
+      "back": "It moves a **whole unit** each way. Only half a unit is needed each way, so the correct bounds are 11.5 and 12.5, written $11.5\\le l<12.5$.",
+      "hint": "How big is the rounding interval?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ebwlzy",
+      "kind": "example",
+      "front": "A rectangle measures 8 cm by 5 cm, each to the nearest centimetre. What are the bounds of its area?",
+      "back": "Lower bound $33.75\\,\\mathrm{cm^2}$ and upper bound $46.75\\,\\mathrm{cm^2}$. Use sides from 7.5 to 8.5 and 4.5 to 5.5, multiplying the lower ends together and the upper ends together.",
+      "hint": "Find the bounds of each side first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jqhjut",
+      "kind": "concept",
+      "front": "Why should you keep full values in working and round only at the final step?",
+      "back": "Each early **rounding adds error**, and these small errors can build up. Keeping full values gives a more accurate final answer.",
+      "hint": "Think about what happens at every rounding.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rvzw2k",
+      "kind": "example",
+      "front": "A rod is measured as 24.6 cm, but its exact length is 25.0 cm. What is the percentage error?",
+      "back": "$1.6\\%$. Substitute into the formula: $\\left|\\frac{24.6-25.0}{25.0}\\right|\\times100\\%=1.6\\%$.",
+      "hint": "Divide by the exact value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00294jp",
+      "kind": "mistake",
+      "front": "Why is dividing by the approximate value wrong when finding percentage error?",
+      "back": "Percentage error is measured **against the exact value**, so $v_E$ must go on the bottom. Dividing by $v_A$ gives a different, incorrect percentage.",
+      "hint": "Which value is the reference?",
+      "sectionId": "s5"
+    }
+  ]
+}

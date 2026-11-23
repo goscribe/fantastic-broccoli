@@ -173,11 +173,11 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
               : "border-border bg-white text-muted-foreground hover:bg-muted dark:bg-card",
         )}
       >
-        {/* The flame is the lively bit: orange once there is a streak, brighter and filled when today counts. */}
+        {/* The flame is always orange in the new UI; filled once there is a streak, brighter when today counts. */}
         <Flame
           className={cn(
             variant === "new" ? "size-[19px]" : "size-3.5",
-            variant === "new" ? (lit || days > 0 ? "text-[var(--flame)]" : "text-faint") : lit ? "text-[#f97316]" : "text-faint",
+            variant === "new" ? "text-[var(--flame)]" : lit ? "text-[#f97316]" : "text-faint",
             variant === "new" && lit && "life-pop",
           )}
           fill={lit || (variant === "new" && days > 0) ? "currentColor" : "none"}

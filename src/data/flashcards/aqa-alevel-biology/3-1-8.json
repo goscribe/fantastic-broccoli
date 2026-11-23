@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-1-8",
+  "topicCode": "3.1.8",
+  "topicName": "Inorganic ions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:03.640Z",
+  "cards": [
+    {
+      "id": "1ffezfq",
+      "kind": "concept",
+      "front": "Why do inorganic ions have more specific roles than simply keeping a solution's charge balanced?",
+      "back": "Ions can become part of larger molecules, and cells keep **different ion concentrations** inside and outside membranes, so each ion's effect depends on its charge, concentration and location.",
+      "hint": "Think about where the ion sits and whether it is free or bound up in another molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s64wiv",
+      "kind": "process",
+      "front": "How does sodium support glucose uptake into epithelial cells in the small intestine?",
+      "back": "A pump uses ATP to keep sodium more concentrated outside the cell. Sodium then moves back in down its gradient, and a **co-transporter** carries glucose in alongside it.",
+      "hint": "Begin with how the concentration difference is set up, then follow the sodium.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nvkewe",
+      "kind": "term",
+      "front": "What role do iron ions play in haemoglobin?",
+      "back": "Iron ions form part of the **haem groups**, which bind oxygen. Without iron, haemoglobin cannot bind oxygen normally.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16gg9n3",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that iron carries oxygen through the blood on its own?",
+      "back": "Iron does not carry oxygen alone. It forms part of the **haem group** within haemoglobin, and haemoglobin is what binds and transports oxygen in red blood cells.",
+      "hint": "Think about which molecule actually holds the oxygen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02s8sfn",
+      "kind": "term",
+      "front": "Which molecules are built using phosphate ions?",
+      "back": "**Nucleotides** (which form DNA and RNA), **ATP**, and **phospholipids** in cell membranes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sgrtkn",
+      "kind": "mistake",
+      "front": "Why is sodium simply being present in a cell not enough to drive transport or nerve impulses?",
+      "back": "The **concentration difference** is what matters. Processes such as co-transport and nerve impulses depend on sodium moving down a gradient.",
+      "hint": "Compare a sodium-rich area with a sodium-poor area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oi27v6",
+      "kind": "term",
+      "front": "What is co-transport?",
+      "back": "**Co-transport** couples the movement of one substance down its concentration gradient to the movement of another substance.",
+      "hint": "Think of two substances moving together through one transporter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02cs02o",
+      "kind": "concept",
+      "front": "What does sodium entering a neurone during an action potential do?",
+      "back": "Sodium ($\\text{Na}^{+}$) entering changes the electrical potential across the membrane, which helps a nerve impulse travel along the neurone.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qx8eml",
+      "kind": "concept",
+      "front": "What roles do calcium ions play in cells?",
+      "back": "They act as **signals** in cells, are needed for **muscle contraction**, and help trigger neurotransmitter release at synapses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1p9orra",
+      "kind": "term",
+      "front": "What is the role of magnesium ions in chlorophyll?",
+      "back": "Magnesium ions form part of **chlorophyll**, which absorbs light for photosynthesis. They also help some enzymes function.",
+      "hint": "Think about the pigment that captures light in a plant cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1elseua",
+      "kind": "concept",
+      "front": "How do plants use nitrate ions?",
+      "back": "They supply **nitrogen** that plants use to make **amino acids** and **nucleotides**.",
+      "hint": "Think about which biological molecules contain nitrogen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "135b8dg",
+      "kind": "concept",
+      "front": "How do hydrogen ions affect enzyme activity?",
+      "back": "Hydrogen ions affect **pH**, and changes in pH can alter how enzymes work.",
+      "hint": "Consider how enzymes respond to their surroundings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1157tlr",
+      "kind": "concept",
+      "front": "What role do potassium ions play in neurones?",
+      "back": "Potassium ions help establish **electrical differences** across cell membranes, including the membranes of neurones.",
+      "sectionId": "s4"
+    }
+  ]
+}

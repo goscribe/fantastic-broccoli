@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-3-2",
+  "topicCode": "6.3.2",
+  "topicName": "Internal energy and energy transfers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:11.304Z",
+  "cards": [
+    {
+      "id": "1ux6y1z",
+      "kind": "term",
+      "front": "What is internal energy?",
+      "back": "**Internal energy** is the total energy of the particles in a system: their kinetic energy from movement plus energy associated with their positions relative to each other.",
+      "hint": "Think about the particles in a block of metal, not the block as a whole.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i1wzq5",
+      "kind": "formula",
+      "front": "What equation links energy transferred to mass, specific heat capacity and temperature change, and what does each symbol mean?",
+      "back": "$\\Delta E=mc\\Delta\\theta$, where $E$ is energy in $\\text{J}$, $m$ is mass in $\\text{kg}$, $c$ is specific heat capacity in $\\text{J/kg\\,°C}^{-1}$ and $\\Delta\\theta$ is temperature change in $\\text{°C}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k52642",
+      "kind": "concept",
+      "front": "What does a flat section (plateau) on a heating graph show?",
+      "back": "A **change of state** at constant temperature. Energy still enters the substance during the plateau, so its internal energy keeps increasing.",
+      "hint": "Think about where the energy goes, not how fast the particles move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0im5wca",
+      "kind": "term",
+      "front": "What is specific heat capacity?",
+      "back": "**Specific heat capacity** is the energy needed to raise the temperature of one kilogram of a substance by 1 °C, without a change of state.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mgqpud",
+      "kind": "example",
+      "front": "A 2 kg block has a specific heat capacity of 500 J/kg °C⁻¹. Its temperature rises from 10 °C to 30 °C. How much energy is transferred?",
+      "back": "$\\Delta\\theta=30-10=20\\,\\text{°C}$, so $E=2\\times500\\times20=20\\,000\\,\\text{J}$. The energy transferred is **20,000 J**.",
+      "hint": "Work out the temperature change first, then use the formula for energy transfer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10gta8c",
+      "kind": "term",
+      "front": "What is specific latent heat?",
+      "back": "**Specific latent heat** is the energy needed to change the state of one kilogram of a substance. Its temperature does not change. Its unit is $\\text{J/kg}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z8zv40",
+      "kind": "mistake",
+      "front": "Why is it wrong to say internal energy is only the energy of moving particles?",
+      "back": "It also includes the **energy associated with the positions** of the particles relative to each other. Kinetic energy is only part of internal energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ach5i2",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a flat section on a graph means no energy is being transferred?",
+      "back": "Energy is still transferred during a flat section. It changes the particles' positions, so the **change of state** happens while energy keeps entering or leaving.",
+      "hint": "Ask what the energy is doing during a change of state.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "004msug",
+      "kind": "concept",
+      "front": "Why does the temperature stay constant while a substance melts?",
+      "back": "The energy transferred changes the **positions of the particles** relative to each other, rather than increasing their average kinetic energy.",
+      "hint": "Compare what happens to particle movement during heating and during melting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p9uy3e",
+      "kind": "term",
+      "front": "How is temperature change, $\\Delta\\theta$, worked out?",
+      "back": "**Temperature change** is the final temperature minus the initial temperature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16xcqeq",
+      "kind": "term",
+      "front": "What is the specific latent heat of fusion?",
+      "back": "The **specific latent heat of fusion** is the energy needed to melt one kilogram of a solid into a liquid without changing its temperature.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07h1s97",
+      "kind": "term",
+      "front": "What does a rising line on a heating graph show?",
+      "back": "A **rising line** shows increasing temperature, because the particles gain kinetic energy on average as energy is transferred in.",
+      "hint": "Compare this with the flat sections on the same graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lo17o5",
+      "kind": "mistake",
+      "front": "Which quantity should you use when temperature changes, specific heat capacity or specific latent heat?",
+      "back": "Use **specific heat capacity** when temperature changes without a change of state. Specific latent heat is for a change of state at constant temperature.",
+      "hint": "Ask whether the substance changes state.",
+      "sectionId": "s3"
+    }
+  ]
+}

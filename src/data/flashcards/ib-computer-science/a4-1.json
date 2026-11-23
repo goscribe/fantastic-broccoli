@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a4-1",
+  "topicCode": "A4.1",
+  "topicName": "Machine learning fundamentals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:04.449Z",
+  "cards": [
+    {
+      "id": "1tm7u60",
+      "kind": "concept",
+      "front": "How does machine learning differ from traditional programming?",
+      "back": "In traditional programming a person writes the **rules**, and the computer applies them to data. In machine learning the computer receives data and known answers and produces the rules itself.",
+      "hint": "Who writes the rules in each case?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "080v1u9",
+      "kind": "concept",
+      "front": "Why is some data kept back as testing data?",
+      "back": "So the model is judged on cases it never saw during training, giving an **honest** estimate of how it will perform on new data.",
+      "hint": "Think about a model that simply memorises its examples.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0is8zi9",
+      "kind": "concept",
+      "front": "Why does the quality of training data matter as well as the quantity?",
+      "back": "A model can only reflect patterns its data contains. Too few examples, or examples that miss common cases, give a **weak** model.",
+      "hint": "Could a very large dataset still miss common cases?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1weqi0c",
+      "kind": "term",
+      "front": "What is a model in machine learning?",
+      "back": "A **model** is the set of rules or patterns produced by training, which is then used to make predictions on new data.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01bj315",
+      "kind": "term",
+      "front": "What is the difference between a feature and a label?",
+      "back": "A **feature** is a measurable input property of an example. A **label** is the known correct output attached to a training example.",
+      "hint": "One goes in as input, the other is the known answer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xdmko5",
+      "kind": "term",
+      "front": "What is overfitting?",
+      "back": "**Overfitting** is when a model fits its training data so closely that it performs worse on new data.",
+      "hint": "Good on training data, poor on testing data.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1457znb",
+      "kind": "mistake",
+      "front": "Does a machine learning model keep rewriting its own rules while it is being used?",
+      "back": "No. A model is usually **fixed** after training and then applied to new data. It does not normally rewrite itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x00ra9",
+      "kind": "concept",
+      "front": "Name the five common kinds of task that machine learning solves.",
+      "back": "**Sorting** items into categories, **predicting** a number, **grouping** similar items, **recommending** items, and **spotting** unusual cases.",
+      "hint": "Think of spam filters and house prices.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16hyt8i",
+      "kind": "example",
+      "front": "Which kind of task is image recognition, such as labelling a picture as cat or dog?",
+      "back": "**Sorting items into categories**. Each picture is assigned to a category.",
+      "hint": "Consider what the computer does with each picture.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0181dk1",
+      "kind": "process",
+      "front": "What are the steps of a machine learning workflow, in order?",
+      "back": "Define the problem and success measure, collect and prepare data, split into training and testing sets, train, evaluate on testing data, then **deploy** and monitor.",
+      "hint": "Start with deciding how success will be measured.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yjflhp",
+      "kind": "example",
+      "front": "A model scores 99% on its training data but only 60% on its testing data. What does this suggest?",
+      "back": "**Overfitting**. The model has learned quirks of its training examples rather than the general pattern.",
+      "hint": "Compare the two scores.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b2dcvc",
+      "kind": "process",
+      "front": "What should you do if the evaluation of a model is poor?",
+      "back": "You might **collect more data** or **change the model**, then repeat the earlier steps of the workflow.",
+      "hint": "Which steps come before evaluation?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rtgdbe",
+      "kind": "concept",
+      "front": "Why does monitoring continue after a model has been deployed?",
+      "back": "Accuracy can **fall** as real-world data changes, so the model must keep being checked on real data.",
+      "hint": "Think about what happens when the world changes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pbm9st",
+      "kind": "term",
+      "front": "What is deployment?",
+      "back": "**Deployment** is the stage at which a trained model is put into real use to make predictions on new data.",
+      "sectionId": "s5"
+    }
+  ]
+}

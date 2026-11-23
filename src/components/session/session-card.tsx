@@ -66,7 +66,7 @@ export function SessionCard({
                 {t("session.generationFailed")}
               </span>
             </div>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-caption text-muted-foreground mt-1">
               {t("session.cardFailedBody")}
             </p>
             <div className="flex items-center gap-2 mt-3">
@@ -127,7 +127,7 @@ export function SessionCard({
           <div className="flex-1 min-w-0">
             <h4 className="font-semibold text-sm truncate"><MathText text={session.title} /></h4>
             {session.description && (
-              <p className="text-xs text-muted-foreground mt-1 line-clamp-2">
+              <p className="text-caption text-muted-foreground mt-1 line-clamp-2">
                 <MathText text={session.description} />
               </p>
             )}
@@ -140,7 +140,7 @@ export function SessionCard({
         <Badge variant={depthVariants[session.depth]}>
           {t(depthLabels[session.depth])}
         </Badge>
-        <span className="flex items-center gap-1 text-xs text-muted-foreground">
+        <span className="flex items-center gap-1 text-caption text-muted-foreground">
           <Clock className="h-3 w-3" />
           {formatDuration(session.durationMinutes)}
         </span>
@@ -148,13 +148,13 @@ export function SessionCard({
           <Badge variant="muted">{session.examBoard}</Badge>
         )}
         {session.generating && (
-          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-caption text-muted-foreground">
             <span className="h-3 w-3 rounded-full border-[1.5px] border-accent border-t-transparent animate-spin" />
             {t("session.generatingPlan")}
           </span>
         )}
         {totalActivities > 0 && (
-          <span className="text-xs text-muted-foreground ml-auto">
+          <span className="text-caption text-muted-foreground ml-auto">
             {completedActivities}/{totalActivities}{" "}
             {t("session.activitiesCount")}
           </span>
@@ -175,7 +175,7 @@ export function SessionCard({
       )}
 
       {session.comments.length > 0 && (
-        <p className="text-xs text-muted-foreground mt-2 italic line-clamp-1">
+        <p className="text-caption text-muted-foreground mt-2 italic line-clamp-1">
           &ldquo;{session.comments[0].content}&rdquo;
         </p>
       )}
@@ -189,10 +189,10 @@ export function SessionCard({
 
       {session.endDate && (
         <div className="flex justify-between mt-2">
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-caption text-muted-foreground">
             {t("session.started")} {formatRelativeDate(session.startDate)}
           </span>
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-caption text-muted-foreground">
             {t("session.due")} {formatRelativeDate(session.endDate)}
           </span>
         </div>

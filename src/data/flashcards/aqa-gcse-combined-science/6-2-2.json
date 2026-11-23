@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-2-2",
+  "topicCode": "6.2.2",
+  "topicName": "Series and parallel circuits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:09.360Z",
+  "cards": [
+    {
+      "id": "00z9z40",
+      "kind": "concept",
+      "front": "What is the key difference between a series circuit and a parallel circuit?",
+      "back": "In a **series** circuit, components share one single path. In a **parallel** circuit, the path divides into branches and joins again, giving current separate routes.",
+      "hint": "Count how many routes current can take around the circuit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07j835l",
+      "kind": "concept",
+      "front": "What happens to current at a junction in a parallel circuit?",
+      "back": "The **current splits** between the branches. The branch currents add up to give the total current from the supply.",
+      "hint": "Compare this with the single loop of a series circuit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cqvhwo",
+      "kind": "concept",
+      "front": "What happens to total resistance when a new branch is added in parallel?",
+      "back": "Total resistance **falls**. Each new branch gives current another path, so the total is less than the resistance of any single branch.",
+      "hint": "Think about how many paths current has to choose from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09momh1",
+      "kind": "term",
+      "front": "What is current?",
+      "back": "**Current** is the rate of flow of electric charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uzf8vv",
+      "kind": "term",
+      "front": "What is potential difference?",
+      "back": "**Potential difference** is the energy transferred per unit charge between two points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03667xx",
+      "kind": "term",
+      "front": "What is total resistance?",
+      "back": "**Total resistance** is the resistance of the whole circuit as seen by the supply.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jxh2x6",
+      "kind": "formula",
+      "front": "How do you calculate the total resistance of resistors connected in series?",
+      "back": "Add the individual resistances: $R_{\\mathrm{total}}=R_1+R_2+\\dots$, where each $R$ is in **ohms** ($\\Omega$).",
+      "hint": "Think about how resistance behaves when components share one path.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bm4nbn",
+      "kind": "example",
+      "front": "Two resistors of 2 Ω and 3 Ω are connected in series. What is their total resistance?",
+      "back": "**5 Ω**, because $R_{\\mathrm{total}}=2\\,\\Omega+3\\,\\Omega=5\\,\\Omega$.",
+      "hint": "Which rule applies to resistors in series?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h07lza",
+      "kind": "mistake",
+      "front": "A student says a bulb uses up current, so less flows after it. Why is this wrong?",
+      "back": "Current is **not used up** by a bulb. In series, the same current flows before and after it.",
+      "hint": "Think about what current actually measures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1avxg8a",
+      "kind": "concept",
+      "front": "How is the supply potential difference shared between bulbs in series?",
+      "back": "It is **shared**: the potential differences across the bulbs add up to the supply potential difference.",
+      "hint": "Think about how the supply's energy is divided along one loop.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s49n3q",
+      "kind": "process",
+      "front": "What are the steps to draw two bulbs in parallel with a cell?",
+      "back": "1. Draw the cell with unequal parallel lines, longer line positive. 2. Draw two branches between junctions. 3. Place one bulb on each branch. 4. Join the branches to the cell to make complete paths.",
+      "hint": "Start with the supply symbol.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qsw63o",
+      "kind": "concept",
+      "front": "Why do identical bulbs in series get dimmer when another bulb is added?",
+      "back": "**Total resistance rises**, so the current falls. The supply potential difference is also shared among more bulbs, assuming the supply stays unchanged.",
+      "hint": "Trace what happens to resistance first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p8wlfd",
+      "kind": "concept",
+      "front": "What happens to existing bulbs when an identical bulb is added on a new parallel branch?",
+      "back": "They stay the **same brightness**, because each branch still has the full supply potential difference. More current is drawn from the supply overall.",
+      "hint": "Look at the potential difference across each branch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0flvf6e",
+      "kind": "concept",
+      "front": "What potential difference does each branch of a parallel circuit receive?",
+      "back": "Each branch gets the **full supply potential difference**, as each branch connects across the same two points of the supply.",
+      "hint": "Think about where each branch connects to the cell.",
+      "sectionId": "s2"
+    }
+  ]
+}

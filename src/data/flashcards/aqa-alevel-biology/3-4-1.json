@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-4-1",
+  "topicCode": "3.4.1",
+  "topicName": "DNA, genes and chromosomes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:21.558Z",
+  "cards": [
+    {
+      "id": "1uiflnc",
+      "kind": "concept",
+      "front": "Why does the order of bases in DNA matter?",
+      "back": "The **sequence of the four bases** stores the genetic information. Different sequences carry different information.",
+      "hint": "Think about what differs between two DNA molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o5tlec",
+      "kind": "term",
+      "front": "What is a gene?",
+      "back": "A **gene** is a sequence of DNA bases that codes for a **polypeptide** or a **functional RNA** molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x5femp",
+      "kind": "process",
+      "front": "In what order does DNA become packed into a eukaryotic chromosome?",
+      "back": "DNA wraps around **histone proteins** to form **nucleosomes**. Further folding and coiling make **chromatin**, which makes up the chromosome.",
+      "hint": "Start with what the DNA is wrapped around.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06gn30p",
+      "kind": "term",
+      "front": "What is a nucleotide?",
+      "back": "A **nucleotide** is the repeating unit of DNA. It contains **deoxyribose**, a **phosphate group** and one base.",
+      "hint": "Think about the building blocks of a strand.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rr1yaq",
+      "kind": "concept",
+      "front": "How are nucleotides joined into a DNA strand?",
+      "back": "By **phosphodiester bonds**, which join the sugar of one nucleotide to the phosphate of the next, forming a sugar–phosphate backbone.",
+      "hint": "Think about which parts of neighbouring nucleotides meet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04c3vv6",
+      "kind": "concept",
+      "front": "How are the two strands of a DNA double helix arranged?",
+      "back": "Their **backbones run in opposite directions**, with the bases facing inwards.",
+      "hint": "Look at where the sugar–phosphate parts sit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kldacp",
+      "kind": "concept",
+      "front": "Which bases pair together in DNA?",
+      "back": "**Adenine** pairs with **thymine**, and **cytosine** pairs with **guanine**, held together by hydrogen bonds. This lets each strand act as a template.",
+      "hint": "Count the bases in each pair.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w9z94h",
+      "kind": "concept",
+      "front": "What is the difference between exons and introns?",
+      "back": "**Exons** are sequences retained in mature RNA. **Introns** are removed before the RNA can direct polypeptide production.",
+      "hint": "Think about which parts survive into the mature RNA.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01vlygs",
+      "kind": "mistake",
+      "front": "A student says every gene codes for a protein. What is wrong with this?",
+      "back": "Not every gene codes for a **protein**. Some genes code for **functional RNA**, which has its own function without being translated into a polypeptide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15gq420",
+      "kind": "concept",
+      "front": "What role can some DNA sequences that do not code for products have?",
+      "back": "Some of these sequences help control **when genes are expressed**.",
+      "hint": "Think about switches rather than products.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c4l0pj",
+      "kind": "concept",
+      "front": "Where is the main DNA of a prokaryotic cell located?",
+      "back": "In the **cytoplasm**, usually as a **circular** molecule, because a prokaryotic cell has no nucleus.",
+      "hint": "Compare with where eukaryotic chromosomes are kept.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s3cu7x",
+      "kind": "mistake",
+      "front": "Why is it wrong to call a bacterium's main DNA molecule a plasmid?",
+      "back": "A **plasmid** is a small, circular DNA molecule separate from the **main DNA molecule**. The main DNA is not a plasmid, so the two must be distinguished.",
+      "hint": "Think about what makes a plasmid additional.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cf0eqj",
+      "kind": "mistake",
+      "front": "A student says a chromosome always has two chromatids. What is the mistake?",
+      "back": "A chromosome has **two sister chromatids** only after its DNA is copied and before they separate. An unreplicated chromosome has **one** long DNA molecule.",
+      "hint": "Think about when the DNA is copied during cell division.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gqj6qp",
+      "kind": "term",
+      "front": "What is a locus?",
+      "back": "The **locus** is the particular position a gene occupies on a chromosome.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b1-2",
+  "topicCode": "B1.2",
+  "topicName": "Proteins",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:44.948Z",
+  "cards": [
+    {
+      "id": "0n05dh6",
+      "kind": "concept",
+      "front": "What determines how a polypeptide folds and what the protein can do?",
+      "back": "The **amino acid sequence** (primary structure) determines folding, which positions groups needed for binding or strength. Changing one amino acid can alter folding or function, though some changes have little effect.",
+      "hint": "Think about what the order of amino acids controls.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nqr5fi",
+      "kind": "process",
+      "front": "Describe how two amino acids join to form a peptide bond.",
+      "back": "The **carboxyl group** of one amino acid reacts with the amino group of another in a condensation reaction. A molecule of water is released and a peptide bond forms.",
+      "hint": "Which two groups react with each other?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rxmyfm",
+      "kind": "concept",
+      "front": "How do enzymes speed up reactions?",
+      "back": "**Enzymes** lower the activation energy a reaction needs, so it proceeds faster. They are not used up and do not change the overall energy change or equilibrium position.",
+      "hint": "Think about the energy barrier, not the energy released.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w8sqv3",
+      "kind": "term",
+      "front": "What is secondary structure?",
+      "back": "**Regular local folding** of the polypeptide backbone, such as an alpha helix or beta pleated sheet, stabilised by hydrogen bonds between backbone groups.",
+      "hint": "It is local, not the whole protein.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rzz109",
+      "kind": "term",
+      "front": "What is tertiary structure?",
+      "back": "The **overall three-dimensional shape** of one polypeptide. It is maintained by hydrogen bonds, ionic attractions, hydrophobic interactions and, in some proteins, disulfide bonds.",
+      "hint": "Think of one polypeptide folding as a whole.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d10sb4",
+      "kind": "term",
+      "front": "What is quaternary structure, and does every protein have it?",
+      "back": "The **arrangement of two or more polypeptide subunits** within one protein. Not every protein has this level; haemoglobin, with four subunits, is an example that does.",
+      "hint": "Count the polypeptide chains.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ki7n1w",
+      "kind": "mistake",
+      "front": "A student says an alpha helix is a separate polypeptide chain. What is wrong with this?",
+      "back": "An alpha helix is **a folded region within one polypeptide**, not a separate chain. It is a local shape in the backbone of a single chain.",
+      "hint": "Where does the helix sit in the molecule?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x0l4s7",
+      "kind": "mistake",
+      "front": "A student says enzymes increase the amount of product possible at equilibrium. What is wrong?",
+      "back": "Enzymes increase the **rate** of a reaction, not the amount of product possible at equilibrium. Equilibrium position is unchanged.",
+      "hint": "Separate speed from final yield.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09182cj",
+      "kind": "concept",
+      "front": "What does denaturation do to a protein, and which bonds does it usually affect?",
+      "back": "**Denaturation** disrupts the bonds and interactions maintaining shape, often reducing or destroying function. It usually does not break peptide bonds.",
+      "hint": "Compare the bonds holding shape with the backbone bonds.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1prxa1b",
+      "kind": "process",
+      "front": "Outline the steps by which an enzyme catalyses a reaction.",
+      "back": "A **substrate** binds at the **active site**. The enzyme lowers the activation energy so the reaction proceeds. Products leave, and the enzyme is free to act again.",
+      "hint": "Start with what happens when the substrate arrives.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00i0hqu",
+      "kind": "example",
+      "front": "How does the structure of haemoglobin support its function of carrying oxygen?",
+      "back": "Its four polypeptide subunits hold **haem groups** that bind oxygen. Oxygen binding to one subunit influences the others.",
+      "hint": "Name one structural feature and how it helps.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v19f6u",
+      "kind": "example",
+      "front": "How does the structure of collagen suit its role in connective tissue?",
+      "back": "Its polypeptide chains **wind together** into strong fibres. This helps connective tissue resist stretching.",
+      "hint": "Think about how the chains are arranged.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04og6hc",
+      "kind": "concept",
+      "front": "What happens to peptide bonds during digestion?",
+      "back": "**Hydrolysis** breaks peptide bonds by adding water. This is the reverse of the condensation reaction that forms them.",
+      "hint": "Compare with the reaction that releases water.",
+      "sectionId": "s1"
+    }
+  ]
+}

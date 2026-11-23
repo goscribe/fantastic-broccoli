@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Lewis diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:14.037Z",
+  "cards": [
+    {
+      "id": "00kdqhf",
+      "kind": "concept",
+      "front": "What does one line stand for in a Lewis diagram?",
+      "back": "A **single bond**, which is one shared pair of electrons between two atoms. Each bond line counts as two electrons toward each bonded atom's outer shell.",
+      "hint": "Think about how many electrons the line holds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jb2cjy",
+      "kind": "process",
+      "front": "What are the first steps when drawing a Lewis diagram?",
+      "back": "Total the **valence electrons** from every atom, adjusting for charge. Place the least electronegative suitable atom in the center (never hydrogen), then connect the outer atoms with single bonds.",
+      "hint": "Count before you build the skeleton.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0109vc3",
+      "kind": "concept",
+      "front": "Why does the octet rule help predict how many bonds an atom forms?",
+      "back": "Many atoms reach eight outer-shell electrons through bonds and lone pairs. So carbon usually forms four bonds, nitrogen three, oxygen two, and halogens one.",
+      "hint": "Count the bonds needed to fill the outer shell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "007mjz3",
+      "kind": "example",
+      "front": "In $\\mathrm{NH_3}$, how many lone pairs are left on nitrogen after three N–H bonds?",
+      "back": "One lone pair. There are 8 valence electrons in total ($5+3$), three N–H bonds use 6, and the remaining $8-6=2$ electrons form one lone pair on nitrogen.",
+      "hint": "Subtract the electrons used in bonds from the total.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1td5ufb",
+      "kind": "term",
+      "front": "What is a lone pair?",
+      "back": "A **lone pair** is a pair of valence electrons that is not used in a bond. Lone pairs are drawn as dots on an atom.",
+      "hint": "Think of electrons that stay on one atom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yony9z",
+      "kind": "mistake",
+      "front": "How many electrons does a bond line represent when you check an atom's outer shell?",
+      "back": "Two, not one. A bond line is one shared **pair** of electrons, so count it toward the outer shell of each bonded atom.",
+      "hint": "Consider what a shared pair means for each atom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sfu5py",
+      "kind": "example",
+      "front": "How many bonds and lone pairs does oxygen have in water?",
+      "back": "Two O–H bonds and two **lone pairs** on oxygen. This matches oxygen's usual two bonds in neutral structures.",
+      "hint": "Oxygen usually forms two bonds.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f1feil",
+      "kind": "mistake",
+      "front": "Is a correct total electron count enough to confirm a Lewis diagram?",
+      "back": "No. You must also **check each atom's shell**, because a correct total alone does not guarantee a correct diagram.",
+      "hint": "The total is only one of two checks.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l8jq7w",
+      "kind": "example",
+      "front": "How many electrons surround boron in $\\mathrm{BF_3}$, and is that acceptable?",
+      "back": "Six electrons, from three single bonds. This is an **incomplete octet**, which is an allowed exception to the octet rule.",
+      "hint": "Count the bonds and their electrons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0paofc3",
+      "kind": "term",
+      "front": "What is an expanded octet?",
+      "back": "An **expanded octet** has more than eight electrons counted around an atom in a Lewis diagram. Some period three or later atoms can have one, such as sulfur in $\\mathrm{SF_6}$ with twelve.",
+      "hint": "Think about atoms in period three or later.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mp1g2o",
+      "kind": "mistake",
+      "front": "Should you add extra bonds just so every atom gets eight electrons?",
+      "back": "No. The octet rule is a useful pattern, not a requirement, so do not force extra bonds. Check the electron total before changing an exception.",
+      "hint": "Is the octet rule a law or a pattern?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iltzfu",
+      "kind": "process",
+      "front": "How do you draw a Lewis diagram for a charged ion?",
+      "back": "Add one electron for each unit of negative charge or subtract one for each unit of positive charge. Enclose the ion in **brackets** and write its charge outside.",
+      "hint": "Charge changes the electron total and the notation.",
+      "sectionId": "s2"
+    }
+  ]
+}

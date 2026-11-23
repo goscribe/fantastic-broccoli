@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-8",
+  "topicCode": "8.8",
+  "topicName": "Regions of the brain",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:17.785Z",
+  "cards": [
+    {
+      "id": "07jdom2",
+      "kind": "concept",
+      "front": "What main jobs does the cerebrum handle?",
+      "back": "**Conscious thought**, memory, language and voluntary movement. Each hemisphere mainly serves the opposite side of the body.",
+      "hint": "Think about which region is involved in decisions you are aware of making.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w20ff5",
+      "kind": "concept",
+      "front": "What does the cerebellum do to a movement once the cerebrum has started it?",
+      "back": "It compares the movement with information from muscles, joints and inner-ear balance organs, then refines it, giving smooth, accurate movement and balance.",
+      "hint": "Think about what information the cerebellum receives from the body.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01a4gvr",
+      "kind": "process",
+      "front": "In what order do the brain regions work when a person sees and catches a ball?",
+      "back": "Eyes send impulses to the visual area; association areas interpret position and speed; a motor area sends impulses to arm muscles; the cerebellum adjusts timing and balance; the medulla raises heart and breathing rates.",
+      "hint": "Start with the sense organ that detects the ball.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16sm43k",
+      "kind": "term",
+      "front": "What is the cerebral cortex?",
+      "back": "The **thin, folded outer layer** of the cerebrum, where most conscious processing takes place.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0upu82l",
+      "kind": "term",
+      "front": "Which region, where the brain joins the spinal cord, controls heart rate and breathing rate?",
+      "back": "The **medulla oblongata**, which contains centres for autonomic control of these rates.",
+      "hint": "Think about where the brain meets the spinal cord.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c4hxzn",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the cerebellum starts voluntary movement?",
+      "back": "The cerebrum decides to move and sends impulses through its motor area; the cerebellum only refines the movement once it is under way.",
+      "hint": "Consider which region is involved in conscious decisions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rpa8to",
+      "kind": "term",
+      "front": "What is a sensory area of the cerebral cortex?",
+      "back": "A **region of the cortex that receives and processes impulses** from sensory receptors.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a8uwy3",
+      "kind": "concept",
+      "front": "What role do association areas of the cortex play?",
+      "back": "They **link sensory and motor areas**, combining information for memory, language and decisions.",
+      "hint": "Think about what sits between input areas and output areas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1oto8ny",
+      "kind": "concept",
+      "front": "Why is the cerebral cortex folded?",
+      "back": "Folding gives a **large surface area** inside the limited space of the skull.",
+      "hint": "Think about fitting a large sheet into a small box.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xktnb6",
+      "kind": "term",
+      "front": "Which small region beneath the cerebrum monitors blood concentration and body temperature?",
+      "back": "The **hypothalamus**, which also controls the pituitary gland.",
+      "hint": "Think about the region that links the nervous and hormonal systems.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gbppcp",
+      "kind": "example",
+      "front": "What happens when blood becomes too concentrated after sweating?",
+      "back": "The hypothalamus detects it and the **pituitary gland releases antidiuretic hormone**, which acts on the kidneys so less water is lost.",
+      "hint": "Think about which organ the hormone acts on to save water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pd46cs",
+      "kind": "term",
+      "front": "Which small gland attached to the hypothalamus releases hormones?",
+      "back": "The **pituitary gland**, which releases hormones that control other glands and water balance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cmht63",
+      "kind": "term",
+      "front": "What is a hormone?",
+      "back": "A **chemical messenger** released into the blood that affects cells with suitable receptors.",
+      "hint": "Think about how the message travels around the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1eiwkwc",
+      "kind": "mistake",
+      "front": "Why would 'controls the body' earn no marks in an exam answer?",
+      "back": "It names no region and no specific function. State the **named region** and what it specifically does.",
+      "hint": "Think about what examiners want to see named.",
+      "sectionId": "s5"
+    }
+  ]
+}

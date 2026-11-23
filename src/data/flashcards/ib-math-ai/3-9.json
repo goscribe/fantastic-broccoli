@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-9",
+  "topicCode": "3.9",
+  "topicName": "Matrix transformations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:40.116Z",
+  "cards": [
+    {
+      "id": "13ckue9",
+      "kind": "concept",
+      "front": "What does multiplying a point's column vector by a transformation matrix give you?",
+      "back": "The **image** of the point. $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}\\begin{pmatrix}x\\\\y\\end{pmatrix}$ gives the image, and the **origin** always stays fixed.",
+      "hint": "Think about where the point (0,0) ends up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1shvmlm",
+      "kind": "process",
+      "front": "How do you find the $2\\times2$ matrix for a transformation?",
+      "back": "Find the images of $(1,0)$ and $(0,1)$ and write them as the **columns** of the matrix. These two images define the whole transformation.",
+      "hint": "Multiplying by (1,0) picks out which column?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b4tvpy",
+      "kind": "formula",
+      "front": "What is the determinant of $\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$, and what does it tell you?",
+      "back": "$\\det = ad-bc$. Its absolute value is the **area scale factor**. A negative value means the shape is flipped over.",
+      "hint": "Multiply the diagonals, then subtract.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12kxpj4",
+      "kind": "term",
+      "front": "What is a transformation?",
+      "back": "A **transformation** is a rule that gives every point of the plane exactly one image point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qrnzua",
+      "kind": "formula",
+      "front": "Which matrix rotates points by $\\theta$ anticlockwise about the origin?",
+      "back": "$\\begin{pmatrix}\\cos\\theta&-\\sin\\theta\\\\\\sin\\theta&\\cos\\theta\\end{pmatrix}$. Its first column is $(\\cos\\theta,\\sin\\theta)$, the image of $(1,0)$.",
+      "hint": "A positive angle is anticlockwise.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03bkqks",
+      "kind": "concept",
+      "front": "What is the difference between a stretch and an enlargement?",
+      "back": "A **stretch** changes distances in one direction only. An **enlargement** changes distances in every direction by the same scale factor.",
+      "hint": "Ask whether one direction or all directions change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bnu1hr",
+      "kind": "process",
+      "front": "If transformation A is applied first and then B, what is the single matrix, and how do you read the product?",
+      "back": "It is the product **BA**. Read the product from right to left, because the first transformation meets the point first.",
+      "hint": "Which matrix sits on the right?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03xpz18",
+      "kind": "mistake",
+      "front": "Is $\\mathbf{AB}$ the same transformation as $\\mathbf{BA}$?",
+      "back": "No. **Matrix multiplication is not commutative**, so swapping the order usually gives a different transformation.",
+      "hint": "Try a reflection followed by a rotation, then reverse them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1052a4b",
+      "kind": "example",
+      "front": "A point is reflected in the $x$-axis, then rotated $90^{\\circ}$ anticlockwise about the origin. What single matrix represents this?",
+      "back": "$\\begin{pmatrix}0&1\\\\1&0\\end{pmatrix}$, which is a reflection in $y=x$. It is $\\mathbf{BA}$, with the rotation $\\mathbf{B}$ on the left.",
+      "hint": "The reflection happens first, so it goes on the right.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0663idu",
+      "kind": "example",
+      "front": "A shape of area $4\\,\\mathrm{cm^2}$ is transformed by $\\begin{pmatrix}3&1\\\\2&4\\end{pmatrix}$. What is the area of the image?",
+      "back": "**40 cm²**. The determinant is $3\\times4-1\\times2=10$, so the area scale factor is 10.",
+      "hint": "Find the determinant first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12sbc4u",
+      "kind": "concept",
+      "front": "What happens to the determinants when two transformations are combined?",
+      "back": "They **multiply**. The determinant of the composite matrix equals the product of the individual determinants.",
+      "hint": "Think about how the area factors combine.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19k7yez",
+      "kind": "concept",
+      "front": "What does a determinant of 0 tell you about a transformation?",
+      "back": "The shape is **squashed onto a line**, so the image has zero area.",
+      "hint": "What area does a flat line have?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gei2hj",
+      "kind": "term",
+      "front": "What is a composite transformation?",
+      "back": "A **composite transformation** is the single transformation that is equivalent to applying two or more transformations in sequence.",
+      "sectionId": "s4"
+    }
+  ]
+}

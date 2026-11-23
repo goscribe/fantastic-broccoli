@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-9",
+  "topicCode": "3.9",
+  "topicName": "Reciprocal and inverse trig functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:29.367Z",
+  "cards": [
+    {
+      "id": "12vz0f8",
+      "kind": "concept",
+      "front": "What are cosecant, secant and cotangent, and how is each defined in terms of sine, cosine and tangent?",
+      "back": "**Cosecant** is $\\csc x=\\frac{1}{\\sin x}$, **secant** is $\\sec x=\\frac{1}{\\cos x}$, and **cotangent** is $\\cot x=\\frac{\\cos x}{\\sin x}$, which equals $\\frac{1}{\\tan x}$ wherever tangent is defined. Each one is a reciprocal partner.",
+      "hint": "Each new function flips a ratio you already know.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0no5yjn",
+      "kind": "concept",
+      "front": "Why does $\\csc x$ have gaps in its domain, and where do those gaps occur?",
+      "back": "**Division by zero** is impossible, so $\\csc x$ and $\\cot x$ are undefined where $\\sin x=0$, at $x=n\\pi$. Secant is undefined where $\\cos x=0$, at $x=\\frac{\\pi}{2}+n\\pi$.",
+      "hint": "Which ratio sits in the denominator?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mzgawt",
+      "kind": "concept",
+      "front": "What range of outputs can cosecant and secant take, and why can't they take values like 0.5?",
+      "back": "Their outputs satisfy **$y\\le-1$ or $y\\ge1$**. Sine and cosine lie between −1 and 1, so their reciprocals have size at least 1.",
+      "hint": "Think about the size of 1 divided by a number between −1 and 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11r8w8p",
+      "kind": "term",
+      "front": "What is a vertical asymptote?",
+      "back": "A **vertical asymptote** is a line $x=a$ that a graph approaches without limit as $x$ approaches $a$. The curve gets arbitrarily close but never touches it.",
+      "hint": "Think of the lines at the gaps in $\\csc x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y80aob",
+      "kind": "concept",
+      "front": "How does the graph of cotangent differ from the graph of tangent?",
+      "back": "Cotangent **falls** from left to right on each branch, while tangent rises. Cotangent repeats every $\\pi$ and takes every real value.",
+      "hint": "Compare the direction of each branch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rkzmlz",
+      "kind": "example",
+      "front": "What is $\\cot\\frac{\\pi}{4}$, a useful check point when sketching cotangent?",
+      "back": "$\\cot\\frac{\\pi}{4}=1$. Plot this point to check your cotangent curve.",
+      "hint": "Use $\\cot x=\\frac{\\cos x}{\\sin x}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qwih0b",
+      "kind": "term",
+      "front": "What is an inverse function, and what is its principal value?",
+      "back": "An **inverse function** $f^{-1}$ reverses $f$, so $f^{-1}(f(x))=x$. The **principal value** is the single angle in the restricted range that an inverse trig function returns.",
+      "hint": "Think about which angle the calculator gives.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yg06jd",
+      "kind": "concept",
+      "front": "Why must sine, cosine and tangent be restricted before an inverse can be taken?",
+      "back": "They **repeat**, so many angles share one ratio. Restricting each to one interval where it never repeats gives an inverse that returns a single angle.",
+      "hint": "How many angles have sine 0.5?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jj7x8d",
+      "kind": "formula",
+      "front": "What are the domains and ranges of $\\arcsin x$, $\\arccos x$ and $\\arctan x$?",
+      "back": "$\\arcsin x$: domain $-1\\le x\\le1$, range $-\\frac{\\pi}{2}\\le y\\le\\frac{\\pi}{2}$. $\\arccos x$: domain $-1\\le x\\le1$, range $0\\le y\\le\\pi$. $\\arctan x$: all real $x$, range $-\\frac{\\pi}{2}<y<\\frac{\\pi}{2}$.",
+      "hint": "Arcsin and arccos share the same domain.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lr7rzk",
+      "kind": "mistake",
+      "front": "A student says $\\sin^{-1}x$ means $\\frac{1}{\\sin x}$. What is wrong?",
+      "back": "**Wrong notation**. $\\sin^{-1}x$ is the inverse function arcsin. The reciprocal of sine is $\\csc x=\\frac{1}{\\sin x}$.",
+      "hint": "Compare the notation with the definition of cosecant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00ffdmv",
+      "kind": "mistake",
+      "front": "A student claims $\\arcsin(\\sin x)=x$ for every angle $x$. What is wrong?",
+      "back": "It holds only for $-\\frac{\\pi}{2}\\le x\\le\\frac{\\pi}{2}$. For example, $\\sin\\frac{5\\pi}{6}=\\frac{1}{2}$, but $\\arcsin\\frac{1}{2}=\\frac{\\pi}{6}$.",
+      "hint": "Arcsin returns only the principal value.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ck3z42",
+      "kind": "process",
+      "front": "What are the steps to find an angle from a reciprocal ratio such as $\\sec\\theta=2.5$?",
+      "back": "1) Rewrite the reciprocal as a sine, cosine or tangent, so $\\cos\\theta=\\frac{1}{2.5}=0.4$. 2) Apply the inverse, $\\theta=\\arccos(0.4)$. 3) Use radian mode unless degrees are asked for.",
+      "hint": "Start by writing secant as $\\frac{1}{\\cos\\theta}$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0f8bg3y",
+      "kind": "example",
+      "front": "If $\\theta$ is acute and $\\sec\\theta=2.5$, find $\\theta$ in radians to 3 significant figures.",
+      "back": "$\\theta=\\arccos(0.4)\\approx1.16$ radians.",
+      "hint": "Rewrite $\\sec\\theta$ as $\\frac{1}{\\cos\\theta}$ first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0le5urh",
+      "kind": "formula",
+      "front": "Which identity follows from dividing $\\sin^2x+\\cos^2x=1$ by $\\cos^2x$?",
+      "back": "$\\tan^2x+1=\\sec^2x$. Dividing by $\\sin^2x$ instead gives $1+\\cot^2x=\\csc^2x$. Both hold wherever every function in them is defined.",
+      "hint": "Divide every term by one squared function.",
+      "sectionId": "s6"
+    }
+  ]
+}

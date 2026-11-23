@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-4",
+  "topicCode": "1.4",
+  "topicName": "Estimating limits from tables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:44.708Z",
+  "cards": [
+    {
+      "id": "1fiwf3g",
+      "kind": "concept",
+      "front": "What does a limit describe, and how can a table help estimate it?",
+      "back": "A **limit** is the value a function approaches as its input approaches a given number. A table estimates it by using inputs close to that number.",
+      "hint": "Think about inputs near the target, not the target itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0eruujz",
+      "kind": "concept",
+      "front": "When does a table suggest that a two-sided limit exists at a point?",
+      "back": "When the **left-hand** and **right-hand** estimates approach the same value. This still holds even if the function's value at the target is different.",
+      "hint": "Compare the estimate from each side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00nt7db",
+      "kind": "concept",
+      "front": "What does it mean when the left-side and right-side estimates from a table approach different values?",
+      "back": "The **two-sided limit** does not exist. Each side approaches its own value, so no single limit fits both sides.",
+      "hint": "State both one-sided estimates first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b434i1",
+      "kind": "term",
+      "front": "What is a left-hand limit?",
+      "back": "A **left-hand limit** is what a function approaches as inputs approach the target from below, using only inputs smaller than the target.",
+      "hint": "Only use inputs smaller than the target.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ietup2",
+      "kind": "term",
+      "front": "What is a right-hand limit?",
+      "back": "A **right-hand limit** is what a function approaches as inputs approach the target from above, using only inputs larger than the target.",
+      "hint": "Only use inputs larger than the target.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1klufyr",
+      "kind": "process",
+      "front": "What are the steps for estimating a limit from a table?",
+      "back": "1) Read the inputs on the left, nearest first, toward the target. 2) Read the inputs on the right, nearest first, toward the target. 3) If both sides approach the same number, that number is the estimate.",
+      "hint": "Do each side separately before comparing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0h3de58",
+      "kind": "example",
+      "front": "A table of $f(x)$ gives 3.99 and 3.999 for inputs 1.99 and 1.999, and 4.01 and 4.001 for inputs 2.01 and 2.001. What is the estimated limit as $x$ approaches 2?",
+      "back": "**4**. Outputs from both sides approach 4, so the estimated limit is 4.",
+      "hint": "Check whether each side moves toward the same number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "195kpj8",
+      "kind": "mistake",
+      "front": "A student says the limit at $x=2$ must equal the table value at $x=2$. What is wrong with this?",
+      "back": "The **nearby** outputs decide the limit, not the output at the target. The limit can exist even when the value at the target is different or missing.",
+      "hint": "Which inputs does a limit depend on?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0npj893",
+      "kind": "example",
+      "front": "A table of $g(x)$ near $x=1$ has outputs about 1 from the left and about 3 from the right. Does the two-sided limit exist at $x=1$?",
+      "back": "**No**. The left side approaches 1 and the right side approaches 3, so the two one-sided limits differ.",
+      "hint": "Compare the two one-sided estimates.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1968uzs",
+      "kind": "term",
+      "front": "What is a two-sided limit?",
+      "back": "A finite **two-sided limit** exists when the left-hand and right-hand limits both exist and are equal.",
+      "hint": "Both sides must agree.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k3waba",
+      "kind": "concept",
+      "front": "Why is a table estimate not a proof that a limit exists?",
+      "back": "A table shows only **selected** inputs. It suggests a trend but cannot show that the trend continues for every value arbitrarily close to the target.",
+      "hint": "Think about what a finite list cannot include.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hg7lag",
+      "kind": "mistake",
+      "front": "A student says a missing row at the target means the limit does not exist. Why is this wrong?",
+      "back": "The limit depends on **nearby** behavior. A missing target row says nothing about whether outputs settle near a number.",
+      "hint": "Look at the inputs close to the target.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aiztvg",
+      "kind": "concept",
+      "front": "When might the outputs in a table suggest that no finite limit exists?",
+      "back": "When the outputs **grow without bound** or keep changing direction instead of settling near one number.",
+      "hint": "Consider whether outputs settle or keep moving.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qo878d",
+      "kind": "term",
+      "front": "What is a table estimate?",
+      "back": "A **table estimate** uses nearby input-output pairs to suggest a function's limiting behavior.",
+      "hint": "It is evidence of a trend, not proof.",
+      "sectionId": "s4"
+    }
+  ]
+}

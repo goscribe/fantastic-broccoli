@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-5-1",
+  "topicCode": "4.5.1",
+  "topicName": "Homeostasis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:42.205Z",
+  "cards": [
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "Homeostasis is the **regulation** of internal conditions to keep them within suitable limits, despite changes inside or outside the body.",
+      "hint": "Think about what the body does when a condition moves too far, not whether it stays fixed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "121j125",
+      "kind": "concept",
+      "front": "Why does keeping conditions steady help cells work effectively?",
+      "back": "Cells rely on **enzymes**, which work best under suitable conditions. A large temperature rise can change an enzyme's shape so it stops working, and a fall slows reactions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17dn45v",
+      "kind": "process",
+      "front": "What are the three stages of a response that limits a change in an internal condition?",
+      "back": "A **receptor** detects the change, a **coordination centre** processes the information and sends instructions, and an **effector** produces a response that moves the condition back towards a suitable level.",
+      "hint": "Follow the signal from detection to action.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "009ycbf",
+      "kind": "term",
+      "front": "What is the internal environment?",
+      "back": "The **internal environment** is the set of conditions surrounding cells inside the body.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m6d3h7",
+      "kind": "concept",
+      "front": "Why does homeostasis not aim to keep conditions at one exact value?",
+      "back": "Conditions can vary within limits. The body acts only when they move too far from a suitable level, so it regulates change rather than preventing every small change.",
+      "hint": "Consider what happens to body temperature during exercise.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00uyr5h",
+      "kind": "term",
+      "front": "What is an enzyme?",
+      "back": "An **enzyme** is a **protein** that acts as a biological catalyst, speeding up a reaction without being used up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01jopcr",
+      "kind": "concept",
+      "front": "Why must cells keep their water content within suitable limits?",
+      "back": "Cells need enough water for their reactions to take place. If a cell gains or loses too much water, it cannot function normally.",
+      "hint": "Think about what needs to happen inside cells for reactions to occur.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j3hqv3",
+      "kind": "term",
+      "front": "Which three internal conditions does the body regulate?",
+      "back": "The body regulates **core body temperature**, the **water content** of its fluids, and **blood glucose concentration**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lyx7m9",
+      "kind": "mistake",
+      "front": "Why is it wrong to think homeostasis keeps the whole body unchanged?",
+      "back": "Homeostasis means regulating **particular** internal conditions, such as temperature, water and glucose. It does not stop everything in the body from changing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yu37vb",
+      "kind": "term",
+      "front": "What is a receptor?",
+      "back": "A **receptor** is a cell or group of cells that **detects a stimulus**, a change in the internal or external environment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "An **effector** is a **muscle** or **gland** that produces a response.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xo357c",
+      "kind": "term",
+      "front": "What is negative feedback?",
+      "back": "**Negative feedback** is a control process in which a response **reduces the change** that triggered it, limiting the change rather than increasing it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17x1dj6",
+      "kind": "example",
+      "front": "How does negative feedback respond when body temperature rises?",
+      "back": "Responses increase heat loss. As temperature returns towards a suitable level, the need for that response falls.",
+      "hint": "Think about what happens once the condition starts moving back.",
+      "sectionId": "s4"
+    }
+  ]
+}

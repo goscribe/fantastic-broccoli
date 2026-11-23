@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Photosynthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:31.532Z",
+  "cards": [
+    {
+      "id": "1mawova",
+      "kind": "concept",
+      "front": "How are the two stages of photosynthesis linked, and where does each happen?",
+      "back": "The **light-dependent reactions** happen in the thylakoid membranes and supply ATP and NADPH. The **Calvin cycle** happens in the stroma and uses them to build a three-carbon sugar.",
+      "hint": "Think about where each stage happens and what it hands to the next.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jekxxg",
+      "kind": "process",
+      "front": "What are the main steps of the light-dependent reactions, in order?",
+      "back": "1) Photosystem II absorbs light and water splits, releasing **oxygen**. 2) Electrons pass along a transport chain, building a hydrogen-ion gradient. 3) Hydrogen ions flow through ATP synthase, making ATP. 4) Photosystem I re-energizes electrons that reduce NADP+ to NADPH.",
+      "hint": "Start with the photosystem that handles water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00e0wuz",
+      "kind": "process",
+      "front": "What are the main steps of the Calvin cycle, in order?",
+      "back": "1) Carbon dioxide combines with **RuBP** in carbon fixation, forming two three-carbon molecules. 2) ATP and NADPH convert these into **G3P**. 3) Some G3P leaves to build glucose and other molecules. 4) The rest regenerates RuBP so fixation can continue.",
+      "hint": "Begin with the step where carbon dioxide is first captured.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nueahq",
+      "kind": "term",
+      "front": "What is chlorophyll?",
+      "back": "**Chlorophyll** is a pigment in the thylakoid membranes. Its electrons absorb energy from certain wavelengths of light and are raised to a higher energy state.",
+      "hint": "Think about what chlorophyll does with light, not what it makes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0y42idy",
+      "kind": "concept",
+      "front": "Why do leaves usually look green?",
+      "back": "Chlorophyll reflects more **green light** than it absorbs, so the reflected light is what our eyes see as green.",
+      "hint": "Consider which wavelengths chlorophyll absorbs most.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19xsm6i",
+      "kind": "term",
+      "front": "What are photosystems?",
+      "back": "**Photosystems** are groups of pigments and proteins in the thylakoid membrane. They capture light energy and pass excited electrons into an electron transport pathway.",
+      "hint": "Think of them as light-capturing units made of pigments and proteins.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01wxrrq",
+      "kind": "mistake",
+      "front": "A student says chlorophyll absorbs carbon dioxide. What is wrong with this?",
+      "back": "Chlorophyll absorbs **light energy**, not carbon dioxide. Carbon dioxide enters the Calvin cycle instead.",
+      "hint": "Which molecule does chlorophyll interact with, and which goes into the Calvin cycle?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04ovym4",
+      "kind": "term",
+      "front": "What is ATP synthase?",
+      "back": "**ATP synthase** is a membrane protein that uses hydrogen-ion flow to make ATP from ADP and phosphate.",
+      "hint": "Think about what drives it: the flow of ions across the membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19397ff",
+      "kind": "term",
+      "front": "What is NADPH and what does it carry?",
+      "back": "**NADPH** carries high-energy electrons from the light reactions to the Calvin cycle. It is formed when electrons from photosystem I reduce NADP+.",
+      "hint": "Consider what the Calvin cycle needs besides ATP.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1moz0i9",
+      "kind": "mistake",
+      "front": "A student says the oxygen released in photosynthesis comes from carbon dioxide. What is the correct source?",
+      "back": "The oxygen comes from **water**, which is split during the light-dependent reactions. Carbon dioxide is not split to produce it.",
+      "hint": "Which reactant is split in the light reactions?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1goo3x5",
+      "kind": "term",
+      "front": "What is RuBP?",
+      "back": "**RuBP** is a five-carbon molecule that combines with carbon dioxide during carbon fixation in the Calvin cycle.",
+      "hint": "Think about the first molecule carbon dioxide meets in the cycle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n38n0s",
+      "kind": "term",
+      "front": "What is G3P?",
+      "back": "**G3P** is a three-carbon sugar produced by the Calvin cycle. Some of it is used to build glucose and other organic molecules.",
+      "hint": "Consider what the Calvin cycle directly produces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m00t30",
+      "kind": "mistake",
+      "front": "A student says the Calvin cycle directly produces glucose. What is wrong with this?",
+      "back": "The Calvin cycle directly produces **G3P**, not glucose. Cells can use G3P to build glucose later.",
+      "hint": "Check which three-carbon product comes out of the cycle first.",
+      "sectionId": "s4"
+    }
+  ]
+}

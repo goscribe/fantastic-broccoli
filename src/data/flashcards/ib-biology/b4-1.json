@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b4-1",
+  "topicCode": "B4.1",
+  "topicName": "Adaptation to environment",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:44.777Z",
+  "cards": [
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited feature that improves an organism's survival, reproduction, or both, in a particular environment.",
+      "hint": "Think about whether the feature is inherited.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "141347k",
+      "kind": "process",
+      "front": "How do adaptations arise over generations?",
+      "back": "Individuals with useful inherited differences leave more offspring. This is **natural selection**, so the advantageous differences become more common over generations.",
+      "hint": "Start with inherited differences.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nazaa3",
+      "kind": "mistake",
+      "front": "Is a plant wilting in dry soil an adaptation?",
+      "back": "No. Wilting is a response to water loss during the plant's life, not an **inherited** feature. Adaptations come from past selection, not deliberate change.",
+      "hint": "Ask whether the response is inherited.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s4ewas",
+      "kind": "concept",
+      "front": "How do structural, physiological and behavioural adaptations differ?",
+      "back": "**Structural** adaptations are physical features, physiological ones concern how the body works, and **behavioural** ones concern what the animal does.",
+      "hint": "Think physical, body function, or action.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "185aml1",
+      "kind": "example",
+      "front": "Give an example of a physiological adaptation in desert mammals.",
+      "back": "Producing **concentrated urine**, which lets them lose less water.",
+      "hint": "Think about water loss.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01jhu31",
+      "kind": "mistake",
+      "front": "Why is naming fur or shade alone not enough to explain an adaptation?",
+      "back": "You must link the feature or action to its **effect**. Fur reduces heat loss and shade reduces exposure to heat; the link explains how each helps.",
+      "hint": "What does the feature actually do?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wfoxta",
+      "kind": "term",
+      "front": "What is a cuticle and what does it do?",
+      "back": "A protective, waxy layer on exposed plant surfaces that reduces **water loss** by evaporation.",
+      "hint": "Think about dry environments.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b1jl5r",
+      "kind": "concept",
+      "front": "Why might a plant open its stomata mainly at night?",
+      "back": "It reduces **water loss** during daytime heat. The cost is that it still needs carbon dioxide for photosynthesis, so conserving water limits gas intake.",
+      "hint": "Consider photosynthesis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15uvhh8",
+      "kind": "term",
+      "front": "What is camouflage?",
+      "back": "**Camouflage** is colouring or patterning that makes an organism harder to detect against its surroundings.",
+      "hint": "Think about predators and prey.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j989i9",
+      "kind": "term",
+      "front": "What is a trade-off in adaptation?",
+      "back": "A **trade-off** is when a trait's advantage under one condition comes with a cost under another condition.",
+      "hint": "Think about changing conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03tsjqs",
+      "kind": "concept",
+      "front": "How can camouflage become more common in a prey population?",
+      "back": "Camouflaged animals may avoid predators and leave more offspring. If the trait is inherited, it becomes more **common** over generations.",
+      "hint": "Link survival to reproduction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09m1im1",
+      "kind": "concept",
+      "front": "How can a flower's colour and scent help its reproduction?",
+      "back": "They may attract **pollinators**, increasing the chance of pollen transfer and so helping the plant reproduce.",
+      "hint": "Think about pollen transfer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y03l2c",
+      "kind": "mistake",
+      "front": "Does having an adaptation guarantee survival?",
+      "back": "No. An adaptation is an advantage under particular conditions, not a **guarantee**. Pollinators may be absent and camouflaged animals can still be caught.",
+      "hint": "Consider changing conditions.",
+      "sectionId": "s4"
+    }
+  ]
+}

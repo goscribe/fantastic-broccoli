@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-6",
+  "topicCode": "9.6",
+  "topicName": "Ocean warming",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:08.718Z",
+  "cards": [
+    {
+      "id": "1h4i0oa",
+      "kind": "concept",
+      "front": "Why does the ocean absorb most of the extra heat from rising greenhouse gases?",
+      "back": "The ocean covers about $70\\%$ of Earth's surface and water has a high specific heat capacity, so it stores a lot of energy for little temperature rise. This makes it a large buffer for atmospheric warming.",
+      "hint": "Think about the ocean's size and how much energy water can store.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11durdu",
+      "kind": "term",
+      "front": "What is coral bleaching?",
+      "back": "**Coral bleaching** is the loss of symbiotic algae from coral tissue, usually caused by heat stress. Without the algae that give food and color, the coral turns white.",
+      "hint": "Think about the partnership corals have with other organisms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vzvd2i",
+      "kind": "concept",
+      "front": "How does warmer ocean water help a tropical cyclone grow stronger?",
+      "back": "Warm surface water supplies the **energy and moisture** that feed the storm. More evaporation means the air holds more water vapor, so storms can release heavier rainfall.",
+      "hint": "Trace where a storm gets its fuel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wxxd7h",
+      "kind": "process",
+      "front": "In what order does extra heat move from the air into the deep ocean?",
+      "back": "First, greenhouse gases return infrared radiation to the surface. Second, the surface layer warms first. Third, waves and **ocean currents** carry heat to deeper layers, which warm far more slowly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17szk28",
+      "kind": "term",
+      "front": "What is thermal expansion?",
+      "back": "**Thermal expansion** is the increase in a substance's volume as its temperature rises. Warming water expands, which adds to sea level rise even before any ice melts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0im5wca",
+      "kind": "term",
+      "front": "What is specific heat capacity?",
+      "back": "**Specific heat capacity** is the energy needed to raise the temperature of $1\\,\\text{g}$ of a substance by $1\\,^\\circ\\text{C}$.",
+      "hint": "Compare how much energy water and air need to warm up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dy3psb",
+      "kind": "mistake",
+      "front": "What is wrong with assuming that all bleached coral is dead?",
+      "back": "Bleached coral is not always dead. It can recover if conditions improve soon enough, but long heat stress can kill it.",
+      "hint": "Think about how long the heat stress lasts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dx8zaj",
+      "kind": "concept",
+      "front": "Why does dissolved oxygen drop as ocean water gets warmer?",
+      "back": "Warm water holds less gas, so the **dissolved oxygen** in it falls as temperature rises. Fish and other animals with high oxygen needs may be stressed or move away.",
+      "hint": "Think about how solubility changes as water heats up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0he7bf6",
+      "kind": "concept",
+      "front": "Why can warm surface water reduce phytoplankton?",
+      "back": "Warm surface water is less dense, so it mixes less with cold, nutrient-rich water below. Fewer nutrients reach the surface, so **phytoplankton** may decline.",
+      "hint": "Think about how density controls layers in the ocean.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ya8wvz",
+      "kind": "term",
+      "front": "What are phytoplankton?",
+      "back": "**Phytoplankton** are microscopic photosynthetic organisms that float in water. They form the base of most marine food webs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13ch4xm",
+      "kind": "concept",
+      "front": "How does a loss of phytoplankton affect animals higher up the food web?",
+      "back": "Animals that eat phytoplankton have less food, and the loss passes up the food web to fish, seabirds, and marine mammals.",
+      "hint": "Follow the energy from the bottom of the food web upward.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mz1c9p",
+      "kind": "concept",
+      "front": "How does warming affect fisheries that depend on fish and other animals?",
+      "back": "Many animals move toward the poles or into deeper, cooler water. Fisheries that depend on them must follow these animals or decline.",
+      "hint": "Think about where animals go when surface water gets too warm.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06h19ag",
+      "kind": "term",
+      "front": "What is a tropical cyclone?",
+      "back": "A **tropical cyclone** is a large rotating storm that forms over warm ocean water. It has strong winds and heavy rain.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00b8zad",
+      "kind": "concept",
+      "front": "How can ocean temperature changes affect where rain falls?",
+      "back": "Shifts in ocean temperature patterns can move rainfall, so some regions see more drought while others see more flooding.",
+      "hint": "Think about how weather differs from place to place.",
+      "sectionId": "s5"
+    }
+  ]
+}

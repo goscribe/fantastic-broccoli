@@ -34,7 +34,7 @@ import { deckEntries } from "@/components/bank/bank-content";
 import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
 import type { StudySession } from "@/types";
-import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
+import { SESSION_COMPLETED_EVENT, type SessionCompletedDetail } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
@@ -95,8 +95,8 @@ function NextStep({
   const body = (
     <>
       <span className="min-w-0 flex-1">
-        <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{title}</span>
-        <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
+        <span className="block text-ui font-semibold leading-5 text-foreground">{title}</span>
+        <span className="block text-caption leading-5 text-muted-foreground">{sub}</span>
       </span>
       <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
     </>
@@ -121,7 +121,7 @@ const usefulHeadline = (h: string | undefined) =>
 function StatTile({ label, value }: { label: string; value: ReactNode }) {
   return (
     <div className="flex flex-col gap-1.5 px-4 py-3.5 text-left first:pl-5 last:pr-5">
-      <span className="text-[12.5px] font-bold leading-none text-muted-foreground">{label}</span>
+      <span className="text-caption font-bold leading-none text-muted-foreground">{label}</span>
       <span className="text-[24px] font-extrabold tabular-nums leading-none text-foreground">{value}</span>
     </div>
   );
@@ -165,7 +165,7 @@ function MasteryRows({
             // Phones: two rows keep the next step above the fold.
             <li key={m.topic} className={cn(i >= phoneMax && "max-sm:hidden")}>
               <MaybeLink href={href} className={cn("group block", href && "-mx-1 rounded-lg px-1 py-0.5 hover:bg-muted/60 focus-visible:bg-muted/60")}>
-              <div className="flex items-baseline justify-between gap-3 text-[13.5px]">
+              <div className="flex items-baseline justify-between gap-3 text-small">
                 <span className={cn("min-w-0 truncate font-semibold", href && "underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground")}>{m.label}</span>
                 <span
                   className="shrink-0 tabular-nums text-muted-foreground"
@@ -175,7 +175,7 @@ function MasteryRows({
                     .replace("{b}", String(after))}
                 >
                   {before === null ? (
-                    <span className="mr-1.5 text-[12px] font-semibold">{t("debrief.masteryNew")} ·</span>
+                    <span className="mr-1.5 text-caption font-semibold">{t("debrief.masteryNew")} ·</span>
                   ) : (
                     <>{before}% → </>
                   )}
@@ -276,7 +276,7 @@ function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: 
         ))}
       </ol>
       {wrong > 0 && (
-        <span className={cn("text-[13.5px] font-bold text-muted-foreground", href && "underline decoration-border-strong underline-offset-4 group-hover:text-foreground group-hover:decoration-foreground")}>
+        <span className={cn("text-small font-bold text-muted-foreground", href && "underline decoration-border-strong underline-offset-4 group-hover:text-foreground group-hover:decoration-foreground")}>
           {t("finish.toFix").replace("{n}", String(wrong))}
         </span>
       )}
@@ -303,7 +303,7 @@ function TextAction({
   const body = (
     <>
       <span className="font-bold text-foreground underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{title}</span>
-      {sub && <span className="text-[13px] text-muted-foreground">{sub}</span>}
+      {sub && <span className="text-small text-muted-foreground">{sub}</span>}
     </>
   );
   const cls = "group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 gap-y-0 py-1.5 text-left text-[14.5px] leading-5 focus-visible:outline-none focus-visible:[&>span:first-child]:decoration-foreground disabled:opacity-60";
@@ -430,8 +430,10 @@ export function SessionDebrief({
   });
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }));
-  }, [sessionId]);
+    // `quickStart` lets the subscribe wall stay off a Quick 5's end screen (its one ask is the habit prompt).
+    const detail: SessionCompletedDetail = { sessionId, quickStart };
+    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail }));
+  }, [sessionId, quickStart]);
 
   // Mastery rows link to their topic: the catalog course (if the subject has one) and which topics have a note.
   const { data: topicLinks } = useQuery({
@@ -440,11 +442,12 @@ export function SessionDebrief({
     staleTime: 5 * 60_000,
     retry: false,
     queryFn: async () => {
-      const progress = await coursesApi.progress(workspaceId!).catch(() => null);
-      if (!progress) return null;
+      // Only the course's id is needed, and most subjects follow no course: the student's course subjects say which do.
+      const courseId = (await coursesApi.mine().catch(() => [])).find((c) => c.workspaceId === workspaceId)?.courseId;
+      if (!courseId) return null;
       const [course, notes] = await Promise.all([
-        loadCourse(progress.courseId).catch(() => null),
-        notesApi.listForCourse(progress.courseId).catch(() => []),
+        loadCourse(courseId).catch(() => null),
+        notesApi.listForCourse(courseId).catch(() => []),
       ]);
       return course ? { course, withNotes: new Set(notes.map((n) => n.topicId)) } : null;
     },
@@ -609,13 +612,13 @@ export function SessionDebrief({
               <Mascot pose={stats ? pose : "book"} key={stats ? pose : "wait"} className={cn("relative h-full", celebrate ? "cat-cheer" : "cat-peek")} priority />
             </div>
           </div>
-          <p className="hero-eyebrow relative line-clamp-2 break-words text-[13.5px] font-extrabold @[520px]:max-w-[58%]">
+          <p className="hero-eyebrow relative line-clamp-2 break-words text-small font-extrabold @[520px]:max-w-[58%]">
             {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
           </p>
           <h2 id="finish-title" className="relative mt-1.5 text-balance text-[30px] font-extrabold leading-[1.08] tracking-tight @[520px]:max-w-[58%] @[520px]:text-[38px]">
             {stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
           </h2>
-          <div className="relative mt-1.5 min-h-[22px] text-[15.5px] font-semibold leading-snug text-foreground/75 line-clamp-2 @[520px]:max-w-[52%]">
+          <div className="relative mt-1.5 min-h-[22px] text-ui font-semibold text-foreground/75 line-clamp-2 @[520px]:max-w-[52%]">
             {verdict ? (
               <MathText text={verdict} />
             ) : debriefLoading ? (
@@ -636,7 +639,7 @@ export function SessionDebrief({
                   `${stats.activitiesDone}/${stats.activitiesTotal}`
                 )}
               </span>
-              <span className="text-[15px] font-bold leading-tight text-foreground/75">
+              <span className="text-ui font-bold leading-tight text-foreground/75">
                 {pct !== null
                   ? t("finish.rightOf").replace("{c}", String(stats.correct)).replace("{n}", String(stats.answered))
                   : t("debrief.done")}
@@ -654,12 +657,12 @@ export function SessionDebrief({
           <ul className="mt-5 flex flex-wrap items-baseline gap-x-7 gap-y-2 px-1 sm:mt-6" aria-label={t("debrief.points")}>
             <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 2 }}>
               <span className="text-[24px] font-extrabold leading-none tabular-nums"><CountUp value={points} prefix="+" /></span>
-              <span className="text-[13.5px] font-bold text-muted-foreground">{t("debrief.points").toLowerCase()}</span>
+              <span className="text-small font-bold text-muted-foreground">{t("debrief.points").toLowerCase()}</span>
             </li>
             {streakDays !== null && streakDays > 0 && (
               <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 3 }}>
                 <Flame aria-hidden className={cn("size-[22px] shrink-0 self-center text-[var(--flame)]", streakLitDays !== null && "finish-flame")} fill="currentColor" strokeWidth={1.5} />
-                <span className="text-[13.5px] font-bold text-foreground">
+                <span className="text-small font-bold text-foreground">
                   {streakLitDays !== null ? (
                     <span className="finish-bump" style={{ animationDelay: "0.85s" }}>{t("rewards.streakDays").replace("{n}", String(streakDays))}</span>
                   ) : (
@@ -670,7 +673,7 @@ export function SessionDebrief({
             )}
             <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 11 }}>
               <span className="text-[24px] font-extrabold leading-none tabular-nums">{stats.minutes}</span>
-              <span className="text-[13.5px] font-bold text-muted-foreground">{t("debrief.minutes").replace("{n}", "").trim()}</span>
+              <span className="text-small font-bold text-muted-foreground">{t("debrief.minutes").replace("{n}", "").trim()}</span>
             </li>
             {pct !== null && <li className="sr-only">{`${t("debrief.accuracy")} ${pct}%`}</li>}
           </ul>
@@ -699,7 +702,7 @@ export function SessionDebrief({
                   {fixTitle}
                 </Button>
               </Link>
-              <p className="mt-2.5 text-[13px] text-muted-foreground">{fixSub}</p>
+              <p className="mt-2.5 text-small text-muted-foreground">{fixSub}</p>
             </>
           ) : (
             <div className="[&_button]:sm:w-auto [&_button]:sm:min-w-[300px] [&>a]:sm:w-fit">{primary}</div>
@@ -748,6 +751,7 @@ export function SessionDebrief({
         {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
         {quickStart && stats && (
           <HabitPrompt
+            sessionId={sessionId}
             accuracy={stats.accuracy}
             activitiesDone={stats.activitiesDone}
             subjectTitle={subjectTitle}
@@ -770,7 +774,7 @@ export function SessionDebrief({
         <h2 className="mt-3 text-[30px] font-extrabold tracking-tight sm:mt-5 sm:text-[36px]">
           {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
         </h2>
-        <div className="mt-1 min-h-6 text-[14.5px] leading-6 text-muted-foreground line-clamp-2 sm:mt-1.5 sm:text-[15px]">
+        <div className="mt-1 min-h-6 text-ui text-muted-foreground line-clamp-2 sm:mt-1.5">
           {verdict ? (
             <MathText text={verdict} />
           ) : debriefLoading ? (
@@ -798,7 +802,7 @@ export function SessionDebrief({
       )}
 
       {streakDays !== null && streakDays > 0 && (
-        <p className="mt-3 w-full px-1 text-left text-[13.5px] font-bold text-foreground">
+        <p className="mt-3 w-full px-1 text-left text-small font-bold text-foreground">
           {t("rewards.streakDays").replace("{n}", String(streakDays))}
         </p>
       )}
@@ -851,6 +855,7 @@ export function SessionDebrief({
       {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
       {quickStart && stats && (
         <HabitPrompt
+          sessionId={sessionId}
           accuracy={stats.accuracy}
           activitiesDone={stats.activitiesDone}
           subjectTitle={subjectTitle}
@@ -882,7 +887,7 @@ function DebriefReport({ debrief }: { debrief: ApiSessionDebrief }) {
   return (
             <div className="mt-2 space-y-5 border-t border-border px-1 pt-5 animate-fade-up">
               {usefulHeadline(debrief.headline) && debrief.summary && (
-                <p className="text-sm leading-6 text-foreground">
+                <p className="text-ui text-foreground">
                   <MathText text={debrief.summary} />
                 </p>
               )}
@@ -890,7 +895,7 @@ function DebriefReport({ debrief }: { debrief: ApiSessionDebrief }) {
                 <section key={section.heading}>
                   <h3 className="mb-1.5 text-sm font-semibold">{section.heading}</h3>
                   {section.body && (
-                    <p className="text-sm leading-6 text-muted-foreground">
+                    <p className="text-ui text-muted-foreground">
                       <MathText text={section.body} />
                     </p>
                   )}
@@ -905,11 +910,11 @@ function DebriefReport({ debrief }: { debrief: ApiSessionDebrief }) {
                             )}
                           />
                           <div>
-                            <p className="text-sm font-medium leading-6">
+                            <p className="text-ui font-medium">
                               <MathText text={b.text} />
                             </p>
                             {b.detail && (
-                              <p className="text-sm leading-6 text-muted-foreground">
+                              <p className="text-ui text-muted-foreground">
                                 <MathText text={b.detail} />
                               </p>
                             )}
@@ -943,7 +948,7 @@ export function SessionUnfinished({
     <div className="mx-auto flex w-full max-w-md flex-col items-center pb-10 pt-6 text-center sm:pt-12" data-debrief="unfinished">
       <Mascot pose="book" className="h-[104px]" />
       <h2 className="mt-5 text-[26px] font-extrabold leading-tight tracking-tight">{t("purpose.unfinishedTitle")}</h2>
-      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+      <p className="mt-2 text-ui text-muted-foreground">
         {(left === 1 ? t("purpose.unfinishedSubOne") : t("purpose.unfinishedSub")).replace("{n}", String(left)).replace("{m}", String(minutes))}
       </p>
       {resumeId && (

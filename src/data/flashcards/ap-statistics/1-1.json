@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "What data can tell us",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:46.123Z",
+  "cards": [
+    {
+      "id": "04m07jt",
+      "kind": "concept",
+      "front": "How do data differ from a conclusion?",
+      "back": "**Data** are the recorded values, such as 330 visitors in February. A **conclusion** is a claim about what those values mean, and it goes beyond the recorded numbers.",
+      "hint": "Think: what was recorded versus what it is said to mean.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1smwq6g",
+      "kind": "concept",
+      "front": "What are the four common types of questions that data can answer?",
+      "back": "**Describe** a group, **compare** groups, **find a relationship**, and **ask about cause**. Each type needs different data, and only the cause type needs a carefully planned experiment.",
+      "hint": "Each type says what the data must show.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "184jnb9",
+      "kind": "mistake",
+      "front": "A study finds students who eat breakfast score higher, so it concludes breakfast causes higher scores. What is wrong?",
+      "back": "A **pattern** does not prove **cause**. Something else, such as sleep, could lead to both breakfast and higher scores. Only a carefully planned experiment can support a cause claim.",
+      "hint": "Could something else explain both?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "A **population** is the entire group of individuals or objects about which we want to draw conclusions.",
+      "hint": "Think of the whole group, not just the sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1itymzm",
+      "kind": "term",
+      "front": "What is a pattern in data?",
+      "back": "A **pattern** is a regular, describable feature of data, such as values clustering together, a shared direction, or a difference between groups.",
+      "hint": "Look for something that repeats or is regular.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r3mpmu",
+      "kind": "concept",
+      "front": "How is a trend different from a pattern between groups?",
+      "back": "A **trend** is a pattern of change over time, such as steady growth. Test scores that differ between two classes with no change over time are a pattern between groups, not a trend.",
+      "hint": "Does the pattern involve change over time?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08r6hbh",
+      "kind": "process",
+      "front": "What steps should you follow to describe a trend in a set of values?",
+      "back": "1) Put the values in order, in a table, or on a graph. 2) Compare each value with the one before. 3) Describe the **direction** of change, its **size**, and whether it is steady.",
+      "hint": "Start by organizing the values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ce8obp",
+      "kind": "example",
+      "front": "A library records monthly visitors of 310, 330, 360, 390 and 420 from January to May. Describe the trend.",
+      "back": "Visits rose every month, from 310 to 420, by about 30 visitors a month after February. The total rise is $420-310=110$ visitors.",
+      "hint": "Compare each month with the one before it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "188uerd",
+      "kind": "example",
+      "front": "A town records bike rentals of 410, 460, 520 and 590 over four years. Describe the trend in context.",
+      "back": "Rentals rose every year, from 410 to 590. The yearly increases were 50, 60 and 70, so the rise got faster over time.",
+      "hint": "Find the change between each pair of years.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g04qw1",
+      "kind": "term",
+      "front": "What is statistics?",
+      "back": "**Statistics** is the science of collecting, organizing, analyzing and interpreting data so that conclusions can be drawn despite variation.",
+      "hint": "Think about learning from data that varies.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ywv5fg",
+      "kind": "concept",
+      "front": "What makes a question a statistical question?",
+      "back": "A **statistical question** expects the answers to **vary**, such as how tall each student is. A question with one fixed answer, like the height of the school flagpole, is not statistical.",
+      "hint": "Will different individuals give different answers?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s6e39b",
+      "kind": "concept",
+      "front": "Why should a conclusion be stated in context?",
+      "back": "Context names the **group**, **setting** and **variables** the data describe. This keeps the claim within what the data support and shows who it applies to.",
+      "hint": "Who and what was measured, and where?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y15e5e",
+      "kind": "concept",
+      "front": "What wording should you use for a conclusion unless the way the data were collected supports a stronger claim?",
+      "back": "Cautious wording such as **suggests** or **is consistent with**.",
+      "hint": "Think about how strong the evidence is.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z4mou4",
+      "kind": "process",
+      "front": "What should you check before accepting a claim based on data?",
+      "back": "Check the **individuals** measured and how many there were, how the data were **collected**, the **size and direction** of the pattern, and the group and setting the claim names.",
+      "hint": "Four checks, covering who, how, what and where.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Human impacts on ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:55.313Z",
+  "cards": [
+    {
+      "id": "116l8aa",
+      "kind": "concept",
+      "front": "Why is habitat destruction the largest single threat to biodiversity?",
+      "back": "Every species needs a habitat that supplies **food, water, and shelter**. When that habitat is removed, species that lose it decline or disappear.",
+      "hint": "Think about what every species depends on to survive.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09esc4e",
+      "kind": "process",
+      "front": "What chain of steps links excess nutrients to lower biodiversity in a body of water?",
+      "back": "1) Nutrients build up in the water. 2) The **oxygen** in the water falls. 3) Sensitive species disappear while tolerant species survive. 4) Tolerant species spread, leaving fewer species overall.",
+      "hint": "Start with what the nutrients do to the water itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m1fm1b",
+      "kind": "concept",
+      "front": "How does losing species weaken an ecosystem's ability to cope with change?",
+      "back": "Lost **genetic variety** leaves populations less able to adapt to disease or change. Lost species can break food webs, and lost ecosystems stop providing services like flood control.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10ax1xy",
+      "kind": "concept",
+      "front": "Why does changing an ecosystem's structure often change its function?",
+      "back": "Structure and function are linked, so altering the species or habitat layout changes the processes that run there. Removing wetland plants cuts the wetland's **water filtering**.",
+      "hint": "Compare the wetland example given in the first section.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variety of life a place holds, including variety among genes, among species, and among ecosystems.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0asndfk",
+      "kind": "term",
+      "front": "What is habitat fragmentation?",
+      "back": "**Habitat fragmentation** is the splitting of a continuous habitat into small, isolated patches, often by roads, farms, or buildings. Animals cannot move between patches, so populations shrink.",
+      "hint": "Think about what happens to an animal's ability to move between areas.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1np10cq",
+      "kind": "mistake",
+      "front": "Why is a partly intact habitat not necessarily unharmed?",
+      "back": "Common mistake: assuming any remaining habitat is fine. **Small patches** often cannot support species that need large territories, so biodiversity is still lost.",
+      "hint": "Think about how much space some animals need to live.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fc9cdw",
+      "kind": "term",
+      "front": "What is an indicator species?",
+      "back": "An **indicator species** is one whose presence, absence, or condition reveals the health of its environment, such as insect larvae that need clean water.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xq5z0w",
+      "kind": "mistake",
+      "front": "A student writes that a pollutant is bad because it causes harm. What is wrong with this answer?",
+      "back": "Too vague. Link the pollutant to a **specific effect** on a species or habitat, such as low oxygen killing sensitive species.",
+      "hint": "Ask what exactly the pollutant does to an organism or its habitat.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aqp848",
+      "kind": "concept",
+      "front": "Why is checking for an indicator species easier than measuring every pollutant?",
+      "back": "An indicator species is **sensitive to pollution**, so its loss signals a problem. One check gives a quick picture, and changes over time show whether water quality is improving or declining.",
+      "hint": "Consider how a sensitive species responds to its surroundings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wgsycx",
+      "kind": "term",
+      "front": "What is resilience in an ecosystem?",
+      "back": "**Resilience** is the ability of an ecosystem to resist change or recover after a disturbance. When one species is lost, others may fill its role.",
+      "hint": "Consider how an ecosystem responds after a shock.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wqnx4m",
+      "kind": "concept",
+      "front": "What does wetland drainage remove from an ecosystem?",
+      "back": "Wetland drainage removes **nursery habitat**, flood storage, and water filtering. Each loss lowers biodiversity and changes how the wetland works.",
+      "hint": "Think about what a wetland does during heavy rain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fipkce",
+      "kind": "concept",
+      "front": "Which two effects does the note give for dams on river ecosystems?",
+      "back": "Dams **block fish movement** and change river flow. Each effect lowers the variety of life the river can support and changes the processes it carries out.",
+      "hint": "Look at the dams row in the activities table.",
+      "sectionId": "s3"
+    }
+  ]
+}

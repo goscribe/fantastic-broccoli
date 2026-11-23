@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Aquatic food production",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:30.697Z",
+  "cards": [
+    {
+      "id": "0wtr48h",
+      "kind": "concept",
+      "front": "What makes overfishing dangerous for a fish stock?",
+      "back": "**Overfishing** removes fish faster than reproduction can replace them, so the stock shrinks. The harm depends on whether the stock can recover, not just on how many fish are caught.",
+      "hint": "Think about the rate of removal compared with the rate of replacement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1faxj7p",
+      "kind": "term",
+      "front": "What is the maximum sustainable yield?",
+      "back": "The **largest catch** that can be taken from a stock each year without reducing it in the long term. Catching more than this, year after year, leads to decline.",
+      "hint": "Think of a yearly limit that keeps the stock steady.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ygpkfm",
+      "kind": "concept",
+      "front": "Is aquaculture automatically more sustainable than wild capture?",
+      "back": "**No.** Farms can release waste and chemicals, spread disease and escapees to wild fish, and farmed carnivorous fish may be fed meal made from wild-caught fish.",
+      "hint": "Consider feed, waste, disease and chemicals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "162z4j1",
+      "kind": "term",
+      "front": "What is a capture fishery?",
+      "back": "An activity or area in which **wild aquatic animals** are caught from the sea, rivers or lakes for food or sale.",
+      "hint": "Think of catching, not farming.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19dtwag",
+      "kind": "term",
+      "front": "What is aquaculture?",
+      "back": "The **farming of aquatic organisms** such as fish, shellfish and seaweed under managed conditions, for food or other products.",
+      "hint": "Compare it with capture fisheries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16uolog",
+      "kind": "concept",
+      "front": "Name four methods fishers use to catch wild aquatic animals.",
+      "back": "**Trawl nets** towed through the water or along the seabed, **purse seines** encircling a shoal, **longlines** with many baited hooks, and **traps or pots** for crabs and lobsters.",
+      "hint": "Think of nets, lines and traps.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r6tw3d",
+      "kind": "formula",
+      "front": "What equation gives the percentage of a catch that is bycatch?",
+      "back": "Percentage bycatch $=\\frac{\\text{mass of bycatch}}{\\text{total mass}}\\times100$, where both masses are in kg and the answer is a **percentage**.",
+      "hint": "Use the same unit for both masses.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tcrh5w",
+      "kind": "example",
+      "front": "A boat catches 1500 kg of animals, including 450 kg of bycatch. What percentage of the catch is bycatch?",
+      "back": "**30%**. Working: $\\frac{450\\,\\text{kg}}{1500\\,\\text{kg}}\\times100=30$%.",
+      "hint": "Divide bycatch by total catch, then multiply by 100.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eqdipo",
+      "kind": "process",
+      "front": "How does removing a top predator change a food web?",
+      "back": "Its **prey** increase in number, then eat more of the organisms below them. These indirect changes pass through the food web, which is called a **trophic cascade**.",
+      "hint": "Follow the change one feeding level at a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09pwhn0",
+      "kind": "mistake",
+      "front": "Why is it wrong to think removing a predator just leaves an empty gap?",
+      "back": "Changes **spread through the food web** in several directions. Prey numbers rise and affect other species, so the whole ecosystem shifts.",
+      "hint": "Think about who eats whom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ssd18j",
+      "kind": "term",
+      "front": "What is a quota?",
+      "back": "A **legal limit** on the quantity or mass of a species that may be caught in a given period.",
+      "hint": "Think of a rule set by managers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wegzjd",
+      "kind": "concept",
+      "front": "How does a closed season help a fish stock?",
+      "back": "It **protects fish while they breed**, so more young fish can be produced and the stock can recover.",
+      "hint": "Link the timing to reproduction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "038xr42",
+      "kind": "mistake",
+      "front": "Does setting a quota or protected area protect fish on its own?",
+      "back": "**No.** These measures work only when the rules are monitored and enforced. Without enforcement, the stock may still decline.",
+      "hint": "Who checks that the rules are followed?",
+      "sectionId": "s5"
+    }
+  ]
+}

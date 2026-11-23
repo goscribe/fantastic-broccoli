@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "Heat capacity and calorimetry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:58.431Z",
+  "cards": [
+    {
+      "id": "0im5wca",
+      "kind": "term",
+      "front": "What is specific heat capacity?",
+      "back": "**Specific heat capacity** is the heat needed to raise one gram of a substance by one degree Celsius. A substance with a higher value needs more heat for the same mass and temperature rise.",
+      "hint": "Think about one gram and one degree.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13ai2w9",
+      "kind": "formula",
+      "front": "Which equation links heat transfer to mass, specific heat capacity and temperature change, and what does each symbol mean?",
+      "back": "$q=mc\\Delta T$. Here $q$ is heat in joules, $m$ is mass in grams, $c$ is specific heat capacity in J g^-1 °C^-1, and $\\Delta T$ is final temperature minus initial temperature. A positive $q$ means the substance gains heat.",
+      "hint": "Check that mass is in grams before you substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pn9idf",
+      "kind": "concept",
+      "front": "How does a calorimeter let you find the heat of a reaction without measuring the reaction directly?",
+      "back": "**Energy conservation**: the heat change of the solution is measured from its mass, specific heat capacity and temperature change. If other heat transfers are negligible, $q_{\\mathrm{reaction}}=-q_{\\mathrm{solution}}$.",
+      "hint": "What happens to heat that leaves the reaction?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vbwvi7",
+      "kind": "process",
+      "front": "What are the steps for estimating reaction heat in a solution calorimeter?",
+      "back": "1) Record the initial temperature of the reactants before mixing. 2) Mix them in the insulated container. 3) Record the final temperature after the reaction. 4) Calculate $q_{\\mathrm{solution}}=mc\\Delta T$. 5) Find $q_{\\mathrm{reaction}}=-q_{\\mathrm{solution}}$ if other heat transfers are negligible.",
+      "hint": "Which temperature is recorded before mixing?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13y1xtu",
+      "kind": "example",
+      "front": "How much heat does 50.0 g of water gain when it warms from 20.0 °C to 25.0 °C? Use c = 4.184 J g^-1 °C^-1.",
+      "back": "About $1046\\ \\mathrm{J}$, or $1.0\\times10^3$ J. $\\Delta T=+5.0$ °C, so $q$ is positive and the water gains heat.",
+      "hint": "Find $\\Delta T$ first, keeping its sign.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w6j5ee",
+      "kind": "mistake",
+      "front": "Why is it wrong to set reaction heat equal to solution heat?",
+      "back": "The signs are **opposite**. When other heat transfers are negligible, $q_{\\mathrm{reaction}}=-q_{\\mathrm{solution}}$, so a warming solution means the reaction released heat.",
+      "hint": "Which way does the heat flow?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03ukrsj",
+      "kind": "term",
+      "front": "What is temperature change in a heat calculation?",
+      "back": "**Temperature change** is the final temperature minus the initial temperature, written $\\Delta T=T_{\\mathrm{final}}-T_{\\mathrm{initial}}$. A rise gives a positive value and a fall gives a negative value.",
+      "hint": "Always subtract the starting value from the end value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15bgpcd",
+      "kind": "concept",
+      "front": "What does a negative q mean for a substance?",
+      "back": "A **negative q** means the substance loses heat to its surroundings. For example, cooling water has a negative $q$.",
+      "hint": "Think about the direction of heat flow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yqmf4v",
+      "kind": "formula",
+      "front": "How do you include the container when a calorimeter constant is known?",
+      "back": "$q_{\\mathrm{cal}}=C_{\\mathrm{cal}}\\Delta T$ gives the heat absorbed by the container. Then $q_{\\mathrm{reaction}}=-(q_{\\mathrm{solution}}+q_{\\mathrm{cal}})$ when exchange with the surroundings is negligible.",
+      "hint": "Add the container's heat to the solution's heat before taking the negative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rwmlsp",
+      "kind": "mistake",
+      "front": "Which mass should you use for a solution in a calorimeter calculation?",
+      "back": "The **total solution mass**, not just one reactant's mass. Using only one reactant's mass gives an incorrect $q_{\\mathrm{solution}}$.",
+      "hint": "Include everything that is being heated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00abf3e",
+      "kind": "term",
+      "front": "What is a calorimeter constant?",
+      "back": "A **calorimeter constant** is the heat absorbed by a calorimeter per degree of temperature rise. It is used in $q_{\\mathrm{cal}}=C_{\\mathrm{cal}}\\Delta T$.",
+      "hint": "Units are heat per degree.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kwwm64",
+      "kind": "example",
+      "front": "How much heat does 40.0 g of water lose when it cools from 30.0 °C to 25.0 °C? Use c = 4.184 J g^-1 °C^-1.",
+      "back": "About $-837$ J, or roughly $-840$ J. $\\Delta T=-5.0$ °C, so the water loses about 840 J.",
+      "hint": "The temperature change is negative."
+    },
+    {
+      "id": "08fyzo7",
+      "kind": "concept",
+      "front": "Why does a warming solution in a calorimeter show that the reaction releases heat?",
+      "back": "The solution gains heat, so its $q$ is positive. With negligible other heat transfers, the reaction loses that same heat, so it releases heat.",
+      "hint": "Follow the heat from the reaction to the solution.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fktlyc",
+      "kind": "term",
+      "front": "What is a calorimeter?",
+      "back": "A **calorimeter** is an insulated setup used to measure heat transfer through a temperature change. Insulation reduces unwanted heat exchange but does not remove it completely.",
+      "hint": "It is insulated and has a thermometer.",
+      "sectionId": "s3"
+    }
+  ]
+}

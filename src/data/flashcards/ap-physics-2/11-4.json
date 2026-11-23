@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "11-4",
+  "topicCode": "11.4",
+  "topicName": "Electric power",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:18.030Z",
+  "cards": [
+    {
+      "id": "053td7m",
+      "kind": "concept",
+      "front": "What does electric power measure in a circuit?",
+      "back": "**Power** is the rate at which a circuit element transfers energy, equal to energy transferred divided by time taken: $P=\\frac{\\Delta E}{\\Delta t}$.",
+      "hint": "Think about energy per second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1keylsv",
+      "kind": "formula",
+      "front": "What is the power equation linking current and potential difference, and what are its units?",
+      "back": "$P=I\\,\\Delta V$, where $P$ is power in **watts** (W), $I$ is current in amperes (A), and $\\Delta V$ is potential difference in volts (V). Amperes times volts gives watts.",
+      "hint": "Think about charge flow and energy per coulomb.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0csjgsy",
+      "kind": "concept",
+      "front": "Why does a resistor get hot when current flows through it?",
+      "back": "A **resistor** converts electrical energy into thermal energy, and the rate of this conversion is the power dissipated, $P=I\\,\\Delta V$.",
+      "hint": "Where does the electrical energy go?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14p1xbm",
+      "kind": "formula",
+      "front": "What are the three equivalent forms of the power equation for a resistor?",
+      "back": "$P=I\\,\\Delta V$, $P=I^2R$, and $P=\\frac{(\\Delta V)^2}{R}$. Choose the form that matches the quantities you know; all give the same answer for consistent data.",
+      "hint": "Combine Ohm's law with P = I ΔV.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d1xta5",
+      "kind": "mistake",
+      "front": "Does a larger resistance always dissipate more power?",
+      "back": "No. With equal currents the **larger** resistance dissipates more power, but with equal potential differences the **smaller** resistance dissipates more.",
+      "hint": "Which quantity is held constant matters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0htsupp",
+      "kind": "term",
+      "front": "What is a power rating?",
+      "back": "The **power rating** is the power a device transfers when it operates at its stated potential difference. At any other potential difference, the power changes.",
+      "hint": "Look for the label on an appliance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gc9j5d",
+      "kind": "example",
+      "front": "A bulb is rated 60 W at 120 V. What is its current when operating at 120 V?",
+      "back": "$I=\\frac{P}{\\Delta V}=\\frac{60\\,\\mathrm{W}}{120\\,\\mathrm{V}}=0.50\\,\\mathrm{A}$. Rearrange the power equation to find the current.",
+      "hint": "Rearrange P = I ΔV for I.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "069415o",
+      "kind": "example",
+      "front": "A headlight bulb draws 3.0 A from a 12 V battery. What power does it transfer?",
+      "back": "$P=I\\,\\Delta V=(3.0\\,\\mathrm{A})(12\\,\\mathrm{V})=36\\,\\mathrm{W}$.",
+      "hint": "Substitute into P = I ΔV.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iiuwqm",
+      "kind": "concept",
+      "front": "How is the energy transferred by a device found from its power and the time it runs?",
+      "back": "**Energy** transferred equals power times time: $\\Delta E=P\\,\\Delta t$. Use watts with seconds to get joules.",
+      "hint": "Rearrange the definition of power.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j6l6et",
+      "kind": "term",
+      "front": "What is a kilowatt-hour?",
+      "back": "A **kilowatt-hour** is a unit of energy equal to the energy a 1 kW device transfers in 1 hour, which is $3.6\\times10^{6}\\,\\mathrm{J}$.",
+      "hint": "It is the unit on electricity bills.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p48yl5",
+      "kind": "example",
+      "front": "A 1.5 kW heater runs for 2.0 h. How much energy does it transfer in kilowatt-hours?",
+      "back": "$\\Delta E=P\\,\\Delta t=(1.5\\,\\mathrm{kW})(2.0\\,\\mathrm{h})=3.0\\,\\mathrm{kWh}$, which is about $1.1\\times10^{7}\\,\\mathrm{J}$.",
+      "hint": "Multiply kilowatts by hours.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yux1xp",
+      "kind": "mistake",
+      "front": "Why must units be consistent when calculating energy from power?",
+      "back": "Mixing units gives wrong answers. Use watts with seconds to get joules, or kilowatts with hours to get kilowatt-hours.",
+      "hint": "Check the time unit before multiplying.",
+      "sectionId": "s5"
+    }
+  ]
+}

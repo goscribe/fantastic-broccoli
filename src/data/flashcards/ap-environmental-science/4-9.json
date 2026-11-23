@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-9",
+  "topicCode": "4.9",
+  "topicName": "El Niño and La Niña",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:46.569Z",
+  "cards": [
+    {
+      "id": "1xt4yug",
+      "kind": "concept",
+      "front": "Why does the western tropical Pacific get heavy rain in a normal year?",
+      "back": "Steady **trade winds** push warm surface water westward. The warm water heats the air above it, the air rises, cools, and drops heavy rain.",
+      "hint": "Follow the warm water and the air above it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kwiftr",
+      "kind": "concept",
+      "front": "How does a weakening of the trade winds lead to El Niño?",
+      "back": "Less warm water is pushed west, so it spreads back eastward and warms the central and eastern Pacific. **Upwelling** weakens and the heavy rain moves east with the warm water.",
+      "hint": "Think about where the warm water goes when the winds slacken.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0du8p7y",
+      "kind": "concept",
+      "front": "What makes La Niña the opposite of El Niño?",
+      "back": "The trade winds are stronger than normal, pushing more warm water west. The eastern Pacific becomes cooler, upwelling strengthens, and rain concentrates even more in the west.",
+      "hint": "Compare the wind strength with the normal pattern.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mvhaqf",
+      "kind": "term",
+      "front": "What is upwelling?",
+      "back": "The rise of cold, **nutrient-rich deep water** to the ocean surface, often where winds push surface water away from a coast. It supports rich fisheries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rnxifz",
+      "kind": "term",
+      "front": "What is a teleconnection?",
+      "back": "A **climate link** in which conditions in one region influence weather in a distant region, such as Pacific rainfall changing air flow around the globe.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cc4hcy",
+      "kind": "mistake",
+      "front": "Why is it wrong to think of El Niño as a single storm?",
+      "back": "El Niño is a **change in ocean and air conditions** that lasts for months, not one storm.",
+      "hint": "Think about how long the event lasts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l9121o",
+      "kind": "concept",
+      "front": "During El Niño, which regions tend to become drier?",
+      "back": "**Indonesia and Australia** tend to become drier, with drought risk, while western South America tends to get wetter.",
+      "hint": "Compare with where the heavy rain moves.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "077dzf3",
+      "kind": "concept",
+      "front": "Which ocean events are linked to more Atlantic hurricanes?",
+      "back": "**La Niña** is linked to often more Atlantic hurricanes, while El Niño is linked to often fewer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ey1yhc",
+      "kind": "concept",
+      "front": "How do El Niño and La Niña affect global average temperatures?",
+      "back": "El Niño years often run **warmer** worldwide, while La Niña years run slightly cooler.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f6ay7u",
+      "kind": "concept",
+      "front": "Why do fish populations often decline during El Niño?",
+      "back": "Weaker **upwelling** cuts the nutrient supply, so less food reaches fish and the animals that eat them.",
+      "hint": "Recall what upwelling brings in a normal year.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11durdu",
+      "kind": "term",
+      "front": "What is coral bleaching?",
+      "back": "A loss of color that occurs when stress, such as unusually warm water, causes corals to expel their **algae**, which can kill them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vn21ma",
+      "kind": "mistake",
+      "front": "Why is it wrong to think the Pacific stays in El Niño or La Niña permanently?",
+      "back": "Between events the Pacific returns to **near-normal conditions**. Both events return irregularly and last from several months to a year or more.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1exp1hi",
+      "kind": "concept",
+      "front": "Why is forecasting El Niño and La Niña useful?",
+      "back": "It helps **communities prepare**: farmers can adjust crops, and agencies can plan for floods or drought.",
+      "sectionId": "s5"
+    }
+  ]
+}

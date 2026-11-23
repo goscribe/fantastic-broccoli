@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a2-3",
+  "topicCode": "A2.3",
+  "topicName": "Data transmission",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:56.450Z",
+  "cards": [
+    {
+      "id": "18ykd2x",
+      "kind": "term",
+      "front": "What is a packet, and what are its two main parts?",
+      "back": "A **packet** is a small unit of data that crosses the network on its own. It has a header (source address, destination address and sequence number) and a payload (a piece of the file).",
+      "hint": "Think about how a photo is split into pieces before it is sent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "060fxqm",
+      "kind": "concept",
+      "front": "How does packet switching differ from circuit switching?",
+      "back": "In **packet switching**, each packet is routed separately and may take a different route over shared links. In **circuit switching**, a dedicated path is set up before sending and reserved for the whole session.",
+      "hint": "Compare who controls the route and whether the path is reserved.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1anl931",
+      "kind": "formula",
+      "front": "How do you calculate the transfer time for a file?",
+      "back": "Use $t=\\frac{S}{R}$, where $t$ is time in seconds, $S$ is the size in **bits** and $R$ is the **data rate** in bits per second. Convert bytes to bits first by multiplying by 8.",
+      "hint": "Check the units match before you divide.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12a6tl6",
+      "kind": "example",
+      "front": "A 120 MB file is sent over a link with a data rate of 80 Mbit s^-1. How long does the ideal transfer take?",
+      "back": "$12\\,\\mathrm{s}$. Convert $120\\times8=960\\,\\mathrm{Mbit}$, then $t=\\frac{960}{80}=12\\,\\mathrm{s}$.",
+      "hint": "Convert megabytes to megabits first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dr1bqz",
+      "kind": "mistake",
+      "front": "A student divides 120 MB directly by 80 Mbit s^-1. What is wrong?",
+      "back": "The **units do not match**. The size must be converted to bits, not left in bytes. Dividing directly gives a time eight times too small.",
+      "hint": "One byte contains how many bits?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xiarxd",
+      "kind": "term",
+      "front": "What is bandwidth?",
+      "back": "**Bandwidth** is the maximum rate at which a link can transfer data, measured in bits per second, for example Mbit s^-1.",
+      "hint": "It is a maximum, not the speed you actually get.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0penzko",
+      "kind": "term",
+      "front": "What is latency?",
+      "back": "**Latency** is the time delay between data being sent and its arrival at the destination, measured in milliseconds.",
+      "hint": "Think about delay rather than amount of data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h3pumv",
+      "kind": "concept",
+      "front": "Why can a video call stutter even when the link has high bandwidth?",
+      "back": "Bandwidth is only a **maximum rate**. High latency, congestion and resent packets delay data, and throughput is usually lower than bandwidth.",
+      "hint": "Bandwidth and delay are different things.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08n96oe",
+      "kind": "concept",
+      "front": "Name three factors that slow down the speed you actually experience.",
+      "back": "**Congestion** (many users share a link), **distance** (more routers add delay) and **interference** (noise causes errors and resending). Hardware and the medium also matter.",
+      "hint": "Think about shared links and noise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sk8nrc",
+      "kind": "term",
+      "front": "What is a fibre-optic cable?",
+      "back": "A **fibre-optic cable** carries data as pulses of light through thin glass or plastic strands. It can reach high speeds over long distances.",
+      "hint": "Light, not electricity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hze3jw",
+      "kind": "concept",
+      "front": "Why might a school cable its server room but use wireless in classrooms?",
+      "back": "Wired links are **steadier and usually faster**, while wireless gives **mobility** and needs fewer cables. Neither type is better in every case.",
+      "hint": "Consider where devices need to move.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tv7jsu",
+      "kind": "mistake",
+      "front": "Is a wireless network automatically more secure because nobody can plug in a cable?",
+      "back": "No. **Anyone in range** can receive wireless signals, whereas tapping a wired link needs physical access.",
+      "hint": "Think about who can receive the signal.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r3nuh5",
+      "kind": "process",
+      "front": "What happens to packets when they reach the destination?",
+      "back": "The receiver uses the **sequence numbers** to put the packets back in order. If a packet is missing, it can be requested again, so only that piece is resent.",
+      "hint": "Sequence numbers do two jobs here.",
+      "sectionId": "s1"
+    }
+  ]
+}

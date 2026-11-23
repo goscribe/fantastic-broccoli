@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Feedback",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:36.150Z",
+  "cards": [
+    {
+      "id": "02r3025",
+      "kind": "concept",
+      "front": "What is the key difference between negative and positive feedback?",
+      "back": "**Negative feedback** reduces the original change and moves a condition back toward a useful range. **Positive feedback** amplifies the original change and drives the process further in the same direction.",
+      "hint": "Focus on how the response affects the initial change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05jbfbz",
+      "kind": "concept",
+      "front": "How does negative feedback keep blood glucose within a useful range?",
+      "back": "Rising glucose prompts release of **insulin**, which helps cells take up and store glucose, lowering it. Falling glucose prompts release of **glucagon**, which releases stored glucose, raising it.",
+      "hint": "Name the hormone for each direction of change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08js0c0",
+      "kind": "concept",
+      "front": "What is feedback inhibition?",
+      "back": "**Feedback inhibition** is when a metabolic pathway's final product reduces the activity of an earlier enzyme, so less product is made. As the product is used up, the inhibition lifts and production resumes.",
+      "hint": "Name the product, the enzyme, and the effect on production.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1abthsp",
+      "kind": "term",
+      "front": "What is feedback?",
+      "back": "A process that changes a condition that affects that same process. A system detects the change and produces a response, and the response's effect determines whether the feedback is negative or positive.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1au9k0z",
+      "kind": "term",
+      "front": "What is homeostasis?",
+      "back": "The maintenance of **internal conditions** within ranges that support life. Conditions can vary within these ranges, and negative feedback limits departures rather than holding every condition perfectly constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m0x9lw",
+      "kind": "mistake",
+      "front": "Does positive feedback mean the response is beneficial?",
+      "back": "No. **Positive feedback** only means the response amplifies the initial change. The terms describe the response's effect on the change, not whether the outcome is helpful or harmful.",
+      "hint": "Think about what the terms describe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h6yu9w",
+      "kind": "mistake",
+      "front": "Does homeostasis mean every internal condition stays perfectly constant?",
+      "back": "No. Homeostasis keeps conditions within **ranges** that support life, and conditions can vary within those ranges. Negative feedback limits departures rather than fixing values exactly.",
+      "hint": "Consider the word ranges in the definition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rfha86",
+      "kind": "process",
+      "front": "What are the steps of feedback inhibition in amino acid production?",
+      "back": "1) The amino acid accumulates. 2) It binds an **enzyme** near the start of its production pathway. 3) Enzyme activity drops, so less amino acid is made. 4) As the cell uses the amino acid, its concentration falls and inhibition eases.",
+      "hint": "Follow the product from buildup to use.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00uyr5h",
+      "kind": "term",
+      "front": "What is an enzyme?",
+      "back": "A **biological catalyst** that speeds up a chemical reaction without being consumed in the process.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04pv8zz",
+      "kind": "process",
+      "front": "How does positive feedback help seal a damaged blood vessel?",
+      "back": "Activated **platelets** release signals that attract and activate more platelets. Those platelets release further signals, rapidly strengthening the platelet response at the damaged site.",
+      "hint": "Describe the loop step by step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vlgswx",
+      "kind": "concept",
+      "front": "Why can positive feedback alone not keep an internal condition stable?",
+      "back": "It amplifies change instead of reducing it. The process needs a way to end, such as the vessel being sealed, which removes the damage that drives platelet recruitment.",
+      "hint": "Ask what would stop the loop.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lritwl",
+      "kind": "example",
+      "front": "How do sweating and shivering illustrate negative feedback in body temperature?",
+      "back": "Both responses oppose the temperature change. **Sweating** helps cool a warm body, while **shivering** generates heat when the body is cold.",
+      "hint": "Each response pushes temperature back toward its range.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Definition of the derivative",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:39.032Z",
+  "cards": [
+    {
+      "id": "1w20ohk",
+      "kind": "concept",
+      "front": "What does the derivative $f'(a)$ measure at a point on a graph?",
+      "back": "The **slope of the tangent line** at $x=a$. It is the limit of secant slopes as the second point approaches the first.",
+      "hint": "Think about secant lines squeezing toward one point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1il74wq",
+      "kind": "formula",
+      "front": "Write the limit definition of $f'(a)$ and say what the symbol $h$ stands for.",
+      "back": "$f'(a)=\\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}$, where $h$ is the **change in input** and $h\\ne 0$ inside the quotient.",
+      "hint": "The quotient is a difference quotient.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fnhgaz",
+      "kind": "concept",
+      "front": "What does the sign of $v(t)=x'(t)$ tell you about motion?",
+      "back": "**Direction**: positive velocity means position increases; negative velocity means position decreases. Unlike speed, velocity includes direction.",
+      "hint": "Compare velocity with speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15yvf4f",
+      "kind": "term",
+      "front": "What is a secant line?",
+      "back": "A **secant line** passes through two distinct points on a graph. Its slope is the difference quotient.",
+      "hint": "Two points, not one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14yfylm",
+      "kind": "process",
+      "front": "What are the steps to find $f'(a)$ from the limit definition?",
+      "back": "1) Write $\\frac{f(a+h)-f(a)}{h}$. 2) Expand and simplify, cancelling $h$ since $h\\ne 0$. 3) Take the **limit** as $h$ approaches zero.",
+      "hint": "Simplify before taking the limit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yi598z",
+      "kind": "mistake",
+      "front": "A student sets $h=0$ in $\\frac{f(a+h)-f(a)}{h}$ to get the derivative. What is wrong?",
+      "back": "Setting $h=0$ gives $\\frac{0}{0}$, which is undefined. You must find the **limit** as $h$ approaches zero instead.",
+      "hint": "What does division by zero give?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ujwcsh",
+      "kind": "concept",
+      "front": "When does the derivative fail to exist at a point?",
+      "back": "When the difference quotient has **no finite, two-sided limit**. The left and right limits must agree.",
+      "hint": "Think about the two sides of $a$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f64557",
+      "kind": "term",
+      "front": "What is the derivative function $f'$?",
+      "back": "The **derivative function** assigns to each input $x$ the slope $f'(x)$ where the derivative exists.",
+      "hint": "It is a function, not a single value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yw8n96",
+      "kind": "formula",
+      "front": "Which notations name the derivative of $y=f(x)$ at $x=a$?",
+      "back": "$f'(a)$ or $\\left.\\frac{dy}{dx}\\right|_{x=a}$. Use $x$ for a variable input and $a$ for a chosen input.",
+      "hint": "Include the specified input in the notation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sp9f1i",
+      "kind": "term",
+      "front": "What is the instantaneous rate of change?",
+      "back": "The **derivative** of a measured quantity with respect to its input. Its units are output units divided by input units.",
+      "hint": "Think of a rate at a single moment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07putkh",
+      "kind": "example",
+      "front": "Let $x(t)=t^2$ meters, with $t$ in seconds. Find $v(3)$.",
+      "back": "$v(3)=6\\,\\mathrm{m/s}$. Simplify $\\frac{(3+h)^2-9}{h}=\\frac{6h+h^2}{h}=6+h$, then let $h\\to 0$.",
+      "hint": "Expand $(3+h)^2$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1odr1do",
+      "kind": "example",
+      "front": "Use the limit definition to find $f'(2)$ for $f(x)=x^2$.",
+      "back": "$f'(2)=4$. Simplify $\\frac{(2+h)^2-4}{h}=\\frac{4h+h^2}{h}=4+h$, then take the limit as $h\\to 0$.",
+      "hint": "Same pattern as the position example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ylwgn0",
+      "kind": "concept",
+      "front": "If $f'(a)=0$, what does the tangent line look like?",
+      "back": "It is **horizontal**. A positive $f'(a)$ means the tangent rises left to right; a negative one means it falls.",
+      "hint": "Zero slope.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n8073k",
+      "kind": "example",
+      "front": "For position $x(t)$ in meters, $x'(3)=-2$ m/s. What does this mean?",
+      "back": "At 3 seconds the **instantaneous velocity** is $-2\\,\\mathrm{m/s}$, so the position is decreasing at that instant.",
+      "hint": "Read the sign carefully.",
+      "sectionId": "s4"
+    }
+  ]
+}

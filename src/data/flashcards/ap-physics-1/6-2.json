@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Torque and work",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:45.252Z",
+  "cards": [
+    {
+      "id": "1fdryhb",
+      "kind": "formula",
+      "front": "What equation gives the work done by a constant torque, and what unit must the angle use?",
+      "back": "$W = \\tau\\,\\Delta\\theta$, with the **angular displacement** $\\Delta\\theta$ in radians. The work is in joules.",
+      "hint": "The angle must not be in degrees.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01dhuss",
+      "kind": "concept",
+      "front": "How is the net work on a spinning object linked to its rotational kinetic energy?",
+      "back": "The **net work** equals the change in rotational kinetic energy, $W_{\\mathrm{net}} = \\Delta K$. A wheel speeds up when net work is positive and slows down when it is negative.",
+      "hint": "Think of the work-energy theorem for rotation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hwlz69",
+      "kind": "concept",
+      "front": "How do you find the work done when the torque changes as the object turns?",
+      "back": "Find the **area** between the torque-angle graph and the angle axis. Areas below the axis count as negative work.",
+      "hint": "Plot torque against angle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1brlbny",
+      "kind": "term",
+      "front": "What is torque?",
+      "back": "Torque is the **turning effect** of a force about an axis. It is given by $\\tau = rF\\sin\\theta$ and measured in $\\mathrm{N\\,m}$.",
+      "hint": "Think of how a force turns a door about its hinges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kk21kg",
+      "kind": "formula",
+      "front": "What equation gives torque, and what do $r$, $F$ and $\\theta$ mean?",
+      "back": "$\\tau = rF\\sin\\theta$, where $r$ is the distance from the axis, $F$ is the force, and $\\theta$ is the angle between the force and the line from the axis to where the force acts.",
+      "hint": "Check the angle is measured between the force and that line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hdu9fw",
+      "kind": "mistake",
+      "front": "Why is it wrong to say torque and work are the same because they share the unit N m?",
+      "back": "Torque is a **turning effect**, while work is energy transferred. They share the unit $\\mathrm{N\\,m}$, but they measure different quantities.",
+      "hint": "Compare what each quantity describes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k3a3fe",
+      "kind": "mistake",
+      "front": "What goes wrong if you put an angle in degrees into $W = \\tau\\Delta\\theta$?",
+      "back": "You get the wrong work. Convert to **radians** first, since one full turn is $2\\pi$ rad.",
+      "hint": "Recall how many radians are in one full turn.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10umyqs",
+      "kind": "example",
+      "front": "A constant torque of 12 N m turns a wheel through 3.0 rad. What work is done?",
+      "back": "**36 J**, from $W = (12)(3.0) = 36\\ \\mathrm{J}$.",
+      "hint": "Multiply the torque by the angle in radians.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ba2y6k",
+      "kind": "example",
+      "front": "A wheel with $I = 0.50\\ \\mathrm{kg\\,m^2}$ starts at rest. A constant net torque of 4.0 N m acts through 5.0 rad. What is its final angular speed?",
+      "back": "About **8.9 rad/s**. The work is 20 J, so $\\omega = \\sqrt{2W/I} = \\sqrt{80} \\approx 8.9\\ \\mathrm{rad/s}$.",
+      "hint": "Find the work first, then use $W = \\frac{1}{2}I\\omega^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wpqiu2",
+      "kind": "term",
+      "front": "What is rotational kinetic energy?",
+      "back": "The **kinetic energy of rotation** about a fixed axis, $K = \\frac{1}{2}I\\omega^2$, measured in joules, where $I$ is the rotational inertia.",
+      "hint": "It is the rotating version of $\\frac{1}{2}mv^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ez34cw",
+      "kind": "formula",
+      "front": "What equation gives the power delivered by a torque, and what unit is used for $\\omega$?",
+      "back": "$P = \\tau\\omega$, where $\\omega$ is the angular speed in **rad/s** and $P$ is in watts.",
+      "hint": "Start from $W = \\tau\\Delta\\theta$ and divide by time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ou6igp",
+      "kind": "example",
+      "front": "A shaft applies a torque of 6.0 N m while turning at 50 rad/s. What is the power?",
+      "back": "**300 W**, from $P = (6.0)(50) = 300\\ \\mathrm{W}$.",
+      "hint": "Multiply torque by angular speed.",
+      "sectionId": "s5"
+    }
+  ]
+}

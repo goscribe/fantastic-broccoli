@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "7-5",
+  "topicCode": "7.5",
+  "topicName": "Euler's method",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:47.997Z",
+  "cards": [
+    {
+      "id": "07stzew",
+      "kind": "formula",
+      "front": "What is the Euler's method formula that gives y_{n+1} from (x_n, y_n)?",
+      "back": "$y_{n+1}=y_n+\\frac{dy}{dx}\\Big|_{(x_n,y_n)}\\Delta x$: the **old y-value** plus the slope at the current point times the step. Each step uses the newest point.",
+      "hint": "Old value plus slope times step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1243vzu",
+      "kind": "concept",
+      "front": "Why does halving the step size usually bring the Euler estimate closer to the true value?",
+      "back": "**Smaller steps** refresh the slope more often, so the estimate follows the curve more closely. For y(1) the estimate rose from 2.500 to 2.883, closer to 3.437.",
+      "hint": "Think about how often the slope is recalculated.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fd6bv6",
+      "kind": "concept",
+      "front": "Does Euler's method run low or high on a concave-up solution, and why?",
+      "back": "It runs **low**. Tangent lines to a **concave-up** curve lie below the curve, so each step falls short. For concave down, the estimates run high.",
+      "hint": "Compare a tangent line with the curve.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lgbg6o",
+      "kind": "term",
+      "front": "What is a differential equation?",
+      "back": "An equation involving a function and at least one of its **derivatives**.",
+      "hint": "It links a function with its rate of change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fszimj",
+      "kind": "term",
+      "front": "What is an initial condition, such as y(0)=1?",
+      "back": "A **function value** given at a specified input, which fixes the starting point and lets you find the constant of integration.",
+      "hint": "It tells you where to start.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ox6pg",
+      "kind": "concept",
+      "front": "Why can Euler's method estimate solution values without a formula for y?",
+      "back": "The **differential equation** gives the slope at any point where x and y are known, so the slope can be read straight from it.",
+      "hint": "Where does the slope come from?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ffnlng",
+      "kind": "process",
+      "front": "What are the four steps of one Euler step from (x_n, y_n)?",
+      "back": "1) Compute the **slope** at (x_n, y_n). 2) Multiply the slope by Δx. 3) Add the product to y_n to get y_{n+1}. 4) Add Δx to x_n to get x_{n+1}.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "054ok6q",
+      "kind": "formula",
+      "front": "How many Euler steps are needed to go from x = a to x = b with step size Δx?",
+      "back": "**(b − a)/Δx** steps. For x = 0 to 1 with Δx = 0.5, that is 2 steps.",
+      "hint": "Divide the distance in x by the step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xf7g9x",
+      "kind": "term",
+      "front": "What is the step size in Euler's method?",
+      "back": "The fixed change in $x$, written $\\Delta x$, between consecutive points. It is the **horizontal distance** covered before the slope is recalculated.",
+      "hint": "It is a change in x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oe07uv",
+      "kind": "example",
+      "front": "Using Euler's method with Δx = 0.5 for dy/dx = x + y and y(0) = 1, estimate y(1).",
+      "back": "**y(1) ≈ 2.5**. Step 1: slope at (0,1) is 1, so y = 1.5. Step 2: slope at (0.5, 1.5) is 2, so y = 2.5.",
+      "hint": "Two steps, each with the slope from the equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05wgp6b",
+      "kind": "example",
+      "front": "What is the exact value of y(1) for dy/dx = x + y with y(0) = 1, and how far off is the estimate of 2.5?",
+      "back": "**2e − 2 ≈ 3.437**, from y = 2e^x − x − 1. The estimate of 2.5 is low by about 0.937.",
+      "hint": "Check the given exact solution.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qoysoo",
+      "kind": "mistake",
+      "front": "A student says the step size is the change in y for each step. What is wrong?",
+      "back": "The **step size** is a change in x, Δx. The change in y for one step is the slope times Δx.",
+      "hint": "Which letter does the step size use?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y67tdc",
+      "kind": "mistake",
+      "front": "Why should the Euler result for y(1) be written with ≈ rather than =?",
+      "back": "It is an **estimate**, not exact. Each step starts from an estimated y-value, so errors build up as the steps continue.",
+      "hint": "Look at where each step starts.",
+      "sectionId": "s4"
+    }
+  ]
+}

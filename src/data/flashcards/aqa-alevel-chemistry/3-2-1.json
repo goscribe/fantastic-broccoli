@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-2-1",
+  "topicCode": "3.2.1",
+  "topicName": "Periodicity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:04.204Z",
+  "cards": [
+    {
+      "id": "1fxy4c1",
+      "kind": "concept",
+      "front": "Why does atomic radius decrease from sodium to chlorine across Period 3?",
+      "back": "**Nuclear charge** rises by one proton per element while shielding stays about constant, so the outer electrons are pulled closer to the nucleus.",
+      "hint": "Compare what changes in the nucleus with what stays the same in the inner shells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wufj8t",
+      "kind": "concept",
+      "front": "Why does first ionisation energy generally rise across Period 3?",
+      "back": "Smaller atoms hold the outer electron more tightly, so more **energy** is needed to remove it.",
+      "hint": "Link it to the radius trend you have just revised.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u5tura",
+      "kind": "concept",
+      "front": "Why is sodium the most reactive metal in Period 3?",
+      "back": "It has a low first ionisation energy, so it loses its single outer electron easily.",
+      "hint": "Think about how many electrons each metal must lose to react.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14jsyzu",
+      "kind": "term",
+      "front": "What is shielding in an atom?",
+      "back": "**Shielding** is the repulsion of outer electrons by inner-shell electrons, which reduces the attraction the outer electrons feel from the nucleus.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07573h1",
+      "kind": "formula",
+      "front": "What equation shows the first ionisation of magnesium, and what does it show?",
+      "back": "$\\mathrm{Mg(g)\\rightarrow Mg^+(g)+e^-}$: one electron is removed from each gaseous atom to form a $\\mathrm{Mg^+}$ ion and a free electron.",
+      "hint": "Check which state symbol applies to each species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bll5q0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say atoms shrink across Period 3 because they lose electrons?",
+      "back": "Atoms gain electrons, which enter the **same shell**. The stronger nuclear attraction then pulls that shell closer.",
+      "hint": "Which shell do the new electrons enter?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y42qwh",
+      "kind": "concept",
+      "front": "Why does first ionisation energy dip from magnesium to aluminium?",
+      "back": "Aluminium's outer electron is in a **3p subshell**, which is higher in energy than 3s, and the 3s electrons also shield it.",
+      "hint": "Compare the subshell that holds the outer electron in each atom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rqy1ba",
+      "kind": "concept",
+      "front": "Why does first ionisation energy dip from phosphorus to sulfur?",
+      "back": "Two electrons share one 3p orbital in sulfur, and the **repulsion** between them makes one easier to remove.",
+      "hint": "Count the electrons in the 3p orbitals of each atom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00h40fl",
+      "kind": "concept",
+      "front": "What does electronegativity measure, and how does it change across Period 3?",
+      "back": "It measures an atom's ability to attract the shared electrons in a covalent bond, and it **rises** from sodium to chlorine.",
+      "hint": "Think about the nuclear charge and radius trends.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14re7wm",
+      "kind": "concept",
+      "front": "Why does aluminium have a higher melting point than sodium?",
+      "back": "Aluminium gives more delocalised electrons and its ions are smaller and more highly charged, so the **metallic bonding** is stronger.",
+      "hint": "Compare how many electrons each atom contributes to the lattice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u4b2gu",
+      "kind": "concept",
+      "front": "Why does silicon have the highest melting point in Period 3?",
+      "back": "Silicon has a **giant covalent lattice**, so melting breaks many strong covalent bonds.",
+      "hint": "Compare what must be overcome with the weak forces in small molecules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04agwp5",
+      "kind": "mistake",
+      "front": "Why does melting chlorine not break the covalent bonds inside its molecules?",
+      "back": "Only the weak **London forces** between molecules are overcome, so the covalent bonds within each $\\mathrm{Cl_2}$ molecule stay intact.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1585oqm",
+      "kind": "concept",
+      "front": "Why does $\\mathrm{S_8}$ melt at a higher temperature than $\\mathrm{P_4}$?",
+      "back": "**London forces** strengthen as the number of electrons increases, and $\\mathrm{S_8}$ has more electrons, so its molecules are held together more strongly.",
+      "hint": "Compare the number of electrons in each molecule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04r45zr",
+      "kind": "concept",
+      "front": "Why is chlorine the most reactive non-metal in Period 3?",
+      "back": "It has a high **electronegativity**, so it attracts electrons strongly and readily gains them.",
+      "hint": "Think about how non-metals react and which property measures attraction for electrons.",
+      "sectionId": "s5"
+    }
+  ]
+}

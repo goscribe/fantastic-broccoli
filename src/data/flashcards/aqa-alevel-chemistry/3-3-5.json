@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-5",
+  "topicCode": "3.3.5",
+  "topicName": "Alcohols",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:27.485Z",
+  "cards": [
+    {
+      "id": "0581n74",
+      "kind": "term",
+      "front": "What is an alcohol, and what feature gives alcohols their characteristic reactions?",
+      "back": "An **alcohol** is an organic compound with a **hydroxyl group**, -OH, bonded to a saturated carbon atom. The polar O–H bond makes alcohols more reactive than alkanes.",
+      "hint": "Think about the functional group that ends the name of the compound.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o06dll",
+      "kind": "concept",
+      "front": "How is an alcohol classed as primary, secondary or tertiary?",
+      "back": "By the number of other carbon atoms bonded to the carbon that holds the -OH: **one** is primary, **two** is secondary, **three** is tertiary. The total length of the chain does not decide it.",
+      "hint": "Look only at the carbon holding the -OH group.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03f5gsh",
+      "kind": "concept",
+      "front": "What product does a secondary alcohol form when it is oxidised by acidified potassium dichromate(VI)?",
+      "back": "A **ketone**. A ketone is not oxidised further by this reagent, so the reaction stops there whether the mixture is distilled or refluxed.",
+      "hint": "Compare this with the two-stage route for a primary alcohol.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wfqjaq",
+      "kind": "process",
+      "front": "How do you obtain an aldehyde rather than a carboxylic acid from oxidising a primary alcohol?",
+      "back": "**Distil** the product off as it forms, so the aldehyde leaves before it is oxidised again, since it has a lower boiling point than the alcohol. Heating under **reflux** instead gives the carboxylic acid.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fj2jom",
+      "kind": "mistake",
+      "front": "Why does a tertiary alcohol leave the orange dichromate mixture orange, rather than turning it green?",
+      "back": "A tertiary alcohol is **not oxidised**, because the carbon holding the -OH has no hydrogen atom. Only primary and secondary alcohols give the green chromium(III) colour.",
+      "hint": "Count the hydrogen atoms on the carbon holding the -OH group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "063vybl",
+      "kind": "mistake",
+      "front": "Why is butan-2-ol a secondary alcohol, even though it has four carbon atoms?",
+      "back": "Its type depends on the carbon holding the -OH, which is bonded to **two** other carbons. A long chain alone does not make an alcohol primary.",
+      "hint": "Look at the carbon holding the -OH, not the total chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iqnis1",
+      "kind": "concept",
+      "front": "What colour change shows that an alcohol has been oxidised by acidified potassium dichromate(VI)?",
+      "back": "The mixture turns from **orange** to **green**, because chromium(III) ions form as the dichromate is reduced.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09k4d23",
+      "kind": "formula",
+      "front": "What is the equilibrium equation for making ethanol by hydration of ethene, and what conditions are used?",
+      "back": "$\\mathrm{C_2H_4(g) + H_2O(g) \\rightleftharpoons C_2H_5OH(g)}$ over a phosphoric acid catalyst at high temperature and pressure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xz87ao",
+      "kind": "formula",
+      "front": "What is the equation for making ethanol by fermentation of glucose, and at what temperature is it run?",
+      "back": "$\\mathrm{C_6H_{12}O_6(aq) \\rightarrow 2C_2H_5OH(aq) + 2CO_2(g)}$ at about $30\\text{–}40\\,^\\circ\\text{C}$, without air.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gq8x5k",
+      "kind": "concept",
+      "front": "How does ethanol from hydration of ethene compare with ethanol from fermentation?",
+      "back": "**Hydration** uses ethene from crude oil, and is fast, continuous and gives pure ethanol. **Fermentation** uses plant sugar, is slow and batch, and gives dilute ethanol that needs distillation.",
+      "hint": "Consider the raw material, the rate and the purity of the product.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xrmrfq",
+      "kind": "concept",
+      "front": "Why is ethanol from fermentation a biofuel that is not fully carbon neutral?",
+      "back": "The crops absorbed carbon dioxide as they grew, which offsets the carbon dioxide released on burning. However, growing, transport and distillation use energy, so it is not fully carbon neutral.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eugg84",
+      "kind": "concept",
+      "front": "What happens when ethanol is heated with concentrated sulfuric acid, and what is the name of this reaction?",
+      "back": "**Dehydration**: a water molecule is removed and ethene forms, $\\mathrm{C_2H_5OH(l) \\rightarrow C_2H_4(g) + H_2O(l)}$. The acid acts as a catalyst.",
+      "hint": "Think about which small molecule leaves the alcohol.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1dy89p5",
+      "kind": "process",
+      "front": "What two stages does ethanol go through when it is oxidised to a carboxylic acid?",
+      "back": "First it forms the **aldehyde**, $\\mathrm{CH_3CHO}$, then the aldehyde is oxidised to the **carboxylic acid**, $\\mathrm{CH_3COOH}$. Each stage uses oxygen from the oxidising agent.",
+      "sectionId": "s5"
+    }
+  ]
+}

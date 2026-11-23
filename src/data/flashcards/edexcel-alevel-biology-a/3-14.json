@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-14",
+  "topicCode": "3.14",
+  "topicName": "Genotype, environment and phenotype",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:34.906Z",
+  "cards": [
+    {
+      "id": "0yas0z6",
+      "kind": "term",
+      "front": "What is the difference between genotype and phenotype?",
+      "back": "**Genotype** is the alleles an organism has for a gene. **Phenotype** is its characteristics, which can be seen or detected by tests and also depend on the environment.",
+      "hint": "Think about what an organism carries versus what it shows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wdk2tl",
+      "kind": "concept",
+      "front": "Why can changing the environment change a phenotype without changing the genotype?",
+      "back": "The **alleles** stay the same, but the conditions change how those alleles show their effects, so the phenotype changes.",
+      "hint": "Compare the same organism kept in different conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01off0x",
+      "kind": "concept",
+      "front": "How do alleles and diet together affect phenylketonuria?",
+      "back": "Alleles set the **potential**, since people with certain alleles cannot break down phenylalanine. Keeping phenylalanine low in the diet greatly reduces the harm, so the environment affects how much of that potential is reached.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "An **allele** is a version of a gene.",
+      "hint": "Think of a gene as having several possible forms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lprt9i",
+      "kind": "term",
+      "front": "What does the term environment mean in biology?",
+      "back": "The **environment** is the set of external conditions, such as light, temperature, diet and soil pH, that act on an organism.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rv6fu1",
+      "kind": "process",
+      "front": "How does an allele lead to a change in a characteristic, step by step?",
+      "back": "1 The gene carries instructions for making a protein. 2 Different alleles give proteins with different shapes. 3 A differently shaped enzyme may work faster, more slowly or not at all. 4 This changes a reaction in the cell, which changes the characteristic.",
+      "hint": "Start with what a gene carries.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0odp12o",
+      "kind": "concept",
+      "front": "Why must a gene be expressed before its allele can affect phenotype?",
+      "back": "An allele only has an effect if its gene is expressed, so **gene expression** is the link between genotype and phenotype.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gjdfco",
+      "kind": "example",
+      "front": "Why do Himalayan rabbits have dark fur only on the ears and paws?",
+      "back": "Dark fur appears only on the cooler parts of the body, so the conditions decide where the same alleles show their effect.",
+      "hint": "Compare the ears and paws with the rest of the rabbit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s6asie",
+      "kind": "example",
+      "front": "What happens to seedlings grown in the dark, and why?",
+      "back": "They are pale and elongated, because without light they cannot make **chlorophyll**.",
+      "hint": "Think about what light is needed for in a plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p1uuv4",
+      "kind": "mistake",
+      "front": "Why is a suntan not passed on to a person's children?",
+      "back": "A suntan changes the phenotype, not the **alleles** a person passes on. Children inherit alleles, not the tan.",
+      "hint": "Think about what parents pass to their offspring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dsjf08",
+      "kind": "concept",
+      "front": "How can biologists separate genetic from environmental causes of differences between individuals?",
+      "back": "Use genetically identical organisms, such as identical twins or plant cuttings: differences between them are likely environmental. Different genotypes raised in the same conditions point to genetic causes.",
+      "hint": "Control one of the two factors at a time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "046t32e",
+      "kind": "example",
+      "front": "Identical twins differ in body mass. What is the most likely cause?",
+      "back": "**Environmental** differences, such as diet or amount of exercise, because the twins share the same alleles.",
+      "hint": "Consider what is fixed for identical twins.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fukin8",
+      "kind": "example",
+      "front": "For skin colour, name one genetic factor and one environmental factor.",
+      "back": "Genetic: alleles for making **melanin**. Environmental: exposure to sunlight.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "147mewk",
+      "kind": "mistake",
+      "front": "Why is a blood group counted as a phenotype even though it cannot be seen?",
+      "back": "Phenotype is not limited to what the eye can see. Blood group and enzyme activity are phenotypes because tests can detect them.",
+      "hint": "Think about how a characteristic can be detected.",
+      "sectionId": "s1"
+    }
+  ]
+}

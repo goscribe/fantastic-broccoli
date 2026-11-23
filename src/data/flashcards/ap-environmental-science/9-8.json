@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-8",
+  "topicCode": "9.8",
+  "topicName": "Invasive species",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:20.456Z",
+  "cards": [
+    {
+      "id": "03mfd8q",
+      "kind": "term",
+      "front": "What is an invasive species?",
+      "back": "An **invasive species** spreads outside its native range and causes ecological harm in the new area. A non-native species that does not spread or harm anything is not invasive.",
+      "hint": "Compare it with a non-native species that stays in one spot.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iq4uwg",
+      "kind": "concept",
+      "front": "Why can a newcomer species boom in a new region?",
+      "back": "Its **natural enemies** (predators, parasites, and diseases) from home are usually absent, so nothing holds its population down. Fast reproduction and a varied diet then let it spread quickly.",
+      "hint": "Think about what keeps its population in check back home.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qk26rg",
+      "kind": "concept",
+      "front": "How do humans carry species past oceans and mountains?",
+      "back": "Ships carry organisms in ballast water or on their hulls. Cargo, packing, and soil carry seeds and insects. Released or escaped pets and garden plants, and deliberate introductions, also spread species.",
+      "hint": "Think about the trade and travel that removed natural barriers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hika11",
+      "kind": "term",
+      "front": "What is a native range?",
+      "back": "The **native range** is the geographic region where a species evolved or has long lived naturally.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qw6uxi",
+      "kind": "term",
+      "front": "What is ballast water?",
+      "back": "**Ballast water** is water pumped into a ship's tanks for stability, which can carry living organisms to distant ports.",
+      "hint": "Think about why a ship would take on water when it is not carrying cargo.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fzm1m1",
+      "kind": "term",
+      "front": "What is a generalist species?",
+      "back": "A **generalist** tolerates a wide range of conditions and uses many food or habitat resources, which helps many invaders succeed.",
+      "hint": "Compare it with a species that needs one specific food or habitat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variation in life at genetic, species, and ecosystem levels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iqux7a",
+      "kind": "concept",
+      "front": "What are the four main ways an invasive species harms an ecosystem?",
+      "back": "**Competition** for food, light, water, or space; **predation** on natives with no defenses; spreading **disease** natives cannot resist; and **habitat change** to soil, fire, or water flow.",
+      "hint": "Think about what natives need and what the invader does to them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ykhroi",
+      "kind": "example",
+      "front": "How did the zebra mussel reach the Great Lakes?",
+      "back": "It arrived through **ballast water** that ships pumped in and out. Once established, it removes plankton, clogs water pipes, and displaces native mussels.",
+      "hint": "Think about how it crossed a barrier that once kept it out.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kfxz89",
+      "kind": "example",
+      "front": "Why did the cane toad backfire in Australia?",
+      "back": "It was brought in to control beetles in sugarcane, but it is poisonous. It poisons predators that eat it, so the introduction caused harm instead of solving the pest problem.",
+      "hint": "Consider the goal of the introduction and what happened next.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vh838v",
+      "kind": "mistake",
+      "front": "Why is a non-native species not automatically invasive?",
+      "back": "It becomes invasive only when it both spreads and causes ecological harm. Many introduced species stay uncommon and do little damage.",
+      "hint": "Think about the two conditions in the definition.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f8m0d3",
+      "kind": "process",
+      "front": "Name two actions that reduce new invasive arrivals.",
+      "back": "Inspecting cargo and treating ballast water reduce arrivals by ship. Not releasing pets also reduces new arrivals. Prevention is usually more effective than removal once a species is established.",
+      "hint": "Think about where new arrivals come from and what people could stop.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12dmf9u",
+      "kind": "concept",
+      "front": "Why are disturbed habitats, such as cleared land, easy to invade?",
+      "back": "Fewer native competitors remain there, so the newcomer meets less resistance and can establish more easily.",
+      "hint": "Think about who is still there to compete with the newcomer.",
+      "sectionId": "s3"
+    }
+  ]
+}

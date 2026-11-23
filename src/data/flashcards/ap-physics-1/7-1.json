@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Defining simple harmonic motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:50.866Z",
+  "cards": [
+    {
+      "id": "0lvbrno",
+      "kind": "term",
+      "front": "What condition must the net force meet for an oscillation to be simple harmonic motion?",
+      "back": "The **net force** must be proportional to displacement from equilibrium and directed opposite to the displacement.",
+      "hint": "Think about two parts: how big the force is and which way it points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pnq1ii",
+      "kind": "formula",
+      "front": "What equation gives the net restoring force on an ideal spring-mass system, and what does each symbol mean?",
+      "back": "$F=-kx$, where $F$ is the net force in N, $k$ is the **spring constant** in N/m, and $x$ is displacement from equilibrium in m. The minus sign means the force opposes the displacement.",
+      "hint": "Check which way the minus sign tells you the force points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xi2ft6",
+      "kind": "concept",
+      "front": "Which way does a restoring force point, and where is it zero and where is it largest?",
+      "back": "It always points **toward equilibrium**, opposite the displacement. It is zero at equilibrium and largest at the largest displacement.",
+      "hint": "Think about what brings the object back.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d8lnq2",
+      "kind": "term",
+      "front": "What is the equilibrium position of an oscillator?",
+      "back": "The **equilibrium position** is where the net force on the object is zero. Displacement is measured from this point.",
+      "hint": "It is the centre of the motion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17dpjg9",
+      "kind": "term",
+      "front": "What is the amplitude of an oscillation?",
+      "back": "The **maximum distance** the object gets from equilibrium, measured in metres.",
+      "hint": "Think about the farthest point the object reaches.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bq5mye",
+      "kind": "concept",
+      "front": "How do speed and acceleration change as a mass on a spring moves from a turning point to equilibrium?",
+      "back": "Speed rises from zero to its **maximum** at equilibrium. Acceleration falls from its largest value to **zero** at equilibrium, always pointing toward equilibrium.",
+      "hint": "Compare the turning point with the equilibrium point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nnynd3",
+      "kind": "mistake",
+      "front": "An object momentarily stops at a turning point. Is its acceleration zero there?",
+      "back": "No. Speed is zero there, but acceleration is at its **largest**, because the restoring force is largest at maximum displacement.",
+      "hint": "Speed and acceleration are different quantities.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "140m14t",
+      "kind": "example",
+      "front": "A 0.40 kg mass on an ideal spring with $k=80\\ \\mathrm{N/m}$ is displaced $+0.050\\ \\mathrm{m}$. What are the net force and acceleration?",
+      "back": "$F=-(80)(0.050)=-4.0\\ \\mathrm{N}$, so $a=F/m=-4.0/0.40=-10\\ \\mathrm{m/s^2}$. Both point toward equilibrium.",
+      "hint": "Use $F=-kx$ first, then $a=F/m$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dj0fmt",
+      "kind": "example",
+      "front": "A 0.50 kg mass on a spring with $k=250\\ \\mathrm{N/m}$ is displaced $+0.040\\ \\mathrm{m}$ from equilibrium. What is its acceleration?",
+      "back": "$a=-20\\ \\mathrm{m/s^2}$, toward equilibrium. The net force is $-10\\ \\mathrm{N}$, from $F=-kx$, and $a=F/m$.",
+      "hint": "Find the force before the acceleration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "178ble5",
+      "kind": "concept",
+      "front": "Why is a pendulum only approximately simple harmonic?",
+      "back": "Its restoring force is the **component of gravity along the arc**, which is nearly proportional to displacement only for small angles.",
+      "hint": "Think about how gravity's pull along the arc changes with angle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1f95cpw",
+      "kind": "mistake",
+      "front": "Does any motion that repeats count as simple harmonic motion?",
+      "back": "No. Repetition alone is not enough. A bouncing ball repeats, but its net force is not proportional to displacement, so it is not SHM.",
+      "hint": "What extra condition must the force meet?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0984yzp",
+      "kind": "term",
+      "front": "What is the spring constant $k$, and what are its units?",
+      "back": "A measure of spring **stiffness**, equal to force per unit extension. Its units are N/m. A stiffer spring has a larger $k$.",
+      "hint": "Think about how much force is needed per metre of stretch.",
+      "sectionId": "s3"
+    }
+  ]
+}

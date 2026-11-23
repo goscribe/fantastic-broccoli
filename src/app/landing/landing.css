@@ -1,0 +1,157 @@
+/*
+ * Public marketing pages (/landing/*). They wear the signed-in app's look:
+ * .app-brand supplies the tokens (white chrome, grey ramp, purple for the one
+ * primary action, Nunito); colour comes from the subject tiles and the
+ * time-of-day scene (tokens.css). Only what the app does not already have
+ * lives here.
+ */
+
+/*
+ * Course tiles on the landing. The app clamps a tile's title to two lines
+ * (student-typed names can be anything); here the names are the catalog's own
+ * and the list is the point, so they get a third line and a little more width.
+ */
+.landing-course.subject-tile--row { min-height: 72px; }
+.landing-course.subject-tile--row .subject-tile__text { max-width: 66%; }
+.landing-course .subject-tile__title { font-size: 15px; line-height: 1.22; -webkit-line-clamp: 3; line-clamp: 3; }
+
+/* The phone's sideways course strips: no scrollbar chrome, snap to a tile. */
+.landing-strip { scrollbar-width: none; scroll-padding-left: 16px; }
+.landing-strip::-webkit-scrollbar { display: none; }
+
+/* Sub-page headings share one scale. */
+.landing-root h1 { letter-spacing: -0.02em; }
+
+/* A small scene panel (sub-page heroes): the whole landscape, no wash over it. */
+.landing-scene .hero-field { --wash: linear-gradient(transparent, transparent); background-position: 70% 70%; }
+
+/* The closing banner is shorter than the hero: keep the grass the cat stands on in frame. */
+@media (min-width: 640px) { .landing-cta-field.hero-field { background-position: right 86%; } }
+
+/*
+ * The landing hero on a phone. The scene follows the visitor's clock, so as a
+ * plain CSS background (tokens.css) the browser only finds it after the
+ * stylesheets load, and it is the largest thing on the first screen. Here the
+ * five phone scenes are one stacked file (all-phone.webp: morning, afternoon,
+ * evening, night, late; 720x300 each, 25 KB) that the page preloads with the HTML;
+ * the daypart only picks the row. Sized like `cover` and placed like
+ * `right 60%`, as .hero-field does. Wider screens keep the single 1600px file.
+ */
+@media (max-width: 639px) {
+  html .landing-hero .hero-field, html[data-daypart] .landing-hero .hero-field { container-type: size; background-image: none; --scene-row: 1; }
+  html[data-daypart="morning"] .landing-hero .hero-field { --scene-row: 0; }
+  html[data-daypart="evening"] .landing-hero .hero-field { --scene-row: 2; }
+  html[data-daypart="night"] .landing-hero .hero-field { --scene-row: 3; }
+  html[data-daypart="late"] .landing-hero .hero-field { --scene-row: 4; }
+  .landing-hero .hero-field::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    /* One row's height: cover the box, plus 2% so a neighbouring row never shows at an edge. */
+    --rh: calc(max(100cqw * 333 / 800, 100cqh) * 1.02);
+    background-image: url("/design/hero/all-phone.webp");
+    background-repeat: no-repeat;
+    background-size: auto calc(var(--rh) * 5);
+    background-position: right calc(0px - var(--scene-row) * var(--rh) - (var(--rh) - 100cqh) * 0.6);
+  }
+}
+
+/* A very long word (a blog title, a translated label) wraps inside its box instead of widening the page. */
+.landing-root main { overflow-wrap: anywhere; }
+
+/*
+ * The closing banner: the whole scene, no wash over it. From sm up the words
+ * sit on one solid card over the sky (white by day, the night sky lifted a
+ * step after dark, as the home banner's cards do), so their contrast never
+ * depends on the picture. On phones the scene is a band above the words.
+ */
+.landing-banner { --hero-surface: #ffffff; }
+.landing-banner .hero-field { --wash: none; }
+html[data-daypart="night"] .landing-banner,
+html[data-daypart="late"] .landing-banner { --hero-surface: color-mix(in srgb, var(--hero-wash) 86%, #ffffff); }
+@media (min-width: 640px) {
+  .landing-cta-copy {
+    background: var(--hero-surface);
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    border-radius: 28px;
+    padding: 28px 32px 30px;
+    box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 18px 34px -18px rgb(22 22 26 / 0.45);
+  }
+}
+@media (min-width: 1024px) { .landing-cta-copy { padding: 36px 44px 38px; } }
+
+/* The home picture on a phone: two narrow tiles a row. The title sits above the art there, so it can use the tile's full width (no mid-word break in "Economics"). */
+@media (max-width: 639px) {
+  .landing-home-tiles .subject-tile:not(.subject-tile--row) .subject-tile__text { max-width: none; }
+}
+
+/* ---------------------------------------------------------------------------
+ * The home (/landing). A white page with a few big pictures: the hero's scene,
+ * the course tiles drifting past, and two blocks in subject colours.
+ * ------------------------------------------------------------------------- */
+
+/* Hero: the scene is a wide stage under the words; the cat bounds through it and out over its top edge. */
+.landing-stage { height: 268px; max-width: 1152px; }
+.landing-stage .hero-field { --wash: linear-gradient(transparent, transparent); background-position: 36% 100%; }
+.landing-stage__cat { right: 2%; bottom: 14px; height: 236px; }
+.landing-stage__card-a { left: 12px; top: 18px; }
+.landing-stage__card-b { display: none; }
+@media (min-width: 640px) {
+  .landing-stage { height: 400px; }
+  .landing-stage__cat { right: 10%; bottom: 26px; height: 380px; }
+  .landing-stage__card-a { left: 5%; top: 16%; }
+  .landing-stage__card-b { display: block; left: 30%; bottom: 12%; }
+}
+@media (min-width: 1024px) {
+  .landing-stage { height: 440px; }
+  .landing-stage__cat { right: 13%; bottom: 28px; height: 462px; }
+  .landing-stage__card-a { left: 6%; top: 12%; }
+  .landing-stage__card-b { left: 26%; bottom: auto; top: 44%; }
+}
+@keyframes landing-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+.landing-float { animation: landing-bob 5s ease-in-out infinite; }
+.landing-stage__card-b { animation-delay: -2.5s; }
+
+/*
+ * Courses: two rows of the app's tiles drifting to their far end and back
+ * (each row is its own size container, so the travel is the row's overflow).
+ * Every tile is in the page once: nothing is duplicated to fake a loop.
+ */
+.landing-marquee { display: grid; gap: 12px; }
+.landing-marquee__row { overflow: hidden; container-type: inline-size; -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent); }
+.landing-marquee__track { display: flex; gap: 12px; width: max-content; padding: 4px 24px 10px; animation: landing-marquee 70s ease-in-out infinite alternate; }
+.landing-marquee__row--back .landing-marquee__track { animation-direction: alternate-reverse; animation-duration: 60s; }
+.landing-marquee__item { display: flex; flex: none; width: 252px; }
+@media (min-width: 640px) { .landing-marquee__item { width: 288px; } }
+@keyframes landing-marquee { from { transform: translateX(0); } to { transform: translateX(calc(100cqw - 100%)); } }
+/* Stops under the pointer, while a tile has focus, and when the visitor ticks "Pause". */
+.landing-marquee:hover .landing-marquee__track,
+.landing-marquee:focus-within .landing-marquee__track,
+.landing-courses:has(.landing-marquee__pause input:checked) .landing-marquee__track { animation-play-state: paused; }
+/* The cat reading on top of the first row (md and up). */
+.landing-courses__cat { right: max(24px, calc(50% - 560px)); top: -2px; height: 112px; transform: translateY(-86%); }
+
+/* A block in a subject family's colour: white words on the deep end, the bright end glowing behind the screens. */
+.landing-block { position: relative; isolation: isolate; border-radius: 28px; color: #fff; background: radial-gradient(110% 80% at 100% 100%, var(--tile-b) 0%, var(--tile-a) 62%); }
+.landing-block--flip { background: radial-gradient(110% 80% at 0% 100%, var(--tile-b) 0%, var(--tile-a) 62%); }
+@media (max-width: 1023px) { .landing-block, .landing-block--flip { background: radial-gradient(130% 55% at 50% 100%, var(--tile-b) 0%, var(--tile-a) 70%); } }
+@media (min-width: 640px) { .landing-block { border-radius: 40px; } }
+.landing-block .life-card, .landing-block [class*="shadow-"] { box-shadow: 0 24px 48px -28px rgb(0 0 0 / 0.5); }
+
+/* The practice pair: the question in front with the cat peeking over it, the marked answer tucked behind. */
+.landing-pair { position: relative; padding-top: 84px; }
+.landing-peek { top: 84px; right: 36px; height: 104px; transform: translateY(-80%); }
+.landing-pair__back { margin: -10px 0 0 8%; rotate: 1.5deg; }
+@media (min-width: 640px) { .landing-peek { height: 120px; } .landing-pair { padding-top: 96px; } .landing-peek { top: 96px; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-root .cat-float, .landing-root .cat-bob, .landing-root .cat-wiggle, .landing-float { animation: none; }
+  /* No drifting: each row becomes a strip you can scroll yourself, without the loop copy. */
+  .landing-marquee__row { -webkit-mask-image: none; mask-image: none; overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; scroll-padding-left: 16px; }
+  .landing-marquee__row::-webkit-scrollbar { display: none; }
+  .landing-marquee__track { animation: none; padding-inline: 16px; }
+  .landing-marquee__item { scroll-snap-align: start; }
+  .landing-marquee__pause { display: none !important; }
+}
+/* The app's screens keep their own ink on a coloured block. */
+.landing-block figure { color: var(--foreground); }

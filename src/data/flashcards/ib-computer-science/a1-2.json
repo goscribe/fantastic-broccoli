@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a1-2",
+  "topicCode": "A1.2",
+  "topicName": "Data representation and logic",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:51.150Z",
+  "cards": [
+    {
+      "id": "0cwksdj",
+      "kind": "concept",
+      "front": "Why do computers store all data as patterns of bits?",
+      "back": "Computer circuits are built from switches that are either **on or off**. Two states are easy to make reliable, and we write them as 1 and 0, so letters, colours and sounds can all be stored as bit patterns.",
+      "hint": "Think about what a physical switch can be.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pgjlbi",
+      "kind": "formula",
+      "front": "How many different patterns can n bits hold?",
+      "back": "$2^n$ patterns. Each extra **bit** doubles the count, so a byte of 8 bits holds $2^8=256$ patterns.",
+      "hint": "Each extra bit doubles the number of patterns.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kspfxw",
+      "kind": "concept",
+      "front": "How does a binary number get its decimal value?",
+      "back": "Add the **place values** that hold a 1. In a byte the place values are 128, 64, 32, 16, 8, 4, 2 and 1, each twice the one to its right.",
+      "hint": "Each place value is twice the one on its right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rqwdnd",
+      "kind": "process",
+      "front": "What are the steps to convert a decimal number to binary?",
+      "back": "Subtract the **largest place value** that fits and set that place to 1, then repeat with the remainder. Places that are too large hold 0. Check by adding the place values that hold 1.",
+      "hint": "Start with the largest place value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eyncm7",
+      "kind": "example",
+      "front": "Write the decimal number 45 as an 8-bit binary number.",
+      "back": "$00101101$. The 32, 8, 4 and 1 places hold 1, and $32+8+4+1=45$.",
+      "hint": "Start with 128 and 64, which are too large.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zbkkik",
+      "kind": "concept",
+      "front": "Why do programmers often write binary values in hexadecimal?",
+      "back": "**One hex digit** stands for exactly four bits, so a long binary value becomes a much shorter and easier-to-read hexadecimal value.",
+      "hint": "Count how many bits one hex digit represents.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jlrbmg",
+      "kind": "process",
+      "front": "How do you convert a binary number to hexadecimal?",
+      "back": "Split the bits into **groups of four** starting from the right, then replace each group with its hex digit. In hex, A stands for 10 and F stands for 15.",
+      "hint": "Work from the right-hand end of the bits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tub9l0",
+      "kind": "example",
+      "front": "Convert the binary number 10110110 to hexadecimal, then find its decimal value.",
+      "back": "**B6** in hexadecimal. The groups 1011 and 0110 give B and 6. Decimal: $11\\times16+6=182$.",
+      "hint": "Split into two groups of four bits first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "050i23c",
+      "kind": "mistake",
+      "front": "A student says hexadecimal stores the same number in fewer bits. What is wrong with this?",
+      "back": "Hexadecimal does **not** use fewer bits. B6 and 10110110 are the same eight bits, just written in a shorter form.",
+      "hint": "Compare B6 with 10110110 bit by bit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14je3y9",
+      "kind": "mistake",
+      "front": "A student says binary is a different kind of number from decimal. What is wrong with this?",
+      "back": "Binary is **not** a different kind of number. It is a different way of writing the same number, using only the digits 0 and 1.",
+      "hint": "Think about two ways of writing the same quantity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iw8tvg",
+      "kind": "term",
+      "front": "What is a logic gate?",
+      "back": "A **logic gate** is a circuit with one or more binary inputs and one binary output. It applies a logical operation such as AND, OR or NOT.",
+      "hint": "Think of it as a small decision-making circuit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "020oo6b",
+      "kind": "concept",
+      "front": "When does an OR gate output 1, and when does an AND gate?",
+      "back": "An OR gate outputs 1 when **at least one** input is 1. An AND gate outputs 1 only when **all** its inputs are 1.",
+      "hint": "Compare the words at least one and all.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x33wgr",
+      "kind": "process",
+      "front": "How do you work out the output of a circuit diagram with several gates?",
+      "back": "Work out the **first gates** and feed their outputs into the next gate, moving left to right. Write the value on each wire as you go, then test one more input combination.",
+      "hint": "Work from the inputs towards the output.",
+      "sectionId": "s5"
+    }
+  ]
+}

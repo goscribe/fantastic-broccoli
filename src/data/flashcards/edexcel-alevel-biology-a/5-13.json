@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-13",
+  "topicCode": "5.13",
+  "topicName": "Causes of climate change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:20.150Z",
+  "cards": [
+    {
+      "id": "0gnn4w8",
+      "kind": "concept",
+      "front": "How do greenhouse gases keep Earth warm enough for life?",
+      "back": "They **absorb** infrared radiation from the warm surface and re-emit it in all directions, so some returns to the surface and warms it further. This is the greenhouse effect.",
+      "hint": "Start with what the warm surface gives out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r3upnn",
+      "kind": "term",
+      "front": "What is the enhanced greenhouse effect?",
+      "back": "The **additional warming** caused by human activities that increase greenhouse gas concentrations, so more infrared is absorbed and less heat escapes to space.",
+      "hint": "Compare it with the natural greenhouse effect.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00uemij",
+      "kind": "concept",
+      "front": "Why is burning fossil fuels the largest human source of carbon dioxide?",
+      "back": "Fossil fuels hold **carbon locked underground** from ancient organisms. Burning them releases that carbon as carbon dioxide within moments.",
+      "hint": "Consider where the carbon in coal, oil and gas came from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18pxq0r",
+      "kind": "term",
+      "front": "What is deforestation?",
+      "back": "The **large-scale removal of forest**, usually by felling or burning, so the land can be used for other purposes. It matters because trees take up carbon dioxide and store carbon.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kpvlcq",
+      "kind": "concept",
+      "front": "How can a large volcanic eruption make global temperatures fall?",
+      "back": "Ash and gases thrown high into the atmosphere **reflect some sunlight back to space**, so temperatures can fall for a few years.",
+      "hint": "Think about what the particles do to incoming sunlight.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xywbkk",
+      "kind": "concept",
+      "front": "Why does water vapour amplify warming rather than starting it?",
+      "back": "Warmer air holds **more water vapour**, so the amount rises as air warms. It multiplies warming that other gases have already begun.",
+      "hint": "Consider what happens to the amount of vapour when air warms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07mb21d",
+      "kind": "mistake",
+      "front": "Why is methane less important overall than carbon dioxide, even though it absorbs more infrared per molecule?",
+      "back": "Methane is present in **far smaller amounts** and lasts a shorter time in the air. Its strong absorption still makes it important, but its total effect is smaller.",
+      "hint": "Think about both the amount in the air and how long it lasts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "152a008",
+      "kind": "mistake",
+      "front": "A student says the greenhouse effect is the same as ozone depletion. What is wrong with this?",
+      "back": "They are different issues with **different causes and effects**. The greenhouse effect is warming from gases trapping infrared, while ozone depletion is a separate problem.",
+      "hint": "Compare what each one is about.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vq06dt",
+      "kind": "formula",
+      "front": "What do the symbols in the equation $\\mathrm{CH_4(g)+2O_2(g)\\rightarrow CO_2(g)+2H_2O(g)}$ mean?",
+      "back": "$\\mathrm{CH_4}$ is **methane**, $\\mathrm{O_2}$ is oxygen, $\\mathrm{CO_2}$ is **carbon dioxide** and $\\mathrm{H_2O}$ is water vapour. The (g) shows each substance is a gas.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08hyglb",
+      "kind": "process",
+      "front": "What is the chain of events from burning fossil fuels to surface warming?",
+      "back": "1 Burning releases carbon dioxide. 2 The concentration in the air rises. 3 More infrared is absorbed and re-emitted. 4 The surface warms.",
+      "hint": "Four steps; start from the combustion and follow the carbon.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q21rdn",
+      "kind": "concept",
+      "front": "Why does melting ice add to warming?",
+      "back": "Melting exposes **darker land or water**, which absorbs more sunlight than ice did. This extra absorption is a **positive feedback** that increases warming.",
+      "hint": "Compare the surface before and after it melts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tu682x",
+      "kind": "concept",
+      "front": "What does ice core evidence show about recent carbon dioxide and methane?",
+      "back": "Their concentrations now **exceed anything in the long ice-core record**. Natural causes such as volcanic activity and solar changes do not explain this recent rise.",
+      "hint": "Think about what air trapped in ice tells us about the past.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03k4zuf",
+      "kind": "concept",
+      "front": "How does deforestation raise carbon dioxide in the air?",
+      "back": "Felled trees that are burned or decay release their stored carbon as carbon dioxide, and **fewer trees remain** to remove carbon dioxide by photosynthesis.",
+      "hint": "Think about two things trees normally do with carbon.",
+      "sectionId": "s4"
+    }
+  ]
+}

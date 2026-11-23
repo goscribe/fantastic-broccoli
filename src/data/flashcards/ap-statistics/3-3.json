@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Confidence interval for a proportion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:19.488Z",
+  "cards": [
+    {
+      "id": "140wiwk",
+      "kind": "term",
+      "front": "What is a confidence interval for a proportion?",
+      "back": "A **range** of plausible values, built from sample data, designed to capture the population proportion. It is the estimate plus and minus a margin of error.",
+      "hint": "Think of a range of values, not one single number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00m9lyl",
+      "kind": "formula",
+      "front": "What is the formula for a confidence interval for a population proportion, and what does each symbol mean?",
+      "back": "$\\hat{p}\\pm z^{*}\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$, where $\\hat{p}$ is the sample proportion, $n$ is the sample size and $z^{*}$ is the **critical value**. The square-root part is the standard error.",
+      "hint": "Center plus or minus a multiplier times a standard error.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zr481y",
+      "kind": "concept",
+      "front": "What does a 95% confidence level mean?",
+      "back": "A **long-run success rate**: if many random samples each gave an interval, about 95% of those intervals would capture the true proportion. It describes the method, not one fixed interval.",
+      "hint": "Think about repeating the sampling many times.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06g297w",
+      "kind": "term",
+      "front": "What is the margin of error?",
+      "back": "The **half-width** of a confidence interval, equal to the critical value times the standard error.",
+      "hint": "It is half the total width of the interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pnbq4k",
+      "kind": "concept",
+      "front": "Why can't a student just use a very wide interval to be sure it captures the truth?",
+      "back": "A wider interval is more likely to capture the truth but tells you less. A narrow interval is more **precise**, so statisticians balance these two goals.",
+      "hint": "Think about the trade-off between certainty and precision.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cq8xwf",
+      "kind": "term",
+      "front": "What is the critical value $z^{*}$?",
+      "back": "The standard normal value that captures the middle C% of the area, where C is the confidence level. A larger critical value gives a **wider** interval.",
+      "hint": "It comes from the standard normal curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wlen9v",
+      "kind": "term",
+      "front": "What does the standard error of $\\hat{p}$ estimate?",
+      "back": "The **standard deviation** of the sampling distribution of $\\hat{p}$. It uses $\\hat{p}$ in place of the unknown $p$ in $\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$.",
+      "hint": "It measures how much the sample proportion varies.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w7qv0f",
+      "kind": "process",
+      "front": "What are the four steps to build a confidence interval for a proportion?",
+      "back": "1) Find $\\hat{p}$. 2) Calculate the standard error. 3) Multiply by $z^{*}$ to get the margin of error. 4) Add and subtract the margin of error from $\\hat{p}$.",
+      "hint": "Start from the sample data and end with the interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0du1xdz",
+      "kind": "example",
+      "front": "In a random sample of 400 adults, 248 ride transit weekly. What is the 95% confidence interval for the population proportion?",
+      "back": "(0.572, 0.668). Here $\\hat{p}=0.620$, the standard error is about 0.0243 and the margin of error is about 0.0476.",
+      "hint": "Use $z^{*}=1.960$ and round only at the end.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u7ynml",
+      "kind": "concept",
+      "front": "How do a higher confidence level and a larger sample size change the interval?",
+      "back": "Raising the confidence level **widens** the interval. A larger sample size **narrows** it.",
+      "hint": "Higher confidence needs a bigger critical value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e3p5cv",
+      "kind": "mistake",
+      "front": "Is it correct to say there is a 95% chance that the true proportion lies in this particular calculated interval?",
+      "back": "No. The 95% describes the method over many samples. Once calculated, an interval either captures $p$ or it does not.",
+      "hint": "The randomness comes from the sampling, not the fixed interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yrrl7j",
+      "kind": "process",
+      "front": "What are the three conditions to check before using the interval for a proportion?",
+      "back": "**Random** sample or randomized experiment; **Independence**: $n$ is at most 10% of the population; **Large counts**: $n\\hat{p}\\ge 10$ and $n(1-\\hat{p})\\ge 10$.",
+      "hint": "Random, then the 10% rule, then the counts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zvxy3n",
+      "kind": "mistake",
+      "front": "A student checks the large counts condition by looking only at n = 60. What is wrong with this?",
+      "back": "Large counts needs **both** $n\\hat{p}\\ge 10$ and $n(1-\\hat{p})\\ge 10$, using the observed numbers of successes and failures. The sample size alone is not enough.",
+      "hint": "Check successes and failures separately.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fuxxgx",
+      "kind": "example",
+      "front": "A random sample of 60 gives $\\hat{p}=0.05$. Is the large counts condition met?",
+      "back": "No. $n\\hat{p}=60(0.05)=3$, which is below 10, so the **large counts** condition fails and the stated confidence level may not be accurate.",
+      "hint": "Compute the number of successes first.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-5",
+  "topicCode": "4.5",
+  "topicName": "Hardy-Weinberg and allele frequencies",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:42.476Z",
+  "cards": [
+    {
+      "id": "1o2q22v",
+      "kind": "concept",
+      "front": "What does the Hardy–Weinberg principle describe?",
+      "back": "A population in which **allele frequencies** stay constant from one generation to the next, but only when specific conditions are met.",
+      "hint": "Think about what would happen to frequencies if nothing changed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1spfrye",
+      "kind": "concept",
+      "front": "What does a change in allele frequency between generations show?",
+      "back": "That **evolution** is occurring, since evolution is a change in allele frequency in a population across generations. At least one Hardy–Weinberg condition has failed.",
+      "hint": "Compare the real population with the prediction.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ejf7i6",
+      "kind": "formula",
+      "front": "What do $p^2$, $2pq$ and $q^2$ represent in the equation $p^2+2pq+q^2=1$?",
+      "back": "The genotype frequencies of AA ($p^2$), Aa ($2pq$) and aa ($q^2$). They add to **1** because every individual has one of these genotypes.",
+      "hint": "Each term matches one genotype in the table.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vuniqo",
+      "kind": "formula",
+      "front": "What is the relationship between $p$ and $q$ in a gene with two alleles?",
+      "back": "$p+q=1$, so the frequency of allele A ($p$) plus the frequency of allele a ($q$) gives **1**, because together they cover every copy of the gene.",
+      "hint": "Think about what share of all copies is left over.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gamwgc",
+      "kind": "term",
+      "front": "What is an allele frequency?",
+      "back": "The **proportion** of all copies of a gene in a population that are one particular allele, written as a decimal between 0 and 1.",
+      "hint": "Count gene copies, not whole plants.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yenvf8",
+      "kind": "term",
+      "front": "What is a genotype frequency?",
+      "back": "The **proportion** of individuals in a population that have a particular genotype.",
+      "hint": "Count whole organisms rather than gene copies.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h7kqy8",
+      "kind": "concept",
+      "front": "Why does a large population help the Hardy–Weinberg equations hold?",
+      "back": "**Chance** has little effect on allele frequencies in a large population, so they stay steady from one generation to the next.",
+      "hint": "Think about how much random events matter in a big group.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yaq4me",
+      "kind": "concept",
+      "front": "Which five conditions must a population meet for Hardy–Weinberg predictions to hold?",
+      "back": "Large size, random mating, no mutations, no migration in or out, and no natural selection, so all genotypes survive and reproduce equally well.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zcj2va",
+      "kind": "process",
+      "front": "What are the four steps to find all genotype frequencies from the recessive phenotype?",
+      "back": "1) Find $q^2$ from the proportion with the recessive phenotype. 2) Take the square root to get $q$. 3) Find $p=1-q$. 4) Substitute into $2pq$ and $p^2$.",
+      "hint": "Start with the phenotype you can see.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wcaq64",
+      "kind": "example",
+      "front": "In 500 flowers, 80 have white petals (recessive allele a). What is the frequency of allele a?",
+      "back": "**0.40**: $q^2=\\frac{80}{500}=0.16$, so $q=\\sqrt{0.16}=0.40$.",
+      "hint": "Start with the proportion of white-petalled plants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05ernlx",
+      "kind": "example",
+      "front": "In the same population of 500 flowers with 80 white, how many heterozygous plants are there?",
+      "back": "**240** plants: $p=0.60$, so $2pq=2\\times0.60\\times0.40=0.48$, and $0.48\\times500=240$.",
+      "hint": "You need $p$ before you can find the heterozygotes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uamyyp",
+      "kind": "mistake",
+      "front": "What is a common mistake about the value $p^2$?",
+      "back": "Thinking it is the frequency of **allele A**. It is actually the frequency of individuals with genotype AA.",
+      "hint": "Check which genotype the term describes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ynjjjk",
+      "kind": "mistake",
+      "front": "Why can a dominant allele still be rare in a population?",
+      "back": "Because **dominance** describes how an allele is expressed, not how common it is in the population.",
+      "hint": "Think about what dominance is describing.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1f0kx1e",
+      "kind": "term",
+      "front": "What is genetic drift?",
+      "back": "A **chance** change in allele frequencies from one generation to the next, with stronger effects in small populations since few individuals pass on alleles.",
+      "hint": "Think about chance in a small group.",
+      "sectionId": "s6"
+    }
+  ]
+}

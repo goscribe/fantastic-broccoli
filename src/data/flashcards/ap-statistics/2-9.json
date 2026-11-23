@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Parameters of random variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:08.394Z",
+  "cards": [
+    {
+      "id": "1vz899m",
+      "kind": "concept",
+      "front": "What does the mean of a discrete random variable tell you about many repeated observations?",
+      "back": "The **long-run average** of the values. Over many repeats, the average settles near the mean, which is the center of the distribution.",
+      "hint": "Think about what happens after thousands of customers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0exeohq",
+      "kind": "formula",
+      "front": "Write the formula for the mean $\\mu_X$ of a discrete random variable $X$, and say what each symbol means.",
+      "back": "$\\mu_X=\\sum x_iP(x_i)$: multiply each possible value $x_i$ by its **probability** $P(x_i)$, then add the products. The mean is also called the expected value.",
+      "hint": "Weighted average: each value counts in proportion to how likely it is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j2dv15",
+      "kind": "concept",
+      "front": "If $X$ and $Y$ are random variables, what is the mean of $X+Y$, and does independence matter?",
+      "back": "$\\mu_{X+Y}=\\mu_X+\\mu_Y$. The **sum rule** for means holds even when $X$ and $Y$ are not independent.",
+      "hint": "The mean rules are simpler than the spread rules.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zjyoow",
+      "kind": "formula",
+      "front": "Write the formula for the standard deviation $\\sigma_X$ of a discrete random variable, and explain the sum under the root.",
+      "back": "$\\sigma_X=\\sqrt{\\sum(x_i-\\mu_X)^2P(x_i)}$. The sum under the root is the **variance**, the probability-weighted average squared distance from $\\mu_X$.",
+      "hint": "Square root of the variance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cn33di",
+      "kind": "process",
+      "front": "What are the four steps to calculate the standard deviation of a discrete random variable?",
+      "back": "Subtract $\\mu_X$ from each value and square the difference. Multiply each squared difference by its probability. Add these products. Take the **square root** of the sum.",
+      "hint": "Work from the mean outward, then finish with a root.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "005ljy1",
+      "kind": "example",
+      "front": "A store's count $X$ has $P(1)=0.35$, $P(2)=0.30$, $P(3)=0.20$, $P(4)=0.15$. What is $\\mu_X$?",
+      "back": "$\\mu_X=2.15$ items. Compute $1(0.35)+2(0.30)+3(0.20)+4(0.15)=0.35+0.60+0.60+0.60=2.15$.",
+      "hint": "Multiply each value by its probability, then add.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f6hd0m",
+      "kind": "example",
+      "front": "Using the store distribution with $\\mu_X=2.15$, what is $\\sigma_X$ to two decimal places?",
+      "back": "$\\sigma_X\\approx1.06$ items. The variance is $1.1275$, and $\\sqrt{1.1275}\\approx1.06$.",
+      "hint": "Add the four squared-distance-times-probability terms first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fgx7oi",
+      "kind": "concept",
+      "front": "Why is the mean called the balance point of a histogram?",
+      "back": "Each bar acts like a **weight** on a beam. The mean is where the beam balances, so a tall bar on one side pulls the mean toward that side.",
+      "hint": "Picture the bars as weights on a seesaw.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u74bna",
+      "kind": "mistake",
+      "front": "A student says the mean of the store distribution must be 2 items because customers buy whole numbers. What is wrong?",
+      "back": "The mean **does not have to be a possible value** of $X$. It is a weighted average, so 2.15 is valid even though no customer buys 2.15 items.",
+      "hint": "Compare the mean with the list of possible values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yphfp2",
+      "kind": "mistake",
+      "front": "Why is it wrong to add standard deviations to find the spread of $X+Y$?",
+      "back": "Spread combines through **variances**, not standard deviations. For independent variables, variances add, and the standard deviation is the square root of that total.",
+      "hint": "Work with squares first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h6sjdk",
+      "kind": "example",
+      "front": "Morning trip mean is 25 minutes and evening trip mean is 32 minutes. What are the mean total time and the mean of evening minus morning?",
+      "back": "Mean total is **57 minutes** ($25+32$). Mean of evening minus morning is **7 minutes** ($32-25$).",
+      "hint": "Use the sum rule and the difference rule for means.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qlp6o1",
+      "kind": "mistake",
+      "front": "A student interprets $\\mu_X=2.15$ as saying that any one customer buys 2.15 items. What should they say instead?",
+      "back": "Over **many customers**, the number of items bought averages about 2.15 per customer. The mean describes the long-run average, not one person.",
+      "hint": "Include a phrase such as over many customers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14ks4cs",
+      "kind": "term",
+      "front": "What are independent random variables?",
+      "back": "Variables for which **knowing the value of one does not change the probabilities** for the other.",
+      "hint": "Think about whether one variable gives information about the other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ltmj2s",
+      "kind": "example",
+      "front": "If $X$ and $Y$ are independent with $\\sigma_X=3$ and $\\sigma_Y=4$, what is $\\sigma_{X+Y}$?",
+      "back": "$\\sigma_{X+Y}=5$. Variances add: $9+16=25$, and $\\sqrt{25}=5$, not 7.",
+      "hint": "Add variances, not standard deviations.",
+      "sectionId": "s5"
+    }
+  ]
+}

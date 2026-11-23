@@ -53,7 +53,7 @@ export function InteractiveActivity({ content, onComplete }: InteractiveActivity
 
   if (!body) {
     return (
-      <Card className="py-6 text-center text-sm text-muted-foreground">
+      <Card className="py-6 text-center text-ui text-muted-foreground">
         <p className="mb-4">{t("session.activityUnavailable")}</p>
         <Button onClick={onComplete}>
           {t("session.continue")}
@@ -67,7 +67,7 @@ export function InteractiveActivity({ content, onComplete }: InteractiveActivity
     return (
       <div className="space-y-5">
         <div>
-          <p data-scroll-line className="text-[13px] font-semibold text-muted-foreground">{title ?? t("session.interactiveTitle")}</p>
+          <p data-scroll-line className="text-small font-semibold text-muted-foreground">{title ?? t("session.interactiveTitle")}</p>
           <p className="life-rise mt-2 text-[20px] font-extrabold leading-[1.3] text-foreground sm:text-[22px]">
             {prompt ? <MathText text={prompt} /> : t("session.interactiveHint")}
           </p>
@@ -90,18 +90,18 @@ export function InteractiveActivity({ content, onComplete }: InteractiveActivity
         <p
           className={
             newUi
-              ? "mb-1.5 text-[15px] font-semibold text-muted-foreground"
-              : "mb-1.5 text-sm font-semibold"
+              ? "mb-1.5 text-ui font-semibold text-muted-foreground"
+              : "mb-1.5 text-ui font-semibold"
           }
         >
           {title ?? t("session.interactiveTitle")}
         </p>
         {prompt ? (
-          <p className={newUi ? "text-[17px] leading-relaxed text-foreground" : "text-sm text-foreground"}>
+          <p className={newUi ? "text-read text-foreground" : "text-ui text-foreground"}>
             <MathText text={prompt} />
           </p>
         ) : (
-          <p className="text-xs text-muted-foreground">{t("session.interactiveHint")}</p>
+          <p className="text-caption text-muted-foreground">{t("session.interactiveHint")}</p>
         )}
       </div>
 

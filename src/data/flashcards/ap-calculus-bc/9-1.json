@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "9-1",
+  "topicCode": "9.1",
+  "topicName": "Differentiating parametric equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:58.147Z",
+  "cards": [
+    {
+      "id": "08yhfad",
+      "kind": "formula",
+      "front": "What formula gives dy/dx for a curve defined by parametric equations x = f(t) and y = g(t)?",
+      "back": "$\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}$, valid when $\\frac{dx}{dt}\\ne0$. This ratio is the **slope** of the tangent line at that point.",
+      "hint": "Think of rise over run, using the two rates.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kjizap",
+      "kind": "concept",
+      "front": "When is a parametric curve's tangent line horizontal, and when is it vertical?",
+      "back": "**Horizontal** when $\\frac{dy}{dt}=0$ and $\\frac{dx}{dt}\\ne0$. **Vertical** when $\\frac{dx}{dt}=0$ and $\\frac{dy}{dt}\\ne0$. Both tests must pass.",
+      "hint": "A fraction is zero when its numerator is zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1oe9ktr",
+      "kind": "term",
+      "front": "What are parametric equations?",
+      "back": "A pair of rules $x=f(t)$ and $y=g(t)$ that give the coordinates of a curve's points using a third variable, the **parameter** $t$.",
+      "hint": "Two separate rules, both in terms of one variable.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yt0xt2",
+      "kind": "term",
+      "front": "What is the parameter in parametric equations?",
+      "back": "The **parameter** is the independent variable, such as time $t$, that both $x$ and $y$ depend on.",
+      "hint": "It is often time, but not always.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "112pikj",
+      "kind": "process",
+      "front": "How do you find the two rates of change for a parametric curve?",
+      "back": "**Differentiate** $x$ with respect to $t$ to get $\\frac{dx}{dt}$, and differentiate $y$ with respect to $t$ to get $\\frac{dy}{dt}$. Each is done on its own.",
+      "hint": "Neither derivative needs the other equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t3q7p2",
+      "kind": "example",
+      "front": "For $x=t^2+1$ and $y=t^3-3t$, what are $\\frac{dx}{dt}$ and $\\frac{dy}{dt}$?",
+      "back": "$\\frac{dx}{dt}=2t$ and $\\frac{dy}{dt}=3t^2-3$.",
+      "hint": "Differentiate each rule separately using power rules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a5h6z0",
+      "kind": "process",
+      "front": "How do you find the slope of the tangent at a chosen value of t?",
+      "back": "**Evaluate** $\\frac{dx}{dt}$ and $\\frac{dy}{dt}$ at that $t$, check $\\frac{dx}{dt}\\ne0$, then divide $\\frac{dy}{dt}$ by $\\frac{dx}{dt}$.",
+      "hint": "Substitute the value of t into both derivatives first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ywzrbc",
+      "kind": "example",
+      "front": "For $x=t^2+1$ and $y=t^3-3t$, what is the tangent line at $t=2$?",
+      "back": "$y-2=\\frac{9}{4}(x-5)$. At $t=2$ the point is $(5,2)$ and the slope is $\\frac{9}{4}$.",
+      "hint": "Find the point first, then the slope.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1seqv92",
+      "kind": "example",
+      "front": "For $x=t^2+1$ and $y=t^3-3t$, where are the horizontal tangents?",
+      "back": "At $(2,-2)$ where $t=1$, and at $(2,2)$ where $t=-1$. In both cases $\\frac{dy}{dt}=0$ and $\\frac{dx}{dt}\\ne0$.",
+      "hint": "Set $\\frac{dy}{dt}$ equal to zero and solve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fn9lq8",
+      "kind": "mistake",
+      "front": "Is dy/dx the same as dy/dt? Why or why not?",
+      "back": "**No**. $\\frac{dy}{dx}=\\frac{dy/dt}{dx/dt}$, so skipping the division by $\\frac{dx}{dt}$, or inverting the ratio, gives a wrong slope.",
+      "hint": "Compare the formula with what you wrote.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s80e2r",
+      "kind": "mistake",
+      "front": "If both dx/dt and dy/dt are zero at the same t, is there a horizontal or vertical tangent?",
+      "back": "**No**. The ratio becomes $\\frac{0}{0}$, which gives no slope there, so do not claim a horizontal or vertical tangent.",
+      "hint": "What does the slope formula give when both parts are zero?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05ea6cs",
+      "kind": "concept",
+      "front": "Does dy/dx change if you travel the same path faster?",
+      "back": "**No**. $\\frac{dy}{dx}$ depends only on the shape of the path, while $\\frac{dx}{dt}$ and $\\frac{dy}{dt}$ depend on time.",
+      "hint": "A slope is a property of the path itself.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ieno7w",
+      "kind": "example",
+      "front": "If x and y are both in meters, what are the units of dy/dx?",
+      "back": "$\\mathrm{m/m}$, so $\\frac{dy}{dx}$ has **no units**. It is a pure number.",
+      "hint": "Divide the units of y by the units of x.",
+      "sectionId": "s5"
+    }
+  ]
+}

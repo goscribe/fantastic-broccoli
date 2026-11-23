@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-2-1",
+  "topicCode": "3.2.2.1",
+  "topicName": "The photoelectric effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:08.956Z",
+  "cards": [
+    {
+      "id": "0fekx0x",
+      "kind": "concept",
+      "front": "How does one photon interact with one electron in the photoelectric effect?",
+      "back": "The electron takes **all** of the photon's energy $E=hf$ or none of it. Energy from several photons does not add up in one electron.",
+      "hint": "Consider whether the energy can be shared out or built up gradually.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06gb3ee",
+      "kind": "formula",
+      "front": "What does each term in the photoelectric equation $hf=\\phi+E_\\mathrm{k,max}$ represent?",
+      "back": "$hf$ is the photon energy, $\\phi$ is the **work function**, and $E_\\mathrm{k,max}$ is the maximum kinetic energy of the photoelectron. All are measured in $\\mathrm{J}$.",
+      "hint": "Think about conservation of energy for one photon.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ylkyb3",
+      "kind": "term",
+      "front": "What is the threshold frequency, $f_0$?",
+      "back": "The **minimum** frequency of radiation that causes photoelectric emission from a given metal. Below it nothing is emitted, and its value depends on the metal.",
+      "hint": "Think about what happens just below and just above a cut-off.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01csgsj",
+      "kind": "term",
+      "front": "What is the photoelectric effect?",
+      "back": "The **emission** of electrons from a metal surface when suitable radiation is absorbed by it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v1qkpl",
+      "kind": "term",
+      "front": "What is the work function, $\\phi$?",
+      "back": "The **minimum** energy needed to remove an electron from the surface of a metal. Different metals have different work functions.",
+      "hint": "Compare it with the energy a photon brings.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fwb27x",
+      "kind": "term",
+      "front": "What is a photon?",
+      "back": "A **packet** of electromagnetic energy, given by $E=hf$.",
+      "hint": "Think of light as a stream of packets rather than a continuous wave.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qjqlj2",
+      "kind": "term",
+      "front": "What is the Planck constant, $h$, and what is its value?",
+      "back": "The constant relating photon energy to frequency, with a value of $6.63\\times10^{-34}\\,\\mathrm{J\\,s}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04gr1xy",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that brighter light gives each photoelectron more energy?",
+      "back": "Brighter light gives more **photons** per second, not more energy per photon. Photon energy depends only on frequency, so the maximum kinetic energy is unchanged.",
+      "hint": "Compare what changes when intensity increases.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1we56l4",
+      "kind": "mistake",
+      "front": "Why can the wave model not explain the instant emission of electrons?",
+      "back": "Wave energy would spread across the surface, so each electron would need time to collect enough energy. Emission is actually seen with no delay.",
+      "hint": "Think about how a wave's energy is distributed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xuyzyg",
+      "kind": "example",
+      "front": "Calculate $E_\\mathrm{k,max}$ when radiation of frequency $1.20\\times10^{15}\\,\\mathrm{Hz}$ falls on a metal with $\\phi=6.40\\times10^{-19}\\,\\mathrm{J}$.",
+      "back": "$E_\\mathrm{k,max}=1.56\\times10^{-19}\\,\\mathrm{J}$. The photon energy is $hf=7.96\\times10^{-19}\\,\\mathrm{J}$, and the work function is subtracted from it.",
+      "hint": "Find the photon energy first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q99k1n",
+      "kind": "example",
+      "front": "Calculate the threshold frequency of a metal with a work function of $3.20\\times10^{-19}\\,\\mathrm{J}$.",
+      "back": "$f_0=\\frac{\\phi}{h}=4.83\\times10^{14}\\,\\mathrm{Hz}$.",
+      "hint": "Use the energy balance at the point where kinetic energy is zero.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p3tzd8",
+      "kind": "process",
+      "front": "How can the Planck constant be found from a graph of $E_\\mathrm{k,max}$ against $f$?",
+      "back": "Plot $E_\\mathrm{k,max}$ in joules against $f$ in hertz to get a straight line. The gradient of that line is $h$.",
+      "hint": "Think about the photoelectric equation rearranged into the form $y=mx+c$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0olk09s",
+      "kind": "term",
+      "front": "How many joules is one electronvolt?",
+      "back": "$1.60\\times10^{-19}\\,\\mathrm{J}$. It is the energy an electron gains when it moves through a potential difference of 1 V.",
+      "hint": "Think about electrons being accelerated through a voltage.",
+      "sectionId": "s6"
+    }
+  ]
+}

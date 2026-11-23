@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-17",
+  "topicCode": "5.17",
+  "topicName": "Volumes of revolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:09.198Z",
+  "cards": [
+    {
+      "id": "1209zrg",
+      "kind": "formula",
+      "front": "What is the formula for the volume when $y=f(x)$ between $x=a$ and $x=b$ is rotated through $360^{\\circ}$ about the x-axis?",
+      "back": "$V=\\pi\\int_a^b y^2\\,dx$. **Square** the function first, then integrate. The $\\pi$ comes from the area of a circle, $\\pi y^2$.",
+      "hint": "Think about the area of a circle of radius $y$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t25sxh",
+      "kind": "concept",
+      "front": "Why does each thin slice of a solid of revolution about the x-axis have volume approximately $\\pi y^2\\,\\delta x$?",
+      "back": "Each slice is a **disc**, a cylinder of radius $y$ and thickness $\\delta x$. Using the cylinder volume $\\pi r^2h$ gives $\\pi y^2\\,\\delta x$.",
+      "hint": "Compare the slice with the cylinder volume formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hvdrly",
+      "kind": "formula",
+      "front": "What is the formula for the volume when a region is rotated about the y-axis, with limits $y=c$ and $y=d$?",
+      "back": "$V=\\pi\\int_c^d x^2\\,dy$. The integrand must be in terms of $y$, so make $x^2$ the **subject** of the curve equation first.",
+      "hint": "The slices are horizontal, so their thickness is $\\delta y$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jwy4ci",
+      "kind": "term",
+      "front": "What is a solid of revolution?",
+      "back": "The **three-dimensional shape** formed when a plane region is rotated through $360^{\\circ}$ about a fixed line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05xh52n",
+      "kind": "term",
+      "front": "What is the axis of rotation?",
+      "back": "The **fixed line** about which a region turns to form a solid. In this topic it is either the x-axis or the y-axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n4k8o5",
+      "kind": "process",
+      "front": "What are the steps to find a volume of revolution about the x-axis?",
+      "back": "1) **Square** the function. 2) Find the limits from where the region starts and ends. 3) Write $\\pi$ times the integral. 4) Integrate, evaluate and give cubic units.",
+      "hint": "Sketch the region first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kfub85",
+      "kind": "term",
+      "front": "What is a washer in a volume of revolution?",
+      "back": "A **disc with a circular hole**. Its area is the outer circle area minus the inner circle area.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1px5bt9",
+      "kind": "concept",
+      "front": "How do you tell which curve gives the outer radius for a region between two curves?",
+      "back": "The **outer curve** is the one farther from the axis of rotation. Sketching the region first makes this clear.",
+      "hint": "Which curve is further from the axis?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ibargs",
+      "kind": "mistake",
+      "front": "A student uses x-limits in $\\pi\\int x^2\\,dy$ for $y=x^2$ between $x=0$ and $x=2$. What is the error?",
+      "back": "Limits for a y-integral must be **y-values**. For $y=x^2$ between $x=0$ and $x=2$, the limits for $y$ are $0$ and $4$.",
+      "hint": "What values does y take on this region?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07ich5r",
+      "kind": "mistake",
+      "front": "Why is the washer area not $\\pi(y_1-y_2)^2$?",
+      "back": "Square each curve **first**, then subtract: the area is $\\pi y_1^2-\\pi y_2^2$. The square of a difference is not the difference of the squares.",
+      "hint": "Check $(y_1-y_2)^2$ against $y_1^2-y_2^2$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kb03bu",
+      "kind": "example",
+      "front": "Find the volume when $y=\\sqrt{x}$ for $0\\le x\\le4$ is rotated through $360^{\\circ}$ about the x-axis.",
+      "back": "$8\\pi$ cubic units, approximately $25.1$. The set-up is $\\pi\\int_0^4 x\\,dx$, since $y^2=x$.",
+      "hint": "Square $\\sqrt{x}$ before integrating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00m4n07",
+      "kind": "example",
+      "front": "Find the volume when the region bounded by $y=x^2$ ($x\\ge0$), the y-axis and $y=3$ is rotated about the y-axis.",
+      "back": "$\\frac{9\\pi}{2}$ cubic units, approximately $14.1$. The set-up is $\\pi\\int_0^3 y\\,dy$.",
+      "hint": "Rewrite $x^2$ in terms of $y$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ju49uv",
+      "kind": "concept",
+      "front": "How can you check that a volume of revolution answer is reasonable?",
+      "back": "It must be **positive** and smaller than the cylinder that encloses the solid. The formula also reproduces known solids such as cylinders, cones and spheres.",
+      "hint": "Compare with a cylinder of the same height and radius.",
+      "sectionId": "s6"
+    }
+  ]
+}

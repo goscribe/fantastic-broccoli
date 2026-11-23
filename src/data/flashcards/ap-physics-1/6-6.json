@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "Motion of orbiting satellites",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:51.509Z",
+  "cards": [
+    {
+      "id": "1layyix",
+      "kind": "concept",
+      "front": "What force keeps a satellite in a circular orbit, and which way does it point?",
+      "back": "**Gravity** pulls the satellite toward the planet's center. This pull acts as the centripetal force, changing the velocity's direction but not its speed.",
+      "hint": "Compare the direction of the pull with the direction of the velocity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a2i1w4",
+      "kind": "concept",
+      "front": "Why does a satellite stay up instead of falling into the planet?",
+      "back": "It is in **free fall** around the planet. It keeps falling toward the planet, but its sideways speed makes its path curve as fast as it falls.",
+      "hint": "Think about a ball thrown horizontally with increasing speed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03x2jv4",
+      "kind": "formula",
+      "front": "What is the orbital speed of a satellite in a circular orbit, and what do the symbols mean?",
+      "back": "$v = \\sqrt{\\frac{GM}{r}}$, where $G$ is the gravitational constant, $M$ is the planet's mass in kg, and $r$ is the orbit radius in m, measured from the planet's center. Speed is in m/s.",
+      "hint": "Set gravity equal to the centripetal force.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1opaq3q",
+      "kind": "mistake",
+      "front": "Common mistake: astronauts float because gravity is absent at that height. Why is this wrong?",
+      "back": "Gravity is still strong there. Astronauts float because they and the station fall together in **free fall**, so nothing pushes them against the floor.",
+      "hint": "What is the station doing as it moves?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ued1ek",
+      "kind": "mistake",
+      "front": "A problem gives a satellite's altitude above the surface. What mistake must you avoid when using $r$?",
+      "back": "Do not use the altitude as $r$. Measure $r$ from the planet's **center**, so add the planet's radius to the altitude.",
+      "hint": "Where is the center of the orbit located?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ixyn05",
+      "kind": "formula",
+      "front": "What is the orbital period of a circular orbit in terms of $r$ and $M$?",
+      "back": "$T = 2\\pi\\sqrt{\\frac{r^3}{GM}}$, found from $T = \\frac{2\\pi r}{v}$. It depends only on the orbit radius and the planet's mass, not the satellite's mass.",
+      "hint": "Substitute the orbital speed into the distance divided by speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02b6j9c",
+      "kind": "process",
+      "front": "What steps find the speed and period of a satellite in a circular orbit?",
+      "back": "1) Find $GM$. 2) Find $v = \\sqrt{GM/r}$. 3) Find $T = 2\\pi r / v$. Keep $r$ measured from the planet's center.",
+      "hint": "Start with the planet's constants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jxn6l0",
+      "kind": "example",
+      "front": "A satellite orbits Earth at $r = 7.00\\times10^{6}$ m, with $GM = 3.98\\times10^{14}$ m$^3$/s$^2$. What are its speed and period?",
+      "back": "Speed is about $7.54\\times10^{3}$ m/s and period is about $5.83\\times10^{3}$ s, roughly 97 minutes.",
+      "hint": "Find the speed first, then use $T = 2\\pi r / v$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lnkzal",
+      "kind": "concept",
+      "front": "How do orbital speed and period change when the orbit radius increases?",
+      "back": "**Speed decreases** and **period increases**, because gravity is weaker farther from the planet.",
+      "hint": "Look at $v = \\sqrt{GM/r}$ and how $T$ depends on $r$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "10g66xx",
+      "kind": "example",
+      "front": "If the orbit radius doubles, by what factors do the gravitational force, orbital speed and period change?",
+      "back": "The force falls to one quarter. The speed drops by a factor of $\\sqrt{2}$. The period rises by a factor of $2\\sqrt{2}$.",
+      "hint": "Use $GMm/r^2$, $\\sqrt{GM/r}$ and $2\\pi\\sqrt{r^3/GM}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hi8ik9",
+      "kind": "concept",
+      "front": "Why does a satellite's mass not affect its orbital speed?",
+      "back": "Setting $\\frac{GMm}{r^2} = \\frac{mv^2}{r}$ lets the satellite's mass $m$ cancel. Only the planet's mass and the orbit radius matter.",
+      "hint": "Look at which terms contain $m$ on each side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kw7p9s",
+      "kind": "term",
+      "front": "What is centripetal force?",
+      "back": "The **net force** directed toward the center of a circular path. It equals $mv^2/r$ and is not a separate kind of force.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ifk239",
+      "kind": "term",
+      "front": "What is the orbital period?",
+      "back": "The **time** for a satellite to complete one orbit. It increases with orbit radius, following $T \\propto r^{3/2}$.",
+      "hint": "Measured in seconds.",
+      "sectionId": "s4"
+    }
+  ]
+}

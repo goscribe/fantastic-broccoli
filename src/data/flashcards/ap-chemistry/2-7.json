@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "VSEPR and bond hybridization",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:21.262Z",
+  "cards": [
+    {
+      "id": "0xaybwr",
+      "kind": "concept",
+      "front": "How does VSEPR theory predict the shape of a molecule around a central atom?",
+      "back": "Count the **electron domains** around the central atom, then let them spread out to minimize repulsion. Each bond or lone pair is one domain, and a double or triple bond still counts as one domain.",
+      "hint": "Think about what pushes the domains apart.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1537uck",
+      "kind": "concept",
+      "front": "Why is water's molecular geometry bent even though its electron-domain geometry is tetrahedral?",
+      "back": "Water has four domains: two bonds and two lone pairs. The lone pairs shape the arrangement but are left out of the name, so only the two bonded atoms define the **bent** molecular geometry.",
+      "hint": "Which domains do you count when naming the shape?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v9nhm2",
+      "kind": "concept",
+      "front": "What is hybridization, and why does the number of hybrid orbitals match the number of electron domains?",
+      "back": "**Hybridization** combines atomic orbitals on one atom into directional orbitals. Two domains give two $sp$ orbitals, three give three $sp^2$ orbitals, and four give four $sp^3$ orbitals, because each domain needs its own orbital.",
+      "hint": "Each domain needs its own orbital.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l5uzc7",
+      "kind": "term",
+      "front": "What is an electron domain?",
+      "back": "An **electron domain** is one bond or one lone pair around a central atom. A single, double, or triple bond all count as one domain.",
+      "hint": "Count regions, not electrons or bond orders.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ytqzft",
+      "kind": "term",
+      "front": "What is electron-domain geometry?",
+      "back": "**Electron-domain geometry** is the arrangement of all domains around a central atom, including lone pairs. Two domains are linear, three trigonal planar, four tetrahedral, five trigonal bipyramidal, and six octahedral.",
+      "hint": "It includes lone pairs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1theoju",
+      "kind": "example",
+      "front": "A central atom has four bonded atoms and one lone pair. What is its molecular geometry?",
+      "back": "**Seesaw**. Five domains give trigonal bipyramidal electron-domain geometry, and one lone pair in that arrangement leaves a seesaw shape of bonded atoms.",
+      "hint": "Start by counting all five domains.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18ccyq2",
+      "kind": "mistake",
+      "front": "A student says water is tetrahedral because it has four electron domains. What is the error?",
+      "back": "The student named the shape using all domains. Shape names use only bonded atoms, so water's electron-domain geometry is tetrahedral but its **molecular geometry is bent**.",
+      "hint": "Which atoms does the shape name refer to?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ct53pj",
+      "kind": "mistake",
+      "front": "A student counts a central atom's double bond as two electron domains. What is wrong?",
+      "back": "A **double bond** is one electron domain. Its two bonding pairs occupy one region of space, so they repel as a single domain.",
+      "hint": "How many regions of space do the bonding pairs occupy?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rg7a83",
+      "kind": "concept",
+      "front": "Why do lone pairs change bond angles compared with ideal values?",
+      "back": "A **lone pair** repels neighboring bonding domains more strongly than a bonding domain does. This compresses the angle between bonds, so actual angles can differ from ideal values like 109.5°.",
+      "hint": "Compare lone pair repulsion with bonding pair repulsion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08xtbif",
+      "kind": "process",
+      "front": "What are the steps to predict a molecule's shape from its Lewis structure?",
+      "back": "1) Identify the central atom and count its bonds (each multiple bond as one domain) and lone pairs. 2) Find the electron-domain geometry from the total. 3) Remove lone pairs from the name to get the **molecular geometry**. 4) Adjust the bond angle for lone pair repulsion.",
+      "hint": "Count all domains before naming the shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a50ynw",
+      "kind": "concept",
+      "front": "Which hybridization does carbon have in methane, ethene, and ethyne, and how does ethene form its double bond?",
+      "back": "Carbon is $sp^3$ in methane, $sp^2$ in ethene, and $sp$ in ethyne. Hybrid orbitals form sigma bonds, and the **unhybridized p orbitals** overlap sideways to form the pi bond in the double bond.",
+      "hint": "Match the domain count to the hybridization.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ke0wy5",
+      "kind": "term",
+      "front": "What are sp hybrid orbitals?",
+      "back": "**sp hybrid orbitals** are two orbitals formed by combining one s orbital and one p orbital on the same atom. They correspond to a central atom with two electron domains.",
+      "hint": "Two orbitals come from one s and one p.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "Second derivative test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:26.272Z",
+  "cards": [
+    {
+      "id": "0aip6nu",
+      "kind": "concept",
+      "front": "What does the second derivative test tell you about a point where $f'(c)=0$?",
+      "back": "If $f''(c)>0$, the graph bends **upward** and $f(c)$ is a local minimum. If $f''(c)<0$, the graph bends **downward** and $f(c)$ is a local maximum.",
+      "hint": "Think about which way the graph bends at that point.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15loylj",
+      "kind": "process",
+      "front": "How do you classify the critical points of a function using the second derivative?",
+      "back": "**Step 1:** solve $f'(x)=0$ and find where $f'$ is undefined. **Step 2:** find $f''(x)$. **Step 3:** evaluate $f''$ at each stationary point. A positive value gives a minimum and a negative value gives a maximum.",
+      "hint": "Start by solving $f'(x)=0$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "111ytq4",
+      "kind": "mistake",
+      "front": "If $f''(c)=0$, does that mean $f$ has no local extremum at $c$?",
+      "back": "**No.** A zero second derivative makes the test **inconclusive**. The point may be a local maximum, a local minimum, or neither.",
+      "hint": "What does the test say when it cannot decide?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jjseet",
+      "kind": "example",
+      "front": "Find and classify the stationary points of $f(x)=x^3-3x$.",
+      "back": "Local **maximum** at $(-1,2)$ and local **minimum** at $(1,-2)$. Here $f'(x)=3x^2-3=0$ gives $x=\\pm1$, and $f''(x)=6x$ gives $f''(-1)=-6$ and $f''(1)=6$.",
+      "hint": "Solve $f'(x)=0$ first, then test the sign of $f''$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1brxsaj",
+      "kind": "term",
+      "front": "What is a stationary point?",
+      "back": "A **stationary point** is a point on a graph where its first derivative equals **zero**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ofbrpq",
+      "kind": "term",
+      "front": "What is a critical point?",
+      "back": "A **critical point** is a domain value where the first derivative is **zero** or **does not exist**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0izgfqg",
+      "kind": "concept",
+      "front": "How do $f(x)=x^4$ and $g(x)=-x^4$ behave at zero, even though both second derivatives are zero there?",
+      "back": "$f(x)=x^4$ has a local **minimum** at zero because nearby outputs are positive. $g(x)=-x^4$ has a local **maximum** there because nearby outputs are negative.",
+      "hint": "Compare the sign of nearby outputs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aiybcq",
+      "kind": "example",
+      "front": "Classify $x=0$ for $h(x)=x^3$ and explain.",
+      "back": "The test is **inconclusive** because $h'(0)=0$ and $h''(0)=0$. Values on either side of zero have opposite signs, so zero is **neither** a maximum nor a minimum.",
+      "hint": "Check nearby values on both sides of zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07sbohl",
+      "kind": "term",
+      "front": "What is a nondifferentiable critical point?",
+      "back": "A **nondifferentiable critical point** is a point in the domain where the first derivative **does not exist**, so the second derivative test cannot be applied.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pmbzdm",
+      "kind": "mistake",
+      "front": "Can you use the second derivative test to classify $f(x)=|x|$ at zero?",
+      "back": "**No.** The first derivative does not exist at zero, so the test does not apply. Zero is still a local minimum because nearby function values are at least zero.",
+      "hint": "Is $f'(0)$ defined?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gcim80",
+      "kind": "process",
+      "front": "How can you classify a critical point when the second derivative test cannot decide?",
+      "back": "If $f$ is continuous there, check the sign of $f'$ on each side. A change from **negative to positive** gives a local minimum, a change from **positive to negative** gives a local maximum, and no sign change means **neither**.",
+      "hint": "Look at the sign of $f'$ just left and right of the point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14oyn3x",
+      "kind": "formula",
+      "front": "Write the second derivative test as conditions on $f'(c)$ and $f''(c)$.",
+      "back": "If $f'(c)=0$ and $f''(c)>0$, then $f(c)$ is a local **minimum**. If $f'(c)=0$ and $f''(c)<0$, then $f(c)$ is a local **maximum**.",
+      "hint": "Check both derivatives at $c$.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "6-3-2",
+  "topicCode": "6.3.2",
+  "topicName": "Populations and sustainability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:21.532Z",
+  "cards": [
+    {
+      "id": "1a755he",
+      "kind": "concept",
+      "front": "Why does a population stop growing once it nears its carrying capacity?",
+      "back": "Limiting factors such as food and space become scarce, so birth rate falls and death rate rises until the two balance and numbers stay stable.",
+      "hint": "Think about what happens to birth and death rates as numbers rise.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u6w7yy",
+      "kind": "concept",
+      "front": "Why do biologists sample a small part of a habitat instead of counting every individual?",
+      "back": "Counting everything would take far too long. A random sample is counted and scaled up to give a reliable estimate of the whole population.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vttptu",
+      "kind": "term",
+      "front": "What is sustainable use of a resource?",
+      "back": "Using a resource at a rate that lets it be renewed, so future generations can still obtain it. Present needs are met without reducing future supply.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tbx4vp",
+      "kind": "example",
+      "front": "Ten 0.25 m² quadrats placed at random in a 500 m² field hold 30 plants in total. What is the estimated population size?",
+      "back": "About 6000 plants, or $\\approx6.0\\times10^{3}$ plants. Mean density is $12\\,\\mathrm{m^{-2}}$, multiplied by the 500 m² area.",
+      "hint": "Start by finding the mean count per quadrat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05dxefu",
+      "kind": "formula",
+      "front": "In the mark–release–recapture formula $N=\\frac{n_1\\times n_2}{m}$, what does each symbol represent?",
+      "back": "$N$ is the estimated population size. $n_1$ is the number marked and released. $n_2$ is the size of the second sample. $m$ is the number of marked animals in the second sample.",
+      "hint": "Think about the two sampling trips.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oerkwy",
+      "kind": "example",
+      "front": "40 beetles are caught, marked and released. A later sample of 50 beetles contains 10 marked ones. What is the estimated population?",
+      "back": "200 beetles. Using $N=\\frac{40\\times50}{10}=200$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oyg8q5",
+      "kind": "concept",
+      "front": "What assumptions must hold for mark–release–recapture to give an accurate estimate?",
+      "back": "Marks last and do no harm, animals mix fully before the second sample, and there is no migration, birth or death between samples.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yecnau",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat carrying capacity as a fixed number for a species?",
+      "back": "Carrying capacity rises or falls when resources, space or disease risk change. It describes what the environment can support at a given time.",
+      "hint": "Consider what might change in a habitat over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e3ton2",
+      "kind": "term",
+      "front": "How does preservation differ from conservation?",
+      "back": "**Preservation** keeps an area unchanged, with human activity excluded or minimal. **Conservation** allows sustainable use and may use active management such as controlling grazing.",
+      "hint": "Compare how much human use each one allows.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0j7ifji",
+      "kind": "concept",
+      "front": "How does a closed season help a fish population?",
+      "back": "It protects fish while they breed, so more of them survive to reproduce and the population can recover.",
+      "hint": "Think about when fish are most vulnerable to being caught.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pq362t",
+      "kind": "term",
+      "front": "What is in situ conservation, and give one example?",
+      "back": "Protecting species within their natural habitat, such as nature reserves, marine protected areas or laws against hunting. Whole communities and food webs are protected together.",
+      "hint": "Think about where the species normally lives.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0s2175n",
+      "kind": "term",
+      "front": "What is ex situ conservation, and give one example?",
+      "back": "Protecting species outside their natural habitat, such as in zoos running captive breeding programmes or in seed banks storing rare plant seeds.",
+      "hint": "Compare it with where in situ conservation takes place.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fcj0hv",
+      "kind": "mistake",
+      "front": "Why does a field of millions of one crop plant have low biodiversity?",
+      "back": "Biodiversity measures the variety of species, not the number of individuals. A single species, however abundant, gives very little variety.",
+      "hint": "Compare how many plants there are with how many kinds there are.",
+      "sectionId": "s7"
+    },
+    {
+      "id": "1uxy5gu",
+      "kind": "term",
+      "front": "What is a monoculture?",
+      "back": "The growing of a single crop species over a large area. It offers fewer habitats and food sources than a varied habitat, so fewer species can live there.",
+      "sectionId": "s7"
+    }
+  ]
+}

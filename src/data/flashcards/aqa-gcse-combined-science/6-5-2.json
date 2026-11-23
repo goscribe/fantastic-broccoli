@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-5-2",
+  "topicCode": "6.5.2",
+  "topicName": "Work done and energy transfer",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:28.773Z",
+  "cards": [
+    {
+      "id": "1ujguq4",
+      "kind": "concept",
+      "front": "Why is work done described as an energy transfer?",
+      "back": "**Work done** is the energy a force transfers when it moves an object through a distance in the force's direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ibif7k",
+      "kind": "formula",
+      "front": "Which equation calculates work done, with its symbols and units?",
+      "back": "$W=Fs$: $W$ is work done in **joules (J)**, $F$ is force in **newtons (N)**, and $s$ is distance in **metres (m)** moved in the force's direction.",
+      "hint": "Think about how the joule is built from a newton and a metre.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rr9jkk",
+      "kind": "concept",
+      "front": "Where does the kinetic energy of a sliding box go as it slows down?",
+      "back": "It is transferred by **friction** to the thermal energy stores of the box and floor, which may warm up.",
+      "hint": "Which force opposes the box's movement?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d4oumf",
+      "kind": "term",
+      "front": "What is the distance moved in the force's direction?",
+      "back": "The part of an object's movement measured along the direction in which the force acts.",
+      "hint": "Compare it with the total route the object travels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kqk5io",
+      "kind": "term",
+      "front": "What is a joule?",
+      "back": "The **joule (J)** is the unit of work done and energy transferred; one joule is done when a 1 N force moves an object 1 m in its direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x3n00t",
+      "kind": "example",
+      "front": "A person pushes a box with a force of 40 N and it moves 3 m in the force's direction. What is the work done?",
+      "back": "$W=40\\,\\mathrm{N}\\times3\\,\\mathrm{m}=120\\,\\mathrm{J}$, so the work done is **120 J**.",
+      "hint": "Write the equation first, then substitute the values with units.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ep4y3j",
+      "kind": "mistake",
+      "front": "A student puts a distance of 50 cm into $W=Fs$ as 50. What is wrong with this?",
+      "back": "Distance must be in **metres**. 50 cm is 0.5 m, so 0.5 must be substituted, otherwise the answer in joules is wrong.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fvbpl5",
+      "kind": "mistake",
+      "front": "Why does holding a heavy bag still do no work on it?",
+      "back": "The bag does not move, so the distance moved in the force's direction is zero; effort is used, but **no work** is done on the bag.",
+      "hint": "Compare the effort you feel with the distance the bag travels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fouy5j",
+      "kind": "mistake",
+      "front": "A force moves an object along a curved route. Which distance should be used in $W=Fs$?",
+      "back": "Only the **distance moved in the force's direction**, not the whole route travelled; movement at right angles to the force is excluded.",
+      "hint": "Think about which part of the path the force is pushing along.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rzoiyf",
+      "kind": "process",
+      "front": "Trace the energy transfers when a person lifts a bag higher.",
+      "back": "The person's muscles do work against gravity, so energy moves from their **chemical energy store** to the bag's **gravitational potential energy store**.",
+      "hint": "Start with where the person's energy is held before lifting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t8yrn9",
+      "kind": "concept",
+      "front": "Why is energy said to be held in stores rather than as work?",
+      "back": "Work describes how energy is transferred, while energy is held in **stores** such as kinetic or chemical energy stores.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1seiw5u",
+      "kind": "term",
+      "front": "What is friction?",
+      "back": "**Friction** is a force that opposes movement between surfaces in contact; it does work when the surfaces move past each other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ao4irc",
+      "kind": "concept",
+      "front": "How do brakes slow a vehicle, in terms of energy stores?",
+      "back": "Friction between brake parts opposes motion, so the vehicle's **kinetic energy store** decreases while the brakes' and surroundings' **thermal energy stores** increase.",
+      "hint": "Think about what friction does to the vehicle's motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qwgq7g",
+      "kind": "concept",
+      "front": "Why does doing work not create energy?",
+      "back": "Work transfers move energy between stores, with some passing to the surroundings, so no new energy is made.",
+      "sectionId": "s3"
+    }
+  ]
+}

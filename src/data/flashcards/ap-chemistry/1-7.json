@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Periodic trends",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:12.453Z",
+  "cards": [
+    {
+      "id": "1xmxcwc",
+      "kind": "concept",
+      "front": "What makes an outer electron feel a stronger pull from the nucleus as you move across a period?",
+      "back": "The **effective nuclear charge** rises. Proton number increases while added electrons enter the same principal energy level, so shielding changes relatively little.",
+      "hint": "Compare proton number with how much shielding changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cyvka1",
+      "kind": "concept",
+      "front": "Why does atomic radius generally decrease across a period but increase down a group?",
+      "back": "Across a period, stronger nuclear attraction pulls same-level electrons closer. Down a group, each step adds an occupied principal energy level, placing outer electrons farther from the nucleus.",
+      "hint": "Think about the nucleus pull and the energy level of the outer electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0upmoca",
+      "kind": "concept",
+      "front": "Why does first ionization energy generally rise across a period?",
+      "back": "Stronger nuclear attraction makes the outer electron harder to **remove**. It generally decreases down a group because greater distance and shielding make removal easier.",
+      "hint": "Name the electron being removed and compare its attraction to the nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06y6yhf",
+      "kind": "term",
+      "front": "What is effective nuclear charge?",
+      "back": "The **net nuclear attraction** an electron experiences after accounting for shielding by other electrons.",
+      "hint": "Think net, not full, attraction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01p1agp",
+      "kind": "term",
+      "front": "What does it mean for inner electrons to shield outer electrons?",
+      "back": "Inner electrons **reduce** the full attraction that outer electrons feel from the nucleus.",
+      "hint": "Shielding weakens the pull, it does not remove it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qbhjfl",
+      "kind": "term",
+      "front": "What is atomic radius?",
+      "back": "A measure of **atomic size**, commonly based on the distance between bonded nuclei.",
+      "hint": "Size is measured using distances between nuclei.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f8x93q",
+      "kind": "term",
+      "front": "What is first ionization energy?",
+      "back": "The **energy** needed to remove one electron from a gaseous atom.",
+      "hint": "Gaseous atom, one electron removed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "008ey7e",
+      "kind": "term",
+      "front": "What is electronegativity?",
+      "back": "An atom's **ability to attract shared electrons** in a chemical bond.",
+      "hint": "Think about bonding, not removing electrons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vgl58p",
+      "kind": "concept",
+      "front": "How does electronegativity change across a period and down a group, and which element is highest?",
+      "back": "It generally **increases** across a period as effective nuclear charge increases and **decreases** down a group. **Fluorine** has the highest electronegativity.",
+      "hint": "Link it to effective nuclear charge and distance from the nucleus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xtgpmf",
+      "kind": "mistake",
+      "front": "Is it true that more protons always mean a stronger attraction for outer electrons?",
+      "back": "No. **Distance** and **shielding** also matter, so more protons do not always produce a stronger attraction on outer electrons.",
+      "hint": "Consider where the outer electrons are and what blocks the pull.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1g6qiij",
+      "kind": "mistake",
+      "front": "Does first ionization energy rise at every step across a period?",
+      "back": "No. **Exceptions** occur, such as when an electron enters a higher-energy subshell, or when two electrons pair in one orbital, lowering the energy needed for removal.",
+      "hint": "Think about subshells and paired electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1btgdsr",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat electronegativity and ionization energy as the same measure?",
+      "back": "**Ionization energy** removes an electron from an isolated gaseous atom. **Electronegativity** describes how strongly an atom attracts shared electrons within a bond.",
+      "hint": "One concerns an isolated atom, the other a bond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0elitr3",
+      "kind": "example",
+      "front": "Which has the larger atomic radius, sodium or chlorine, and why?",
+      "back": "**Sodium** is larger. Both lie in the same period, and chlorine's outer electrons experience stronger nuclear attraction, pulling them closer.",
+      "hint": "Same period, so compare nuclear attraction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17yx16b",
+      "kind": "process",
+      "front": "What is the best way to explain a periodic trend in an answer?",
+      "back": "**Name** the electron being removed or shared, then compare its attraction to the nucleus, including distance and shielding.",
+      "hint": "Start with which electron you are discussing.",
+      "sectionId": "s3"
+    }
+  ]
+}

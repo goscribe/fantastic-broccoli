@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-2-1",
+  "topicCode": "3.2.1",
+  "topicName": "Cell structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:11.896Z",
+  "cards": [
+    {
+      "id": "1tj0k7t",
+      "kind": "concept",
+      "front": "Why does increasing magnification not always reveal more detail in a cell image?",
+      "back": "Magnification only enlarges the image. Detail is limited by **resolution**, the ability to tell two close points apart, so beyond that the enlarged image stays blurred.",
+      "hint": "Think about what happens when two very close points cannot be told apart.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "198l41v",
+      "kind": "concept",
+      "front": "How does the structure of a mitochondrion suit its job of making ATP?",
+      "back": "Its folded inner membrane forms **cristae**, which give a large surface area for aerobic respiration. The matrix holds enzymes, DNA and ribosomes needed for the process.",
+      "hint": "Compare the surface area of a folded membrane with a flat one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "006865d",
+      "kind": "formula",
+      "front": "Which equation links magnification, image size and actual size?",
+      "back": "$\\text{magnification} = \\frac{\\text{image size}}{\\text{actual size}}$. Convert both measurements to the same unit before dividing.",
+      "hint": "Think about how the image size compares with the real size of the cell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tvgha4",
+      "kind": "example",
+      "front": "A cell measures 30 mm on a micrograph and is 15 µm long. What is the magnification?",
+      "back": "$\\times 2\\,000$. Convert $30\\,\\mathrm{mm}=30\\,000\\,\\mathrm{\\mu m}$, then $30\\,000\\div15=2\\,000$, with no units.",
+      "hint": "Start by putting both lengths into the same unit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dyez39",
+      "kind": "term",
+      "front": "What is the role of the rough endoplasmic reticulum?",
+      "back": "It is a membrane network with attached **ribosomes**. It helps process and transport proteins destined for secretion or for membranes.",
+      "hint": "Look at what is attached to its surface.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13rf52u",
+      "kind": "mistake",
+      "front": "Why is it wrong to call ribosomes membrane-bound organelles?",
+      "back": "**Ribosomes** have no membrane. They occur in both eukaryotic and prokaryotic cells, so they are not membrane-bound organelles.",
+      "hint": "Think about which cell types contain ribosomes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hr0opx",
+      "kind": "concept",
+      "front": "How does the DNA of a prokaryotic cell differ from DNA in a eukaryotic cell?",
+      "back": "Prokaryotic DNA is a **circular** loop lying in the cytoplasm, and may have small **plasmids**. Eukaryotic DNA is held inside a nucleus.",
+      "hint": "Consider where the DNA sits in each cell type.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tuk6oi",
+      "kind": "concept",
+      "front": "What does the cellulose cell wall do in a plant cell?",
+      "back": "It **supports** the cell. Bacterial cell walls are different: most contain **murein** rather than cellulose.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v1wos4",
+      "kind": "concept",
+      "front": "Which feature should you check first when judging an object's size in a micrograph?",
+      "back": "The **scale bar**. Only after using it should you judge size, then look for boundaries and internal patterns.",
+      "hint": "Think about what gives the real-world size reference.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00lq0lz",
+      "kind": "concept",
+      "front": "Which electron micrograph shows internal structures, and why?",
+      "back": "A **transmission electron micrograph** shows internal structures in a thin section. A **scanning electron micrograph** shows only the outside of the specimen.",
+      "hint": "Consider how the specimen is prepared for viewing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mw1exv",
+      "kind": "process",
+      "front": "What are the steps of cell fractionation, in order?",
+      "back": "Homogenise tissue in a cold, buffered, isotonic solution. Filter out large debris. Then spin repeatedly with **differential centrifugation**, collecting each pellet and spinning the **supernatant** faster.",
+      "hint": "Start with what happens to the tissue before any spinning.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0rro9ng",
+      "kind": "concept",
+      "front": "What does each condition of the homogenising solution achieve?",
+      "back": "**Cold** slows enzyme activity. The **buffer** maintains pH. **Isotonic** conditions help prevent organelles swelling or shrinking.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0s03klf",
+      "kind": "example",
+      "front": "In differential centrifugation, which component pellets first, nuclei or mitochondria?",
+      "back": "**Nuclei** pellet first. Larger, denser components sediment at lower speeds, so nuclei usually pellet before mitochondria.",
+      "hint": "Think about which component is larger and denser.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1bob19b",
+      "kind": "mistake",
+      "front": "Why is a pellet from centrifugation not always pure?",
+      "back": "A **pellet** is just the material that sediments under the chosen conditions. Other material may still be present, so separation is not necessarily complete.",
+      "hint": "Think about what a single spin speed can and cannot separate.",
+      "sectionId": "s6"
+    }
+  ]
+}

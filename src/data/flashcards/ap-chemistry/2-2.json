@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Intramolecular force and potential energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:23.072Z",
+  "cards": [
+    {
+      "id": "1fesugd",
+      "kind": "concept",
+      "front": "What makes the potential energy of two atoms fall as they approach each other?",
+      "back": "Each **nucleus** attracts the other atom's electrons, which lowers their potential energy. That lower energy is released as the bond forms.",
+      "hint": "Think about which particles attract each other as the atoms get closer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ih66qe",
+      "kind": "concept",
+      "front": "Where is the equilibrium bond length found on a potential energy diagram?",
+      "back": "At the **minimum** of the curve. This is the most stable separation of the two atoms.",
+      "hint": "Think about where the atoms are most stable on the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09t7ou7",
+      "kind": "concept",
+      "front": "How does the depth of the energy minimum relate to bond strength?",
+      "back": "A **deeper minimum** means a stronger bond. The bond dissociation energy is the vertical distance from the minimum up to zero for separated atoms.",
+      "hint": "Compare vertical depths, not horizontal positions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l83klc",
+      "kind": "term",
+      "front": "What is bond dissociation energy?",
+      "back": "The **energy required** to break one mole of specified gaseous bonds and separate the atoms.",
+      "hint": "Think about breaking the bond, not forming it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01ppc14",
+      "kind": "term",
+      "front": "What does a potential energy diagram show?",
+      "back": "How the **potential energy** of two interacting atoms changes with the distance between their nuclei.",
+      "hint": "One axis is energy; what is the other?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "008287a",
+      "kind": "process",
+      "front": "How does potential energy change as two atoms move inward from far apart?",
+      "back": "1. Far apart, energy is near zero. 2. Attraction dominates, so energy falls. 3. Energy reaches a **minimum** at the equilibrium bond length. 4. Closer in, repulsion dominates and energy rises steeply.",
+      "hint": "Start at large separation and move inward.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zzzdie",
+      "kind": "concept",
+      "front": "Why is bond formation a balance rather than attraction alone?",
+      "back": "**Repulsions** between nuclei and between electrons become important at short distances, so the bond depends on both attraction and repulsion.",
+      "hint": "Think about what happens when atoms get very close.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qx1qcp",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a bond forms when potential energy rises?",
+      "back": "A bond forms when potential energy **falls**, releasing energy. A rise at short distances reflects repulsion, not bond formation.",
+      "hint": "Which direction does energy move during bond formation?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nt57z6",
+      "kind": "mistake",
+      "front": "Does the energy minimum mean that bonded atoms stop moving?",
+      "back": "No. Bonded atoms **vibrate** around the equilibrium separation. The minimum only marks the preferred bond length.",
+      "hint": "Think about what the curve describes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ic5v40",
+      "kind": "mistake",
+      "front": "Is a shorter bond always a stronger bond?",
+      "back": "Not always. Across different atom pairs, **atomic size** also affects length, so length alone cannot rank every bond's strength.",
+      "hint": "Compare bonds between the same atoms versus different atoms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ssu28p",
+      "kind": "example",
+      "front": "A curve's minimum is at 100 pm and $-400$ kJ mol$^{-1}$, with separated atoms at 0. What is the bond dissociation energy?",
+      "back": "$400$ kJ mol$^{-1}$, from $0-(-400)=400$. The equilibrium bond length is 100 pm.",
+      "hint": "Measure the energy rise from the minimum up to zero.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q4j2pb",
+      "kind": "term",
+      "front": "What is bond length?",
+      "back": "The **distance between the nuclei** of two bonded atoms at equilibrium.",
+      "hint": "It is read from the horizontal position of the minimum.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lf7nkw",
+      "kind": "concept",
+      "front": "Why is bond dissociation energy positive while the energy at the minimum is negative?",
+      "back": "The **minimum** describes the bonded state relative to separated atoms, while bond dissociation energy is the energy supplied to separate them.",
+      "hint": "Consider which state the negative value describes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02giuzy",
+      "kind": "term",
+      "front": "What is an intramolecular force?",
+      "back": "An **interaction** that acts between atoms within a substance and holds them together.",
+      "hint": "Within the substance, not between separate substances.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-14",
+  "topicCode": "3.14",
+  "topicName": "Graph theory",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:39.871Z",
+  "cards": [
+    {
+      "id": "0nps0ci",
+      "kind": "concept",
+      "front": "What does a graph actually record, and what does its drawing shape not matter for?",
+      "back": "A **graph** is a set of vertices joined by edges. Only which vertices are connected matters, so the drawn shape or distances do not change the graph.",
+      "hint": "Think about a railway map: which stations connect, not how far apart they are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "116qrn9",
+      "kind": "formula",
+      "front": "For any graph with E edges, how does the sum of all vertex degrees relate to E?",
+      "back": "The sum of the degrees equals $2E$. Each edge has two ends, so it adds 1 to the degree of two vertices.",
+      "hint": "Each edge is counted at both of its ends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ychyh3",
+      "kind": "concept",
+      "front": "Why does a tree with n vertices have exactly n-1 edges, and what follows if a connected graph has n-1 edges?",
+      "back": "A tree is a connected graph with no cycles, so it has $n-1$ edges. A connected graph with $n$ vertices and $n-1$ edges must be a **tree**.",
+      "hint": "A tree is connected and contains no cycles.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0cpryfv",
+      "kind": "term",
+      "front": "What is the degree of a vertex?",
+      "back": "The **degree** of a vertex is the number of edges that meet at that vertex.",
+      "hint": "Count the lines touching the vertex.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05kurj3",
+      "kind": "example",
+      "front": "A graph has 5 vertices, and K_5 is the complete graph on them. How many edges does K_5 have?",
+      "back": "$K_5$ has **10** edges. Each vertex has degree 4, the sum of degrees is $5\\times4=20$, and $E=\\frac{20}{2}=10$.",
+      "hint": "Each vertex is joined to every other vertex.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18kv2as",
+      "kind": "mistake",
+      "front": "A student says the number of edges in $K_n$ is $n(n-1)$. What is wrong?",
+      "back": "The count is $\\frac{n(n-1)}{2}$, not $n(n-1)$. Dividing by 2 stops each edge being counted twice.",
+      "hint": "Each edge joins two vertices, so it appears twice in the degree sum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v29uf9",
+      "kind": "term",
+      "front": "What is a simple graph?",
+      "back": "A **simple graph** has no loops and no more than one edge between any pair of vertices.",
+      "hint": "Think about loops and repeated edges.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wyfz9r",
+      "kind": "concept",
+      "front": "How do weighted and directed graphs add information to a basic graph?",
+      "back": "A **weighted graph** gives each edge a number such as a distance, time or cost. A **directed graph** gives each edge an arrow, so travel may be allowed in one direction only.",
+      "hint": "Think about a road map with distances and a one-way street.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h18s0g",
+      "kind": "term",
+      "front": "What is a path in a graph?",
+      "back": "A **path** is a sequence of edges joining a starting vertex to an ending vertex that visits no vertex more than once.",
+      "hint": "Compare it with a cycle, which returns to its start.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h993kr",
+      "kind": "concept",
+      "front": "When is a graph called connected?",
+      "back": "A graph is **connected** when there is a path between every pair of vertices. If not, it splits into separate pieces.",
+      "hint": "Ask whether you can travel between any two vertices.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mrxhqp",
+      "kind": "mistake",
+      "front": "Two lines cross in a drawing of a graph. Does this crossing create a new vertex?",
+      "back": "No. Crossing lines join the graph only if they meet at a **vertex**. A crossing point alone does not create a vertex or connection.",
+      "hint": "Only marked points where edges meet count as vertices.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mvhlmt",
+      "kind": "term",
+      "front": "What is a cycle in a graph?",
+      "back": "A **cycle** is a closed path that starts and ends at the same vertex and visits no other vertex more than once. In a simple graph the shortest cycle is a triangle.",
+      "hint": "A route that returns to where it started.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0i5tcv6",
+      "kind": "process",
+      "front": "How can you deduce whether a connected network of 8 computers with 7 cables contains a cycle?",
+      "back": "Compare edges with vertices: a tree with 8 vertices has $8-1=7$ edges. Since the network is connected with 7 edges, it is a **tree**, so it contains no cycle.",
+      "hint": "Use the number of vertices and edges.",
+      "sectionId": "s6"
+    }
+  ]
+}

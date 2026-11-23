@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-7",
+  "topicCode": "1.7",
+  "topicName": "Choosing a limit procedure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:49.208Z",
+  "cards": [
+    {
+      "id": "0e8tz8y",
+      "kind": "concept",
+      "front": "What should decide your first choice of limit method?",
+      "back": "The **information available** decides it. Graphs show behavior near the input, tables give nearby values, and a formula may allow an exact algebraic result.",
+      "hint": "Think about what evidence you have been given.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oj2viw",
+      "kind": "process",
+      "front": "What do you try first when finding the limit of a formula?",
+      "back": "Try **direct substitution**. A defined value gives the limit for a function continuous there. If you get $\\frac{0}{0}$, switch methods.",
+      "hint": "Look at what the substituted result tells you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ywge6g",
+      "kind": "concept",
+      "front": "When does a two-sided limit fail to exist, based on one-sided checks?",
+      "back": "When the **left-hand limit** and **right-hand limit** disagree. Check each side separately, because behavior can differ on the two sides.",
+      "hint": "Compare the values approached from below and from above.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gf577r",
+      "kind": "term",
+      "front": "What is an indeterminate form such as $\\frac{0}{0}$?",
+      "back": "An **indeterminate form** that does not determine the limit. It signals that another step, such as factoring, is needed.",
+      "hint": "Substitution has not found the answer yet.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0czhqst",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to 2}\\frac{x^2-4}{x-2}$ after substitution gives $\\frac{0}{0}$.",
+      "back": "The limit is $4$. Factor to $\\frac{(x-2)(x+2)}{x-2}$, cancel for $x\\ne 2$ to get $x+2$, then substitute: $2+2=4$.",
+      "hint": "Factor the numerator first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qjziny",
+      "kind": "term",
+      "front": "What is a graphical method for limits?",
+      "back": "A **graphical method** uses the behavior shown near an input to estimate a limit or compare its two sides.",
+      "hint": "Think about what you can see on a graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qhjzqf",
+      "kind": "term",
+      "front": "What is a numerical method for limits?",
+      "back": "A **numerical method** uses function values at inputs approaching a target to estimate the limit.",
+      "hint": "Think about tables of nearby values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01z5n16",
+      "kind": "term",
+      "front": "What is the left-hand limit of a function at a target?",
+      "back": "The **left-hand limit** is the value approached from inputs below the target.",
+      "hint": "Left means smaller inputs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1967a8x",
+      "kind": "term",
+      "front": "What is the right-hand limit of a function at a target?",
+      "back": "The **right-hand limit** is the value approached from inputs above the target.",
+      "hint": "Right means larger inputs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11pzekj",
+      "kind": "mistake",
+      "front": "Can a table of values prove that a limit exists?",
+      "back": "No. A table can **suggest** a limit, but it gives an estimate, not proof. Check both sides and inspect the formula when values seem unstable.",
+      "hint": "Think about what a few entries can hide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wrk170",
+      "kind": "process",
+      "front": "How should you justify switching from one limit method to another?",
+      "back": "**Name what the first method cannot establish**, then explain how the new method addresses that gap.",
+      "hint": "Start with the weakness of the first method.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08z6a72",
+      "kind": "concept",
+      "front": "What is a method justification?",
+      "back": "A **method justification** explains why the available information makes your chosen approach useful for that particular limit. Name a useful feature, not just that it is easier.",
+      "hint": "Point to a specific feature of the expression or graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g2kq82",
+      "kind": "concept",
+      "front": "Should a limit read from a graph or table be stated as exact?",
+      "back": "No. A graph or table gives an **estimate** unless more information supports certainty. Say so clearly in your answer.",
+      "hint": "Match your conclusion to your evidence.",
+      "sectionId": "s4"
+    }
+  ]
+}

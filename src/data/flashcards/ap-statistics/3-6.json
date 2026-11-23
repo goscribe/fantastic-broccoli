@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "p-values",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:19.299Z",
+  "cards": [
+    {
+      "id": "08pt5nd",
+      "kind": "concept",
+      "front": "What does a p-value actually measure?",
+      "back": "The **probability**, assuming the null hypothesis is true, of getting a sample result at least as extreme as the one observed. It is not the chance the null hypothesis is true.",
+      "hint": "Start by assuming the null is true.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fpxequ",
+      "kind": "process",
+      "front": "What are the three parts of a correct p-value interpretation, in order?",
+      "back": "1) Assume the null hypothesis is true, using the claimed value in context. 2) Describe a sample result at least as extreme as the one observed. 3) Give the **probability** and say it comes from random sampling.",
+      "hint": "Three steps, always in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fmkfk8",
+      "kind": "concept",
+      "front": "What does a small p-value tell you about the null hypothesis?",
+      "back": "It is **strong evidence against** the null hypothesis, because the result would be unusual if the null were true. A large p-value gives weak evidence against it.",
+      "hint": "Think about how surprising the result would be.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "045pva0",
+      "kind": "concept",
+      "front": "Where does the p-value come from on the null model curve?",
+      "back": "It is the **area in the tail** beyond your observed result. A result far out in the tail leaves little area, giving a small p-value.",
+      "hint": "Picture the bell curve centered on the null value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d78cfs",
+      "kind": "concept",
+      "front": "How is a two-sided p-value found from a one-tail area?",
+      "back": "It is **double** the one-tail area, because a two-sided alternative counts both tails of the null model.",
+      "hint": "Two-sided means two tails.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1182b4h",
+      "kind": "example",
+      "front": "A shop claims 40% of customers use a loyalty card. 47% of 200 sampled do; one-sided p-value 0.022. Interpret the p-value in context.",
+      "back": "If exactly 40% of all customers use a loyalty card, there is about a **2.2% chance** that a random sample of 200 customers has 47% or more users.",
+      "hint": "Assume the claim is true first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rl5skm",
+      "kind": "term",
+      "front": "What is the significance level, $\\alpha$?",
+      "back": "A **cutoff** set before seeing the data. A p-value at or below $\\alpha$ is statistically significant. Common choices are 0.05 and 0.01.",
+      "hint": "It is chosen before you look at the data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vvuvj3",
+      "kind": "mistake",
+      "front": "Is a p-value of 0.03 the chance that the null hypothesis is true?",
+      "back": "**No.** The p-value assumes the null is true and describes how likely the data are under that assumption. It says nothing about the probability the null is true.",
+      "hint": "Which hypothesis is assumed true here?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aumb8p",
+      "kind": "mistake",
+      "front": "Does a large p-value prove the null hypothesis is true?",
+      "back": "**No.** A large p-value means the result is not unusual, so the evidence against the null is weak. Never say the null is proven true or false.",
+      "hint": "Weak evidence is not the same as proof.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rp2gcc",
+      "kind": "term",
+      "front": "What is practical significance?",
+      "back": "Whether the size of a difference or effect is **large enough to matter** in the real situation. The p-value alone cannot answer this.",
+      "hint": "Think about real life, not statistics.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lmyqzm",
+      "kind": "concept",
+      "front": "Why can a huge sample give a small p-value for a tiny difference?",
+      "back": "Sample size drives the gap: a very large sample can make even a tiny difference statistically significant, while a tiny difference may still not matter in real life.",
+      "hint": "Consider 40,000 users with a 50.5% success rate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z6rm8d",
+      "kind": "mistake",
+      "front": "A p-value is 0.001. Does this show the effect is large?",
+      "back": "**No.** A small p-value shows only that the result is unlikely to be random variation alone, not that the effect is large.",
+      "hint": "Separate significance from size of the effect.",
+      "sectionId": "s5"
+    }
+  ]
+}

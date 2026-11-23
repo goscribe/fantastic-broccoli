@@ -1,7 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
-import { Clock, Moon, Sun, Sunset, Backpack } from "lucide-react";
+import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import {
@@ -16,11 +16,16 @@ import {
 } from "@/lib/reminders";
 import "@/lib/i18n/reminders";
 
-const PRESET_META: Record<StudyTimePreset, { key: string; icon: typeof Sun }> = {
-  morning: { key: "remind.morning", icon: Sun },
-  afterSchool: { key: "remind.afterSchool", icon: Backpack },
-  evening: { key: "remind.evening", icon: Sunset },
-  late: { key: "remind.late", icon: Moon },
+/**
+ * Each preset's picture: the home landscape at that time of day (tiles cut
+ * from public/design/hero, the same window in four lightings) with the cat in
+ * the foreground. `sky` is the tile's sky colour, shown until it arrives.
+ */
+const PRESET_META: Record<StudyTimePreset, { key: string; scene: string; sky: string; pose: MascotPose; cat: string }> = {
+  morning: { key: "remind.morning", scene: "morning", sky: "#d9e6fb", pose: "wave", cat: "h-[66%]" },
+  afterSchool: { key: "remind.afterSchool", scene: "after-school", sky: "#a8dafb", pose: "book", cat: "h-[66%]" },
+  evening: { key: "remind.evening", scene: "evening", sky: "#d9719a", pose: "pencil", cat: "h-[66%]" },
+  late: { key: "remind.late", scene: "late", sky: "#0b1351", pose: "sleep", cat: "h-[60%]" },
 };
 
 /**
@@ -49,7 +54,7 @@ export function StudyTimePicker({
         {STUDY_TIME_PRESET_ORDER.map((p) => {
           const minute = STUDY_TIME_PRESETS[p];
           const selected = !custom && preset === p;
-          const Icon = PRESET_META[p].icon;
+          const meta = PRESET_META[p];
           return (
             <button
               key={p}
@@ -61,23 +66,27 @@ export function StudyTimePicker({
                 onChange(minute);
               }}
               className={cn(
-                "flex min-h-[64px] items-center gap-3 rounded-2xl border px-3.5 py-3 text-left transition-colors",
+                "flex flex-col overflow-hidden rounded-2xl border text-left transition-colors",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
                 selected
-                  ? "border-accent bg-accent-soft text-foreground shadow-[inset_0_0_0_1px_var(--accent)]"
+                  ? "border-accent bg-accent-soft text-foreground shadow-[0_0_0_1px_var(--accent)]"
                   : "border-border bg-card hover:border-accent/50",
               )}
             >
               <span
+                aria-hidden
                 className={cn(
-                  "flex size-9 shrink-0 items-center justify-center rounded-xl",
-                  selected ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground",
+                  "relative block aspect-[9/4] w-full overflow-hidden bg-cover transition-[filter] sm:aspect-[2/1]",
+                  // The night sky keeps its moon; the others keep their hills.
+                  p === "late" ? "bg-top" : "bg-bottom",
+                  selected ? "saturate-[1.1]" : "saturate-[0.8]",
                 )}
+                style={{ backgroundColor: meta.sky, backgroundImage: `url(/design/reminders/${meta.scene}.webp)` }}
               >
-                <Icon className="size-[18px]" />
+                <Mascot pose={meta.pose} className={cn("absolute bottom-[-3%] left-[7%]", meta.cat)} />
               </span>
-              <span className="min-w-0">
-                <span className="block text-[14.5px] font-semibold leading-5">{t(PRESET_META[p].key)}</span>
+              <span className="block min-w-0 px-3.5 py-2 sm:py-2.5">
+                <span className="block text-[14.5px] font-semibold leading-5">{t(meta.key)}</span>
                 <span className="block text-[12.5px] leading-5 text-muted-foreground">~{formatStudyTime(minute, locale)}</span>
               </span>
             </button>
@@ -87,8 +96,8 @@ export function StudyTimePicker({
 
       <div
         className={cn(
-          "mt-2.5 flex min-h-[52px] items-center gap-3 rounded-2xl border px-3.5 py-2 transition-colors",
-          custom ? "border-accent bg-accent-soft shadow-[inset_0_0_0_1px_var(--accent)]" : "border-border bg-card",
+          "mt-2.5 flex min-h-[56px] items-center gap-3 rounded-2xl border py-2 pl-2 pr-3.5 transition-colors",
+          custom ? "border-accent bg-accent-soft shadow-[0_0_0_1px_var(--accent)]" : "border-border bg-card",
         )}
       >
         <button
@@ -99,16 +108,21 @@ export function StudyTimePicker({
             setCustom(true);
             onChange(customValue);
           }}
-          className="flex flex-1 items-center gap-3 text-left focus-visible:outline-none"
+          className="flex flex-1 items-center gap-2.5 text-left focus-visible:outline-none sm:gap-3"
         >
+          {/* A calm stretch of sky with the alarm-clock prop. */}
           <span
+            aria-hidden
             className={cn(
-              "flex size-9 shrink-0 items-center justify-center rounded-xl",
-              custom ? "bg-accent text-accent-foreground" : "bg-muted text-muted-foreground",
+              "block size-10 shrink-0 sm:w-[60px] rounded-xl bg-[#a8dafb] bg-no-repeat transition-[filter]",
+              custom ? "saturate-[1.1]" : "saturate-[0.8]",
             )}
-          >
-            <Clock className="size-[18px]" />
-          </span>
+            style={{
+              backgroundImage: "url(/design/reminders/clock.webp), url(/design/reminders/sky.webp)",
+              backgroundSize: "auto 82%, cover",
+              backgroundPosition: "center, center",
+            }}
+          />
           <span className="text-[14.5px] font-semibold">{t("remind.custom")}</span>
         </button>
         <label htmlFor={`${id}-time`} className="sr-only">

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Conditional probability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:04.584Z",
+  "cards": [
+    {
+      "id": "0ror3if",
+      "kind": "term",
+      "front": "What is a conditional probability, and how is it written?",
+      "back": "The **probability** that event $A$ occurs given that event $B$ has occurred, written $P(A\\mid B)$ and read as the probability of $A$ given $B$.",
+      "hint": "Think about what the event after the bar tells you.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tzeyyp",
+      "kind": "formula",
+      "front": "What is the formula for $P(A\\mid B)$, and what does the denominator represent?",
+      "back": "$P(A\\mid B)=\\frac{P(A\\cap B)}{P(B)}$. The **denominator** is the probability of the condition $B$, and the numerator is the probability that both $A$ and $B$ occur.",
+      "hint": "Which event supplies the denominator?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eut9kk",
+      "kind": "mistake",
+      "front": "Why can't you swap the two events in a conditional probability?",
+      "back": "$P(A\\mid B)$ divides by the total for $B$, while $P(B\\mid A)$ divides by the total for $A$. Different **totals** usually give different answers, so $P(A\\mid B)$ is usually not equal to $P(B\\mid A)$.",
+      "hint": "Check which event names the group you are restricted to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fkjjki",
+      "kind": "example",
+      "front": "In the 150-student table, what is $P(\\text{pet}\\mid\\text{house})$?",
+      "back": "**0.60**, from $\\frac{54}{90}$. The 90 house residents form the denominator, and 54 of them have a pet.",
+      "hint": "Which total does the condition tell you to use?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0na0t41",
+      "kind": "process",
+      "front": "How do you find a conditional probability from a table of counts?",
+      "back": "Use the **total for the condition** as the denominator, count the cell in both categories as the numerator, then divide and simplify. The answer must lie between 0 and 1.",
+      "hint": "Find the condition's total first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1meok54",
+      "kind": "concept",
+      "front": "Why can a conditional probability differ from an unconditional one?",
+      "back": "The condition **removes** outcomes outside $B$, so the denominator is smaller than the full sample space. The condition carries information about the group being studied.",
+      "hint": "Compare the size of the denominators.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rsgyz6",
+      "kind": "example",
+      "front": "In the 150-student table, what is $P(\\text{house}\\mid\\text{pet})$?",
+      "back": "**0.72**, from $\\frac{54}{75}$. Among the 75 pet owners, 54 live in a house.",
+      "hint": "The condition is now having a pet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16tzm2y",
+      "kind": "concept",
+      "front": "How does knowing a student lives in a house affect the chance that the student has a pet?",
+      "back": "It **raises** the chance from 0.50 (unconditional) to 0.60 (conditional), because the condition gave new information about the group.",
+      "hint": "Compare $P(\\text{pet})$ with $P(\\text{pet}\\mid\\text{house})$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ldk5hr",
+      "kind": "term",
+      "front": "What is an unconditional probability?",
+      "back": "A **probability** found from the entire sample space with no other event given, such as $P(\\text{pet})=0.50$ in the table.",
+      "hint": "No condition is attached.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qwm6vz",
+      "kind": "formula",
+      "front": "How can $P(A\\cap B)$ be found from $P(B)$ and $P(A\\mid B)$?",
+      "back": "$P(A\\cap B)=P(B)\\cdot P(A\\mid B)$. In the table, $0.60\\times0.60=0.36$, which matches the direct count $\\frac{54}{150}$.",
+      "hint": "Rearrange the conditional probability formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o1hrf7",
+      "kind": "concept",
+      "front": "Why must you name the group when you interpret a conditional probability?",
+      "back": "The group states **who** is counted, for example 60% of students who live in a house have a pet. The complement stays in the same condition: $P(\\text{no pet}\\mid\\text{house})=0.40$.",
+      "hint": "Include the condition in your sentence.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pq0ra9",
+      "kind": "example",
+      "front": "In a group of 80 students, 30 play basketball and 12 of them also run track. What is $P(\\text{track}\\mid\\text{basketball})$?",
+      "back": "**0.40**, from $\\frac{12}{30}$. The 30 basketball players form the condition, so they are the denominator.",
+      "hint": "Which group is the condition?"
+    }
+  ]
+}

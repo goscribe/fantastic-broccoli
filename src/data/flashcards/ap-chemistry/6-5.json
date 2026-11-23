@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Energy of phase changes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:48.343Z",
+  "cards": [
+    {
+      "id": "10hxp67",
+      "kind": "concept",
+      "front": "Why does temperature stay constant while a pure substance melts at constant pressure?",
+      "back": "Added **energy** goes into overcoming attractions between particles, not into raising their kinetic energy. Solid and liquid coexist until melting finishes.",
+      "hint": "Think about what the added energy is changing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hkwe72",
+      "kind": "formula",
+      "front": "In $q=n\\Delta H_{\\mathrm{phase}}$, what do $n$ and $\\Delta H_{\\mathrm{phase}}$ represent, and what signs do melting and boiling get?",
+      "back": "$n$ is the **amount in moles**; $\\Delta H_{\\mathrm{phase}}$ is the molar enthalpy of the phase change. Melting and boiling are positive; their reverse changes are negative.",
+      "hint": "Check the units and the direction of the change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0huxyyw",
+      "kind": "concept",
+      "front": "What does a flat segment on a heating curve show?",
+      "back": "A **phase change** with two phases present. Heat keeps entering, but temperature stays constant until the change finishes.",
+      "hint": "Compare it with the sloped segments.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0parord",
+      "kind": "term",
+      "front": "Define molar enthalpy of fusion.",
+      "back": "The **heat absorbed** per mole when a substance melts at constant pressure.",
+      "hint": "Think about the melting entry in the key terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cstrv2",
+      "kind": "term",
+      "front": "Define boiling.",
+      "back": "**Vaporization** throughout a liquid, occurring when its vapor pressure equals the external pressure.",
+      "hint": "Boiling happens throughout the liquid, not only at the surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0db8l7a",
+      "kind": "mistake",
+      "front": "A student says melting ice breaks the O-H covalent bonds in water. Is this correct?",
+      "back": "**No**. Melting changes attractions between molecules; the covalent bonds within each water molecule stay intact.",
+      "hint": "Covalent bonds hold atoms together inside a molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cr27we",
+      "kind": "mistake",
+      "front": "A student thinks heat transfer has stopped on a flat segment of a heating curve. Is this right?",
+      "back": "**No**. Heat continues to enter or leave during the phase change; only the temperature stays constant.",
+      "hint": "Think about what the added energy is doing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "127l7si",
+      "kind": "example",
+      "front": "Find q when 2.00 mol of water vapor condenses, given that water's molar enthalpy of vaporization is 40.7 kJ/mol.",
+      "back": "$q=-81.4\\,\\mathrm{kJ}$. Condensation reverses the sign, so $\\Delta H_{\\mathrm{cond}}=-40.7\\,\\mathrm{kJ\\,mol^{-1}}$ and $q=(2.00)(-40.7)$.",
+      "hint": "Reverse the sign for condensation first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08lyo5f",
+      "kind": "example",
+      "front": "Find q when 0.500 mol of a solid melts, given its molar enthalpy of fusion is 12.0 kJ/mol.",
+      "back": "$q=+6.00\\,\\mathrm{kJ}$. Melting absorbs heat, so the sign is positive: $q=(0.500)(12.0)$.",
+      "hint": "Melting absorbs energy, so decide the sign first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v4im9y",
+      "kind": "concept",
+      "front": "How do boiling and condensation compare in energy at the same pressure for the same substance?",
+      "back": "Boiling **absorbs** heat; condensation **releases** the same amount per mole. Vaporization generally needs more energy per mole than melting.",
+      "hint": "Think about particles separating versus coming together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mad2lh",
+      "kind": "concept",
+      "front": "How does freezing's enthalpy change compare with melting's for the same substance?",
+      "back": "They are **opposite in sign** with equal magnitude at the same conditions: freezing is negative, melting is positive.",
+      "hint": "Freezing releases energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xy8s72",
+      "kind": "process",
+      "front": "What steps should you follow to assign the sign of a phase change's enthalpy?",
+      "back": "1. Name the direction of the change. 2. Make the value positive if heat is absorbed (melting, boiling) or negative if released (freezing, condensation). 3. Multiply by n.",
+      "hint": "Start with the direction of the change."
+    },
+    {
+      "id": "1womvbi",
+      "kind": "concept",
+      "front": "What does a sloped segment on a heating curve show?",
+      "back": "A **single phase warming**: added energy raises the average kinetic energy of particles, so temperature rises.",
+      "hint": "Compare with the flat segments.",
+      "sectionId": "s4"
+    }
+  ]
+}

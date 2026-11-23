@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Introduction to rate law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:42.445Z",
+  "cards": [
+    {
+      "id": "0h4o6ky",
+      "kind": "concept",
+      "front": "What does a rate law show, and where do its exponents come from?",
+      "back": "A **rate law** links reaction rate to reactant concentrations, for example $\\text{rate}=k[\\mathrm{A}]^m[\\mathrm{B}]^n$. The exponents are the **reaction orders**, found from experimental data, not the balanced equation.",
+      "hint": "Think about what the lab measured.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06ukkxe",
+      "kind": "concept",
+      "front": "How can you find the order for one reactant using experiments?",
+      "back": "Use the **method of initial rates**: pick two experiments where only that reactant's concentration changes, divide the rates, and compare the result with the concentration ratio.",
+      "hint": "Only one concentration should change between the two runs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xms644",
+      "kind": "concept",
+      "front": "If a reactant's concentration changes by a factor f, how does its effect on rate change?",
+      "back": "Its contribution changes by $f^m$, where m is its order. Multiply the factors for all changed reactants. The **rate constant** $k$ cancels when comparing rates at the same temperature.",
+      "hint": "Each changed reactant gets its own factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zkixd4",
+      "kind": "term",
+      "front": "What is the rate constant k in a rate law?",
+      "back": "The **rate constant** is the proportionality constant in the rate law. It stays constant as long as the temperature and conditions stay fixed.",
+      "hint": "It does not depend on concentrations.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vzi8uh",
+      "kind": "term",
+      "front": "How is the overall reaction order found?",
+      "back": "The **overall reaction order** is the sum of all reactant exponents in the rate law. For $\\text{rate}=k[\\mathrm{A}]^2[\\mathrm{B}]$, it is $2+1=3$.",
+      "hint": "Add the exponents, not the coefficients.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z78eic",
+      "kind": "process",
+      "front": "What are the steps to write a rate law from initial-rate data?",
+      "back": "1) Pick pairs where only one concentration changes. 2) Divide rates and compare with the concentration ratio to get each order. 3) Write the rate law. 4) Substitute one experiment to find $k$, keeping units consistent.",
+      "hint": "Work one reactant at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m6t9l9",
+      "kind": "example",
+      "front": "Using experiments 1 and 2 in the table, what is the order of A?",
+      "back": "**Second order**. [A] doubles while the rate quadruples: $0.0080/0.0020=4=2^2$.",
+      "hint": "Check which experiments keep [B] fixed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13qok4h",
+      "kind": "example",
+      "front": "Using experiments 1 and 3 in the table, what is the order of B?",
+      "back": "**First order**. [B] doubles while the rate doubles: $0.0040/0.0020=2=2^1$.",
+      "hint": "Here [A] stays at 0.10 mol L^-1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ggp286",
+      "kind": "example",
+      "front": "Find k from experiment 1 for $\\text{rate}=k[\\mathrm{A}]^2[\\mathrm{B}]$.",
+      "back": "$k=2.0\\ \\mathrm{L^2\\,mol^{-2}\\,s^{-1}}$, since $0.0020/((0.10)^2(0.10))=2.0$.",
+      "hint": "Substitute the concentrations and the measured rate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13le0y2",
+      "kind": "example",
+      "front": "For $\\text{rate}=k[\\mathrm{A}]^2[\\mathrm{B}]$, what happens to rate if [A] doubles and [B] is halved?",
+      "back": "The rate **doubles**. Doubling A gives $2^2=4$, halving B gives $1/2$, and $4 \\times 1/2 = 2$.",
+      "hint": "State each factor and its exponent first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16hn3yv",
+      "kind": "mistake",
+      "front": "A student copies the coefficients from the balanced equation into the rate law. What is wrong?",
+      "back": "**Wrong**: coefficients describe amounts consumed and produced. Exponents in the rate law must be found from experimental rates.",
+      "hint": "Ask what the lab data actually show.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g6f2us",
+      "kind": "mistake",
+      "front": "A student says the rate constant k changes when reactant concentrations change. Why is this wrong?",
+      "back": "**Wrong**: k stays constant at a fixed temperature. Concentration changes alter the rate, but not k.",
+      "hint": "Check what the rate constant is said to depend on.",
+      "sectionId": "s1"
+    }
+  ]
+}

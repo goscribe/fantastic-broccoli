@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "First derivative test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:06.863Z",
+  "cards": [
+    {
+      "id": "12yxd0e",
+      "kind": "concept",
+      "front": "How does a change in the sign of f' at a critical point show whether it is a local maximum or minimum?",
+      "back": "A **positive-to-negative** change in f' gives a local maximum, where the function rises then falls. A **negative-to-positive** change gives a local minimum, where the function falls then rises.",
+      "hint": "Picture whether the graph climbs then drops, or drops then climbs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04nx154",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that f'(c)=0 alone means f has a maximum or minimum at c?",
+      "back": "**Wrong:** a zero derivative does not classify a point. You must check the sign on both sides. For $f(x)=x^3$, $f'(0)=0$, but $f'(x)=3x^2$ is positive on both sides, so there is no extremum.",
+      "hint": "Check what f' does on each side of the point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1th8ztm",
+      "kind": "process",
+      "front": "What are the steps for building a sign chart to apply the first derivative test?",
+      "back": "1) Find the critical points where f' equals zero. 2) Split the domain into **test intervals** at those points. 3) Test one value in each interval to find the sign of f'. 4) Read the max or min from each sign change.",
+      "hint": "Start by solving f'(x)=0.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xxs8a8",
+      "kind": "term",
+      "front": "What is a sign chart?",
+      "back": "A **sign chart** records the sign of the derivative on intervals separated by critical points, showing how the function moves toward and away from each point.",
+      "hint": "Think of a table of plus and minus signs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bfs6ow",
+      "kind": "term",
+      "front": "What is a local maximum?",
+      "back": "A **local maximum** is a function value at least as large as nearby function values.",
+      "hint": "Compare the value with points just left and right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10uavte",
+      "kind": "term",
+      "front": "What is a local minimum?",
+      "back": "A **local minimum** is a function value at most as large as nearby function values.",
+      "hint": "Compare the value with points just left and right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18oacja",
+      "kind": "term",
+      "front": "What are test intervals?",
+      "back": "**Test intervals** are the intervals between points that may separate regions with different derivative signs. You test one value inside each one.",
+      "hint": "They sit between the critical points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iq8q5i",
+      "kind": "example",
+      "front": "Classify the critical points of $f(x)=x^3-3x$ using the first derivative test.",
+      "back": "Local **maximum** at $(-1,2)$ and local **minimum** at $(1,-2)$. Since $f'(x)=3(x+1)(x-1)$ has signs $+,-,+$ on the intervals split at $x=-1$ and $x=1$.",
+      "hint": "Find where f' is zero, then test a value in each interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mg3cpo",
+      "kind": "concept",
+      "front": "Can the first derivative test classify a point where f' does not exist?",
+      "back": "Yes, **provided** f is continuous there. For $g(x)=|x|$, $g'$ changes from negative to positive at zero, so $(0,0)$ is a local minimum even though $g'(0)$ does not exist.",
+      "hint": "Check continuity before you conclude.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qvqudy",
+      "kind": "mistake",
+      "front": "Why can the two-sided test fail at an endpoint or a discontinuity?",
+      "back": "Those points lack values on both sides, or the function is not continuous there, so opposite derivative signs need not mean an extremum. Check continuity and two-sided values first.",
+      "hint": "What is missing at an endpoint?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06ivoyu",
+      "kind": "process",
+      "front": "What should a complete classification of a critical point include?",
+      "back": "Give the **derivative signs** on each side of the point, the way they change, and the point's coordinates.",
+      "hint": "Three parts are needed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0waqfqk",
+      "kind": "example",
+      "front": "What does the derivative sign pattern of $f(x)=x^3$ at $x=0$ tell you?",
+      "back": "$f'(x)=3x^2$ is positive on both sides of zero, so there is no sign change and no local extremum. The function keeps increasing.",
+      "hint": "Look at the sign on each side of zero.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-6",
+  "topicCode": "5.6",
+  "topicName": "Stationary points",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:05.341Z",
+  "cards": [
+    {
+      "id": "17fs7rv",
+      "kind": "concept",
+      "front": "Where on a curve does a stationary point occur, and what condition describes it?",
+      "back": "A **stationary point** occurs wherever the gradient is zero, so $f'(x)=0$. The curve is momentarily flat there.",
+      "hint": "Think about the gradient at the top of a hill.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19du6ms",
+      "kind": "process",
+      "front": "What are the three steps to find the stationary points of $f(x)$?",
+      "back": "Differentiate to get $f'(x)$. Solve $f'(x)=0$ for $x$. Substitute each solution into $f(x)$ to get its $y$-coordinate.",
+      "hint": "Three steps, always in this order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nkea0b",
+      "kind": "formula",
+      "front": "How does the second derivative $f''(x)$ classify a stationary point?",
+      "back": "If $f''(x)>0$ the point is a **local minimum**. If $f''(x)<0$ it is a **local maximum**. If $f''(x)=0$ the test tells you nothing.",
+      "hint": "Evaluate $f''(x)$ at the stationary $x$-value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rpc9o3",
+      "kind": "example",
+      "front": "Find the stationary points of $f(x)=x^3-6x^2+9x$.",
+      "back": "$(1,4)$ and $(3,0)$. Differentiate to $3x^2-12x+9$, factorise $3(x-1)(x-3)=0$, then substitute $x=1$ and $x=3$ into $f(x)$.",
+      "hint": "Factorise $f'(x)$ after dividing out the common factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bto3b0",
+      "kind": "mistake",
+      "front": "A student solves $f'(x)=0$ and gives the answer as $x=1$ and $x=3$. What is missing?",
+      "back": "The $y$-coordinates. Each point needs $y$ found by substituting into **$f(x)$**, not $f'(x)$, so the answer is $(1,4)$ and $(3,0)$.",
+      "hint": "Which function gives the height of the curve?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rxkjlw",
+      "kind": "concept",
+      "front": "How can the sign of $f'(x)$ either side of a stationary point show its type?",
+      "back": "A **local maximum** changes from positive to negative. A **local minimum** changes from negative to positive. A **point of inflection** keeps the same sign on both sides.",
+      "hint": "Check the gradient just before and just after the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bfs6ow",
+      "kind": "term",
+      "front": "What is a local maximum?",
+      "back": "A **local maximum** is a point where the function value is greater than at all nearby points. It may not be the highest value on the whole graph.",
+      "hint": "Compare only nearby points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ms18mh",
+      "kind": "term",
+      "front": "What is a point of inflection?",
+      "back": "A **point of inflection** is where the graph changes from curving upwards to curving downwards, or the reverse. At a stationary one, the gradient keeps the same sign on both sides.",
+      "hint": "Think about the direction of curving, not just flatness.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b6ga50",
+      "kind": "mistake",
+      "front": "Is a point a point of inflection just because $f''(x)=0$ there?",
+      "back": "No. A zero second derivative does not prove an **inflection**. For $f(x)=x^4$, $f''(0)=0$, yet $x=0$ is a minimum. Check the sign of $f'(x)$ instead.",
+      "hint": "Use the first derivative when the second is inconclusive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o8q345",
+      "kind": "example",
+      "front": "A greenhouse temperature is $T(t)=-t^2+8t+5$, with $T$ in °C and $t$ in hours. When is it hottest, and what is the temperature?",
+      "back": "It peaks at **21 °C** after 4 hours. $T'(t)=-2t+8=0$ gives $t=4$, $T''(t)=-2<0$ so it is a maximum, and $T(4)=21$.",
+      "hint": "Find $t$ where $T'(t)=0$, then check $T''(t)$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09cydg6",
+      "kind": "concept",
+      "front": "Does a local maximum always give the greatest value of a function?",
+      "back": "No. A **local maximum** is only the highest value nearby. On a restricted interval, the greatest value may occur at an end of the interval instead.",
+      "hint": "Consider the whole domain being studied.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dz3wx8",
+      "kind": "term",
+      "front": "What is the second derivative?",
+      "back": "The **second derivative**, written $f''(x)$, is the derivative of the first derivative $f'(x)$. It is used to test whether a stationary point is a maximum or minimum.",
+      "hint": "Differentiate twice.",
+      "sectionId": "s4"
+    }
+  ]
+}

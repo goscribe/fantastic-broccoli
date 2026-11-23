@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Meiosis and genetic diversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:44.957Z",
+  "cards": [
+    {
+      "id": "0zpe936",
+      "kind": "concept",
+      "front": "Which two meiosis mechanisms create new gamete combinations, and what does each one change?",
+      "back": "**Crossing over** rearranges alleles along a single chromatid, while **independent assortment** randomly mixes whole homologs into gametes. Both shuffle alleles the parents already carry.",
+      "hint": "Think about alleles on one chromosome versus whole chromosomes in a gamete.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tfeyrs",
+      "kind": "formula",
+      "front": "With n homologous pairs, how many whole-chromosome combinations can independent assortment produce?",
+      "back": "$2^n$ combinations, where n is the **number of homologous pairs**. This assumes two orientations per pair and excludes extra combinations from crossing over.",
+      "hint": "Each extra pair doubles the count.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13jws1l",
+      "kind": "concept",
+      "front": "When conditions change, why might a population with genetic diversity be more likely to keep going than one without it?",
+      "back": "Diversity gives inherited variation among individuals. Some traits may improve survival or reproduction, so their alleles can become more common over generations.",
+      "hint": "Consider which individuals survive and reproduce under new conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wxm9th",
+      "kind": "term",
+      "front": "What are homologous chromosomes?",
+      "back": "**Homologous chromosomes** carry the same genes at corresponding positions but may carry different alleles of those genes.",
+      "hint": "One from each parent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ohujv8",
+      "kind": "term",
+      "front": "What is crossing over?",
+      "back": "**Crossing over** is the exchange of matching DNA segments between nonsister chromatids of homologous chromosomes during early meiosis.",
+      "hint": "Which chromatids swap pieces?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07evxwo",
+      "kind": "process",
+      "front": "What are the main steps of crossing over during meiosis?",
+      "back": "1) Homologous chromosomes pair up. 2) Nonsister chromatids exchange matching segments. 3) The chromatids separate, and recombinant chromatids can enter gametes.",
+      "hint": "Start with pairing in early meiosis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cbzfc0",
+      "kind": "mistake",
+      "front": "A student says crossing over creates brand-new alleles. What is wrong with this?",
+      "back": "Crossing over only **rearranges** existing alleles into new combinations. New alleles come from mutation, not from crossing over.",
+      "hint": "Compare rearranging with creating.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02lvqca",
+      "kind": "term",
+      "front": "What is a recombinant chromatid?",
+      "back": "A **recombinant** chromatid carries a combination of alleles produced by crossing over, which neither parent chromosome had in that exact arrangement.",
+      "hint": "Look for the result of an exchange.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qrb4u2",
+      "kind": "term",
+      "front": "What is independent assortment?",
+      "back": "**Independent assortment** is the random distribution of maternal and paternal homologs into daughter cells, with each homologous pair lining up independently of the others.",
+      "hint": "Does one pair's orientation affect another's?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a0biw4",
+      "kind": "term",
+      "front": "What are gametes?",
+      "back": "**Gametes** are haploid reproductive cells that can unite during fertilization to form offspring.",
+      "hint": "Haploid means one set of chromosomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p4a9eb",
+      "kind": "example",
+      "front": "A cell has three homologous pairs. How many whole-chromosome combinations can independent assortment produce?",
+      "back": "**8** combinations, since $2^3=2\\times2\\times2=8$.",
+      "hint": "Use 2 raised to the number of pairs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xal08y",
+      "kind": "mistake",
+      "front": "A student says populations produce the alleles they need when conditions change. Why is this wrong?",
+      "back": "**Selection** acts on inherited variation that is already present. Alleles do not appear because conditions change.",
+      "hint": "Where does variation come from before selection acts?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "191nji2",
+      "kind": "term",
+      "front": "What is genetic diversity?",
+      "back": "**Genetic diversity** is variation in inherited genetic information among individuals in a population.",
+      "hint": "Think about differences between individuals, not within one.",
+      "sectionId": "s4"
+    }
+  ]
+}

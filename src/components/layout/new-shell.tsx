@@ -5,7 +5,7 @@ import Image from "next/image";
 import { NotificationBell } from "@/components/layout/notification-bell";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { Calendar, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PlayCircle, RotateCcw, Search, Settings } from "lucide-react";
+import { Calendar, House, LogOut, NotebookText, PanelLeft, PanelLeftClose, PenLine, PlayCircle, RotateCcw, Search, Settings } from "lucide-react";
 import { fetchWorkspaceTree } from "@/lib/api/workspace";
 import { signOut, useAuthUser } from "@/lib/api/auth";
 import { PointsPill, StreakButton } from "@/components/rewards/streak-button";
@@ -14,6 +14,8 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/rewards";
 import "@/lib/i18n/mistakes";
 import "@/lib/i18n/today";
+import "@/lib/i18n/coursework";
+import { useCourseworkNav } from "@/components/coursework/use-grader";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
@@ -28,6 +30,12 @@ const NAV: { href: string; label: string; labelKey?: string; icon: typeof House 
   { href: "/planner", label: "Planner", labelKey: "today.planner", icon: Calendar },
   { href: "/mistakes", label: "Mistakes", labelKey: "mistakes.nav", icon: RotateCcw },
 ];
+
+/**
+ * Coursework (the grader): a fifth place, shown only to students it is for
+ * (see useCourseworkNav), so nobody else's navigation grows.
+ */
+const COURSEWORK_NAV = { href: "/coursework", label: "Coursework", labelKey: "cw.nav", icon: PenLine };
 
 const RAIL_KEY = "scribe.sidebar.rail";
 const NARROW = "(max-width: 1179px)";
@@ -71,8 +79,11 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [rootWorkspaces, setRootWorkspaces] = useState<Workspace[]>([]);
   const [paletteOpen, setPaletteOpen] = useState(false);
-    const [mobileOpen, setMobileOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const rail = useRail();
+  const coursework = useCourseworkNav(!!user);
+  const nav = coursework ? [...NAV, COURSEWORK_NAV] : NAV;
   const { data: streak } = useStreak();
   const started = !!streak && (streak.longest > 0 || streak.current > 0 || streak.todayDone);
   // Subjects live on home's tiles, not in the sidebar. The tree is only for
@@ -112,14 +123,17 @@ export function NewShell({ children }: { children: React.ReactNode }) {
     <div className="design-root app-brand flex h-dvh overflow-hidden bg-[var(--page)] text-foreground">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:translate-x-0 md:border-r-0 md:bg-transparent",
+          // Desktop: a shelf out from the left wall. Flush with the window's left
+          // edge, inset 8px top and bottom, rounded and hairlined only on the sides
+          // you can see, on the light neutral tint, with a soft shadow to the right.
+          "fixed inset-y-0 left-0 z-50 flex w-[256px] shrink-0 flex-col border-r border-border bg-white px-3.5 py-5 transition-transform md:static md:my-2 md:translate-x-0 md:rounded-r-[var(--r-card)] md:border md:border-l-0 md:bg-white md:shadow-[4px_0_16px_-12px_rgba(22,22,26,0.18)]",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
           rail && "md:w-[68px] md:px-2.5",
         )}
       >
         <div className={cn("mb-6 flex items-center justify-between gap-2 pl-2", rail && "md:flex-col md:gap-3 md:pl-0")}>
           <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
-            <Image src="/logo.png" alt="Scribe" width={28} height={28} />
+            <Image src="/brand/scribe-hp-head.svg" alt="Scribe" width={28} height={28} />
             <span className={cn("text-[17px] font-bold tracking-tight", rail && "md:hidden")}>Scribe</span>
           </Link>
           <button
@@ -133,7 +147,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         <nav className="flex flex-col gap-1">
-          {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+          {nav.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
             const label = labelKey ? t(labelKey) : fallbackLabel;
             return (
             <Link
@@ -208,10 +222,26 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       )}
 
       {/* Room for the phone bottom nav (and the home indicator) under the last row. */}
-      <div className="flex min-w-0 flex-1 flex-col overflow-y-auto max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]">
-        <header className="flex h-[64px] shrink-0 items-center gap-2 px-4 sm:gap-3 sm:px-8">
+      {/* --app-top: where the floating top bar ends, for sticky bars inside pages. */}
+      <div
+        onScroll={(e) => {
+          const s = e.currentTarget.scrollTop > 4;
+          if (s !== scrolled) setScrolled(s);
+        }}
+        className="flex min-w-0 flex-1 flex-col overflow-y-auto [--app-top:64px] max-md:pb-[calc(4rem+env(safe-area-inset-bottom))]"
+      >
+        {/* The top bar: plain white, no border or island, its top edge
+            level with the shelf's, 8px in from the shelf and the window. It stays put
+            while the page scrolls under it, with no shadow. Only
+            the 8px strip above it is page-coloured, so content never shows over its top. */}
+        <div className="sticky top-0 z-30 shrink-0 bg-[linear-gradient(to_bottom,var(--page)_8px,transparent_8px)] px-2 pt-2">
+        <header
+          className={cn(
+            "flex h-14 items-center gap-2 bg-white px-2 transition-shadow sm:gap-3 sm:px-6",
+          )}
+        >
           <button type="button" onClick={() => setMobileOpen(true)} className="grid size-10 place-items-center rounded-xl hover:bg-muted md:hidden" aria-label="Open sidebar">
-            <Image src="/logo.png" alt="" width={24} height={24} />
+            <Image src="/brand/scribe-hp-head.svg" alt="" width={24} height={24} />
           </button>
           <button
             type="button"
@@ -243,6 +273,7 @@ export function NewShell({ children }: { children: React.ReactNode }) {
             </Link>
           </div>
         </header>
+        </div>
         {children}
         <AppTourHost />
       </div>
@@ -250,9 +281,9 @@ export function NewShell({ children }: { children: React.ReactNode }) {
       {/* Phones: the four places you go every day, one thumb away (the drawer holds settings; subjects are on home). */}
       <nav
         aria-label="Main"
-        className="fixed inset-x-0 bottom-0 z-40 grid grid-cols-4 border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
+        className={cn("fixed inset-x-0 bottom-0 z-40 grid border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden", nav.length === 5 ? "grid-cols-5" : "grid-cols-4")}
       >
-        {NAV.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+        {nav.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
           const label = labelKey ? t(labelKey) : fallbackLabel;
           const on = isActive(href);
           return (

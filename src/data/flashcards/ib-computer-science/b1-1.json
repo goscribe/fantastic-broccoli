@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b1-1",
+  "topicCode": "B1.1",
+  "topicName": "Approaches to computational thinking",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:06.125Z",
+  "cards": [
+    {
+      "id": "0et3l6c",
+      "kind": "process",
+      "front": "What are the five stages of solving a computational problem, in order?",
+      "back": "**Understand** the problem, **plan** an algorithm, **implement** it as a program, **test** it with a range of inputs, then **evaluate** and refine the result.",
+      "hint": "Start with what is given and what must be produced.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jgnogt",
+      "kind": "concept",
+      "front": "Why is abstraction useful when designing a program?",
+      "back": "It removes detail the problem does not need, leaving a **model** with only the essential features. A library system stores a book's title and borrower, not its cover colour.",
+      "hint": "Think of an underground map that leaves out streets.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iqq90j",
+      "kind": "term",
+      "front": "What is decomposition?",
+      "back": "Breaking a large problem into smaller **sub-problems** that can each be solved and tested separately, then combined into the full solution.",
+      "hint": "Think of a school concert split into tickets, lighting and music.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jafabm",
+      "kind": "term",
+      "front": "What is an algorithm?",
+      "back": "A **finite sequence of unambiguous steps** that solves a problem or completes a task, always leading to a result.",
+      "hint": "It is the plan you make before writing any code.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nd4rp9",
+      "kind": "term",
+      "front": "What is pattern recognition?",
+      "back": "Identifying **similarities or repeated features** within a problem or between problems, so an approach can be reused.",
+      "hint": "Sorting names and sorting prices have something in common.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jme5ez",
+      "kind": "term",
+      "front": "What is generalisation?",
+      "back": "Turning a recognised pattern into a **single solution** that works for a whole class of problems, not just one case.",
+      "hint": "Compare a routine that adds any two numbers with one that adds only 3 and 4.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k7u4yy",
+      "kind": "term",
+      "front": "What is a parameter?",
+      "back": "A **named input** to a routine whose value is supplied each time the routine is used, so the repeated steps stay fixed.",
+      "hint": "Which values change each time the routine runs?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09hn5w9",
+      "kind": "mistake",
+      "front": "A student starts writing code as soon as a problem is given. What is the error?",
+      "back": "They skip **understanding the problem**. Without a clear plan, mistakes are much harder to find later.",
+      "hint": "What should come before planning?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wq12gf",
+      "kind": "mistake",
+      "front": "Does abstraction mean losing any important detail?",
+      "back": "No. Abstraction removes only the detail that is **irrelevant** to the purpose, so essential features must stay.",
+      "hint": "Relevant to what?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10f1ldf",
+      "kind": "process",
+      "front": "When asked for an example of decomposition, what should you do first?",
+      "back": "Name the **whole problem** first, then list the sub-problems it splits into.",
+      "hint": "Start with the big picture.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mupqcv",
+      "kind": "concept",
+      "front": "Why does spotting a pattern save effort?",
+      "back": "Once one part is solved, you can **reuse the same approach** on similar parts. Patterns also help predict what a program will do next.",
+      "hint": "Think about solving one part and applying it elsewhere.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04hdde0",
+      "kind": "concept",
+      "front": "Why is a generalised solution more useful than one written for a single case?",
+      "back": "It uses **parameters** to handle many inputs, avoids rewriting similar code, and one tested solution is easier to maintain.",
+      "hint": "Count how many copies of the code you would otherwise need.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jhd3mw",
+      "kind": "concept",
+      "front": "How do pattern recognition and generalisation relate in order?",
+      "back": "**Pattern recognition** comes first, noticing what repeats. **Generalisation** follows by writing one solution that works for all such cases.",
+      "hint": "Which one notices, and which one writes the solution?"
+    }
+  ]
+}

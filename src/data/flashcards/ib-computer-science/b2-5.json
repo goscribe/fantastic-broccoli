@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b2-5",
+  "topicCode": "B2.5",
+  "topicName": "File processing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:17.727Z",
+  "cards": [
+    {
+      "id": "0kpsct1",
+      "kind": "concept",
+      "front": "Why does a program need to store data in a file instead of only in variables?",
+      "back": "Variables **vanish** when a program stops, so a **file** stores data on disk to keep it between runs.",
+      "hint": "Consider where the data goes once the program has finished running.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yehnyv",
+      "kind": "concept",
+      "front": "Why must a program close a file once it has finished writing to it?",
+      "back": "Closing sends data still waiting in the **buffer** to the disk and releases the file so other programs can open it.",
+      "hint": "Think about data that has not yet reached the disk.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ntpc8m",
+      "kind": "concept",
+      "front": "How can a program process every line of a file, even a very long one?",
+      "back": "Use a **loop** that runs until end of file, reading and processing one line per pass. Only one line is held in memory at a time.",
+      "hint": "Think about how many lines are in memory at once.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1kup12s",
+      "kind": "term",
+      "front": "What is a file mode?",
+      "back": "A **file mode** is the setting chosen when a file is opened that limits the program to reading, writing or appending.",
+      "hint": "It is set at the moment the file is opened.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hvv3pr",
+      "kind": "mistake",
+      "front": "A program opens an existing file in write mode to add a new score. What goes wrong?",
+      "back": "Write mode **erases** the existing content, so the old data is lost. Use append mode when the old data must stay.",
+      "hint": "Compare what write and append do to existing content.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pasz38",
+      "kind": "process",
+      "front": "What steps does a program follow to read a text file line by line?",
+      "back": "Open the file in **read mode**, loop until end of file reading one line per pass, then close the file.",
+      "hint": "Consider what must happen before the reading starts and after the loop ends.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x259ef",
+      "kind": "term",
+      "front": "What is the end of file?",
+      "back": "The **end of file** is the point after the last item of a file, where a further read has no data to return.",
+      "hint": "It is the point where the lines run out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01o5sor",
+      "kind": "mistake",
+      "front": "A program adds a line read from a text file straight to a total. Why is this wrong?",
+      "back": "The line arrives as a **string**, and adding strings joins them as text. Convert the line to a number before adding.",
+      "hint": "What type of data does a line from a file arrive as?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sp5tsi",
+      "kind": "process",
+      "front": "What happens when a program writes data into a text file?",
+      "back": "It sends text to the file and adds an **end-of-line marker** after each item. Numbers must be converted to text first.",
+      "hint": "Think about what starts a new line.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1aob7ed",
+      "kind": "term",
+      "front": "What is a buffer in file handling?",
+      "back": "A **buffer** is a temporary area of memory that holds data on its way to or from a file.",
+      "hint": "It sits between the program and the disk.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fv32jb",
+      "kind": "formula",
+      "front": "Which formula gives the mean of a set of values, given their total and the number of values?",
+      "back": "$\\mathrm{mean}=\\frac{\\mathrm{total}}{\\mathrm{count}}$, where total is the sum of the values and count is how many values there are.",
+      "hint": "Divide the sum by how many values were added.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pr6yxh",
+      "kind": "example",
+      "front": "A file holds the lines 12, 15, 9 and 20, one per line. What are the total and the mean?",
+      "back": "The total is **56** and the mean is **14**, because $12+15+9+20=56$ and $56 \\div 4 = 14$.",
+      "hint": "Add all four values, then divide by the number of lines.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ls61jn",
+      "kind": "mistake",
+      "front": "A loop reads lines from a file with no end-of-file test. What error can occur?",
+      "back": "Reading **past the end of file** has no data to return, causing a **runtime error** that stops the program. Test for end of file before each read.",
+      "hint": "What happens when there are no lines left to read?",
+      "sectionId": "s6"
+    }
+  ]
+}

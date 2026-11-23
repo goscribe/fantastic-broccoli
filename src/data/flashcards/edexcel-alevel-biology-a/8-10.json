@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-10",
+  "topicCode": "8.10",
+  "topicName": "Critical periods in development",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:23.178Z",
+  "cards": [
+    {
+      "id": "1qohzw3",
+      "kind": "term",
+      "front": "What is a critical period in brain development?",
+      "back": "A **critical period** is a limited window in early development when a specific experience is needed for a brain function to develop normally.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10iw5yi",
+      "kind": "concept",
+      "front": "How does experience decide which synapses survive in a young brain?",
+      "back": "The young brain forms far more synapses than it keeps. Synapses used often are strengthened, while rarely used ones are removed, so experience shapes which connections remain.",
+      "hint": "Think about what happens to junctions that are used often versus rarely.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "007nudn",
+      "kind": "example",
+      "front": "What happens to one eye of a kitten that is covered during its critical period, once the cover is removed?",
+      "back": "That eye stays **functionally blind**, because neurones in the visual cortex respond poorly to it. The same cover on an adult cat causes no lasting loss.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hd22lr",
+      "kind": "example",
+      "front": "A child is born with a cataract but the lens is treated late. What usually happens to vision in that eye?",
+      "back": "Vision stays **poor**, because the visual cortex did not receive clear images during the critical period.",
+      "hint": "Compare this with what early treatment achieves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15633zr",
+      "kind": "concept",
+      "front": "Why does a weaker eye lose its connections in the visual cortex during the critical period?",
+      "back": "Inputs from the two eyes **compete** for space, so the eye giving a weaker signal loses out and the other eye takes over much of that space.",
+      "hint": "Think about where inputs from both eyes meet in the brain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14o7zrr",
+      "kind": "mistake",
+      "front": "What is wrong with thinking that a critical period ends like a switch?",
+      "back": "Plasticity falls **gradually** with age, so learning becomes harder rather than impossible after the critical period.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09qrntk",
+      "kind": "concept",
+      "front": "Why can children pick up grammar and pronunciation with little effort just from hearing speech?",
+      "back": "A young brain readily picks up the patterns of whatever language it hears, because its **plasticity** is high.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03v0kxa",
+      "kind": "concept",
+      "front": "Why is evidence about critical periods for language limited?",
+      "back": "Planned experiments cannot deprive children of language, so evidence comes from **rare individual cases**, where other factors such as neglect may also affect development.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lc0p4y",
+      "kind": "term",
+      "front": "What is synaptic pruning?",
+      "back": "**Synaptic pruning** is the removal of weak or little-used synapses, which leaves the most-used connections in place.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0swppgh",
+      "kind": "mistake",
+      "front": "Why does losing synapses through pruning not mean the brain has been damaged?",
+      "back": "Pruning is not damage. It makes the brain's networks more **efficient** by keeping the circuits that experience has shown to be useful.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vpr4bw",
+      "kind": "term",
+      "front": "What is the visual cortex?",
+      "back": "The **visual cortex** is the region at the back of the cerebral cortex that receives and processes impulses from the eyes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i628zp",
+      "kind": "concept",
+      "front": "What is the likely lasting effect of missing the critical period for language?",
+      "back": "**Limited grammar and fluency** later, because the regular exposure to speech or sign needed in early childhood was not received.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ympkcu",
+      "kind": "concept",
+      "front": "Why are eye checks and infant hearing tests important?",
+      "back": "They let treatment or language exposure start while the brain is still plastic, so the problem can be dealt with within the critical period.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x6li6y",
+      "kind": "concept",
+      "front": "Why is recovery usually smaller when a problem is treated after the critical period?",
+      "back": "Plasticity does not vanish completely, so some **recovery** is possible, but it is usually less than if treatment came within the critical period.",
+      "hint": "Think about how much plasticity remains as the brain ages.",
+      "sectionId": "s5"
+    }
+  ]
+}

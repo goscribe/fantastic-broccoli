@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Conservation and regeneration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:27.031Z",
+  "cards": [
+    {
+      "id": "0pbx9nj",
+      "kind": "concept",
+      "front": "How do in situ and ex situ conservation differ, and why do most programmes use both?",
+      "back": "**In situ** conservation protects species in their natural habitat, while **ex situ** protects them elsewhere, such as zoos or seed banks. In situ work protects the wider ecosystem, and ex situ work gives a backup for species at high risk.",
+      "hint": "Think about where the species is kept.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z63szf",
+      "kind": "concept",
+      "front": "What role do protected areas play in conserving biodiversity?",
+      "back": "They restrict damaging activities such as hunting, logging and building in a defined place. This prevents **habitat loss**, gives breeding species safe space and lets damaged ecosystems recover.",
+      "hint": "Think about which activities the rules limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10d43sl",
+      "kind": "concept",
+      "front": "When can a species be successfully reintroduced to an area it has disappeared from?",
+      "back": "Only if the **original cause** of its loss, such as hunting, has been removed. Suitable habitat and food must also be present.",
+      "hint": "What must be fixed before any animals are released?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yitp9f",
+      "kind": "term",
+      "front": "What is a wildlife corridor?",
+      "back": "A **strip of habitat** that links separate patches or reserves so organisms can move between them. It helps reduce isolation.",
+      "hint": "Think of it as a link between reserves.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p5powg",
+      "kind": "term",
+      "front": "What is a seed bank?",
+      "back": "A **store** that keeps seeds viable, usually in cold, dry conditions, to conserve plant genetic diversity. Seeds can be grown later even if wild populations have died.",
+      "hint": "Think about storage conditions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ltnrxs",
+      "kind": "term",
+      "front": "What is captive breeding?",
+      "back": "The **breeding of threatened species** in human care, often to release their offspring into the wild.",
+      "hint": "Think about who looks after the animals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pvjhjb",
+      "kind": "term",
+      "front": "What is rewilding?",
+      "back": "The **restoration of natural processes** in an ecosystem, sometimes including the return of key species such as top predators.",
+      "hint": "Think beyond restoring a single species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00oc1pv",
+      "kind": "term",
+      "front": "What is regeneration in an ecosystem?",
+      "back": "The **recovery of an ecosystem's structure and species** after damage. It can happen naturally or with active human help.",
+      "hint": "Think about what is recovering, not just what is planted.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08h89tq",
+      "kind": "process",
+      "front": "What steps do managers usually follow when reintroducing a species?",
+      "back": "First check the **original threat** has stopped and suitable habitat and food are present. Then choose genetically varied individuals, release them, and finally monitor survival and involve local people.",
+      "hint": "Start with the threat, end with monitoring.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qv0r0q",
+      "kind": "concept",
+      "front": "How do natural and assisted regeneration differ?",
+      "back": "**Natural regeneration** removes the pressure and lets seeds and animals return by themselves. **Assisted regeneration** adds active help, such as planting native species, removing invasive species or re-wetting drained land.",
+      "hint": "Ask whether people do anything beyond removing the pressure.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tk2idw",
+      "kind": "mistake",
+      "front": "Is a site safe just because it has been given legal protected status?",
+      "back": "No. Legal status only helps if the **rules are enforced** and the area is large and connected. A protected area on paper alone does little.",
+      "hint": "Think about what makes the law effective.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ewm8xg",
+      "kind": "mistake",
+      "front": "Does planting trees on cleared land prove a regeneration project worked?",
+      "back": "No. Success must be judged by **comparing the site** with its goals and with a healthy reference ecosystem, using evidence such as species richness and breeding success.",
+      "hint": "What should the planted site be compared against?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "17dvfgs",
+      "kind": "concept",
+      "front": "What are the main limits of ex situ conservation?",
+      "back": "It is **expensive** and relies on few founding individuals, so genetic diversity can be low. Captive animals may lose wild behaviours, and it does not conserve a whole ecosystem.",
+      "hint": "Consider cost, genetics and behaviour.",
+      "sectionId": "s3"
+    }
+  ]
+}

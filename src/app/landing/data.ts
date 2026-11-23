@@ -1,90 +1,41 @@
-export const subjects = [
-  {
-    name: "Chemistry",
-    icon: "/design/props/books.png",
-    tint: "bg-accent-soft",
-  },
-  {
-    name: "Biology",
-    icon: "/design/props/notes.png",
-    tint: "bg-emerald-500/15",
-  },
-  {
-    name: "Physics",
-    icon: "/design/props/bulb.png",
-    tint: "bg-sky/20",
-  },
-  {
-    name: "Math",
-    icon: "/design/props/pencil.png",
-    tint: "bg-amber/20",
-  },
-  {
-    name: "English",
-    icon: "/design/props/cards.png",
-    tint: "bg-rose/20",
-  },
-  {
-    name: "History",
-    icon: "/design/props/flag.png",
-    tint: "bg-sky/15",
-  },
-];
-
 export type SceneMock =
   "session" | "quiz" | "copilot" | "upload" | "flashcards";
-export type ArtTint = "accent" | "sky" | "rose" | "amber";
-export type ArtSide = "right" | "left" | "bottom";
 
 export interface Feature {
-  icon: string;
   title: string;
   description: string;
-  tint: ArtTint;
 }
 
 export const features: Feature[] = [
   {
-    icon: "/design/props/books.png",
     title: "Readings with figures",
     description:
       "Focused readings generated from your materials, with the original figures and diagrams pulled straight from your PDFs.",
-    tint: "accent",
   },
   {
-    icon: "/design/props/pencil.png",
     title: "Worksheets with AI grading",
     description:
       "Exam-style questions marked against an AI markscheme — with per-part feedback, not just right or wrong.",
-    tint: "sky",
   },
   {
-    icon: "/design/props/cards.png",
     title: "Flashcards",
     description:
       "Cards for the definitions, formulas and concepts you need to memorise, brought back by spaced repetition right before you forget them.",
-    tint: "amber",
   },
   {
-    icon: "/design/props/bulb.png",
     title: "Quick checks and cloze",
     description:
       "A Quick 5 after each reading and fill-in-the-blank passages from your notes, so you recall it instead of recognising it.",
-    tint: "rose",
   },
   {
-    icon: "/design/props/clock.png",
     title: "Planner and streak",
     description:
       "Connect Google Calendar and Scribe slots study times around your week. Your streak counts on the days you hit your goal.",
-    tint: "sky",
   },
   {
-    icon: "/design/cat2-think.png",
     title: "AI copilot",
     description:
       "A study partner that knows your course. Ask questions, get explanations, and dig deeper without leaving your session.",
-    tint: "accent",
   },
 ];
 
@@ -94,10 +45,6 @@ export interface FeatureScene {
   bullets: string[];
   mock: SceneMock;
   reverse?: boolean;
-  url?: string;
-  art?: string;
-  artTint?: ArtTint;
-  artSide?: ArtSide;
 }
 
 export const homeScenes: FeatureScene[] = [
@@ -111,10 +58,6 @@ export const homeScenes: FeatureScene[] = [
     ],
     mock: "quiz",
     reverse: true,
-    url: "scribe.study/session",
-    art: "/design/props/star.png",
-    artTint: "amber",
-    artSide: "left",
   },
   {
     title: "A copilot that already read the PDF",
@@ -125,10 +68,6 @@ export const homeScenes: FeatureScene[] = [
       "Sits beside the question when you open it",
     ],
     mock: "copilot",
-    url: "scribe.study/session",
-    art: "/design/cat2-book.png",
-    artTint: "accent",
-    artSide: "right",
   },
 ];
 
@@ -138,27 +77,21 @@ export const howItWorks = [
     title: "Make a subject, drop in your notes",
     description:
       "One subject per course — PDFs, slides, photos of notes, lecture audio. Scribe reads the text, figures and diagrams, so everything it builds comes from your own material.",
-    art: "/design/props/notes.png",
-    tint: "sky" as const,
-    side: "bottom" as const,
+    pose: "pencil" as const,
   },
   {
     num: "2",
     title: "Scribe builds the study session",
     description:
       "Tell it what to cover (or just tick a few files) and it builds a 25-minute session: a reading, a check, a worksheet, flashcards. Sessions stack up inside the subject, in order.",
-    art: "/design/props/books.png",
-    tint: "accent" as const,
-    side: "right" as const,
+    pose: "think" as const,
   },
   {
     num: "3",
     title: "Study a bit every day",
     description:
       "Connect your calendar and the planner slots study times around school and sport, with a streak that counts when you hit your daily goal. Stuck? The copilot answers from your own pages.",
-    art: "/design/props/bulb.png",
-    tint: "rose" as const,
-    side: "left" as const,
+    pose: "flame" as const,
   },
 ];
 
@@ -204,64 +137,5 @@ export const plans = [
     ],
     cta: "Go Pro",
     highlighted: false,
-  },
-];
-
-export const sessionPreview: {
-  art: string;
-  label: string;
-  meta: string;
-}[] = [
-  {
-    art: "/design/props/books.png",
-    label: "Reading: Enzyme kinetics",
-    meta: "12 min",
-  },
-  {
-    art: "/design/props/bulb.png",
-    label: "Comprehension check",
-    meta: "4 questions",
-  },
-  {
-    art: "/design/props/pencil.png",
-    label: "Worksheet: Rate equations",
-    meta: "6 parts",
-  },
-  {
-    art: "/design/props/cards.png",
-    label: "Flashcards: Key definitions",
-    meta: "18 cards",
-  },
-  {
-    art: "/design/props/notes.png",
-    label: "Cloze: Michaelis–Menten",
-    meta: "1 passage",
-  },
-];
-
-export const testimonials = [
-  {
-    quote:
-      "I used to highlight everything and still not know what mattered. I dumped in the lecture slides and it pulled the exact concepts I needed to review.",
-    name: "Maya",
-    role: "First-year biochem",
-  },
-  {
-    quote:
-      "The worksheet feedback named the causal step I skipped — not just “wrong.” That’s the bit my professor actually marks.",
-    name: "Jonah",
-    role: "A-level chemistry",
-  },
-  {
-    quote:
-      "Flashcards that used my notes, including the diagrams from the slides. Finally didn’t feel like a generic quizlet deck.",
-    name: "Priya",
-    role: "Pre-med",
-  },
-  {
-    quote:
-      "Sixty-page reading used to freeze me. The session chopped it into a guide plus a check, and I actually finished it.",
-    name: "Leo",
-    role: "Undergrad history",
   },
 ];

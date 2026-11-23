@@ -35,6 +35,7 @@ import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { EmptyScene } from "@/components/graphics/floating-decor";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 function WorkspaceStudyPage() {
   const params = useParams();
@@ -108,14 +109,16 @@ function WorkspaceStudyPage() {
   const materials = workspace?.materials ?? [];
   const openSession = (id: string) =>
     router.push(`/workspace/${workspaceId}/session/${id}`);
-  const startQuick5 = () =>
-    createSession.mutate({
-      workspaceId,
-      title: workspace?.title ?? t("ws.studyNow.quick5"),
-      depth: "light",
-      durationMinutes: 5,
-      quickStart: true,
-    });
+  const startQuick5 = async () =>
+    createSession.mutate(
+      await chooseStudyLength({
+        workspaceId,
+        title: workspace?.title ?? t("ws.studyNow.quick5"),
+        depth: "light" as const,
+        durationMinutes: 5,
+        quickStart: true,
+      }),
+    );
   const addYoutube = async (url: string) => {
     try {
       const result = await importYoutube(workspaceId, url);

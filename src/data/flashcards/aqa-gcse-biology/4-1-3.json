@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-1-3",
+  "topicCode": "4.1.3",
+  "topicName": "Transport in cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:36.015Z",
+  "cards": [
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "**Diffusion** is the net movement of particles from a region of higher concentration to a region of lower concentration. It needs no energy from the cell.",
+      "hint": "Think about what random movement does to particles over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jusre7",
+      "kind": "concept",
+      "front": "What direction does water move in during osmosis?",
+      "back": "Water moves from a more dilute solution towards a more concentrated solution, through a **partially permeable membrane**. This is the net movement of water.",
+      "hint": "Compare how much dissolved substance is on each side of the membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mpiszo",
+      "kind": "concept",
+      "front": "How does active transport differ from diffusion in direction and energy?",
+      "back": "Active transport moves substances from lower to higher concentration, against the gradient. It uses **energy released by respiration** and carrier proteins.",
+      "hint": "Think about which way diffusion moves particles and what that means for energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14dr5yb",
+      "kind": "concept",
+      "front": "What makes diffusion happen faster?",
+      "back": "A **steeper concentration gradient** makes diffusion faster. A larger surface area or a shorter distance also speeds it up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f5zmnt",
+      "kind": "example",
+      "front": "Give one example of diffusion in the lungs.",
+      "back": "**Oxygen** diffuses from the air in the lungs into the blood, and carbon dioxide diffuses from the blood into the air.",
+      "hint": "Think about which gas the body takes in and which it gets rid of.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07h72u1",
+      "kind": "mistake",
+      "front": "Why is it wrong to say diffusion stops once concentrations are equal?",
+      "back": "Particles keep moving when concentrations are equal. There is just **no net movement**, so no overall change.",
+      "hint": "Think about what random movement does after the concentrations balance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cyh77r",
+      "kind": "concept",
+      "front": "What happens to a plant cell placed in a dilute solution?",
+      "back": "It gains water by osmosis and becomes **turgid**. Its cell wall stops it from bursting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rpzdtk",
+      "kind": "concept",
+      "front": "What happens to an animal cell in a sufficiently dilute solution?",
+      "back": "It can swell and **burst**. A plant cell's cell wall prevents this from happening.",
+      "hint": "Compare the animal cell with the plant cell in the same solution.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12i8rvs",
+      "kind": "mistake",
+      "front": "Why is it wrong to say osmosis describes the movement of dissolved substances?",
+      "back": "Osmosis describes only the net movement of **water** through a partially permeable membrane. Dissolved substances move by other processes.",
+      "hint": "Think about what the word osmosis refers to in the definition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1do2zho",
+      "kind": "term",
+      "front": "What are carrier proteins?",
+      "back": "**Carrier proteins** are membrane proteins that move specific substances across a cell membrane. They are used in active transport.",
+      "hint": "Think about where these proteins sit in the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rxlzxr",
+      "kind": "example",
+      "front": "Why can root hair cells take in mineral ions when the soil has fewer ions than the cells?",
+      "back": "They use **active transport**, which moves ions from lower to higher concentration. It uses energy released by respiration.",
+      "hint": "Compare the ion concentration in the soil with the concentration inside the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tfn7ar",
+      "kind": "formula",
+      "front": "What is the formula for percentage change in mass?",
+      "back": "Percentage change = $\\frac{\\text{change in mass}}{\\text{starting mass}}\\times100$, where change in mass = final mass − starting mass. A negative result means a **loss** of mass.",
+      "hint": "Think about what you work out first before dividing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h6muzc",
+      "kind": "example",
+      "front": "A potato piece goes from 4.0 g to 3.6 g. What is its percentage mass change?",
+      "back": "$-10\\%$. The mass change is $-0.4\\,\\mathrm{g}$, so the piece lost water.",
+      "hint": "Find the mass change before dividing by the starting mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07fofpq",
+      "kind": "mistake",
+      "front": "Why must you keep the negative sign when reporting a percentage loss?",
+      "back": "The **negative sign** shows that the mass decreased. Dropping it would wrongly suggest a gain.",
+      "hint": "Think about what the sign tells you about the direction of change.",
+      "sectionId": "s4"
+    }
+  ]
+}

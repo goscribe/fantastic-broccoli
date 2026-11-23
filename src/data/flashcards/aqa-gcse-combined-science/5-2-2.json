@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-2-2",
+  "topicCode": "5.2.2",
+  "topicName": "Bonding and properties",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:39.362Z",
+  "cards": [
+    {
+      "id": "1axe9lz",
+      "kind": "concept",
+      "front": "Why do ionic compounds usually have high melting points?",
+      "back": "Oppositely charged ions attract each other strongly in all directions in the lattice. Much energy is needed to overcome enough of these **electrostatic attractions** for the ions to move freely.",
+      "hint": "Think about the forces between the ions in the lattice.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1li69f9",
+      "kind": "concept",
+      "front": "Why can metals conduct electricity in the solid state without melting?",
+      "back": "Their **delocalised electrons** can move through the solid and carry charge. The metal does not need to melt for this to happen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07o4fxy",
+      "kind": "mistake",
+      "front": "A student says boiling a simple molecular substance breaks its covalent bonds. What is wrong with this?",
+      "back": "Boiling overcomes the **intermolecular forces** between separate molecules. The covalent bonds inside each molecule stay intact.",
+      "hint": "Consider what holds separate molecules together, not what holds atoms within one molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "013v301",
+      "kind": "term",
+      "front": "What is an ionic lattice?",
+      "back": "An **ionic lattice** is a regular, repeating arrangement of oppositely charged ions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x32y5o",
+      "kind": "concept",
+      "front": "Why can a molten or dissolved ionic compound conduct electricity, but a solid one cannot?",
+      "back": "Melting or dissolving makes the ions **free to move**. These mobile ions carry electrical charge. In the solid lattice, they cannot move.",
+      "hint": "Compare where the ions are located in the solid and in the liquid.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bdw1c9",
+      "kind": "mistake",
+      "front": "What happens to the ions when an ionic compound melts?",
+      "back": "Melting does not turn ions into atoms. The ions **remain charged**, but they can now move.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qgq2h6",
+      "kind": "term",
+      "front": "What are intermolecular forces?",
+      "back": "**Intermolecular forces** are the attractions between separate molecules. They are much weaker than the covalent bonds within each molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ht2cry",
+      "kind": "concept",
+      "front": "Why do simple molecular substances not conduct electricity?",
+      "back": "They have no **free-moving charged particles**. Their molecules cannot carry charge through the substance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "124hxqp",
+      "kind": "concept",
+      "front": "Why do giant covalent structures have very high melting points?",
+      "back": "They are continuous networks of atoms. Melting requires **many strong covalent bonds** to break, which needs a great deal of energy.",
+      "hint": "Think about how many bonds must be broken, not how strong each one is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hgnari",
+      "kind": "term",
+      "front": "What are delocalised electrons?",
+      "back": "**Delocalised electrons** are electrons that can move through a structure rather than belonging to one bond.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n0gpit",
+      "kind": "concept",
+      "front": "Why is graphite soft even though it is a giant covalent structure?",
+      "back": "Its **layers can slide over each other**. Most giant covalent substances are hard, but graphite is an exception.",
+      "hint": "Think about how the layers are held together compared with the bonds within a layer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s4m1ya",
+      "kind": "term",
+      "front": "What is metallic bonding?",
+      "back": "**Metallic bonding** is the strong attraction between positive metal ions and delocalised electrons.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0196df2",
+      "kind": "concept",
+      "front": "Why are metals malleable, while ionic crystals break when struck?",
+      "back": "In metals, layers of ions can slide while the attraction to delocalised electrons remains. In ionic crystals, sliding brings **like charges together**, and their repulsion breaks the crystal.",
+      "hint": "Compare what stays attached to the ions as the layers move in each case.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vx76dm",
+      "kind": "process",
+      "front": "What two steps should you follow to explain whether a substance conducts electricity?",
+      "back": "First, identify the **charged particle** that could carry charge. Second, explain whether that particle can move freely."
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d2-3",
+  "topicCode": "D2.3",
+  "topicName": "Water potential",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:01.472Z",
+  "cards": [
+    {
+      "id": "0gvjy0p",
+      "kind": "concept",
+      "front": "What does water potential measure, and what is its value in pure water at atmospheric pressure?",
+      "back": "**Water potential** is the tendency of water to move from one place to another. Pure water at atmospheric pressure has a water potential of zero, and adding dissolved substances lowers it below zero.",
+      "hint": "Think about which way water will move.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gwbb1o",
+      "kind": "concept",
+      "front": "Which way does water move by osmosis, and why?",
+      "back": "Water moves from higher water potential to lower water potential through a partially permeable membrane. Individual molecules move both ways, but more move towards the **lower** potential, so there is a net movement.",
+      "hint": "Compare the two sides of the membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0utv7s0",
+      "kind": "formula",
+      "front": "Which equation combines solute and pressure potential, and what units are used?",
+      "back": "$\\Psi=\\Psi_s+\\Psi_p$, measured in **MPa**. Keep the negative signs, and make sure both components use the same units.",
+      "hint": "Both parts are measured in the same way.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t2rxsg",
+      "kind": "term",
+      "front": "What is solute potential?",
+      "back": "**Solute potential** is the contribution of dissolved substances to water potential. It is zero in pure water and becomes more negative as solute concentration rises.",
+      "hint": "Think about what dissolved substances do to water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bmgbx1",
+      "kind": "term",
+      "front": "What is pressure potential, and how does positive pressure affect water potential?",
+      "back": "**Pressure potential** is the contribution of physical pressure to water potential. Positive pressure raises water potential.",
+      "hint": "Think about pressure pushing on water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1soqenk",
+      "kind": "example",
+      "front": "A cell has a solute potential of −0.70 MPa and a pressure potential of +0.20 MPa. What is its water potential?",
+      "back": "**−0.50 MPa**. Working: (−0.70) + (+0.20) = −0.50 MPa.",
+      "hint": "Add the signed values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tvofie",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume water always moves towards the more concentrated solution?",
+      "back": "Water moves towards the **lower water potential**, not simply the more concentrated solution. You must compare total water potentials, including pressure potential.",
+      "hint": "Consider what else affects water potential besides solutes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xuehso",
+      "kind": "mistake",
+      "front": "Can a positive pressure potential make the total water potential positive?",
+      "back": "Not necessarily. A positive pressure potential can partly offset a negative solute potential, but the total can still be negative, such as −0.50 MPa.",
+      "hint": "Check the sign of the final answer.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "027qni0",
+      "kind": "concept",
+      "front": "What do aquaporins do to water movement?",
+      "back": "**Aquaporins** are membrane proteins that form channels for water. They increase the rate of movement but do not reverse its direction.",
+      "hint": "Think about speed versus direction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06hf4me",
+      "kind": "term",
+      "front": "What is turgor pressure?",
+      "back": "**Turgor pressure** is the outward pressure of a plant cell's contents against its cell wall. It raises pressure potential and opposes further water entry.",
+      "hint": "Think about the vacuole pressing outwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j09jkk",
+      "kind": "process",
+      "front": "What happens step by step when a plant cell is placed in a solution with lower water potential?",
+      "back": "The cell loses water by osmosis, so the vacuole shrinks and turgor falls. The cell becomes **flaccid**. With more severe loss, the membrane pulls away from the wall, which is **plasmolysis**.",
+      "hint": "Follow the water and the vacuole.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0aanxkc",
+      "kind": "concept",
+      "front": "How does water entry help support non-woody plant tissue?",
+      "back": "Water entry expands the vacuole, and the contents press on the wall to create turgor pressure. The **turgid** cell is firm, helping to support leaves and other non-woody tissues.",
+      "hint": "Link firmness to the cell wall.",
+      "sectionId": "s4"
+    }
+  ]
+}

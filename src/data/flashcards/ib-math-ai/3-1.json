@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "3D distance, volume and surface area",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:31.088Z",
+  "cards": [
+    {
+      "id": "18a9pf1",
+      "kind": "concept",
+      "front": "How can Pythagoras' theorem find the longest straight line inside a room?",
+      "back": "Apply **Pythagoras twice**: first across the floor to get $\\sqrt{a^2+b^2}$, then up to the opposite ceiling corner using height $h$, giving $d=\\sqrt{a^2+b^2+h^2}$.",
+      "hint": "Use the floor diagonal as one side of a second triangle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ayx952",
+      "kind": "formula",
+      "front": "What is the distance between two points P(x1,y1,z1) and Q(x2,y2,z2) in three dimensions?",
+      "back": "$d=\\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}$. Each **coordinate difference** is squared, so the order of the points does not matter.",
+      "hint": "Think of the three differences as the edges of a box.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gdjkiy",
+      "kind": "formula",
+      "front": "What is the volume of a prism, and what does each symbol mean?",
+      "back": "$V=Ah$, where $A$ is the **base area** and $h$ is the perpendicular height. Volume is measured in cubic units.",
+      "hint": "Picture a pile of identical sheets of card.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04b1yn0",
+      "kind": "formula",
+      "front": "How does the volume of a pyramid compare with a prism on the same base and height?",
+      "back": "A pyramid has $V=\\frac{1}{3}Ah$, which is **one third** of the prism's volume.",
+      "hint": "The pyramid narrows to a point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "153pxyt",
+      "kind": "formula",
+      "front": "What is the volume of a cone with base radius $r$ and vertical height $h$?",
+      "back": "$V=\\frac{1}{3}\\pi r^2h$. It is **one third** of a cylinder with the same base and height.",
+      "hint": "Compare it with the cylinder volume $\\pi r^2h$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ox91re",
+      "kind": "concept",
+      "front": "By what factor does a sphere's volume change when its radius is doubled?",
+      "back": "The volume is multiplied by **eight**, because $V=\\frac{4}{3}\\pi r^3$ and $2^3=8$.",
+      "hint": "Look at the power of $r$ in the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1me5ips",
+      "kind": "example",
+      "front": "A cone has base radius 3.00 cm and vertical height 4.00 cm. What is its volume?",
+      "back": "$V=\\frac{1}{3}\\pi(3.00)^2(4.00)=12\\pi\\approx37.7\\,\\mathrm{cm^3}$.",
+      "hint": "Substitute into $\\frac{1}{3}\\pi r^2h$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n5ghz2",
+      "kind": "term",
+      "front": "What is the slant height of a cone, and how is it found from $r$ and $h$?",
+      "back": "The **slant height** $l$ runs from the apex to the edge of the base along the curved surface. $l=\\sqrt{r^2+h^2}$.",
+      "hint": "Use Pythagoras with the radius and vertical height.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xmw15e",
+      "kind": "formula",
+      "front": "What is the total surface area of a closed cone?",
+      "back": "$\\pi r^2+\\pi rl$: the **base area** $\\pi r^2$ plus the curved area $\\pi rl$, where $l$ is the slant height.",
+      "hint": "Split the cone into a circle and a curved surface.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r2s9v8",
+      "kind": "mistake",
+      "front": "A student uses the slant height $l$ in the cone volume formula. What is wrong?",
+      "back": "**Volume uses the vertical height** $h$, not $l$. The slant height is only used for the curved surface area $\\pi rl$.",
+      "hint": "Which height is perpendicular to the base?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uesdsi",
+      "kind": "mistake",
+      "front": "A student averages the coordinates of two points to find the distance between them. What should they do?",
+      "back": "**Subtract** matching coordinates, square, add and take the square root. Averaging is only for finding the midpoint.",
+      "hint": "Distance uses differences; midpoint uses sums.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b7opxs",
+      "kind": "example",
+      "front": "Find the distance between P(2,1,10) and Q(8,9,30), and the midpoint of PQ, with coordinates in metres.",
+      "back": "Distance $=\\sqrt{6^2+8^2+20^2}=\\sqrt{500}\\approx22.4\\,\\mathrm{m}$. Midpoint $=(5,5,20)$.",
+      "hint": "Subtract for distance, average for midpoint.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hj9iu2",
+      "kind": "process",
+      "front": "What steps find the outer surface area of a composite solid?",
+      "back": "1) Find the area of each part's outer faces. 2) Leave out the **hidden faces** where parts join, and any base not counted. 3) Add the remaining areas.",
+      "hint": "Ask which faces a person could actually see or touch.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0czu4r3",
+      "kind": "example",
+      "front": "A silo is a cylinder of radius 3.00 m and height 8.00 m, topped by a hemisphere of the same radius. What is its volume?",
+      "back": "$V=\\pi(3.00)^2(8.00)+\\frac{2}{3}\\pi(3.00)^3=72\\pi+18\\pi=90\\pi\\approx283\\,\\mathrm{m^3}$.",
+      "hint": "Add the cylinder and hemisphere volumes.",
+      "sectionId": "s6"
+    }
+  ]
+}

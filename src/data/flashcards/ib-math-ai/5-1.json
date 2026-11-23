@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Limits and the derivative",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:10.102Z",
+  "cards": [
+    {
+      "id": "09gfvgu",
+      "kind": "concept",
+      "front": "What does the derivative of a curve at a point tell you?",
+      "back": "It is the **gradient** of the tangent line at that point, giving the instantaneous rate of change there. A chord only gives an average over a stretch.",
+      "hint": "Think about the straight line that just touches the curve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10casne",
+      "kind": "concept",
+      "front": "What does the gradient of a chord joining two points on a curve measure?",
+      "back": "The **average rate of change** of the function between the two x-values, equal to $\\frac{f(x_2)-f(x_1)}{x_2-x_1}$.",
+      "hint": "Think about the line joining the two points and what its slope tells you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v4qyuo",
+      "kind": "formula",
+      "front": "Which limit formula defines the derivative $f'(x)$?",
+      "back": "$f'(x)=\\lim_{h\\to0}\\frac{f(x+h)-f(x)}{h}$, where $h$ is the small horizontal gap between two points. $h$ approaches 0 but never equals 0.",
+      "hint": "Start from the chord with a small gap h.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14jkhw9",
+      "kind": "term",
+      "front": "What is the gradient of a straight line?",
+      "back": "**Gradient** is the change in $y$ divided by the change in $x$ between any two points on the line: $m=\\frac{y_2-y_1}{x_2-x_1}$.",
+      "hint": "Rise over run.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08ceqb2",
+      "kind": "term",
+      "front": "What is a chord of a curve?",
+      "back": "A **chord** is a straight line segment joining two points on a curve.",
+      "hint": "Picture a straight line drawn between two points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17m1emp",
+      "kind": "term",
+      "front": "What is a tangent line to a curve at a point?",
+      "back": "The straight line that just **touches** the curve at that point, with the same gradient as the curve there.",
+      "hint": "Imagine a ruler resting on the curve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wbknz5",
+      "kind": "term",
+      "front": "What does $\\lim_{x\\to a}f(x)=L$ mean?",
+      "back": "As $x$ gets closer to $a$, the values of $f(x)$ get closer to **L**. The limit does not have to equal $f(a)$.",
+      "hint": "Think about where the values are heading.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ch031b",
+      "kind": "mistake",
+      "front": "Why is a chord gradient not the same as the derivative at a point?",
+      "back": "A chord gradient is an **average** over a stretch between two points. The derivative applies at a single point, and you get closer to it by shrinking the gap.",
+      "hint": "Compare an interval with a single point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "156nf19",
+      "kind": "example",
+      "front": "Find the gradient of the chord of $f(x)=x^2$ between $x=1$ and $x=3$.",
+      "back": "**4**. Use $\\frac{f(3)-f(1)}{3-1}=\\frac{9-1}{2}=4$.",
+      "hint": "Find f(1) and f(3) first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hi6j85",
+      "kind": "example",
+      "front": "For $f(x)=x^2$ at $x=1$, what is the limit of $\\frac{(1+h)^2-1}{h}$ as $h\\to0$?",
+      "back": "**2**. Expanding gives $\\frac{2h+h^2}{h}=2+h$, which approaches 2, so $f'(1)=2$.",
+      "hint": "Expand the numerator first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09w4p5i",
+      "kind": "process",
+      "front": "How do you estimate the gradient at a point from a graph?",
+      "back": "1) Draw a **tangent** that just touches the curve at the point. 2) Choose two points far apart on that line. 3) Divide the rise by the run between them.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lgud38",
+      "kind": "process",
+      "front": "How do you estimate a derivative from a table of values?",
+      "back": "Use the **chord** from the input just before to the input just after the point, choosing the closest inputs you have. Give the unit as output unit per input unit.",
+      "hint": "Use values on both sides of the point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p1kyph",
+      "kind": "example",
+      "front": "A car is 31 m from a line at t=4 s, 45 m at t=5 s and 62 m at t=6 s. Estimate its speed at t=5 s.",
+      "back": "Approximately **$15.5\\,\\mathrm{m\\,s^{-1}}$**. Use the chord from t=4 to t=6: $\\frac{62-31}{6-4}=15.5$.",
+      "hint": "Speed is the rate of change of distance.",
+      "sectionId": "s5"
+    }
+  ]
+}

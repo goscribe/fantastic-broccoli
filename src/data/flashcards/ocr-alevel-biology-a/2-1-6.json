@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "2-1-6",
+  "topicCode": "2.1.6",
+  "topicName": "Cell division and organisation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:59.669Z",
+  "cards": [
+    {
+      "id": "0nm049c",
+      "kind": "term",
+      "front": "What is the cell cycle, and why does a cell need it before it can divide?",
+      "back": "The **cell cycle** is the ordered series of events in which a cell grows, copies its DNA and then divides. A cell cannot simply split in two, because each new cell needs a full set of DNA.",
+      "hint": "Consider what a cell must have ready before it can split into two.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zuml0f",
+      "kind": "concept",
+      "front": "Why is mitosis, rather than meiosis, used for growth and repair?",
+      "back": "Mitosis produces **genetically identical** daughter cells with the same chromosome number as the parent, so new cells match the old ones they replace.",
+      "hint": "Compare what the daughter cells are like with the parent cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ocicf9",
+      "kind": "concept",
+      "front": "Why is meiosis needed in sexual reproduction?",
+      "back": "Meiosis **halves the chromosome number**, so that when two gametes fuse at fertilisation the full number is restored instead of doubling in every generation.",
+      "hint": "Think about what would happen to chromosome numbers if gametes kept the full set.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0brnud4",
+      "kind": "process",
+      "front": "What happens to the chromosomes in each stage of mitosis, in order?",
+      "back": "**Prophase**: chromosomes condense and the nuclear envelope breaks down. **Metaphase**: chromosomes line up across the middle, attached to the spindle. **Anaphase**: centromeres divide and chromatids are pulled apart. **Telophase**: nuclear envelopes re-form and chromosomes uncoil.",
+      "hint": "Start with what the chromosomes look like as they first become visible.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06wdr1s",
+      "kind": "formula",
+      "front": "How is the mitotic index calculated?",
+      "back": "$\\text{mitotic index} = \\frac{\\text{cells in mitosis}}{\\text{total cells}}$. It has no units, and a high value means a tissue is actively dividing.",
+      "hint": "Think about a word equation that compares dividing cells with all cells counted.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14w5ex0",
+      "kind": "example",
+      "front": "A root tip squash shows 250 cells, and 20 of them are in mitosis. What is the mitotic index?",
+      "back": "$\\frac{20}{250}=0.080$. It has no units, which means 8.0% of the cells are dividing.",
+      "hint": "Start with the word equation: cells in mitosis divided by total cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wxm9th",
+      "kind": "term",
+      "front": "What are homologous chromosomes?",
+      "back": "A pair of chromosomes that carry the same genes in the same order, with one inherited from each parent.",
+      "hint": "Think about where each chromosome in a pair comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1al76gb",
+      "kind": "concept",
+      "front": "How does independent assortment produce genetic variation in meiosis?",
+      "back": "Each homologous pair lines up and separates at random in the first division, shuffling maternal and paternal chromosomes into gametes. With $n$ pairs there are $2^n$ possible combinations.",
+      "hint": "Think about which way each pair can face at the middle of the cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "149431t",
+      "kind": "concept",
+      "front": "What is crossing over, and which chromatids are involved?",
+      "back": "Crossing over is the exchange of DNA sections between chromatids of homologous chromosomes during the first division of meiosis, producing chromosomes with new mixtures of genetic information.",
+      "hint": "Consider which pair of chromosomes sits close together during meiosis I.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xr1044",
+      "kind": "mistake",
+      "front": "A student says meiosis makes four copies of the parent cell. What is wrong with this?",
+      "back": "The idea is wrong. The four cells from meiosis are genetically different from each other and from the parent, so they are not copies.",
+      "hint": "Compare how the cells from meiosis relate to one another with the cells from mitosis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sueaat",
+      "kind": "concept",
+      "front": "How is a red blood cell's structure suited to carrying oxygen?",
+      "back": "It has no nucleus, which leaves more room for **haemoglobin**, the protein that carries oxygen.",
+      "hint": "Think about what takes up space inside a typical cell.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1oj0ax6",
+      "kind": "term",
+      "front": "What is a stem cell?",
+      "back": "A **stem cell** is an unspecialised cell that can divide and develop into one or more specialised cell types.",
+      "hint": "Compare it with cells that have already taken on a particular job.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "11nrx2s",
+      "kind": "process",
+      "front": "How do specialised cells build up into an organ system?",
+      "back": "**Similar specialised cells** form a tissue. Different tissues combine to form an organ, and organs that work together on a major function form an organ system.",
+      "hint": "Start with the smallest unit and work upwards through the levels.",
+      "sectionId": "s7"
+    }
+  ]
+}

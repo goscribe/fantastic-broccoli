@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "Vectors and motion in two dimensions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:31.457Z",
+  "cards": [
+    {
+      "id": "033cu3g",
+      "kind": "term",
+      "front": "What are the components of a vector?",
+      "back": "**Components** are two perpendicular vectors, usually along the x and y axes, that together have the same effect as the original vector.",
+      "hint": "Think of the horizontal and vertical parts of a diagonal push.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kmx1go",
+      "kind": "concept",
+      "front": "How do you add two or more vectors accurately?",
+      "back": "**Resolve** each vector, add all the x-components together and all the y-components together, then find the magnitude and angle of the **resultant**.",
+      "hint": "Scale drawings are slow; components are faster.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14q80me",
+      "kind": "concept",
+      "front": "Why does a projectile's horizontal velocity stay constant while its vertical velocity changes?",
+      "back": "**Gravity** acts only vertically, so there is no horizontal acceleration. The vertical velocity changes by 9.8 m/s downward each second.",
+      "hint": "Ask which direction gravity pulls.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nt7m3d",
+      "kind": "formula",
+      "front": "What are the components of a vector of magnitude $A$ at angle $\\theta$ above the positive x-axis?",
+      "back": "$A_x=A\\cos\\theta$ and $A_y=A\\sin\\theta$. Both components are in the same units as $A$, such as m/s or m.",
+      "hint": "Check which axis the angle is measured from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aq7aud",
+      "kind": "formula",
+      "front": "How do you find the magnitude and angle of a vector from its components?",
+      "back": "**Pythagorean theorem** gives $A=\\sqrt{A_x^2+A_y^2}$, and the angle is $\\theta=\\tan^{-1}\\left(\\frac{A_y}{A_x}\\right)$.",
+      "hint": "Use the same method for the resultant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ylq6st",
+      "kind": "mistake",
+      "front": "A student uses cosine for the x-component even though the angle is measured from the y-axis. What is wrong?",
+      "back": "The **trig functions are swapped**. When the angle is measured from the y-axis, swap sine and cosine. Check which axis the angle is measured from first.",
+      "hint": "Look at where the angle starts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ommbbw",
+      "kind": "mistake",
+      "front": "A student finds the resultant of two vectors by adding their magnitudes. Why is this wrong?",
+      "back": "Vectors add by **components**, not magnitudes, because direction matters. Add the x-parts and y-parts separately, then find the magnitude of the total.",
+      "hint": "Direction matters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "162ak67",
+      "kind": "example",
+      "front": "A ball leaves a bat at 20 m/s, 30° above the horizontal. What are its horizontal and vertical velocity components?",
+      "back": "$v_x\\approx17$ m/s horizontally and $v_y=10$ m/s upward, using $v_x=v\\cos\\theta$ and $v_y=v\\sin\\theta$.",
+      "hint": "Cosine for x, sine for y.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1md9ny1",
+      "kind": "example",
+      "front": "Displacement A is 8.0 m east and displacement B is 5.0 m at 60° north of east. What is the resultant?",
+      "back": "About **11.4 m at 22° north of east**. Resolve B first, then add: $R_x=10.5$ m and $R_y=4.33$ m.",
+      "hint": "Resolve B before adding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nlvfsk",
+      "kind": "formula",
+      "front": "How are the components of average velocity found in two dimensions?",
+      "back": "Each component is the **displacement component** divided by the time: $v_x=\\frac{\\Delta x}{\\Delta t}$ and $v_y=\\frac{\\Delta y}{\\Delta t}$. Time is shared by both directions.",
+      "hint": "Treat x and y separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tirsp8",
+      "kind": "process",
+      "front": "What are the steps to find a projectile's velocity after time $t$, when its vertical launch velocity is zero?",
+      "back": "1) Keep $v_x$ unchanged. 2) Find $v_y=-gt$ with $g=9.8\\ \\mathrm{m/s^2}$. 3) Combine: speed is $\\sqrt{v_x^2+v_y^2}$, angle is $\\tan^{-1}\\left(\\frac{|v_y|}{v_x}\\right)$.",
+      "hint": "Keep x and y separate until the end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05ecse9",
+      "kind": "example",
+      "front": "A ball is thrown horizontally at 12 m/s from a high balcony. What is its velocity after 2.0 s?",
+      "back": "About **23 m/s at 59° below the horizontal**. Here $v_x=12$ m/s and $v_y=-19.6$ m/s.",
+      "hint": "Find $v_y$ with $v_y=-gt$ first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11ston5",
+      "kind": "term",
+      "front": "What is a displacement vector?",
+      "back": "A **displacement vector** points from an object's starting position to its final position. Its components are $\\Delta x$ and $\\Delta y$.",
+      "hint": "Start point to end point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u264e6",
+      "kind": "term",
+      "front": "What is a projectile?",
+      "back": "An object moving under **gravity alone** after launch, ignoring air resistance.",
+      "hint": "No engine or air drag acts on it.",
+      "sectionId": "s5"
+    }
+  ]
+}

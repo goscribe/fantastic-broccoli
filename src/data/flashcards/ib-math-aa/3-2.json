@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Right-angled and non-right-angled trigonometry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:19.170Z",
+  "cards": [
+    {
+      "id": "0kuflsl",
+      "kind": "concept",
+      "front": "Why can sine, cosine and tangent be used for any right-angled triangle of a given angle?",
+      "back": "The **side ratios** depend only on the angle, not on the size of the triangle. Like a ramp of fixed steepness, the same angle always gives the same ratios.",
+      "hint": "Think about a ramp that keeps the same steepness at any size.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jmfxfb",
+      "kind": "formula",
+      "front": "What is the sine rule, and when do you use it?",
+      "back": "$\\frac{a}{\\sin A}=\\frac{b}{\\sin B}=\\frac{c}{\\sin C}$. Use it when you know a side and its **opposite** angle, plus one more angle or side.",
+      "hint": "Each side pairs with the angle opposite it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0611ajd",
+      "kind": "formula",
+      "front": "What is the cosine rule, and when do you use it?",
+      "back": "$a^2=b^2+c^2-2bc\\cos A$. Use it for two sides with the **included** angle between them, or when all three sides are known.",
+      "hint": "It extends Pythagoras' theorem to any triangle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0imtwbt",
+      "kind": "term",
+      "front": "What is the hypotenuse of a right-angled triangle?",
+      "back": "The **hypotenuse** is the longest side, lying opposite the right angle.",
+      "hint": "Find the side opposite the right angle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aswsvn",
+      "kind": "process",
+      "front": "How do you choose between sine, cosine and tangent to find an angle from two sides?",
+      "back": "Use the two sides you know: **opposite and hypotenuse** gives sine, **adjacent and hypotenuse** gives cosine, **opposite and adjacent** gives tangent. Then apply the inverse function.",
+      "hint": "Name the two sides first, then match them to a ratio.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nlvx79",
+      "kind": "formula",
+      "front": "What is the formula for the area of a triangle with two sides and the included angle?",
+      "back": "$\\mathrm{Area}=\\frac12ab\\sin C$, where $C$ is the **included** angle between sides $a$ and $b$.",
+      "hint": "The angle must sit between the two sides you use.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "04eyai6",
+      "kind": "example",
+      "front": "A right-angled triangle has hypotenuse 12 cm and an angle of 35 degrees. What is the side opposite that angle?",
+      "back": "About **6.88 cm**, from $x=12\\sin35^\\circ$.",
+      "hint": "Opposite and hypotenuse mean sine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vhurqz",
+      "kind": "example",
+      "front": "In triangle ABC, A is 40 degrees, B is 65 degrees and a is 8 cm. Find b.",
+      "back": "About **11.3 cm**, from $b=\\frac{8\\sin65^\\circ}{\\sin40^\\circ}$.",
+      "hint": "Write the sine rule with b over sin B on one side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12xi038",
+      "kind": "mistake",
+      "front": "In the ambiguous case, why might a student miss the second triangle?",
+      "back": "They discard the obtuse angle because the sketch looks acute. Keep $180^\\circ-B$ as well, provided the angle sum with $A$ stays below $180^\\circ$.",
+      "hint": "A sketch is only a guide and may not be to scale.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1foqtkc",
+      "kind": "mistake",
+      "front": "When evaluating the cosine rule with an included angle, what is the common error?",
+      "back": "Subtracting before multiplying by the cosine is wrong. Evaluate $2bc\\cos A$ as one product, then subtract it from $b^2+c^2$.",
+      "hint": "Work out the product before any subtraction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0s9ssgy",
+      "kind": "example",
+      "front": "A triangle has sides 8 cm and 5 cm with an included angle of 40 degrees. What is its area?",
+      "back": "About **12.9 cm^2**, from $\\frac12\\times8\\times5\\times\\sin40^\\circ$.",
+      "hint": "Use the area formula with the included angle.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fodxnj",
+      "kind": "concept",
+      "front": "What does the inverse trig function do in a right-angled triangle?",
+      "back": "It **turns a ratio back into an angle**. Sine and cosine ratios in a right-angled triangle are at most 1, so a larger value signals a mistake.",
+      "hint": "Think of it as undoing the ratio.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j1l1bj",
+      "kind": "term",
+      "front": "What is the ambiguous case?",
+      "back": "The **ambiguous case** occurs when two sides and a non-included angle are given and two different triangles fit the data.",
+      "hint": "Two sides and an angle that is not between them.",
+      "sectionId": "s4"
+    }
+  ]
+}

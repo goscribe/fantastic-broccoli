@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p7",
+  "topicCode": "P7",
+  "topicName": "Differentiation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:34.978Z",
+  "cards": [
+    {
+      "id": "1nl8b8l",
+      "kind": "concept",
+      "front": "What does $\\frac{dy}{dx}$ tell you about a curve at a point?",
+      "back": "It gives the **gradient** of the curve at that point, which is the gradient of the tangent there. Positive means the curve is rising, negative means it is falling.",
+      "hint": "Compare it with a speedometer reading.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zq2nn7",
+      "kind": "formula",
+      "front": "What is the power rule for differentiating $ax^n$?",
+      "back": "$\\frac{d}{dx}(ax^n)=anx^{n-1}$: multiply by the **power**, then reduce the power by 1. A constant differentiates to zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07npmky",
+      "kind": "process",
+      "front": "What are the steps to find and classify the stationary points of a curve?",
+      "back": "Set $\\frac{dy}{dx}=0$ and solve for $x$, then find the $y$-values. Differentiate again: $\\frac{d^2y}{dx^2}>0$ gives a **minimum**, and $\\frac{d^2y}{dx^2}<0$ gives a **maximum**.",
+      "hint": "Start with what a zero gradient means.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01s6nh7",
+      "kind": "term",
+      "front": "What is the **normal** to a curve at a point?",
+      "back": "The line through that point perpendicular to the tangent. If the tangent has gradient $m$, the normal has gradient $-\\frac{1}{m}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0so1ah8",
+      "kind": "example",
+      "front": "Differentiate $f(x)=x^2$ from first principles.",
+      "back": "$f'(x)=2x$. Expand $(x+h)^2-x^2$ to get $2xh+h^2$, cancel $h$ to get $2x+h$, then let $h\\to0$.",
+      "hint": "Start by writing the difference quotient.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e97hsc",
+      "kind": "mistake",
+      "front": "Why can't you put $h=0$ into $\\frac{f(x+h)-f(x)}{h}$ at the start?",
+      "back": "It gives $\\frac{0}{0}$, which is undefined. Simplify and cancel $h$ first, then let $h\\to0$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06ubqwc",
+      "kind": "example",
+      "front": "Differentiate $y=5x^4-\\frac{3}{x^2}+\\sqrt{x}$ with respect to $x$.",
+      "back": "$\\frac{dy}{dx}=20x^3+\\frac{6}{x^3}+\\frac{1}{2\\sqrt{x}}$. Rewrite first as $5x^4-3x^{-2}+x^{1/2}$, then differentiate each term.",
+      "hint": "Rewrite the roots and fractions as powers first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r71jj3",
+      "kind": "formula",
+      "front": "What is the product rule for $y=uv$, where $u$ and $v$ are functions of $x$?",
+      "back": "$\\frac{dy}{dx}=u\\frac{dv}{dx}+v\\frac{du}{dx}$. The derivative of a product is **not** the product of the derivatives.",
+      "hint": "Why does the sum rule not work here?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jt3exy",
+      "kind": "formula",
+      "front": "What is the quotient rule for $y=\\frac{u}{v}$?",
+      "back": "$\\frac{dy}{dx}=\\frac{v\\frac{du}{dx}-u\\frac{dv}{dx}}{v^2}$, valid where $v\\neq0$. Write $u$, $v$ and their derivatives down first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17toxl7",
+      "kind": "example",
+      "front": "Use the product rule to differentiate $y=x^2(3x+1)$.",
+      "back": "$\\frac{dy}{dx}=9x^2+2x$. With $u=x^2$ and $v=3x+1$, the working is $x^2\\times3+(3x+1)\\times2x$, then expand.",
+      "hint": "Name $u$ and $v$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fh3u3e",
+      "kind": "mistake",
+      "front": "Why does $\\frac{dy}{dx}=0$ not guarantee a maximum or minimum?",
+      "back": "The point is only stationary. The curve can keep rising or falling through it, as $y=x^3$ does at the origin.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "021bokj",
+      "kind": "example",
+      "front": "Find and classify the stationary points of $y=x^3-3x$.",
+      "back": "Local maximum at $(-1,2)$ and local minimum at $(1,-2)$. Use $\\frac{dy}{dx}=3x^2-3=0$, then $\\frac{d^2y}{dx^2}=6x$ to classify.",
+      "hint": "Set the first derivative to zero.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dguvnp",
+      "kind": "term",
+      "front": "What is a **rate** of change in a real problem?",
+      "back": "A derivative with respect to time, such as $\\frac{dh}{dt}$, which shows how quickly a quantity changes. Its units are the quantity's units per unit of time.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0qxd0p5",
+      "kind": "example",
+      "front": "For $h=20t-5t^2$ metres, what is the rate of change of height at $t=1$ second?",
+      "back": "$10\\,\\mathrm{m\\,s^{-1}}$. Differentiate to get $\\frac{dh}{dt}=20-10t$, then substitute $t=1$.",
+      "hint": "Differentiate with respect to $t$ first.",
+      "sectionId": "s6"
+    }
+  ]
+}

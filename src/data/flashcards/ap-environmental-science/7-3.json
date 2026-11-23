@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Thermal inversion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:28.849Z",
+  "cards": [
+    {
+      "id": "0jvdjlh",
+      "kind": "concept",
+      "front": "How does temperature change with height inside a thermal inversion?",
+      "back": "Temperature **rises** with altitude through the inversion layer instead of falling, so a warm layer sits over cooler air near the ground.",
+      "hint": "Compare this with how air temperature changes as you climb a tall mountain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jm2sxd",
+      "kind": "concept",
+      "front": "Why can't cool air under an inversion rise through the warm layer above it?",
+      "back": "That cool air is **denser** than the warm air above, so it has no reason to rise. The inversion layer acts as a lid that stops convection.",
+      "hint": "Compare the density of the two layers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a6o9mt",
+      "kind": "concept",
+      "front": "Which conditions most often create a thermal inversion?",
+      "back": "A **clear, calm night** when the ground cools fast, sinking high-pressure air, valleys or basins where cool air pools, and coastal settings where cool ocean air lies under warmer air.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lugxe2",
+      "kind": "term",
+      "front": "What is the troposphere?",
+      "back": "The **lowest layer** of the atmosphere, where weather occurs and temperature normally falls as altitude increases.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yw1o34",
+      "kind": "term",
+      "front": "What is convection in the atmosphere?",
+      "back": "The **vertical movement** of air caused by differences in temperature and density. Warm, less dense air rises and carries pollutants upward.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zse5rz",
+      "kind": "concept",
+      "front": "Why does stagnant air make pollution worse?",
+      "back": "**Stagnant air** has little wind or vertical mixing, so pollutants stay in place instead of spreading out, and new emissions keep building up.",
+      "hint": "Think about what wind normally does to smoke.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0we28x0",
+      "kind": "mistake",
+      "front": "What is wrong with thinking an inversion creates new pollution?",
+      "back": "An inversion does not create pollution. It **traps** pollution that sources have already released, so concentrations build up beneath the lid.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19jx95a",
+      "kind": "process",
+      "front": "How does radiational cooling produce a night-time inversion?",
+      "back": "On a clear, calm night the ground loses heat to the sky, chilling the air touching it while the air above stays warmer, creating a **cold-air layer** capped by warmer air.",
+      "hint": "Start by asking where the ground's heat goes on a clear night.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pa5m3z",
+      "kind": "term",
+      "front": "What is a subsidence inversion?",
+      "back": "An inversion formed when **sinking high-pressure air** compresses and warms above cooler air near the surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0aemkqc",
+      "kind": "concept",
+      "front": "Which groups are most at risk from the health effects of a long inversion?",
+      "back": "**Children, older adults**, and people with asthma or heart disease are most at risk from trapped particles and gases.",
+      "hint": "Think about groups whose breathing or heart is less able to cope with dirty air.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o6fuwv",
+      "kind": "example",
+      "front": "Why does a city in a mountain-ringed basin often suffer worse inversion pollution than a city on a windy plain?",
+      "back": "Cool, dense air drains in and pools, and mountains block wind, so **stagnant air** lets pollutants build up. On a windy plain, wind mixes and spreads them.",
+      "hint": "Think about what happens to wind when air is surrounded by mountains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uuemcj",
+      "kind": "process",
+      "front": "How does a night-time inversion usually end?",
+      "back": "It **breaks up by midday** once the sun warms the ground, so the cool air near the surface mixes upward again.",
+      "hint": "Think about what the sun does to the ground in the morning.",
+      "sectionId": "s5"
+    }
+  ]
+}

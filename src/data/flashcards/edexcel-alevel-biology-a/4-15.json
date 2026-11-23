@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-15",
+  "topicCode": "4.15",
+  "topicName": "Plant fibres and sustainability",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:55.876Z",
+  "cards": [
+    {
+      "id": "1gsyacf",
+      "kind": "concept",
+      "front": "Why do plant fibres resist being pulled along their length so well?",
+      "back": "Cellulose chains are bundled into **microfibrils**, held together by hydrogen bonds and lying close to the fibre's length, so a pull along the fibre is resisted well.",
+      "hint": "Think about how the cellulose molecules are arranged inside the cell wall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00h0p39",
+      "kind": "concept",
+      "front": "Why is a plant fibre crop a renewable resource, while crude oil used for synthetic fibres is not?",
+      "back": "A fibre crop can be harvested and replanted, often within a year, so natural growth replaces it. **Crude oil** is finite and takes millions of years to form.",
+      "hint": "Compare how quickly each source is replaced by natural processes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dx7xiv",
+      "kind": "concept",
+      "front": "Why is a renewable fibre crop not automatically a sustainable choice?",
+      "back": "**Sustainability depends on how the crop is grown.** Replanting, avoiding cleared forest, limiting fertiliser and pesticide, and using the whole plant are needed for sustainable use.",
+      "hint": "Think about what the land, water and surrounding wildlife need from the farming method.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rxodo0",
+      "kind": "term",
+      "front": "What is a plant fibre?",
+      "back": "A **plant fibre** is a long, narrow plant cell with a thick wall, mostly made of cellulose, that people use in rope, cloth and paper.",
+      "hint": "Think about the shape of the cell and where fibres sit in a plant.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s26ryh",
+      "kind": "mistake",
+      "front": "A student says lignin gives plant fibres their tensile strength. What is wrong with this?",
+      "back": "**Cellulose microfibrils** resist pulling. Lignin fills the spaces around the cellulose and makes the walls rigid and waterproof, but it is not the main source of tensile strength.",
+      "hint": "Ask which component of the wall is arranged along the fibre to resist a pull.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bwc7uo",
+      "kind": "example",
+      "front": "Four fibres of one type broke at 520 g, 480 g, 500 g and 560 g. What is their mean breaking mass?",
+      "back": "**515 g.** Total: $2060\\,\\text{g}$. Mean: $\\frac{2060\\,\\text{g}}{4}=515\\,\\text{g}$.",
+      "hint": "Work out the total first, then think about how many values there are.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c4lkee",
+      "kind": "process",
+      "front": "What steps should you follow to compare the tensile strength of two types of plant fibre?",
+      "back": "Use fibres of the same diameter and tested length. Hang masses from a clamp, adding them gradually until each fibre breaks. Record the breaking mass, repeat for several fibres and calculate the mean.",
+      "hint": "Think about which variables must be kept the same to make the test fair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17db7sy",
+      "kind": "mistake",
+      "front": "Why is clearing forest to grow a fibre crop a poor choice, even though the crop is renewable?",
+      "back": "It removes **habitats** and releases the carbon stored in the trees, which can cancel out the benefits of using plant fibres.",
+      "hint": "Think about what a forest provides for wildlife and what it stores.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1w9mw7y",
+      "kind": "term",
+      "front": "What is a renewable resource?",
+      "back": "A **renewable resource** is one that natural processes replace at least as fast as people use it.",
+      "hint": "Compare this with a finite resource such as crude oil.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fzjl4k",
+      "kind": "term",
+      "front": "What is meant by sustainable use of a resource?",
+      "back": "**Sustainable use** meets the needs of people today without reducing what is available for future generations.",
+      "hint": "Think about who else will need the resource later on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0btgk5d",
+      "kind": "term",
+      "front": "What does biodegradable mean for a plant fibre product?",
+      "back": "It can be broken down by **microorganisms** into simpler substances, so it creates less long-lasting waste than many plastics.",
+      "hint": "Think about what happens to a product after it is thrown away.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "081pd3p",
+      "kind": "concept",
+      "front": "Why is plant fibre better suited to a disposable bag than to a rope left outdoors for years?",
+      "back": "Plant fibres **biodegrade** and can rot or weaken when kept wet, so they suit short-term use. An outdoor rope needs to stay strong and durable for years.",
+      "hint": "Consider how long the product must last and the conditions it will face.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ql3q6f",
+      "kind": "concept",
+      "front": "What practical limits do plant fibres have compared with other materials?",
+      "back": "Crops need **land, water** and sometimes fertiliser. Fibres may rot or weaken when wet, and some synthetic fibres are stronger or last longer.",
+      "hint": "Think about what the crop requires to grow and how fibres behave in wet conditions.",
+      "sectionId": "s6"
+    }
+  ]
+}

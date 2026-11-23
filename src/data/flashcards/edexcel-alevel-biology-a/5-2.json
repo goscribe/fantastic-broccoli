@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-2",
+  "topicCode": "5.2",
+  "topicName": "Biotic and abiotic factors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:54.140Z",
+  "cards": [
+    {
+      "id": "0be4rm2",
+      "kind": "concept",
+      "front": "What is the difference between biotic and abiotic factors, and what do they both affect?",
+      "back": "**Biotic** factors are effects from other living organisms; **abiotic** factors are non-living conditions. Both change how many individuals survive and reproduce.",
+      "hint": "Ask where the effect comes from: living things or the non-living environment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18ysx52",
+      "kind": "concept",
+      "front": "Why does a rise in predator numbers eventually lead to fewer predators?",
+      "back": "More predators eat more prey, so prey numbers fall. Predators then have less food, so their numbers fall too, with a time lag after the prey.",
+      "hint": "Follow the prey numbers first, then the predators.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15jswq7",
+      "kind": "term",
+      "front": "What is a limiting factor?",
+      "back": "A **limiting factor** is a variable that restricts the size of a population or the rate of a process, such as a factor in short supply or outside a species' tolerated range.",
+      "hint": "Think about what happens when a resource runs out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vyhj28",
+      "kind": "mistake",
+      "front": "Why is food supply a biotic factor rather than an abiotic one?",
+      "back": "Food comes from other living organisms, so it is **biotic**. Water and minerals are non-living, so they are abiotic.",
+      "hint": "Consider where the food actually comes from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11q2maa",
+      "kind": "term",
+      "front": "What is the difference between intraspecific and interspecific competition?",
+      "back": "**Intraspecific** competition is between members of the same species; **interspecific** competition is between different species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a6gawh",
+      "kind": "term",
+      "front": "What is a pathogen?",
+      "back": "A **pathogen** is an organism that causes disease in its host. Infected individuals may die or produce fewer offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e46fux",
+      "kind": "process",
+      "front": "How can a dry summer reduce the number of predators in a grassland?",
+      "back": "Dry weather cuts grass growth. Herbivores get less food and decline. Predators then have fewer prey, so births fall or deaths rise and predator numbers drop.",
+      "hint": "Start with the abiotic factor and follow the food chain upwards.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dj5jlh",
+      "kind": "example",
+      "front": "Name one biotic and one abiotic factor that could affect the size of a frog population.",
+      "back": "Biotic: predation, competition or disease. Abiotic: temperature, oxygen concentration or pH.",
+      "hint": "Think about the frog's living neighbours and its pond water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01wk0r1",
+      "kind": "concept",
+      "front": "Why can a change in temperature reduce the survival of an organism?",
+      "back": "Temperature changes the rate of enzyme-controlled reactions. Outside the range where its enzymes work well, the organism grows and reproduces poorly.",
+      "hint": "Consider what enzymes do in metabolic reactions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x5wqpp",
+      "kind": "mistake",
+      "front": "What should you include when explaining a change in population size?",
+      "back": "Name the factor and say whether it is biotic or abiotic. Then link it to survival or reproduction, so that births fall or deaths rise.",
+      "hint": "Think about the order of steps in a good explanation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16pjmgu",
+      "kind": "concept",
+      "front": "How does competition for a limited resource reduce population size?",
+      "back": "Each organism gets less of the resource, so survival or reproduction falls in both species. One population may decline further or even disappear from the area.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c7ob01",
+      "kind": "concept",
+      "front": "Why can a dense population lose many members to disease?",
+      "back": "Disease spreads faster when individuals live close together, so more individuals become infected and may die or breed less.",
+      "hint": "Think about how close individuals are to each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pkfipt",
+      "kind": "concept",
+      "front": "How does light intensity affect the food available to other organisms?",
+      "back": "Light intensity affects photosynthesis, so it changes plant growth. Less plant growth means less food for herbivores and the animals that eat them.",
+      "hint": "Follow photosynthesis through to the food chain.",
+      "sectionId": "s4"
+    }
+  ]
+}

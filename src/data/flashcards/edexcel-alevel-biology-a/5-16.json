@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-16",
+  "topicCode": "5.16",
+  "topicName": "Temperature and enzyme activity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:33.973Z",
+  "cards": [
+    {
+      "id": "1rxfux2",
+      "kind": "concept",
+      "front": "Why does raising the temperature make an enzyme-catalysed reaction go faster at first?",
+      "back": "Molecules gain **kinetic energy**, so they move faster and collide with the active site more often. A larger share of those collisions has enough energy to react.",
+      "hint": "Compare with why sugar dissolves faster in hot tea than in cold tea.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qrpt0j",
+      "kind": "concept",
+      "front": "Why does the rate of an enzyme reaction fall to zero at very high temperatures?",
+      "back": "Heat breaks the weak bonds holding the **tertiary structure**, so the active site changes shape and the substrate no longer fits. This change is **denaturation**.",
+      "hint": "Think about what extra vibration does to the folded shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cc6837",
+      "kind": "concept",
+      "front": "Why does the rate peak and then fall at the optimum temperature?",
+      "back": "Below the optimum, extra collisions outweigh any damage, so the rate rises. Above it, **denaturation** outweighs the gain, so the rate falls steeply to zero.",
+      "hint": "Two effects of heat compete on the same graph.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1859fhg",
+      "kind": "term",
+      "front": "What is the optimum temperature of an enzyme?",
+      "back": "The **optimum temperature** is the temperature at which an enzyme's activity is highest under given conditions. It differs between enzymes; many human enzymes work best near $37\\,^\\circ\\mathrm{C}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0y6ah9a",
+      "kind": "concept",
+      "front": "Why does cooling slow an enzyme without permanently damaging it?",
+      "back": "Molecules have little kinetic energy, so collisions are rare and few succeed. The **enzyme** keeps its shape, so activity returns when the mixture warms again.",
+      "hint": "Contrast this with what heat does to the bonds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17ih9c6",
+      "kind": "formula",
+      "front": "How is the rate of reaction calculated from the volume of product collected over time?",
+      "back": "$\\text{rate} = \\frac{\\text{volume of product}}{\\text{time}}$, measured in $\\mathrm{cm^3\\,s^{-1}}$ when volume is in $\\mathrm{cm^3}$ and time is in $\\mathrm{s}$.",
+      "hint": "Each rate is one number divided by another.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00r67t5",
+      "kind": "example",
+      "front": "Catalase gives $6.0\\,\\mathrm{cm^3}$ of oxygen in $120\\,\\mathrm{s}$ at 20 °C and $15.0\\,\\mathrm{cm^3}$ at 30 °C. How many times faster is the rate at 30 °C?",
+      "back": "The rates are $0.050\\,\\mathrm{cm^3\\,s^{-1}}$ at 20 °C and $0.125\\,\\mathrm{cm^3\\,s^{-1}}$ at 30 °C, so the rate at 30 °C is **2.5 times** greater.",
+      "hint": "Work out each rate first, then divide one by the other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15xsyo6",
+      "kind": "concept",
+      "front": "Which variables must be kept constant when testing enzyme rate at several temperatures?",
+      "back": "**pH** (held steady with a buffer), enzyme concentration, substrate concentration, and volumes and reaction time, so that only temperature changes.",
+      "hint": "Think about what else in the mixture could change the rate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y1ml33",
+      "kind": "process",
+      "front": "What are the steps for measuring enzyme rate across a range of temperatures?",
+      "back": "Mix enzyme and substrate in water baths at each temperature. Measure the product at fixed times, calculate the rate, then plot rate against temperature and join the points with a smooth curve.",
+      "hint": "Start with how the temperature is set before mixing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15cgfah",
+      "kind": "formula",
+      "front": "What is the temperature coefficient $Q_{10}$, and how is it calculated?",
+      "back": "$Q_{10}=\\frac{\\text{rate at }(T+10)}{\\text{rate at }T}$, the rate at a temperature divided by the rate 10 °C lower. It is meaningful only below the optimum.",
+      "hint": "Compare two rates that are 10 °C apart.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0isiaha",
+      "kind": "mistake",
+      "front": "Why can the highest tested temperature not be assumed to be the true optimum?",
+      "back": "The optimum is known only to within the range tested. A temperature between two tested values might give a higher rate, so the peak must be read from a smooth curve.",
+      "hint": "Think about the gaps between the points you measured.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1t6ak47",
+      "kind": "concept",
+      "front": "Why can an enzyme from a hot-spring bacterium have a higher optimum temperature than a human enzyme?",
+      "back": "Each enzyme has its own **tertiary structure** and bonds, so the hot-spring enzyme keeps its active site intact at temperatures that would denature a human enzyme.",
+      "hint": "Think about what differs between enzymes from different organisms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qf6btd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that heat has killed an enzyme?",
+      "back": "Enzymes are **molecules**, not living things, so heat denatures them rather than killing them. Denaturation changes the shape and usually cannot be reversed by cooling.",
+      "hint": "Consider what kind of thing an enzyme is.",
+      "sectionId": "s2"
+    }
+  ]
+}

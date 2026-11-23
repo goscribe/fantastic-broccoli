@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Mammalian gametes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:27.871Z",
+  "cards": [
+    {
+      "id": "0r5wy3q",
+      "kind": "concept",
+      "front": "Why are a human sperm and an egg built so differently?",
+      "back": "Each cell is adapted to its job. The **sperm** is small and mobile so it can reach and enter the egg. The **egg** is large and still, storing nutrients and carrying protective layers for the early embryo.",
+      "hint": "Think about the job each cell has in reproduction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14f7qu5",
+      "kind": "concept",
+      "front": "Why must gametes be haploid?",
+      "back": "Each gamete has $23$ chromosomes, so when a sperm and egg fuse the **zygote** has $46$ chromosomes, the full set. If gametes were diploid, the chromosome number would double each generation.",
+      "hint": "Consider which two cells meet to form a zygote.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14u0kxc",
+      "kind": "process",
+      "front": "What is the correct order of the four steps that take a sperm from swimming to fertilising an egg?",
+      "back": "1) The tail moves the sperm towards the egg, powered by ATP from the midpiece. 2) The acrosome releases enzymes that digest a path through the outer layers. 3) The sperm membrane fuses with the egg membrane. 4) Cortical granules release enzymes that change the zona pellucida and block other sperm.",
+      "hint": "Start with how the sperm gets close to the egg.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jmbwzs",
+      "kind": "term",
+      "front": "What is a gamete?",
+      "back": "A **gamete** is a haploid sex cell, such as a sperm or an egg, that joins with another gamete at fertilisation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10rzqdu",
+      "kind": "process",
+      "front": "Which type of division produces gametes?",
+      "back": "**Meiosis** produces gametes. It halves the chromosome number and normally makes four genetically different cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "037mp8i",
+      "kind": "term",
+      "front": "What is the acrosome?",
+      "back": "The **acrosome** is a membrane-bound sac at the tip of the sperm head. It contains digestive enzymes that can break down the layers around an egg.",
+      "hint": "Look at where it sits on the sperm head.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wv2b2f",
+      "kind": "concept",
+      "front": "Why does the sperm midpiece contain many mitochondria?",
+      "back": "Mitochondria release energy by aerobic respiration to make ATP. The ATP powers the movement of the tail.",
+      "hint": "Think about what the tail needs in order to move.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1su3f7d",
+      "kind": "concept",
+      "front": "Why does a sperm have very little cytoplasm?",
+      "back": "Little cytoplasm keeps the sperm light so it can swim easily. The trade-off is that it carries almost no food store.",
+      "hint": "Compare with the amount of cytoplasm in an egg.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13c4zhi",
+      "kind": "term",
+      "front": "What is the zona pellucida?",
+      "back": "The **zona pellucida** is a jelly-like layer of glycoproteins surrounding the cell surface membrane of a mammalian egg.",
+      "hint": "Think about what lies just outside the egg membrane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tt4msq",
+      "kind": "term",
+      "front": "What are cortical granules?",
+      "back": "**Cortical granules** are vesicles lying just beneath the egg cell surface membrane. They contain enzymes that are released after a sperm enters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l7t5q5",
+      "kind": "mistake",
+      "front": "Why is it wrong to describe an egg as diploid?",
+      "back": "An egg is **haploid**, so its nucleus holds $23$ chromosomes. The $46$ chromosomes only appear in the zygote after fusion with a sperm.",
+      "hint": "Count the chromosomes in the egg nucleus before fertilisation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fbxczb",
+      "kind": "concept",
+      "front": "What would happen if cortical granule enzymes failed to act after a sperm entered?",
+      "back": "Extra sperm could enter the egg, so the zygote would end up with too many chromosomes.",
+      "sectionId": "s5"
+    }
+  ]
+}

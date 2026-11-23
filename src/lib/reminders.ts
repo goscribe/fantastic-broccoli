@@ -100,6 +100,22 @@ export interface DeviceSeen {
   androidInstall: boolean;
 }
 
+/** What localStorage keeps: the markers plus the user agent they were set under. */
+export interface StoredDeviceSeen extends Partial<DeviceSeen> {
+  ua?: string;
+}
+
+/**
+ * The markers that still count for this browser. A different user agent (a
+ * browser or OS update, "Request desktop site", a new phone restored from a
+ * backup) clears them, so the install hint can come back; markers saved
+ * before the user agent was recorded count as changed too.
+ */
+export function deviceSeenFor(stored: StoredDeviceSeen | null | undefined, userAgent: string): DeviceSeen {
+  if (!stored || stored.ua !== userAgent) return { iosInstallHint: false, androidInstall: false };
+  return { iosInstallHint: !!stored.iosInstallHint, androidInstall: !!stored.androidInstall };
+}
+
 export type HabitStep = "study_time" | "push" | "ios_install" | "android_install";
 
 /** Whether this browser can ask for push permission right now. */
@@ -155,4 +171,29 @@ export function urlBase64ToUint8Array(base64String: string): Uint8Array<ArrayBuf
   const out = new Uint8Array(new ArrayBuffer(raw.length));
   for (let i = 0; i < raw.length; i++) out[i] = raw.charCodeAt(i);
   return out;
+}
+
+/** The week planner's untouched server default window (StudyPlan windowStart/windowEnd). */
+export const PLANNER_DEFAULT_WINDOW = { windowStart: "15:00", windowEnd: "19:00" } as const;
+
+/** How long the planner window is when it comes from the study-time answer. */
+export const PLANNER_WINDOW_FROM_STUDY_TIME_MIN = 120;
+
+/**
+ * The planner study window implied by the habit prompt's "When do you usually
+ * study?" answer, or null when the student already chose their own window or
+ * free times (never overwritten). The window starts at that time and runs two
+ * hours, ending by 23:59.
+ */
+export function plannerWindowFromStudyTime(
+  plan: { windowStart: string; windowEnd: string; availability?: unknown[] | null },
+  minute: number,
+): { windowStart: string; windowEnd: string } | null {
+  if (Array.isArray(plan.availability) && plan.availability.length > 0) return null;
+  if (plan.windowStart !== PLANNER_DEFAULT_WINDOW.windowStart || plan.windowEnd !== PLANNER_DEFAULT_WINDOW.windowEnd) return null;
+  if (!Number.isFinite(minute) || minute < 0 || minute >= 24 * 60) return null;
+  const start = Math.floor(minute);
+  const end = Math.min(start + PLANNER_WINDOW_FROM_STUDY_TIME_MIN, 23 * 60 + 59);
+  if (end <= start) return null;
+  return { windowStart: minuteToTimeInput(start), windowEnd: minuteToTimeInput(end) };
 }

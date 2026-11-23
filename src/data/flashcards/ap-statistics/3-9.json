@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-9",
+  "topicCode": "3.9",
+  "topicName": "Differences in sample proportions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:19.234Z",
+  "cards": [
+    {
+      "id": "0shiira",
+      "kind": "concept",
+      "front": "Where is the sampling distribution of the difference in sample proportions centered?",
+      "back": "It is centered at **p1 − p2**, the true difference in population proportions. The statistic has no built-in lean, so on average it neither overshoots nor undershoots.",
+      "hint": "Think about where each sample proportion is centered on its own.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wooq2u",
+      "kind": "formula",
+      "front": "What is the standard deviation of $\\hat{p}_1-\\hat{p}_2$ for two independent samples?",
+      "back": "$\\sigma=\\sqrt{\\frac{p_1(1-p_1)}{n_1}+\\frac{p_2(1-p_2)}{n_2}}$, where $n_1$ and $n_2$ are the sample sizes. The **variances** add, then you take the square root.",
+      "hint": "Which quantity adds: the variances or the standard deviations?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13vbzwg",
+      "kind": "process",
+      "front": "What four conditions must be checked before using the normal model for a difference in sample proportions?",
+      "back": "**Random** samples, **independent** samples, the **10% condition** (each sample under 10% of its population), and the **Large Counts** condition (all four counts $n_1p_1$, $n_1(1-p_1)$, $n_2p_2$, $n_2(1-p_2)$ at least 10).",
+      "hint": "Two of these are about how the data were collected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0d7jwjy",
+      "kind": "term",
+      "front": "What is the difference in sample proportions?",
+      "back": "The **difference in sample proportions** is $\\hat{p}_1-\\hat{p}_2$, computed from independent random samples of sizes $n_1$ and $n_2$ taken from two populations.",
+      "hint": "Subtract the second sample proportion from the first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yn5d1x",
+      "kind": "concept",
+      "front": "Why does the statistic $\\hat{p}_1-\\hat{p}_2$ vary from one study to another?",
+      "back": "A new pair of samples gives a new difference, so the statistic changes. The pattern of its values over all possible pairs of samples is its **sampling distribution**.",
+      "hint": "What changes when you take new samples?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02ncvnl",
+      "kind": "term",
+      "front": "What are independent samples?",
+      "back": "**Independent samples** are samples where the individuals chosen for one group have no influence on, or connection to, the individuals chosen for the other group.",
+      "hint": "Knowing one sample should tell you nothing about the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0akar3s",
+      "kind": "concept",
+      "front": "When can you use z-scores and normal probabilities for the difference in proportions?",
+      "back": "When the sampling distribution is approximately **normal**, which happens when both samples are large enough that the conditions hold. Without large samples, it can be skewed.",
+      "hint": "Recall the conditions you check before using the normal model.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vs6kyq",
+      "kind": "example",
+      "front": "Two independent samples of 100 come from populations with $p_1=0.60$ and $p_2=0.50$. Find the mean and standard deviation of $\\hat{p}_1-\\hat{p}_2$.",
+      "back": "Mean is **0.10**. Standard deviation is $\\sqrt{0.0024+0.0025}=\\sqrt{0.0049}=0.07$.",
+      "hint": "Find the mean first, then add the two variance terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v16s4h",
+      "kind": "example",
+      "front": "Using a mean of 0.10 and standard deviation of 0.07, what range holds about 95% of differences?",
+      "back": "Roughly **−0.04 to 0.24**, which is two standard deviations on each side of 0.10.",
+      "hint": "Go two standard deviations either side of the mean.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17tzval",
+      "kind": "example",
+      "front": "Is the Large Counts condition met when $n_1=50$, $p_1=0.40$, $n_2=60$, and $p_2=0.15$?",
+      "back": "**No**. The four counts are 20, 30, 9, and 51. Since $60(0.15)=9$ is below 10, the condition fails.",
+      "hint": "Compute all four products and compare each with 10.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vrk3kc",
+      "kind": "mistake",
+      "front": "A student finds the standard deviation of the difference by subtracting the two standard deviations. What is wrong?",
+      "back": "You should **add the variances**, not subtract the standard deviations. The spread of the difference is larger than the spread of either sample proportion alone.",
+      "hint": "Think about which quantity is additive for independent samples.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pfcfcp",
+      "kind": "mistake",
+      "front": "Can the same 40 students answering two different topics be treated as two independent samples?",
+      "back": "**No**. The same individuals appear in both samples, so they are not independent, and the formula that adds variances does not apply.",
+      "hint": "Ask who is in each sample.",
+      "sectionId": "s5"
+    }
+  ]
+}

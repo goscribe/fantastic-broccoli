@@ -27,6 +27,43 @@
  * - Shape by size: controls 12, buttons 16, cards 20, the hero 24. Depth is a
  *   hairline, plus a 1px shadow at most.
  */
+/*
+ * Body type scale. Every run of body copy (paragraphs, list items, helper and
+ * card text, callouts, questions, answer options, explanations, captions) uses
+ * one of these four, through the Tailwind utilities text-read / text-ui /
+ * text-small / text-caption (mapped in globals.css @theme). Each size carries
+ * its own line-height; hierarchy inside a size comes from weight, colour and
+ * spacing, never from a half-pixel step. Headings have their own tokens
+ * (--h1 / --h2, design.css); buttons, chips and tiles keep their own type.
+ *
+ *   read     17px / 1.6, 18px from 640px   long-form reading: a note's body,
+ *                                          lists, callouts, worked examples,
+ *                                          recall and practice questions,
+ *                                          options, explanations; landing prose
+ *   ui       15px / 1.5                    standard app body: card text,
+ *                                          descriptions, list rows, figure
+ *                                          captions, table cells
+ *   small    13px / 1.45                   secondary: meta, helper text,
+ *                                          labels over a block ("Common mistake")
+ *   caption  12px / 1.35                   micro: eyebrows, timestamps, counts
+ *
+ * Only `read` steps up on wider screens (a phone holds ~60 characters at 17px;
+ * a note's column holds ~70 at 18px). One screen uses at most three of these.
+ */
+:root {
+  --fs-read: 17px;
+  --lh-read: 1.6;
+  --fs-ui: 15px;
+  --lh-ui: 1.5;
+  --fs-small: 13px;
+  --lh-small: 1.45;
+  --fs-caption: 12px;
+  --lh-caption: 1.35;
+}
+@media (min-width: 640px) {
+  :root { --fs-read: 18px; }
+}
+
 :root .app-brand,
 :root .notes-look {
   --page: #ffffff;
@@ -165,6 +202,12 @@
   /* Short rows (phone lists, the picker): the art is cropped harder so the title keeps its room. */
   .subject-tile--row .subject-tile__art { right: -4%; bottom: -34%; height: 150%; }
   .subject-tile--row .subject-tile__text { max-width: 60%; }
+  /*
+   * Course tiles grow with their text (a long name, a wrapped stats line), so
+   * their art is capped by the tile's width too: a taller tile no longer means
+   * bigger art running under the words, the status line and the pill.
+   */
+  .course-tile:not(.subject-tile--row) > .subject-tile__art { height: min(90%, 72cqw); bottom: -8%; }
   /* The words keep the left; the art keeps the right. */
   .subject-tile__text { max-width: 62%; min-width: 0; }
   .subject-tile__title,
@@ -178,6 +221,7 @@
     overflow: hidden;
   }
   .subject-band__title { -webkit-line-clamp: 3; line-clamp: 3; }
+  .course-tile__title { -webkit-line-clamp: 3; line-clamp: 3; }
   .subject-tile__sub { color: rgb(255 255 255 / 0.92); }
   .subject-tile__sub--line { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .subject-pill {

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { GlowField } from "@/components/graphics/landing-art";
 import { blogApi, BLOG_AUTHORS, type BlogList } from "@/lib/api/blog";
 
 export const revalidate = 3600;
@@ -21,13 +20,13 @@ function AuthorBadge({ author }: { author: string }) {
   return (
     <span className="flex items-center gap-2">
       <span
-        className={`flex h-7 w-7 items-center justify-center rounded-full text-xs font-bold text-white ${persona.color}`}
+        className={`flex h-7 w-7 items-center justify-center rounded-full text-caption font-bold text-white ${persona.color}`}
       >
         {persona.name[0]}
       </span>
-      <span className="text-xs">
+      <span className="text-caption">
         <span className="block font-semibold">{persona.name}</span>
-        <span className="block text-faint">{persona.role} · Scribe AI</span>
+        <span className="block text-muted-foreground">{persona.role} · Scribe AI</span>
       </span>
     </span>
   );
@@ -52,19 +51,18 @@ export default async function BlogIndexPage() {
   }
 
   return (
-    <section className="relative overflow-hidden py-16 md:py-20">
-      <GlowField />
-      <div className="relative mx-auto max-w-4xl px-6">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+    <section className="py-12 sm:py-16">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6">
+        <h1 className="text-balance text-[34px] font-extrabold leading-[1.08] sm:text-[44px]">
           The Scribe blog
         </h1>
-        <p className="mt-4 max-w-xl text-muted-foreground">
+        <p className="mt-4 max-w-xl text-read text-muted-foreground">
           Daily study tips, trends, and topic deep-dives — written by our AI
           authors from what students are actually studying.
         </p>
 
         {!data || data.posts.length === 0 ? (
-          <p className="mt-12 text-sm text-muted-foreground">
+          <p className="mt-12 text-ui text-muted-foreground">
             No posts yet — check back tomorrow.
           </p>
         ) : (
@@ -73,18 +71,18 @@ export default async function BlogIndexPage() {
               <Link
                 key={post.id}
                 href={`/landing/blog/${post.slug}`}
-                className="block rounded-2xl border border-border bg-card p-5 transition-colors hover:border-accent/50 sm:p-6"
+                className="life-card life-press block p-5 sm:p-6"
               >
                 <div className="flex items-center justify-between gap-4">
                   <AuthorBadge author={post.author} />
-                  <span className="text-xs text-faint">
+                  <span className="text-caption text-muted-foreground">
                     {formatDay(post.day)}
                   </span>
                 </div>
-                <h2 className="mt-3 text-lg font-bold leading-snug">
+                <h2 className="mt-3 text-[19px] font-extrabold leading-snug">
                   {post.title}
                 </h2>
-                <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground">
+                <p className="mt-1.5 line-clamp-2 text-ui text-muted-foreground">
                   {post.excerpt}
                 </p>
               </Link>

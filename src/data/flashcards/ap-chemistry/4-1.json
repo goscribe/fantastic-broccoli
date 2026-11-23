@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Introduction for reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:32.611Z",
+  "cards": [
+    {
+      "id": "1qgt377",
+      "kind": "concept",
+      "front": "What happens to atoms during a chemical reaction?",
+      "back": "A chemical reaction **rearranges** atoms into new substances with different chemical identities. The atoms stay present but are bonded differently in the products.",
+      "hint": "Think about what stays the same and what changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10iupla",
+      "kind": "term",
+      "front": "What makes an equation balanced?",
+      "back": "A **balanced equation** has the same number of atoms of each element on both sides of the arrow.",
+      "hint": "Compare the counts on each side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0etll6k",
+      "kind": "mistake",
+      "front": "Why is changing a subscript wrong when balancing an equation?",
+      "back": "Changing a subscript changes the substance itself. Balance only by adjusting **coefficients**, the numbers placed before formulas, because subscripts define each substance.",
+      "hint": "What do subscripts describe?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mgq14m",
+      "kind": "concept",
+      "front": "Which observations can suggest that a chemical reaction has occurred?",
+      "back": "A color change, gas production, formation of a **precipitate**, or a temperature change with no external heating or cooling. Context still matters.",
+      "hint": "Think of visible or measurable signs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bn3znm",
+      "kind": "mistake",
+      "front": "Does bubbling prove that a chemical reaction happened?",
+      "back": "**No.** Bubbles can come from a liquid boiling, which forms no new substance. Consider what materials were present and other possible causes.",
+      "hint": "Could boiling explain the bubbles?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ll8sh9",
+      "kind": "term",
+      "front": "What is a precipitate?",
+      "back": "A **precipitate** is a solid that forms from substances in a solution.",
+      "hint": "Picture a solid appearing inside a liquid.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hpzk65",
+      "kind": "term",
+      "front": "How can you tell reactants from products in a word description?",
+      "back": "**Reactants** are the starting substances, written before the arrow. **Products** are formed and written after it. Phrases like \"reacts with\" signal reactants; \"produces\" or \"forms\" signal products.",
+      "hint": "Look at the verb phrases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01reeee",
+      "kind": "concept",
+      "front": "What does the arrow in a chemical equation mean?",
+      "back": "The arrow means **produces**, not \"equals.\" Plus signs separate substances on the same side of the arrow.",
+      "hint": "Read the arrow as a direction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02o7593",
+      "kind": "term",
+      "front": "Why are hydrogen and oxygen gases written as H2 and O2?",
+      "back": "They occur as **diatomic molecules**, meaning each molecule has two bonded atoms. Their formulas are not written as single atoms.",
+      "hint": "Look at the subscript.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j7wn42",
+      "kind": "process",
+      "front": "What are the steps for turning a word description into a balanced equation?",
+      "back": "1) Identify each named substance and write its correct formula. 2) Place reactants left of the arrow and products right. 3) Adjust **coefficients** until each element has equal atoms on both sides. 4) Check each element and use the smallest whole numbers.",
+      "hint": "Start with the formulas, not the numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1orikpg",
+      "kind": "concept",
+      "front": "What does a coefficient do in a chemical equation?",
+      "back": "A **coefficient** multiplies every atom in the formula that follows it. A coefficient of 1 is omitted.",
+      "hint": "Count what the number multiplies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1188ela",
+      "kind": "example",
+      "front": "Balance the equation for hydrogen gas reacting with oxygen gas to produce water.",
+      "back": "$\\mathrm{2H_2 + O_2 \\rightarrow 2H_2O}$. Each side has four hydrogen atoms and two oxygen atoms.",
+      "hint": "Balance oxygen first, then hydrogen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09j7iag",
+      "kind": "example",
+      "front": "Write a balanced equation for magnesium reacting with oxygen gas to form magnesium oxide.",
+      "back": "$\\mathrm{2Mg + O_2 \\rightarrow 2MgO}$. Each side has two magnesium atoms and two oxygen atoms.",
+      "hint": "Oxygen gas is diatomic, so keep O2 as written.",
+      "sectionId": "s4"
+    }
+  ]
+}

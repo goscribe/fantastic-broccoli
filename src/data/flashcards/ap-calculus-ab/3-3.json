@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Differentiating inverse functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:58.092Z",
+  "cards": [
+    {
+      "id": "10dixay",
+      "kind": "formula",
+      "front": "What is the inverse derivative formula for $(f^{-1})'(a)$ when $f(b)=a$?",
+      "back": "$(f^{-1})'(a)=\\frac{1}{f'(b)}$, valid when $f'(b)\\ne 0$. Evaluate $f'$ at the **matching input** $b$, not at $a$.",
+      "hint": "Which input of $f$ should the derivative be evaluated at?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15gravy",
+      "kind": "process",
+      "front": "What are the steps to find $(f^{-1})'(a)$ from a table of function and derivative values?",
+      "back": "1) Find the **matching input** $b$ with $f(b)=a$. 2) Read $f'(b)$ from the table. 3) Compute $\\frac{1}{f'(b)}$. Match the function value before reading the derivative.",
+      "hint": "Write the matching pair before you substitute.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a60sxh",
+      "kind": "term",
+      "front": "What is an inverse function?",
+      "back": "A function that **reverses** the input-output pairs of $f$: if $f(b)=a$ then $f^{-1}(a)=b$. It is a function only when each output of $f$ comes from one input.",
+      "hint": "The superscript $-1$ means inverse, not reciprocal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ekdfkk",
+      "kind": "concept",
+      "front": "How are the points on the graphs of $f$ and $f^{-1}$ related?",
+      "back": "If $(b,a)$ is on $f$, then $(a,b)$ is on $f^{-1}$. The **coordinates switch places**.",
+      "hint": "Think about what happens to the input and output.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "094hk63",
+      "kind": "concept",
+      "front": "What happens to the inverse derivative formula when $f'(b)=0$?",
+      "back": "It divides by zero, so there is **no finite** inverse derivative. A horizontal tangent on $f$ can correspond to a vertical tangent on $f^{-1}$.",
+      "hint": "What does dividing by zero do to the result?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11u20jx",
+      "kind": "mistake",
+      "front": "What is the common mistake when finding $(f^{-1})'(a)$?",
+      "back": "Using $f'(a)$ instead of $f'(f^{-1}(a))$. You must **first** find the input $b$ that gives output $a$, then evaluate $f'$ at $b$.",
+      "hint": "Which input of $f$ produces the output $a$?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05jq6du",
+      "kind": "example",
+      "front": "Given $f(2)=7$ and $f'(2)=4$, what is $(f^{-1})'(7)$?",
+      "back": "$\\frac{1}{4}$. Since $f(2)=7$, the matching input is $2$, so $(f^{-1})'(7)=\\frac{1}{f'(2)}=\\frac{1}{4}$.",
+      "hint": "Which input of $f$ gives the output 7?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02gyeq7",
+      "kind": "term",
+      "front": "What is the line $y=x$ in relation to a function and its inverse?",
+      "back": "It is the **reflection line** that swaps each point $(b,a)$ with $(a,b)$, so the graph of $f^{-1}$ mirrors the graph of $f$ across it.",
+      "hint": "Think about swapping x and y coordinates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qdxoqv",
+      "kind": "concept",
+      "front": "Why does a tangent slope $m$ become $1/m$ at the reflected point?",
+      "back": "Reflection across $y=x$ **swaps** horizontal and vertical changes, so rise and run trade places. This holds when $m\\ne 0$; positive slopes stay positive and negative slopes stay negative.",
+      "hint": "What does reflecting across $y=x$ do to rise and run?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16v19qx",
+      "kind": "example",
+      "front": "Given $f(3)=10$ and $f'(3)=-2$, what is $(f^{-1})'(10)$?",
+      "back": "$-\\frac{1}{2}$. The matching input is $3$, so $(f^{-1})'(10)=\\frac{1}{f'(3)}=\\frac{1}{-2}$.",
+      "hint": "Find $f^{-1}(10)$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12zvu1y",
+      "kind": "term",
+      "front": "What are reciprocal slopes?",
+      "back": "At corresponding points, the tangent slopes of $f$ and $f^{-1}$ multiply to **1** when both slopes are finite.",
+      "hint": "Relate this to the inverse derivative formula.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vawl8u",
+      "kind": "concept",
+      "front": "Do you need an algebraic formula for $f^{-1}$ to find its derivative from given values?",
+      "back": "No. Use the **matching input** and the table values of $f$ and $f'$. An algebraic expression for $f^{-1}$ is not needed.",
+      "hint": "What information does the formula actually use?",
+      "sectionId": "s3"
+    }
+  ]
+}

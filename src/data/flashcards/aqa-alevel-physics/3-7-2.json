@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-7-2",
+  "topicCode": "3.7.2",
+  "topicName": "Gravitational fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:49.556Z",
+  "cards": [
+    {
+      "id": "0be4vyx",
+      "kind": "formula",
+      "front": "What does Newton's law of gravitation say about the force between two point masses?",
+      "back": "Two point masses attract with a force proportional to the product of their masses and inversely proportional to the square of their separation: $F=\\frac{Gm_1m_2}{r^2}$, where $r$ is the **centre-to-centre** distance.",
+      "hint": "Think about what happens to the force when the distance doubles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03nu7l3",
+      "kind": "formula",
+      "front": "What is gravitational field strength, and what expression gives it for a point mass $M$ at distance $r$?",
+      "back": "Gravitational field strength is the **gravitational force per unit mass** at a point, $g=\\frac{F}{m}$, in $\\mathrm{N\\,kg^{-1}}$. For a point mass, $g=\\frac{GM}{r^2}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07ojz18",
+      "kind": "concept",
+      "front": "Why does gravity keep a satellite moving in a circle rather than pulling it straight down into the planet?",
+      "back": "Gravity acts **towards the centre**, at right angles to the velocity, so it supplies the centripetal force. Equating $\\frac{GMm}{r^2}=\\frac{mv^2}{r}$ gives $v=\\sqrt{\\frac{GM}{r}}$.",
+      "hint": "Compare the direction of gravity with the direction the satellite is travelling.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cwrli8",
+      "kind": "formula",
+      "front": "What is gravitational potential at a point in a radial field, and what are its units?",
+      "back": "Gravitational potential is the **energy per unit mass** relative to zero at infinity: $V=-\\frac{GM}{r}$, in $\\mathrm{J\\,kg^{-1}}$. It is negative because work must be done against the attraction to move a mass to infinity.",
+      "hint": "Where is the zero of potential set?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12ckb07",
+      "kind": "concept",
+      "front": "How is gravitational field strength related to gravitational potential?",
+      "back": "Field strength is minus the **potential gradient**: $g=-\\frac{\\Delta V}{\\Delta r}$. On a $V$ against $r$ graph, a steeper line means a stronger field.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16qumrx",
+      "kind": "concept",
+      "front": "How does gravitational field strength near Earth's surface differ from its behaviour further out?",
+      "back": "Near the surface the field is almost **uniform**, about $9.8\\,\\mathrm{N\\,kg^{-1}}$ over a small region. Further out, the field is **radial**, pointing to the centre and falling with the square of distance.",
+      "hint": "Compare a small region with a large distance from the planet.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1983cql",
+      "kind": "example",
+      "front": "What is the gravitational force on a 500 kg satellite 7.0×10^6 m from the centre of Earth, given Earth's mass is 5.98×10^24 kg?",
+      "back": "$F\\approx4.1\\times10^{3}\\,\\mathrm{N}$, directed towards the centre of Earth. Use $F=\\frac{GMm}{r^2}$ with $G=6.67\\times10^{-11}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dflgav",
+      "kind": "mistake",
+      "front": "Why is it wrong to use a satellite's height above Earth's surface as $r$ in Newton's law?",
+      "back": "$r$ must be the **centre-to-centre** distance, so the planet's radius must be added to the height. Using height alone gives a too-small $r$ and a wrong, too-large force.",
+      "hint": "Where is the centre of the planet relative to its surface?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ocw5rn",
+      "kind": "example",
+      "front": "What is the gravitational potential at Earth's surface, with $M=5.98\\times10^{24}\\,\\mathrm{kg}$ and $r=6.37\\times10^{6}\\,\\mathrm{m}$?",
+      "back": "$V\\approx-6.26\\times10^{7}\\,\\mathrm{J\\,kg^{-1}}$. Use $V=-\\frac{GM}{r}$; the negative sign reflects the zero of potential being at infinity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "045545v",
+      "kind": "example",
+      "front": "What is the orbital speed at $r=7.0\\times10^{6}\\,\\mathrm{m}$ from Earth's centre, given $GM=3.99\\times10^{14}\\,\\mathrm{N\\,m^2\\,kg^{-1}}$?",
+      "back": "$v\\approx7.5\\times10^{3}\\,\\mathrm{m\\,s^{-1}}$. Use $v=\\sqrt{\\frac{GM}{r}}$.",
+      "hint": "Start by equating gravitational force to the centripetal force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "099d8fy",
+      "kind": "formula",
+      "front": "What expression gives the orbital period $T$ of a circular orbit, and what does each symbol mean?",
+      "back": "$T^2=\\frac{4\\pi^2r^3}{GM}$, where $T$ is the **orbital period** in seconds, $r$ the orbital radius in $\\mathrm{m}$, and $M$ the mass of the planet in $\\mathrm{kg}$. It comes from $v=\\frac{2\\pi r}{T}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xsb5zy",
+      "kind": "term",
+      "front": "What is a geostationary orbit?",
+      "back": "A **circular equatorial orbit** with a period of one day. The satellite stays above one fixed point on Earth.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zwhnj3",
+      "kind": "term",
+      "front": "What is the escape velocity from a planet's surface?",
+      "back": "The **minimum launch speed** needed to reach infinity, ignoring air resistance, given by $v=\\sqrt{\\frac{2GM}{r}}$. It is $\\sqrt{2}$ times the orbital speed at the same radius.",
+      "hint": "Think about the energy needed to reach infinity with no kinetic energy left.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "04i8xrv",
+      "kind": "mistake",
+      "front": "Why does a heavier rocket not need a higher escape velocity?",
+      "back": "The rocket's mass $m$ **cancels** in $\\frac12mv^2-\\frac{GMm}{r}=0$. A heavier rocket needs more energy in total, but the same launch speed.",
+      "hint": "Look at which terms in the energy balance contain $m$.",
+      "sectionId": "s6"
+    }
+  ]
+}

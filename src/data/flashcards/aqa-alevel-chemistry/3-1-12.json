@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-12",
+  "topicCode": "3.1.12",
+  "topicName": "Acids and bases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:29.068Z",
+  "cards": [
+    {
+      "id": "1nfpwjc",
+      "kind": "concept",
+      "front": "In the Brønsted–Lowry model, what does an acid transfer in a reaction?",
+      "back": "A **proton** ($\\mathrm{H^+}$). An acid is a proton donor, and a base is a proton acceptor.",
+      "hint": "Think about what hydrogen chloride gives to water when it dissolves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "130yh5j",
+      "kind": "formula",
+      "front": "What equation links pH to hydrogen ion concentration?",
+      "back": "$\\mathrm{pH}=-\\log_{10}[\\mathrm{H^+}]$, where $[\\mathrm{H^+}]$ is in $\\mathrm{mol\\,dm^{-3}}$. The pH has no units, and each pH unit is a tenfold change in $[\\mathrm{H^+}]$.",
+      "hint": "Look at the sign and which logarithm is used.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1brwrwz",
+      "kind": "concept",
+      "front": "Why does a buffer keep its pH almost constant when a little acid is added?",
+      "back": "The **anion of the salt** ($\\mathrm{A^-}$) reacts with the added $\\mathrm{H^+}$ to form the weak acid HA, so the ratio $\\frac{[\\mathrm{HA}]}{[\\mathrm{A^-}]}$ barely changes.",
+      "hint": "Which component of the buffer is present in large amounts?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mhll52",
+      "kind": "term",
+      "front": "What is the difference between a strong acid and a weak acid?",
+      "back": "A **strong acid** dissociates completely in water. A **weak acid** dissociates only partly, so an equilibrium is set up and its $[\\mathrm{H^+}]$ is lower.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fndkn2",
+      "kind": "formula",
+      "front": "What is the expression for the acid dissociation constant $K_a$ of a weak acid HA?",
+      "back": "$K_a=\\frac{[\\mathrm{H^+}][\\mathrm{A^-}]}{[\\mathrm{HA}]}$, in $\\mathrm{mol\\,dm^{-3}}$. A larger $K_a$ means a stronger weak acid.",
+      "hint": "Products go on the top of the fraction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11hg1yz",
+      "kind": "formula",
+      "front": "What is the ionic product of water, $K_\\mathrm{w}$, at 298 K?",
+      "back": "$K_\\mathrm{w}=[\\mathrm{H^+}][\\mathrm{OH^-}]=1.00\\times10^{-14}\\,\\mathrm{mol^{2}\\,dm^{-6}}$ at 298 K. It increases as temperature rises.",
+      "hint": "Think about what pure water ionises into.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0isxrgc",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that pure water always has a pH of 7?",
+      "back": "Pure water has pH 7 only at 298 K. $K_\\mathrm{w}$ rises with temperature, so $[\\mathrm{H^+}]$ rises and the pH falls, while the water stays neutral because $[\\mathrm{H^+}]=[\\mathrm{OH^-}]$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12qrjo1",
+      "kind": "mistake",
+      "front": "Why is 'base' not the same thing as 'alkali'?",
+      "back": "Every alkali is a base, but many bases do not dissolve in water. An **alkali** is a base that dissolves in water to produce hydroxide ions, $\\mathrm{OH^-}$.",
+      "hint": "Think about what happens when the substance dissolves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qwkc4h",
+      "kind": "example",
+      "front": "What is the pH of $0.020\\,\\mathrm{mol\\,dm^{-3}}$ hydrochloric acid?",
+      "back": "**1.70**. Hydrochloric acid dissociates completely, so $[\\mathrm{H^+}]=0.020\\,\\mathrm{mol\\,dm^{-3}}$ and $\\mathrm{pH}=-\\log_{10}(0.020)=1.70$.",
+      "hint": "Is hydrochloric acid strong or weak?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11jjwy9",
+      "kind": "example",
+      "front": "What is the pH of $0.050\\,\\mathrm{mol\\,dm^{-3}}$ sodium hydroxide at 298 K?",
+      "back": "**12.70**. Since $[\\mathrm{OH^-}]=0.050$, $[\\mathrm{H^+}]=\\frac{1.00\\times10^{-14}}{0.050}=2.0\\times10^{-13}\\,\\mathrm{mol\\,dm^{-3}}$, so the pH is 12.70.",
+      "hint": "Which ion's concentration does the alkali give you directly?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y8kb2g",
+      "kind": "example",
+      "front": "What is the pH of a $0.010\\,\\mathrm{mol\\,dm^{-3}}$ solution of weak acid HA with $K_a=2.5\\times10^{-5}\\,\\mathrm{mol\\,dm^{-3}}$?",
+      "back": "**3.30**. Using $[\\mathrm{H^+}]=\\sqrt{K_a[\\mathrm{HA}]}=5.0\\times10^{-4}\\,\\mathrm{mol\\,dm^{-3}}$, so $\\mathrm{pH}=-\\log_{10}(5.0\\times10^{-4})=3.30$.",
+      "hint": "Compare with how a strong acid of the same concentration would be treated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dtsk1t",
+      "kind": "example",
+      "front": "Buffer: $0.200\\,\\mathrm{mol\\,dm^{-3}}$ ethanoic acid, $0.100\\,\\mathrm{mol\\,dm^{-3}}$ ethanoate, $K_a=1.7\\times10^{-5}\\,\\mathrm{mol\\,dm^{-3}}$. What pH?",
+      "back": "**4.47**. $[\\mathrm{H^+}]=K_a\\times\\frac{[\\mathrm{HA}]}{[\\mathrm{A^-}]}=1.7\\times10^{-5}\\times\\frac{0.200}{0.100}=3.4\\times10^{-5}\\,\\mathrm{mol\\,dm^{-3}}$, giving pH 4.47.",
+      "hint": "Rearrange the $K_a$ expression first.",
+      "sectionId": "s5"
+    }
+  ]
+}

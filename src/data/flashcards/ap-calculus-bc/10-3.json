@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-3",
+  "topicCode": "10.3",
+  "topicName": "nth term test for divergence",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:16.819Z",
+  "cards": [
+    {
+      "id": "021487w",
+      "kind": "concept",
+      "front": "What can the nth term test for divergence let you conclude about a series?",
+      "back": "If $\\lim_{n\\to\\infty}a_n\\ne0$ or the limit does not exist, then $\\sum a_n$ **diverges**. It is the contrapositive of the fact that convergence forces the terms to 0.",
+      "hint": "Think about the contrapositive of the convergence fact.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "076wqkf",
+      "kind": "mistake",
+      "front": "If the terms of $\\sum a_n$ approach 0, can you conclude the series converges?",
+      "back": "No. A zero limit is **inconclusive**: $\\sum\\frac{1}{n}$ has terms approaching 0 yet diverges. Another test is needed.",
+      "hint": "Consider the harmonic series $\\sum\\frac{1}{n}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d82ihh",
+      "kind": "concept",
+      "front": "Why must the terms of a convergent series approach 0?",
+      "back": "Both partial sums $S_n$ and $S_{n-1}$ approach the same total, so their **difference** $a_n$ must approach 0.",
+      "hint": "Subtract two partial sums that approach the same number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b0eoay",
+      "kind": "process",
+      "front": "What are the steps for applying the nth term test to $\\sum a_n$?",
+      "back": "1) Find $\\lim_{n\\to\\infty}a_n$. 2) If it is not 0, or does not exist, conclude the series **diverges**. 3) If it is 0, conclude nothing from this test.",
+      "hint": "Only one limit is needed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16eo7da",
+      "kind": "term",
+      "front": "What is the nth term of a series?",
+      "back": "The **nth term** $a_n$ is the term in position $n$. It equals $S_n-S_{n-1}$, where $S_n$ is the sum of the first $n$ terms.",
+      "hint": "It is the term in position $n$ of the list.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b0zih4",
+      "kind": "formula",
+      "front": "How is the nth term $a_n$ written in terms of partial sums $S_n$?",
+      "back": "$a_n=S_n-S_{n-1}$, where $S_n$ is the sum of the first $n$ terms and $S_{n-1}$ is the sum of the first $n-1$ terms.",
+      "hint": "Subtract the sum before term $n$ from the sum through term $n$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lvdjm3",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{n}{2n+1}$ converge or diverge?",
+      "back": "**Diverges**. $\\lim_{n\\to\\infty}\\frac{n}{2n+1}=\\frac{1}{2}\\ne0$, so the nth term test applies.",
+      "hint": "Divide the top and bottom by $n$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14wkk2y",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{3n^2}{n^2+5}$ converge or diverge?",
+      "back": "**Diverges**. The terms approach $\\lim_{n\\to\\infty}\\frac{3n^2}{n^2+5}=3$, which is not 0.",
+      "hint": "Compare the leading coefficients of top and bottom.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1w79hfl",
+      "kind": "example",
+      "front": "Does $\\sum_{n=0}^{\\infty}(-1)^n$ converge or diverge?",
+      "back": "**Diverges**. The terms alternate between 1 and $-1$, so $\\lim_{n\\to\\infty}a_n$ does not exist.",
+      "hint": "Check whether the terms settle to one value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cmd9uv",
+      "kind": "example",
+      "front": "Does $\\sum_{n=0}^{\\infty}2\\left(\\frac{3}{2}\\right)^n$ converge or diverge?",
+      "back": "**Diverges**. The terms grow without bound, so $\\lim_{n\\to\\infty}a_n\\ne0$.",
+      "hint": "Ask whether the terms shrink toward 0 as $n$ grows.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n8s5lx",
+      "kind": "term",
+      "front": "What is a counterexample?",
+      "back": "A **counterexample** is a single case that meets the conditions of a general claim but contradicts its conclusion. The harmonic series disproves that a zero limit proves convergence.",
+      "hint": "One case is enough to disprove a general claim.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0353act",
+      "kind": "term",
+      "front": "What is the contrapositive of \"if $P$ then $Q$\"?",
+      "back": "**If not $Q$ then not $P$**. It is equivalent to the original statement, so it is true exactly when the original is true.",
+      "hint": "Swap and negate both parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mnlnzf",
+      "kind": "concept",
+      "front": "When is the nth term test most useful, and what are its limits?",
+      "back": "It is a **quick first screen** for series whose terms stay large. It can show divergence only, never convergence; if the limit is 0, switch methods.",
+      "hint": "Think about what it can and cannot prove.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14tyuy3",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{n}{n+1}$ converge or diverge?",
+      "back": "**Diverges**. $\\lim_{n\\to\\infty}\\frac{n}{n+1}=1\\ne0$, so the nth term test shows divergence.",
+      "hint": "Compare the leading terms of numerator and denominator.",
+      "sectionId": "s4"
+    }
+  ]
+}

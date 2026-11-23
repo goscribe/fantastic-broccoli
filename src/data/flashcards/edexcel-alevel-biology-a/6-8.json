@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-8",
+  "topicCode": "6.8",
+  "topicName": "Antigens and antibodies",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:35.313Z",
+  "cards": [
+    {
+      "id": "1ndmsuj",
+      "kind": "term",
+      "front": "What is an antigen?",
+      "back": "An antigen is a **molecule** recognised by a specific lymphocyte receptor or antibody. It is found on pathogens, toxins and cells from other individuals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zq1dig",
+      "kind": "concept",
+      "front": "Why does an antibody bind only one type of antigen?",
+      "back": "The **variable region** has a specific amino acid sequence, which gives its binding site a three-dimensional shape complementary to just one antigen.",
+      "hint": "Compare how a key fits a lock.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "057n2z8",
+      "kind": "process",
+      "front": "What are the three main ways antibodies help destroy pathogens?",
+      "back": "**Agglutination**, marking and **neutralisation**. Antibodies mark and disable pathogens, but other cells do the engulfing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0co855k",
+      "kind": "concept",
+      "front": "Which region of an antibody forms the antigen-binding site?",
+      "back": "The **variable region**, at the tips of the two arms. The rest of the molecule, the **constant region**, is similar in all antibodies.",
+      "hint": "Look at where the arms meet the rest of the Y.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "013qfye",
+      "kind": "concept",
+      "front": "What is the structure of an antibody?",
+      "back": "A **Y-shaped** protein made of four polypeptide chains: two long heavy chains and two shorter light chains, held together by disulfide bonds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1su4y03",
+      "kind": "concept",
+      "front": "Which cells secrete antibodies into blood and tissue fluid?",
+      "back": "**Plasma cells**, which are specialised white blood cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1akmipo",
+      "kind": "concept",
+      "front": "How does agglutination help phagocytes destroy pathogens?",
+      "back": "Each antibody binds two pathogens, so they **clump together**. Clumps are easier for phagocytes to find and engulf.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0admyz4",
+      "kind": "concept",
+      "front": "How does neutralisation stop a toxin from causing harm?",
+      "back": "Bound antibodies **block** the toxin or a pathogen's attachment molecules, so it can no longer harm or enter host cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0to1s8l",
+      "kind": "mistake",
+      "front": "Why is it wrong to say antibodies engulf and digest pathogens?",
+      "back": "Antibodies are **proteins**, not cells. They mark and disable pathogens, and **phagocytes** do the engulfing.",
+      "hint": "Think about what type of molecule an antibody is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hngm18",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a bacterium is a single antigen?",
+      "back": "An antigen is a **molecule**, not a whole pathogen. A single bacterium can carry many different antigens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18w3px0",
+      "kind": "concept",
+      "front": "Why can a pathogen that changes its surface antigen escape existing antibodies?",
+      "back": "The new antigen has a different shape, so the **variable region** of the existing antibodies is no longer complementary and cannot bind it.",
+      "hint": "Think about what decides an antibody's binding-site shape.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03tlw0w",
+      "kind": "process",
+      "front": "What happens when a pathogen changes its surface antigen?",
+      "back": "The immune system must make **new antibodies** with a matching variable region. This takes time, so the pathogen can multiply meanwhile.",
+      "hint": "Consider what happens to existing antibodies first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jp7vfe",
+      "kind": "concept",
+      "front": "Why can antibodies not destroy a virus inside a host cell?",
+      "back": "Antibodies stay in blood and tissue fluid and act on pathogens **outside cells**, so they cannot reach a virus until the cell releases it.",
+      "hint": "Where in the body do antibodies stay?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gfu2cr",
+      "kind": "term",
+      "front": "What is a lymphocyte?",
+      "back": "A **white blood cell** that has receptors able to recognise one specific antigen.",
+      "sectionId": "s1"
+    }
+  ]
+}

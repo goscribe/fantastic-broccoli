@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-11",
+  "topicCode": "6.11",
+  "topicName": "Integration by parts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:37.597Z",
+  "cards": [
+    {
+      "id": "1kseau8",
+      "kind": "formula",
+      "front": "What is the integration by parts formula for $\\int u\\,dv$, and what does each part mean?",
+      "back": "**$\\int u\\,dv = uv - \\int v\\,du$**, where $du=u'\\,dx$ and $dv=v'\\,dx$. You swap the hard integral $\\int u\\,dv$ for the easier $\\int v\\,du$. The $uv$ term appears because integrating a derivative returns the original function.",
+      "hint": "Think of it as the product rule run in reverse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1h7tj4n",
+      "kind": "process",
+      "front": "How do you choose $u$ when using integration by parts?",
+      "back": "Use the memory aid **LIATE**, which ranks logarithmic, inverse trig, algebraic, trig, then exponential. Pick the highest-ranked type in the integrand as $u$, and the rest becomes $dv$. If the new integral is not simpler, test the other choice.",
+      "hint": "It is a five-letter memory aid.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12te3sq",
+      "kind": "concept",
+      "front": "When is integration by parts the right tool rather than substitution?",
+      "back": "Use it for a **product of unlike functions**, such as $x\\sin x$, or a single function like $\\ln x$ with a simple derivative, written as $1\\cdot\\ln x$. Try substitution first, since it is usually faster.",
+      "hint": "Look for an inner function paired with its derivative first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tajv92",
+      "kind": "mistake",
+      "front": "Is $\\int fg\\,dx$ equal to $\\int f\\,dx \\times \\int g\\,dx$?",
+      "back": "**No**. Integration by parts is not a product rule for integrals. In general, $\\int fg\\,dx$ does not equal the product of the two separate integrals.",
+      "hint": "Think about what the product rule actually does.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v51xcc",
+      "kind": "example",
+      "front": "Evaluate $\\int x e^x\\,dx$.",
+      "back": "**$(x-1)e^x + C$**. Let $u=x$ and $dv=e^x\\,dx$, so $du=dx$ and $v=e^x$. Then $xe^x - \\int e^x\\,dx = xe^x - e^x + C$.",
+      "hint": "Algebraic ranks above exponential in LIATE.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15z60ol",
+      "kind": "process",
+      "front": "How do you apply integration by parts to a definite integral from $a$ to $b$?",
+      "back": "Write $\\int_a^b u\\,dv=\\left[uv\\right]_a^b-\\int_a^b v\\,du$. Evaluate the bracket at $b$ minus at $a$, evaluate the remaining integral with its limits, then subtract. A definite integral ends as a number.",
+      "hint": "Where do the limits attach?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hmb7y6",
+      "kind": "example",
+      "front": "Evaluate $\\int_0^1 x e^x\\,dx$.",
+      "back": "**1**. The bracket gives $\\left[xe^x\\right]_0^1=e$, and $\\int_0^1 e^x\\,dx=e-1$. So $e-(e-1)=1$.",
+      "hint": "Keep the limits on every integral until it is evaluated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16mrq1j",
+      "kind": "example",
+      "front": "Evaluate $\\int \\ln x\\,dx$.",
+      "back": "**$x\\ln x - x + C$**. Let $u=\\ln x$ and $dv=dx$, so $du=\\frac{1}{x}\\,dx$ and $v=x$. The new integral is $\\int 1\\,dx$.",
+      "hint": "Write the integrand as $1$ times the function.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h9kp0g",
+      "kind": "process",
+      "front": "How does repeated integration by parts work for $\\int x^n e^x\\,dx$?",
+      "back": "Each round keeps $x^k$ as $u$ and **lowers the power of $x$ by one**. The number of rounds equals the power, so $x^3e^x$ needs three rounds. Stop when the leftover integral is basic.",
+      "hint": "Track how the power changes each round.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01n9vjr",
+      "kind": "mistake",
+      "front": "In a repeated round of parts, what goes wrong if you swap which function is $u$?",
+      "back": "You **undo your progress** and return to the original integral. Keep the same type of function as $u$ in each round.",
+      "hint": "Check which function you differentiated last time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0smpv3y",
+      "kind": "example",
+      "front": "Evaluate $\\int x^2e^x\\,dx$.",
+      "back": "**$(x^2-2x+2)e^x + C$**. Parts gives $x^2e^x - 2\\int xe^x\\,dx$, then use $\\int xe^x\\,dx=(x-1)e^x$ and factor.",
+      "hint": "The second round reuses a result you already know.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pd1f9n",
+      "kind": "concept",
+      "front": "What happens when parts brings back the original integral, as with $I=\\int e^x\\sin x\\,dx$?",
+      "back": "Parts applied twice gives $I$ again on the right side. Treat the result as an equation in $I$ and solve it to get $\\frac{e^x}{2}(\\sin x-\\cos x)+C$.",
+      "hint": "Solve for $I$ like an ordinary equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gho58h",
+      "kind": "term",
+      "front": "What is the integrand?",
+      "back": "The **integrand** is the function written inside an integral, which you evaluate across its interval.",
+      "hint": "It sits between the integral sign and $dx$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ir2hgl",
+      "kind": "process",
+      "front": "How can you check an antiderivative you found using integration by parts?",
+      "back": "**Differentiate your answer**. You should recover the original integrand. You may drop any constant when finding $v$.",
+      "hint": "Use the product rule when you differentiate.",
+      "sectionId": "s3"
+    }
+  ]
+}

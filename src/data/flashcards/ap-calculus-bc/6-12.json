@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-12",
+  "topicCode": "6.12",
+  "topicName": "Linear partial fractions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:34.028Z",
+  "cards": [
+    {
+      "id": "0776a08",
+      "kind": "concept",
+      "front": "What does partial fraction decomposition let you do with a hard rational integral?",
+      "back": "It **splits** one fraction into a sum of simpler fractions, each of which integrates directly. You then integrate term by term.",
+      "hint": "Think of adding fractions, but in reverse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bzobfc",
+      "kind": "process",
+      "front": "How do you find the constants in a partial fraction setup with linear factors?",
+      "back": "Multiply through to clear denominators, then substitute values that make each factor zero. Each substitution isolates one constant, so you find them one at a time.",
+      "hint": "Pick x-values that make a factor equal zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "042pi8o",
+      "kind": "formula",
+      "front": "What is the integral of $\\frac{A}{ax+b}$ with respect to $x$?",
+      "back": "$\\frac{A}{a}\\ln|ax+b|+C$. Divide by $a$ because of the chain rule, and keep the absolute value so the logarithm is defined when the inside is negative.",
+      "hint": "Don't forget the factor of 1 over a.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "066irr7",
+      "kind": "term",
+      "front": "What is a linear factor?",
+      "back": "A **linear factor** is a polynomial of the form $ax+b$ with $a\\neq 0$, that is, a first-degree factor.",
+      "hint": "Think of the highest power of x in it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1trp80q",
+      "kind": "term",
+      "front": "What is partial fraction decomposition?",
+      "back": "**Partial fraction decomposition** rewrites a rational function as a sum of fractions whose denominators are the factors of the original denominator.",
+      "hint": "Each piece has one factor as its denominator.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nvxac9",
+      "kind": "concept",
+      "front": "How many unknown constants does a denominator with distinct linear factors need?",
+      "back": "**One constant per factor**, each over a constant numerator. So the number of constants equals the degree of the denominator.",
+      "hint": "Count the factors in the denominator.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gi7cb6",
+      "kind": "mistake",
+      "front": "Why is writing $\\frac{3x+5}{x+1}+\\frac{3x+5}{x+3}$ as the decomposition wrong?",
+      "back": "It **copies the whole numerator** over each factor, and that sum is not the original fraction. Each piece should get its own constant, such as $\\frac{A}{x+1}+\\frac{B}{x+3}$.",
+      "hint": "Check whether the pieces recombine to the original.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0i37drb",
+      "kind": "example",
+      "front": "Evaluate the definite integral from 2 to 3 of $\\frac{1}{x^2-1}\\,dx$.",
+      "back": "$\\frac{1}{2}\\ln\\frac{3}{2}\\approx 0.203$. The constants are $A=\\frac{1}{2}$ and $B=-\\frac{1}{2}$, and the antiderivative is $\\frac{1}{2}\\ln\\left|\\frac{x-1}{x+1}\\right|$.",
+      "hint": "Factor the denominator first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18yeamt",
+      "kind": "mistake",
+      "front": "Why is $\\frac{A}{x-1}$ alone not enough when the denominator is $(x-1)^2$?",
+      "back": "A **repeated factor** needs a term for every power, so the setup is $\\frac{A}{x-1}+\\frac{B}{(x-1)^2}$. One constant cannot account for both powers.",
+      "hint": "Count the powers of the repeated factor.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1s2nszu",
+      "kind": "mistake",
+      "front": "How do you integrate the squared term $\\frac{B}{(x-a)^2}$?",
+      "back": "Use the **power rule**, not a logarithm. Its antiderivative is $-\\frac{B}{x-a}$. Only the first power of a factor gives a logarithm.",
+      "hint": "Only the first power gives a logarithm.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17866qd",
+      "kind": "example",
+      "front": "Evaluate $\\int\\frac{x+2}{(x-1)^2}\\,dx$.",
+      "back": "$\\ln|x-1|-\\frac{3}{x-1}+C$. The constants are $A=1$ and $B=3$, found by substituting $x=1$ and $x=0$.",
+      "hint": "Substitute x=1 first to find B.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1w5exsq",
+      "kind": "process",
+      "front": "What must be true of the numerator before you use partial fractions, and what if it is not?",
+      "back": "The numerator must have **lower degree** than the denominator. If not, divide first, then decompose the remainder.",
+      "hint": "Compare the highest powers of x.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ryz432",
+      "kind": "concept",
+      "front": "When is substitution better than partial fractions for a rational integral?",
+      "back": "When the numerator is the **derivative of the denominator**, as in $\\int\\frac{2x}{x^2+1}\\,dx$. Substitution then gives $\\ln(x^2+1)+C$ at once.",
+      "hint": "Compare the numerator with the derivative of the denominator.",
+      "sectionId": "s6"
+    }
+  ]
+}

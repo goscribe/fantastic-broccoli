@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Measures of central tendency and spread",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:49.517Z",
+  "cards": [
+    {
+      "id": "0fd1wxv",
+      "kind": "concept",
+      "front": "Why does one extreme value pull the mean much more than the median?",
+      "back": "Extreme values pull the **mean** towards the long tail, while the median stays near the bulk of the data.",
+      "hint": "Think about what the median actually depends on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o3i80c",
+      "kind": "concept",
+      "front": "What does standard deviation tell you that the range does not?",
+      "back": "**Standard deviation** uses every value and measures the typical distance of values from the mean. The range uses only the largest and smallest values.",
+      "hint": "Ask how many of the values each measure uses.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b72px8",
+      "kind": "formula",
+      "front": "What does $\\sigma=\\sqrt{\\frac{\\sum(x-\\bar{x})^2}{n}}$ measure, and what do $\\bar{x}$ and $n$ stand for?",
+      "back": "The **standard deviation** $\\sigma$, the typical distance of values from the mean. $\\bar{x}$ is the mean and $n$ is the number of values. It has the same units as the data.",
+      "hint": "Read it from the inside out: deviation, square, sum, divide, root.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uql3ct",
+      "kind": "formula",
+      "front": "What is the formula for the mean of n values, and what does it mean in words?",
+      "back": "$\\bar{x}=\\frac{\\sum x}{n}$: the **sum** of the values divided by how many values there are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fb9zln",
+      "kind": "term",
+      "front": "What is the median of a data set?",
+      "back": "The **middle value** when the data are in order. With an even number of values, it is the mean of the two middle values.",
+      "hint": "Order the data first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q97b3g",
+      "kind": "term",
+      "front": "What is the mode of a data set?",
+      "back": "The **value that occurs most often**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jhp45m",
+      "kind": "process",
+      "front": "What are the steps to estimate the mean of grouped data?",
+      "back": "1. Find the **midpoint** $x$ of each interval. 2. Multiply each $x$ by its frequency $f$. 3. Add the products. 4. Divide by $n=\\sum f$.",
+      "hint": "The result is an estimate, not an exact mean.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06mfu5q",
+      "kind": "example",
+      "front": "Estimate the mean for intervals 0 to under 10, 10 to under 20, 20 to under 30 and 30 to under 40, with frequencies 4, 9, 5 and 2.",
+      "back": "About **17.5 h**. The midpoints are 5, 15, 25 and 35, $\\sum fx=350$ and $n=20$, so $350\\div20=17.5$.",
+      "hint": "Start by finding the midpoint of each interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oul4mt",
+      "kind": "process",
+      "front": "What are the steps to find the interquartile range of ordered data?",
+      "back": "1. Order the data. 2. Find the median and split the data into lower and upper halves. 3. Find $Q_1$ and $Q_3$ as the medians of the halves. 4. Calculate $Q_3-Q_1$.",
+      "hint": "Show the values you use, since technology may differ slightly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "006tm1h",
+      "kind": "example",
+      "front": "Find the interquartile range of 3, 5, 5, 6, 8, 9 and 20.",
+      "back": "**4**. $Q_1=5$ from the lower half 3, 5, 5 and $Q_3=9$ from the upper half 8, 9, 20, so $9-5=4$.",
+      "hint": "The median of the whole set is 6.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uspg0h",
+      "kind": "example",
+      "front": "Find the standard deviation and variance of 4, 6, 8, 10 and 12.",
+      "back": "Standard deviation about **2.83**, variance **8**. The mean is 8, the squared deviations sum to 40, so the variance is $40\\div5=8$ and $\\sigma=\\sqrt{8}$.",
+      "hint": "Find the mean first, then the deviations from it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ynn6xj",
+      "kind": "mistake",
+      "front": "A student says every data set has exactly one mode. What is wrong?",
+      "back": "A data set can have **no mode** or more than one mode, so the claim is false.",
+      "hint": "Consider a set where every value appears once.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1q6rcs4",
+      "kind": "mistake",
+      "front": "A student says adding 5 to every mark doubles the spread. What is wrong?",
+      "back": "**Adding a constant** does not change the spread, so the standard deviation stays the same. Only multiplying by $a$ changes it, giving $a\\sigma$.",
+      "hint": "Which change alters the gaps between values?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1uwfoyb",
+      "kind": "example",
+      "front": "A data set has mean 12 and standard deviation 3. Find the mean and standard deviation of $y=2x+5$.",
+      "back": "Mean **29** and standard deviation **6**. The new mean is $2\\times12+5$, and the new standard deviation is $2\\times3$.",
+      "hint": "Only the multiplying constant affects the standard deviation.",
+      "sectionId": "s6"
+    }
+  ]
+}

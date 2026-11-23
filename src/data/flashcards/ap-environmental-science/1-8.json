@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Primary productivity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:22.652Z",
+  "cards": [
+    {
+      "id": "1g5917q",
+      "kind": "term",
+      "front": "What is primary productivity?",
+      "back": "**Primary productivity** is the rate at which producers convert light energy into chemical energy stored in organic matter, called biomass. More productivity means more food energy for the whole ecosystem.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sx4wo3",
+      "kind": "concept",
+      "front": "Why does net productivity matter more than gross productivity for the rest of an ecosystem?",
+      "back": "Only energy stored in **biomass** can pass to organisms that eat producers. Energy used in respiration is not stored, so NPP sets the energy available to consumers.",
+      "hint": "Follow where the respiration energy goes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i7npi3",
+      "kind": "formula",
+      "front": "What equation gives net primary productivity, and what does each symbol mean?",
+      "back": "$\\mathrm{NPP}=\\mathrm{GPP}-R$: NPP is net primary productivity, GPP is gross primary productivity, and $R$ is the energy used in respiration. All are in $\\mathrm{kcal/m^2/yr}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w5kuve",
+      "kind": "term",
+      "front": "What is gross primary productivity (GPP)?",
+      "back": "**GPP** is the total rate at which producers capture energy by photosynthesis, measured before any of it is used in respiration.",
+      "hint": "It is the starting total, before losses.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ppf9zy",
+      "kind": "mistake",
+      "front": "What is wrong with the claim that NPP is always equal to GPP?",
+      "back": "NPP is smaller than GPP. Producers use part of the captured energy in **respiration** to stay alive, so only the remainder is stored as biomass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m9xku9",
+      "kind": "example",
+      "front": "A site has GPP of $6{,}000\\,\\mathrm{kcal/m^2/yr}$ and respiration of $2{,}500\\,\\mathrm{kcal/m^2/yr}$. What is its NPP?",
+      "back": "$3{,}500\\,\\mathrm{kcal/m^2/yr}$, from $6{,}000-2{,}500=3{,}500$.",
+      "hint": "Start with NPP equals GPP minus R.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ad9z2n",
+      "kind": "concept",
+      "front": "Why does a limiting nutrient restrict productivity even when light and water are plentiful?",
+      "back": "The scarcest resource sets the limit on growth. Adding more of the **limiting nutrient**, such as nitrogen or phosphorus, raises productivity.",
+      "hint": "Think about which input runs out first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gyoh5v",
+      "kind": "concept",
+      "front": "How do sunlight and temperature affect primary productivity?",
+      "back": "More light drives more photosynthesis, but light fades with depth in water. Warmth speeds photosynthesis, while extreme cold or heat slows it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yl5f3c",
+      "kind": "concept",
+      "front": "Why is open ocean productivity per unit area low?",
+      "back": "Surface waters have few nutrients, so producers grow slowly. Because the ocean covers so much area, it still adds a large share of global total productivity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j11j1m",
+      "kind": "concept",
+      "front": "Why do tundra and deserts have low productivity?",
+      "back": "Tundra has a cold climate and a short growing season, while deserts have little water. Each limits how much producers can grow.",
+      "hint": "Compare the main input each one lacks.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uxxqu3",
+      "kind": "mistake",
+      "front": "What should you check before comparing productivity values in a data table?",
+      "back": "Check whether each value is per unit area or a total, and which quantity it reports, such as GPP or NPP. Comparing mismatched units or quantities misleads.",
+      "hint": "Look at the units and column headings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rqyvf8",
+      "kind": "example",
+      "front": "Which site has more NPP: A with GPP 8,000 and respiration 5,500, or B with GPP 5,000 and respiration 1,500 $\\mathrm{kcal/m^2/yr}$?",
+      "back": "Site B, with $3{,}500\\,\\mathrm{kcal/m^2/yr}$ compared with $2{,}500\\,\\mathrm{kcal/m^2/yr}$ at Site A, despite its lower GPP.",
+      "hint": "Calculate NPP for each site first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pc3930",
+      "kind": "concept",
+      "front": "How can people change the productivity of an ecosystem?",
+      "back": "Adding fertilizer to a nutrient-limited site raises productivity. Clearing forest removes producers and lowers it. Both change the energy available to consumers.",
+      "sectionId": "s5"
+    }
+  ]
+}

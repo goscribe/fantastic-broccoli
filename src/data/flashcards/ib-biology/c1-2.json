@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c1-2",
+  "topicCode": "C1.2",
+  "topicName": "Cell respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:59.866Z",
+  "cards": [
+    {
+      "id": "0prl1rq",
+      "kind": "term",
+      "front": "What is cell respiration?",
+      "back": "**Cell respiration** is the enzyme-controlled release of energy from organic molecules, with some of that energy transferred into ATP.",
+      "hint": "Think about where the energy stored in glucose goes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yolaab",
+      "kind": "concept",
+      "front": "What is ATP, and why is it useful to cells?",
+      "back": "**ATP** carries usable energy. Breaking it down to ADP and phosphate releases energy quickly, and cells can make it where it is needed.",
+      "hint": "Consider how fast the energy can be released.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vscpeq",
+      "kind": "concept",
+      "front": "Why does oxygen matter in aerobic respiration?",
+      "back": "Oxygen **accepts electrons** at the end of the electron transport chain and forms water. Without oxygen, electron transfer stops and most ATP production stops.",
+      "hint": "What happens to the electrons at the end of the chain?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qooliw",
+      "kind": "process",
+      "front": "Outline the main stages of aerobic respiration after glucose enters a cell.",
+      "back": "Glycolysis in the cytoplasm splits glucose into two **pyruvate**. Pyruvate enters the mitochondrion and releases carbon dioxide. The Krebs cycle makes reduced carriers, which feed the electron transport chain.",
+      "hint": "Start in the cytoplasm and move into the mitochondrion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kncmxk",
+      "kind": "term",
+      "front": "What is glycolysis?",
+      "back": "**Glycolysis** is the cytoplasmic pathway that splits one glucose into two pyruvate molecules. It does not need oxygen and gives a small net gain of ATP.",
+      "hint": "Where in the cell does it happen?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k5bznr",
+      "kind": "mistake",
+      "front": "A student says glycolysis happens in the mitochondrion. What is wrong?",
+      "back": "Glycolysis happens in the **cytoplasm**, not the mitochondrion. Mitochondria are where the later aerobic stages, such as the Krebs cycle, take place.",
+      "hint": "Compare where glycolysis and the Krebs cycle occur.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03eyiz7",
+      "kind": "term",
+      "front": "Where in the mitochondrion does the Krebs cycle take place?",
+      "back": "The Krebs cycle takes place in the **mitochondrial matrix**. It releases carbon dioxide, produces reduced electron carriers and makes a small amount of ATP.",
+      "hint": "It is the inner fluid-filled region of the mitochondrion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xd7bce",
+      "kind": "concept",
+      "front": "How does the electron transport chain help make ATP?",
+      "back": "Electron transfer releases energy that pumps **protons** across the inner mitochondrial membrane. Protons flowing back through ATP synthase drive most ATP production.",
+      "hint": "Follow the protons from one side of the membrane to the other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16jxuh1",
+      "kind": "mistake",
+      "front": "A student says the Krebs cycle takes place in the inner mitochondrial membrane. Is this correct?",
+      "back": "No. The Krebs cycle takes place in the **mitochondrial matrix**. The electron transport chain is the process in the inner mitochondrial membrane.",
+      "hint": "Matrix and membrane are different parts of the mitochondrion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m3mm7e",
+      "kind": "term",
+      "front": "What is fermentation?",
+      "back": "**Fermentation** restores the electron carriers needed for glycolysis when oxygen is unavailable. It adds no ATP beyond the net gain from glycolysis.",
+      "hint": "What problem does it solve when oxygen is missing?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11ukgb7",
+      "kind": "concept",
+      "front": "What do animal cells and yeast turn pyruvate into during fermentation?",
+      "back": "Animal cells convert pyruvate to **lactate**. Yeast and some plant cells convert pyruvate to ethanol and carbon dioxide. Both reactions occur in the cytoplasm.",
+      "hint": "Animal cells and yeast use different products.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08nahsz",
+      "kind": "mistake",
+      "front": "A student says that without oxygen, cells make no ATP. What is wrong?",
+      "back": "Anaerobic respiration still makes ATP. Glycolysis produces ATP without oxygen. Fermentation simply adds no further ATP.",
+      "hint": "Think about which stage needs oxygen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pztsjd",
+      "kind": "concept",
+      "front": "Why does aerobic respiration produce much more ATP per glucose than fermentation?",
+      "back": "Aerobic respiration continues through the Krebs cycle and electron transport chain, producing **substantially more ATP**. Fermentation stops after glycolysis's small gain.",
+      "hint": "Compare which stages each pathway includes.",
+      "sectionId": "s4"
+    }
+  ]
+}

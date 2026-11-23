@@ -1,6 +1,8 @@
 "use client";
 
 import { useNewUi } from "@/lib/new-ui";
+import { McqOptions, PaperBar, SourcesPanel, wordCount } from "@/components/session/paper-parts";
+import "@/lib/i18n/practice-paper";
 import { useEffect, useRef, useState } from "react";
 import { PartMarking, WorksheetContent } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
@@ -16,10 +18,12 @@ import { WorksheetFigureCard } from "@/components/graphics/worksheet-figures";
 import { FigureView } from "@/components/session/reading-activity";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
 import { DrawingCanvas } from "@/components/ui/drawing-canvas";
+import { RichAnswerField } from "@/components/ui/rich-answer-field";
 import { Button } from "@/components/ui/button";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/habits";
+import "@/lib/i18n/voice";
 import { cn } from "@/lib/utils";
 import { ItemDots, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
 import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, SkipForward, Undo2, X } from "lucide-react";
@@ -85,16 +89,26 @@ export function WorksheetActivity({
     restored?.skipped ?? {},
   );
   const [introOpen, setIntroOpen] = useState<Record<number, boolean>>({});
+  // Redesign: one part of a question on screen at a time (per question, so Back returns to it).
+  const [partAt, setPartAt] = useState<Record<number, number>>({});
   const [markingInFlight, setMarkingInFlight] = useState(false);
   const firstInput = useRef<HTMLTextAreaElement>(null);
 
+  const step = content.steps[stepIndex];
+  // One part per screen: the answer box on screen is the only one (and the
+  // only one the microphone writes into). The question's stem stays above it.
+  const onePart = newUi && step.parts.length > 1;
+  const partIndex = onePart ? Math.min(partAt[stepIndex] ?? 0, step.parts.length - 1) : 0;
+  const lastPart = !onePart || partIndex === step.parts.length - 1;
+  const goPart = (i: number) => setPartAt((p) => ({ ...p, [stepIndex]: i }));
+
   useReportCurrentItem(activityId, stepIndex);
-  // The player's bottom bar moves between questions here first.
+  // The player's bottom bar moves between parts, then questions, here first.
   useItemNav(activityId, {
-    canNext: () => stepIndex < content.steps.length - 1,
-    canBack: () => stepIndex > 0,
-    next: () => setStepIndex((i) => Math.min(i + 1, content.steps.length - 1)),
-    back: () => setStepIndex((i) => Math.max(i - 1, 0)),
+    canNext: () => !lastPart || stepIndex < content.steps.length - 1,
+    canBack: () => partIndex > 0 || stepIndex > 0,
+    next: () => (lastPart ? setStepIndex((i) => Math.min(i + 1, content.steps.length - 1)) : goPart(partIndex + 1)),
+    back: () => (partIndex > 0 ? goPart(partIndex - 1) : setStepIndex((i) => Math.max(i - 1, 0))),
   });
   useActivityDraft(activityId, {
     stepIndex,
@@ -105,7 +119,6 @@ export function WorksheetActivity({
     skipped,
   });
 
-  const step = content.steps[stepIndex];
   const checked = !!checkedSteps[stepIndex];
   const isLastStep = stepIndex === content.steps.length - 1;
   const key = (partIdx: number) => `${stepIndex}-${partIdx}`;
@@ -131,9 +144,9 @@ export function WorksheetActivity({
     if (checkedSteps[stepIndex]) return;
     if (typeof window === "undefined" || !window.matchMedia("(pointer: fine)").matches) return;
     firstInput.current?.focus({ preventScroll: true });
-    // Only when the question changes.
+    // Only when the question (or the part on screen) changes.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stepIndex]);
+  }, [stepIndex, partIndex]);
 
   const checkStep = async () => {
     setMarkingInFlight(true);
@@ -199,39 +212,46 @@ export function WorksheetActivity({
     setMarkingInFlight(false);
   };
 
+  const paper = content.paper;
+  /** Papers title their questions "Question n", already in the counter above. */
+  const stepTitle = step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "") || (paper ? "" : step.title);
+
   return (
     <div>
+      {paper && <PaperBar activityId={activityId} paper={paper} section={step.section} showInstructions={stepIndex === 0} />}
       {/* Step header */}
       {newUi ? (
         <div>
           <div className="flex min-h-6 items-center justify-between gap-4">
-            <p data-scroll-line className="text-[13px] font-semibold tabular-nums text-muted-foreground" aria-live="polite">
-              {t("session.question")} {stepIndex + 1} {t("session.of")} {content.steps.length} · {totalMarks} {t("session.marks")}
-              {content.steps.length === 1 && ` · ~${summary.minutes} ${t("session.min")}`}
+            <p data-scroll-line className="text-small font-semibold tabular-nums text-muted-foreground" aria-live="polite">
+              {t("session.question")} {stepIndex + 1} {t("session.of")} {content.steps.length} · {totalMarks} {t(totalMarks === 1 ? "paper.mark" : "session.marks")}
+              {content.steps.length === 1 && !paper && ` · ~${summary.minutes} ${t("session.min")}`}
             </p>
             <ItemDots current={stepIndex} states={content.steps.map((_, i) => (checkedSteps[i] ? "done" : "todo"))} />
           </div>
-          <p key={`ws-${stepIndex}`} className="life-rise mt-3 text-[20px] font-extrabold leading-[1.3] sm:text-[22px]">
-            <MathText text={step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "")} />
-          </p>
+          {stepTitle && (
+            <p key={`ws-${stepIndex}`} className="life-rise mt-3 text-[20px] font-extrabold leading-[1.3] sm:text-[22px]">
+              <MathText text={stepTitle} />
+            </p>
+          )}
         </div>
       ) : (
       <div className="pb-4 border-b border-border">
-        <p className="mb-1.5 text-xs font-medium text-muted-foreground tabular-nums">
+        <p className="mb-1.5 text-caption font-medium text-muted-foreground tabular-nums">
           {(summary.questions === 1 ? t("habit.wsSummaryOne") : t("habit.wsSummary"))
             .replace("{n}", String(summary.questions))
             .replace("{m}", String(summary.minutes))}
         </p>
         <div className="flex items-center justify-between gap-4">
-          <p className="text-sm font-semibold">
+          <p className="text-ui font-semibold">
             {t("session.question")} {stepIndex + 1} —{" "}
             <MathText
               text={step.title.replace(/^question\s*\d+\s*[—–:.-]?\s*/i, "")}
             />
           </p>
-          <span className="text-xs text-muted-foreground shrink-0 tabular-nums">
+          <span className="text-caption text-muted-foreground shrink-0 tabular-nums">
             {stepIndex + 1} {t("session.of")} {content.steps.length} ·{" "}
-            {totalMarks} {t("session.marks")}
+            {totalMarks} {t(totalMarks === 1 ? "paper.mark" : "session.marks")}
           </span>
         </div>
         <div className="flex gap-1 mt-3">
@@ -268,7 +288,7 @@ export function WorksheetActivity({
           <div>
             <div
               className={cn(
-                newUi ? "text-[16.5px] leading-7 text-foreground" : "text-sm leading-6 text-foreground",
+                newUi ? "text-read text-foreground" : "text-ui text-foreground",
                 introLong && !introOpen[stepIndex] && "line-clamp-3",
               )}
             >
@@ -290,10 +310,49 @@ export function WorksheetActivity({
         {step.figures?.map((figure) => (
           <FigureView key={figure.id} figure={figure} />
         ))}
+        {step.sources && step.sources.length > 0 && <SourcesPanel sources={step.sources} />}
+
+        {/* Which part is on screen, and how each one stands: answered, marked right or wrong. */}
+        {onePart && (
+          <div className="flex flex-wrap items-center gap-1.5" role="tablist" aria-label={t("worksheet.parts")}>
+            {step.parts.map((part, i) => {
+              const m = markings[key(i)];
+              return (
+                <button
+                  key={part.label}
+                  type="button"
+                  role="tab"
+                  aria-selected={i === partIndex}
+                  aria-label={`${t("worksheet.part")} ${part.label}`}
+                  disabled={markingInFlight}
+                  onClick={() => goPart(i)}
+                  className={cn(
+                    "grid size-9 touch-manipulation place-items-center rounded-full text-[13.5px] font-extrabold ring-inset transition-colors",
+                    i === partIndex
+                      ? "bg-accent text-white"
+                      : checked && m
+                        ? m.correct
+                          ? "bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500"
+                          : "bg-rose-50 text-rose-900 ring-2 ring-rose-400"
+                        : answered(i)
+                          ? "bg-accent-soft text-accent"
+                          : "bg-muted text-foreground hover:bg-[var(--edge)]",
+                  )}
+                >
+                  {part.label}
+                </button>
+              );
+            })}
+            <span className="ml-1 text-small font-semibold text-muted-foreground">
+              {t("worksheet.partOf").replace("{n}", String(partIndex + 1)).replace("{m}", String(step.parts.length))}
+            </span>
+          </div>
+        )}
 
         {/* Sub-questions */}
         <div className={newUi ? "space-y-7" : "space-y-4"}>
           {step.parts.map((part, i) => {
+            if (onePart && i !== partIndex) return null;
             const value = answers[key(i)] ?? "";
             const marking = markings[key(i)];
             const correct = marking?.correct ?? false;
@@ -301,22 +360,31 @@ export function WorksheetActivity({
               !!marking && !marking.correct && marking.achievedPoints > 0;
             const isSkipped = !!skipped[key(i)] && !value.trim() && !drawings[key(i)];
             return (
-              <div key={part.label} className="flex gap-3">
+              <div key={part.label} className="flex gap-3" data-dictation-label={part.label} data-dictation-prompt={part.prompt}>
                 <span className={cn("shrink-0 flex items-center justify-center font-bold", newUi ? "size-8 rounded-full bg-muted text-[13.5px] font-extrabold text-foreground" : "mt-1.5 h-6 w-6 rounded-full bg-muted text-[11px]")}>
                   {part.label}
                 </span>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className={newUi ? "pt-0.5 text-[16.5px] font-semibold leading-7" : "text-sm leading-6"}>
+                    <p className={newUi ? "pt-0.5 text-read font-semibold" : "text-ui"}>
                       <MarkdownText text={part.prompt} />
                     </p>
-                    <span className={newUi ? "shrink-0 text-[13px] font-bold tabular-nums text-muted-foreground" : "text-[11px] text-faint shrink-0 tabular-nums"}>
+                    <span className={newUi ? "shrink-0 text-small font-bold tabular-nums text-muted-foreground" : "text-caption text-faint shrink-0 tabular-nums"}>
                       {checked && marking
                         ? `${marking.achievedPoints}/${marking.totalPoints}`
                         : `[${part.marks ?? 1}]`}
                     </span>
                   </div>
-                  {part.type === "true_false" ? (
+                  {part.type === "mcq" && part.options?.length ? (
+                    <McqOptions
+                      options={part.options}
+                      value={value}
+                      answer={part.answer}
+                      checked={checked}
+                      disabled={checked || markingInFlight}
+                      onPick={(letter) => setAnswers((a) => ({ ...a, [key(i)]: letter }))}
+                    />
+                  ) : part.type === "true_false" ? (
                     <div className={newUi ? "mt-3 flex gap-2.5" : "flex gap-2 mt-2"}>
                       {["True", "False"].map((opt) => (
                         <button
@@ -354,13 +422,12 @@ export function WorksheetActivity({
                       ))}
                     </div>
                   ) : (
-                    <textarea
-                      ref={i === 0 ? firstInput : undefined}
+                    <RichAnswerField
+                      textareaRef={i === partIndex ? firstInput : undefined}
                       value={value}
-                      rows={part.type === "numeric" ? 1 : 2}
+                      rows={part.type === "numeric" ? 1 : part.type === "essay" ? 12 : 2}
                       disabled={(checked && correct) || markingInFlight}
-                      onChange={(e) => {
-                        const v = e.target.value;
+                      onChange={(v) => {
                         setAnswers((a) => ({ ...a, [key(i)]: v }));
                         // Typing un-skips the part.
                         if (v.trim()) setSkipped((sk) => (sk[key(i)] ? { ...sk, [key(i)]: false } : sk));
@@ -406,6 +473,11 @@ export function WorksheetActivity({
 
                   {!checked && (
                     <div className={newUi ? "mt-1 flex flex-wrap items-center gap-x-5" : "mt-1.5 flex items-center gap-4"}>
+                      {part.type === "essay" && (
+                        <span className="min-h-10 text-[13px] font-semibold tabular-nums text-muted-foreground flex items-center">
+                          {t("paper.words").replace("{n}", String(wordCount(value)))}
+                        </span>
+                      )}
                       {part.type === "text" && !drawingOpen[key(i)] && (
                         <button
                           type="button"
@@ -444,7 +516,7 @@ export function WorksheetActivity({
                     </div>
                   )}
                   {checked && isSkipped && (
-                    <p className={newUi ? "mt-2 text-[13.5px] font-semibold text-muted-foreground" : "mt-1.5 text-xs text-muted-foreground"}>{t("habit.wsSkipped")}</p>
+                    <p className={newUi ? "mt-2 text-small font-semibold text-muted-foreground" : "mt-1.5 text-caption text-muted-foreground"}>{t("habit.wsSkipped")}</p>
                   )}
                   {part.type === "text" && drawingOpen[key(i)] && (
                     <DrawingCanvas
@@ -459,7 +531,7 @@ export function WorksheetActivity({
                   {/* Mark scheme (redesign): lines on the page under the answer, a tick or a cross per mark; no table. */}
                   {newUi && checked && marking && marking.points.length > 0 && (
                     <div className="life-rise mt-4" role="status">
-                      <p className="text-[13px] font-extrabold text-foreground">
+                      <p className="text-small font-extrabold text-foreground">
                         {t("session.markScheme")}
                         <span className="ml-2 font-bold tabular-nums text-muted-foreground">
                           {marking.achievedPoints}/{marking.totalPoints} {t("session.marks")}
@@ -474,10 +546,10 @@ export function WorksheetActivity({
                                 {earned ? <Check className="size-3.5" strokeWidth={3.5} /> : <X className="size-3.5" strokeWidth={3.5} />}
                                 <span className="sr-only">{point.achievedPoints}/{point.point}</span>
                               </span>
-                              <div className="min-w-0 flex-1 text-[15px] leading-6">
+                              <div className="min-w-0 flex-1 text-ui">
                                 <MarkdownText text={point.requirements} />
                                 {point.feedback && !earned && (
-                                  <p className="mt-0.5 text-[14px] leading-6 text-muted-foreground">
+                                  <p className="mt-0.5 text-ui text-muted-foreground">
                                     <MarkdownText text={point.feedback} />
                                   </p>
                                 )}
@@ -492,12 +564,12 @@ export function WorksheetActivity({
                   {!newUi && checked && marking && marking.points.length > 0 && (
                     <div className={newUi ? "mt-3 rounded-2xl border border-border bg-card overflow-hidden shadow-[0_8px_24px_-16px_rgba(17,17,20,.2)]" : "mt-2 rounded-lg border border-border overflow-hidden"}>
                       <div className={cn("flex items-center justify-between border-b border-border", newUi ? "px-4 py-2.5" : "bg-muted/60 px-3 py-1.5")}>
-                        <p className={newUi ? "text-[13px] font-semibold" : "text-[11px] font-semibold uppercase tracking-wide text-muted-foreground"}>
+                        <p className={newUi ? "text-small font-semibold" : "text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
                           {t("session.markScheme")}
                         </p>
                         <span
                           className={cn(
-                            newUi ? "text-[12px] font-bold tabular-nums rounded-full px-2.5 py-1" : "text-[11px] font-bold tabular-nums rounded-full px-2 py-0.5",
+                            newUi ? "text-caption font-bold tabular-nums rounded-full px-2.5 py-1" : "text-caption font-bold tabular-nums rounded-full px-2 py-0.5",
                             correct
                               ? "bg-success/10 text-green-700 dark:text-green-400"
                               : partial
@@ -525,10 +597,10 @@ export function WorksheetActivity({
                                 >
                                   M{j + 1}
                                 </span>
-                                <p className={newUi ? "flex-1 min-w-0 text-[13.5px] leading-6" : "flex-1 min-w-0 text-xs leading-5"}>
+                                <p className={newUi ? "flex-1 min-w-0 text-small" : "flex-1 min-w-0 text-caption leading-5"}>
                                   <MarkdownText text={point.requirements} />
                                 </p>
-                                <span className="shrink-0 flex items-center gap-1 text-[11px] font-semibold tabular-nums">
+                                <span className="shrink-0 flex items-center gap-1 text-caption font-semibold tabular-nums">
                                   {earned ? (
                                     <Check className="h-3.5 w-3.5 text-green-700 dark:text-green-400" />
                                   ) : (
@@ -538,7 +610,7 @@ export function WorksheetActivity({
                                 </span>
                               </div>
                               {point.feedback && !earned && (
-                                <p className={newUi ? "mt-1.5 pl-10 text-[13px] leading-5 text-muted-foreground" : "mt-1 pl-8 text-[11px] leading-4 text-muted-foreground"}>
+                                <p className={newUi ? "mt-1.5 pl-10 text-small leading-5 text-muted-foreground" : "mt-1 pl-8 text-caption leading-4 text-muted-foreground"}>
                                   <MarkdownText text={point.feedback} />
                                 </p>
                               )}
@@ -554,7 +626,7 @@ export function WorksheetActivity({
                     marking.points.length === 0 &&
                     !correct &&
                     part.answer && (
-                      <p className={cn(newUi ? "mt-2 text-[14.5px] font-bold" : "text-xs mt-1.5", isSkipped ? "text-muted-foreground" : newUi ? "text-rose-800" : "text-red-600 dark:text-red-400")}>
+                      <p className={cn(newUi ? "mt-2 text-ui font-bold" : "text-caption mt-1.5", isSkipped ? "text-muted-foreground" : newUi ? "text-rose-800" : "text-red-600 dark:text-red-400")}>
                         {t("session.expected")} {part.answer}
                       </p>
                     )}
@@ -567,18 +639,29 @@ export function WorksheetActivity({
         {newUi ? (
           <div className="flex flex-col-reverse gap-2.5 pt-1 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center justify-center gap-4 sm:justify-start">
-              {stepIndex > 0 && (
-                <button type="button" disabled={markingInFlight} onClick={() => setStepIndex((s) => s - 1)} className={playLink}>
+              {(partIndex > 0 || stepIndex > 0) && (
+                <button
+                  type="button"
+                  disabled={markingInFlight}
+                  onClick={() => (partIndex > 0 ? goPart(partIndex - 1) : setStepIndex((s) => s - 1))}
+                  className={playLink}
+                >
                   {t("session.back")}
                 </button>
               )}
               {checked && (
-                <p className="text-[14.5px] font-extrabold tabular-nums text-foreground" role="status">
+                <p className="text-ui font-extrabold tabular-nums text-foreground" role="status">
                   {earnedMarks}/{totalMarks} <span className="font-semibold text-muted-foreground">{t("session.marksOnQuestion")}</span>
                 </p>
               )}
             </div>
-            {checked ? (
+            {!lastPart ? (
+              // Not the last part yet: on to the next one (marking waits for the whole question).
+              <PlayPrimary disabled={markingInFlight} onClick={() => goPart(partIndex + 1)}>
+                {t("worksheet.nextPart")}
+                <ArrowRight className="ml-1.5 size-4" />
+              </PlayPrimary>
+            ) : checked ? (
               <PlayPrimary onClick={isLastStep ? onComplete : () => setStepIndex((s) => s + 1)}>
                 {t(isLastStep ? "session.finishWorksheet" : "session.nextQuestion")}
                 <ArrowRight className="ml-1.5 size-4" />
@@ -613,7 +696,7 @@ export function WorksheetActivity({
               </Button>
             )}
             {checked && (
-              <p className="text-xs text-muted-foreground tabular-nums">
+              <p className="text-caption text-muted-foreground tabular-nums">
                 {earnedMarks}/{totalMarks} {t("session.marksOnQuestion")}
               </p>
             )}

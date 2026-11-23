@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "a-1",
+  "topicCode": "A.1",
+  "topicName": "Kinematics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:29:46.507Z",
+  "cards": [
+    {
+      "id": "0cdm2ur",
+      "kind": "concept",
+      "front": "What is the difference between a vector and a scalar quantity?",
+      "back": "A **vector** has both magnitude and direction, such as displacement, velocity and acceleration. A **scalar** has magnitude only, such as distance and speed.",
+      "hint": "Ask yourself whether direction matters for the quantity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gfiuof",
+      "kind": "concept",
+      "front": "Can an object moving east have an acceleration pointing west?",
+      "back": "**Yes**. Acceleration is the rate of change of velocity, so if the eastward velocity is decreasing, the acceleration points west.",
+      "hint": "Think about slowing down while still moving east.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "072vmi0",
+      "kind": "formula",
+      "front": "Which equation links final velocity, initial velocity, acceleration and time?",
+      "back": "$v=u+at$, where $u$ is initial velocity, $v$ is final velocity, $a$ is **constant** acceleration and $t$ is time. Velocities are in m s⁻¹, and $t$ is in s.",
+      "hint": "This equation does not contain displacement.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13iadzi",
+      "kind": "term",
+      "front": "What does the gradient of a displacement–time graph give?",
+      "back": "**Velocity**. A steeper line means greater speed, and a negative gradient means motion in the negative direction.",
+      "hint": "Gradient is change on the vertical axis divided by change on the horizontal axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "185h97g",
+      "kind": "concept",
+      "front": "What does the signed area under a velocity–time graph give?",
+      "back": "**Displacement**. Areas below the time axis count negatively. If you count all areas positively instead, you get the total distance travelled.",
+      "hint": "Decide whether the question asks for displacement or distance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ji92h0",
+      "kind": "term",
+      "front": "What is acceleration?",
+      "back": "**Acceleration** is the rate of change of velocity with time. Average acceleration is the change in velocity divided by the time taken, in m s⁻².",
+      "hint": "It is about velocity, not speed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jweg13",
+      "kind": "term",
+      "front": "What is instantaneous velocity?",
+      "back": "**Instantaneous velocity** is the rate of change of displacement at one particular moment. On a displacement–time graph, it is the gradient of the tangent at that moment.",
+      "hint": "Compare it with an average over a whole interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yw0dse",
+      "kind": "process",
+      "front": "How do you find the instantaneous velocity from a curved displacement–time graph?",
+      "back": "1. Draw a tangent at the chosen moment. 2. Pick two points on the tangent. 3. Divide the vertical change by the horizontal change, keeping the axis units.",
+      "hint": "The tangent touches the curve at one point only.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cubkbt",
+      "kind": "mistake",
+      "front": "A student says average speed is zero after a return trip. What is wrong?",
+      "back": "The student has confused **average velocity** with average speed. Average velocity is zero because displacement is zero, but average speed is total distance divided by total time, which is positive.",
+      "hint": "Which quantity uses displacement and which uses distance?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0odbucx",
+      "kind": "example",
+      "front": "A car goes 30 m east then 10 m west in 20 s. What are its average speed and average velocity?",
+      "back": "Average speed is **2 m s⁻¹**, from 40 m divided by 20 s. Average velocity is **1 m s⁻¹ east**, from 20 m east divided by 20 s.",
+      "hint": "Find the distance and the displacement separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xufjwv",
+      "kind": "example",
+      "front": "A vehicle moves east at 20 m s⁻¹ and slows uniformly at 4 m s⁻² until it stops. How long does it take to stop?",
+      "back": "**5 s**. Taking east as positive, $a=-4$, so $0=20-4t$ gives $t=5$.",
+      "hint": "Assign the sign of acceleration before substituting.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yll557",
+      "kind": "mistake",
+      "front": "Can you use the equations of motion when the acceleration changes during a journey?",
+      "back": "**No**. The equations assume constant acceleration along the chosen line. Split the motion into intervals where acceleration is constant, then apply the equations to each interval.",
+      "hint": "What condition do the equations of motion require?",
+      "sectionId": "s5"
+    }
+  ]
+}

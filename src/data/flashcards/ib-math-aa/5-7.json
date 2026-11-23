@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "The second derivative",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:54.593Z",
+  "cards": [
+    {
+      "id": "1ag5hhk",
+      "kind": "concept",
+      "front": "What does the second derivative tell you about a curve?",
+      "back": "It measures how the **gradient** is changing. It is the derivative of the first derivative, written $f''(x)$ or $\\frac{d^2y}{dx^2}$.",
+      "hint": "Think of it as the derivative of the derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mg925x",
+      "kind": "concept",
+      "front": "What shape does a graph have where $f''(x)>0$?",
+      "back": "**Concave up**: the gradient is increasing, so the curve bends like a bowl. A positive $f''$ does not mean the graph is rising.",
+      "hint": "Concavity is about how slopes change, not height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ms18mh",
+      "kind": "term",
+      "front": "What is a point of inflection?",
+      "back": "A point on a curve where the **concavity changes**, so $f''(x)$ changes sign.",
+      "hint": "Look for a switch from bowl-shaped to upside-down bowl.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fahvt7",
+      "kind": "formula",
+      "front": "Find $f''(x)$ for $f(x)=x^4-3x^2+2x$.",
+      "back": "**$f''(x)=12x^2-6$**, found by differentiating once to get $4x^3-6x+2$, then again.",
+      "hint": "Differentiate twice, one step at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17zjb68",
+      "kind": "mistake",
+      "front": "Does $\\frac{d^2y}{dx^2}$ mean $\\left(\\frac{dy}{dx}\\right)^2$?",
+      "back": "**No**. $\\frac{d^2y}{dx^2}$ means differentiate twice. $\\left(\\frac{dy}{dx}\\right)^2$ means square the first derivative.",
+      "hint": "Count the derivatives, not the powers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qjhvdp",
+      "kind": "mistake",
+      "front": "If $f''(c)=0$, is there automatically a point of inflection at $x=c$?",
+      "back": "**No**. You must check that $f''$ changes sign at $c$. For $y=x^4$, $f''(0)=0$ but the concavity does not change.",
+      "hint": "Test the sign on each side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1awmikm",
+      "kind": "process",
+      "front": "What are the steps to locate a point of inflection?",
+      "back": "**Find $f''$**, solve $f''(x)=0$, test the sign of $f''$ either side of each candidate, then substitute into $f$ for the $y$-coordinate.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p0uzlu",
+      "kind": "example",
+      "front": "For $f(x)=x^3-3x^2$, where is the graph concave up?",
+      "back": "For **$x>1$**. Here $f''(x)=6x-6$, which is positive when $x>1$ (and concave down for $x<1$).",
+      "hint": "Solve $f''(x)>0$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ezl9pn",
+      "kind": "example",
+      "front": "Find the point of inflection of $f(x)=x^3-3x^2$.",
+      "back": "**$(1,-2)$**. $f''(x)=6x-6$ is zero at $x=1$, its sign changes there, and $f(1)=-2$.",
+      "hint": "Find where $f''=0$, then the $y$-value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18za38t",
+      "kind": "concept",
+      "front": "Why do inflection points match where the gradient is locally greatest or least?",
+      "back": "Since $f''$ is the derivative of $f'$, it changes sign where $f'$ switches between **increasing and decreasing**.",
+      "hint": "Relate $f''$ to the behaviour of $f'$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06c3udy",
+      "kind": "formula",
+      "front": "For position $s(t)$, what do $\\frac{ds}{dt}$ and $\\frac{d^2s}{dt^2}$ represent?",
+      "back": "$\\frac{ds}{dt}$ is **velocity** and $\\frac{d^2s}{dt^2}$ is **acceleration**, measured in $\\mathrm{m\\,s^{-2}}$.",
+      "hint": "Each derivative is a rate of change of the previous one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1449bwc",
+      "kind": "example",
+      "front": "An object has $s=t^3-6t^2+5t$ metres. What is its acceleration at $t=3$ s?",
+      "back": "**$6\\,\\mathrm{m\\,s^{-2}}$**. Acceleration is $6t-12$, and substituting $t=3$ gives $6$.",
+      "hint": "Differentiate twice, then substitute.",
+      "sectionId": "s5"
+    }
+  ]
+}

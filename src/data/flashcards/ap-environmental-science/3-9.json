@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-9",
+  "topicCode": "3.9",
+  "topicName": "Demographic transition",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:02.839Z",
+  "cards": [
+    {
+      "id": "00s5xzp",
+      "kind": "concept",
+      "front": "What pattern does the demographic transition describe?",
+      "back": "Countries move from **high** birth and death rates to **low** ones as they develop. The model describes this shift in four stages.",
+      "hint": "Think about family size and life length in two different countries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pl9h37",
+      "kind": "concept",
+      "front": "Why does population growth peak in stage 2?",
+      "back": "**Death rates** fall sharply because of better food, clean water, sanitation and medicine, while birth rates stay high. The gap between them is widest, so growth is fastest.",
+      "hint": "Think about which rate changes first in stage 2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "147d3oy",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a falling death rate in stage 2 means fewer births?",
+      "back": "Births stay **high** in stage 2. The population grows because far fewer people die, not because births fall.",
+      "hint": "Check which rate is actually falling in stage 2.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13l65oa",
+      "kind": "formula",
+      "front": "Which formula gives the natural growth rate in percent per year?",
+      "back": "$\\frac{b-d}{10}$, where $b$ is the birth rate and $d$ is the death rate, both per 1,000 people per year. The result is a **percent** per year.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17obpzl",
+      "kind": "term",
+      "front": "What does the birth rate measure?",
+      "back": "The **birth rate** is the number of births per 1,000 people in a population per year.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "134nvve",
+      "kind": "term",
+      "front": "What does the death rate measure?",
+      "back": "The **death rate** is the number of deaths per 1,000 people in a population per year.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0032s69",
+      "kind": "concept",
+      "front": "Why does the birth rate start to fall in stage 3?",
+      "back": "Fewer children die, women gain schooling and paid work, raising children in cities costs more, and birth control and health services become widely available.",
+      "hint": "Think about why parents would choose smaller families.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a7b1y7",
+      "kind": "process",
+      "front": "How do the birth and death rates change across the four stages, in order?",
+      "back": "Stage 1: both high, slow growth. Stage 2: death rate falls fast while birth rate stays high, so growth is rapid. Stage 3: birth rate falls, so growth slows. Stage 4: both low, so growth is near zero or the population declines.",
+      "hint": "Start with both rates high and follow the falling death rate first."
+    },
+    {
+      "id": "03tmoyc",
+      "kind": "example",
+      "front": "A country has a birth rate of 36 and a death rate of 12 per 1,000. What is its natural growth rate, ignoring migration?",
+      "back": "**+2.4% per year**, from $\\frac{36-12}{10}=+2.4$. This fits stage 2.",
+      "hint": "Subtract the death rate from the birth rate first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nht3d0",
+      "kind": "formula",
+      "front": "How is doubling time estimated from a percent growth rate?",
+      "back": "About $\\frac{70}{r}$ years, where $r$ is the percent growth rate per year. A higher rate gives a **shorter** doubling time.",
+      "hint": "Consider how a bigger divisor changes the result.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06wlp9v",
+      "kind": "example",
+      "front": "A country has a birth rate of 9 and a death rate of 11 per 1,000. What trend does its population follow, ignoring migration?",
+      "back": "The population will **decline**, at $\\frac{9-11}{10}=-0.2$ per cent per year, because deaths outnumber births.",
+      "hint": "Check whether births or deaths are the larger number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kc3k5r",
+      "kind": "mistake",
+      "front": "Does the demographic transition guarantee that every country will reach stage 4?",
+      "back": "No. The model describes a **typical** pattern from industrializing countries, not a guaranteed outcome or timeline.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1egme9f",
+      "kind": "term",
+      "front": "What is carrying capacity?",
+      "back": "Carrying capacity is the **population size** an environment can support over time under given conditions.",
+      "sectionId": "s5"
+    }
+  ]
+}

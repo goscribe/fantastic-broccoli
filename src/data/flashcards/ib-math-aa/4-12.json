@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-12",
+  "topicCode": "4.12",
+  "topicName": "Standardizing normal variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:45.845Z",
+  "cards": [
+    {
+      "id": "143gm8j",
+      "kind": "formula",
+      "front": "How do you convert a value $x$ from $X\\sim N(\\mu,\\sigma^2)$ into a z-value?",
+      "back": "**Standardise** with $z=\\frac{x-\\mu}{\\sigma}$: subtract the mean, then divide by the standard deviation. The result follows $Z\\sim N(0,1)$.",
+      "hint": "Subtract first, then divide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uopzh1",
+      "kind": "term",
+      "front": "What is a z-value?",
+      "back": "A **z-value** is the number of standard deviations a value lies from the mean. Zero is the mean, positive is above it and negative is below it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "123wioq",
+      "kind": "process",
+      "front": "How do you find the value $x$ that has a given probability below it, for a normal variable?",
+      "back": "Make the probability a **left-tail** probability, use inverse normal to get $z$, then convert back with $x=\\mu+z\\sigma$.",
+      "hint": "Sketch the curve to see which tail you need.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gmu6ug",
+      "kind": "example",
+      "front": "For $X\\sim N(62,8^2)$, what is the z-value of a score of 78?",
+      "back": "$z=\\frac{78-62}{8}=2$, so 78 is **two** standard deviations above the mean.",
+      "hint": "Use $z=\\frac{x-\\mu}{\\sigma}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vqmrcp",
+      "kind": "mistake",
+      "front": "Why is it wrong to divide by 64 when $X\\sim N(62,64)$?",
+      "back": "64 is the **variance**, not the standard deviation. Take the square root first, so $\\sigma=8$, then divide by 8.",
+      "hint": "Check what the second number in $N(\\mu,\\sigma^2)$ means.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1duz44p",
+      "kind": "example",
+      "front": "For $X\\sim N(70,10^2)$, find $k$ so that the top 5% of values exceed $k$.",
+      "back": "$P(X<k)=0.95$, so $z\\approx1.6449$ and $k=70+1.6449\\times10\\approx86.4$.",
+      "hint": "The left-tail probability is 0.95.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jz9yw9",
+      "kind": "process",
+      "front": "How do you find an unknown mean when one probability and one value are known?",
+      "back": "Find the **z-value** from the probability using inverse normal, then solve $z=\\frac{x-\\mu}{\\sigma}$ for $\\mu$.",
+      "hint": "Check the sign of z against a sketch.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0umlf76",
+      "kind": "example",
+      "front": "If $X\\sim N(\\mu,5^2)$ and $P(X<40)=0.9$, what is $\\mu$?",
+      "back": "$z\\approx1.2816$, so $\\frac{40-\\mu}{5}=1.2816$, giving $40-\\mu=6.408$ and $\\mu\\approx33.6$.",
+      "hint": "Standardise, then multiply by 5.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17vwjpd",
+      "kind": "concept",
+      "front": "What sign does the z-value have when a left-tail probability is below 0.5?",
+      "back": "The z-value is **negative**. A probability above 0.5 gives a positive z-value. Sketch the curve to check.",
+      "hint": "Where is the mean on the curve?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0slp562",
+      "kind": "concept",
+      "front": "Which symmetry facts let you check probabilities for the standard normal curve?",
+      "back": "$P(Z<-a)=P(Z>a)$ and $P(Z>a)=1-P(Z<a)$, because the curve is **symmetric** about $z=0$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0u39ypj",
+      "kind": "mistake",
+      "front": "Why is using a probability such as 0.95 as a z-value wrong?",
+      "back": "0.95 is an **area**, while the matching z-value is about 1.64. Never mix a probability up with a z-value.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0go5ewp",
+      "kind": "term",
+      "front": "What is the standard normal distribution?",
+      "back": "The **standard normal distribution** is $Z\\sim N(0,1)$, with mean 0 and standard deviation 1. Every normal variable standardises to it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hwehr4",
+      "kind": "formula",
+      "front": "How do you convert a z-value back to $x$ for $X\\sim N(\\mu,\\sigma^2)$?",
+      "back": "$x=\\mu+z\\sigma$, where **z** comes from the inverse normal calculation.",
+      "hint": "Reverse the standardising formula.",
+      "sectionId": "s3"
+    }
+  ]
+}

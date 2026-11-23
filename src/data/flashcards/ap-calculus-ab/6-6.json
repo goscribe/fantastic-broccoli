@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-6",
+  "topicCode": "6.6",
+  "topicName": "Properties of definite integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:21.966Z",
+  "cards": [
+    {
+      "id": "0etqefb",
+      "kind": "formula",
+      "front": "Which property lets you integrate a sum term by term and pull out constant factors?",
+      "back": "**Linearity**: $\\int_a^b[Af(x)+Bg(x)]\\,dx=A\\int_a^b f(x)\\,dx+B\\int_a^b g(x)\\,dx$. Both terms keep the same limits.",
+      "hint": "Sums split apart, constants step outside.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "181isua",
+      "kind": "concept",
+      "front": "Why can you split a definite integral from a to b at a point c in between?",
+      "back": "**Interval additivity**: $\\int_a^b f(x)\\,dx=\\int_a^c f(x)\\,dx+\\int_c^b f(x)\\,dx$. The two pieces meet at c, so together they cover the whole interval.",
+      "hint": "Think of cutting one interval into two joined pieces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "133d4tv",
+      "kind": "concept",
+      "front": "How do symmetry rules simplify an integral from $-a$ to $a$ when a function is even or odd?",
+      "back": "**Even** $f$: the integral equals $2\\int_0^a f(x)\\,dx$. **Odd** $f$: the integral is $0$. The limits must be opposite, such as $-2$ and $2$.",
+      "hint": "Check whether f(-x) equals f(x) or -f(x).",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jhu99l",
+      "kind": "term",
+      "front": "What happens to a definite integral when you swap its limits?",
+      "back": "The **sign reverses**: $\\int_b^a f(x)\\,dx=-\\int_a^b f(x)\\,dx$. If both limits are equal, the integral is $0$.",
+      "hint": "Think about direction of travel along the x-axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12bekza",
+      "kind": "term",
+      "front": "What is the value of $\\int_a^b c\\,dx$ for a constant c?",
+      "back": "$c(b-a)$. The result is signed, so it can be negative.",
+      "hint": "Width times height.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hsemc3",
+      "kind": "mistake",
+      "front": "Can the integral of a product f(x)g(x) be written as the product of the two separate integrals?",
+      "back": "**No**. $\\int_a^b f(x)g(x)\\,dx$ generally differs from the product of the two integrals. Linearity only covers sums and constant factors.",
+      "hint": "Linearity has limits on what it covers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sgtyuy",
+      "kind": "mistake",
+      "front": "Can $\\int_2^5 f(x)\\,dx+\\int_7^5 f(x)\\,dx$ be written as $\\int_2^7 f(x)\\,dx$?",
+      "back": "**No**. Reverse the second integral to get $\\int_2^5 f(x)\\,dx-\\int_5^7 f(x)\\,dx$. The minus sign stays, so you cannot merge them into one integral from 2 to 7.",
+      "hint": "Reversing limits changes a sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ub6tyk",
+      "kind": "process",
+      "front": "What steps do you follow before combining two definite integrals into one?",
+      "back": "1) Check that the integrands match. 2) Reverse any limits so they run in order. 3) Check that the endpoints connect, then write one integral using the outer limits.",
+      "hint": "Matching integrands and connecting endpoints.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rde4aa",
+      "kind": "example",
+      "front": "Evaluate $\\int_{-2}^{2}(3x^2+2x)\\,dx$ using symmetry and linearity.",
+      "back": "**16**. The $2x$ term is odd, so it integrates to $0$. The $3x^2$ term is even: $6\\int_0^2 x^2\\,dx=6\\left(\\frac{8}{3}\\right)=16$.",
+      "hint": "Split into two terms and check each for even or odd.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zey61f",
+      "kind": "example",
+      "front": "Given $\\int_1^3 f(x)\\,dx=4$ and $\\int_3^6 f(x)\\,dx=-2$, find $\\int_1^6(2f(x)+1)\\,dx$.",
+      "back": "**9**. First $\\int_1^6 f(x)\\,dx=4+(-2)=2$. Then $2(2)+(6-1)=9$.",
+      "hint": "Combine the two pieces first, then apply linearity."
+    },
+    {
+      "id": "0fqp36p",
+      "kind": "mistake",
+      "front": "If a sum has an even term and an odd term, can you treat the whole sum as even or odd?",
+      "back": "**No**. Check each term separately and apply its own shortcut. The sum need not be either even or odd.",
+      "hint": "Look at each term on its own.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bnd4pf",
+      "kind": "formula",
+      "front": "What does an odd function satisfy, and what is its integral from $-a$ to $a$?",
+      "back": "$f(-x)=-f(x)$. Its contributions on either side cancel, so $\\int_{-a}^a f(x)\\,dx=0$.",
+      "hint": "Opposite inputs give opposite outputs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a17etl",
+      "kind": "term",
+      "front": "What defining rule does an even function satisfy?",
+      "back": "$f(-x)=f(x)$ wherever both inputs are in its domain. Its contributions on either side of zero match.",
+      "hint": "Mirror image across the y-axis.",
+      "sectionId": "s4"
+    }
+  ]
+}

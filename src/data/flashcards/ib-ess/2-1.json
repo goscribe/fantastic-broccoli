@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Individuals, populations, communities and ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:20.124Z",
+  "cards": [
+    {
+      "id": "1oyxvg3",
+      "kind": "concept",
+      "front": "What decides how many individuals an area can support?",
+      "back": "**Limiting factors**, both abiotic and biotic, restrict population size by raising deaths or lowering births. The largest size an environment can support over time is its **carrying capacity**.",
+      "hint": "Think about what runs short in a dry grassland.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "069vnw3",
+      "kind": "concept",
+      "front": "How can two species share one habitat without a strong clash?",
+      "back": "They can share a **habitat** if they have **different niches**, meaning different food, timing or interactions. Two species with almost identical niches compete strongly.",
+      "hint": "Compare what each species eats and when it is active.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14yn60p",
+      "kind": "term",
+      "front": "What is an ecosystem?",
+      "back": "A **community** of organisms together with the non-living environment it interacts with. Energy and nutrients pass between its living and non-living parts.",
+      "hint": "What extra part is added to a community?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ybioms",
+      "kind": "term",
+      "front": "How is a species defined?",
+      "back": "A **species** is a group of organisms recognised as distinct from other groups, using evidence such as reproduction or shared features. Members usually breed with each other.",
+      "hint": "Look at what members share and whether they breed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "A **population** is a group of individuals of the same species living in the same area. Their numbers can rise and fall over time.",
+      "hint": "Same species, same place.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m6mwn8",
+      "kind": "term",
+      "front": "What is a community?",
+      "back": "A **community** is all the populations of different species living and interacting in a particular area. Its members affect one another.",
+      "hint": "Several species, one area.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ybzkhm",
+      "kind": "process",
+      "front": "Put these in order from smallest to largest: ecosystem, species, community, population.",
+      "back": "**Species**, then **population**, then **community**, then **ecosystem**. Each level adds more: one kind of organism, all of that kind in an area, all the populations together, then the non-living surroundings.",
+      "hint": "Start with a single kind of frog.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0eoverl",
+      "kind": "term",
+      "front": "What is an abiotic factor?",
+      "back": "A **non-living** physical or chemical part of the environment that influences organisms, such as temperature, light or soil pH.",
+      "hint": "Non-living, not biological.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1168z0o",
+      "kind": "term",
+      "front": "What is a biotic factor?",
+      "back": "An influence on an organism that comes from **other living organisms**, such as food supply, predators or disease.",
+      "hint": "Think of influences from other organisms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15jswq7",
+      "kind": "term",
+      "front": "What is a limiting factor?",
+      "back": "A **resource or condition in short supply** that restricts the growth or size of a population.",
+      "hint": "What is scarce restricts growth.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zrfoj6",
+      "kind": "concept",
+      "front": "How can predation change the size of a predator population?",
+      "back": "**Predators** reduce prey numbers, and a fall in prey can later reduce predator numbers. This links the two populations over time.",
+      "hint": "Follow the effect with a time delay.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12zrzme",
+      "kind": "concept",
+      "front": "Name two ways competition between species reduces a population.",
+      "back": "Each competitor **gets less** of a shared resource, so its growth or survival may fall. Competition can occur within a species or between different species.",
+      "hint": "Think about food, light, water or mates.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n8d85r",
+      "kind": "mistake",
+      "front": "Is a habitat the same as a niche?",
+      "back": "No. A **habitat** is the place where a species lives, while a **niche** is its role, including what it eats, where it lives, when it is active and how it interacts.",
+      "hint": "One says where, the other says what it does.",
+      "sectionId": "s5"
+    }
+  ]
+}

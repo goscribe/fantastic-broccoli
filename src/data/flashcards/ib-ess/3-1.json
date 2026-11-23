@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Biodiversity and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:35.476Z",
+  "cards": [
+    {
+      "id": "1j1cqbo",
+      "kind": "term",
+      "front": "What is biodiversity, and at which three levels do ecologists consider it?",
+      "back": "**Biodiversity** is the variety of life, considered as genetic diversity, species diversity and ecosystem diversity. Diverse systems tend to cope better with disturbance.",
+      "hint": "Think about how many different living things an area can hold.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cg99z9",
+      "kind": "concept",
+      "front": "What three things must be present for natural selection to change a population?",
+      "back": "Individuals must **vary**, they must compete for limited resources, and the differences must be inherited. If one is missing, selection cannot change the population this way.",
+      "hint": "Think about what makes some individuals more successful than others.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ikbjjf",
+      "kind": "process",
+      "front": "How can one population split over time to form two new species?",
+      "back": "A river or mountain range separates the population. Each group meets different selection and mutations arise separately. After many generations they cannot interbreed: this is **speciation**.",
+      "hint": "Start with separation and end with interbreeding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gxxuug",
+      "kind": "term",
+      "front": "What is a mutation, and why does it matter for natural selection?",
+      "back": "A **mutation** is a random, permanent change in an organism's DNA. It creates new variation, which selection can act on.",
+      "hint": "Where does new inherited variation come from?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "An **allele** is one of the alternative forms of a gene, found at the same position on a chromosome.",
+      "hint": "Alternative versions of one gene.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sgn8ra",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an individual changes its features during its life to meet a need?",
+      "back": "**Populations** change across generations as helpful alleles become more common. Individuals do not evolve during their lives or change features to meet a need.",
+      "hint": "Think about where change happens: individual or population.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05uu5xx",
+      "kind": "term",
+      "front": "Why do ecologists use sampling rather than counting every organism in an area?",
+      "back": "Counting every organism is impossible and would damage the habitat. **Sampling** measures small, representative parts of the area and uses them to estimate the whole.",
+      "hint": "Consider time and damage to the habitat.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xd5zls",
+      "kind": "concept",
+      "front": "Why can two sites with the same species richness still differ in diversity?",
+      "back": "They can differ in **species evenness**. Individuals may be shared unequally, so one species dominates at one site but not at the other.",
+      "hint": "Richness counts species; what else matters?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rvs9p1",
+      "kind": "process",
+      "front": "What steps make a comparison of biodiversity between two sites fair?",
+      "back": "Take enough samples, place them **randomly**, and use the same sampling effort and method at each site.",
+      "hint": "Three conditions to keep the comparison fair.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o3xocs",
+      "kind": "formula",
+      "front": "What is Simpson's reciprocal index, and what do N and n represent?",
+      "back": "$D=\\frac{N(N-1)}{\\sum n(n-1)}$, where $N$ is the total number of individuals of all species and $n$ is the number for one species. A **higher D** means greater diversity; it has no unit.",
+      "hint": "N covers all species; n covers one species.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05ymfc4",
+      "kind": "example",
+      "front": "A sample has 10, 6, 4, 3 and 2 individuals of five species. What is Simpson's reciprocal index?",
+      "back": "$D\\approx4.3$. Here $N=25$, so $N(N-1)=600$, and $\\sum n(n-1)=140$, giving $D=\\frac{600}{140}$.",
+      "hint": "Find N first, then n(n-1) for each species.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16lt0yz",
+      "kind": "mistake",
+      "front": "What is the common error when using Simpson's reciprocal index?",
+      "back": "Swapping $N$ and $n$. **N** covers every species in the sample, while **n** covers one species at a time.",
+      "hint": "Check which symbol refers to the whole sample.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08wgwy3",
+      "kind": "concept",
+      "front": "Why are small populations less able to respond if conditions change?",
+      "back": "In small populations chance can shift allele frequencies, and they lose **genetic diversity** more easily. This reduces their ability to respond to change.",
+      "hint": "Think about chance and the size of the population.",
+      "sectionId": "s3"
+    }
+  ]
+}

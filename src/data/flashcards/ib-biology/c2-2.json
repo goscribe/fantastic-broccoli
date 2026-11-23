@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "c2-2",
+  "topicCode": "C2.2",
+  "topicName": "Neural signalling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:58.225Z",
+  "cards": [
+    {
+      "id": "0apx1lu",
+      "kind": "concept",
+      "front": "How does an action potential travel along an unmyelinated axon without the charge itself moving down it?",
+      "back": "Each region of membrane generates a new **action potential**. Local currents from one region trigger the next region, so the impulse passes along the axon.",
+      "hint": "Think about what happens at each patch of membrane, not what travels as a charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01mb1mp",
+      "kind": "process",
+      "front": "What are the main steps of signal transmission at a chemical synapse?",
+      "back": "1) An action potential arrives at the axon terminal. 2) Calcium ions enter and trigger vesicles. 3) **Neurotransmitter** is released into the synaptic cleft. 4) It diffuses and binds to receptors on the next cell. 5) It is removed or broken down.",
+      "hint": "Start with the arriving action potential and end with the neurotransmitter being removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "090bna6",
+      "kind": "concept",
+      "front": "Why does myelin make nerve impulses travel faster along an axon?",
+      "back": "Myelin insulates most of the membrane, so action potentials occur mainly at the **nodes of Ranvier**. Local currents jump between nodes in a process called saltatory conduction, which is faster than continuous conduction.",
+      "hint": "Link insulation to where action potentials form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "159i7xj",
+      "kind": "term",
+      "front": "What is a resting potential?",
+      "back": "The **resting potential** is the voltage difference across an unstimulated neuron's membrane, with the inside negative relative to the outside. Ion channels and the sodium-potassium pump help maintain it.",
+      "hint": "Think about the inside compared with the outside of an unstimulated membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n78med",
+      "kind": "process",
+      "front": "What happens to the membrane during an action potential, in order?",
+      "back": "**Depolarisation**: sodium ions enter through voltage-gated channels, making the inside briefly more positive. **Repolarisation**: sodium channels inactivate, potassium channels open, and potassium ions leave, returning the membrane towards rest.",
+      "hint": "Which ion moves first, and which ion moves second?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xxgrwa",
+      "kind": "mistake",
+      "front": "A student writes that an action potential is an electrical charge moving unchanged down the axon. What is wrong?",
+      "back": "An **action potential** is not a charge that travels unchanged. Successive regions of membrane generate new action potentials, so the signal is regenerated along the axon.",
+      "hint": "Consider what the membrane does at each point along the axon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tgzygl",
+      "kind": "mistake",
+      "front": "A student says neurotransmitter carries an action potential across the synaptic cleft. What is the correct idea?",
+      "back": "Neurotransmitter does not carry an action potential. It is a **chemical** signal that binds to receptors and changes the next cell's membrane potential.",
+      "hint": "Is the neurotransmitter electrical or chemical?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r5bn6e",
+      "kind": "term",
+      "front": "What is a synapse?",
+      "back": "A **synapse** is a junction where a neuron communicates with another cell, such as another neuron, a muscle or a gland.",
+      "hint": "Think of it as the junction, not the signal itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12tmokl",
+      "kind": "concept",
+      "front": "Why does transmission across a synapse only go one way?",
+      "back": "Neurotransmitter is released from the axon terminal on one side, and receptors are on the next cell on the other side. This makes transmission **directional**.",
+      "hint": "Compare where the chemical is made and where it binds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b12lt1",
+      "kind": "term",
+      "front": "What is an axon?",
+      "back": "An **axon** is a neuron extension that carries electrical impulses away from the cell body towards its terminals.",
+      "hint": "Compare its direction with the dendrites.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07rbzu3",
+      "kind": "term",
+      "front": "What are nodes of Ranvier?",
+      "back": "**Nodes of Ranvier** are the gaps between sections of myelin, where voltage-gated channels are concentrated and action potentials are regenerated.",
+      "hint": "Where are the gaps in the myelin sheath?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rvfi06",
+      "kind": "term",
+      "front": "What is a voluntary response?",
+      "back": "A **voluntary response** is an action performed under conscious control, such as choosing to move a hand. Practice can make it quicker, but it stays under conscious control.",
+      "hint": "Focus on the role of conscious decision.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03mo9c6",
+      "kind": "process",
+      "front": "What is the pathway of a withdrawal reflex?",
+      "back": "A sensory neuron carries impulses into the spinal cord. An interneuron passes the signal to a motor neuron, which activates a muscle. The brain receives information, but conscious awareness is not needed to start the response.",
+      "hint": "Follow the route from the sensory neuron to the muscle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0aastpd",
+      "kind": "concept",
+      "front": "How does an involuntary response differ from a voluntary one?",
+      "back": "An **involuntary response** happens without a conscious decision to start it. A reflex gives a rapid protective response, while both response types depend on neurons and synapses.",
+      "hint": "Ask who or what starts the response.",
+      "sectionId": "s5"
+    }
+  ]
+}

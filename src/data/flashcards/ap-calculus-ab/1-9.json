@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-9",
+  "topicCode": "1.9",
+  "topicName": "Multiple representations of limits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:37.945Z",
+  "cards": [
+    {
+      "id": "1v4r4de",
+      "kind": "concept",
+      "front": "What does $\\lim_{x\\to 2}f(x)=4$ tell you about the outputs near $x=2$?",
+      "back": "The outputs **approach 4** as x approaches 2. The input need not reach 2, so this does not tell you the value of f(2).",
+      "hint": "Focus on nearby inputs, not the input itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t78pwe",
+      "kind": "concept",
+      "front": "When does a two-sided limit exist at a point?",
+      "back": "When the **left-hand and right-hand limits** approach the same height. If the two sides approach different heights, the two-sided limit does not exist, whatever the function value there.",
+      "hint": "Compare what each side approaches.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wtjkag",
+      "kind": "mistake",
+      "front": "A graph has a filled point at (2, 7). Does this mean the limit as x approaches 2 is 7?",
+      "back": "No. The **filled point** gives f(2), which may differ from the limit. Trace the curve toward x=2 from both sides to find the limit.",
+      "hint": "A point shows one output, not what the curve approaches.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1b434i1",
+      "kind": "term",
+      "front": "What is a left-hand limit?",
+      "back": "The **output** a function approaches as inputs get closer to a value from smaller inputs (from below).",
+      "hint": "Think of approaching from the left on a graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ietup2",
+      "kind": "term",
+      "front": "What is a right-hand limit?",
+      "back": "The **output** a function approaches as inputs get closer to a value from larger inputs (from above).",
+      "hint": "Think of approaching from the right on a graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uqxmak",
+      "kind": "process",
+      "front": "How do you find a limit from a graph?",
+      "back": "1. Trace toward the chosen input from the left. 2. Trace from the right. 3. If both approach the same **height**, that height is the limit. Ignore the point at the input itself.",
+      "hint": "Work from both directions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11kavpr",
+      "kind": "process",
+      "front": "How do you read a limit from a table?",
+      "back": "Choose inputs increasingly close to the target, on both sides, and watch the outputs. If both sides approach the same value, that is the **suggested** limit.",
+      "hint": "Keep inputs on both sides of the target.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hyzas7",
+      "kind": "formula",
+      "front": "What simplified form does $\\frac{x^2-4}{x-2}$ take when $x\\ne 2$?",
+      "back": "$x+2$. Factor the numerator as $(x-2)(x+2)$ and **cancel** the common $x-2$ factor, which is valid because $x\\ne 2$.",
+      "hint": "Factor the numerator first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q5ck66",
+      "kind": "example",
+      "front": "For $g(x)=\\frac{x^2-4}{x-2}$ when $x\\ne 2$, find $g(1.99)$ and the limit this suggests at $x=2$.",
+      "back": "$g(1.99)=3.99$, since $g(x)=x+2$ for $x\\ne 2$. Outputs approach **4**, so $\\lim_{x\\to 2}g(x)=4$.",
+      "hint": "Use the simplified form $x+2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cq7v4p",
+      "kind": "example",
+      "front": "For $h(x)=x+2$ when $x<2$ and $h(x)=x+3$ when $x>2$, what is the two-sided limit at $x=2$?",
+      "back": "It **does not exist**. Left-side outputs approach 4 and right-side outputs approach 5. The values of $h(2)$ do not matter.",
+      "hint": "Find each side's limit separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sq6f66",
+      "kind": "mistake",
+      "front": "Why is checking only one side of $x=2$ not enough to find a two-sided limit?",
+      "back": "A two-sided limit needs **matching** approaches from both sides. One side alone can suggest a height that the other side does not share.",
+      "hint": "Think about what a limit requires from both directions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10lwbea",
+      "kind": "concept",
+      "front": "Why draw an open point when turning an equation into a graph?",
+      "back": "An **open point** marks the height the outputs approach when that height is not the function value at that input.",
+      "hint": "Compare the approaching height with the value at the input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cfwxp8",
+      "kind": "process",
+      "front": "What should you state when comparing a limit across representations?",
+      "back": "State the **input** approached, each side's approaching output, and whether the two sides agree.",
+      "hint": "Think of three things to say.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "e-3",
+  "topicCode": "E.3",
+  "topicName": "Radioactive decay",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:46.932Z",
+  "cards": [
+    {
+      "id": "1cuhqen",
+      "kind": "concept",
+      "front": "Why can you not predict when one particular unstable nucleus will decay?",
+      "back": "Radioactive decay is **spontaneous**, so the time of any single decay is unpredictable. Temperature, pressure and chemical reactions do not change it.",
+      "hint": "Think about what outside conditions can and cannot change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ibsemc",
+      "kind": "term",
+      "front": "What is the half-life of a radioactive sample?",
+      "back": "The **half-life** is the time taken for half the undecayed nuclei in a large sample to decay. The sample's activity also halves in this time.",
+      "hint": "It describes a large sample, not one nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l8qppq",
+      "kind": "formula",
+      "front": "Which equation gives the number of undecayed nuclei N left after time t?",
+      "back": "$N=N_0(1/2)^{t/T_{1/2}}$, where $N_0$ is the starting number, $t$ the elapsed time and $T_{1/2}$ the half-life in the same time units. Activity follows the same pattern: $R=R_0(1/2)^{t/T_{1/2}}$.",
+      "hint": "Work out the number of half-lives first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tk6wgb",
+      "kind": "term",
+      "front": "What is ionising radiation?",
+      "back": "**Ionising** radiation carries enough energy to remove electrons from atoms or molecules it encounters.",
+      "hint": "Think about what it does to atoms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cz6blh",
+      "kind": "term",
+      "front": "What is alpha radiation made of?",
+      "back": "**Helium** nuclei, each containing two protons and two neutrons.",
+      "hint": "Count the protons and neutrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kmrzkj",
+      "kind": "concept",
+      "front": "What happens inside a nucleus during beta-minus decay?",
+      "back": "A **neutron** changes into a proton and an electron is emitted. The nucleon number stays the same and the proton number rises by one.",
+      "hint": "Which particle changes into which?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rxy3z3",
+      "kind": "concept",
+      "front": "What does beta-plus decay produce, and what happens to the proton number?",
+      "back": "A **positron** is produced when a proton changes into a neutron. The proton number falls by one.",
+      "hint": "Compare with beta-minus decay.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01h6pf8",
+      "kind": "formula",
+      "front": "Write the general equation for alpha decay of nucleus X, with nucleon number A and proton number Z.",
+      "back": "${}^{A}_{Z}X\\rightarrow{}^{A-4}_{Z-2}Y+{}^{4}_{2}\\mathrm{He}$. The alpha particle takes away four nucleons and two protons.",
+      "hint": "Check both the superscripts and subscripts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "187mkvn",
+      "kind": "process",
+      "front": "What are the steps for writing and checking a decay equation?",
+      "back": "1) Write the original nucleus. 2) Add the products and any radiation. 3) Check that the **nucleon numbers** add up on both sides. 4) Check that the **proton numbers** (charge) add up. 5) Include a neutrino or antineutrino for beta decay.",
+      "hint": "There are two conservation checks.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ol6nx5",
+      "kind": "mistake",
+      "front": "A student says gamma emission changes the proton number of a nucleus. What is wrong with this?",
+      "back": "A **gamma** photon carries energy away from the nucleus but does not change its proton or nucleon number.",
+      "hint": "What does a gamma photon carry?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wnoxtr",
+      "kind": "mistake",
+      "front": "A student finds the remaining activity by taking away half the original activity each half-life. Why is this wrong?",
+      "back": "You must **halve the activity that remains**, not the original. Each half-life, the amount still present falls by half of what is there at that moment.",
+      "hint": "Which value gets halved each time?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kxflo8",
+      "kind": "example",
+      "front": "A sample has an initial activity of 800 Bq and a half-life of 4 days. What is its activity after 12 days?",
+      "back": "**100 Bq**. There are 12/4 = 3 half-lives, so $R=800(1/2)^3=100\\,\\mathrm{Bq}$.",
+      "hint": "Start by finding the number of half-lives.",
+      "sectionId": "s4"
+    }
+  ]
+}

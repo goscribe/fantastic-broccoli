@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-16",
+  "topicCode": "1.16",
+  "topicName": "Intermediate value theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:55.230Z",
+  "cards": [
+    {
+      "id": "1mgahi8",
+      "kind": "concept",
+      "front": "What does the intermediate value theorem guarantee for a function $f$ that is continuous on $[a,b]$?",
+      "back": "A **continuous** function reaches every value $N$ between $f(a)$ and $f(b)$ at some point $c$ in $[a,b]$. It guarantees the value is reached, but not where.",
+      "hint": "Think about tracing a graph from one endpoint to the other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ojggyj",
+      "kind": "process",
+      "front": "How do you use the intermediate value theorem to show that $f(x)=N$ has a solution?",
+      "back": "Name an interval, check $f$ is **continuous** on it, calculate both endpoint values, then confirm $N$ lies between them. The theorem then guarantees a solution inside the interval.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00m9w1a",
+      "kind": "mistake",
+      "front": "A student says opposite endpoint signs always prove a root exists. Why is that wrong?",
+      "back": "Opposite signs only help if the function is **continuous** across the whole closed interval. A jump can skip zero even when the endpoint signs are opposite.",
+      "hint": "Think about a graph with a gap.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i66na0",
+      "kind": "example",
+      "front": "Show that $f(x)=x^2-2$ has a root between 1 and 2. What are $f(1)$ and $f(2)$?",
+      "back": "$f(1)=-1$ and $f(2)=2$. Since $f$ is a polynomial, it is continuous, and $-1<0<2$, so a root $c$ in $(1,2)$ exists.",
+      "hint": "Substitute each endpoint into the function.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12u3u04",
+      "kind": "term",
+      "front": "What is a closed interval?",
+      "back": "A **closed interval** $[a,b]$ includes both endpoints $a$ and $b$.",
+      "hint": "Square brackets matter.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e02rzr",
+      "kind": "term",
+      "front": "What is a root of a function $f$?",
+      "back": "A **root** is an input $c$ for which $f(c)=0$.",
+      "hint": "Where does the graph cross the horizontal axis?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ftv6gt",
+      "kind": "term",
+      "front": "What is a discontinuity?",
+      "back": "A **discontinuity** is a point where a function fails to be continuous, such as a jump in its graph.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uvgovm",
+      "kind": "concept",
+      "front": "Why is continuity essential for the intermediate value theorem?",
+      "back": "A **discontinuity** can let a graph jump over a value. Without continuity across the interval, the function may never equal $N$ even when $N$ lies between the endpoint values.",
+      "hint": "Consider a step function that jumps from -1 to 1 at 0.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0aguna0",
+      "kind": "example",
+      "front": "Show that $f(x)=x^3+x-1$ has a root in $(0,1)$. What are $f(0)$ and $f(1)$?",
+      "back": "$f(0)=-1$ and $f(1)=1$. $f$ is a polynomial, so it is continuous on $[0,1]$, and zero lies between $-1$ and $1$, so a root exists in $(0,1)$.",
+      "hint": "Check the sign of each endpoint value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yked07",
+      "kind": "concept",
+      "front": "Does the intermediate value theorem tell you how many solutions $f(x)=N$ has?",
+      "back": "No. It is an **existence claim**: at least one input gives $N$. It does not rule out other inputs with the same value, so there may be more than one solution.",
+      "hint": "Existence is not the same as counting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i4exh9",
+      "kind": "mistake",
+      "front": "For $h(x)=x^2-1$ on $[-2,2]$, both endpoint values equal 3. Can the theorem show a root there?",
+      "back": "No. Zero is not between the **endpoint values**, so the theorem gives no conclusion. Choose endpoints that bracket zero instead, such as $[0,2]$, where $h(0)=-1$ and $h(2)=3$.",
+      "hint": "Is zero between the two endpoint values?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rqh8f9",
+      "kind": "term",
+      "front": "What is an existence claim?",
+      "back": "An **existence claim** says at least one input meeting a stated condition occurs. It does not identify that input or count all solutions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ew7u55",
+      "kind": "concept",
+      "front": "Why is the intermediate value theorem useful even when solving an equation exactly is hard?",
+      "back": "It guarantees a solution exists in a chosen interval using only continuity and endpoint values, without finding the solution itself.",
+      "hint": "Focus on what is guaranteed, not the exact value.",
+      "sectionId": "s4"
+    }
+  ]
+}

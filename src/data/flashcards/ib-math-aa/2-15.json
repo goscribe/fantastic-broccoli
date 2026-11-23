@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-15",
+  "topicCode": "2.15",
+  "topicName": "Solving inequalities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:18.575Z",
+  "cards": [
+    {
+      "id": "02v49nx",
+      "kind": "concept",
+      "front": "What do critical values do when solving a polynomial inequality?",
+      "back": "They are the $x$-values where the expression is zero or undefined. They split the number line into **intervals**, and the expression keeps one sign within each interval.",
+      "hint": "Think about where the sign of the expression can change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dqrx0m",
+      "kind": "process",
+      "front": "What are the steps for solving a quadratic or polynomial inequality?",
+      "back": "Move all terms to one side, factorise, find the critical values, test one value in each interval, then keep the intervals that match the inequality.",
+      "hint": "Five steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bdv3eu",
+      "kind": "mistake",
+      "front": "What goes wrong when you multiply both sides of an inequality by a negative number?",
+      "back": "You must **reverse** the inequality sign. For example, $-2x<6$ gives $x>-3$, not $x<-3$.",
+      "hint": "Check the sign of what you multiply by.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gtwdlc",
+      "kind": "term",
+      "front": "What is an inequality?",
+      "back": "An **inequality** is a statement that one expression is less than, greater than, or equal to another, using $<$, $\\le$, $>$ or $\\ge$. Its solutions form an interval on the number line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09reb61",
+      "kind": "term",
+      "front": "What is a rational function?",
+      "back": "A **rational function** is a quotient of two polynomials. Values that make the denominator zero are excluded from its domain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jqumxq",
+      "kind": "example",
+      "front": "Solve $x^2-x-6>0$.",
+      "back": "$x<-2$ or $x>3$. Factorise to $(x-3)(x+2)>0$. The parabola opens upwards, so it is above the axis outside the roots, and both critical values are excluded.",
+      "hint": "Factorise first, then see where the parabola is above the axis.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mtprjj",
+      "kind": "mistake",
+      "front": "Why should you not multiply both sides of a rational inequality by $x+2$?",
+      "back": "Its sign changes with $x$, so the inequality may **reverse** for some values. Use a sign table instead.",
+      "hint": "What is the sign of the denominator?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f7yu26",
+      "kind": "example",
+      "front": "Solve $\\frac{x-1}{x+2}\\le0$.",
+      "back": "$-2<x\\le1$. The fraction is negative between the critical values. $x=1$ is included because it makes the fraction zero, and $x=-2$ is excluded.",
+      "hint": "Find the zeros of the numerator and the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hllgsu",
+      "kind": "concept",
+      "front": "What does a quadratic with a positive $x^2$ coefficient look like when sketched?",
+      "back": "It opens **upwards**. It lies below the $x$-axis between the roots and above it outside them.",
+      "hint": "Picture a U-shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qyk5k9",
+      "kind": "concept",
+      "front": "Why does a repeated factor such as $(x-2)^2$ not change the sign of an expression?",
+      "back": "A squared factor is never negative, so it **never changes sign**. The expression keeps the same sign on either side of that value.",
+      "hint": "Think about what a square can be.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hacb5c",
+      "kind": "concept",
+      "front": "How do you write $-2\\le x<3$ in interval notation?",
+      "back": "$[-2,3)$. **Square brackets** include an end value and **round brackets** exclude it.",
+      "hint": "Which end value is included?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "066ix3z",
+      "kind": "concept",
+      "front": "How do you solve $f(x)>g(x)$ using graphs?",
+      "back": "Sketch both graphs on the same axes and find where they intersect. Then read off the $x$-values where the graph of $f$ lies **above** the graph of $g$.",
+      "hint": "Look for where one curve is higher.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rugygj",
+      "kind": "example",
+      "front": "Solve $\\frac{2}{x}>1$ graphically.",
+      "back": "$0<x<2$. The curve $y=\\frac{2}{x}$ meets $y=1$ at $x=2$ and lies above the line for $0<x<2$. Negative $x$ values fail.",
+      "hint": "Find the intersection point first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pdfzfl",
+      "kind": "mistake",
+      "front": "Should critical values be included in the answer to a strict inequality?",
+      "back": "No. **Strict** inequalities using $<$ or $>$ exclude critical values. Inequalities using $\\le$ or $\\ge$ include them, but a zero of the denominator is always excluded.",
+      "hint": "Look at the inequality symbol.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-4",
+  "topicCode": "8.4",
+  "topicName": "Wetlands and mangroves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:52.858Z",
+  "cards": [
+    {
+      "id": "16w621o",
+      "kind": "term",
+      "front": "What is a wetland?",
+      "back": "A **wetland** is an area where water covers or soaks the soil for much of the year, so its plants are adapted to wet conditions.",
+      "hint": "Picture a marsh underfoot and how long the ground stays that way.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vjv943",
+      "kind": "concept",
+      "front": "How does slow water in a wetland clean runoff?",
+      "back": "Slow flow lets suspended **sediment** settle, and pollutants stuck to the particles settle with it. Plant roots also take up dissolved nitrogen and phosphorus.",
+      "hint": "Think about what happens to moving water when it spreads among plant stems.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e4nc0g",
+      "kind": "concept",
+      "front": "How do mangrove roots protect a coastline during a storm?",
+      "back": "The roots **slow incoming waves** and hold sediment in place, which reduces erosion and weakens the storm surge that reaches land.",
+      "hint": "Think about the first thing a storm's water meets on a mangrove coast.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ywse6",
+      "kind": "term",
+      "front": "What is a nursery habitat?",
+      "back": "A **nursery habitat** is a sheltered area where the young of many species grow, with food and some protection from predators.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jn3x1a",
+      "kind": "term",
+      "front": "Which process converts nitrate into nitrogen gas in wetland soils?",
+      "back": "**Denitrification** is carried out by bacteria in low-oxygen conditions. The nitrogen gas it produces escapes to the air.",
+      "hint": "Think about which soil condition suits these bacteria.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ht3i8f",
+      "kind": "mistake",
+      "front": "What is the mistake in thinking a wetland removes every pollutant?",
+      "back": "Wetlands do not remove everything. Heavy loads can overwhelm them, and some **toxins** stay trapped in sediment and plant tissue.",
+      "hint": "Think about the limits of any natural filter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10hbdcs",
+      "kind": "concept",
+      "front": "Why does losing one wetland remove several benefits at once?",
+      "back": "Wetlands provide several services together, so draining one reduces **floodwater storage**, water filtering, and wildlife habitat at the same time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08p304q",
+      "kind": "concept",
+      "front": "Which coastal activity leads to the clearing of mangroves?",
+      "back": "Clearing mangroves for **shrimp ponds** and coastal development removes the trees that protect shorelines and shelter young fish.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t1217v",
+      "kind": "concept",
+      "front": "Why can rising sea level drown some wetlands?",
+      "back": "Wetlands that cannot **move inland** are flooded as the sea rises and are lost, because there is nowhere for them to go.",
+      "hint": "Think about what a wetland needs to do as water levels change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f5ffo6",
+      "kind": "concept",
+      "front": "Why is protecting existing wetlands better than rebuilding them?",
+      "back": "Protection is **cheaper and more effective** than restoration, because damaged wetlands take time and money to repair.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1x9rzwc",
+      "kind": "mistake",
+      "front": "Why does replanting seedlings alone often fail in a damaged wetland?",
+      "back": "Seedlings need the right **water depth and salt level** to survive, so natural water flow must be restored first.",
+      "hint": "Think about what a seedling needs from its surroundings besides the ground it grows in.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xazbnc",
+      "kind": "term",
+      "front": "What is a constructed wetland?",
+      "back": "A **constructed wetland** is a human-made wetland designed to treat polluted water using plants, soil, and microbes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00ussa9",
+      "kind": "concept",
+      "front": "How does a mangrove forest's water differ from a freshwater marsh's water?",
+      "back": "Mangrove water is **salty or mixed** with tides, while freshwater marsh water comes from rain, rivers, or groundwater.",
+      "hint": "Think about where each type sits on the land, inland or along the coast.",
+      "sectionId": "s1"
+    }
+  ]
+}

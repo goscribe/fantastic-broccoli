@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-10",
+  "topicCode": "8.10",
+  "topicName": "Disc method about other axes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:53.124Z",
+  "cards": [
+    {
+      "id": "1ghk3ud",
+      "kind": "concept",
+      "front": "When a region spins around a shifted axis, what sets the radius of each disc?",
+      "back": "The **perpendicular distance** from the axis of rotation to the region's outer edge. The disc area is still $\\pi r^2$; only the way you find $r$ changes.",
+      "hint": "Measure from the line of rotation, not from the x-axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1awhd5x",
+      "kind": "formula",
+      "front": "For a region spinning around the horizontal line $y=k$, what is the volume integral using vertical slices?",
+      "back": "$V=\\pi\\int_a^b[f(x)-k]^2\\,dx$, where $a$ and $b$ are the left and right ends of the region and $f(x)-k$ is the radius. Squaring removes the need for an absolute value.",
+      "hint": "Vertical slices have thickness $dx$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12sagon",
+      "kind": "formula",
+      "front": "For a region spinning around the vertical line $x=h$, what is the volume integral using horizontal slices?",
+      "back": "$V=\\pi\\int_c^d[g(y)-h]^2\\,dy$, where $x=g(y)$ is the curve, $c$ and $d$ are the bottom and top of the region, and $g(y)-h$ is the radius.",
+      "hint": "Write the curve as x in terms of y first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18vfzdd",
+      "kind": "term",
+      "front": "What is the disc method?",
+      "back": "A way to find a solid's volume by adding the areas of **circular cross sections** perpendicular to the axis of rotation, each with area $\\pi r^2$.",
+      "hint": "Think of thin circular slices stacked along the axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fy9wzl",
+      "kind": "term",
+      "front": "What is a radius function?",
+      "back": "A **radius function** gives the perpendicular distance from the axis of rotation to the region's outer edge at each slice.",
+      "hint": "It depends on the slice position.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ea1fxp",
+      "kind": "mistake",
+      "front": "Why is using a curve's coordinate as the radius a common error?",
+      "back": "It ignores the axis. The radius must be the **distance from the axis of rotation**, so you must measure from the line, such as $|f(x)-k|$ for $y=k$.",
+      "hint": "Check where the line of rotation is first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dqd2a4",
+      "kind": "concept",
+      "front": "When do rotated slices form solid discs rather than rings?",
+      "back": "When each slice runs from the **axis of rotation** to the curve, so the rotated slice fills the circle with no empty center. If the region does not touch the axis, you get rings.",
+      "hint": "Look at whether the region reaches the axis along every slice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mg5h6i",
+      "kind": "mistake",
+      "front": "Which slice thickness belongs with a vertical axis $x=h$?",
+      "back": "Use $dy$, with **horizontal slices**. Using $dx$ with a vertical axis mixes up the slicing variable and the radius direction, so the integral is set up wrongly.",
+      "hint": "Name the slicing variable before writing the radius.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ey9s40",
+      "kind": "process",
+      "front": "What are the steps to find a disc volume around a shifted axis?",
+      "back": "Identify the axis and the outer curve. Find the perpendicular distance at a typical slice. Confirm the slice reaches the axis. Square the radius, integrate over the correct bounds, and give the answer in cubic units.",
+      "hint": "Start with the axis, then the radius, then the integral.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jr74de",
+      "kind": "example",
+      "front": "Find the volume when the region bounded by $y=x+1$, $y=3$, and $x=0$ spins around $y=3$.",
+      "back": "$V=\\frac{8\\pi}{3}$ cubic units. The right endpoint is $x=2$, the radius is $2-x$, and $V=\\pi\\int_0^2(2-x)^2\\,dx$.",
+      "hint": "Find where $x+1=3$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w5d33h",
+      "kind": "example",
+      "front": "Set up the volume for the region between $x=y^2$ and $x=4$, for $0\\le y\\le2$, spun around $x=4$.",
+      "back": "$V=\\pi\\int_0^2(4-y^2)^2\\,dy$. The radius is $4-y^2$, measured horizontally from the axis $x=4$ to the curve.",
+      "hint": "Use horizontal slices and the distance from $x=4$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0itehnl",
+      "kind": "term",
+      "front": "What is a volume integral?",
+      "back": "A **volume integral** adds the cross-sectional areas over the interval the solid occupies, giving the solid's volume.",
+      "hint": "It sums slice areas along one variable.",
+      "sectionId": "s3"
+    }
+  ]
+}

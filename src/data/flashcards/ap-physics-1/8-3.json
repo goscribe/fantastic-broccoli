@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Fluids and Newton's laws",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:00.709Z",
+  "cards": [
+    {
+      "id": "19hmll6",
+      "kind": "concept",
+      "front": "Why does a fluid push upward on a submerged object?",
+      "back": "Because **pressure increases with depth**, the fluid pushes up on the bottom of the object harder than it pushes down on the top. The net upward push is the buoyant force.",
+      "hint": "Compare the pressure at the top and the bottom of the object.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vpb4fx",
+      "kind": "formula",
+      "front": "What is the formula for buoyant force, and what does each symbol mean?",
+      "back": "**Archimedes' principle**: $F_B=\\rho_f V g$. $\\rho_f$ is fluid density in $\\mathrm{kg/m^3}$, $V$ is the volume of fluid displaced in $\\mathrm{m^3}$, and $g$ is $9.8\\ \\mathrm{m/s^2}$. The object's own mass does not appear.",
+      "hint": "The result is a force, so the unit is newtons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nqrr6s",
+      "kind": "concept",
+      "front": "For a fully submerged object, how do densities decide whether it rises, stays put or sinks?",
+      "back": "Compare the **object density** $\\rho_o$ with the fluid density $\\rho_f$. If $\\rho_o<\\rho_f$ it rises, if they are equal it stays at rest, and if $\\rho_o>\\rho_f$ it sinks. Volume and $g$ cancel for a solid object.",
+      "hint": "Write the weight as $\\rho_o V g$ and the buoyant force as $\\rho_f V g$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0de19kc",
+      "kind": "term",
+      "front": "What is the buoyant force?",
+      "back": "The **net upward force** a fluid exerts on a submerged or floating object, because pressure increases with depth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hb7v6a",
+      "kind": "process",
+      "front": "What is the first step when solving a force or motion problem involving a fluid?",
+      "back": "**Draw a free-body diagram**: label every force on the object, such as weight downward, buoyant force upward and drag opposite the motion, then say which force is larger.",
+      "hint": "Start with the object and its forces before any equation."
+    },
+    {
+      "id": "1299r58",
+      "kind": "mistake",
+      "front": "A student says buoyant force only acts on floating objects. Why is this wrong?",
+      "back": "A **fully submerged** object that sinks still feels an upward buoyant force. Buoyant force acts on any object in a fluid, whether it floats, sinks or is held under.",
+      "hint": "Think about a stone dropped into a pond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z5ppju",
+      "kind": "mistake",
+      "front": "Which density should go into the buoyant force formula, and what mistake should you avoid?",
+      "back": "Use the **fluid** density, not the object's density. Use only the volume below the fluid surface, which is the displaced volume.",
+      "hint": "Check which material is doing the pushing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t1y1yg",
+      "kind": "concept",
+      "front": "What is true about the forces on a floating object at rest?",
+      "back": "The **net force is zero**, so the buoyant force equals the weight, $F_B=mg$. Only part of the object is under water.",
+      "hint": "Think about what being at rest means for net force.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q0muil",
+      "kind": "formula",
+      "front": "What fraction of a floating object is submerged, and what does the formula say?",
+      "back": "$\\frac{V_{sub}}{V}=\\frac{\\rho_o}{\\rho_f}$: the **submerged fraction** equals the object's density divided by the fluid's density. Wood at $600\\ \\mathrm{kg/m^3}$ in water has 60% submerged.",
+      "hint": "Divide the two densities.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mi0tn0",
+      "kind": "example",
+      "front": "A block of volume $0.0030\\ \\mathrm{m^3}$ is fully submerged in water. What is the buoyant force? Use $\\rho_f=1000\\ \\mathrm{kg/m^3}$ and $g=9.8\\ \\mathrm{m/s^2}$.",
+      "back": "$F_B=(1000)(0.0030)(9.8)=29.4\\ \\mathrm{N}$ upward.",
+      "hint": "Use $F_B=\\rho_f V g$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06ao7ua",
+      "kind": "example",
+      "front": "A 1.5 kg block of volume $0.0020\\ \\mathrm{m^3}$ is held fully under water, then released from rest. Neglecting drag, what is its initial acceleration?",
+      "back": "About **3.3 m/s^2 upward**. The buoyant force is 19.6 N up and the weight is 14.7 N down, so the net force is 4.9 N up and $a=4.9/1.5$.",
+      "hint": "Find both forces first, then net force divided by mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0chwnxa",
+      "kind": "term",
+      "front": "What is drag force, and which way does it point?",
+      "back": "The **fluid force that opposes an object's motion** through it. It always points opposite the object's velocity and generally grows as speed increases.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lupgz1",
+      "kind": "concept",
+      "front": "Why does a ball sinking through oil stop speeding up?",
+      "back": "As it speeds up, **drag grows**. Eventually drag plus buoyant force balances the weight, the net force is zero, and the ball moves at a constant **terminal velocity**.",
+      "hint": "Think about what happens to drag as speed rises.",
+      "sectionId": "s5"
+    }
+  ]
+}

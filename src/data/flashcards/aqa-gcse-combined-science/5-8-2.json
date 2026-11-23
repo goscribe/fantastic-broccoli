@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-8-2",
+  "topicCode": "5.8.2",
+  "topicName": "Tests for common gases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:55.054Z",
+  "cards": [
+    {
+      "id": "17zhf1x",
+      "kind": "process",
+      "front": "What are the steps for testing a gas to see whether it is hydrogen?",
+      "back": "Hold a **lit splint** at the mouth of the container. A **squeaky pop** means hydrogen is present. The pop comes from hydrogen reacting rapidly with oxygen in the air.",
+      "hint": "Think about what you bring to the container and what you watch for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fo8v2s",
+      "kind": "concept",
+      "front": "Why does a glowing splint relight when placed in oxygen?",
+      "back": "Oxygen **supports burning**, so the glowing wood catches fire again.",
+      "hint": "Compare what oxygen does for a fire with ordinary air.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "015s8ue",
+      "kind": "process",
+      "front": "How do you test a gas for carbon dioxide, and what is the positive result?",
+      "back": "Bubble the gas through **limewater**. If it turns from clear to **milky**, carbon dioxide is present.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05x6q5d",
+      "kind": "process",
+      "front": "What is the test for chlorine gas, and what is its complete positive result?",
+      "back": "Expose **damp blue litmus paper** to the gas. It turns red first, then is bleached white.",
+      "hint": "Consider what the paper needs in order to change colour.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0nrrim4",
+      "kind": "term",
+      "front": "What is a lit splint?",
+      "back": "A wooden stick with a **burning flame** at its tip.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a70o7u",
+      "kind": "term",
+      "front": "What is a glowing splint?",
+      "back": "A wooden stick whose **flame** has gone out while its tip stays hot and glowing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u31zma",
+      "kind": "term",
+      "front": "What is limewater?",
+      "back": "A clear **calcium hydroxide** solution that turns milky when carbon dioxide passes through it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1laect8",
+      "kind": "mistake",
+      "front": "Why must you not use a lit splint in the oxygen test?",
+      "back": "A flame does not relight the splint. It must be **glowing** with no flame before it enters the gas.",
+      "hint": "Think about the difference between a flame and a glow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1izbz7w",
+      "kind": "mistake",
+      "front": "Why is seeing a flame alone not enough to identify hydrogen?",
+      "back": "The positive result is a **squeaky pop** when a lit splint is held at the container, so a flame alone does not identify hydrogen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ask14q",
+      "kind": "mistake",
+      "front": "Why will holding the delivery tube above the limewater fail the carbon dioxide test?",
+      "back": "The gas must reach the liquid and bubble through it. Above the liquid, the **intended result** will not occur.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "116lk3p",
+      "kind": "mistake",
+      "front": "Why must the blue litmus paper be damp in the chlorine test?",
+      "back": "The colour changes require **moisture**, so dry paper will not give the correct result.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w2x418",
+      "kind": "mistake",
+      "front": "What safety precaution applies when testing for chlorine, and why?",
+      "back": "Do not **breathe in** or smell the gas. Chlorine is toxic, so observe the paper with appropriate ventilation and supervision.",
+      "sectionId": "s4"
+    }
+  ]
+}

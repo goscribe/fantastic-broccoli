@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Population genetics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:58.736Z",
+  "cards": [
+    {
+      "id": "14uhpcy",
+      "kind": "concept",
+      "front": "How does natural selection change allele frequencies in a population?",
+      "back": "Inherited differences affect **reproductive success**. Individuals with a beneficial inherited trait leave more offspring, so their alleles become more common over generations.",
+      "hint": "Follow the offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v6qesm",
+      "kind": "concept",
+      "front": "How is genetic drift different from natural selection?",
+      "back": "Drift is a change in allele frequency caused by **chance** events, not because alleles improve reproductive success. Drift has a stronger effect in small populations.",
+      "hint": "Ask whether the allele helps reproduction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05mwo36",
+      "kind": "example",
+      "front": "A population has 10 AA, 8 Aa, and 2 aa individuals. What is the frequency of allele A?",
+      "back": "**0.70**, or 70%. There are $2(10)+8=28$ A copies out of $2(20)=40$ total gene copies, so $28/40=0.70$.",
+      "hint": "Count both copies in each diploid individual.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f3tqcw",
+      "kind": "term",
+      "front": "What is a gene pool?",
+      "back": "A **gene pool** is the complete set of alleles present in a population.",
+      "hint": "Think of all alleles together, not one individual.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uq6wpy",
+      "kind": "mistake",
+      "front": "Why is dividing the number of AA individuals by population size wrong when finding allele A's frequency?",
+      "back": "It leaves out **heterozygotes**, which also carry an A allele. Count every A copy across all gene copies in the population.",
+      "hint": "Count the copies, not just the individuals with one genotype.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05q8n3w",
+      "kind": "concept",
+      "front": "Does a mutation arise because an organism needs a useful trait?",
+      "back": "No. A **mutation** is a change in DNA sequence. A heritable mutation can create a new allele, but it does not happen because the organism needs it.",
+      "hint": "Think about what drives a mutation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jaw8rr",
+      "kind": "term",
+      "front": "What is gene flow?",
+      "back": "**Gene flow** is the transfer of alleles between populations when migrants reproduce and their alleles enter the receiving gene pool.",
+      "hint": "What must migrants do for alleles to move?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eqmu48",
+      "kind": "mistake",
+      "front": "Is migration alone enough to cause gene flow?",
+      "back": "No. Migrants must **reproduce**. If migrants leave no offspring, their alleles never enter the receiving population's gene pool.",
+      "hint": "Where do the alleles need to end up?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16nxbgd",
+      "kind": "mistake",
+      "front": "Does natural selection produce the mutations a population needs to adapt?",
+      "back": "No. Selection changes the **frequencies** of existing heritable variants. It does not produce needed mutations.",
+      "hint": "Where do new alleles come from?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19htllb",
+      "kind": "concept",
+      "front": "Can an allele that helps in one environment also help in another?",
+      "back": "Not necessarily. **Fitness** depends on environment and genetic context, so an allele favored in one setting may not be favored in another.",
+      "hint": "Fitness is relative to surroundings.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fqyvti",
+      "kind": "term",
+      "front": "What is a bottleneck?",
+      "back": "A **bottleneck** is a sharp decrease in population size. The survivors may carry an unrepresentative sample of the former alleles.",
+      "hint": "Think of a narrow point the population passes through.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n6rg8v",
+      "kind": "term",
+      "front": "What is the founder effect?",
+      "back": "The **founder effect** occurs when a few individuals establish a new population whose allele frequencies differ from those of the population they left.",
+      "hint": "Think about who started the new population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "187yh2z",
+      "kind": "concept",
+      "front": "Why do drift, bottlenecks, and founder effects not need an allele to improve reproductive success?",
+      "back": "They change frequencies by **chance** through who reproduces or survives. Natural selection, by contrast, depends on inherited differences in reproductive success.",
+      "hint": "Compare chance with selection.",
+      "sectionId": "s4"
+    }
+  ]
+}

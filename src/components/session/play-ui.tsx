@@ -71,7 +71,7 @@ export function RunBadge({ run, className }: { run: number; className?: string }
   const { t } = useI18n();
   if (run < 2) return null;
   return (
-    <span key={run} className={cn("life-tick inline-flex items-center gap-1 text-[13px] font-extrabold tabular-nums text-foreground", className)} style={{ ["--i" as string]: 0 }}>
+    <span key={run} className={cn("life-tick inline-flex items-center gap-1 text-small font-extrabold tabular-nums text-foreground", className)} style={{ ["--i" as string]: 0 }}>
       <Flame aria-hidden className="size-4 text-[var(--flame)]" fill="currentColor" strokeWidth={1.5} />
       {t("finish.inARow").replace("{n}", String(run))}
     </span>
@@ -119,7 +119,7 @@ export function PlayDone({
       <div className="min-w-0 flex-1">
         <p className="life-rise text-[24px] font-extrabold leading-tight tracking-tight sm:text-[28px]">{title}</p>
         {sub && (
-          <p className="life-rise mt-1 text-[15.5px] font-semibold leading-snug text-muted-foreground" style={{ ["--i" as string]: 1 }}>
+          <p className="life-rise mt-1 text-ui font-semibold text-muted-foreground" style={{ ["--i" as string]: 1 }}>
             {sub}
           </p>
         )}

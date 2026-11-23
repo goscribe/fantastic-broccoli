@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-8",
+  "topicCode": "4.8",
+  "topicName": "Geography and climate",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:09.469Z",
+  "cards": [
+    {
+      "id": "1yu544q",
+      "kind": "concept",
+      "front": "Which factor has the biggest effect on climate, and why?",
+      "back": "**Latitude** has the biggest effect because it sets how directly sunlight strikes the surface. Average temperature generally falls from the equator toward the poles.",
+      "hint": "Think about where the warm and cold zones sit on a globe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19bc4qd",
+      "kind": "concept",
+      "front": "How does air temperature change as altitude rises?",
+      "back": "Air cools by about $6.5\\,^{\\circ}\\mathrm{C/km}$, a rate called the **lapse rate**. The air is thinner and farther from the warm ground, so it is cooler.",
+      "hint": "Think about what you notice when you climb a mountain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lehuu8",
+      "kind": "process",
+      "front": "How does a mountain range create a dry rain shadow?",
+      "back": "Moist air is forced **up the windward side**, cools, and drops its water as rain. It then sinks down the leeward side, warms, and holds little moisture, creating a **rain shadow**.",
+      "hint": "Start with the side of the range the wind reaches first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zt9okj",
+      "kind": "formula",
+      "front": "Which equation estimates the temperature change for a gain in altitude?",
+      "back": "$\\Delta T=-(6.5\\,^{\\circ}\\mathrm{C/km})\\,h$, where $\\Delta T$ is the temperature change in $^{\\circ}\\mathrm{C}$ and $h$ is the altitude gain in $\\mathrm{km}$.",
+      "hint": "Think about the direction temperature moves when altitude increases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1unetck",
+      "kind": "example",
+      "front": "A valley town at sea level is $30\\,^{\\circ}\\mathrm{C}$. Using a lapse rate of $6.5\\,^{\\circ}\\mathrm{C/km}$, what is the air temperature at 2.0 km?",
+      "back": "About $17\\,^{\\circ}\\mathrm{C}$. The change is $-(6.5)(2.0)=-13\\,^{\\circ}\\mathrm{C}$, and $30\\,^{\\circ}\\mathrm{C}-13\\,^{\\circ}\\mathrm{C}=17\\,^{\\circ}\\mathrm{C}$.",
+      "hint": "Work out the temperature change first, then combine it with the sea-level value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "078eln2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a mountain top is cold because it is closer to the Sun?",
+      "back": "The extra distance is tiny. The top is cold because the air there is thinner and cooler, being farther from the warm ground.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x80j4e",
+      "kind": "concept",
+      "front": "Why do coastal cities have smaller temperature swings than inland cities at the same latitude?",
+      "back": "Water heats and cools more slowly than land, so the ocean acts as a **heat reservoir** that smooths out temperature swings.",
+      "hint": "Compare how quickly water and land change temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o01ojg",
+      "kind": "term",
+      "front": "What is a maritime climate?",
+      "back": "A **maritime climate** is the climate of a coastal region, with mild winters, cool summers, and small seasonal temperature swings. Inland areas have a continental climate instead.",
+      "hint": "Think about where the ocean's influence is strongest.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02rzb0i",
+      "kind": "concept",
+      "front": "How does a warm ocean current affect the climate of a nearby coast?",
+      "back": "A warm current heats the air above it and adds moisture, so the coast tends to be milder than other places at similar latitudes.",
+      "hint": "Consider where warm currents carry heat from.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vkx271",
+      "kind": "term",
+      "front": "Which warm current keeps northwestern Europe milder than other places at similar latitudes?",
+      "back": "The **Gulf Stream**, a warm current in the North Atlantic that carries heat from the tropics toward higher latitudes.",
+      "hint": "Think about which ocean lies west of Europe.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "127rstl",
+      "kind": "concept",
+      "front": "How does a cold ocean current affect the climate of a nearby coast?",
+      "back": "A cold current flows toward the equator and cools the air above it. Cool air holds less water vapor, so the coast can be cool and dry.",
+      "hint": "Compare this with what a warm current does to the air above it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n1izcu",
+      "kind": "concept",
+      "front": "How does climate differ from weather?",
+      "back": "**Climate** is the long-term average of temperature and precipitation over many years, while weather can change within hours.",
+      "hint": "Think about the time scale over which scientists average conditions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10ome9y",
+      "kind": "term",
+      "front": "What is a climate zone?",
+      "back": "A **climate zone** is a broad region, often arranged by latitude, where temperature and precipitation follow a similar long-term pattern.",
+      "hint": "Think about how the tropical, desert, temperate and polar zones are placed on a map.",
+      "sectionId": "s1"
+    }
+  ]
+}

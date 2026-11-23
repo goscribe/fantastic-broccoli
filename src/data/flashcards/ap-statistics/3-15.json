@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-15",
+  "topicCode": "3.15",
+  "topicName": "Carrying out a chi-square test for two-way tables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:27.650Z",
+  "cards": [
+    {
+      "id": "0upmceo",
+      "kind": "concept",
+      "front": "What does the chi-square statistic measure, and why do large values count as evidence against H0?",
+      "back": "It measures how far the **observed** counts sit from the expected counts, summed over all cells. When $H_0$ is true, observed counts should sit close to expected counts, so large gaps suggest $H_0$ is wrong.",
+      "hint": "Think about what H0 predicts for each cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lozxb7",
+      "kind": "formula",
+      "front": "What is the chi-square statistic formula, and what do its symbols mean?",
+      "back": "$\\chi^2 = \\sum \\frac{(O - E)^2}{E}$, where $O$ is the **observed** count and $E$ is the **expected** count, summed over every cell. Squaring stops gaps canceling, and dividing by $E$ scales each gap to its cell size.",
+      "hint": "The sum runs over every cell in the table.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1axnmm3",
+      "kind": "process",
+      "front": "What are the steps to reach a decision in a chi-square test?",
+      "back": "Compare the **p-value** with $\\alpha$. Reject $H_0$ if the p-value is less than $\\alpha$; otherwise fail to reject. Then state the conclusion about the populations in context, using the variable names.",
+      "hint": "Two steps: compare, then conclude in context.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qjtxz3",
+      "kind": "process",
+      "front": "What are the steps for each cell's term in the chi-square sum?",
+      "back": "Subtract the expected count from the observed count, square the result, divide by the expected count, then add the terms from all cells. Keep extra decimals until the final rounding.",
+      "hint": "Follow the order: subtract, square, divide, add.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1utsddw",
+      "kind": "example",
+      "front": "For the freshmen pizza cell, observed 50 and expected 42, what is that cell's term in the chi-square sum?",
+      "back": "$\\frac{(50-42)^2}{42} \\approx 1.524$. Each of the six cells adds one such term, and the total for the lunch survey is $\\chi^2 \\approx 6.55$.",
+      "hint": "Square the gap first, then divide by the expected count.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uyfv0u",
+      "kind": "concept",
+      "front": "How do you find the degrees of freedom for a two-way table?",
+      "back": "Use $df = (r-1)(c-1)$, where $r$ is the number of **category rows** and $c$ is the number of **category columns**. Do not count the row or column of totals.",
+      "hint": "Leave out the totals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pbtj37",
+      "kind": "mistake",
+      "front": "What is the common error when finding degrees of freedom for a two-way table?",
+      "back": "Counting the totals as a row or column is **wrong**. It gives the wrong degrees of freedom and therefore the wrong p-value. Count only the categories.",
+      "hint": "Totals are not categories.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1itxc9z",
+      "kind": "example",
+      "front": "A lunch table has 2 rows and 3 columns of categories. What are the degrees of freedom?",
+      "back": "$df = (2-1)(3-1) = 2$.",
+      "hint": "Subtract 1 from each count, then multiply.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i8tns3",
+      "kind": "term",
+      "front": "What is the chi-square distribution?",
+      "back": "A **right-skewed** family of curves, one for each number of degrees of freedom, that models $\\chi^2$ when $H_0$ is true. As degrees of freedom increase, the curve shifts right and flattens.",
+      "hint": "Each df value gives its own curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kk50m6",
+      "kind": "concept",
+      "front": "Why is only the right tail used when finding a chi-square p-value?",
+      "back": "Larger gaps push $\\chi^2$ **upward**, so only large values count as evidence against $H_0$. Small values fit $H_0$ well.",
+      "hint": "Which direction do bigger gaps push the statistic?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h43yuc",
+      "kind": "example",
+      "front": "For $\\chi^2 = 6.55$ with $df = 2$, what is the p-value?",
+      "back": "About **0.038**, the area to the right of 6.55 on the chi-square curve with 2 degrees of freedom.",
+      "hint": "Use a calculator chi-square function or a table.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10sypyz",
+      "kind": "example",
+      "front": "In the lunch survey with $\\alpha = 0.05$ and a p-value of 0.038, what is the decision and conclusion?",
+      "back": "Since $0.038 < 0.05$, we **reject** $H_0$. There is convincing evidence that the distribution of favorite lunch is not the same for freshmen and seniors.",
+      "hint": "Compare the p-value with alpha first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nicldm",
+      "kind": "mistake",
+      "front": "Does a significant chi-square result show that every group differs from every other?",
+      "back": "No. It shows only that the **distributions are not all the same**. It does not show that each group differs from each other group.",
+      "hint": "What exactly did the test show?",
+      "sectionId": "s5"
+    }
+  ]
+}

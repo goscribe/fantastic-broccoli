@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Environmental effects on phenotype",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:39.316Z",
+  "cards": [
+    {
+      "id": "17kzitn",
+      "kind": "concept",
+      "front": "Why can two organisms with the same genotype end up with different phenotypes?",
+      "back": "Phenotype depends on **both** genotype and environment. Genes set which proteins an organism can make, while conditions affect when proteins are made and how the organism develops.",
+      "hint": "Think about what genes can and cannot control on their own.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wam8f6",
+      "kind": "concept",
+      "front": "How can an environmental signal change gene expression without changing the DNA sequence?",
+      "back": "Environmental signals can affect proteins that control **transcription**, changing how much mRNA a gene makes and often how much protein is made. Epigenetic changes can also alter how accessible a gene is.",
+      "hint": "Look at what happens between the gene and the protein.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "163jdfm",
+      "kind": "term",
+      "front": "What is a gene–environment interaction?",
+      "back": "A **gene–environment interaction** is when an environmental factor's effect on a trait depends on the organism's genotype. The genotype's effect can also depend on the environment.",
+      "hint": "The effect depends on both sides at once.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06lxmqm",
+      "kind": "term",
+      "front": "What is a genotype, and how does it differ from a phenotype?",
+      "back": "A **genotype** is an organism's set of inherited genetic variants. A **phenotype** is an observable characteristic, such as height or flower color.",
+      "hint": "One is inherited DNA; the other is what you can observe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cnz99e",
+      "kind": "term",
+      "front": "What are epigenetic changes?",
+      "back": "**Epigenetic changes** alter gene activity without changing the DNA sequence. For example, chemical modifications to DNA or associated proteins can change how accessible a gene is.",
+      "hint": "The key word is that the sequence stays the same.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y3sp4m",
+      "kind": "process",
+      "front": "What is the chain of events when an environmental signal changes how much protein a cell makes?",
+      "back": "1) An environmental signal acts on proteins that control **transcription**. 2) The amount of messenger RNA from the gene changes. 3) The amount of protein made often changes too.",
+      "hint": "Start with the signal and end with the protein.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xt01dq",
+      "kind": "term",
+      "front": "What are developmental conditions?",
+      "back": "**Developmental conditions** are the nutrients, signals, and physical surroundings a cell encounters as an organism grows. Differences in them can lead to different patterns of gene expression.",
+      "hint": "Think about what surrounds a cell while the organism grows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18glf1p",
+      "kind": "mistake",
+      "front": "A student says that because environment matters, genes do not really matter for a trait. What is wrong with this?",
+      "back": "Environmental influence does **not** mean genes are unimportant. Both genes and conditions can contribute to one trait, such as human height.",
+      "hint": "Can a trait have more than one cause?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cmbm2i",
+      "kind": "mistake",
+      "front": "A student says that epigenetic changes are the same as changes in the DNA sequence. Why is this wrong?",
+      "back": "Epigenetic changes alter gene **activity** without changing the DNA sequence. A DNA sequence change alters the order of DNA bases.",
+      "hint": "Compare what changes in each case.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11mq9a9",
+      "kind": "mistake",
+      "front": "A student says that people with the same genotype will always show the same phenotype. What is the correct idea?",
+      "back": "An identical genotype does **not** fix every detail of phenotype. Different environments or local cell signals can lead to different gene expression and different appearance.",
+      "hint": "Think about the conditions the individuals live in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z692pv",
+      "kind": "concept",
+      "front": "How does sunlight affect skin color in humans?",
+      "back": "Sunlight can increase **melanin** production in skin cells, darkening exposed skin. This happens without changing the DNA sequence, though inherited variants also shape skin pigmentation.",
+      "hint": "Light is the environmental factor here.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h59rfy",
+      "kind": "concept",
+      "front": "Why might genetically identical plants grown in different light look different?",
+      "back": "They have the same inherited DNA but receive different amounts of light. Light can affect growth or the **production of pigments** that color leaves or flowers, so their phenotypes differ.",
+      "hint": "The genes are the same; what is not the same?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02xhyoh",
+      "kind": "concept",
+      "front": "How do nutrition and genes both contribute to human height?",
+      "back": "Height is influenced by **many genetic variants** and also by nutrition and health during growth. A genetic capacity for growth does not guarantee it is reached under every condition.",
+      "hint": "Name the genetic part and the environmental part.",
+      "sectionId": "s3"
+    }
+  ]
+}

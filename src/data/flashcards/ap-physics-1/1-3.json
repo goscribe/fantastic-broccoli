@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Representing motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:24.087Z",
+  "cards": [
+    {
+      "id": "0bbtwtx",
+      "kind": "concept",
+      "front": "What does the slope of a position-time graph tell you about an object's motion?",
+      "back": "The **slope** gives the object's **velocity**. Slope is rise over run, so change in position divided by change in time.",
+      "hint": "Rise over run, with position on the vertical axis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "077465n",
+      "kind": "concept",
+      "front": "What does the area under a velocity-time graph represent?",
+      "back": "The **displacement** of the object. Area above the time axis counts as positive, and area below counts as negative.",
+      "hint": "Think about velocity times time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1upr23y",
+      "kind": "concept",
+      "front": "What does the slope of a velocity-time graph represent?",
+      "back": "The **acceleration**, found as change in velocity divided by change in time. A horizontal line means zero acceleration.",
+      "hint": "Compare with the slope of a position-time graph.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1szqpti",
+      "kind": "term",
+      "front": "What is a position-time graph?",
+      "back": "A **position-time graph** plots an object's position on the vertical axis against time on the horizontal axis. Each point gives position at one instant.",
+      "hint": "Position goes up the vertical axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "077csea",
+      "kind": "term",
+      "front": "What is the slope of a line on a graph?",
+      "back": "The **slope** is the change in the vertical quantity divided by the change in the horizontal quantity between two points on the line.",
+      "hint": "Think about how steep the line looks between two of its points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w9vq87",
+      "kind": "term",
+      "front": "What is the area under a graph?",
+      "back": "The **signed area** between the graph line and the horizontal axis. On a velocity-time graph, it equals displacement.",
+      "hint": "Include the sign: area below the axis is negative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nphm34",
+      "kind": "formula",
+      "front": "What is the formula for average velocity from a position-time graph, and what do its symbols mean?",
+      "back": "$v_{\\mathrm{avg}}=\\frac{\\Delta x}{\\Delta t}$, where $\\Delta x$ is change in position in metres and $\\Delta t$ is change in time in seconds. The unit is m/s.",
+      "hint": "Delta means change in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ma9i7e",
+      "kind": "formula",
+      "front": "What is the formula for acceleration from a velocity-time graph, and what are its units?",
+      "back": "$a=\\frac{\\Delta v}{\\Delta t}$, where $\\Delta v$ is change in velocity. The unit is m/s².",
+      "hint": "Think about how much velocity changes in each second.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aka93e",
+      "kind": "process",
+      "front": "What are the steps to describe a graph of motion?",
+      "back": "Go segment by segment. First state the **direction** from the sign of velocity. Then say whether the object speeds up, slows down or stays steady.",
+      "hint": "Direction first, then speed change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o4zm4s",
+      "kind": "mistake",
+      "front": "A position-time graph is a horizontal line, so the object moves sideways. True or false?",
+      "back": "False. A horizontal line on a position-time graph means the object is at **rest**. It is not a picture of the path.",
+      "hint": "Think about what the vertical axis measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gjcobu",
+      "kind": "mistake",
+      "front": "When finding displacement from a velocity-time graph, should you add or subtract area below the axis?",
+      "back": "**Subtract** area below the axis to get displacement. Add every area as a positive value only when finding total distance.",
+      "hint": "Displacement accounts for direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "125uj4x",
+      "kind": "formula",
+      "front": "Which kinematic equation links final velocity, initial velocity, acceleration and time?",
+      "back": "$v_x=v_{x0}+a_x t$, where $v_{x0}$ is initial velocity, $a_x$ is constant acceleration and $t$ is elapsed time. It holds only when acceleration is constant.",
+      "hint": "Velocity changes by acceleration times time.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "143z4jf",
+      "kind": "example",
+      "front": "A cart starts at 2.0 m with velocity 3.0 m/s and accelerates at 2.0 m/s² for 4.0 s. What is its final position?",
+      "back": "**30.0 m**. Using $x=x_0+v_{x0}t+\\frac{1}{2}a_x t^2$: $2.0+12.0+16.0=30.0$ m.",
+      "hint": "Substitute each value into the position equation.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1jgmz78",
+      "kind": "example",
+      "front": "A position-time graph is a straight line through (1.0 s, 2.0 m) and (5.0 s, 14.0 m). What is the velocity?",
+      "back": "**3.0 m/s** in the positive direction. Slope is $\\frac{14.0-2.0}{5.0-1.0}=3.0$ m/s, and the slope is positive.",
+      "hint": "Use two points to find the slope.",
+      "sectionId": "s2"
+    }
+  ]
+}

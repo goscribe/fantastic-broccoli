@@ -48,7 +48,7 @@ export const organizationJsonLd = {
   "@type": "Organization",
   name: siteName,
   url: siteUrl,
-  logo: absoluteUrl("/logo.png"),
+  logo: absoluteUrl("/brand/scribe-hp-logo-512.png"),
   sameAs: ["https://www.producthunt.com/products/scribe-19"],
 };
 
@@ -82,3 +82,8 @@ export function jsonLdScriptProps(data: object) {
     },
   } as const;
 }
+
+/** Link-preview image for the public marketing pages (1200×630: the afternoon scene, the cat, the headline on a white card). */
+export const landingOgImages = [
+  { url: "/og-landing-hp2.jpg", width: 1200, height: 630, alt: "Scribe: study from your notes, actually remember it" },
+];

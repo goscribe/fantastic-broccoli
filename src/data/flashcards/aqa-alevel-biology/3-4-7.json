@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-4-7",
+  "topicCode": "3.4.7",
+  "topicName": "Investigating diversity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:20.330Z",
+  "cards": [
+    {
+      "id": "0k89tmi",
+      "kind": "concept",
+      "front": "Why must quadrat locations be chosen randomly when sampling a habitat to compare species diversity?",
+      "back": "**Random** selection gives every possible location an equal chance, so you avoid choosing only unusually rich or poor areas.",
+      "hint": "Think about what happens to the result if you pick the spots yourself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nkhje1",
+      "kind": "formula",
+      "front": "What does each symbol in the index of diversity formula $d=\\frac{N(N-1)}{\\sum n(n-1)}$ stand for, and does the index have units?",
+      "back": "$N$ is the **total number of individuals** in the sample, $n$ is the number of individuals of each species, and the index has no units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gtxsu4",
+      "kind": "concept",
+      "front": "What is the difference between reliability and validity in a diversity investigation?",
+      "back": "**Reliability** is whether repeating the method gives similar results; **validity** is whether the method measures the diversity it is meant to measure.",
+      "hint": "Compare repeating a test with aiming at the right target.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fy9k75",
+      "kind": "term",
+      "front": "What is a polymorphic locus?",
+      "back": "A **polymorphic locus** is a position in the genome at which more than one allele occurs in the population.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fufhkl",
+      "kind": "term",
+      "front": "How does gel electrophoresis separate DNA fragments?",
+      "back": "It separates them by **size** as they move through a gel in an electric field.",
+      "hint": "Think about what the electric field does to charged fragments.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03ut793",
+      "kind": "mistake",
+      "front": "Why can identical gel electrophoresis patterns not prove that two individuals have identical DNA?",
+      "back": "The gel only shows fragment patterns, so **identical patterns** do not guarantee identical base sequences; differences may go undetected.",
+      "hint": "Consider exactly what the gel is able to measure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "097bp7l",
+      "kind": "example",
+      "front": "Calculate the index of diversity for a sample with 12, 5 and 3 individuals of three species.",
+      "back": "$N=20$ and $\\sum n(n-1)=158$, so $d=\\frac{20(19)}{158}=2.41$ with no units.",
+      "hint": "Find N first, then work out n(n-1) for each species.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08nq9ay",
+      "kind": "mistake",
+      "front": "Why is a large sample not automatically representative of a population?",
+      "back": "Sampling only easy-to-reach places can **bias** results however many samples are taken.",
+      "hint": "Think about where the samples came from, not how many there are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "120fdzi",
+      "kind": "concept",
+      "front": "Why can two sites with the same number of species have different index values?",
+      "back": "The index also uses the **abundance** of each species; more even abundances generally give a higher value.",
+      "hint": "Think about what else the index counts besides species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a39vzr",
+      "kind": "concept",
+      "front": "What can a diversity index not tell you when comparing two sites?",
+      "back": "It describes the organisms recorded but does not explain **why** the sites differ.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hfd6pl",
+      "kind": "concept",
+      "front": "Why does sequencing one DNA region not show diversity throughout the whole genome?",
+      "back": "It detects variation only in **that region**, so several loci are needed for a wider picture.",
+      "hint": "Consider how much of the genome a single region covers.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06q1pab",
+      "kind": "concept",
+      "front": "Why can comparing amino acid sequences underestimate the differences in the DNA that codes for them?",
+      "back": "Different DNA sequences can sometimes produce the **same amino acid sequence**, so protein comparison can miss some DNA differences.",
+      "sectionId": "s2"
+    }
+  ]
+}

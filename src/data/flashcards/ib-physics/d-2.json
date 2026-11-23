@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "d-2",
+  "topicCode": "D.2",
+  "topicName": "Electric and magnetic fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:35.198Z",
+  "cards": [
+    {
+      "id": "0phxxwn",
+      "kind": "concept",
+      "front": "What does an electric field line show about the force on a charge?",
+      "back": "The **direction** of the arrow is the direction of the electric force on a positive test charge. A negative charge feels force in the opposite direction.",
+      "hint": "Think about which charge you are testing with.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v66zjc",
+      "kind": "formula",
+      "front": "How is electric field strength calculated, and what are its units?",
+      "back": "$E=F/q$, where $F$ is force magnitude and $q$ is charge magnitude. The unit is $\\mathrm{N\\,C^{-1}}$.",
+      "hint": "Force per unit positive test charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xl55lk",
+      "kind": "concept",
+      "front": "Why are field lines closer together in some places?",
+      "back": "Lines closer together mean a **stronger** field. The field weakens with distance from a point charge, so lines spread out further away.",
+      "hint": "Compare lines near and far from a point charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ly7892",
+      "kind": "term",
+      "front": "What is a uniform electric field?",
+      "back": "A **uniform electric field** has constant strength and direction throughout a region. Between large parallel plates it is shown by straight, parallel, evenly spaced lines.",
+      "hint": "Look at the central region between plates.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o47omd",
+      "kind": "concept",
+      "front": "Where between oppositely charged parallel plates does the field stay uniform, and what is fringing?",
+      "back": "The **central region** is uniform. Near the edges, lines curve outwards, called **fringing**, and the field there is not uniform.",
+      "hint": "Consider where the simple parallel-line pattern applies best.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gopf8h",
+      "kind": "process",
+      "front": "How do you find the direction of the magnetic field around a straight current-carrying wire?",
+      "back": "Use the **right-hand grip rule**: point your thumb along conventional current. Your curled fingers show the field direction. Reversing the current reverses the field.",
+      "hint": "Use conventional current, not electron flow.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jhic1k",
+      "kind": "concept",
+      "front": "What shape are magnetic field lines around a straight current-carrying wire?",
+      "back": "They form **concentric circles** around the wire. Reversing the current reverses their direction.",
+      "hint": "Picture cross-section of the wire.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09qtjc2",
+      "kind": "concept",
+      "front": "What does the magnetic field look like inside a long solenoid?",
+      "back": "Inside a long solenoid the field is **approximately uniform**, with straight, parallel lines. Its overall field resembles a bar magnet's field.",
+      "hint": "Compare with the field around a straight wire.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "018zphv",
+      "kind": "mistake",
+      "front": "A student says field arrows point towards whichever charge is placed between the plates. What is wrong?",
+      "back": "Field arrows do **not** point towards the charge placed there. They show the force direction on a positive test charge.",
+      "hint": "What does the arrow represent?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1j25r4z",
+      "kind": "mistake",
+      "front": "A student says electric field lines are paths that charges must follow. Why is this wrong?",
+      "back": "Field lines are a **drawing tool**, not paths charges must follow. They show direction and relative strength of the field.",
+      "hint": "Consider what the lines are used for.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ray4zj",
+      "kind": "mistake",
+      "front": "Does the electric field strength at a point depend on the test charge used?",
+      "back": "No. At a fixed point the field strength does **not** depend on the test charge used, because $E=F/q$ scales with the force.",
+      "hint": "Think about what stays the same at a fixed point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xmovyf",
+      "kind": "example",
+      "front": "A charge of magnitude $2.0\\times10^{-6}\\,\\textrm{C}$ experiences a force of $0.010\\,\\textrm{N}$. What is the electric field strength?",
+      "back": "$E=0.010/(2.0\\times10^{-6})=5.0\\times10^{3}\\,\\mathrm{N\\,C^{-1}}$.",
+      "hint": "Use $E=F/q$ with charge magnitude.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16oojwm",
+      "kind": "concept",
+      "front": "What are electric field lines near an isolated positive point charge like?",
+      "back": "They form a **radial pattern**, pointing outwards from the charge. Lines are closer together near the charge and spread apart further away.",
+      "hint": "Think about direction for a positive charge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l838ou",
+      "kind": "term",
+      "front": "What is a solenoid?",
+      "back": "A **solenoid** is a coil of wire that produces a magnetic field when current flows through it. Its field resembles a bar magnet's field.",
+      "hint": "Think about the shape of the wire.",
+      "sectionId": "s4"
+    }
+  ]
+}

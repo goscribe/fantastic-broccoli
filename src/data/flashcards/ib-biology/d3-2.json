@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "d3-2",
+  "topicCode": "D3.2",
+  "topicName": "Inheritance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:13.324Z",
+  "cards": [
+    {
+      "id": "0yas0z6",
+      "kind": "concept",
+      "front": "What is the difference between genotype and phenotype?",
+      "back": "A **genotype** is the alleles an individual has for a gene, such as $Aa$. A **phenotype** is the observable characteristic, which depends on genotype and can also be affected by the environment.",
+      "hint": "One is the genetic makeup, the other is what you can observe.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1so5grw",
+      "kind": "concept",
+      "front": "Why can an individual with the dominant phenotype have the genotype $Aa$ rather than $AA$?",
+      "back": "Under **complete dominance**, one copy of the dominant allele $A$ is enough to produce the dominant phenotype, so $AA$ and $Aa$ look the same.",
+      "hint": "Count how many copies the recessive allele needs to show.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nxqse8",
+      "kind": "example",
+      "front": "Two heterozygous parents ($Aa$ × $Aa$) have one child. What is the probability that the child has genotype $aa$?",
+      "back": "**25%**. The Punnett square gives $AA$, $Aa$, $Aa$ and $aa$, so one of four boxes is $aa$: 1/4 × 100 = 25%.",
+      "hint": "List each parent's gametes across the top and down the side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07uj91e",
+      "kind": "concept",
+      "front": "Why does letter notation for genotype not mean a whole characteristic always follows a simple pattern?",
+      "back": "Letter notation describes **one gene** at a time. Many characteristics involve several genes, and the environment can also affect the phenotype.",
+      "hint": "Think about how many genes affect a typical characteristic.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sqf9lf",
+      "kind": "term",
+      "front": "What is a recessive allele?",
+      "back": "A **recessive allele** produces its associated phenotype only when an individual has two copies of it. It is masked when a dominant allele is present.",
+      "hint": "Consider what happens with only one copy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0djohu3",
+      "kind": "term",
+      "front": "What do heterozygous and homozygous mean?",
+      "back": "**Heterozygous** means the two alleles for a gene differ, as in $Aa$. **Homozygous** means the two alleles match, as in $AA$ or $aa$.",
+      "hint": "Hetero means different, homo means same.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19oajte",
+      "kind": "mistake",
+      "front": "A student says anyone with the dominant phenotype must be $AA$. Why is this wrong?",
+      "back": "It is not necessarily true: the genotype could be **$AA$ or $Aa$**, because one copy of the dominant allele is enough for the dominant phenotype.",
+      "hint": "Is one copy of the dominant allele enough?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v0ripu",
+      "kind": "mistake",
+      "front": "A student says a dominant allele is more common, stronger or more beneficial. What is the correct view?",
+      "back": "**Dominant** only describes how alleles interact to produce a particular phenotype. It does not mean more common, stronger or more beneficial.",
+      "hint": "Dominant describes a relationship between alleles, nothing more.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03o74qx",
+      "kind": "process",
+      "front": "What are the steps for building a Punnett square for a single-gene cross?",
+      "back": "1) List each parent's possible gamete alleles. 2) Place one parent's alleles across the top and the other's down the side. 3) Fill each box with one offspring genotype. 4) Count the outcomes to find the probability.",
+      "hint": "Start with the gametes, not the offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oupt04",
+      "kind": "mistake",
+      "front": "A student says a family of four children will have exactly one $aa$ child because the probability is 25%. What is wrong?",
+      "back": "A probability is given for **each offspring**, not a guaranteed number of children. Each child has a 1 in 4 chance of $aa$.",
+      "hint": "Probability applies to each individual birth.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iq0lbt",
+      "kind": "term",
+      "front": "What do squares, circles and shaded symbols show in a pedigree?",
+      "back": "**Squares** represent males, **circles** represent females, and **shaded** symbols show individuals with the phenotype being tracked. A horizontal line joins parents and a line below connects children.",
+      "hint": "Think about the key of a family tree.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dfricx",
+      "kind": "example",
+      "front": "Two unaffected parents have an affected child, assuming simple autosomal recessive inheritance. What are the genotypes?",
+      "back": "The affected child is $aa$. Each unaffected parent is **$Aa$**, since each must have passed on an $a$ allele while showing the unaffected phenotype.",
+      "hint": "Work out the child's genotype first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rp7ll0",
+      "kind": "mistake",
+      "front": "An affected parent has an unaffected child. Can the parent be $AA$ under complete dominance?",
+      "back": "No. Under **complete dominance**, a dominant affected parent cannot be $AA$ in this situation.",
+      "hint": "Think about what $AA$ would pass on to every child.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-10",
+  "topicCode": "5.10",
+  "topicName": "Multistep reaction energy profile",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:50.478Z",
+  "cards": [
+    {
+      "id": "1rzfciw",
+      "kind": "concept",
+      "front": "In a multistep energy profile, where do intermediates appear and where do transition states appear?",
+      "back": "**Intermediates** sit in the valleys between peaks; **transition states** sit at the peaks. A peak is never an intermediate.",
+      "hint": "Think about which points are high energy and which are the dips between them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l7ys7w",
+      "kind": "term",
+      "front": "What is the activation energy for a forward step?",
+      "back": "The **activation energy** is the difference between the step's peak (transition state) and the energy where that step begins.",
+      "hint": "Measure from the starting level of that particular step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0og8kx8",
+      "kind": "concept",
+      "front": "Why does the largest step barrier, not the highest peak on the page, point to the slow step?",
+      "back": "The **rate-determining step** is the one with the largest forward activation energy, measured from its own starting level. It is hardest to overcome, so it proceeds most slowly.",
+      "hint": "Compare each peak with the valley just before it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00yw0jz",
+      "kind": "term",
+      "front": "What is a multistep energy profile?",
+      "back": "A **multistep energy profile** is a graph of potential energy against reaction progress for a reaction that proceeds through more than one step.",
+      "hint": "Potential energy goes on the vertical axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0am0jsb",
+      "kind": "process",
+      "front": "What are the steps for drawing an energy profile for a reaction with three steps?",
+      "back": "Start at the reactants and end at the products. Draw three peaks, one per step, with **intermediate** valleys between neighboring peaks. Label both axes and every peak and valley.",
+      "hint": "Count the peaks first, then the valleys between them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14z985p",
+      "kind": "mistake",
+      "front": "A student says the highest peak on the profile is always the rate-determining step. What is wrong?",
+      "back": "The highest peak is not always the largest barrier. Each step's **activation energy** must be measured from the valley before its own peak, then the largest one is compared.",
+      "hint": "Measure each rise from its own starting level.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1655hoq",
+      "kind": "mistake",
+      "front": "A student measures every forward activation energy from the reactants. Why is this wrong?",
+      "back": "Each step begins at a different level. The second step begins at the **intermediate**, so its barrier is measured from that valley, not from the reactants.",
+      "hint": "Where does each step actually start?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yf1pr5",
+      "kind": "formula",
+      "front": "What does the overall energy change $\\Delta E$ compare, and how is it calculated?",
+      "back": "$\\Delta E = E_{\\mathrm{products}} - E_{\\mathrm{reactants}}$, in kJ mol$^{-1}$. A negative value means the **overall energy change** releases energy.",
+      "hint": "Only the start and end levels matter here.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hlgn70",
+      "kind": "formula",
+      "front": "How is the forward activation energy of step 1 found from the profile?",
+      "back": "$E_{\\mathrm{a},1} = E_{\\mathrm{peak}\\,1} - E_{\\mathrm{reactants}}$, in kJ mol$^{-1}$. The first step starts at the reactants.",
+      "hint": "Which level does step 1 start from?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tjird8",
+      "kind": "example",
+      "front": "Reactants 40, peak 1 100, intermediate 60, peak 2 140, products 20 kJ mol⁻¹. Find both activation energies and the overall energy change.",
+      "back": "$E_{\\mathrm{a},1}=60$ kJ mol$^{-1}$ and $E_{\\mathrm{a},2}=80$ kJ mol$^{-1}$. The overall $\\Delta E=-20$ kJ mol$^{-1}$, so the reaction releases energy.",
+      "hint": "Start the second barrier from the intermediate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aa7bf2",
+      "kind": "example",
+      "front": "Reactants are at 75 kJ mol⁻¹ and products at 45 kJ mol⁻¹. What is the overall energy change, and does the reaction release energy?",
+      "back": "$\\Delta E = 45-75 = -30$ kJ mol$^{-1}$. Yes, the overall reaction **releases energy** because the products are lower.",
+      "hint": "Subtract reactants from products.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "118a20s",
+      "kind": "concept",
+      "front": "Which step is predicted to be rate-determining if reactants are at 30, the first peak at 90, the intermediate at 50, and the second peak at 120 kJ mol⁻¹?",
+      "back": "The second step, with $E_{\\mathrm{a},2}=70$ kJ mol$^{-1}$, is predicted to be the **rate-determining step**, since the first barrier is $60$ kJ mol$^{-1}$.",
+      "hint": "Compare the two activation energies you calculate.",
+      "sectionId": "s4"
+    }
+  ]
+}

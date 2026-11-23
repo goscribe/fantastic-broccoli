@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Scaling and linearizing data",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:32.543Z",
+  "cards": [
+    {
+      "id": "1geq2jv",
+      "kind": "concept",
+      "front": "Why is a curve turned into a straight line before fitting a model?",
+      "back": "**Linearisation** changes the plotted variables so that data from the right model lie on a straight line. The line's equation then gives the model's constants, and straight lines are far easier to judge by eye.",
+      "hint": "Think about what is hard to judge by eye.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gopfv1",
+      "kind": "formula",
+      "front": "What do you plot to straighten data from a power model $y=ax^n$, and what do its gradient and intercept give?",
+      "back": "Plot $\\ln y$ against $\\ln x$, a **log–log graph**. The gradient is $n$ and the vertical intercept is $\\ln a$.",
+      "hint": "Take natural logarithms of both sides of $y=ax^n$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d3ri7z",
+      "kind": "formula",
+      "front": "What do you plot to straighten data from an exponential model $y=ab^x$, and what do its gradient and intercept give?",
+      "back": "Plot $\\ln y$ against $x$, a **semi-log graph**. The gradient is $\\ln b$ and the vertical intercept is $\\ln a$.",
+      "hint": "Only one variable needs logging here.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e6p6gt",
+      "kind": "process",
+      "front": "How do you find the constants $a$ and $n$ from a straight-line graph of transformed data?",
+      "back": "Draw the **line of best fit** through the transformed points. Read the gradient from two widely separated points, then reverse the intercept with $a=e^c$.",
+      "hint": "Which value gives n, and which gives a?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xt1yyq",
+      "kind": "mistake",
+      "front": "A student says the vertical intercept of a log–log graph is $a$. What is wrong?",
+      "back": "The intercept is **$\\ln a$**, not $a$. Reverse the logarithm with $a=e^{\\ln a}$ to recover $a$ itself.",
+      "hint": "Check what the line's equation actually says.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ut7kfu",
+      "kind": "mistake",
+      "front": "A student reads the gradient of the straight line on a $\\ln y$ against $x$ graph as the gradient of the original curve. Why is this wrong?",
+      "back": "The line's gradient is the constant **$k$** in $y=ae^{kx}$. It is not the gradient of the original curve.",
+      "hint": "What does the line plot on its axes?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sy358g",
+      "kind": "example",
+      "front": "Data follow $y=ax^n$, and the log–log line has gradient 2.00 and intercept 1.099. What is the model in original variables?",
+      "back": "$y=3.00x^{2.00}$, that is $y=3x^2$, since $a=e^{1.099}\\approx3.00$.",
+      "hint": "Reverse the intercept using the exponential function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fchdfe",
+      "kind": "example",
+      "front": "A culture has $N=150e^{0.300t}$ with $t$ in hours. Estimate $N$ when $t=2$.",
+      "back": "About **273** bacteria, since $150e^{0.300\\times2}=150e^{0.6}\\approx273$.",
+      "hint": "Substitute $t=2$ into the model.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "111hz6z",
+      "kind": "term",
+      "front": "What is the natural logarithm $\\ln x$?",
+      "back": "The power to which **$e$** must be raised to give $x$. It turns products into sums and powers into multiples.",
+      "hint": "Think about which base is used.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "094c6ra",
+      "kind": "concept",
+      "front": "Why does an exponential model only need $y$ logged, while a power model needs both variables logged?",
+      "back": "Taking logs of $y=ab^x$ gives $\\ln y=\\ln a+x\\ln b$, which is already linear in $x$, so only **$y$** is transformed.",
+      "hint": "Look at where $x$ appears in the logged equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10tre0t",
+      "kind": "process",
+      "front": "How do you decide which model suits data when the model is not known in advance?",
+      "back": "Try each graph in turn. If $y$ against $x$ is straight, the model is **linear**. If $\\ln y$ against $\\ln x$ is straight, it is a **power** model. If $\\ln y$ against $x$ is straight, it is **exponential**. If none is straight, none of these models suits.",
+      "hint": "Test three graphs in turn.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0441se4",
+      "kind": "formula",
+      "front": "Which two logarithm rules are used to linearise a power model?",
+      "back": "$\\ln(pq)=\\ln p+\\ln q$ and $\\ln(p^k)=k\\ln p$. Products become sums and powers become multiples.",
+      "hint": "One rule handles products, the other handles powers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sxdfgn",
+      "kind": "mistake",
+      "front": "Is a prediction from a fitted model made outside the range of the data as reliable as one inside it?",
+      "back": "No. Predictions **inside the range of the data** are more reliable than predictions outside it.",
+      "hint": "Compare where the data were collected with where you are predicting.",
+      "sectionId": "s5"
+    }
+  ]
+}

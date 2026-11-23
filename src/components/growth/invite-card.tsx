@@ -109,10 +109,10 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
           type="button"
           onClick={onShare}
           disabled={!data}
-          className="group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 py-1.5 text-left text-[14.5px] leading-5 focus-visible:outline-none disabled:cursor-default"
+          className="group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 py-1.5 text-left text-ui focus-visible:outline-none disabled:cursor-default"
         >
           <span className="font-bold text-foreground underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{t("growth.inviteTitle")}</span>
-          <span className="text-[13px] text-muted-foreground">{copied ? t("growth.copied") : sub}</span>
+          <span className="text-small text-muted-foreground">{copied ? t("growth.copied") : sub}</span>
         </button>
       </li>
     );
@@ -134,8 +134,8 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
         )}
       >
         <span className="min-w-0 flex-1">
-          <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{t("growth.inviteTitle")}</span>
-          <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
+          <span className="block text-ui font-semibold text-foreground">{t("growth.inviteTitle")}</span>
+          <span className="block text-caption leading-5 text-muted-foreground">{sub}</span>
         </span>
         <span className="shrink-0 text-accent-dim" title={t("growth.share")}>
           {copied ? <Check className="size-4 text-success" strokeWidth={3} /> : <Share2 className="size-4" />}
@@ -153,11 +153,11 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
       <div className="flex items-start gap-3.5">
         <div className="min-w-0">
           <h2 className="page-h2">{t("growth.inviteTitle")}</h2>
-          <p className="mt-1 text-[13px] leading-snug text-muted-foreground">{body}</p>
+          <p className="mt-1 text-small text-muted-foreground">{body}</p>
         </div>
       </div>
 
-      <label className="mt-4 block text-[12px] font-semibold text-muted-foreground" htmlFor="invite-link">
+      <label className="mt-4 block text-caption font-semibold text-muted-foreground" htmlFor="invite-link">
         {t("growth.linkLabel")}
       </label>
       <input
@@ -170,7 +170,7 @@ export function InviteCard({ variant = "full", className }: { variant?: "compact
       />
       {actions}
 
-      <div className="mt-4 flex flex-col gap-1 border-t border-border pt-3 text-[12.5px] text-muted-foreground">
+      <div className="mt-4 flex flex-col gap-1 border-t border-border pt-3 text-caption text-muted-foreground">
         <p className="font-semibold text-foreground">
           {data ? statusLine(data, t) : <span className="inline-block h-3.5 w-40 animate-pulse rounded-full bg-muted" />}
         </p>

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-7-5",
+  "topicCode": "4.7.5",
+  "topicName": "Food production",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:02.744Z",
+  "cards": [
+    {
+      "id": "0q9tfa0",
+      "kind": "concept",
+      "front": "How can keeping farm animals warm and restricting their movement improve food production?",
+      "back": "Less energy goes to **maintaining body temperature** and muscle use, so more of the feed supports growth and more edible animal biomass is produced.",
+      "hint": "Think about where an animal's energy goes apart from growth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05wawx6",
+      "kind": "concept",
+      "front": "What is the main trade-off of intensive farming?",
+      "back": "It raises **yield** by housing many animals in a small area under controlled conditions, but crowding can spread disease, harm welfare and cause water pollution from waste.",
+      "hint": "Weigh the production gains against the problems crowding causes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dniipo",
+      "kind": "concept",
+      "front": "Why does overfishing lower a fish stock over time?",
+      "back": "Fish are caught faster than they **reproduce**, so fewer fish remain to breed and the stock falls.",
+      "hint": "Compare how many fish are removed with how many are produced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sz6ela",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume an animal turns all its feed into meat?",
+      "back": "Some energy is used for **respiration** and some material is lost in **waste**, so feed is never fully converted into animal biomass.",
+      "hint": "Think about what happens to energy and material after feed is eaten.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w6uo96",
+      "kind": "term",
+      "front": "What is disease transmission?",
+      "back": "The **spread** of an infectious disease between organisms.",
+      "hint": "Think about how illness moves through a crowded group of animals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fralhs",
+      "kind": "concept",
+      "front": "Why should antibiotics not be used unnecessarily on farm animals?",
+      "back": "Unnecessary use **encourages antibiotic resistance** in bacteria, which weakens the drugs' future value.",
+      "hint": "Think about what bacteria do when repeatedly exposed to a drug.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "041f10j",
+      "kind": "term",
+      "front": "What is a fish stock?",
+      "back": "A **population of fish** available to a fishery.",
+      "hint": "Think about what a fishery draws from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bhr3s9",
+      "kind": "term",
+      "front": "What are fishing quotas?",
+      "back": "**Limits** on the number or mass of fish that may be caught during a set period.",
+      "hint": "Consider how a limit is set in terms of time and amount.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "188hng0",
+      "kind": "concept",
+      "front": "How does using larger net mesh help fish stocks recover?",
+      "back": "Smaller fish **escape the net**, grow to breeding age and reproduce, helping replace fish that have been caught.",
+      "hint": "Follow a small fish that slips through the net.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15b0803",
+      "kind": "concept",
+      "front": "Why might seasonal restrictions and protected areas help fish stocks in the long term?",
+      "back": "They **safeguard fish during breeding**. This reduces catches in the short term but keeps enough adults to support future catches.",
+      "hint": "Think about when fish reproduce and the trade-off with catches.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08p4qxq",
+      "kind": "term",
+      "front": "What is biotechnology?",
+      "back": "Using **living organisms or their products** to make useful goods or carry out useful processes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kvkqcc",
+      "kind": "process",
+      "front": "What are the steps in producing mycoprotein from a fungus?",
+      "back": "Grow the fungus on a **glucose-containing nutrient supply** with oxygen for aerobic respiration, harvest its biomass, then process it into a protein-rich food.",
+      "hint": "Start with what the fungus is fed and what it needs to respire.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pq0bpq",
+      "kind": "concept",
+      "front": "How can genetic modification increase crop production?",
+      "back": "A crop can be modified to **resist insect pests**, reducing losses before harvest.",
+      "hint": "Think about what damages crops before they are picked.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01sqspq",
+      "kind": "mistake",
+      "front": "What should be considered alongside the benefits of biotechnology food?",
+      "back": "Its need for **nutrients, energy and equipment**, plus possible **environmental effects**, since benefits alone do not show the full picture.",
+      "hint": "Think about the inputs the process requires.",
+      "sectionId": "s4"
+    }
+  ]
+}

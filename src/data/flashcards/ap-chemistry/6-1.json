@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "Endothermic and exothermic processes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:48.303Z",
+  "cards": [
+    {
+      "id": "0pxa9jn",
+      "kind": "term",
+      "front": "What are the system and the surroundings in a thermochemistry experiment?",
+      "back": "The **system** is the part being studied, such as the reacting chemicals. The **surroundings** are everything outside that boundary, such as the container and nearby solution.",
+      "hint": "Start by deciding which boundary you are drawing around the experiment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14h0diq",
+      "kind": "term",
+      "front": "What is an endothermic process?",
+      "back": "An **endothermic** process absorbs heat from its surroundings, so heat flows from the surroundings into the system. Melting ice is an example.",
+      "hint": "Think about which direction the heat travels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i24756",
+      "kind": "term",
+      "front": "What is an exothermic process?",
+      "back": "An **exothermic** process releases heat to its surroundings, so heat flows from the system into the surroundings. Combustion is an example.",
+      "hint": "Think about where the heat ends up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dnau9w",
+      "kind": "concept",
+      "front": "Why must you name the system boundary before describing heat flow?",
+      "back": "Heat flow only has a direction once you know which side of the boundary is the system. Naming both makes the direction **unambiguous**.",
+      "hint": "Heat moves from one side of a boundary to the other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03592qp",
+      "kind": "mistake",
+      "front": "True or false: an endothermic process must make the system colder.",
+      "back": "False. **Endothermic** describes heat flowing into the system, not a required temperature change.",
+      "hint": "Look at what the word describes: heat flow, not temperature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yawikt",
+      "kind": "concept",
+      "front": "Can an exothermic process occur while the system's temperature stays steady?",
+      "back": "Yes. An exothermic process can release heat while the **temperature** of the system stays steady, so temperature alone does not show the heat flow.",
+      "hint": "Releasing heat and changing temperature are not the same thing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hah14u",
+      "kind": "mistake",
+      "front": "Why is a thermometer reading alone not enough to label a reaction?",
+      "back": "The thermometer only measures temperature at its tip, which may be the mixture or a surrounding solution. You must also state the **direction of heat flow**.",
+      "hint": "Ask where the thermometer is and which way heat moved.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dgy5jk",
+      "kind": "process",
+      "front": "How should you interpret temperature evidence from a reaction?",
+      "back": "1) Identify what the thermometer measures. 2) Check whether that is the reacting mixture or a surrounding solution. 3) State the **direction of heat flow**, then label the process.",
+      "hint": "Start with the thermometer's location.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kftxnt",
+      "kind": "concept",
+      "front": "When can a drop in a surrounding solution's temperature show that a reaction is endothermic?",
+      "back": "When little other heat transfer occurs. The solution loses heat to the reaction, which absorbs it, so the reaction is **endothermic**.",
+      "hint": "Consider what else could cool the solution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14oxhm2",
+      "kind": "term",
+      "front": "What does heat flow describe in thermochemistry?",
+      "back": "The transfer of **heat** across the boundary between the system and its surroundings. Heat entering the system comes from the surroundings; heat leaving goes to the surroundings.",
+      "hint": "Heat always moves across the system boundary.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1306sj1",
+      "kind": "mistake",
+      "front": "Why might an exothermic reaction produce only a small rise in a surrounding solution's temperature?",
+      "back": "The solution usually warms, but the rise may be small if heat also escapes into the wider environment. Heat release does not guarantee a large temperature change.",
+      "hint": "Think about heat leaking away from the solution.",
+      "sectionId": "s3"
+    }
+  ]
+}

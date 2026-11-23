@@ -724,6 +724,50 @@ export interface Trends {
   metrics: TrendMetric[];
 }
 
+// ── Scribe benchmark (admin.benchmark / admin.runBenchmark) ─────────────
+// Mirrors goscribe/server src/lib/benchmark.ts and GenerationEvalReportService.benchmark.
+
+export interface BenchmarkModelLine {
+  /** Null = the production models. */
+  model: string | null;
+  label: string;
+  attempted: number;
+  assessed: number;
+  failed: number;
+  overall: number | null;
+  materialFit: number | null;
+  quality: number | null;
+  mediumFit: number | null;
+  laptopFit: number | null;
+  phoneFit: number | null;
+  passRate: number | null;
+  avgSeconds: number | null;
+  avgCostUsd: number | null;
+  totalCostUsd: number | null;
+  avgTokens: number | null;
+}
+
+export interface BenchmarkCell {
+  status: string;
+  overall: number | null;
+  summary: string | null;
+  error: string | null;
+  seconds: number | null;
+  costUsd: number | null;
+}
+
+export interface BenchmarkOverview {
+  running: boolean;
+  pool: Array<{ key: string; title: string; kind: string; subject: string }>;
+  runs: Array<{ runId: string; finishedAt: string | null; rows: number; models: Array<string | null> }>;
+  runId: string | null;
+  report: {
+    models: BenchmarkModelLine[];
+    materials: Array<{ key: string; title: string; kind: string; cells: Record<string, BenchmarkCell> }>;
+    skippedMaterials: number;
+  } | null;
+}
+
 // ── Generation assessment (admin.generationEvalSummary) ────────────────
 
 export interface GenerationEvalRun {
@@ -993,6 +1037,13 @@ export const adminApi = {
 
   runGenerationEval: () =>
     rpc<{ started: boolean }>("admin.runGenerationEval", "mutation", undefined),
+
+  benchmark: (runId?: string) =>
+    rpc<BenchmarkOverview>("admin.benchmark", "query", runId ? { runId } : undefined),
+
+  /** Models: OpenRouter ids, or "production" for the current models. */
+  runBenchmark: (input: { models: string[]; materialKeys?: string[] }) =>
+    rpc<{ started: boolean }>("admin.runBenchmark", "mutation", input),
 
   qualitySummary: (sinceDays: number) =>
     rpc<QualitySummary>("admin.qualitySummary", "query", { sinceDays }),

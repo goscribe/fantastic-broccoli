@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b2-4",
+  "topicCode": "B2.4",
+  "topicName": "Programming algorithms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:08.061Z",
+  "cards": [
+    {
+      "id": "1lkqnm2",
+      "kind": "term",
+      "front": "What is a linear search?",
+      "back": "A **linear search** checks each item in turn, from the first, until it finds the target or reaches the end. It works on unsorted data too.",
+      "hint": "Think of reading a guest list from the top.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f5es72",
+      "kind": "concept",
+      "front": "How does a bubble sort put a list into ascending order?",
+      "back": "It compares each neighbouring pair and **swaps** them if they are out of order. Each **pass** places the next largest item at the end, and it stops when a pass makes no swaps.",
+      "hint": "Each pass moves one more item to its final place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "119g76o",
+      "kind": "concept",
+      "front": "Why does linear search get slow on long lists, and how can binary search help?",
+      "back": "Linear search may need up to $n$ comparisons. A **binary search** halves the sorted list at each step, needing about $\\log_2 n$ comparisons, but the list must be sorted first.",
+      "hint": "Compare the worst-case counts for each method.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1qyjf2r",
+      "kind": "process",
+      "front": "What are the steps of a linear search?",
+      "back": "Set the position to the first item. Compare that item with the target. If they match, report the position and stop. Otherwise move to the next position. If the end is reached, report the target is absent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i9jan7",
+      "kind": "formula",
+      "front": "What is the worst-case number of comparisons for a binary search, and what do the symbols mean?",
+      "back": "About $\\log_2 n$ comparisons, where $n$ is the number of items in the sorted list. For 1000 items this is about 10.",
+      "hint": "Each step halves the items still to be searched.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "02wwmle",
+      "kind": "example",
+      "front": "Trace a linear search for the target 9 in the list 7, 3, 9, 4. How many comparisons are made?",
+      "back": "3 comparisons. The search checks 7, then 3, then finds 9 at position 2, so it returns position 2.",
+      "hint": "Count each position you check, including the match.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q18bq1",
+      "kind": "example",
+      "front": "Sort 5, 3, 8, 1 with a bubble sort. What is the list after the first pass?",
+      "back": "3, 5, 1, 8. Swap 5 and 3, keep 5 and 8, then swap 8 and 1.",
+      "hint": "Compare each neighbouring pair from left to right.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hlc0mv",
+      "kind": "mistake",
+      "front": "A student says one pass of a bubble sort sorts the whole list. What is wrong?",
+      "back": "A single pass only places the largest item in its final place. Several passes are needed, until a pass makes no swaps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1burpxy",
+      "kind": "mistake",
+      "front": "Can a binary search be used on an unsorted list?",
+      "back": "No. **Binary search** needs sorted data, because it discards half the list based on order. Sorting first costs extra work, so it pays off when many searches follow.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0w8ce0b",
+      "kind": "concept",
+      "front": "What does the efficiency of an algorithm describe?",
+      "back": "How the **work** an algorithm needs grows as the input size $n$ grows. A simple measure counts comparisons. One timing on one computer is not a fair comparison.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "142dbwq",
+      "kind": "concept",
+      "front": "Why does bubble sort become much slower than linear search as the list grows?",
+      "back": "Bubble sort grows roughly with $n^2$, so doubling the list about quadruples its comparisons. Linear search needs up to $n$ comparisons.",
+      "hint": "Compare how the work changes when $n$ doubles.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14uq3eu",
+      "kind": "process",
+      "front": "How do you use a trace table to locate a fault in an algorithm?",
+      "back": "Record each variable's value after every step, then find the first row where a value looks wrong. The fault lies at or just before that step.",
+      "hint": "Copy unchanged values down into each new row.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "121dh3w",
+      "kind": "term",
+      "front": "What is a pass in a bubble sort?",
+      "back": "A **pass** is one complete run through the list, comparing each neighbouring pair once and swapping where needed.",
+      "sectionId": "s3"
+    }
+  ]
+}

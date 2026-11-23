@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Change at an instant",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:35.176Z",
+  "cards": [
+    {
+      "id": "0gilz8r",
+      "kind": "concept",
+      "front": "Why does a single point on a graph not show how fast the output is changing?",
+      "back": "A **single point** gives only one input and one output. To see change, you must compare output values at nearby inputs.",
+      "hint": "Think about what you need to compare to measure change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sp9f1i",
+      "kind": "term",
+      "front": "What is the instantaneous rate of change?",
+      "back": "The **instantaneous rate of change** is the value that average rates approach over shrinking intervals around one input, when that value exists.",
+      "hint": "Think of shorter and shorter intervals near one input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q1g3co",
+      "kind": "formula",
+      "front": "What is the average rate of change of $f$ between $a$ and $b$?",
+      "back": "$\\frac{f(b)-f(a)}{b-a}$. It divides the total output change by the total input change, and it is the slope of the **secant line**.",
+      "hint": "Divide by the change in input, not the change in output alone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1edzgjh",
+      "kind": "concept",
+      "front": "How does an instantaneous rate appear on a smooth graph?",
+      "back": "It is the slope of the **tangent line** at that point. The tangent shows the graph's direction at that point, not across an interval.",
+      "hint": "Compare a line touching one point with a line through two points.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0doslzf",
+      "kind": "mistake",
+      "front": "A student says the average rate of change is just the change in output. What is wrong?",
+      "back": "The change in output alone is not a rate. You must **divide** by the change in input to get output units per input unit.",
+      "hint": "Check what units a rate should have.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00o3ybq",
+      "kind": "concept",
+      "front": "Why can an average rate differ from the rate at every moment in an interval?",
+      "back": "An average describes the **whole interval**. The function can speed up, slow down, or stop, so it need not change at that same rate throughout.",
+      "hint": "Use the car example from the note.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02f872u",
+      "kind": "example",
+      "front": "For $x(t)=t^2$ (meters, seconds), find the average velocity from 2 to 4 seconds.",
+      "back": "$6\\,\\mathrm{m/s}$, because $\\frac{x(4)-x(2)}{4-2}=\\frac{16-4}{2}=6$.",
+      "hint": "Find x(4) and x(2) first, then divide by the change in time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l7wd5j",
+      "kind": "example",
+      "front": "For $x(t)=t^2$ (meters, seconds), estimate the instantaneous velocity at 2 seconds using shorter intervals.",
+      "back": "About $4\\,\\mathrm{m/s}$. Average rates over 0.1 and 0.01 seconds are $4.1$ and $4.01\\,\\mathrm{m/s}$, approaching 4.",
+      "hint": "Use intervals from 2 to 2.1 and from 2 to 2.01.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14f8sy9",
+      "kind": "process",
+      "front": "What are the steps to estimate an instantaneous rate at one input from function values?",
+      "back": "1) Compute average rates over intervals starting at that input. 2) Make the intervals shorter. 3) If the values approach one number, that number is the instantaneous rate.",
+      "hint": "Think about what happens as the interval shrinks.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1byqs2i",
+      "kind": "concept",
+      "front": "What does a speedometer report, and how does it differ from average speed?",
+      "back": "A speedometer reports the **instantaneous velocity** size at the current moment. Average speed describes distance traveled per unit time over a whole trip.",
+      "hint": "Compare one moment with the whole trip.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pwys0m",
+      "kind": "mistake",
+      "front": "Does every function have an instantaneous rate of change at every point?",
+      "back": "No. At a **sharp corner**, the graph approaches the point with different slopes from each side, so the instantaneous rate need not exist there.",
+      "hint": "Think about graphs with pointed corners.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13ey31w",
+      "kind": "term",
+      "front": "What is a rate of change?",
+      "back": "A **rate of change** compares a change in output with the input change that produced it. Units are output units per input unit.",
+      "hint": "Think of a ratio of two changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cqk8qu",
+      "kind": "formula",
+      "front": "For a position function measured in meters and seconds, what are the units of velocity?",
+      "back": "**Meters per second** ($\\mathrm{m/s}$), because the rate compares a change in position in meters with a change in time in seconds.",
+      "hint": "Output units per input unit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06z7p87",
+      "kind": "process",
+      "front": "How do you find the average velocity from 1 to 3 seconds for $x(t)=t^2$?",
+      "back": "Compute $x(1)=1$ and $x(3)=9$, then $\\frac{9-1}{3-1}=4\\,\\mathrm{m/s}$.",
+      "hint": "Use the average rate formula with a = 1 and b = 3."
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Derivatives in context",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:58.675Z",
+  "cards": [
+    {
+      "id": "1sx7cpw",
+      "kind": "concept",
+      "front": "For a tank with volume V(t) in liters after t minutes, what does V'(2)=8 tell you?",
+      "back": "At 2 minutes the water volume is **increasing** at 8 liters per minute. It is an instantaneous rate, so it does not mean the tank holds 8 liters.",
+      "hint": "Name the quantity, the time, the direction, and the rate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y8vl3m",
+      "kind": "concept",
+      "front": "What does a negative derivative V'(t)<0 tell you about the tank at time t?",
+      "back": "The water volume is **decreasing** at time t. A negative derivative does not mean the volume itself is negative.",
+      "hint": "Think about the sign of the rate, not the sign of the amount.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ola4fy",
+      "kind": "concept",
+      "front": "A table gives volumes at 1, 2, and 3 minutes but no exact derivative. How can you estimate V'(2)?",
+      "back": "Use a **difference quotient** with values on both sides of 2 minutes: divide the output change by the input change. A small interval gives a good approximation of the instantaneous rate.",
+      "hint": "Pick the times on either side of 2 minutes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wpp2hy",
+      "kind": "formula",
+      "front": "What is the difference quotient used to estimate a rate from two values f(a) and f(b)?",
+      "back": "$\\frac{f(b)-f(a)}{b-a}$. Here $f(b)-f(a)$ is the **output change** and $b-a$ is the input change, so the result has output units per input unit.",
+      "hint": "Output change divided by input change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fqi992",
+      "kind": "example",
+      "front": "Using 111 liters at 1 minute and 127 liters at 3 minutes, estimate V'(2) for the tank.",
+      "back": "**8 liters per minute**: $\\frac{127-111}{3-1}=8$, so $V'(2)\\approx 8$ liters per minute.",
+      "hint": "Subtract the volumes, then subtract the times.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kmovz5",
+      "kind": "mistake",
+      "front": "A student says V'(t)=-3 means the tank has no water. What is wrong with this reasoning?",
+      "back": "The derivative is negative, so the volume is **falling** at that time. A negative rate does not mean the amount is negative, and the tank can still contain water.",
+      "hint": "Separate the rate from the amount.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vnqqrd",
+      "kind": "mistake",
+      "front": "Why is the slope between two points on the curve away from x=2 not the instantaneous rate at x=2?",
+      "back": "Points elsewhere on the curve give an **average rate of change**. For an instantaneous rate, use two points on the tangent line at the chosen input.",
+      "hint": "Which kind of line gives the instantaneous rate?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06kjyon",
+      "kind": "process",
+      "front": "What are the steps to estimate a derivative at a marked point on a graph?",
+      "back": "1. Draw a **tangent line** at the point. 2. Read two convenient points on that line. 3. Divide the vertical change by the horizontal change, using the axis scales.",
+      "hint": "Start with the tangent line, not the curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hzzuw2",
+      "kind": "concept",
+      "front": "What are the units of a derivative, and what are the units for a volume graph in liters against minutes?",
+      "back": "Derivative units are **output units divided by input units**. For liters against minutes, the rate is in liters per minute.",
+      "hint": "Think about the units of the difference quotient.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01jq772",
+      "kind": "concept",
+      "front": "What does V'(t)=0 tell you about the volume graph at time t?",
+      "back": "The graph has a **horizontal tangent** at that time. On its own, it does not show whether the volume rises or falls afterward.",
+      "hint": "What does a zero slope look like on a graph?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ciee0x",
+      "kind": "term",
+      "front": "What is an average rate of change?",
+      "back": "An **average rate of change** is the output change divided by the input change across an interval. It measures the change over the whole interval, not at one instant.",
+      "hint": "Think about an interval, not a single input.",
+      "sectionId": "s3"
+    }
+  ]
+}

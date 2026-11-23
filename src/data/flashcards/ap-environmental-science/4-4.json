@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Earth's atmosphere",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:59.420Z",
+  "cards": [
+    {
+      "id": "1dr9ntc",
+      "kind": "concept",
+      "front": "How do scientists divide the atmosphere into layers?",
+      "back": "By how **temperature** changes with altitude in each layer. The four layers are the troposphere, stratosphere, mesosphere and thermosphere.",
+      "hint": "Think about which direction temperature moves in each layer as you go up."
+    },
+    {
+      "id": "0uj6rql",
+      "kind": "concept",
+      "front": "Why does temperature fall as you climb through the troposphere?",
+      "back": "Earth's surface warms the air from below, so the air gets cooler with height, by about $6.5\\,^{\\circ}\\mathrm{C/km}$ on average.",
+      "hint": "Where does the heat in the lowest layer come from?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hmhfno",
+      "kind": "concept",
+      "front": "What makes temperature rise with altitude in the stratosphere?",
+      "back": "**Ozone** absorbs ultraviolet radiation and converts that energy to heat. The top of the stratosphere is the warmest part.",
+      "hint": "Think about which gas this layer holds in high concentration and what energy it takes in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18wukdr",
+      "kind": "term",
+      "front": "What is the atmosphere?",
+      "back": "The **atmosphere** is the layer of gases held around Earth by gravity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ce2ou0",
+      "kind": "concept",
+      "front": "Which two gases make up most of dry air?",
+      "back": "**Nitrogen** at about 78% and **oxygen** at about 21%. Argon and carbon dioxide make up only a very small remainder.",
+      "hint": "Look at the table of main gases in dry air.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11bm6qo",
+      "kind": "term",
+      "front": "What is the force per unit area that air exerts on a surface called?",
+      "back": "**Air pressure**. It is caused by the weight of the air above the surface, so it falls as altitude increases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1arrf5z",
+      "kind": "mistake",
+      "front": "What mistake do students often make about oxygen in thin high-altitude air?",
+      "back": "They think the percentage of oxygen drops. The mix stays similar, but each breath holds fewer **molecules**.",
+      "hint": "Compare the share of oxygen with the number of molecules in one breath.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z76xyv",
+      "kind": "term",
+      "front": "At the particle level, what does temperature measure?",
+      "back": "**Average kinetic energy** of a substance's particles.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02gxld2",
+      "kind": "example",
+      "front": "What is the estimated air temperature at 6 km if surface air is 20 °C and temperature falls steadily in the troposphere?",
+      "back": "About $-19\\,^{\\circ}\\mathrm{C}$. The change is $-6.5 \\times 6 = -39\\,^{\\circ}\\mathrm{C}$, and adding that to 20 °C gives $-19\\,^{\\circ}\\mathrm{C}$.",
+      "hint": "Start by finding the total temperature change over the altitude gained.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01vy4ip",
+      "kind": "formula",
+      "front": "Which equation links final temperature, initial temperature and temperature change?",
+      "back": "$T_\\mathrm{final}=T_\\mathrm{initial}+\\Delta T$, where $\\Delta T$ is the **temperature change**, found as final minus initial, in $^{\\circ}\\mathrm{C}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hx9feb",
+      "kind": "mistake",
+      "front": "Why is ozone at ground level harmful, while ozone high up helps?",
+      "back": "Ground-level ozone is a pollutant that harms lungs and plants. High-altitude **ozone** absorbs harmful ultraviolet radiation, which protects life.",
+      "hint": "Compare where the ozone is located in the atmosphere.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ah7stj",
+      "kind": "term",
+      "front": "What is the layer between about 50 km and 85 km called?",
+      "back": "The **mesosphere**. Temperature falls with altitude here, and the top of this layer is the coldest place in the atmosphere.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qtp343",
+      "kind": "concept",
+      "front": "Why does temperature rise sharply with altitude in the thermosphere?",
+      "back": "Its sparse gas absorbs very energetic solar radiation. The air is so thin that few particles are present to transfer heat.",
+      "hint": "Compare the amount of gas here with the amount in the mesosphere below.",
+      "sectionId": "s5"
+    }
+  ]
+}
