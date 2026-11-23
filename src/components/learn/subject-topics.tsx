@@ -18,12 +18,14 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { Skeleton } from "@/components/ui/skeleton";
-import { loadCourse, TopicRow } from "@/components/courses/course-picker";
+import { loadCourse, TickBox, TopicRow } from "@/components/courses/course-picker";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 import type { Material } from "@/types";
 import { chooseStudyLength } from "@/lib/study-length-client";
+import { MAX_SELECTED_TOPICS, groupState, mixedSessionMinutes, selectedInOrder, toggleGroup, toggleTopic, type SelectChange } from "@/lib/topic-select";
+import { buttonClass } from "@/components/ui/button";
 
 export type SubjectCourse =
   | { state: "loading" }
@@ -135,6 +137,7 @@ export function useNotesOutline(workspaceId: string) {
 }
 
 const linkBtn = "text-[13px] font-semibold text-accent hover:underline disabled:opacity-60";
+const NO_TOPICS: ReadonlySet<string> = new Set();
 
 /**
  * One topic list for the subject. A course subject lists the course's topics
@@ -142,6 +145,11 @@ const linkBtn = "text-[13px] font-semibold text-accent hover:underline disabled:
  * student's own topics that match no course topic follow under "Also in your
  * notes". A subject without a course lists the topics Scribe organised from
  * its files. Every row starts 5 questions on that topic.
+ *
+ * Course topics can be picked together (a tick box in place of a row's code
+ * on hover, a held touch, or "Select" above the list; a unit's box picks the
+ * unit) and started as one session over all of them. The selection lives on
+ * this page only and is cleared once the session starts.
  */
 export function SubjectTopics({
   workspaceId,
@@ -160,6 +168,10 @@ export function SubjectTopics({
   const [openUnit, setOpenUnit] = useState<string | null>(null);
   const [starting, setStarting] = useState<string | null>(null);
   const startingRef = useRef(false);
+  // Picking several course topics: `selectMode` is "Select" pressed; a ticked topic is enough by itself.
+  const [selectMode, setSelectMode] = useState(false);
+  const [picked, setPicked] = useState<ReadonlySet<string>>(NO_TOPICS);
+  const [startingPicked, setStartingPicked] = useState(false);
   const { outline, loading, working, reorganise } = notes;
   const titleOf = useMemo(() => new Map(materials.map((m) => [m.id, m.title])), [materials]);
 
@@ -213,6 +225,43 @@ export function SubjectTopics({
     }
   };
 
+  // Ticks for topics that are no longer listed (the level changed) do not count.
+  const pickedIds = useMemo(() => selectedInOrder(units, picked), [units, picked]);
+  const selecting = selectMode || pickedIds.length > 0;
+  const applyPick = (change: SelectChange) => {
+    setPicked(change.next);
+    if (change.capped) toast.message(t("course.selectMax").replace("{max}", String(MAX_SELECTED_TOPICS)), { id: "topic-select-max" });
+  };
+  const clearPicked = () => {
+    setPicked(NO_TOPICS);
+    setSelectMode(false);
+  };
+
+  /** One session over every picked topic; a single pick is that topic's usual 5 questions. */
+  const startPicked = async () => {
+    if (!ready || pickedIds.length === 0 || startingRef.current) return;
+    startingRef.current = true;
+    setStartingPicked(true);
+    try {
+      const usual = { depth: "moderate" as const, durationMinutes: mixedSessionMinutes(pickedIds.length), quickStart: false };
+      // A learner's first sessions are asked how long; an answer is passed on, otherwise the server sets the length.
+      const chosen = pickedIds.length > 1 ? await chooseStudyLength(usual) : usual;
+      const started = await coursesApi.startTopics({
+        courseId: ready.course.id,
+        topicIds: pickedIds,
+        ...(ready.level ? { level: ready.level } : {}),
+        ...(chosen !== usual ? { durationMinutes: chosen.durationMinutes } : {}),
+      });
+      clearPicked();
+      emitTreeChanged();
+      router.push(`/workspace/${started.workspaceId}/session/${started.sessionId}`);
+    } catch (e) {
+      toastError(e, t("course.errorStart"));
+      startingRef.current = false;
+      setStartingPicked(false);
+    }
+  };
+
   if (course.state === "loading" || (course.state === "none" && loading)) {
     return materials.length > 0 || course.state === "loading" ? <Skeleton className="h-[140px] rounded-2xl" /> : null;
   }
@@ -242,10 +291,20 @@ export function SubjectTopics({
     const pct = masteryPercent(progress.mastery);
     const shownUnit = openUnit ?? linkedUnit?.id ?? next?.unit.id ?? null;
     return (
-      <section>
+      <section onKeyDown={(e) => e.key === "Escape" && selecting && !startingPicked && clearPicked()}>
         <div className="flex items-baseline justify-between gap-3">
           <h2 className="text-[16px] font-semibold">Topics</h2>
-          {reorganiseLink}
+          <div className="flex shrink-0 items-baseline gap-4">
+            {reorganiseLink}
+            <button
+              type="button"
+              onClick={() => (selecting ? clearPicked() : setSelectMode(true))}
+              disabled={startingPicked}
+              className="text-[13px] font-semibold text-muted-foreground hover:text-foreground disabled:opacity-60"
+            >
+              {t(selecting ? "course.selectCancel" : "course.select")}
+            </button>
+          </div>
         </div>
         <p className="mt-0.5 text-small text-muted-foreground">
           {t("course.progressLine").replace("{done}", String(progress.topicsDone)).replace("{total}", String(progress.topicsTotal))}
@@ -263,20 +322,37 @@ export function SubjectTopics({
           {units.map((u) => {
             const open = shownUnit === u.id;
             const up = unitProgress(u, byTopic);
+            const unitIds = u.topics.map((x) => x.id);
+            const unitState = groupState(unitIds, picked);
             return (
               <div key={u.id}>
-                <button
-                  type="button"
-                  onClick={() => setOpenUnit(open ? "" : u.id)}
-                  aria-expanded={open}
-                  className="flex min-h-11 w-full items-center gap-3 rounded-lg px-1 text-left hover:bg-muted/60"
-                >
-                  <span className="min-w-0 flex-1 truncate text-small font-semibold">{unitTitle(c, u)}</span>
-                  <span className="shrink-0 text-caption tabular-nums text-faint">
-                    {up.done}/{up.total}
-                  </span>
-                  <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-180")} />
-                </button>
+                <div className="flex items-center rounded-lg hover:bg-muted/60">
+                  {selecting && (
+                    <button
+                      type="button"
+                      role="checkbox"
+                      aria-checked={unitState === "all" ? true : unitState === "some" ? "mixed" : false}
+                      aria-label={t("course.selectUnit").replace("{unit}", unitTitle(c, u))}
+                      onClick={() => applyPick(toggleGroup(picked, unitIds))}
+                      disabled={startingPicked}
+                      className="grid size-11 shrink-0 place-items-center rounded-lg"
+                    >
+                      <TickBox state={unitState} />
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => setOpenUnit(open ? "" : u.id)}
+                    aria-expanded={open}
+                    className={cn("flex min-h-11 min-w-0 flex-1 items-center gap-3 rounded-lg pr-1 text-left", !selecting && "pl-1")}
+                  >
+                    <span className="min-w-0 flex-1 truncate text-small font-semibold">{unitTitle(c, u)}</span>
+                    <span className="shrink-0 text-caption tabular-nums text-faint">
+                      {up.done}/{up.total}
+                    </span>
+                    <ChevronDown className={cn("size-4 shrink-0 text-faint transition-transform", open && "rotate-180")} />
+                  </button>
+                </div>
                 {open && (
                   <ul className="mb-2 mt-1 flex flex-col gap-1.5">
                     {u.topics.map((topic) => (
@@ -287,8 +363,9 @@ export function SubjectTopics({
                           files={(matched.byTopic.get(topic.id) ?? []).map((id) => titleOf.get(id)).filter((n): n is string => !!n)}
                           onStart={() => void start(c, topic, ready.level)}
                           busy={busyTopicId === topic.id}
-                          disabled={!!busyTopicId}
+                          disabled={!!busyTopicId || startingPicked}
                           notesHref={ready.withNotes.has(topic.id) ? noteHref(c.id, topic.id) : undefined}
+                          select={{ selecting, checked: picked.has(topic.id), onToggle: () => !startingPicked && applyPick(toggleTopic(picked, topic.id)) }}
                         />
                       </li>
                     ))}
@@ -308,6 +385,21 @@ export function SubjectTopics({
           {t("course.sourceNote")}
           {c.numberingNote ? ` ${c.numberingNote}` : ""}
         </p>
+        {pickedIds.length > 0 && (
+          <div className="sticky bottom-3 z-20 mt-4 sm:bottom-4">
+            <div className="flex items-center gap-1.5 rounded-2xl border border-border bg-card py-2 pl-4 pr-2 shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
+              <p aria-live="polite" className="min-w-0 flex-1 truncate text-ui font-semibold">
+                {pickedIds.length === 1 ? t("course.selectedOne") : t("course.selectedMany").replace("{count}", String(pickedIds.length))}
+              </p>
+              <button type="button" onClick={clearPicked} disabled={startingPicked} className={buttonClass({ variant: "ghost", size: "sm" })}>
+                {t("course.selectClear")}
+              </button>
+              <button type="button" onClick={() => void startPicked()} disabled={startingPicked || !!busyTopicId} className={buttonClass({ size: "sm", className: "min-w-[116px]" })}>
+                {startingPicked ? <Loader2 className="size-4 animate-spin" /> : t("course.selectStart")}
+              </button>
+            </div>
+          </div>
+        )}
       </section>
     );
   }
