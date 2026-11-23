@@ -2,6 +2,7 @@
 
 import { buttonClass } from "@/components/ui/button";
 import "@/lib/i18n/exam-planner";
+import "@/lib/i18n/exam-import";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
@@ -51,12 +52,15 @@ export function ExamSetup({
   weekdayMinutes,
   firstExam,
   onClose,
+  onImport,
 }: {
   mode: SetupMode;
   today: string;
   weekdayMinutes: number[];
   firstExam: boolean;
   onClose: () => void;
+  /** Opens the exam import (calendar or file). Absent on a server without it: the older calendar suggestions show instead. */
+  onImport?: () => void;
 }) {
   const { t, locale } = useI18n();
   const qc = useQueryClient();
@@ -84,7 +88,7 @@ export function ExamSetup({
   const [saving, setSaving] = useState(false);
 
   const subjects = useQuery({ queryKey: ["workspace-tree-flat"], queryFn: async () => { const tr = await fetchWorkspaceTree(); return flatten(tr.folders, tr.rootWorkspaces); }, enabled: mode.kind !== "time" });
-  const suggestions = useQuery({ queryKey: [...PLAN_KEY, "suggestions"], queryFn: fetchExamSuggestions, enabled: mode.kind !== "time", retry: false });
+  const suggestions = useQuery({ queryKey: [...PLAN_KEY, "suggestions"], queryFn: fetchExamSuggestions, enabled: mode.kind !== "time" && !onImport, retry: false });
 
   // With one subject there's nothing to pick.
   const workspaceId = pickedWs || (subjects.data?.length === 1 ? subjects.data[0].id : "");
@@ -200,6 +204,11 @@ export function ExamSetup({
           {step === "exam" && (
             <div className="mt-1.5 flex flex-col gap-4">
               <p className="text-[13.5px] text-muted-foreground">{t("ep.setup.examSub")}</p>
+              {onImport && !editing && (
+                <button type="button" onClick={onImport} className="-mt-1 self-start rounded-lg border border-border bg-card px-3 py-2 text-[13px] font-semibold text-foreground hover:border-border-strong">
+                  {t("ei.open")}
+                </button>
+              )}
               {suggestions.data?.suggestions.length ? (
                 <div>
                   <div className="mb-1.5 flex items-center gap-1.5 text-[12.5px] font-semibold text-faint"><CalendarPlus className="size-3.5" />{t("ep.setup.fromCalendar")}</div>

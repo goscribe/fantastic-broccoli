@@ -39,6 +39,12 @@ export interface ExamSummary {
   tasksTotal: number;
   topicLabels: string[];
   confidence: Record<string, number>;
+  /** Where an imported exam came from; absent or null when typed in (or on an older server). */
+  source?: "google" | "ics" | "file" | null;
+  /** The source's start "HH:MM" or session "am" | "pm". */
+  time?: string | null;
+  /** The day it was on before its calendar event moved; null once seen. */
+  movedFrom?: string | null;
 }
 
 export interface PlanToday {

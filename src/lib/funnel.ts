@@ -48,7 +48,12 @@ export type FunnelEvent =
   | "wall.dismissed"
   | "wall.trial_started"
   /** Coursework grader screen opened (the server records review_requested / review_completed / limit_hit itself). */
-  | "grader.opened";
+  | "grader.opened"
+  /** Exam import: started (`source`), exams added by it (`count`, `source`), an imported exam removed, an event attached by hand. */
+  | "planner.calendar_import_opened"
+  | "planner.calendar_import_added"
+  | "planner.calendar_exam_removed"
+  | "planner.calendar_event_attached";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
@@ -87,6 +92,10 @@ export interface FunnelProps {
   reason?: WallReason;
   /** wall.*: which wall layout (server WALL_VARIANTS). */
   variant?: WallVariant;
+  /** planner.calendar_*: where the exams came from (server EXAM_IMPORT_SOURCES). */
+  source?: "google" | "ics" | "file";
+  /** planner.calendar_import_added: how many exams the import added. */
+  count?: number;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";
