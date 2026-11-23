@@ -2,6 +2,7 @@ import superjson from "superjson";
 import { surfaceRefusal } from "./refusals";
 import { apiUrl } from "./config";
 import { normalizeActivityContent } from "./activity-content";
+import type { MaterialPrimer } from "@/lib/start-check";
 import type {
   ActivityStatus,
   ActivityType,
@@ -108,6 +109,10 @@ export interface ApiStudySession {
   quickStart?: boolean;
   /** Built from the learner's mistakes ("Practice my mistakes"). */
   mistakesPractice?: boolean;
+  /** Start check: the learner's own 0-10 confidence, asked before this session (older servers omit it). */
+  confidenceBefore?: number | null;
+  /** Catalog topics the session is on: "<courseId>:<topicId>[,<topicId>…]". */
+  courseTopic?: string | null;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -145,6 +150,34 @@ export interface CreateStudySessionInput {
   endDate?: Date;
   /** Quick 5: one easy 5-question quiz from the material instead of a full plan. */
   quickStart?: boolean;
+  /** What the learner answered on the start check, when it was shown. */
+  startCheck?: StartCheckAnswers;
+}
+
+/** A paper to study for, in the board's own words ("Paper 1", "Multiple choice, then data-based questions"). */
+export interface PaperChoice {
+  id: string;
+  name: string;
+  blurb: string;
+}
+
+/** What to ask before a start (server src/services/session/start-check.service.ts). */
+export interface StartCheckOptions {
+  askConfidence: boolean;
+  /** Catalog topics with no fresh rating (empty for a subject's own material). */
+  askTopicIds: string[];
+  /** Papers to choose between; empty = offer the focus note instead. */
+  papers: PaperChoice[];
+  /** The paper chosen last time; null = mix. */
+  paperId: string | null;
+}
+
+export interface StartCheckAnswers {
+  confidence?: number;
+  confidenceTopicIds?: string[];
+  /** Sent when the paper choice was shown: an id, or null for "Mix". */
+  paperId?: string | null;
+  focusNote?: string;
 }
 
 export interface AddActivityInput {
@@ -259,6 +292,13 @@ export const studySessionApi = {
 
   getStats: (id: string) =>
     rpc<ApiSessionStats>("studySession.getStats", "query", { id }),
+
+  /** Before a session in a subject: whether to ask for a confidence, and the papers to choose between. */
+  startCheck: (workspaceId: string) =>
+    rpc<StartCheckOptions>("studySession.startCheck", "query", { workspaceId }),
+
+  /** The notes-first screen for a session on the learner's own material. */
+  getPrimer: (id: string) => rpc<MaterialPrimer>("studySession.getPrimer", "query", { id }),
 
   /** Practice papers this subject can take, in its board's format. */
   paperOptions: (input: { workspaceId: string; board?: string }) =>
@@ -737,6 +777,8 @@ export function mapSession(s: ApiStudySession): StudySession {
     generationProgress: s.generationProgress ?? undefined,
     quickStart: s.quickStart ?? false,
     mistakesPractice: s.mistakesPractice ?? false,
+    confidenceBefore: typeof s.confidenceBefore === "number" ? s.confidenceBefore : undefined,
+    courseTopic: s.courseTopic ?? undefined,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),

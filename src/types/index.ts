@@ -52,6 +52,10 @@ export interface StudySession {
   quickStart: boolean;
   /** Built from the learner's mistakes ("Practice my mistakes"). */
   mistakesPractice?: boolean;
+  /** The learner's own 0-10 confidence, asked just before this session. */
+  confidenceBefore?: number;
+  /** Catalog topics the session is on: "<courseId>:<topicId>[,<topicId>…]". */
+  courseTopic?: string;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;

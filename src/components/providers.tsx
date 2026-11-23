@@ -15,6 +15,7 @@ import { reportSignupConversionFromUrl } from "@/lib/gtag";
 import { captureInstallPrompt } from "@/lib/push-client";
 import { useNewUi } from "@/lib/new-ui";
 import { StudyLengthHost } from "@/components/session/study-length-host";
+import { StartCheckHost } from "@/components/session/start-check-host";
 import "@/app/design/design.css";
 
 /**
@@ -80,6 +81,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
           {children}
           <ThemedToaster />
           <StudyLengthHost />
+          <StartCheckHost />
         </QueryClientProvider>
       </I18nProvider>
     </ThemeProvider>

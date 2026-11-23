@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Loader2, Upload } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
 import { addPastedText, analyzeFiles, uploadFiles } from "@/lib/api/materials";
-import { createStudySession } from "@/lib/api/study";
+import { createStudySessionQuietly } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
@@ -133,7 +133,7 @@ export function FirstRun({
       ...extra,
     });
     setBusy("building");
-    const session = await createStudySession(input);
+    const session = await createStudySessionQuietly(input);
     track("first_run.session_requested", { option }, workspaceId);
     router.push(session ? `/workspace/${workspaceId}/session/${session.id}` : `/workspace/${workspaceId}`);
   };

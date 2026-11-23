@@ -2,7 +2,8 @@
 
 import { useNewUi } from "@/lib/new-ui";
 import { PlayActions, PlayPrimary } from "@/components/session/play-ui";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import { readingOrder } from "@/lib/start-check";
 import {
   ReadingContent,
   ReadingFigure,
@@ -486,16 +487,19 @@ function SectionHeading({
  * figures, without highlighting or completion controls. Used for previews
  * (e.g. the artifact bank).
  */
-export function ReadingBody({ content }: { content: ReadingContent }) {
+export function ReadingBody({ content, visualFirst = false, lead, className }: { content: ReadingContent; /** A reading that opens on bullets shows its figure and explanation first (see `readingOrder`). */ visualFirst?: boolean; /** Shown above the text: a visual brought from elsewhere. */ lead?: ReactNode; className?: string }) {
   const parsedBlocks = parseReadingBlocks(content.text);
+  const order = blockOrder(parsedBlocks, visualFirst);
   const figuresById = new Map(
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );
   const info = sectionInfo(parsedBlocks, content);
   return (
-    <div className="mx-auto max-w-[75ch] space-y-5">
+    <div className={cn("mx-auto max-w-[75ch] space-y-5", className)}>
       <SourceBadge content={content} />
-      {parsedBlocks.map((block, i) => {
+      {lead}
+      {order.map((i) => {
+        const block = parsedBlocks[i];
         if (block.kind === "callout") return <CalloutView key={i} callout={block.callout} />;
         if (block.kind === "widget") {
           return block.widget in widgetRegistry ? (
@@ -658,6 +662,23 @@ interface ReadingActivityProps {
   initialHighlights?: SessionHighlight[];
   onComplete: () => void;
   onHighlightsChange?: (highlights: ReadingHighlight[]) => void;
+  /**
+   * The first screen of a session: a reading that opens on a bullet list
+   * shows its figure and its explanation before the points. Blocks keep
+   * their index, so saved highlights are unaffected.
+   */
+  visualFirst?: boolean;
+  /** A visual brought from elsewhere (the topic note, the material), above the text. */
+  lead?: ReactNode;
+}
+
+/** Whether a reading opens on bullets with no figure or widget of its own (it then wants a `lead`). */
+export function readingNeedsLead(content: ReadingContent): boolean {
+  return readingOrder(parseReadingBlocks(content.text).map((b) => b.kind)).needsLead;
+}
+
+function blockOrder(blocks: ReadingBlock[], visualFirst: boolean): number[] {
+  return visualFirst ? readingOrder(blocks.map((b) => b.kind)).order : blocks.map((_, i) => i);
 }
 
 export function ReadingActivity({
@@ -666,6 +687,8 @@ export function ReadingActivity({
   initialHighlights,
   onComplete,
   onHighlightsChange,
+  visualFirst = false,
+  lead,
 }: ReadingActivityProps) {
   const { t } = useI18n();
   const newUi = useNewUi();
@@ -688,6 +711,7 @@ export function ReadingActivity({
   const [noteDraft, setNoteDraft] = useState("");
 
   const parsedBlocks = parseReadingBlocks(content.text);
+  const order = blockOrder(parsedBlocks, visualFirst);
   const figuresById = new Map(
     (content.figures ?? []).map((figure) => [figure.id, figure]),
   );
@@ -810,7 +834,9 @@ export function ReadingActivity({
         className={cn("relative space-y-5 select-text", newUi ? "max-w-[70ch]" : "mx-auto max-w-[75ch]")}
       >
         <SourceBadge content={content} />
-        {parsedBlocks.map((block, i) => {
+        {lead}
+        {order.map((i) => {
+        const block = parsedBlocks[i];
           if (block.kind === "widget") {
             return block.widget in widgetRegistry ? (
               <InteractiveWidget key={i} id={block.widget as WidgetId} />
