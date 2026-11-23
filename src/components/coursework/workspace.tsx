@@ -8,22 +8,40 @@ import { ChevronDown, ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, Mo
 import { ScribeEditor, type EditorDoc, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
 import { courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type DraftDetail, type DraftSummary, type ImportFailure } from "@/lib/api/coursework";
 import { SubjectArt } from "@/components/learn/subject-tile";
-import { componentTitle, countWords, draftEntries, familyText, feedbackAnchors, locateAnchors, wordStatus } from "@/lib/coursework";
+import { EDIT_UPLOADS_AS_TEXT, componentTitle, draftEntries, familyText, feedbackAnchors, locateAnchors } from "@/lib/coursework";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { CompareSheet } from "./compare";
 import { GradePanel, type PanelView } from "./grade-panel";
 import { AskInput, useChat } from "./panel-views";
+import type { DocxViewHandle } from "./docx-view";
 import type { PdfViewHandle } from "./pdf-view";
 import { useCw } from "./use-cw";
 import { useGrader, useOnline, useWide } from "./use-grader";
+import { WordInfo, draftBreakdown, lineFor, rulesOf, useDeclaredWords } from "./word-count";
 import "@/app/coursework/coursework.css";
 
 /** pdf.js is only fetched when a PDF draft is on screen. */
 const PdfView = dynamic(() => import("./pdf-view"), { ssr: false, loading: () => <div className="mx-auto mt-4 aspect-[1/1.414] w-full max-w-[860px] animate-pulse bg-white" aria-busy="true" /> });
 
+/** docx-preview is only fetched when a Word draft is on screen. */
+const DocxView = dynamic(() => import("./docx-view"), { ssr: false, loading: () => <div className="mx-auto mt-4 aspect-[1/1.414] w-full max-w-[860px] animate-pulse bg-white" aria-busy="true" /> });
+
 type Tab = PanelView | "doc";
+
+/**
+ * The draft a piece opens on: the newest, except that a text draft which is
+ * only an untouched conversion of an uploaded file gives way to the file
+ * itself while uploads are preview-and-grade only (EDIT_UPLOADS_AS_TEXT off).
+ * Such drafts were made automatically for Word files by earlier servers.
+ */
+export function firstDraft(drafts: DraftSummary[]): DraftSummary | undefined {
+  const newestFirst = [...drafts].sort((x, y) => y.number - x.number);
+  if (EDIT_UPLOADS_AS_TEXT) return newestFirst[0];
+  const untouchedCopy = (d: DraftSummary) => d.kind === "text" && !!d.createdFromDraftId && (d.version ?? 1) <= 1 && d.reviewCount === 0 && drafts.some((f) => f.id === d.createdFromDraftId && f.kind === "file" && f.format !== "txt" && (f.status ?? "ready") === "ready");
+  return newestFirst.find((d) => !untouchedCopy(d)) ?? newestFirst[0];
+}
 
 const ZOOMS = [0.85, 1, 1.15, 1.3, 1.5];
 type SaveState = "saved" | "saving" | "local" | "conflict";
@@ -73,6 +91,10 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const editor = useRef<ScribeEditorHandle>(null);
   const fileInput = useRef<HTMLInputElement>(null);
   const pdf = useRef<PdfViewHandle>(null);
+  const docx = useRef<DocxViewHandle>(null);
+  /** The heading each quote of a Word draft sits under, as the preview found them. */
+  const [docxPlaces, setDocxPlaces] = useState<Map<string, string>>(new Map());
+  const [declared, setDeclared] = useDeclaredWords(documentId);
   /** Which page each quote of a PDF draft is on, as the viewer found them. */
   const [pdfPages, setPdfPages] = useState<Map<string, number>>(new Map());
   const [draftsOpen, setDraftsOpen] = useState(false);
@@ -141,6 +163,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     setJson(content);
     setText(plain);
     setPdfPages(new Map());
+    setDocxPlaces(new Map());
     setMark(-1);
     setActiveAnchor(null);
     if (d.kind === "file") {
@@ -160,7 +183,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
         sync.current.rubricId = d.rubricId;
         sync.current.currentDraftId = d.currentDraftId ?? null;
         // The newest draft opens first: the text version when there is one, else the file as uploaded.
-        const newest = [...(d.drafts ?? [])].sort((x, y) => y.number - x.number)[0];
+        const newest = firstDraft(d.drafts ?? []);
         const first = newest ? await courseworkApi.draft(newest.id) : v1Draft(d);
         if (cancelled) return;
         setDoc(d);
@@ -266,6 +289,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     documentId: loadState === "ready" ? documentId : null,
     rubricId: doc?.rubricId ?? null,
     draftId: draft && draft.id !== V1_DRAFT ? draft.id : null,
+    declaredWords: declared,
     onRubric: (id) => {
       sync.current.rubricId = id;
       setDoc((d) => (d ? { ...d, rubricId: id } : d));
@@ -297,7 +321,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     setActiveAnchor(anchorId);
     setTab("doc");
     // On a phone the document has to be on screen before it can scroll.
-    requestAnimationFrame(() => requestAnimationFrame(() => (pdf.current ?? editor.current)?.showAnchor(anchorId)));
+    requestAnimationFrame(() => requestAnimationFrame(() => (pdf.current ?? docx.current ?? editor.current)?.showAnchor(anchorId)));
   };
   const onAnchorClick = (anchorId: string) => {
     const target = targets.get(anchorId);
@@ -311,8 +335,12 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     setTab("guide");
   };
 
-  const words = useMemo(() => countWords(text), [text]);
-  const ws = wordStatus(words, rubric?.wordLimit ?? null);
+  // Counted the way the board counts for this component, live: the editor's document as it is now, or the file as it was read.
+  const rules = useMemo(() => rulesOf(rubric), [rubric]);
+  const breakdown = useMemo(() => (draft ? draftBreakdown(draft, rules, draft.kind === "text" ? json : undefined) : draftBreakdown({ kind: "text", text }, rules)), [draft, rules, json, text]);
+  const words = breakdown.total;
+  const mine = rules.kind === "words" ? declared : null;
+  const ws = lineFor(breakdown, rules, mine);
 
   /** Opens a draft by id (saving the one on screen first). */
   const openDraft = async (draftId: string) => {
@@ -332,7 +360,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
       const fresh = await courseworkApi.document(documentId);
       sync.current.currentDraftId = fresh.currentDraftId ?? null;
       setDoc(fresh);
-      const newest = [...(fresh.drafts ?? [])].sort((x, y) => y.number - x.number)[0];
+      const newest = firstDraft(fresh.drafts ?? []);
       if (newest) {
         showDraft(await courseworkApi.draft(newest.id));
         grader.select(null);
@@ -380,10 +408,13 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   // The document side always shows the draft that is open: a file as itself, or text in the editor.
   const source = format;
   const showPdf = source === "file" && fileFormat === "pdf";
+  const showDocx = source === "file" && fileFormat === "docx";
   const places = useMemo(() => {
+    // A Word preview has no reliable page numbers: a passage is placed by the heading it sits under.
+    if (showDocx) return new Map([...docxPlaces.entries()].map(([id, section]) => [id, section ? t("cw.place", { section }) : t("cw.place.doc")]));
     if (source === "file") return new Map([...pdfPages.entries()].map(([id, n]) => [id, t("cw.place.page", { n })]));
     return new Map([...locateAnchors(json, anchors).entries()].map(([id, section]) => [id, /^Paragraph \d+$/.test(section) ? section : t("cw.place", { section })]));
-  }, [source, pdfPages, json, anchors, t]);
+  }, [source, showDocx, docxPlaces, pdfPages, json, anchors, t]);
   const marks = useMemo(() => [...places.keys()], [places]);
   const entries = useMemo(() => draftEntries(grader.rows, drafts), [grader.rows, drafts]);
   const shownDraft = (review ? entries.find((d) => d.reviewId === review.id) : entries.find((d) => d.reviewId === null && d.draftId === draft?.id)) ?? entries[entries.length - 1];
@@ -433,7 +464,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
     const next = (mark + dir + marks.length) % marks.length;
     setMark(next);
     setActiveAnchor(marks[next]);
-    requestAnimationFrame(() => (pdf.current ?? editor.current)?.showAnchor(marks[next]));
+    requestAnimationFrame(() => (pdf.current ?? docx.current ?? editor.current)?.showAnchor(marks[next]));
   };
   const fileWord = t(fileFormat === "pdf" ? "cw.file.pdf" : fileFormat === "docx" || fileFormat === "doc" ? "cw.file.word" : "cw.file.other");
   /** "Edit as text": a new text draft made from this file's text. The file stays as its own draft. */
@@ -622,6 +653,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             grader={grader}
             text={text}
             words={words}
+            wordInfo={<WordInfo status={ws} breakdown={breakdown} rules={rules} declared={mine} onDeclared={setDeclared} uncertain={rubric?.status === "draft" || rules.fallback} />}
             view={panelView}
             onView={setTab}
             onShowQuote={showQuote}
@@ -656,10 +688,12 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
                 </button>
               </>
             ) : (
-              <span className="whitespace-nowrap text-small font-bold tabular-nums text-muted-foreground">{ws.count}</span>
+              <span className="min-w-0 truncate whitespace-nowrap text-small font-bold tabular-nums text-muted-foreground" title={[ws.count, ws.detail].filter(Boolean).join(" · ")}>
+                {ws.count}
+              </span>
             )}
             <span className="ml-auto flex items-center">
-              {source === "file" && (
+              {EDIT_UPLOADS_AS_TEXT && source === "file" && (
                 <button type="button" onClick={() => void editAsText()} disabled={converting} title={t("cw.file.editSub", { kind: fileWord })} className="mr-1 inline-flex h-10 shrink-0 items-center rounded-[12px] border border-border bg-white px-3 text-small font-extrabold text-foreground hover:border-border-strong hover:bg-muted disabled:opacity-50">
                   {converting ? t("cw.file.editing") : t("cw.file.edit")}
                 </button>
@@ -696,6 +730,20 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
                   zoom={zoom}
                   failed={<OriginalText name={file.name} onDownload={() => void downloadOriginal()} text={text} />}
                 />
+              ) : showDocx ? (
+                <DocxView
+                  key={draft!.id}
+                  handleRef={docx}
+                  url={file.url}
+                  html={draft!.kind === "file" ? (draft!.contentHtml ?? null) : null}
+                  text={text}
+                  anchors={anchors}
+                  activeAnchor={activeAnchor}
+                  onAnchorClick={onAnchorClick}
+                  onLocated={setDocxPlaces}
+                  zoom={zoom}
+                  failed={<OriginalText name={file.name} onDownload={() => void downloadOriginal()} text={text} />}
+                />
               ) : (
                 <div className="py-4">
                   <OriginalText name={file.name} onDownload={() => void downloadOriginal()} text={text} />
@@ -722,7 +770,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             }}
             toolbarEnd={
               marks.length > 0 ? (
-                <span className={cn("whitespace-nowrap text-small font-bold tabular-nums", ws.state === "over" ? "text-foreground" : "text-muted-foreground")} title={saveLabel}>
+                <span className={cn("whitespace-nowrap text-small font-bold tabular-nums", ws.state === "over" ? "text-foreground" : "text-muted-foreground")} title={[saveLabel, ws.detail].filter(Boolean).join(" · ")}>
                   {ws.count}
                 </span>
               ) : undefined

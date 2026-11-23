@@ -49,11 +49,22 @@ export interface GraderRubric {
   sessionLabel: string;
   totalMarks: number;
   wordLimit: number | null;
+  /** How the board counts words for this component (absent on a server without counting rules: the app falls back). */
+  wordCount?: WordCountRules & { fallback?: boolean };
   status: "draft" | "reviewed";
   sourceNote: string;
   criteria: Array<{ letter: string; name: string; maxMarks: number }>;
   /** Matches one of the student's own subjects: prefill the picker with it. */
   suggested: boolean;
+}
+
+/** Server lib/coursework/word-count.ts WordCountRules. */
+export interface WordCountRules {
+  limit: number | null;
+  kind: "words" | "pages" | "none";
+  excludes: string[];
+  /** What the count covers, in plain words. */
+  note: string;
 }
 
 export type GuideBlock =
@@ -143,7 +154,8 @@ interface ResultBase {
   schemaVersion: 1;
   disclaimer: string;
   topFixes: Array<{ title: string; detail: string; criterion: string }>;
-  words: { counted: number; limit: number | null; overLimit: boolean; graded: number; bibliographyFound: boolean };
+  /** `counted` is what counts toward the limit (an estimate for files); `declared` the student's own count; nothing is cut at the limit (`truncated` only beyond the safety cap). Fields after `bibliographyFound` are absent on older results. */
+  words: { counted: number; limit: number | null; overLimit: boolean; graded: number; bibliographyFound: boolean; total?: number; notCounted?: number; excluded?: Record<string, number>; estimate?: boolean; declared?: number | null; overBy?: number; limitKind?: "words" | "pages" | "none"; truncated?: boolean };
   flags: { quotesDropped: number; rewritesRemoved: number; bandsAdjusted: number; marksRemoved: number; notes: string[] };
 }
 
@@ -193,7 +205,7 @@ export interface GraderReview {
   wordCount: number | null;
   createdAt: Date;
   completedAt: Date | null;
-  rubric: Pick<GraderRubric, "id" | "board" | "qualification" | "subject" | "component" | "componentKind" | "level" | "sessionLabel" | "totalMarks" | "wordLimit" | "status" | "sourceNote">;
+  rubric: Pick<GraderRubric, "id" | "board" | "qualification" | "subject" | "component" | "componentKind" | "level" | "sessionLabel" | "totalMarks" | "wordLimit" | "wordCount" | "status" | "sourceNote">;
   /** The exact text reviewed; evidence offsets point into it. */
   snapshotText: string | null;
   result: GradeResult | null;
@@ -221,6 +233,8 @@ export interface RequestReviewInput {
   mode?: ReviewMode;
   label?: string;
   timezone?: string;
+  /** The student's own word count: used for the limit feedback instead of Scribe's estimate. */
+  declaredWords?: number;
 }
 
 /* --------------------------------- Transport -------------------------------- */

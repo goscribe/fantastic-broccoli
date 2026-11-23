@@ -55,7 +55,8 @@ interface Rect {
 type PdfJs = typeof import("pdfjs-dist");
 
 let pdfjs: Promise<PdfJs> | null = null;
-function loadPdfJs(): Promise<PdfJs> {
+/** pdf.js, fetched on first use (the PDF viewer and the first-page thumbnail share one copy). */
+export function loadPdfJs(): Promise<PdfJs> {
   // The legacy build runs on older phones too (no Promise.withResolvers needed).
   pdfjs ??= import("pdfjs-dist/legacy/build/pdf.mjs").then((lib) => {
     const mod = lib as unknown as PdfJs;

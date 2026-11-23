@@ -13,6 +13,14 @@ export interface UltraOffer {
   priceAboveProDollars: number;
 }
 
+/**
+ * "Edit as text": making an editable text draft from an uploaded PDF or Word
+ * file. Off for now: an upload is previewed and graded as it is (the server
+ * endpoint and existing text drafts keep working). Turn it on to bring the
+ * action back in the document's toolbar.
+ */
+export const EDIT_UPLOADS_AS_TEXT = false;
+
 /** Shortest work worth reviewing (server MIN_WORDS). */
 export const MIN_WORDS = 150;
 
@@ -229,28 +237,74 @@ export type WordState = "empty" | "short" | "ok" | "over";
 
 export interface WordStatus {
   state: WordState;
-  /** "2,184 of 2,200 words", "2,184 words". */
+  /** "About 2,140 words counted of 2,000", "2,184 of 2,200 words", "2,184 words". */
   count: string;
   /** A calm line when short or over; null otherwise. */
   note: string | null;
+  /** "3,445 not counted (tables, code, appendices, bibliography)"; null when everything counts. */
+  detail: string | null;
 }
 
 const n = (v: number) => v.toLocaleString("en-GB");
 
+export interface WordLineInput {
+  /** Words that count toward the limit under the component's rules. */
+  counted: number;
+  /** Every word in the work (what the minimum for a review is checked against). */
+  total: number;
+  /** What was left out, already worded: "tables, code, appendices". */
+  leftOut?: string;
+  /** From an uploaded file: the count is an estimate and is said as one. */
+  estimate: boolean;
+  /** The word limit; null for a page guide or no limit (then no "of N" is shown at all). */
+  limit: number | null;
+  /** The student's own count ("My word count is ___"): it decides over/under when given. */
+  declared?: number | null;
+}
+
+/**
+ * The word count line. Counting from a file is an estimate, so being over
+ * the limit is never stated as fact: "About 2,140 words counted of 2,000",
+ * with the student's own count taking over when they give it. The whole
+ * work is reviewed either way.
+ */
+export function wordLine(i: WordLineInput): WordStatus {
+  const about = i.estimate ? "About " : "";
+  const own = typeof i.declared === "number" && i.declared > 0 ? i.declared : null;
+  const count =
+    own !== null
+      ? i.limit
+        ? `${n(own)} of ${n(i.limit)} words (your count)`
+        : `${n(own)} words (your count)`
+      : i.limit
+        ? `${about}${n(i.counted)} words counted of ${n(i.limit)}`
+        : i.total - i.counted > 0
+          ? `${about}${n(i.counted)} words counted`
+          : `${n(i.counted)} ${i.counted === 1 ? "word" : "words"}`;
+  const notCounted = i.total - i.counted;
+  const detail = notCounted > 0 ? `${n(notCounted)} not counted${i.leftOut ? ` (${i.leftOut})` : ""}` : null;
+  if (i.total === 0) return { state: "empty", count, note: null, detail: null };
+  if (i.total < MIN_WORDS) {
+    return { state: "short", count, note: `Add at least ${MIN_WORDS} words for a review. ${n(MIN_WORDS - i.total)} to go.`, detail };
+  }
+  const used = own ?? i.counted;
+  if (i.limit && used > i.limit) {
+    const over = used - i.limit;
+    const note =
+      own !== null
+        ? `${n(over)} over the limit by your count. Examiners are not required to read past ${n(i.limit)} words. Your whole work is still reviewed.`
+        : i.estimate
+          ? `About ${n(Math.max(10, Math.round(over / 10) * 10))} over the limit by Scribe's count, which is an estimate from your file. Check it against your own word count. Your whole work is still reviewed.`
+          : `${n(over)} over the limit. Examiners are not required to read past ${n(i.limit)} words. Your whole work is still reviewed.`;
+    return { state: "over", count, note, detail };
+  }
+  return { state: "ok", count, note: null, detail };
+}
+
+/** A plain count with nothing left out (pasted text before a component is chosen, older servers). */
 export function wordStatus(words: number, limit: number | null): WordStatus {
-  const count = limit ? `${n(words)} of ${n(limit)} words` : `${n(words)} ${words === 1 ? "word" : "words"}`;
-  if (words === 0) return { state: "empty", count, note: null };
-  if (words < MIN_WORDS) {
-    return { state: "short", count, note: `Add at least ${MIN_WORDS} words for a review. ${n(MIN_WORDS - words)} to go.` };
-  }
-  if (limit && words > limit) {
-    return {
-      state: "over",
-      count,
-      note: `${n(words - limit)} over the limit. Examiners stop reading at ${n(limit)} words, so the review does too.`,
-    };
-  }
-  return { state: "ok", count, note: null };
+  const s = wordLine({ counted: words, total: words, estimate: false, limit });
+  return limit ? { ...s, count: `${n(words)} of ${n(limit)} words` } : s;
 }
 
 /* ---------- Rubrics ---------- */
