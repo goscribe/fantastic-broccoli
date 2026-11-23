@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { defaultNoteSubject, docHighlights, isDiagramFigure, locateAnchor, locateInNote, makeAnchor, ownNoteHref, quotePreview, sortByPlace, treeLevels, wrapLabel } from "./my-notes";
+import { defaultNoteSubject, docHighlights, highlightBarPlace, isDiagramFigure, locateAnchor, locateInNote, makeAnchor, ownNoteHref, quotePreview, sortByPlace, treeLevels, wrapLabel } from "./my-notes";
 
 const TEXT = "Water is a polar molecule. Hydrogen bonds form between water molecules. Hydrogen bonds make water cohesive.";
 
@@ -86,4 +86,22 @@ test("a tree is laid out level by level; labels wrap at spaces", () => {
   assert.deepEqual(treeLevels({ layout: "tree", nodes: ["a", "b"].map(node), edges: [edge("a", "b"), edge("b", "a")] }), [["a"], ["b"]]);
   assert.deepEqual(wrapLabel("Chromosomes line up at the equator", 16), ["Chromosomes line", "up at the", "equator"]);
   assert.deepEqual(wrapLabel("one two three four five six seven", 8, 2), ["one two", "thre…"]);
+});
+
+test("the highlighter toolbar shows only beside a selection that is on screen", () => {
+  const vp = { width: 1440, height: 900 };
+  const box = (top: number, left = 400, width = 200, height = 24) => ({ top, bottom: top + height, left, width, height });
+  // Nothing selected (a collapsed range has no box): no toolbar, so none on load.
+  assert.equal(highlightBarPlace({ top: 0, bottom: 0, left: 0, width: 0, height: 0 }, vp, false), null);
+  // The selected words have been scrolled off the screen: no toolbar left floating over other content.
+  assert.equal(highlightBarPlace(box(-300), vp, false), null);
+  assert.equal(highlightBarPlace(box(1200), vp, false), null);
+  assert.equal(highlightBarPlace(box(1200), { width: 390, height: 844 }, true), null);
+  // With a mouse: just above the words, centred on them.
+  assert.deepEqual(highlightBarPlace(box(400), vp, false), { x: 500, y: 390, below: false });
+  // Too near the top to fit above: just under them.
+  assert.deepEqual(highlightBarPlace(box(60), vp, false), { x: 500, y: 94, below: true });
+  // Touch: under the words, clear of the system's selection menu, and kept on the screen sideways.
+  assert.deepEqual(highlightBarPlace(box(300, 0, 60), { width: 390, height: 844 }, true), { x: 110, y: 372, below: true });
+  assert.equal(highlightBarPlace(box(300, 330, 60), { width: 390, height: 844 }, true)?.x, 280);
 });
