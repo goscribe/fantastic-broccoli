@@ -31,8 +31,15 @@ const label = (model: string | null) => model ?? "Production (current models)";
 /** "claude-sonnet-5.5" for "anthropic/claude-sonnet-5.5": fits a stat card. */
 const shortLabel = (model: string | null) => (model ? model.split("/").pop()! : "Production");
 const keyOf = (model: string | null) => model ?? PRODUCTION;
-/** The ranking score (failures count as 0); an older server only sends the finished-only average. */
-const rankScore = (m: BenchmarkModelLine) => (m.score === undefined ? m.overall : m.score);
+/**
+ * The ranking score (failures count as 0). An older server only sends the
+ * finished-only average, so it is worked out from that and the counts.
+ */
+const rankScore = (m: BenchmarkModelLine) => {
+  if (m.score !== undefined) return m.score;
+  if (m.attempted === 0) return null;
+  return Math.round((((m.overall ?? 0) * m.assessed) / m.attempted) * 10) / 10;
+};
 
 function scoreTone(score: number | null) {
   if (score === null) return "text-faint";
