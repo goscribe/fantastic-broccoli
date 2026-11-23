@@ -86,7 +86,7 @@ export function ReminderSettings() {
             </p>
           </>
         ) : (
-          <div className="mt-3 h-[150px] max-w-md animate-pulse rounded-2xl bg-muted" />
+          <div className="mt-3 h-[326px] max-w-md sm:h-[408px] animate-pulse rounded-2xl bg-muted" />
         )}
 
         {pushRow && (
