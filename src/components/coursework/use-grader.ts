@@ -191,7 +191,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
         .then((r) => {
           if (cancelled) return;
           setReview(r);
-          setRows((list) => list.map((row) => (row.id === r.id ? { ...row, status: r.status, marksLow: r.result?.mode === "marked" ? r.result.overall.marksLow : null, marksHigh: r.result?.mode === "marked" ? r.result.overall.marksHigh : null } : row)));
+          setRows((list) => list.map((row) => (row.id === r.id ? { ...row, status: r.status, marksEstimate: r.result?.mode === "marked" ? r.result.overall.marksEstimate ?? null : null, marksLow: r.result?.mode === "marked" ? r.result.overall.marksLow : null, marksHigh: r.result?.mode === "marked" ? r.result.overall.marksHigh : null } : row)));
           if (isRunning(r.status)) {
             wasRunning = true;
             timer = setTimeout(load, 2500);

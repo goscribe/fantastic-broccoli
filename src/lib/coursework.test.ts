@@ -34,6 +34,14 @@ import {
   ultraPitch,
   wordLine,
   wordStatus,
+  criterionMark,
+  estimateLabel,
+  likelyLabel,
+  likelyRange,
+  prediction,
+  predictionSpan,
+  predictionSpoken,
+  withEstimate,
 } from "./coursework";
 import { SAMPLE_CITATIONS, SAMPLE_RESULT } from "./coursework-sample";
 import { countWork, resolveWordCountRules } from "./coursework-word-count";
@@ -68,11 +76,11 @@ test("grades and the cat's mood come from the range", () => {
 
 const draft1: MarkedResult = {
   ...SAMPLE_RESULT,
-  overall: { ...SAMPLE_RESULT.overall, marksLow: 13, marksHigh: 17 },
-  criteria: SAMPLE_RESULT.criteria.map((c) => (c.letter === "A" ? { ...c, bandLow: 3, bandHigh: 4 } : c.letter === "D" ? { ...c, bandLow: 4, bandHigh: 5 } : c)),
+  overall: { ...SAMPLE_RESULT.overall, marksEstimate: 16, marksLow: 15, marksHigh: 17 },
+  criteria: SAMPLE_RESULT.criteria.map((c) => (c.letter === "A" ? { ...c, bandLow: 3, bandHigh: 4, mark: 4 } : c.letter === "D" ? { ...c, bandLow: 4, bandHigh: 5, mark: 5 } : c)),
 };
 
-test("comparing drafts says which criteria moved, by the middle of each band", () => {
+test("comparing drafts says which criteria moved, by each best-estimate mark", () => {
   const cmp = compareDrafts(draft1, SAMPLE_RESULT)!;
   assert.deepEqual(
     cmp.rows.map((r) => [r.letter, r.move]),
@@ -84,6 +92,8 @@ test("comparing drafts says which criteria moved, by the middle of each band", (
     ],
   );
   assert.equal(cmp.overall.move, "up");
+  assert.deepEqual([cmp.overall.from.estimate, cmp.overall.to.estimate], [16, 17]);
+  assert.deepEqual(cmp.rows[0].from, { low: 3, high: 4, mark: 4 });
   assert.deepEqual([cmp.up, cmp.down, cmp.same], [1, 1, 2]);
   assert.equal(comparisonHeadline(cmp), "1 criterion moved up, 1 moved down");
   assert.equal(comparisonHeadline({ up: 2, down: 0 }), "2 criteria moved up");
@@ -259,7 +269,8 @@ test("a quoted passage is placed by the heading above it, or its paragraph numbe
 
 test("the ring gives each criterion its share and draws its band along it", () => {
   const segs = ringSegments([{ letter: "A", maxMarks: 6, bandLow: 3, bandHigh: 6 }, { letter: "B", maxMarks: 18, bandLow: 9, bandHigh: 9 }], 0.02);
-  assert.deepEqual(segs.map((s) => [s.letter, +s.start.toFixed(2), +s.end.toFixed(2), s.low, s.high]), [["A", 0.01, 0.24, 0.5, 1], ["B", 0.26, 0.99, 0.5, 0.5]]);
+  assert.deepEqual(segs.map((s) => [s.letter, +s.start.toFixed(2), +s.end.toFixed(2), s.low, s.high, +s.mark.toFixed(2)]), [["A", 0.01, 0.24, 0.5, 1, 0.67], ["B", 0.26, 0.99, 0.5, 0.5, 0.5]]);
+  assert.equal(ringSegments([{ letter: "A", maxMarks: 6, bandLow: 3, bandHigh: 6, mark: 5 }])[0].mark, 5 / 6);
   assert.deepEqual(ringSegments([]), []);
 });
 
@@ -298,4 +309,33 @@ test("the count follows the component's rules, and falls back when a rubric has 
   // The editor's document counts the same way, exactly (no "about").
   const doc = { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: prose }] }, { type: "codeBlock", content: [{ type: "text", text: "x = 1" }] }] };
   assert.deepEqual({ counted: countWork({ doc }, fallback).counted, estimate: countWork({ doc }, fallback).estimate }, { counted: 8 * 18, estimate: false });
+});
+
+test("the predicted total: the estimate with a narrow likely range, never the band sums", () => {
+  assert.equal(criterionMark({ bandLow: 3, bandHigh: 4, mark: 4 }), 4);
+  assert.equal(criterionMark({ bandLow: 3, bandHigh: 4 }), 3, "old results: the midpoint rounded down");
+  assert.deepEqual(likelyRange(16, 20), { low: 15, high: 17 });
+  assert.deepEqual(likelyRange(23, 34), { low: 21, high: 25 });
+  assert.deepEqual(likelyRange(13, 20, { low: 13, high: 18 }), { low: 13, high: 14 }, "never wider than the old span");
+  const p = prediction({ marksEstimate: 16, marksLow: 15, marksHigh: 17 }, 20);
+  assert.equal(estimateLabel(p), "16 of 20");
+  assert.equal(likelyLabel(p), "likely 15–17");
+  assert.equal(predictionSpoken(p), "Predicted 16 out of 20, likely 15 to 17");
+  assert.deepEqual(predictionSpan(p), { fill: 80, low: 75, high: 85 });
+  // A row from a server before the estimate: 20–26 of 34 becomes 23, likely 21–25.
+  assert.deepEqual(prediction({ marksLow: 20, marksHigh: 26 }, 34), { estimate: 23, low: 21, high: 25, max: 34 });
+  assert.equal(likelyLabel({ low: 5, high: 5 }), null);
+});
+
+test("an old 13–18 of 20 result reads as 13, likely 13–14, with each criterion's mark", () => {
+  const old: MarkedResult = {
+    ...SAMPLE_RESULT,
+    overall: { marksLow: 13, marksHigh: 18, totalMarks: 20, gradeLow: "4", gradeHigh: "6", summary: "" },
+    criteria: [[4, 3, 4], [4, 2, 3], [3, 2, 3], [3, 2, 3], [6, 4, 5]].map(([maxMarks, bandLow, bandHigh], i) => ({ ...SAMPLE_RESULT.criteria[0], letter: "ABCDE"[i], maxMarks, bandLow, bandHigh, mark: undefined })),
+  };
+  const r = withEstimate(old);
+  assert.deepEqual(r.criteria.map((c) => c.mark), [3, 2, 2, 2, 4]);
+  assert.deepEqual([r.overall.marksEstimate, r.overall.marksLow, r.overall.marksHigh, r.overall.gradeLow], [13, 13, 14, null]);
+  assert.equal(withEstimate(SAMPLE_RESULT), SAMPLE_RESULT, "current results pass unchanged");
+  assert.equal(withEstimate(null), null);
 });

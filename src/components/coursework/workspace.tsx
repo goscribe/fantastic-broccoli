@@ -8,7 +8,7 @@ import { ChevronDown, ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, Mo
 import { ScribeEditor, type EditorDoc, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
 import { awaitRead, courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type DraftDetail, type DraftSummary, type ImportFailure } from "@/lib/api/coursework";
 import { SubjectArt } from "@/components/learn/subject-tile";
-import { EDIT_UPLOADS_AS_TEXT, componentTitle, draftEntries, familyText, feedbackAnchors, locateAnchors } from "@/lib/coursework";
+import { EDIT_UPLOADS_AS_TEXT, componentTitle, draftEntries, estimateLabel, familyText, feedbackAnchors, locateAnchors, prediction } from "@/lib/coursework";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { toast } from "@/lib/toast";
 import { cn } from "@/lib/utils";
@@ -608,7 +608,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
                       >
                         {d.label}
                         <span className="text-small font-bold tabular-nums text-muted-foreground">
-                          {row && row.marksLow !== null && row.marksHigh !== null && !grader.hideMarks ? `${row.marksLow}–${row.marksHigh}` : !d.reviewId ? t("cw.notReviewed") : ""}
+                          {row && row.marksLow !== null && row.marksHigh !== null && !grader.hideMarks ? estimateLabel(prediction({ marksEstimate: row.marksEstimate, marksLow: row.marksLow, marksHigh: row.marksHigh }, row.rubric.totalMarks)) : !d.reviewId ? t("cw.notReviewed") : ""}
                         </span>
                       </button>
                     );

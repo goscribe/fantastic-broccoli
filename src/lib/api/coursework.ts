@@ -23,6 +23,7 @@ import {
 } from "./grader";
 import { rpc } from "./study-session";
 import { waitForRead, type ReadStatus } from "../coursework-read";
+import { withEstimate } from "../coursework";
 
 export type {
   CitationsResult,
@@ -177,7 +178,8 @@ export const courseworkApi = {
   ...graderApi,
   status: () => graderApi.status() as Promise<GraderStatus>,
   document: (documentId: string) => graderApi.document(documentId) as Promise<CourseworkDocument>,
-  review: (reviewId: string) => graderApi.review(reviewId) as Promise<Review>,
+  /** The result as the screens read it: each criterion's mark and the predicted total, recomputed for a result from a server before them. */
+  review: (reviewId: string) => graderApi.review(reviewId).then((r) => ({ ...r, result: withEstimate(r.result) }) as Review),
   reviews: (input: { documentId?: string; rubricId?: string } = {}) => graderApi.reviews(input) as Promise<ReviewRow[]>,
   requestReview: (input: { documentId: string; draftId?: string; rubricId?: string; mode: ReviewMode; declaredWords?: number }) => graderApi.requestReview(input as Parameters<typeof graderApi.requestReview>[0]),
   draft: (draftId: string) => rpc<DraftDetail>("coursework.draft", "query", { draftId }),
