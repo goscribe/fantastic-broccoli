@@ -280,3 +280,18 @@ export function filesForCourseTopics<O extends { title: string; fileIds: string[
   }
   return { byTopic, unmatched };
 }
+
+/**
+ * Whether to ask the server for the subject's course progress.
+ *  - "wait": the subject has not loaded yet;
+ *  - "skip": it is not the student's subject, or it follows no course (most
+ *    subjects: the student's own notes), so there is nothing to ask for;
+ *  - "ask": it follows a course, or an older server did not say.
+ */
+export type CourseLookup = "wait" | "skip" | "ask";
+
+export function courseLookup(subject: { courseId?: string | null } | null | undefined): CourseLookup {
+  if (subject === undefined) return "wait";
+  if (subject === null || subject.courseId === null) return "skip";
+  return "ask";
+}

@@ -11,7 +11,7 @@ import { notesApi } from "@/lib/api/notes";
 import { createStudySession } from "@/lib/api/study";
 import { masteryPercent, nextTopic, topicTitle, unitProgress, unitTitle, unitsForLevel } from "@/lib/courses";
 import { libraryCourseHref, noteHref } from "@/lib/notes";
-import { filesForCourseTopics } from "@/lib/subject-page";
+import { courseLookup, filesForCourseTopics } from "@/lib/subject-page";
 import { emitTreeChanged, onTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { cn, formatRelativeDate } from "@/lib/utils";
@@ -30,15 +30,27 @@ export type SubjectCourse =
   | { state: "none" }
   | { state: "ready"; course: Course; progress: CourseProgress; level: CourseLevel | undefined; withNotes: Set<string> };
 
-/** The subject's course (when it follows one), its progress, and which topics Scribe has notes for. */
-export function useSubjectCourse(workspaceId: string): SubjectCourse {
-  const [state, setState] = useState<SubjectCourse>({ state: "loading" });
+const COURSE_LOADING: SubjectCourse = { state: "loading" };
+const COURSE_NONE: SubjectCourse = { state: "none" };
+
+/**
+ * The subject's course (when it follows one), its progress, and which topics
+ * Scribe has notes for. `subject` is the loaded subject (undefined while it
+ * loads, null when it is not the student's): course progress is asked for
+ * only when the subject follows a course, never for the student's own notes.
+ */
+export function useSubjectCourse(workspaceId: string, subject: { courseId?: string | null } | null | undefined): SubjectCourse {
+  const lookup = courseLookup(subject);
+  const [state, setState] = useState<SubjectCourse>(COURSE_LOADING);
   useEffect(() => {
+    if (lookup !== "ask") return;
     let cancelled = false;
     const load = () =>
       coursesApi
         .progress(workspaceId)
         .then(async (progress) => {
+          // No course after all (an older server could not say so up front).
+          if (!progress) return void (!cancelled && setState(COURSE_NONE));
           const course = await loadCourse(progress.courseId);
           // Scribe notes are optional: a failure just leaves the links out.
           const withNotes = await notesApi
@@ -47,14 +59,17 @@ export function useSubjectCourse(workspaceId: string): SubjectCourse {
             .catch(() => new Set<string>());
           if (!cancelled) setState({ state: "ready", course, progress, level: (progress.level ?? undefined) as CourseLevel | undefined, withNotes });
         })
-        .catch(() => !cancelled && setState({ state: "none" }));
+        // The course list is an extra on the page: without it the subject shows its own files and topics.
+        .catch(() => !cancelled && setState(COURSE_NONE));
     void load();
     const off = onTreeChanged(() => void load());
     return () => {
       cancelled = true;
       off();
     };
-  }, [workspaceId]);
+  }, [workspaceId, lookup]);
+  if (lookup === "wait") return COURSE_LOADING;
+  if (lookup === "skip") return COURSE_NONE;
   return state;
 }
 
