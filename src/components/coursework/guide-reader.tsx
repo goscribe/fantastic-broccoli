@@ -11,7 +11,10 @@ import { LIBRARY_PATH } from "@/lib/notes";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { guideContent, loadGuide } from "./grade-panel";
 import { useCw } from "./use-cw";
-import { loadRubrics } from "./use-grader";
+import { loadRubrics, useCourseworkNav } from "./use-grader";
+import { PlanCrown } from "./plan-crown";
+import { COURSEWORK_UPGRADE_HREF } from "@/lib/coursework-access";
+import { track } from "@/lib/funnel";
 import "@/app/notes/notes-look.css";
 
 type State = { kind: "loading" } | { kind: "missing" } | { kind: "error" } | { kind: "ready"; rubric: RubricSummary; guide: GuideResponse };
@@ -24,6 +27,7 @@ type State = { kind: "loading" } | { kind: "missing" } | { kind: "error" } | { k
 export function GuideReader({ rubricKey }: { rubricKey: string }) {
   const { t } = useCw();
   const [state, setState] = useState<State>({ kind: "loading" });
+  const entry = useCourseworkNav(true);
   useEffect(() => {
     let cancelled = false;
     loadRubrics()
@@ -107,9 +111,23 @@ export function GuideReader({ rubricKey }: { rubricKey: string }) {
             <li>{t(rubric.status === "reviewed" ? "cw.guide.reviewed" : "cw.guide.draft")}</li>
           </ul>
           <div className="nl-rise mt-4 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-3" style={{ ["--i" as string]: 4 }}>
-            <Link href={`/coursework/new?rubric=${encodeURIComponent(rubric.key)}`} className="nl-btn">
-              {t("cw.guide.review", { name })}
-            </Link>
+            {entry.state === "locked" ? (
+              // No reviews on the plan and no free credits: still here, muted, to the upgrade page.
+              <Link
+                href={COURSEWORK_UPGRADE_HREF}
+                onClick={() => track("wall.shown", { reason: "grader", variant: "locked" })}
+                data-locked=""
+                className="nl-btn gap-1.5 opacity-75 hover:opacity-90"
+              >
+                {t("cw.guide.review", { name })}
+                <span className="sr-only">{t("cw.nav.lockedSr")}</span>
+                <PlanCrown />
+              </Link>
+            ) : (
+              <Link href={`/coursework/new?rubric=${encodeURIComponent(rubric.key)}`} className="nl-btn">
+                {t("cw.guide.review", { name })}
+              </Link>
+            )}
           </div>
         </header>
         <div className="mt-8 max-w-[760px]">

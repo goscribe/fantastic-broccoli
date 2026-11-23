@@ -11,6 +11,7 @@ import { courseworkApi, isMissingEndpoint, type DocumentSummary, type GraderStat
 import { componentTitle, familyText, likelyLabel, prediction, predictionSpoken } from "@/lib/coursework";
 import { SAMPLE_CITATIONS, SAMPLE_RESULT, SAMPLE_RUBRIC } from "@/lib/coursework-sample";
 import { track } from "@/lib/funnel";
+import { COURSEWORK_UPGRADE_HREF } from "@/lib/coursework-access";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { cn, formatRelativeDate } from "@/lib/utils";
 import { PredictionTrack } from "./band-track";
@@ -110,7 +111,7 @@ function Locked({ ultra }: { ultra: boolean }) {
           <p className="text-small font-extrabold text-muted-foreground">{t("cw.locked.eyebrow")}</p>
           <h1 className="mt-1.5 text-balance text-[30px] font-extrabold leading-[1.1] tracking-tight sm:text-[36px]">{t("cw.locked.title")}</h1>
           <p className="mt-3 text-read text-foreground/80">{t("cw.locked.sub")}</p>
-          <Link href="/pricing" className={buttonClass({ size: "lg", className: "mt-6 w-full sm:w-auto sm:min-w-[280px]" })}>
+          <Link href={COURSEWORK_UPGRADE_HREF} className={buttonClass({ size: "lg", className: "mt-6 w-full sm:w-auto sm:min-w-[280px]" })}>
             {t("cw.locked.cta")}
           </Link>
           <p className="mt-3 text-small font-bold text-muted-foreground">

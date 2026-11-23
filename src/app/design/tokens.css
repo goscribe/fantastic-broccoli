@@ -337,7 +337,21 @@
     html[data-daypart="night"] .hero-field { background-image: url("/design/hero/night-1600.webp"); }
     html[data-daypart="late"] .hero-field { background-image: url("/design/hero/late-1600.webp"); }
   }
+  /*
+   * The wait (WaitScreen): one calm bar in ink, never the accent. With a real
+   * fraction the fill is that wide; without one a short piece slides across.
+   * Steps are a ring that fills when done; the current one has a dot.
+   */
+  .wait-bar { position: relative; height: 6px; border-radius: 999px; background: var(--muted); overflow: hidden; }
+  .wait-bar > span { position: absolute; inset-block: 0; left: 0; border-radius: inherit; background: var(--foreground); transition: width 0.7s ease-out; }
+  .wait-bar--calm > span { width: 38%; animation: wait-slide 1.8s ease-in-out infinite; }
+  @keyframes wait-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(270%); } }
+  .wait-step { flex: none; width: 14px; height: 14px; border-radius: 999px; border: 2px solid var(--border-strong); }
+  .wait-step--now { border-color: var(--foreground); box-shadow: inset 0 0 0 2px var(--background), inset 0 0 0 8px var(--foreground); }
+  .wait-step--done { border-color: var(--foreground); background: var(--foreground); }
   @media (prefers-reduced-motion: reduce) {
+    .wait-bar > span { transition: none; }
+    .wait-bar--calm > span { animation: none; width: 100%; opacity: 0.35; }
     .subject-tile, .subject-tile__art { transition: none; }
     .subject-tile:hover, .subject-tile:active, .subject-tile:hover .subject-tile__art { transform: none; }
     .subject-tile:hover .subject-tile__art { transform: rotate(6deg); }

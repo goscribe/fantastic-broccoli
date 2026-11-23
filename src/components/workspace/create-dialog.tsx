@@ -7,6 +7,8 @@ import { createStudySession } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { WaitScreen } from "@/components/ui/wait-screen";
+import "@/lib/i18n/first-run";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
@@ -19,7 +21,6 @@ import {
   Check,
   FilePlus2,
   GraduationCap,
-  Loader2,
   MessageCircle,
   Sparkles,
   Upload,
@@ -204,14 +205,13 @@ function BusyOverlay({ files }: { files: File[] }) {
       aria-live="polite"
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
     >
-      <div className="flex w-full max-w-sm flex-col items-center gap-2 rounded-2xl border border-border bg-card px-5 py-8 text-center">
-        <Loader2 className="h-5 w-5 animate-spin text-accent" />
-        <p className="text-sm font-semibold">{t("misc.buildingFromFiles")}</p>
-        <p className="max-w-full truncate text-xs text-muted-foreground">
-          {files.length === 1
-            ? files[0].name
-            : `${files.length} ${t("ws.files")}`}
-        </p>
+      <div className="w-full max-w-sm rounded-[var(--r-panel,24px)] bg-card px-5">
+        <WaitScreen
+          compact
+          title={t("misc.buildingFromFiles").replace(/…$/, "")}
+          status={files.length === 1 ? files[0].name : `${files.length} ${t("ws.files")}`}
+          time={t("firstRun.busyHint")}
+        />
       </div>
     </div>
   );
@@ -417,15 +417,7 @@ export function CreateResourceDialog({
         {kind === "workspace" && mode === "curated" && (
           <div className="mt-4">
             {busy ? (
-              <div className="flex flex-col items-center gap-2 py-8 text-center">
-                <Sparkles className="h-5 w-5 animate-pulse text-accent" />
-                <p className="text-sm font-medium">
-                  {t("ws.buildingSession")}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {t("ws.buildingSessionHint")}
-                </p>
-              </div>
+              <WaitScreen compact title={t("ws.buildingSession").replace(/…$/, "")} time={t("firstRun.busyHint")} />
             ) : !curriculum ? (
               <>
                 <p className="mb-3 text-xs text-muted-foreground">

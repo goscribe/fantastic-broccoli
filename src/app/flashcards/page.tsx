@@ -11,7 +11,6 @@ import {
   type DeckWithWorkspace,
 } from "@/lib/flashcard-decks";
 import { CardGridSkeleton } from "@/components/ui/skeleton";
-import { RotateCcw } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { useI18n } from "@/lib/i18n";
@@ -28,7 +27,7 @@ function DeckRow({ deck }: { deck: DeckWithWorkspace }) {
         <h3 className="truncate text-[15px] font-semibold leading-tight tracking-tight">
           <MathText text={item.title} />
         </h3>
-        <p className="mt-1 flex items-center gap-1.5 text-[12.5px] text-muted-foreground">
+        <p className="mt-1 flex items-center gap-1.5 text-small text-muted-foreground">
           <span className="shrink-0">
             {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
           </span>
@@ -42,10 +41,10 @@ function DeckRow({ deck }: { deck: DeckWithWorkspace }) {
           )}
         </p>
       </div>
-      <span className="hidden rounded-full bg-accent-soft px-2 py-0.5 text-[11px] font-medium text-accent-dim sm:inline">
+      <span className="hidden rounded-full bg-muted px-2 py-0.5 text-caption font-semibold text-muted-foreground sm:inline">
         {t(item.kind === "VOCAB_DECK" ? "fc.kindVocab" : "fc.kindFlashcards")}
       </span>
-      <span className="h-8 shrink-0 rounded-lg border border-border px-3 text-[12.5px] font-semibold leading-8 text-foreground group-hover:border-accent group-hover:text-accent">
+      <span className="h-8 shrink-0 rounded-lg border border-border px-3 text-small font-semibold leading-8 text-foreground group-hover:border-border-strong">
         {t("fc.study")}
       </span>
     </Link>
@@ -68,7 +67,6 @@ export default function FlashcardsPage() {
             href="/flashcards/review"
             className={buttonClass({ className: "gap-2" })}
           >
-            <RotateCcw className="h-3.5 w-3.5" />
             {t(
               dueReview.total === 1 ? "fc.reviewDueOne" : "fc.reviewDueMany",
             ).replace("{count}", String(dueReview.total))}

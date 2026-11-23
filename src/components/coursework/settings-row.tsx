@@ -4,8 +4,10 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { courseworkApi, type GraderStatus } from "@/lib/api/coursework";
 import { allowanceCopy, ultraPitch } from "@/lib/coursework";
+import { COURSEWORK_UPGRADE_HREF } from "@/lib/coursework-access";
 import { useCw } from "./use-cw";
 import { ultraOffer } from "./use-grader";
+import { PlanCrown } from "./plan-crown";
 
 /**
  * Settings › Plan: what the plan gives for coursework today, in the plan
@@ -39,8 +41,14 @@ export function CourseworkPlanRow() {
           {copy.state === "limit" && copy.resets ? `. ${copy.resets}` : ""}
         </p>
       </div>
+      {copy.state === "locked" && (
+        <Link href={COURSEWORK_UPGRADE_HREF} className="inline-flex items-center gap-1 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
+          {t("cw.locked.cta")}
+          <PlanCrown />
+        </Link>
+      )}
       {pitch && (
-        <Link href="/pricing" className="text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
+        <Link href={COURSEWORK_UPGRADE_HREF} className="text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
           {pitch}
         </Link>
       )}
