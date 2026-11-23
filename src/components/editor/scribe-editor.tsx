@@ -378,6 +378,7 @@ export function ScribeEditor({
       setDiagram(null);
     } catch (err) {
       setDiagram({ ...d, busy: false, error: err instanceof Error && err.message ? err.message : "We couldn't draw that one. Try describing it another way." });
+      requestAnimationFrame(() => diagramInput.current?.focus());
     }
   },
     [editor, createDiagram],
@@ -641,12 +642,14 @@ export function ScribeEditor({
 
       {diagram && diagramBox && createDiagram && (
         <form
-          className="se-menu absolute z-30 flex w-[360px] max-w-[calc(100vw-32px)] flex-col gap-2 p-3"
+          // select-none: the box sits after the document in the page, so a selection that runs on from the text (or out of
+          // the box while it is busy) would paint the title with the selection colour. Only the description is selectable.
+          className="se-menu absolute z-30 flex w-[360px] max-w-[calc(100vw-32px)] select-none flex-col gap-2 p-3"
           style={diagramBox}
           aria-label="Diagram"
           onSubmit={(e) => {
             e.preventDefault();
-            void draw(diagram);
+            if (!diagram.busy) void draw(diagram);
           }}
         >
           <label className="text-ui font-extrabold text-foreground" htmlFor="se-diagram-prompt">
@@ -665,20 +668,22 @@ export function ScribeEditor({
               }
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                void draw(diagram);
+                if (!diagram.busy) void draw(diagram);
               }
             }}
             rows={3}
-            disabled={diagram.busy}
-            placeholder="y = x^2 - 4 from -3 to 3 with the roots marked"
-            className="min-h-[84px] w-full resize-none rounded-[10px] bg-muted px-3 py-2.5 text-ui text-foreground placeholder:text-faint focus:outline-none"
+            // Read-only, not disabled, while drawing: the box keeps the keyboard and the selection stays in it.
+            readOnly={diagram.busy}
+            aria-busy={diagram.busy}
+            placeholder="AD–AS with a recessionary gap, or y = x^2 - 4 from -3 to 3"
+            className="min-h-[84px] w-full select-text resize-none rounded-[10px] bg-muted px-3 py-2.5 text-ui text-foreground placeholder:text-faint focus:outline-none read-only:opacity-60"
           />
           {diagram.error ? (
             <p className="px-1 text-small font-semibold text-foreground" role="alert">
               {diagram.error}
             </p>
           ) : (
-            <p className="px-1 text-caption text-muted-foreground">Equations and numbers you give are plotted exactly.</p>
+            <p className="px-1 text-caption text-muted-foreground">Name the diagram; no numbers needed. Equations you give are plotted exactly.</p>
           )}
           <div className="flex items-center justify-end gap-1">
             <button type="button" onClick={() => setDiagram(null)} className="h-11 rounded-[10px] px-3 text-[14px] font-bold text-muted-foreground hover:bg-muted hover:text-foreground">

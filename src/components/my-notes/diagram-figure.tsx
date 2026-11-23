@@ -4,11 +4,13 @@ import { useId, useMemo } from "react";
 import { NoteGraph, graphSupported } from "@/components/notes/note-graph";
 import type { DiagramFigure, DiagramSpec } from "@/lib/api/my-notes";
 import { treeLevels, wrapLabel } from "@/lib/my-notes";
+import { SketchFigure } from "./sketch-figure";
 
 /**
  * A `/diagram` figure drawn from its spec: a plot through the note reader's
  * own NoteGraph (which evaluates the equations, so curves and points are
- * exact), or a labelled diagram laid out here from its nodes and arrows.
+ * exact), a schematic sketch without numbers (SketchFigure), or a labelled
+ * diagram laid out here from its nodes and arrows.
  * Nothing in a spec is markup: the app decides where every box and label
  * goes, so labels never overlap or leave the frame.
  */
@@ -17,6 +19,7 @@ export function DiagramFigureView({ figure }: { figure: DiagramFigure }) {
     if (!graphSupported(figure.graph)) return <p className="rounded-2xl bg-muted px-4 py-6 text-center text-ui text-muted-foreground">This graph can&apos;t be drawn. Describe it again to redraw it.</p>;
     return <NoteGraph graph={figure.graph} title={figure.title} />;
   }
+  if (figure.kind === "sketch") return <SketchFigure sketch={figure.sketch} title={figure.title} alt={figure.alt} />;
   return <LabelledDiagram diagram={figure.diagram} title={figure.title} alt={figure.alt} />;
 }
 
