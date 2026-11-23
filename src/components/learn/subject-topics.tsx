@@ -335,7 +335,7 @@ export function SubjectTopics({
                       aria-label={t("course.selectUnit").replace("{unit}", unitTitle(c, u))}
                       onClick={() => applyPick(toggleGroup(picked, unitIds))}
                       disabled={startingPicked}
-                      className="grid size-11 shrink-0 place-items-center rounded-lg"
+                      className="group/tick grid size-11 shrink-0 place-items-center rounded-lg outline-none"
                     >
                       <TickBox state={unitState} />
                     </button>

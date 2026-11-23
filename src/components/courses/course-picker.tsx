@@ -368,13 +368,18 @@ export function CoursePicker({
   );
 }
 
-/** The tick box of the topic list: empty, a dash (part of a unit picked) or ticked. Neutral, so the one purple thing stays the start button. */
+/**
+ * The tick box of the topic list: empty, a dash (part of a unit picked) or ticked. Neutral, so the one purple thing
+ * stays the start button. Its button carries `group/tick outline-none`, so the focus ring is drawn here.
+ */
 export function TickBox({ state }: { state: "none" | "some" | "all" }) {
   return (
     <span
       aria-hidden="true"
       className={cn(
         "grid size-[18px] place-items-center rounded-[6px] border transition-colors",
+        // Keyboard focus rings the box itself (the app's focus colour), not its larger touch target.
+        "group-focus-visible/tick:outline-2 group-focus-visible/tick:outline-offset-2 group-focus-visible/tick:outline-[color-mix(in_srgb,var(--accent)_45%,transparent)]",
         state === "none" ? "border-border-strong bg-card" : "border-foreground bg-foreground text-background",
       )}
     >
@@ -525,7 +530,7 @@ export function TopicRow({
           onClick={select.onToggle}
           disabled={!selecting && disabled}
           className={cn(
-            "absolute inset-y-0 left-0 z-10 grid w-11 place-items-center rounded-l-2xl",
+            "group/tick absolute inset-y-0 left-0 z-10 grid w-11 place-items-center rounded-l-2xl outline-none",
             !selecting &&
               "pointer-events-none opacity-0 focus-visible:pointer-events-auto focus-visible:opacity-100 group-hover/topic:opacity-100 [@media(hover:hover)]:pointer-events-auto",
           )}
