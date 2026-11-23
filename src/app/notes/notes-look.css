@@ -131,10 +131,17 @@
   @keyframes nl-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
   .nl-bob { animation: nl-bob 3.4s ease-in-out infinite; }
 
-  /* ---------- Reveal on scroll: only elements a script has marked as waiting are hidden ---------- */
-  [data-nl-reveal="wait"] { opacity: 0; transform: translateY(16px); }
+  /*
+   * ---------- Reveal on scroll ----------
+   * Only elements a script has marked as waiting are hidden, and only while
+   * that script's observer is alive: it sets data-nl-reveals on <html> when it
+   * starts and removes it when it stops (lib/notes-public/reveal.ts). Without
+   * the attribute nothing here hides anything, so a reveal that never comes
+   * cannot leave a blank stretch in the note.
+   */
+  [data-nl-reveals] [data-nl-reveal="wait"] { opacity: 0; transform: translateY(16px); }
   [data-nl-reveal="in"] { animation: nl-rise 0.55s var(--ease-out) both; }
-  .nl-stage[data-nl-reveal="wait"] { transform: translateY(16px) scale(0.97); }
+  [data-nl-reveals] .nl-stage[data-nl-reveal="wait"] { transform: translateY(16px) scale(0.97); }
 
   /* ---------- Reading progress ---------- */
   .nl-topbar {
@@ -224,7 +231,7 @@
     background-position: 0 86%;
     border-radius: 2px;
   }
-  [data-nl-reveal="wait"] strong { background-size: 0% 0.5em; }
+  [data-nl-reveals] [data-nl-reveal="wait"] strong { background-size: 0% 0.5em; }
   [data-nl-reveal="in"] strong { animation: nl-mark 0.7s var(--ease-out) 0.25s both; }
   @keyframes nl-mark { from { background-size: 0% 0.5em; } to { background-size: 100% 0.5em; } }
   /* The opening paragraph stands out by weight only: same size, line-height and colour as the rest. */
@@ -541,8 +548,8 @@
 
   @media (prefers-reduced-motion: reduce) {
     .nl-rise, .nl-cat-in, .nl-bob, .nl-pop, .nl-shake, .nl-up, .nl-dot, [data-nl-reveal="in"], [data-nl-reveal="in"] strong { animation: none !important; }
-    [data-nl-reveal="wait"] { opacity: 1; transform: none; }
-    [data-nl-reveal="wait"] strong { background-size: 100% 0.5em; }
+    [data-nl-reveals] [data-nl-reveal="wait"] { opacity: 1; transform: none; }
+    [data-nl-reveals] [data-nl-reveal="wait"] strong { background-size: 100% 0.5em; }
     .nl-sparkle, .nl-confetti { display: none; }
     .nl-score, .nl-findot, .nl-stagger { animation: none !important; }
     .nl-fc-card, .nl-fc-nudge > .nl-fc-inner, .nl-fc-meter > li, .nl-fc-lock { animation: none !important; }

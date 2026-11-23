@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { myNotesApi, myNotesAvailable, type HighlightAnchor, type HighlightColor, type NoteHighlight, type NoteRef } from "@/lib/api/my-notes";
-import { HIGHLIGHT_COLORS, lastHighlightColor, locateInNote, makeAnchor, rememberHighlightColor, sortByPlace } from "@/lib/my-notes";
+import { HIGHLIGHT_COLORS, highlightBarPlace, lastHighlightColor, locateInNote, makeAnchor, rememberHighlightColor, sortByPlace } from "@/lib/my-notes";
 import { toastError } from "@/lib/toast";
 import { HighlightsSheet, type HighlightItem } from "./highlights-list";
 
@@ -27,6 +27,8 @@ import { HighlightsSheet, type HighlightItem } from "./highlights-list";
 
 const SECTION = "section[data-nl-section]";
 const SKIP = "svg, .katex-mathml, script, style, button, input, textarea, select";
+/** A selection that starts here offers no highlighters: controls, and a figure's drawing (its caption is text and can be highlighted). */
+const NO_BAR = "button, input, textarea, select, svg, iframe, canvas, [role='img'], figure > :not(figcaption)";
 /**
  * The paint for each highlighter: the four colours of tokens.css (--hl-yellow,
  * --hl-green, --hl-pink, --hl-blue) written out, because ::highlight() does
@@ -209,7 +211,7 @@ export function useNoteHighlights({ note, rootId, enabled, partial }: { note: No
       const range = sel.getRangeAt(0);
       const startEl = range.startContainer instanceof Element ? range.startContainer : range.startContainer.parentElement;
       const sectionEl = startEl?.closest<HTMLElement>(SECTION);
-      if (!sectionEl || !root.contains(sectionEl) || startEl?.closest("button, input, textarea")) {
+      if (!sectionEl || !root.contains(sectionEl) || startEl?.closest(NO_BAR)) {
         setBar((b) => (b?.anchor ? null : b));
         return;
       }
@@ -219,21 +221,44 @@ export function useNoteHighlights({ note, rootId, enabled, partial }: { note: No
       const end = sectionEl.contains(range.endContainer) ? offsetOf(section, range.endContainer, range.endOffset) : section.text.length;
       const anchor = makeAnchor(section.id, section.text, start, end);
       if (!anchor) return setBar(null);
-      const rect = range.getBoundingClientRect();
-      const touch = window.matchMedia("(pointer: coarse)").matches;
-      const below = touch || rect.top < 130;
-      setBar({ x: Math.max(110, Math.min(rect.left + rect.width / 2, window.innerWidth - 110)), y: below ? Math.min(rect.bottom + (touch ? 48 : 10), window.innerHeight - 130) : rect.top - 10, below, anchor });
+      const place = highlightBarPlace(range.getBoundingClientRect(), { width: window.innerWidth, height: window.innerHeight }, window.matchMedia("(pointer: coarse)").matches);
+      setBar(place ? { ...place, anchor } : null);
     };
     const onChange = () => {
       if (timer) clearTimeout(timer);
       timer = setTimeout(read, 180);
     };
+    // The toolbar is fixed to the screen, so it goes away while the page moves under it; if the words are still selected
+    // and on screen once the page is still, it comes back beside them.
+    const onMove = () => {
+      setBar(null);
+      onChange();
+    };
     document.addEventListener("selectionchange", onChange);
+    // Capture: inside the app shell the page scrolls in its own container, whose scroll events do not bubble.
+    window.addEventListener("scroll", onMove, { passive: true, capture: true });
+    window.addEventListener("resize", onMove);
     return () => {
       document.removeEventListener("selectionchange", onChange);
+      window.removeEventListener("scroll", onMove, { capture: true });
+      window.removeEventListener("resize", onMove);
       if (timer) clearTimeout(timer);
     };
   }, [available, rootId]);
+
+  // A press anywhere but the toolbar puts it away (a tap on a highlight opens it again on the click that follows;
+  // a new selection brings it back when the selection settles).
+  const barRef = useRef<HTMLDivElement>(null);
+  const barOpen = bar !== null;
+  useEffect(() => {
+    if (!barOpen) return;
+    const onDown = (e: PointerEvent) => {
+      if (barRef.current?.contains(e.target as Node)) return;
+      setBar(null);
+    };
+    document.addEventListener("pointerdown", onDown, true);
+    return () => document.removeEventListener("pointerdown", onDown, true);
+  }, [barOpen]);
 
   // A tap on a highlight offers recolour and remove.
   useEffect(() => {
@@ -342,6 +367,7 @@ export function useNoteHighlights({ note, rootId, enabled, partial }: { note: No
       <style>{PAINT_CSS}</style>
       {bar && (
         <div
+          ref={barRef}
           className="note-hl-bar fixed z-[55] flex items-center gap-1 rounded-full border border-border bg-white p-1"
           style={{ left: bar.x, top: bar.y, transform: `translateX(-50%)${bar.below ? "" : " translateY(-100%)"}`, boxShadow: "0 12px 32px -16px rgb(22 22 26 / 0.35), 0 1px 2px rgb(22 22 26 / 0.05)" }}
           role="toolbar"
