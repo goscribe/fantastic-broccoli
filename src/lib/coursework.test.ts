@@ -17,6 +17,12 @@ import {
   formatBand,
   gradeRange,
   groupRubrics,
+  guideVersions,
+  guideYear,
+  headingList,
+  newestVersions,
+  rubricFamily,
+  versionName,
   draftEntries,
   draftKindLabel,
   hasMarks,
@@ -174,6 +180,28 @@ test("rubric names and the picker's groups", () => {
   assert.deepEqual(groupRubrics([chem, ee, bio], "zzz"), []);
 });
 
+test("guide versions: one tile per component, the versions newest first, and a short name for each", () => {
+  const old = { ...rubric("cs14", "Computer Science", "Internal Assessment (solution)", "internal_assessment"), key: "ib-dp-computer-science-ia-2014", sessionLabel: "first assessment 2014 (replaced by the guide for first assessment 2027)" };
+  const fresh = { ...rubric("cs27", "Computer Science", "Internal Assessment (computational solution)", "internal_assessment"), key: "ib-dp-computer-science-ia-2027", sessionLabel: "first assessment 2027 (new guide: the computational solution)" };
+  const bio = { ...rubric("b", "Biology", "Internal Assessment", "internal_assessment"), key: "ib-dp-biology-ia-2025" };
+  assert.equal(rubricFamily(old), "ib-dp-computer-science-ia");
+  assert.equal(rubricFamily(old), rubricFamily(fresh));
+  // The server's own fields win over the key; a rubric with neither is its own family.
+  assert.equal(rubricFamily({ id: "x", key: "a-2020", family: "f" }), "f");
+  assert.equal(rubricFamily({ id: "x" }), "x");
+  assert.equal(guideYear(fresh), 2027);
+  assert.equal(guideYear({ id: "x", key: "a-2020", guideYear: 2031 }), 2031);
+  assert.equal(guideYear({ id: "x", key: "ib-dp-tok-essay" }), null);
+  assert.deepEqual(guideVersions([old, bio, fresh], old).map((r) => r.id), ["cs27", "cs14"]);
+  assert.deepEqual(guideVersions([old, bio, fresh], bio).map((r) => r.id), ["b"]);
+  // The picker shows the newest guide for a component; the version is chosen after.
+  assert.deepEqual(newestVersions([old, bio, fresh]).map((r) => r.id), ["b", "cs27"]);
+  assert.deepEqual(groupRubrics(newestVersions([old, bio, fresh]), "").flatMap((g) => g.rubrics.map((r) => r.id)), ["b", "cs27"]);
+  assert.equal(versionName(fresh), "2027 guide");
+  assert.equal(versionName({ id: "x", key: "ib-dp-tok-essay", sessionLabel: "first assessment 2022" }), "first assessment 2022");
+  assert.equal(headingList(["Section A: Problem Specification (250 words)", "Section C: System Overview (0 words)", "Section D: Development", "Section E: Evaluation"]), "“Section A: Problem Specification”, “Section C: System Overview”, “Section D: Development”");
+});
+
 test("citation issues: one flat list, and a missing source is never called fake", () => {
   const items = citationItems(SAMPLE_CITATIONS);
   assert.equal(items.length, 7);
@@ -259,10 +287,11 @@ test("the count follows the component's rules, and falls back when a rubric has 
   const prose = "The club secretary records every court booking by hand in a paper diary kept at the front desk. ".repeat(8);
   const html = `<h1>Development</h1><p>${prose}</p><table><tr><td><p>Task one</p></td><td><p>Meet the client</p></td></tr></table><p>total = total + used;</p><h1>Bibliography</h1><p>Lutz, M. (2013) Learning Python. Sebastopol: O'Reilly Media.</p><h1>Appendix A: Source code</h1><p>${prose}</p>`;
   const fallback = resolveWordCountRules(undefined, 2000);
-  assert.deepEqual({ fallback: fallback.fallback, excludes: fallback.excludes, limit: fallback.limit }, { fallback: true, excludes: ["bibliography", "appendices", "tables", "code"], limit: 2000 });
+  assert.deepEqual({ fallback: fallback.fallback, excludes: fallback.excludes, limit: fallback.limit }, { fallback: true, excludes: ["title_page", "contents", "bibliography", "appendices", "tables", "code"], limit: 2000 });
   const b = countWork({ html, file: true }, fallback);
-  assert.equal(b.counted, 8 * 18 + 1, "the prose and its heading");
-  assert.deepEqual(Object.keys(b.excluded).sort(), ["appendices", "bibliography", "code", "tables"]);
+  // The prose; the lone line before it reads as the work's title, which no board counts.
+  assert.equal(b.counted, 8 * 18);
+  assert.deepEqual(Object.keys(b.excluded).sort(), ["appendices", "bibliography", "code", "tables", "title_page"]);
   assert.equal(b.estimate, true);
   const rules = resolveWordCountRules({ limit: null, kind: "pages", excludes: ["headings", "bibliography", "appendices"], note: "A page guide." }, null);
   assert.deepEqual({ kind: rules.kind, limit: rules.limit, fallback: rules.fallback }, { kind: "pages", limit: null, fallback: false });

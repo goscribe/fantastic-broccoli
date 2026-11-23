@@ -6,9 +6,9 @@ import { Search } from "lucide-react";
 import { Button, buttonClass } from "@/components/ui/button";
 import { SubjectTile } from "@/components/learn/subject-tile";
 import { PublicNoteBody } from "@/components/notes-public/public-note-body";
-import { courseworkApi, type CourseworkGuide, type GraderStatus, type GuideResponse, type ReviewMode, type RubricSummary } from "@/lib/api/coursework";
+import { courseworkApi, type CourseworkGuide, type GradeResult, type GraderStatus, type GuideResponse, type ReviewMode, type RubricSummary } from "@/lib/api/coursework";
 import type { TopicNoteContent } from "@/lib/api/notes";
-import { allowanceCopy, componentTitle, familyText, groupRubrics, rubricLine, wordStatus, type UltraOffer } from "@/lib/coursework";
+import { allowanceCopy, componentTitle, familyText, groupRubrics, guideYear, headingList, newestVersions, rubricLine, versionName, wordStatus, type UltraOffer } from "@/lib/coursework";
 import { track } from "@/lib/funnel";
 import { cn } from "@/lib/utils";
 import { Feedback, type FeedbackHost } from "./feedback";
@@ -30,7 +30,8 @@ export function rubricSub(r: Pick<RubricSummary, "totalMarks" | "wordLimit">): s
 export function ComponentPicker({ rubrics, onPick, dense }: { rubrics: RubricSummary[]; onPick: (r: RubricSummary) => void; /** In a narrow rail: two columns at most. */ dense?: boolean }) {
   const { t } = useCw();
   const [query, setQuery] = useState("");
-  const groups = useMemo(() => groupRubrics(rubrics, query), [rubrics, query]);
+  // One tile per component: its guide versions are chosen after (VersionChoice).
+  const groups = useMemo(() => groupRubrics(newestVersions(rubrics), query), [rubrics, query]);
   return (
     <div>
       <label className="flex h-11 w-full items-center gap-2.5 rounded-xl bg-muted px-3.5 sm:max-w-[320px]">
@@ -61,6 +62,116 @@ export function ComponentPicker({ rubrics, onPick, dense }: { rubrics: RubricSum
         <div className="mt-5">
           <p className="text-ui font-extrabold text-foreground">{t("cw.start.noMatch", { q: query.trim() })}</p>
           <p className="mt-1 text-ui text-muted-foreground">{t("cw.start.noMatchSub")}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* ---------- Which version of the guide? ---------- */
+
+/** What the work's headings say about the version: nothing, the one chosen, or another one. */
+export interface VersionHint {
+  /** The version the headings point to. */
+  rubricId: string;
+  headings: string[];
+  /** Scribe chose it from the headings (the start screen), rather than the student. */
+  picked?: boolean;
+}
+
+/**
+ * A component with more than one guide in use (the old guide and its
+ * replacement): the student says which one their work is for. Scribe's
+ * reading of the work's headings is a line under the choice, with one tap to
+ * follow it; it never overrides a choice the student made. Renders nothing
+ * for a component with one guide. Same plain look as the review type.
+ */
+export function VersionChoice({ versions, value, onChange, hint, compact }: { versions: RubricSummary[]; value: string; onChange: (rubricId: string) => void; hint?: VersionHint | null; /** One line each (the rail). */ compact?: boolean }) {
+  const { t } = useCw();
+  if (versions.length < 2) return null;
+  const suggested = hint ? versions.find((v) => v.id === hint.rubricId) : undefined;
+  const list = hint ? headingList(hint.headings) : "";
+  return (
+    <div>
+      <p id="cw-version-label" className="text-small font-extrabold text-muted-foreground">
+        {t("cw.version.label")}
+      </p>
+      <div role="radiogroup" aria-labelledby="cw-version-label" className={cn("mt-2 grid", versions.length > 2 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2", compact ? "gap-0 rounded-[12px] bg-muted p-1" : "gap-2.5")}>
+        {versions.map((v) => {
+          const on = v.id === value;
+          const year = guideYear(v);
+          return (
+            <button
+              key={v.id}
+              type="button"
+              role="radio"
+              aria-checked={on}
+              onClick={() => onChange(v.id)}
+              className={
+                compact
+                  ? cn("min-h-11 rounded-[9px] px-2 text-small font-extrabold transition-colors", on ? "bg-white text-foreground shadow-[0_1px_2px_rgba(22,22,26,0.12)]" : "text-muted-foreground hover:text-foreground")
+                  : cn("cw-radio flex min-h-[64px] flex-col justify-center rounded-[var(--r-button)] border px-4 py-2.5 text-left transition-colors", on ? "border-foreground shadow-[inset_0_0_0_1px_var(--foreground)]" : "border-border hover:border-border-strong")
+              }
+            >
+              <span className={cn("font-extrabold text-foreground", compact ? undefined : "flex items-center gap-2 text-ui")}>
+                {!compact && <span className={cn("grid size-[18px] shrink-0 place-items-center rounded-full border-2", on ? "border-foreground" : "border-border-strong")} aria-hidden>{on && <span className="size-2 rounded-full bg-foreground" />}</span>}
+                {versionName(v)}
+              </span>
+              {!compact && <span className="mt-0.5 text-small text-muted-foreground">{year ? t("cw.version.sub", { y: year, n: v.totalMarks }) : t("cw.version.subPlain", { n: v.totalMarks })}</span>}
+            </button>
+          );
+        })}
+      </div>
+      <p className="mt-2 text-small text-muted-foreground" role="status">
+        {suggested && suggested.id === value ? (
+          t(hint?.picked ? "cw.version.picked" : "cw.version.match", { list, name: versionName(suggested) })
+        ) : suggested ? (
+          <>
+            {t("cw.version.other", { list, name: versionName(suggested) })}{" "}
+            <button type="button" onClick={() => onChange(suggested.id)} className="font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
+              {t("cw.version.use", { name: versionName(suggested) })}
+            </button>
+          </>
+        ) : (
+          t("cw.version.unsure")
+        )}
+      </p>
+    </div>
+  );
+}
+
+/**
+ * At the top of a review whose rubric does not fit the work (the server's
+ * `rubricFit`): what Scribe saw, and the way to a fair one. Plain bordered
+ * note, no colour; the action is a text button (the review button stays the
+ * one filled action).
+ */
+export function FitNotice({ grader, fit, used, canReview }: { grader: Grader; fit: NonNullable<GradeResult["rubricFit"]>; /** The rubric the review on screen used. */ used: Pick<RubricSummary, "id" | "sessionLabel"> & { key?: string }; /** This is the newest review: offer the next step. */ canReview: boolean }) {
+  const { t } = useCw();
+  const better = fit.suggested ? grader.rubrics.find((r) => r.id === fit.suggested!.rubricId) ?? null : null;
+  const usedRubric = grader.rubrics.find((r) => r.id === used.id) ?? used;
+  const switched = !!better && grader.chosen?.id === better.id;
+  return (
+    <div role="status" data-cw-fit className="rounded-[var(--r-card)] border border-border-strong px-4 py-3.5">
+      <p className="text-ui font-extrabold text-foreground">{t(better ? "cw.fit.title" : "cw.fit.titlePlain")}</p>
+      <p className="mt-1 text-small text-foreground/80">{better ? t("cw.fit.body", { list: headingList(fit.headings), name: versionName(better), used: versionName(usedRubric) }) : fit.message}</p>
+      {better && canReview && (
+        <div className="mt-1 flex flex-wrap items-center gap-x-5">
+          <button
+            type="button"
+            disabled={grader.requesting || grader.running}
+            onClick={() => void grader.request(better.id)}
+            className="min-h-11 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4 disabled:opacity-50"
+          >
+            {t("cw.fit.again", { name: versionName(better) })}
+          </button>
+          {switched ? (
+            <span className="text-small text-muted-foreground">{t("cw.fit.switched", { name: versionName(better) })}</span>
+          ) : (
+            <button type="button" onClick={() => grader.setRubric(better.id)} className="min-h-11 text-small font-extrabold text-muted-foreground underline decoration-border decoration-2 underline-offset-4 hover:text-foreground">
+              {t("cw.fit.switch", { name: versionName(better) })}
+            </button>
+          )}
         </div>
       )}
     </div>
@@ -386,6 +497,18 @@ export function GradePanel({ grader, text, words, wordInfo, view, onView, onShow
     </p>
   );
 
+  // The guide version the next review uses, with what the work's headings say about it.
+  const versionChoice =
+    grader.chosen && grader.versions.length > 1 ? (
+      <VersionChoice
+        versions={grader.versions}
+        value={grader.chosen.id}
+        onChange={grader.setRubric}
+        hint={grader.suggestion?.suggestedRubricId ? { rubricId: grader.suggestion.suggestedRubricId, headings: grader.suggestion.headings } : null}
+        compact
+      />
+    ) : null;
+
   if (grader.running) {
     return (
       <div className="flex flex-col gap-6">
@@ -405,6 +528,7 @@ export function GradePanel({ grader, text, words, wordInfo, view, onView, onShow
             <p className="mt-1 text-ui text-foreground/80">{review.error && !/did not count/i.test(review.error) ? `${review.error} ` : ""}{t("cw.err.failed")}</p>
           </div>
         )}
+        {versionChoice}
         <ReviewAction grader={grader} words={words} wordInfo={wordInfo} wide={phone} />
         {rubricNote}
         <p className="text-small text-muted-foreground">{t("cw.start.promise")}</p>
@@ -415,10 +539,17 @@ export function GradePanel({ grader, text, words, wordInfo, view, onView, onShow
   const edited = review.snapshotText !== null && !same(review.snapshotText, text);
   const isLatest = grader.rows[grader.rows.length - 1]?.id === review.id;
   const marked = review.result.mode === "marked";
-  const action = <ReviewAction grader={grader} words={words} wordInfo={wordInfo} wide={phone} />;
+  const action = (
+    <div className="flex flex-col gap-5">
+      {versionChoice}
+      <ReviewAction grader={grader} words={words} wordInfo={wordInfo} wide={phone} />
+    </div>
+  );
 
   return (
     <div className="flex flex-col gap-7">
+      {/* The rubric does not fit the work: said before anything else. */}
+      {review.result.rubricFit && <FitNotice grader={grader} fit={review.result.rubricFit} used={review.rubric} canReview={isLatest} />}
       {/* Edited since the review: the next review is the next step, so it comes first. */}
       {edited && isLatest && action}
       <Feedback

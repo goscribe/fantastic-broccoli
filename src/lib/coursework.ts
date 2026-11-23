@@ -331,6 +331,52 @@ export function familyText(r: Pick<RubricInfo, "subject" | "componentKind">): st
   return r.subject;
 }
 
+/* ---------- Guide versions of one component ---------- */
+
+type Versioned = Pick<RubricInfo, "id"> & { key?: string; family?: string; guideYear?: number | null };
+
+/** Rubrics of one component share a family: the server's, else the key without its year ("…-ia-2027" → "…-ia"). */
+export function rubricFamily(r: Versioned): string {
+  return r.family ?? (r.key ? r.key.replace(/-(?:19|20)\d{2}$/, "") : r.id);
+}
+
+/** The guide's first-assessment year: the server's, else from the key. */
+export function guideYear(r: Versioned): number | null {
+  if (typeof r.guideYear === "number") return r.guideYear;
+  const m = r.key ? /-((?:19|20)\d{2})$/.exec(r.key) : null;
+  return m ? Number(m[1]) : null;
+}
+
+/** Every guide version of `rubric`'s component (itself included), newest guide first. */
+export function guideVersions<R extends Versioned>(rubrics: R[], rubric: R): R[] {
+  const family = rubricFamily(rubric);
+  return rubrics.filter((r) => rubricFamily(r) === family).sort((a, b) => (guideYear(b) ?? 0) - (guideYear(a) ?? 0));
+}
+
+/** One rubric per component for the picker: the newest guide stands for its versions (the version is chosen after). */
+export function newestVersions<R extends Versioned>(rubrics: R[]): R[] {
+  const best = new Map<string, R>();
+  for (const r of rubrics) {
+    const have = best.get(rubricFamily(r));
+    if (!have || (guideYear(r) ?? 0) > (guideYear(have) ?? 0)) best.set(rubricFamily(r), r);
+  }
+  return rubrics.filter((r) => best.get(rubricFamily(r)) === r);
+}
+
+/** "2027 guide" for a version's button; its session label when the key has no year. */
+export function versionName(r: Versioned & Pick<RubricInfo, "sessionLabel">): string {
+  const y = guideYear(r);
+  return y ? `${y} guide` : r.sessionLabel;
+}
+
+/** Up to three of the work's headings, quoted, without a trailing "(250 words)". */
+export function headingList(headings: string[]): string {
+  return headings
+    .slice(0, 3)
+    .map((h) => `“${h.replace(/\s*\(\s*[\d,.]+\s*words?\s*\)\s*$/i, "").trim() || h}”`)
+    .join(", ");
+}
+
 export interface RubricGroup<R> {
   id: "yours" | "core" | "ia";
   title: string;
