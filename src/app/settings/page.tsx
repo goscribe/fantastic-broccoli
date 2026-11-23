@@ -8,6 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-return";
 import { planBilling, planDisplayName } from "@/lib/plan-display";
+import { hasUnlimitedGrant } from "@/lib/plan-access";
 import { CourseworkPlanRow } from "@/components/coursework/settings-row";
 import { Button, buttonClass } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -17,6 +18,7 @@ import { toast, toastError } from "@/lib/toast";
 import {
   cancelSubscription,
   fetchCurrentSubscription,
+  fetchPlanCaps,
   fetchPlanOptions,
   resumeSubscription,
   updatePreferredLanguage,
@@ -56,10 +58,16 @@ function needsBillingManagement(subscription: CurrentSubscription | null) {
  * The plan as one row: what you are on, what happens next, and where to
  * change it (Pricing). Cancelling stays here: a subscriber must always be
  * able to stop a trial or a renewal from their account.
+ *
+ * An account an admin gave the top tier to for free reads "Unlimited · free":
+ * no renewal date and no way to the plans (there is nothing to buy). If they
+ * also pay for a plan of their own, that plan is named with its next charge
+ * and stays cancellable.
  */
 function PlanRow({
   plans,
   subscription,
+  unlimited,
   loading,
   switching,
   onCancel,
@@ -67,6 +75,8 @@ function PlanRow({
 }: {
   plans: PlanOption[];
   subscription: CurrentSubscription | null;
+  /** The top tier, given free by an admin. */
+  unlimited: boolean;
   loading: boolean;
   switching: boolean;
   onCancel: () => void;
@@ -74,7 +84,8 @@ function PlanRow({
 }) {
   const { t, locale } = useI18n();
   const active = plans.find((p) => p.isActive && p.priceDollars > 0) ?? null;
-  const name = active ? planDisplayName(active.name) : subscription ? planDisplayName(subscription.planName) : t("set.free");
+  const ownName = active ? planDisplayName(active.name) : subscription ? planDisplayName(subscription.planName) : t("set.free");
+  const name = unlimited ? t("set.unlimitedFree") : ownName;
   const isPass = active ? planBilling(active) === "once" : false;
   const manageable = subscription && !needsBillingManagement(subscription) && !isPass;
   let status: string | null = null;
@@ -82,6 +93,12 @@ function PlanRow({
   else if (subscription?.isTrial) status = t("set.trialEndsOn").replace("{date}", formatDate(subscription.currentPeriodEnd, locale));
   else if (isPass && active?.accessUntil) status = t("set.accessUntil").replace("{date}", formatDate(active.accessUntil, locale));
   else if (subscription && !needsBillingManagement(subscription)) status = t("set.renewsOn").replace("{date}", formatDate(subscription.currentPeriodEnd, locale));
+  if (unlimited) {
+    // Their own plan, if they still pay for one; otherwise nothing renews.
+    status = subscription
+      ? t("set.unlimitedAlsoPaying").replace("{plan}", planDisplayName(subscription.planName)).replace("{status}", status ?? "").trim()
+      : t("set.unlimitedFreeNote");
+  }
   return (
     <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-y border-border py-4">
       <div className="min-w-0">
@@ -102,7 +119,7 @@ function PlanRow({
             {subscription?.isTrial ? t("set.cancelTrial") : t("set.cancelPlan")}
           </Button>
         ) : null}
-        {!BILLING_PAUSED && (
+        {!BILLING_PAUSED && !unlimited && (
           <Link href="/pricing" className={buttonClass({ variant: "secondary", size: "sm" })}>
             {active || subscription ? t("set.changePlan") : t("set.seePlans")}
           </Link>
@@ -162,6 +179,7 @@ export default function SettingsPage() {
   );
   const [confirmingDowngrade, setConfirmingDowngrade] = useState(false);
   const [plansLoading, setPlansLoading] = useState(true);
+  const [unlimited, setUnlimited] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [photoError, setPhotoError] = useState<string | null>(null);
@@ -175,6 +193,9 @@ export default function SettingsPage() {
       .finally(() => setPlansLoading(false));
     fetchCurrentSubscription()
       .then(setSubscription)
+      .catch(() => {});
+    fetchPlanCaps()
+      .then((caps) => setUnlimited(hasUnlimitedGrant(caps)))
       .catch(() => {});
   }, []);
 
@@ -472,6 +493,7 @@ export default function SettingsPage() {
           <PlanRow
             plans={plans}
             subscription={subscription}
+            unlimited={unlimited}
             loading={plansLoading}
             switching={switching}
             onCancel={openDowngrade}

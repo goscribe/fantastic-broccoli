@@ -58,6 +58,15 @@ const english = {
   "course.start": "Start",
   "course.files": "Your files: {names}",
   "course.notes": "Notes",
+  "course.select": "Select",
+  "course.selectCancel": "Cancel",
+  "course.selectTopic": "Select {topic}",
+  "course.selectUnit": "Select all of {unit}",
+  "course.selectedOne": "1 topic selected",
+  "course.selectedMany": "{count} topics selected",
+  "course.selectClear": "Clear",
+  "course.selectStart": "Start session",
+  "course.selectMax": "One session takes up to {max} topics",
 };
 
 registerTranslations(english, {

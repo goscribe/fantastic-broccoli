@@ -18,6 +18,7 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toast } from "@/lib/toast";
 import { AddToSubjectDialog } from "./add-to-subject";
 import { loadNoteCourse, useLoaded } from "./data";
+import { useNoteHighlights } from "@/components/my-notes/note-highlighter";
 import "@/app/notes/notes-look.css";
 
 const APP_PATHS: NotePaths = {
@@ -152,6 +153,8 @@ function Reader({ data }: { data: PublicTopic }) {
     // The session's subject holds this note as material (the server attaches it on start).
     if (note) track("notes.attached_session_started", { from: "note", courseId: course.id }, workspaceId);
   };
+  /** The reader's own highlights in this note (nothing on a server without them). */
+  const highlights = useNoteHighlights({ note: { kind: "topic", courseId: course.id, topicId: topic.id }, rootId: "nl-article", enabled: !!note, partial: locked });
   const added = (inSubjects?.length ?? 0) > 0;
   const addToSubject = async () => {
     // Not in any subject yet and they have one for this course: put it there. Anything else is a choice, so ask.
@@ -197,6 +200,11 @@ function Reader({ data }: { data: PublicTopic }) {
           headerActions: (
             <>
               <StartQuick5 courseId={course.id} topicId={topic.id} level={level} placement="header" mode="session" onStarted={onStarted} />
+              {highlights.available && highlights.count > 0 && (
+                <button type="button" onClick={highlights.open} className="nl-btn-ghost">
+                  Highlights <span className="tabular-nums opacity-70">{highlights.count}</span>
+                </button>
+              )}
               {note && !locked && inSubjects !== null && canAttach && (
                 <button type="button" onClick={() => void addToSubject()} className="nl-btn-ghost" aria-busy={addingNow}>
                   {added && <Check className="size-4" strokeWidth={3} aria-hidden="true" />}
@@ -237,6 +245,7 @@ function Reader({ data }: { data: PublicTopic }) {
             ) : null,
         }}
       />
+      {highlights.ui}
       {adding && (
         <AddToSubjectDialog
           courseId={course.id}

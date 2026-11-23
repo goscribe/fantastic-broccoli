@@ -600,6 +600,14 @@ function walk(n: Node, out: Segment[], depth: number): void {
       return;
     case 'image':
     case 'figure': {
+      // A `/diagram` block (api/my-notes.ts DiagramFigure) carries a spec: a figure whose caption is its title and caption line. Mirrors the server.
+      const spec = (n.attrs as { figure?: { title?: unknown; caption?: unknown } } | undefined)?.figure;
+      if (spec && typeof spec === 'object' && typeof spec.title === 'string') {
+        out.push({ kind: 'figure', text: '' });
+        const words = [spec.title, typeof spec.caption === 'string' ? spec.caption : ''].filter(Boolean).join('. ');
+        if (words) out.push({ kind: 'caption', text: words });
+        return;
+      }
       const caption = inlineText(n.content, out, depth + 1).trim();
       out.push({ kind: 'figure', text: nodeAttr(n, 'alt') || nodeAttr(n, 'title') });
       if (caption) out.push({ kind: 'caption', text: caption });

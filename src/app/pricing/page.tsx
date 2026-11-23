@@ -20,6 +20,7 @@ import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
 import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
+import { UNLIMITED_GRANT_LABEL, hasUnlimitedGrant } from "@/lib/plan-access";
 import { fetchPlanToday } from "@/lib/api/exam-planner";
 import { examPassPitch, freePerks, paidPerks, plural, type ExamPitch, type FreeCaps } from "@/lib/wall";
 
@@ -162,6 +163,22 @@ export default function PricingPage() {
       setSwitching(false);
     }
   };
+
+  // The top tier, given free by an admin: nothing to choose, buy or upgrade to.
+  if (!loading && hasUnlimitedGrant(caps)) {
+    return (
+      <PageShell>
+        <PageHeader back={{ href: "/settings", label: "Settings" }} title="Your plan" className="mb-2" />
+        <section className="mt-6 max-w-xl border-y border-border py-5" role="status">
+          <p className="text-[18px] font-extrabold">{UNLIMITED_GRANT_LABEL}</p>
+          <p className="mt-1 text-[14px] text-muted-foreground">
+            You have everything Scribe offers, free, with no end date. There is nothing to buy and nothing renews.
+            {caps?.paid ? " You are still paying for a plan of your own; you can cancel it in Settings and keep everything." : ""}
+          </p>
+        </section>
+      </PageShell>
+    );
+  }
 
   return (
     <PageShell>
