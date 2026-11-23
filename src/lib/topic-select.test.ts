@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { MAX_SELECTED_TOPICS, groupState, mixedSessionMinutes, selectedInOrder, toggleGroup, toggleTopic } from "./topic-select";
+import { MAX_SELECTED_TOPICS, groupState, mixedSessionMinutes, pickSummary, selectedInOrder, toggleGroup, toggleTopic } from "./topic-select";
 
 const ids = (n: number, prefix = "t") => Array.from({ length: n }, (_, i) => `${prefix}${i + 1}`);
 
@@ -62,4 +62,80 @@ test("the start sends the picked topics in the list's order, without ones no lon
 
 test("a mixed session runs 15 to 45 minutes by the number of topics", () => {
   assert.deepEqual([1, 2, 3, 4, 8, 20].map(mixedSessionMinutes), [15, 15, 20, 25, 45, 45]);
+});
+
+const course = [
+  { topics: ids(8, "a").map((id) => ({ id })) },
+  { topics: ids(9, "b").map((id) => ({ id })) },
+  { topics: ids(7, "c").map((id) => ({ id })) },
+];
+const unitIds = (i: number) => course[i].topics.map((t) => t.id);
+
+test("whole units ticked one after another add up, and the first stays picked", () => {
+  let picked: ReadonlySet<string> = new Set();
+  picked = toggleGroup(picked, unitIds(2), Infinity).next;
+  picked = toggleGroup(picked, unitIds(0), Infinity).next;
+  assert.equal(groupState(unitIds(0), picked), "all");
+  assert.equal(groupState(unitIds(1), picked), "none");
+  assert.equal(groupState(unitIds(2), picked), "all");
+  const sum = pickSummary(course, picked);
+  assert.equal(sum.ids.length, 15);
+  assert.equal(sum.unitCount, 2);
+  assert.equal(sum.over, false);
+  // Syllabus order, not the order the units were ticked in.
+  assert.deepEqual(sum.startIds, [...unitIds(0), ...unitIds(2)]);
+});
+
+test("a topic unticked inside a ticked unit leaves a dash there and the other unit alone", () => {
+  let picked = toggleGroup(new Set<string>(), unitIds(0), Infinity).next;
+  picked = toggleGroup(picked, unitIds(1), Infinity).next;
+  picked = toggleTopic(picked, "b4", Infinity).next;
+  assert.equal(groupState(unitIds(0), picked), "all");
+  assert.equal(groupState(unitIds(1), picked), "some");
+  const sum = pickSummary(course, picked);
+  assert.equal(sum.ids.length, 16);
+  assert.equal(sum.unitCount, 2);
+  assert.equal(sum.ids.includes("b4"), false);
+});
+
+test("a single topic in one unit and a whole other unit count as two units", () => {
+  let picked = toggleTopic(new Set<string>(), "c2", Infinity).next;
+  picked = toggleGroup(picked, unitIds(0), Infinity).next;
+  assert.deepEqual(pickSummary(course, picked).ids, [...unitIds(0), "c2"]);
+  assert.equal(pickSummary(course, picked).unitCount, 2);
+  // The dashed unit's box pressed fills it; pressed again clears it and nothing else.
+  picked = toggleGroup(picked, unitIds(2), Infinity).next;
+  assert.equal(groupState(unitIds(2), picked), "all");
+  picked = toggleGroup(picked, unitIds(2), Infinity).next;
+  assert.deepEqual(pickSummary(course, picked).ids, unitIds(0));
+  assert.equal(pickSummary(course, picked).unitCount, 1);
+});
+
+test("more than one session takes: every pick is kept, and the session starts on the first 20 in syllabus order", () => {
+  let picked: ReadonlySet<string> = new Set();
+  for (const i of [2, 1, 0]) {
+    const change = toggleGroup(picked, unitIds(i), Infinity);
+    assert.equal(change.capped, false);
+    picked = change.next;
+  }
+  const sum = pickSummary(course, picked);
+  assert.equal(sum.ids.length, 24);
+  assert.equal(sum.unitCount, 3);
+  assert.equal(sum.over, true);
+  assert.equal(sum.startIds.length, MAX_SELECTED_TOPICS);
+  assert.deepEqual(sum.startIds, [...unitIds(0), ...unitIds(1), "c1", "c2", "c3"]);
+});
+
+test("exactly the cap is not over, and nothing picked is an empty summary", () => {
+  const twenty = new Set([...unitIds(0), ...unitIds(1), "c1", "c2", "c3"]);
+  assert.equal(pickSummary(course, twenty).over, false);
+  assert.equal(pickSummary(course, twenty).startIds.length, 20);
+  assert.deepEqual(pickSummary(course, new Set()), { ids: [], unitCount: 0, startIds: [], over: false });
+});
+
+test("picks for topics the level no longer lists do not count", () => {
+  const picked = new Set(["a1", "b2", "hl-only-9"]);
+  const sum = pickSummary(course.slice(0, 1), picked);
+  assert.deepEqual(sum.ids, ["a1"]);
+  assert.equal(sum.unitCount, 1);
 });

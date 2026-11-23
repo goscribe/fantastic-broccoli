@@ -14,7 +14,7 @@ import { PageShell } from "@/components/ui/page-header";
 export default function CoursesPage() {
   const { t } = useI18n();
   const [mine, setMine] = useState<CourseSubject[] | null>(null);
-  const { start, busyTopicId } = useStartCourseTopic();
+  const { start, busyTopicId, startMany, startingMany } = useStartCourseTopic();
 
   useEffect(() => {
     coursesApi
@@ -45,6 +45,8 @@ export default function CoursesPage() {
         <div className="mt-7">
           <CoursePicker
             onStart={(course, topic, level) => void start(course, topic, level)}
+            onStartTopics={(course, topics, level) => void startMany(course, topics, level)}
+            startingTopics={startingMany}
             busyTopicId={busyTopicId}
             enrolledCourseIds={mine?.map((c) => c.courseId)}
           />
