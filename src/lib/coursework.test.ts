@@ -26,9 +26,11 @@ import {
   rubricLine,
   timeUntil,
   ultraPitch,
+  wordLine,
   wordStatus,
 } from "./coursework";
 import { SAMPLE_CITATIONS, SAMPLE_RESULT } from "./coursework-sample";
+import { countWork, resolveWordCountRules } from "./coursework-word-count";
 import { findQuote, quoteChanged } from "./quote-match";
 
 test("a band is always written as a range, never a made-up single number", () => {
@@ -122,17 +124,36 @@ test("time until the reset", () => {
   assert.equal(timeUntil(new Date("2026-11-22T18:48:20Z"), now), "in under a minute");
 });
 
-test("words against the limit: calm notes when short or over", () => {
+test("words against the limit: calm notes when short or over; nothing is cut at the limit", () => {
   assert.equal(countWords("  one two\nthree  "), 3);
   assert.equal(countWords(""), 0);
-  assert.deepEqual(wordStatus(2184, 2200), { state: "ok", count: "2,184 of 2,200 words", note: null });
+  assert.deepEqual(wordStatus(2184, 2200), { state: "ok", count: "2,184 of 2,200 words", note: null, detail: null });
   assert.equal(wordStatus(40, 3000).state, "short");
   assert.equal(wordStatus(40, 3000).note, "Add at least 150 words for a review. 110 to go.");
   const over = wordStatus(1120, 950);
   assert.equal(over.state, "over");
-  assert.equal(over.note, "170 over the limit. Examiners stop reading at 950 words, so the review does too.");
+  assert.equal(over.note, "170 over the limit. Examiners are not required to read past 950 words. Your whole work is still reviewed.");
+  assert.doesNotMatch(over.note ?? "", /stop reading|so the review does too/);
   assert.equal(wordStatus(900, null).count, "900 words");
   assert.equal(wordStatus(0, 3000).state, "empty");
+});
+
+test("a count from a file is an estimate: 'About', what was left out, and the student's own count wins", () => {
+  // The founder's case: 5,585 words in the file, about 1,915 of them count.
+  const ia = wordLine({ counted: 1915, total: 5585, leftOut: "tables, appendices, bibliography, headings", estimate: true, limit: 2000 });
+  assert.deepEqual(ia, { state: "ok", count: "About 1,915 words counted of 2,000", note: null, detail: "3,670 not counted (tables, appendices, bibliography, headings)" });
+  const over = wordLine({ counted: 2143, total: 5585, leftOut: "tables", estimate: true, limit: 2000 });
+  assert.equal(over.state, "over");
+  assert.equal(over.note, "About 140 over the limit by Scribe's count, which is an estimate from your file. Check it against your own word count. Your whole work is still reviewed.");
+  // "My word count is 1,996": the estimate no longer decides.
+  const mine = wordLine({ counted: 2143, total: 5585, estimate: true, limit: 2000, declared: 1996 });
+  assert.deepEqual({ state: mine.state, count: mine.count, note: mine.note }, { state: "ok", count: "1,996 of 2,000 words (your count)", note: null });
+  assert.match(wordLine({ counted: 1915, total: 5585, estimate: true, limit: 2000, declared: 2100 }).note ?? "", /^100 over the limit by your count\./);
+  // A page guide or no limit: no "of N words" at all.
+  assert.equal(wordLine({ counted: 3900, total: 5200, leftOut: "equations", estimate: true, limit: null }).count, "About 3,900 words counted");
+  assert.equal(wordLine({ counted: 900, total: 900, estimate: false, limit: null }).count, "900 words");
+  // The minimum for a review is about the work as a whole, not what counts.
+  assert.equal(wordLine({ counted: 90, total: 400, estimate: true, limit: 2000 }).state, "ok");
 });
 
 const rubric = (id: string, subject: string, component: string, componentKind: "internal_assessment" | "extended_essay" | "tok_essay", suggested = false) => ({ id, subject, component, componentKind, board: "IB", qualification: "IB Diploma", sessionLabel: "first assessment 2025", suggested });
@@ -232,4 +253,20 @@ test("the draft switcher lists reviews in order, then drafts nothing has read, l
   assert.equal(draftKindLabel("file", "doc"), "Word");
   assert.equal(draftKindLabel("file", "image"), "File");
   assert.equal(draftKindLabel(null), "Text");
+});
+
+test("the count follows the component's rules, and falls back when a rubric has none yet", () => {
+  const prose = "The club secretary records every court booking by hand in a paper diary kept at the front desk. ".repeat(8);
+  const html = `<h1>Development</h1><p>${prose}</p><table><tr><td><p>Task one</p></td><td><p>Meet the client</p></td></tr></table><p>total = total + used;</p><h1>Bibliography</h1><p>Lutz, M. (2013) Learning Python. Sebastopol: O'Reilly Media.</p><h1>Appendix A: Source code</h1><p>${prose}</p>`;
+  const fallback = resolveWordCountRules(undefined, 2000);
+  assert.deepEqual({ fallback: fallback.fallback, excludes: fallback.excludes, limit: fallback.limit }, { fallback: true, excludes: ["bibliography", "appendices", "tables", "code"], limit: 2000 });
+  const b = countWork({ html, file: true }, fallback);
+  assert.equal(b.counted, 8 * 18 + 1, "the prose and its heading");
+  assert.deepEqual(Object.keys(b.excluded).sort(), ["appendices", "bibliography", "code", "tables"]);
+  assert.equal(b.estimate, true);
+  const rules = resolveWordCountRules({ limit: null, kind: "pages", excludes: ["headings", "bibliography", "appendices"], note: "A page guide." }, null);
+  assert.deepEqual({ kind: rules.kind, limit: rules.limit, fallback: rules.fallback }, { kind: "pages", limit: null, fallback: false });
+  // The editor's document counts the same way, exactly (no "about").
+  const doc = { type: "doc", content: [{ type: "paragraph", content: [{ type: "text", text: prose }] }, { type: "codeBlock", content: [{ type: "text", text: "x = 1" }] }] };
+  assert.deepEqual({ counted: countWork({ doc }, fallback).counted, estimate: countWork({ doc }, fallback).estimate }, { counted: 8 * 18, estimate: false });
 });

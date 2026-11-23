@@ -123,7 +123,8 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   /** The student's own notes in this subject (none, and no "New note", on a server without them). */
   const own = useOwnNotes(workspaceId);
   const newNote = useNewNote();
-  const course = useSubjectCourse(workspaceId);
+  // Course progress is asked for once the subject is known to follow a course (most follow none).
+  const course = useSubjectCourse(workspaceId, loading && !workspace ? undefined : workspace);
   const notes = useNotesOutline(workspaceId);
   const startCourseTopic = useStartCourseTopic();
   const planStarter = useStartTask();
