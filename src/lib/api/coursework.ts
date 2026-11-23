@@ -15,6 +15,7 @@ import {
   type GraderReview,
   type GraderReviewSummary,
   type GraderRubric,
+  type GraderRubricVersions,
   type GraderStatus as Status,
   type MarkedCriterion,
   type FeedbackCriterion,
@@ -48,6 +49,7 @@ export type RubricCriterion = GraderRubric["criteria"][number];
 /** A rubric without its criteria: what a review carries. */
 export type RubricInfo = GraderReview["rubric"];
 export type GuideResponse = GraderGuide;
+export type RubricVersions = GraderRubricVersions;
 export type CourseworkGuide = NonNullable<GraderGuide["guide"]>;
 /* ---------- Drafts (contract v2): a document holds file drafts and text drafts ---------- */
 
@@ -185,6 +187,8 @@ export const courseworkApi = {
   /** An editable version made from a file draft (or a copy of a text draft). The source draft is never changed. */
   createTextDraft: (input: { documentId: string; fromDraftId?: string }) => rpc<{ draftId: string; number: number }>("coursework.createTextDraft", "mutation", input),
   rubricDetail: (rubricId: string) => rpc<RubricDetail>("coursework.rubric", "query", { rubricId }),
+  /** A component's guide versions and the one this work's headings point to (a draft, or pasted text not saved yet). Reads only; sent as a mutation so pasted text travels in the body. */
+  rubricVersions: (input: { rubricId: string; draftId?: string; text?: string }) => rpc<RubricVersions>("coursework.rubricVersions", "mutation", input),
   ask: (input: { documentId: string; draftId?: string; reviewId?: string; message: string; history: ChatTurn[] }) => rpc<ChatReply>("coursework.ask", "mutation", input),
 };
 

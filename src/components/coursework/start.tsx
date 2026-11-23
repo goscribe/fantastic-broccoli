@@ -9,12 +9,12 @@ import { Button } from "@/components/ui/button";
 import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { UPLOAD_ACCEPT, awaitRead, courseworkApi, importFile, isCourseworkLimit, isMissingEndpoint, readAgain, type DraftDetail, type GraderStatus, type ImportedFile, type RubricSummary } from "@/lib/api/coursework";
 import { parsePendingRead, readPhase, type PendingRead } from "@/lib/coursework-read";
-import { componentTitle, countWords, familyText, rubricLine } from "@/lib/coursework";
+import { componentTitle, countWords, familyText, guideVersions, rubricLine } from "@/lib/coursework";
 import { countWork, type WordBreakdown } from "@/lib/coursework-word-count";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { cn } from "@/lib/utils";
 import { DraftPreview, pagesLabel } from "./draft-preview";
-import { AllowanceGate, ComponentPicker, ModeChoice, loadGuide, rubricSub } from "./grade-panel";
+import { AllowanceGate, ComponentPicker, ModeChoice, VersionChoice, loadGuide, rubricSub, type VersionHint } from "./grade-panel";
 import { useCw } from "./use-cw";
 import { loadRubrics, ultraOffer, useOnline, usePreferredMode } from "./use-grader";
 import { WordInfo, draftBreakdown, lineFor, rulesOf, saveDeclaredWords } from "./word-count";
@@ -24,7 +24,7 @@ import "@/app/coursework/coursework.css";
 type Upload =
   /** `since`: when the file was stored and reading began (null while it is still being sent). */
   | { name: string; state: "reading"; since: number | null }
-  | { name: string; state: "ready"; documentId: string; words: number; /** The file as the server read it (text, pages, a Word file's HTML): what the count and the preview are made from. */ detail: DraftDetail | null; /** A signed link to the original, for the preview. */ url: string | null }
+  | { name: string; state: "ready"; documentId: string; /** The file draft (absent on a server without drafts). */ draftId: string | null; words: number; /** The file as the server read it (text, pages, a Word file's HTML): what the count and the preview are made from. */ detail: DraftDetail | null; /** A signed link to the original, for the preview. */ url: string | null }
   /** `at`: the stored file, when there is one to read again. */
   | { name: string; state: "failed"; message: string; at: { documentId: string; draftId: string } | null };
 
@@ -70,6 +70,9 @@ export function CourseworkStart() {
   /** "My word count is ___": used for the limit instead of Scribe's count. */
   const [declared, setDeclared] = useState<number | null>(null);
   const [attempt, setAttempt] = useState(0);
+  /** Guide versions: what the work's headings point to, and whether the student chose a version themselves. */
+  const [hint, setHint] = useState<VersionHint | null>(null);
+  const [versionChosen, setVersionChosen] = useState(false);
   const wanted = params.get("rubric");
 
   useEffect(() => {
@@ -106,11 +109,45 @@ export function CourseworkStart() {
     };
   }, [rubric]);
 
+  // A component with more than one guide in use: the student picks the version, and Scribe reads the work's
+  // headings to suggest one. The suggestion is followed only until the student chooses for themselves.
+  const versions = useMemo(() => (rubric && rubrics ? guideVersions(rubrics, rubric) : []), [rubrics, rubric]);
+  const rubricId = rubric?.id ?? null;
+  const several = versions.length > 1;
+  const uploadDraftId = upload?.state === "ready" ? upload.draftId : null;
+  const pastedReady = !upload && pasted.trim().length >= 300;
+  useEffect(() => {
+    if (!several || !rubricId || (!uploadDraftId && !pastedReady)) return;
+    let cancelled = false;
+    // Typing settles first; a file is asked about at once.
+    const timer = setTimeout(
+      () => {
+        courseworkApi
+          .rubricVersions(uploadDraftId ? { rubricId, draftId: uploadDraftId } : { rubricId, text: pasted })
+          .then((res) => {
+            if (cancelled) return;
+            if (!res.suggestedRubricId) return setHint(null);
+            const follow = !versionChosen && res.suggestedRubricId !== rubricId;
+            setHint((prev) => ({ rubricId: res.suggestedRubricId!, headings: res.headings, picked: follow || (prev?.picked === true && prev.rubricId === res.suggestedRubricId) }));
+            if (follow) setPicked(res.suggestedRubricId);
+          })
+          .catch(() => {});
+      },
+      uploadDraftId ? 0 : 700,
+    );
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [several, rubricId, uploadDraftId, pastedReady, pasted, versionChosen]);
+  // What the headings said belongs to the work it was read from.
+  const hintFor = several && (uploadDraftId || pastedReady) ? hint : null;
+
   /** The file is read: show it (its count and preview), and fetch what the preview needs. */
   const showRead = async (name: string, out: ImportedFile) => {
     // The file as read (for the count by the component's rules, and the preview); the review does not wait for these.
     const detail = out.detail ?? (out.draftId ? await courseworkApi.draft(out.draftId).catch(() => null) : null);
-    setUpload({ name, state: "ready", documentId: out.documentId, words: out.wordCount, detail, url: null });
+    setUpload({ name, state: "ready", documentId: out.documentId, draftId: out.draftId, words: out.wordCount, detail, url: null });
     setPasted("");
     setDeclared(null);
     if (out.draftId && detail?.kind === "file" && (detail.format === "pdf" || detail.format === "docx")) {
@@ -253,6 +290,8 @@ export function CourseworkStart() {
       }
       const mine = rules.kind === "words" && declared ? declared : null;
       saveDeclaredWords(documentId, mine);
+      // An uploaded file's document was made with the component chosen then; a review carries the final choice itself.
+      if (!review && upload?.state === "ready") await courseworkApi.saveDocument({ documentId, baseVersion: 1, rubricId: rubric.id }).catch(() => {});
       rememberUpload(null);
       if (review) await courseworkApi.requestReview({ documentId, rubricId: rubric.id, mode, ...(mine ? { declaredWords: mine } : {}) });
       router.push(`/coursework/${encodeURIComponent(documentId)}`);
@@ -311,7 +350,11 @@ export function CourseworkStart() {
                 title={componentTitle(rubric)}
                 match={familyText(rubric)}
                 sub={rubricSub(rubric)}
-                onClick={() => setPicked(null)}
+                onClick={() => {
+                  setPicked(null);
+                  setVersionChosen(false);
+                  setHint(null);
+                }}
                 trailing={<span className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white px-3 py-1.5 text-small font-extrabold text-[var(--tile-a)]">{t("cw.start.change")}</span>}
               />
               <Link href={`/library/coursework/${encodeURIComponent(rubric.key)}`} className="group mt-1 flex min-h-12 items-center justify-between gap-3 border-b border-border py-2">
@@ -321,6 +364,19 @@ export function CourseworkStart() {
                 </span>
                 <ChevronRight className="size-5 shrink-0 text-muted-foreground" aria-hidden />
               </Link>
+              {several && (
+                <div className="mt-4">
+                  <VersionChoice
+                    versions={versions}
+                    value={rubric.id}
+                    hint={hintFor}
+                    onChange={(id) => {
+                      setVersionChosen(true);
+                      setPicked(id);
+                    }}
+                  />
+                </div>
+              )}
             </div>
           ) : (
             <div className="mt-3">
