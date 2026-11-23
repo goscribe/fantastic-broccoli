@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageShell } from "@/components/ui/page-header";
+import { useNewUi } from "@/lib/new-ui";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 
 interface WorkspaceShellProps {
@@ -36,6 +38,18 @@ export function WorkspaceShell({
   const pathname = usePathname();
   const { t } = useI18n();
   const [membersOpen, setMembersOpen] = useState(false);
+  const newUi = useNewUi();
+
+  // The app today: these pages (an item opened from search, the subject chat)
+  // sit in the same frame as every other page. The tab bar below belongs to
+  // the old workspace; its tabs now only redirect to the subject page.
+  if (newUi && (workspace || loading)) {
+    return flush ? (
+      <main className="flex w-full min-w-0 flex-1 flex-col">{children}</main>
+    ) : (
+      <PageShell>{children}</PageShell>
+    );
+  }
 
   if (!workspace && loading) {
     return (

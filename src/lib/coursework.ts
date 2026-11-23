@@ -7,6 +7,7 @@
  * PRESENTATION ONLY. Nothing here decides a mark, an allowance or a price.
  */
 import type { CitationsResult, GradeResult, MarkedResult, ResultCriterion, ReviewAllowance, RubricInfo } from "./api/coursework";
+import { creditsLeft, creditsLine } from "./coursework-access";
 
 /** Ultra as it is offered: null hides every mention of it. */
 export interface UltraOffer {
@@ -286,7 +287,8 @@ export function timeUntil(target: string | Date, now: Date): string {
   return m === 0 ? `in ${h} h` : `in ${h} h ${m} min`;
 }
 
-export type AllowanceState = "locked" | "unlimited" | "left" | "limit";
+/** credits: the plan has no reviews left today (or none at all) and the next review spends a free credit. */
+export type AllowanceState = "locked" | "unlimited" | "left" | "credits" | "limit";
 
 export interface AllowanceCopy {
   state: AllowanceState;
@@ -308,13 +310,17 @@ export function ultraPitch(ultra: UltraOffer | null | undefined): string | null 
  * reviews come back.
  */
 export function allowanceCopy(a: ReviewAllowance, ultra: UltraOffer | null | undefined, now: Date): AllowanceCopy {
+  // Free review credits (server limits.ts): spent only after the plan's reviews for the day.
+  const free = creditsLine(creditsLeft(a));
+  if (a.allowed && a.useCredit && free) return { state: "credits", line: free, resets: null, upsell: null };
   if (a.reason === "locked" || (a.limit !== null && a.limit <= 0)) {
     return { state: "locked", line: "Coursework reviews are part of Pro", resets: null, upsell: null };
   }
-  if (a.limit === null && a.allowed) return { state: "unlimited", line: "Unlimited reviews", resets: null, upsell: null };
+  if (a.limit === null && a.allowed) return { state: "unlimited", line: free ? `Unlimited reviews · ${free}` : "Unlimited reviews", resets: null, upsell: null };
   const left = a.remainingToday ?? 0;
   if (a.allowed && left > 0) {
-    return { state: "left", line: `${left} of ${a.limit} ${a.limit === 1 ? "review" : "reviews"} left today`, resets: null, upsell: null };
+    const today = `${left} of ${a.limit} ${a.limit === 1 ? "review" : "reviews"} left today`;
+    return { state: "left", line: free ? `${today} · ${free}` : today, resets: null, upsell: null };
   }
   const resets = `Your next review unlocks at midnight, ${timeUntil(a.resetsAt, now)}.`;
   return {

@@ -16,6 +16,9 @@ import "@/lib/i18n/mistakes";
 import "@/lib/i18n/today";
 import "@/lib/i18n/coursework";
 import { useCourseworkNav } from "@/components/coursework/use-grader";
+import { PlanCrown } from "@/components/coursework/plan-crown";
+import { COURSEWORK_UPGRADE_HREF } from "@/lib/coursework-access";
+import { track } from "@/lib/funnel";
 import { onTreeChanged } from "@/lib/tree-events";
 import { cn } from "@/lib/utils";
 import { AppTourHost, requestAppTour } from "@/components/onboarding/app-tour";
@@ -23,7 +26,9 @@ import { CommandPalette } from "@/components/layout/command-palette";
 import type { Folder, Workspace } from "@/types";
 import "@/app/design/design.css";
 
-const NAV: { href: string; label: string; labelKey?: string; icon: typeof House }[] = [
+type NavItem = { href: string; label: string; labelKey?: string; icon: typeof House; /** Shown muted with a crown; leads to the upgrade page. */ locked?: boolean };
+
+const NAV: NavItem[] = [
   { href: "/", label: "Home", labelKey: "nav.home", icon: House },
   // Scribe's own notes, inside the app (the public pages are /notes).
   { href: "/library", label: "Notes", icon: NotebookText },
@@ -32,10 +37,13 @@ const NAV: { href: string; label: string; labelKey?: string; icon: typeof House 
 ];
 
 /**
- * Coursework (the grader): a fifth place, shown only to students it is for
- * (see useCourseworkNav), so nobody else's navigation grows.
+ * Coursework (the grader): a fifth place, wherever the server reviews
+ * coursework (see useCourseworkNav). Without reviews on the plan and without
+ * free credits it is still there, muted with a crown, and leads to the
+ * upgrade page with the plan for coursework picked.
  */
-const COURSEWORK_NAV = { href: "/coursework", label: "Coursework", labelKey: "cw.nav", icon: PenLine };
+const COURSEWORK_NAV: NavItem = { href: "/coursework", label: "Coursework", labelKey: "cw.nav", icon: PenLine };
+const COURSEWORK_LOCKED_NAV: NavItem = { ...COURSEWORK_NAV, href: COURSEWORK_UPGRADE_HREF, locked: true };
 
 const RAIL_KEY = "scribe.sidebar.rail";
 const NARROW = "(max-width: 1179px)";
@@ -83,7 +91,10 @@ export function NewShell({ children }: { children: React.ReactNode }) {
   const [scrolled, setScrolled] = useState(false);
   const rail = useRail();
   const coursework = useCourseworkNav(!!user);
-  const nav = coursework ? [...NAV, COURSEWORK_NAV] : NAV;
+  const nav = coursework.state === "open" ? [...NAV, COURSEWORK_NAV] : coursework.state === "locked" ? [...NAV, COURSEWORK_LOCKED_NAV] : NAV;
+  const onNav = (item: NavItem) => {
+    if (item.locked) track("wall.shown", { reason: "grader", variant: "locked" });
+  };
   const { data: streak } = useStreak();
   const started = !!streak && (streak.longest > 0 || streak.current > 0 || streak.todayDone);
   // Subjects live on home's tiles, not in the sidebar. The tree is only for
@@ -147,22 +158,35 @@ export function NewShell({ children }: { children: React.ReactNode }) {
           </button>
         </div>
         <nav className="flex flex-col gap-1">
-          {nav.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+          {nav.map((item) => {
+            const { href, label: fallbackLabel, labelKey, icon: Icon, locked } = item;
             const label = labelKey ? t(labelKey) : fallbackLabel;
+            const active = !locked && isActive(href);
             return (
             <Link
-              key={href}
+              key={labelKey ?? href}
               href={href}
-              onClick={() => setMobileOpen(false)}
-              title={rail ? label : undefined}
+              onClick={() => {
+                onNav(item);
+                setMobileOpen(false);
+              }}
+              title={locked ? t("cw.nav.lockedHint") : rail ? label : undefined}
+              data-locked={locked ? "" : undefined}
               className={cn(
                 "flex h-11 items-center gap-3 rounded-[var(--r-control)] px-4 text-[14.5px] font-bold text-foreground/70 transition-colors hover:bg-muted/70",
-                isActive(href) && "bg-[var(--accent-tint)] text-accent-dim hover:bg-[var(--accent-tint)]",
-                rail && "md:justify-center md:px-0",
+                active && "bg-[var(--accent-tint)] text-accent-dim hover:bg-[var(--accent-tint)]",
+                locked && "text-faint hover:text-muted-foreground",
+                rail && "md:relative md:justify-center md:px-0",
               )}
             >
-              <Icon className="size-[18px] shrink-0" strokeWidth={isActive(href) ? 2.2 : 1.8} />
+              <Icon className="size-[18px] shrink-0" strokeWidth={active ? 2.2 : 1.8} />
               <span className={cn(rail && "md:hidden")}>{label}</span>
+              {locked && (
+                <>
+                  <span className="sr-only">{t("cw.nav.lockedSr")}</span>
+                  <PlanCrown className={cn("ml-auto", rail && "md:absolute md:right-1.5 md:top-1.5 md:ml-0 md:size-3")} />
+                </>
+              )}
             </Link>
             );
           })}
@@ -283,17 +307,20 @@ export function NewShell({ children }: { children: React.ReactNode }) {
         aria-label="Main"
         className={cn("fixed inset-x-0 bottom-0 z-40 grid border-t border-border bg-white/95 px-1 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden", nav.length === 5 ? "grid-cols-5" : "grid-cols-4")}
       >
-        {nav.map(({ href, label: fallbackLabel, labelKey, icon: Icon }) => {
+        {nav.map((item) => {
+          const { href, label: fallbackLabel, labelKey, icon: Icon, locked } = item;
           const label = labelKey ? t(labelKey) : fallbackLabel;
-          const on = isActive(href);
+          const on = !locked && isActive(href);
           return (
             <Link
-              key={href}
+              key={labelKey ?? href}
               href={href}
+              onClick={() => onNav(item)}
               aria-current={on ? "page" : undefined}
+              data-locked={locked ? "" : undefined}
               className={cn(
-                "group flex h-16 flex-col items-center justify-center gap-0.5 text-[11.5px] font-bold",
-                on ? "text-accent-dim" : "text-muted-foreground",
+                "group relative flex h-16 flex-col items-center justify-center gap-0.5 text-[11.5px] font-bold",
+                on ? "text-accent-dim" : locked ? "text-faint" : "text-muted-foreground",
               )}
             >
               {/* Active tab: a soft pill behind a filled icon. */}
@@ -305,7 +332,15 @@ export function NewShell({ children }: { children: React.ReactNode }) {
               >
                 <Icon className="size-[22px]" strokeWidth={on ? 2.4 : 1.9} fill={on ? "currentColor" : "none"} fillOpacity={on ? 0.18 : 0} />
               </span>
-              {label}
+              <span className="flex items-center gap-0.5">
+                {label}
+                {locked && (
+                  <>
+                    <span className="sr-only">{t("cw.nav.lockedSr")}</span>
+                    <PlanCrown className="size-3" />
+                  </>
+                )}
+              </span>
             </Link>
           );
         })}
