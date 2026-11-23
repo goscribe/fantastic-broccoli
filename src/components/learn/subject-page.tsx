@@ -13,6 +13,8 @@ import { SubjectTopics, courseNextOf, useNotesOutline, useSubjectCourse } from "
 import { UpNextCard } from "@/components/learn/up-next-card";
 import { AddMaterialMenu, NoteMaterialCard, useAttachedNotes } from "@/components/notes-app/subject-notes";
 import { AttachNotesDialog } from "@/components/notes-app/attach-notes-dialog";
+import { OwnNoteCard } from "@/components/my-notes/note-card";
+import { useNewNote, useOwnNotes } from "@/components/my-notes/use-my-notes";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
 import { PLAN_KEY, useStartTask } from "@/components/planner/plan-task";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
@@ -118,6 +120,9 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   const [attachOpen, setAttachOpen] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const attached = useAttachedNotes(workspaceId);
+  /** The student's own notes in this subject (none, and no "New note", on a server without them). */
+  const own = useOwnNotes(workspaceId);
+  const newNote = useNewNote();
   const course = useSubjectCourse(workspaceId);
   const notes = useNotesOutline(workspaceId);
   const startCourseTopic = useStartCourseTopic();
@@ -144,10 +149,16 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   const plan = useQuery({ queryKey: [...PLAN_KEY, "today"], queryFn: fetchPlanToday, retry: false });
 
   const title = workspace?.title ?? "";
-  const materials = useMemo(
-    () => [...(workspace?.materials ?? [])].sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()),
-    [workspace],
-  );
+  const ownByFile = useMemo(() => new Map(own.notes.flatMap((n) => (n.fileId ? [[n.fileId, n] as const] : []))), [own.notes]);
+  const materials = useMemo(() => {
+    const files = [...(workspace?.materials ?? [])];
+    // A note whose material row is not there (the subject is shared, or the list is a moment behind) is still shown as a card.
+    const have = new Set(files.map((m) => m.id));
+    const loose: Material[] = own.notes.filter((n) => !n.fileId || !have.has(n.fileId)).map((n) => ({ id: n.fileId ?? `note:${n.id}`, workspaceId, type: "note", title: n.title, analyzed: true, updatedAt: new Date(n.updatedAt).toISOString() }));
+    const at = (m: { id: string; updatedAt: string }) => new Date(ownByFile.get(m.id)?.updatedAt ?? m.updatedAt).getTime();
+    return [...files, ...loose].sort((a, b) => at(b) - at(a));
+  }, [workspace, workspaceId, own.notes, ownByFile]);
+  const noteOf = (m: { id: string }) => ownByFile.get(m.id) ?? own.notes.find((n) => `note:${n.id}` === m.id);
   // `?file=<id>` (search): show that material, scrolled to and outlined.
   const [fileTarget] = useState(() => linkTarget("file"));
   const fileIndex = fileTarget ? materials.findIndex((m) => m.id === fileTarget) : -1;
@@ -302,7 +313,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
       "Could not start a session",
     );
   };
-  const latest = latestUpload(materials, (m) => attached.notes.has(m.id));
+  const latest = latestUpload(materials, (m) => attached.notes.has(m.id) || !!noteOf(m));
   const chips = subjectChips({ latestUploadTitle: latest?.title ?? null, openMistakes: review.data?.mistakes ?? 0 });
   const makeDeck = (files: Material[], key: string) =>
     run(
@@ -456,15 +467,26 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
         {reviewLine("lg:hidden")}
 
         <div>
-          <div className="flex items-center justify-between gap-3">
-            <h2 className="text-[16px] font-semibold">
+          <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+            <h2 className="whitespace-nowrap text-[16px] font-semibold">
               Your materials <span className="font-medium text-faint">· {materials.length}</span>
             </h2>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 whitespace-nowrap sm:gap-3">
               {/* With one or two files the dashed tile in the grid is the way to add; from three up, this button is. */}
+              {own.available && (
+                <button type="button" onClick={() => void newNote.create(workspaceId)} disabled={newNote.creating} aria-busy={newNote.creating} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
+                  {newNote.creating && <Loader2 className="size-3.5 animate-spin" />}
+                  New note
+                </button>
+              )}
               {(loading || materials.length >= 3) &&
-                (attached.available ? (
-                  <AddMaterialMenu uploading={uploading} onUpload={() => fileRef.current?.click()} onNotes={() => setAttachOpen(true)} />
+                (attached.available || own.available ? (
+                  <AddMaterialMenu
+                    uploading={uploading}
+                    onUpload={() => fileRef.current?.click()}
+                    onNotes={attached.available ? () => setAttachOpen(true) : undefined}
+                    onWrite={own.available ? () => void newNote.create(workspaceId) : undefined}
+                  />
                 ) : (
                   <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="inline-flex h-8 items-center gap-1.5 rounded-[9px] bg-muted px-3 text-[12.5px] font-semibold hover:bg-accent-soft">
                     {uploading && <Loader2 className="size-3.5 animate-spin" />}
@@ -489,7 +511,9 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
           <div className="mt-3 grid grid-cols-2 gap-3 sm:gap-3.5 md:grid-cols-3">
             {loading && materials.length === 0 && [0, 1, 2].map((i) => <div key={i} className="h-[200px] animate-pulse rounded-[var(--r-card)] bg-muted" />)}
             {shown.map((m) =>
-              attached.notes.has(m.id) ? (
+              noteOf(m) ? (
+                <OwnNoteCard key={m.id} note={noteOf(m)!} selected={selected.has(m.id)} onToggle={() => toggleSelected(m.id)} />
+              ) : attached.notes.has(m.id) ? (
                 <NoteMaterialCard key={m.id} note={attached.notes.get(m.id)!} workspaceId={workspaceId} selected={selected.has(m.id)} onToggle={() => toggleSelected(m.id)} />
               ) : (
                 <div key={m.id} data-file-id={m.id} className={cn("life-card relative flex min-w-0 flex-col p-2.5 transition-colors sm:p-3", selected.has(m.id) && "border-accent ring-2 ring-accent/20")}>
