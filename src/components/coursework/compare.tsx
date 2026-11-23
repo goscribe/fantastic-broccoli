@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowDown, ArrowRight, ArrowUp, Minus } from "lucide-react";
 import { Sheet } from "@/components/notes-app/sheet";
 import { courseworkApi, type GradeResult, type Review } from "@/lib/api/coursework";
-import { compareDrafts, comparisonHeadline, predictionSpoken, type Movement } from "@/lib/coursework";
+import { compareDrafts, comparisonHeadline, formatBand, predictionSpoken, type Movement } from "@/lib/coursework";
 import { cn } from "@/lib/utils";
 import { BandNumber, BandTrack } from "./band-track";
 import { useCw } from "./use-cw";
@@ -56,7 +56,7 @@ export function DraftComparisonView({ before, after, fromDraft, toDraft }: { bef
                 <>
                   <span className="text-small font-bold text-muted-foreground">{t("cw.cmp.was", { n: fromDraft })}</span>
                   <BandTrack low={r.from.low} high={r.from.high} mark={r.from.mark} max={r.maxMarks} faint />
-                  <span className="text-right text-small font-bold tabular-nums text-muted-foreground">{r.from.mark}</span>
+                  <span className="text-right text-small font-bold tabular-nums text-muted-foreground">{r.from.mark ?? formatBand(r.from.low, r.from.high)}</span>
                 </>
               )}
               <span className="text-small font-extrabold text-foreground">{t("cw.cmp.was", { n: toDraft })}</span>

@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { ArrowUp, Check } from "lucide-react";
 import { COURSEWORK_CHAT_LIMIT_PREFIX, courseworkApi, type ChatTurn, type GradeResult, type RubricDetail, type RubricSummary } from "@/lib/api/coursework";
-import { criterionFor, criterionMark, criterionNext, hasMarks, rubricLine } from "@/lib/coursework";
+import { criterionFor, criterionMark, criterionNext, criterionPoint, hasMarks, rubricLine } from "@/lib/coursework";
 import { cn } from "@/lib/utils";
 import { BandNumber, BandTrack } from "./band-track";
 import { useCw } from "./use-cw";
@@ -286,7 +286,7 @@ export function ChatView({ chat, result, hideMarks }: { chat: ChatState & { ask:
   }, [count, chat.busy]);
   const marked = hasMarks(result) && !hideMarks;
   // The weakest criterion is the obvious thing to ask about.
-  const weakest = result ? [...result.criteria].sort((a, b) => ("bandHigh" in a && "bandHigh" in b ? criterionMark(a) / a.maxMarks - criterionMark(b) / b.maxMarks : 0))[0] : null;
+  const weakest = result ? [...result.criteria].sort((a, b) => ("bandHigh" in a && "bandHigh" in b ? criterionPoint(a) / a.maxMarks - criterionPoint(b) / b.maxMarks : 0))[0] : null;
   const starters = [t("cw.chat.s1"), ...(weakest ? [t(marked ? "cw.chat.s2" : "cw.chat.s2Feedback", { name: weakest.name })] : []), t("cw.chat.s3")];
   return (
     <div className="flex flex-col gap-4">
