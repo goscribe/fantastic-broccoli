@@ -90,6 +90,29 @@ export function makeAnchor(sectionId: string, text: string, start: number, end: 
   };
 }
 
+/**
+ * Where the highlighter toolbar goes for a selection (or a tapped highlight)
+ * whose box on screen is `rect`, or null when it should not be shown: the
+ * selection has no box (nothing is selected, or what was selected is not
+ * drawn), or it is off the screen, where a toolbar pinned to the screen's edge
+ * would float over unrelated parts of the note. Above the words with a mouse;
+ * under them on touch, clear of the system's own selection menu.
+ */
+export function highlightBarPlace(
+  rect: { top: number; bottom: number; left: number; width: number; height: number },
+  viewport: { width: number; height: number },
+  touch: boolean,
+): { x: number; y: number; below: boolean } | null {
+  if (rect.width <= 0 && rect.height <= 0) return null;
+  if (rect.bottom <= 0 || rect.top >= viewport.height) return null;
+  const below = touch || rect.top < 130;
+  return {
+    x: Math.max(110, Math.min(rect.left + rect.width / 2, viewport.width - 110)),
+    y: below ? Math.min(rect.bottom + (touch ? 48 : 10), viewport.height - 130) : rect.top - 10,
+    below,
+  };
+}
+
 function commonSuffix(a: string, b: string): number {
   let n = 0;
   while (n < a.length && n < b.length && a[a.length - 1 - n] === b[b.length - 1 - n]) n += 1;

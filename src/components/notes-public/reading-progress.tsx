@@ -3,6 +3,7 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { Check, ChevronDown, Layers, PencilLine } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { REVEAL_SCOPE, revealOnStart, revealOnStop } from "@/lib/notes-public/reveal";
 import { getReading, recordSectionRead, setCurrentSection, useCurrentSection, useReading } from "./reading-store";
 
 /**
@@ -58,27 +59,6 @@ export function ReadingTracker({ topicKey, sectionIds, anchors }: { topicKey: st
       );
       document.querySelectorAll(".nl-secend").forEach((el) => ends.observe(el));
       observers.push(ends);
-
-      // Reveal on scroll, for what is below the fold right now.
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!reduce) {
-        const reveal = new IntersectionObserver(
-          (entries) => {
-            for (const e of entries) {
-              if (!e.isIntersecting) continue;
-              (e.target as HTMLElement).dataset.nlReveal = "in";
-              reveal.unobserve(e.target);
-            }
-          },
-          { rootMargin: "0px 0px -8% 0px" },
-        );
-        document.querySelectorAll<HTMLElement>("[data-nl-reveal]").forEach((el) => {
-          if (el.dataset.nlReveal !== "" || el.getBoundingClientRect().top < window.innerHeight) return;
-          el.dataset.nlReveal = "wait";
-          reveal.observe(el);
-        });
-        observers.push(reveal);
-      }
     }
 
     let frame = 0;
@@ -112,6 +92,46 @@ export function ReadingTracker({ topicKey, sectionIds, anchors }: { topicKey: st
       setCurrentSection(null);
     };
   }, [topicKey, idsKey, anchorsKey]);
+
+  /*
+   * Reveal on scroll, for what is below the fold right now. Its own effect:
+   * it used to share the one above, which runs again whenever the contents
+   * list changes (in the app the flashcards entry arrives after the note), and
+   * that second run dropped the observer while everything it had hidden was
+   * still waiting, so the rest of the note stayed blank for good. Now an
+   * observer that stops un-hides what it was holding, a new one takes over
+   * anything still waiting, and the stylesheet only hides under REVEAL_SCOPE,
+   * which exists exactly as long as an observer does.
+   */
+  useEffect(() => {
+    if (typeof IntersectionObserver === "undefined" || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const root = document.documentElement;
+    const marked = () => document.querySelectorAll<HTMLElement>("[data-nl-reveal]");
+    const reveal = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          (e.target as HTMLElement).dataset.nlReveal = "in";
+          reveal.unobserve(e.target);
+        }
+      },
+      { rootMargin: "0px 0px -8% 0px" },
+    );
+    root.setAttribute(REVEAL_SCOPE, "");
+    marked().forEach((el) => {
+      const next = revealOnStart(el.dataset.nlReveal, el.getBoundingClientRect().top, window.innerHeight);
+      if (el.dataset.nlReveal !== next.state) el.dataset.nlReveal = next.state;
+      if (next.observe) reveal.observe(el);
+    });
+    return () => {
+      reveal.disconnect();
+      root.removeAttribute(REVEAL_SCOPE);
+      marked().forEach((el) => {
+        const next = revealOnStop(el.dataset.nlReveal);
+        if (el.dataset.nlReveal !== next) el.dataset.nlReveal = next;
+      });
+    };
+  }, [topicKey, idsKey]);
   return (
     <div className="nl-topbar lg:hidden" aria-hidden="true">
       <span />

@@ -19,6 +19,8 @@ import { SubjectBand, SubjectTile } from "@/components/learn/subject-tile";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 import "@/lib/i18n/notes";
+import { MAX_SELECTED_TOPICS, groupState, pickSummary, toggleGroup, toggleTopic } from "@/lib/topic-select";
+import { buttonClass } from "@/components/ui/button";
 
 // One fetch per page load: the catalog is static between deploys.
 let listCache: Promise<CourseSummary[]> | null = null;
@@ -55,6 +57,7 @@ function loadAllCourses(list: CourseSummary[]): Promise<Course[]> {
 }
 
 type Step = "course" | "level" | "unit" | "topic";
+const NO_TOPICS: ReadonlySet<string> = new Set();
 
 const row =
   "flex min-h-[52px] w-full items-center gap-3 rounded-xl border border-border bg-card px-3.5 py-2.5 text-left transition-colors hover:border-border-strong";
@@ -67,15 +70,30 @@ const levelFor = (course: Course, topic: CatalogTopic): CourseLevel | undefined 
  * → topic. A topic row starts straight away. Boards are ordered for where
  * the student is (US: AP first; UK: GCSE and A-level first; else IB).
  * Course, unit and topic names are the catalog's (English).
+ *
+ * With `onStartTopics` several units can be picked: each unit row has a tick
+ * box for the whole unit, and its topics can be ticked one by one once it is
+ * opened (the unit then shows a dash). The picks survive going back and forth
+ * between units, and a bar at the bottom starts one session over all of them.
+ * Without it (or with nothing picked) a topic row starts that topic as before.
  */
 export function CoursePicker({
   onStart,
+  onStartTopics,
+  startingTopics = false,
   onFreeTopic,
   busyTopicId,
   enrolledCourseIds,
   unitTop,
 }: {
   onStart: (course: Course, topic: CatalogTopic, level?: CourseLevel) => void;
+  /**
+   * Turns on picking several units and topics: called with the picked topics in syllabus order (at most
+   * MAX_SELECTED_TOPICS, what one session takes). Leave it out where only a single topic can be started.
+   */
+  onStartTopics?: (course: Course, topics: CatalogTopic[], level?: CourseLevel) => void;
+  /** The session over the picked topics is being started. */
+  startingTopics?: boolean;
   /** Typed text that matches nothing in the catalog: start on it anyway (first run, new subject). */
   onFreeTopic?: (text: string) => void;
   /** Shown above the unit list once a course (and level) is chosen: first run offers Scribe's notes there. */
@@ -94,6 +112,9 @@ export function CoursePicker({
   const [unit, setUnit] = useState<CatalogUnit | null>(null);
   const [step, setStep] = useState<Step>("course");
   const [query, setQuery] = useState("");
+  // Topics picked across the chosen course's units; `selectMode` is "Select" pressed on a unit's topic list.
+  const [picked, setPicked] = useState<ReadonlySet<string>>(NO_TOPICS);
+  const [selectMode, setSelectMode] = useState(false);
   // The browser's region applies once the list has loaded (the server render has no browser).
   const [order, setOrder] = useState(BOARD_ORDER);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -119,6 +140,23 @@ export function CoursePicker({
   const results = useMemo(() => (courses && query.trim() ? searchCatalog(query, courses, full ?? [], order) : null), [courses, full, query, order]);
   const freeText = cleanTopic(query);
 
+  const multi = !!onStartTopics;
+  const units = useMemo(() => (course ? unitsForLevel(course, level) : []), [course, level]);
+  // Picks for topics the chosen level does not list do not count.
+  const sum = useMemo(() => pickSummary(units, picked), [units, picked]);
+  const selecting = multi && (selectMode || sum.ids.length > 0);
+  const clearPicked = () => {
+    setPicked(NO_TOPICS);
+    setSelectMode(false);
+  };
+  const startPicked = () => {
+    if (!course || !onStartTopics || sum.startIds.length === 0) return;
+    const byId = new Map(units.flatMap((u) => u.topics).map((x) => [x.id, x]));
+    onStartTopics(course, sum.startIds.map((id) => byId.get(id)!), level);
+  };
+  // "2 units" stays on one line, so a narrow bar never leaves a lone word on its second line.
+  const count = (one: string, many: string, n: number) => (n === 1 ? t(one) : t(many).replace("{count}", String(n))).replace(/ /g, "\u00a0");
+
   const chooseCourse = (id: string) => {
     setLoadingCourse(id);
     setFailed(false);
@@ -126,6 +164,7 @@ export function CoursePicker({
       .then((c) => {
         setCourse(c);
         setUnit(null);
+        clearPicked();
         setStep(c.levels?.length && !level ? "level" : "unit");
       })
       .catch(() => setFailed(true))
@@ -167,7 +206,7 @@ export function CoursePicker({
   );
 
   return (
-    <div className="w-full">
+    <div className="w-full" onKeyDown={(e) => e.key === "Escape" && selecting && step !== "course" && !startingTopics && clearPicked()}>
       {step === "course" ? (
         <div>
           <label htmlFor="course-search" className="sr-only">
@@ -203,7 +242,7 @@ export function CoursePicker({
           >
             <ArrowLeft className="size-4" />
           </button>
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <h2 className="text-[18px] font-extrabold leading-tight">{heading}</h2>
             {crumbs.length > 0 && (
               <p className="truncate text-[12.5px] text-faint">
@@ -212,6 +251,17 @@ export function CoursePicker({
               </p>
             )}
           </div>
+          {/* A phone has no hover to show a topic's tick box: "Select" does (a held touch works too). */}
+          {multi && step === "topic" && sum.ids.length === 0 && (
+            <button
+              type="button"
+              onClick={() => setSelectMode((on) => !on)}
+              disabled={startingTopics}
+              className="shrink-0 self-start py-1 text-small font-semibold text-muted-foreground hover:text-foreground disabled:opacity-60"
+            >
+              {t(selectMode ? "course.selectCancel" : "course.select")}
+            </button>
+          )}
         </div>
       )}
 
@@ -311,6 +361,7 @@ export function CoursePicker({
               key={l}
               type="button"
               onClick={() => {
+                if (l !== level) clearPicked();
                 setLevel(l);
                 setStep("unit");
               }}
@@ -327,24 +378,54 @@ export function CoursePicker({
 
       {step === "unit" && course && (
         <ul className="mt-3 flex flex-col gap-1.5">
-          {unitsForLevel(course, level).map((u) => (
-            <li key={u.id}>
-              <button
-                type="button"
-                onClick={() => {
-                  setUnit(u);
-                  setStep("topic");
-                }}
-                className={row}
-              >
-                <span className="min-w-0 flex-1">
-                  <span className="block text-[14px] font-semibold leading-snug">{unitTitle(course, u)}</span>
-                  <span className="block text-[12.5px] text-faint">{t("course.topicCount").replace("{count}", String(u.topics.length))}</span>
-                </span>
-                <ChevronRight className="size-4 shrink-0 text-faint" />
-              </button>
-            </li>
-          ))}
+          {units.map((u) => {
+            const ids = u.topics.map((x) => x.id);
+            const state = multi ? groupState(ids, picked) : "none";
+            const n = ids.filter((id) => picked.has(id)).length;
+            return (
+              <li key={u.id}>
+                <div
+                  className={cn(
+                    "flex items-stretch rounded-xl border border-border bg-card transition-colors hover:border-border-strong",
+                    state !== "none" && "border-border-strong bg-muted",
+                  )}
+                >
+                  {multi && (
+                    <button
+                      type="button"
+                      role="checkbox"
+                      aria-checked={state === "all" ? true : state === "some" ? "mixed" : false}
+                      aria-label={t("course.selectUnit").replace("{unit}", unitTitle(course, u))}
+                      onClick={() => setPicked(toggleGroup(picked, ids, Infinity).next)}
+                      disabled={startingTopics}
+                      className="group/tick grid w-11 shrink-0 place-items-center rounded-l-xl outline-none"
+                    >
+                      <TickBox state={state} />
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setUnit(u);
+                      setSelectMode(false);
+                      setStep("topic");
+                    }}
+                    className={cn("flex min-h-[52px] min-w-0 flex-1 items-center gap-3 rounded-xl py-2.5 pr-3.5 text-left", multi ? "pl-1" : "pl-3.5")}
+                  >
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-ui font-semibold leading-snug">{unitTitle(course, u)}</span>
+                      <span className="block text-caption text-faint">
+                        {state === "some"
+                          ? t("course.pickedInUnit").replace("{picked}", String(n)).replace("{count}", String(ids.length))
+                          : t("course.topicCount").replace("{count}", String(ids.length))}
+                      </span>
+                    </span>
+                    <ChevronRight className="size-4 shrink-0 text-faint" />
+                  </button>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       )}
 
@@ -352,7 +433,17 @@ export function CoursePicker({
         <ul className="mt-3 flex flex-col gap-1.5">
           {unit.topics.map((topic) => (
             <li key={topic.id}>
-              <TopicRow topic={topic} onStart={() => onStart(course, topic, level)} busy={busyTopicId === topic.id} disabled={!!busyTopicId} />
+              <TopicRow
+                topic={topic}
+                onStart={() => onStart(course, topic, level)}
+                busy={busyTopicId === topic.id}
+                disabled={!!busyTopicId || startingTopics}
+                select={
+                  multi
+                    ? { selecting, checked: picked.has(topic.id), onToggle: () => !startingTopics && setPicked(toggleTopic(picked, topic.id, Infinity).next) }
+                    : undefined
+                }
+              />
             </li>
           ))}
         </ul>
@@ -363,6 +454,31 @@ export function CoursePicker({
           {t("course.sourceNote")}
           {course.numberingNote ? ` ${course.numberingNote}` : ""}
         </p>
+      )}
+
+      {multi && course && (step === "unit" || step === "topic") && sum.ids.length > 0 && (
+        <div className="sticky bottom-3 z-20 mt-4 sm:bottom-4">
+          <div className="rounded-2xl border border-border bg-card py-2 pl-4 pr-2 shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
+            <div className="flex items-center gap-1.5">
+              <p aria-live="polite" className="min-w-0 flex-1 text-ui font-semibold leading-tight">
+                {t("course.pickedFrom")
+                  .replace("{topics}", count("course.pickedTopicsOne", "course.pickedTopicsMany", sum.ids.length))
+                  .replace("{units}", count("course.pickedUnitsOne", "course.pickedUnitsMany", sum.unitCount))}
+              </p>
+              <button type="button" onClick={clearPicked} disabled={startingTopics} className={buttonClass({ variant: "ghost", size: "sm" })}>
+                {t("course.selectClear")}
+              </button>
+              <button type="button" onClick={startPicked} disabled={startingTopics || !!busyTopicId} className={buttonClass({ size: "sm", className: "min-w-[116px]" })}>
+                {startingTopics ? <Loader2 className="size-4 animate-spin" /> : t("course.selectStart")}
+              </button>
+            </div>
+            {sum.over && (
+              <p role="status" className="pb-1 pr-2 pt-1.5 text-caption text-muted-foreground">
+                {t("course.pickedOver").replaceAll("{max}", String(MAX_SELECTED_TOPICS))}
+              </p>
+            )}
+          </div>
+        </div>
       )}
     </div>
   );

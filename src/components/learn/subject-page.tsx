@@ -644,7 +644,7 @@ function CatNudge({
   onClear: () => void;
 }) {
   return (
-    <div className="pointer-events-none fixed bottom-5 right-5 z-30 flex items-end gap-2 max-md:bottom-[calc(4.75rem+env(safe-area-inset-bottom))] animate-in fade-in slide-in-from-bottom-4 duration-300 sm:bottom-6 sm:right-6">
+    <div className="pointer-events-none fixed bottom-5 right-5 z-30 flex items-end gap-2 max-md:bottom-[calc(4.75rem+env(safe-area-inset-bottom))] sm:bottom-6 sm:right-6">
       <div className="pointer-events-auto relative max-w-[260px] rounded-2xl border border-border bg-white px-4 py-3 text-small shadow-[0_12px_32px_-16px_rgba(0,0,0,0.25)]">
         {`${count} file${count === 1 ? "" : "s"} picked — ready when you are.`}
         <div className="mt-2.5 flex flex-wrap gap-1.5">

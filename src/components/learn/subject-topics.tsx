@@ -19,12 +19,12 @@ import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { Skeleton } from "@/components/ui/skeleton";
 import { loadCourse, TickBox, TopicRow } from "@/components/courses/course-picker";
-import { useStartCourseTopic } from "@/components/courses/use-start-topic";
+import { startPickedTopics, useStartCourseTopic } from "@/components/courses/use-start-topic";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 import type { Material } from "@/types";
 import { chooseStudyLength } from "@/lib/study-length-client";
-import { MAX_SELECTED_TOPICS, groupState, mixedSessionMinutes, selectedInOrder, toggleGroup, toggleTopic, type SelectChange } from "@/lib/topic-select";
+import { MAX_SELECTED_TOPICS, groupState, selectedInOrder, toggleGroup, toggleTopic, type SelectChange } from "@/lib/topic-select";
 import { buttonClass } from "@/components/ui/button";
 
 export type SubjectCourse =
@@ -243,15 +243,7 @@ export function SubjectTopics({
     startingRef.current = true;
     setStartingPicked(true);
     try {
-      const usual = { depth: "moderate" as const, durationMinutes: mixedSessionMinutes(pickedIds.length), quickStart: false };
-      // A learner's first sessions are asked how long; an answer is passed on, otherwise the server sets the length.
-      const chosen = pickedIds.length > 1 ? await chooseStudyLength(usual) : usual;
-      const started = await coursesApi.startTopics({
-        courseId: ready.course.id,
-        topicIds: pickedIds,
-        ...(ready.level ? { level: ready.level } : {}),
-        ...(chosen !== usual ? { durationMinutes: chosen.durationMinutes } : {}),
-      });
+      const started = await startPickedTopics({ courseId: ready.course.id, topicIds: pickedIds, level: ready.level });
       clearPicked();
       emitTreeChanged();
       router.push(`/workspace/${started.workspaceId}/session/${started.sessionId}`);
