@@ -58,18 +58,18 @@
   .nl-band a:focus-visible, .nl-band button:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
   /* Phones: the illustration sits in the top-right corner, where the title leaves it room. */
   @media (max-width: 639px) {
-    .nl-band .subject-tile__art { top: 12px; bottom: auto; right: -8px; height: 104px; opacity: 1; }
+    .nl-band .subject-tile__art { top: 10px; bottom: auto; right: -6px; height: 76px; opacity: 1; }
   }
   @media (min-width: 640px) {
-    .nl-band .subject-tile__art { right: -1%; bottom: -12%; height: min(112%, 300px); }
+    .nl-band .subject-tile__art { right: -1%; bottom: -12%; height: min(112%, 240px); }
   }
 
   /* The notes home header: the shared time-of-day landscape (.hero-card / .hero-field in tokens.css) behind the headline; a band on phones. */
   .nl-hero { isolation: isolate; border: 1px solid var(--border); border-radius: var(--r-panel); }
-  /* Its buttons keep their own white fill after dark, so their label stays dark. */
-  .nl-hero .nl-btn-ghost { background: #fff; color: #16161a; }
-  .nl-hero .nl-btn-ghost:hover { background: #f4f4f6; }
-  .nl-hero__field { position: absolute; z-index: -1; inset: 0 0 auto 0; height: 150px; overflow: hidden; pointer-events: none; user-select: none; }
+  /* Its buttons sit on the solid copy card: a quiet grey fill that stays light after dark, so their label stays dark. */
+  .nl-hero .nl-btn-ghost { background: #f4f4f6; color: #16161a; border-color: transparent; }
+  .nl-hero .nl-btn-ghost:hover { background: #e8e8ec; }
+  .nl-hero__field { position: absolute; z-index: -1; inset: 0 0 auto 0; height: var(--banner-band); overflow: hidden; pointer-events: none; user-select: none; }
   @media (min-width: 640px) {
     .nl-hero__field { inset: 0; height: auto; }
   }
@@ -116,11 +116,18 @@
     .nl-lift:hover { border-color: var(--border-strong); }
   }
 
-  /* ---------- Entrance: the header eases up on load (CSS only, opacity/transform only) ---------- */
+  /*
+   * ---------- Entrance: the header settles into place on load ----------
+   * Transform only, and nothing is held back before it starts (`forwards`, not
+   * `both`): the header's words and the cat are painted in full from the first
+   * frame, whether or not the animation ever runs.
+   */
+  @keyframes nl-settle { from { transform: translateY(8px); } to { transform: translateY(0); } }
+  .nl-rise { animation: nl-settle 0.4s var(--ease-out) forwards; }
+  @keyframes nl-cat-in { 0% { transform: translateY(14px) rotate(6deg) scale(0.94); } 100% { transform: none; } }
+  .nl-cat-in { animation: nl-cat-in 0.6s var(--ease-spring) forwards; transform-origin: 50% 100%; }
+  /* Scroll reveals (below) still fade: they start from a script-set "wait" state, never from the stylesheet alone. */
   @keyframes nl-rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
-  .nl-rise { animation: nl-rise 0.5s var(--ease-out) both; animation-delay: calc(var(--i, 0) * 70ms); }
-  @keyframes nl-cat-in { 0% { opacity: 0; transform: translateY(18px) rotate(6deg) scale(0.9); } 100% { opacity: 1; transform: none; } }
-  .nl-cat-in { animation: nl-cat-in 0.7s var(--ease-spring) 0.12s both; transform-origin: 50% 100%; }
   @keyframes nl-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
   .nl-bob { animation: nl-bob 3.4s ease-in-out infinite; }
 

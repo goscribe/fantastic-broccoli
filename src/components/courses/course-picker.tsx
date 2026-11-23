@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ChevronRight, Loader2, Lock } from "lucide-react";
+import { ArrowLeft, Check, ChevronRight, Loader2, Lock, Minus } from "lucide-react";
 import {
   coursesApi,
   type CatalogTopic,
@@ -369,10 +369,91 @@ export function CoursePicker({
 }
 
 /**
+ * The tick box of the topic list: empty, a dash (part of a unit picked) or ticked. Neutral, so the one purple thing
+ * stays the start button. Its button carries `group/tick outline-none`, so the focus ring is drawn here.
+ */
+export function TickBox({ state }: { state: "none" | "some" | "all" }) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn(
+        "grid size-[18px] place-items-center rounded-[6px] border transition-colors",
+        // Keyboard focus rings the box itself (the app's focus colour), not its larger touch target.
+        "group-focus-visible/tick:outline-2 group-focus-visible/tick:outline-offset-2 group-focus-visible/tick:outline-[color-mix(in_srgb,var(--accent)_45%,transparent)]",
+        state === "none" ? "border-border-strong bg-card" : "border-foreground bg-foreground text-background",
+      )}
+    >
+      {state === "all" && <Check className="size-3" strokeWidth={3.5} />}
+      {state === "some" && <Minus className="size-3" strokeWidth={3.5} />}
+    </span>
+  );
+}
+
+/** Multi-select on a topic row (the subject page's list). */
+export interface TopicRowSelect {
+  /** Topics are being picked: the whole row ticks, and Start and Notes step aside. */
+  selecting: boolean;
+  checked: boolean;
+  onToggle: () => void;
+}
+
+const LONG_PRESS_MS = 450;
+
+/**
+ * A touch held on a row for a moment calls `onLongPress` (a phone's way into
+ * picking several). Moving the finger (a scroll) cancels it, and the tap that
+ * ends the hold is swallowed so it does not also start the topic.
+ */
+function useLongPress(onLongPress: (() => void) | undefined) {
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const from = useRef<{ x: number; y: number } | null>(null);
+  const firedAt = useRef(0);
+  const cancel = () => {
+    if (timer.current) clearTimeout(timer.current);
+    timer.current = null;
+  };
+  useEffect(() => cancel, []);
+  const justFired = () => Date.now() - firedAt.current < 800;
+  return {
+    onPointerDown: (e: React.PointerEvent) => {
+      if (!onLongPress || e.pointerType === "mouse") return;
+      from.current = { x: e.clientX, y: e.clientY };
+      cancel();
+      timer.current = setTimeout(() => {
+        timer.current = null;
+        firedAt.current = Date.now();
+        onLongPress();
+      }, LONG_PRESS_MS);
+    },
+    onPointerMove: (e: React.PointerEvent) => {
+      if (timer.current && from.current && Math.hypot(e.clientX - from.current.x, e.clientY - from.current.y) > 8) cancel();
+    },
+    onPointerUp: cancel,
+    onPointerCancel: cancel,
+    onPointerLeave: cancel,
+    onClickCapture: (e: React.MouseEvent) => {
+      if (!justFired()) return;
+      firedAt.current = 0;
+      e.preventDefault();
+      e.stopPropagation();
+    },
+    onContextMenu: (e: React.MouseEvent) => {
+      // A held touch also asks for the browser's menu; the hold already did its job.
+      if (timer.current || justFired()) e.preventDefault();
+    },
+  };
+}
+
+/**
  * A topic: code + name, and the row itself starts it (5 questions). No
  * accordion: the objectives were a second tap between the student and the
  * question. Progress, the student's matching files and a link to Scribe's
  * note show when there are some.
+ *
+ * With `select` the row can be picked with others: a tick box takes the
+ * code's place when the row is hovered or reached by keyboard (Space ticks
+ * it), and a held touch ticks it on a phone. While topics are being picked
+ * the whole row ticks and Start and Notes are hidden.
  */
 export function TopicRow({
   topic,
@@ -383,6 +464,7 @@ export function TopicRow({
   notesHref,
   context,
   files,
+  select,
 }: {
   topic: CatalogTopic;
   onStart: () => void;
@@ -395,39 +477,81 @@ export function TopicRow({
   context?: string;
   /** The student's own files on this topic. */
   files?: string[];
+  select?: TopicRowSelect;
 }) {
   const { t } = useI18n();
   const pct = masteryPercent(progress?.mastery);
   const flag = topic.hlOnly ? "course.hlOnly" : topic.bcOnly ? "course.bcOnly" : topic.higherTierOnly ? "course.higherTier" : null;
   const sub = [context, flag ? t(flag) : null, progress?.done ? t("course.done") : null, pct !== null ? `${pct}%` : null].filter(Boolean).join(" · ");
-  return (
-    <div className="flex items-stretch gap-2 rounded-2xl border border-border bg-card transition-colors hover:border-border-strong">
-      <button
-        type="button"
-        onClick={onStart}
-        disabled={disabled}
-        aria-label={`${t("course.start")}: ${topic.code} ${topic.name}`}
-        className="flex min-h-[52px] min-w-0 flex-1 items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left disabled:opacity-70"
-      >
-        <span className="w-[52px] shrink-0 text-caption font-semibold tabular-nums text-faint">{topic.code}</span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-ui font-semibold">{topic.name}</span>
-          {sub && <span className="block truncate text-[12px] text-faint">{sub}</span>}
-          {files && files.length > 0 && (
-            <span className="block truncate text-[12px] text-muted-foreground">{t("course.files").replace("{names}", files.join(", "))}</span>
-          )}
-        </span>
-        {topic.locked && (
-          <span className="shrink-0 text-faint" title={t("course.lockedTopic")}>
-            <Lock className="size-3.5" aria-hidden="true" />
-            <span className="sr-only">{t("course.lockedTopic")}</span>
-          </span>
+  const selecting = !!select?.selecting;
+  const hold = useLongPress(select && !selecting && !disabled ? select.onToggle : undefined);
+  const body = (
+    <>
+      <span
+        className={cn(
+          "w-[52px] shrink-0 text-caption font-semibold tabular-nums text-faint",
+          select && (selecting ? "opacity-0" : "group-hover/topic:opacity-0 group-has-[[data-tick]:focus-visible]/topic:opacity-0"),
         )}
-        <span className="inline-flex h-8 shrink-0 items-center rounded-[10px] border border-border px-3 text-[13px] font-bold text-foreground">
-          {busy ? <Loader2 className="size-4 animate-spin" /> : t("course.start")}
+      >
+        {topic.code}
+      </span>
+      <span className="min-w-0 flex-1">
+        <span className="block text-ui font-semibold">{topic.name}</span>
+        {sub && <span className="block truncate text-[12px] text-faint">{sub}</span>}
+        {files && files.length > 0 && (
+          <span className="block truncate text-[12px] text-muted-foreground">{t("course.files").replace("{names}", files.join(", "))}</span>
+        )}
+      </span>
+      {topic.locked && (
+        <span className="shrink-0 text-faint" title={t("course.lockedTopic")}>
+          <Lock className="size-3.5" aria-hidden="true" />
+          <span className="sr-only">{t("course.lockedTopic")}</span>
         </span>
-      </button>
-      {notesHref && (
+      )}
+    </>
+  );
+  const main = "flex min-h-[52px] min-w-0 flex-1 items-center gap-3 rounded-2xl px-3.5 py-2.5 text-left";
+  return (
+    <div
+      {...(select ? hold : {})}
+      className={cn(
+        "group/topic relative flex items-stretch gap-2 rounded-2xl border border-border bg-card transition-colors hover:border-border-strong",
+        select && "select-none [-webkit-touch-callout:none]",
+        select?.checked && "border-border-strong bg-muted",
+      )}
+    >
+      {select && (
+        <button
+          type="button"
+          data-tick=""
+          role="checkbox"
+          aria-checked={select.checked}
+          aria-label={selecting ? `${topic.code} ${topic.name}` : t("course.selectTopic").replace("{topic}", `${topic.code} ${topic.name}`)}
+          onClick={select.onToggle}
+          disabled={!selecting && disabled}
+          className={cn(
+            "group/tick absolute inset-y-0 left-0 z-10 grid w-11 place-items-center rounded-l-2xl outline-none",
+            !selecting &&
+              "pointer-events-none opacity-0 focus-visible:pointer-events-auto focus-visible:opacity-100 group-hover/topic:opacity-100 [@media(hover:hover)]:pointer-events-auto",
+          )}
+        >
+          <TickBox state={select.checked ? "all" : "none"} />
+        </button>
+      )}
+      {selecting ? (
+        // The tick box is the control; the rest of the row is its larger target.
+        <div onClick={select?.onToggle} className={cn(main, "cursor-pointer")}>
+          {body}
+        </div>
+      ) : (
+        <button type="button" onClick={onStart} disabled={disabled} aria-label={`${t("course.start")}: ${topic.code} ${topic.name}`} className={cn(main, "disabled:opacity-70")}>
+          {body}
+          <span className="inline-flex h-8 shrink-0 items-center rounded-[10px] border border-border px-3 text-[13px] font-bold text-foreground">
+            {busy ? <Loader2 className="size-4 animate-spin" /> : t("course.start")}
+          </span>
+        </button>
+      )}
+      {notesHref && !selecting && (
         <Link href={notesHref} className="flex shrink-0 items-center pr-3.5 text-[13px] font-semibold text-accent hover:underline">
           {t("course.notes")}
         </Link>

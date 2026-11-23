@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 /** A small window onto the hero's landscape with the cat standing in it. Decorative. */
 export function Scene({ pose = "wave", className }: { pose?: CatPose; className?: string }) {
   return (
-    <div aria-hidden className={cn("landing-scene hero-card relative isolate h-52 overflow-hidden rounded-[var(--r-panel)] border border-border sm:h-60", className)}>
+    <div aria-hidden className={cn("landing-scene hero-card relative isolate h-[var(--banner-min)] overflow-hidden rounded-[var(--r-panel)] border border-border", className)}>
       <div className="hero-field absolute inset-0 -z-10">
         <div className="absolute bottom-[12%] left-1/2 h-[62%] -translate-x-1/2">
           <span className="hero-field__ground" />

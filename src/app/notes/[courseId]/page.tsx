@@ -63,22 +63,22 @@ export default async function CourseNotesPage({ params }: Params) {
       <Breadcrumbs crumbs={crumbsFor.course(course)} />
       {/* The header band is the course's subject colour with its illustration; everything under it stays white. */}
       <header
-        className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-9 sm:pb-9 sm:pt-8 sm:pr-[250px]"
+        className="subject-band nl-band mt-4 px-[var(--band-pad-x)] py-[var(--band-pad-y)] sm:pr-[220px]"
         style={familyVars(familyFor(`${course.subject} ${course.title}`)) as React.CSSProperties}
         data-nl-course={course.id}
         data-total={topicCount}
       >
         <SubjectArt family={familyFor(`${course.subject} ${course.title}`)} eager />
-        <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
+        <p className="nl-rise flex min-h-[56px] items-center pr-[76px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
           <span>
             <span className="font-extrabold text-white">{course.boardName}</span> · {course.qualification}
             {course.levels?.length ? ` · ${course.levels.join(" and ")}` : ""}
           </span>
         </p>
-        <h1 className="nl-rise mt-2 text-[32px] font-black leading-[1.05] sm:text-[44px]" style={{ "--i": 1 } as React.CSSProperties}>
+        <h1 className="nl-rise mt-1.5 text-[28px] font-black leading-[1.06] sm:text-[36px]" style={{ "--i": 1 } as React.CSSProperties}>
           {empty ? `${course.title} topics` : `${course.title} notes and practice questions`}
         </h1>
-        <p className="nl-rise mt-3 max-w-[560px] text-read font-semibold text-white/90" style={{ "--i": 2 } as React.CSSProperties}>
+        <p className="nl-rise mt-2 max-w-[560px] text-ui font-semibold text-white/90 sm:text-read" style={{ "--i": 2 } as React.CSSProperties}>
           {topicCount} topics in {course.units.length} units
           {n.notes ? ` · ${n.notes.toLocaleString("en-GB")} topic notes` : ""}
           {n.questions ? ` · ${n.questions.toLocaleString("en-GB")} exam-style questions with worked answers` : ""}.

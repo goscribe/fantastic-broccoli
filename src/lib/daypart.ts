@@ -21,5 +21,13 @@ export function daypartForHour(hour: number): Daypart {
 
 export const DAYPART_ATTR = "data-daypart";
 
-/** Runs in <head> before paint. Keep the hours in step with daypartForHour. */
-export const daypartInitScript = `(function(){try{var h=new Date().getHours();document.documentElement.setAttribute("${DAYPART_ATTR}",h<5?"late":h<12?"morning":h<17?"afternoon":h<21?"evening":"night");}catch(e){}})();`;
+/**
+ * Runs in <head> before paint. Keep the hours in step with daypartForHour.
+ *
+ * It also preloads the one scene file that hour needs (7–21 KB; the same URL
+ * tokens.css picks: 800px under 640px wide, 1600px from there up). The scene
+ * is a CSS background, which the browser otherwise only finds once the
+ * stylesheets are in, so a banner used to show a flat sky first and the
+ * picture a moment later.
+ */
+export const daypartInitScript = `(function(){try{var h=new Date().getHours(),p=h<5?"late":h<12?"morning":h<17?"afternoon":h<21?"evening":"night";document.documentElement.setAttribute("${DAYPART_ATTR}",p);var l=document.createElement("link");l.rel="preload";l.as="image";l.href="/design/hero/"+p+"-"+(window.matchMedia&&matchMedia("(min-width: 640px)").matches?"1600":"800")+".webp";document.head.appendChild(l);}catch(e){}})();`;

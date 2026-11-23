@@ -64,11 +64,112 @@ export function bandSpan(low: number, high: number, max: number): { start: numbe
 }
 
 export interface OverallLike {
+  /** The predicted total (absent from servers before the estimate). */
+  marksEstimate?: number;
+  /** The narrow likely range around it (the band sums on servers before the estimate). */
   marksLow: number;
   marksHigh: number;
   totalMarks: number;
+  gradeEstimate?: string | null;
   gradeLow: string | null;
   gradeHigh: string | null;
+}
+
+/* ---------- The predicted total (server lib/coursework/estimate.ts) ---------- */
+
+/**
+ * A criterion's best-estimate mark: the server's `mark` inside the band, or
+ * undefined for results from before it existed (their band is shown, no mark
+ * is invented; a one-mark band is its mark). Mirrors the server's estimate.ts.
+ */
+export function criterionMark(c: { bandLow: number; bandHigh: number; mark?: number | null }): number | undefined {
+  const low = Math.min(c.bandLow, c.bandHigh);
+  const high = Math.max(c.bandLow, c.bandHigh);
+  if (typeof c.mark === "number" && Number.isFinite(c.mark)) return Math.min(high, Math.max(low, Math.round(c.mark)));
+  return low === high ? low : undefined;
+}
+
+/** Where a criterion sits for totals, drawing and comparing: its mark, or the band's exact midpoint (3–4 → 3.5). */
+export function criterionPoint(c: { bandLow: number; bandHigh: number; mark?: number | null }): number {
+  return criterionMark(c) ?? (Math.min(c.bandLow, c.bandHigh) + Math.max(c.bandLow, c.bandHigh)) / 2;
+}
+
+/** A total is rounded once, half up (15.5 → 16): rounding each band's midpoint down would put every two-mark band at its floor. */
+const roundTotal = (n: number) => Math.floor(n + 0.5);
+
+/**
+ * The likely range around a predicted total: ±1 for 24 marks or fewer, ±2
+ * above, inside 0..max and never wider than the sum of the bands. The server
+ * decides this (estimate.ts likelyRange, with its reasoning); the app only
+ * recomputes it for results from a server that predates it.
+ */
+export function likelyRange(estimate: number, totalMarks: number, span?: { low: number; high: number }): { low: number; high: number } {
+  const max = Math.max(0, totalMarks);
+  const margin = max <= 24 ? 1 : 2;
+  const floor = Math.max(0, span ? span.low : 0);
+  const ceil = Math.min(max, span ? span.high : max);
+  const at = Math.min(ceil, Math.max(floor, estimate));
+  return { low: Math.max(floor, at - margin), high: Math.min(ceil, at + margin) };
+}
+
+export interface Prediction {
+  estimate: number;
+  low: number;
+  high: number;
+  max: number;
+}
+
+/**
+ * The predicted total of a review row or result overall. With
+ * `marksEstimate` (current servers) that and the narrow range as sent; from
+ * an older server, whose `marksLow`..`marksHigh` are the band sums, their
+ * midpoint (rounded half up) and the narrow range inside them.
+ */
+export function prediction(o: { marksEstimate?: number | null; marksLow: number; marksHigh: number }, max: number): Prediction {
+  if (typeof o.marksEstimate === "number") return { estimate: o.marksEstimate, low: Math.min(o.marksLow, o.marksEstimate), high: Math.max(o.marksHigh, o.marksEstimate), max };
+  const estimate = roundTotal((o.marksLow + o.marksHigh) / 2);
+  return { estimate, ...likelyRange(estimate, max, { low: o.marksLow, high: o.marksHigh }), max };
+}
+
+/**
+ * A result as the screens read it: the overall estimate with its narrow
+ * range. Results from a server before the estimate get it from their
+ * criteria (band midpoints summed, the total rounded half up, as the server
+ * does); their criteria keep their bands with no mark, and their grades
+ * (read off the band sums) are dropped. Current results pass unchanged.
+ */
+export function withEstimate<T extends GradeResult | null | undefined>(result: T): T {
+  if (!result || result.mode !== "marked") return result;
+  const r = result as MarkedResult;
+  if (typeof r.overall.marksEstimate === "number") return result;
+  const criteria = r.criteria;
+  const estimate = roundTotal(criteria.reduce((n, c) => n + criterionPoint(c), 0));
+  const span = { low: criteria.reduce((n, c) => n + Math.min(c.bandLow, c.bandHigh), 0), high: criteria.reduce((n, c) => n + Math.max(c.bandLow, c.bandHigh), 0) };
+  const { low, high } = likelyRange(estimate, r.overall.totalMarks, span);
+  return { ...r, overall: { ...r.overall, marksEstimate: estimate, marksLow: low, marksHigh: high, gradeEstimate: null, gradeLow: null, gradeHigh: null } } as T;
+}
+
+/** "16 of 20", the predicted total as written beside it. */
+export function estimateLabel(p: Pick<Prediction, "estimate" | "max">): string {
+  return `${p.estimate} of ${p.max}`;
+}
+
+/** "likely 15–17", the range under the estimate; null when it is the estimate itself. */
+export function likelyLabel(p: Pick<Prediction, "low" | "high">): string | null {
+  return p.low === p.high ? null : `likely ${p.low}–${p.high}`;
+}
+
+/** For a screen reader: "Predicted 16 out of 20, likely 15 to 17". */
+export function predictionSpoken(p: Prediction): string {
+  const base = `Predicted ${p.estimate} out of ${p.max}`;
+  return p.low === p.high ? base : `${base}, likely ${p.low} to ${p.high}`;
+}
+
+/** The predicted track: filled to the estimate, with the likely range drawn faintly around it (percent of the track). */
+export function predictionSpan(p: Prediction): { fill: number; low: number; high: number } {
+  if (p.max <= 0) return { fill: 0, low: 0, high: 0 };
+  const pct = (n: number) => Math.min(100, Math.max(0, (n / p.max) * 100));
+  return { fill: pct(p.estimate), low: pct(p.low), high: pct(p.high) };
 }
 
 /** "5–6", "6", or null when the rubric has no grade boundaries. */
@@ -83,10 +184,10 @@ export type MarksRange = Pick<OverallLike, "marksLow" | "marksHigh" | "totalMark
 
 export type ResultMood = "strong" | "okay" | "rough";
 
-/** How the cat reacts: by where the middle of the range sits. Encouraging at the low end, never mocking. */
-export function resultMood(o: Pick<OverallLike, "marksLow" | "marksHigh" | "totalMarks">): ResultMood {
+/** How the cat reacts: by where the predicted total sits. Encouraging at the low end, never mocking. */
+export function resultMood(o: Pick<OverallLike, "marksEstimate" | "marksLow" | "marksHigh" | "totalMarks">): ResultMood {
   if (o.totalMarks <= 0) return "okay";
-  const mid = (o.marksLow + o.marksHigh) / 2 / o.totalMarks;
+  const mid = prediction(o, o.totalMarks).estimate / o.totalMarks;
   return mid >= 0.75 ? "strong" : mid >= 0.5 ? "okay" : "rough";
 }
 
@@ -115,8 +216,9 @@ export interface CriterionMove {
   letter: string;
   name: string;
   maxMarks: number;
-  from: { low: number; high: number } | null;
-  to: { low: number; high: number };
+  /** The band, the best-estimate mark inside it (absent on older results), and where it sits (the mark, else the band's midpoint). */
+  from: { low: number; high: number; mark?: number; point: number } | null;
+  to: { low: number; high: number; mark?: number; point: number };
   move: Movement | "new";
 }
 
@@ -125,42 +227,40 @@ export interface DraftComparison {
   up: number;
   down: number;
   same: number;
-  overall: { from: MarksRange; to: MarksRange; move: Movement };
+  overall: { from: Prediction; to: Prediction; move: Movement };
 }
 
-const mid = (low: number, high: number) => (low + high) / 2;
-
-function movement(from: { low: number; high: number }, to: { low: number; high: number }): Movement {
-  const d = mid(to.low, to.high) - mid(from.low, from.high);
-  return d > 0 ? "up" : d < 0 ? "down" : "same";
+function movement(from: number, to: number): Movement {
+  return to > from ? "up" : to < from ? "down" : "same";
 }
 
 /**
- * Which criteria moved between two marked drafts, by the middle of each band
- * (4–5 → 5–6 is up; 4–5 → 4–5 is the same). Null when either draft has no
- * marks (a feedback-only review).
+ * Which criteria moved between two marked drafts, by each criterion's
+ * best-estimate mark, or its band's middle on older results (4 → 5 is up;
+ * 4 → 4 is the same), and the predicted
+ * total. Null when either draft has no marks (a feedback-only review).
  */
-export function compareDrafts(prev: GradeResult | null | undefined, next: GradeResult | null | undefined): DraftComparison | null {
+export function compareDrafts(prevResult: GradeResult | null | undefined, nextResult: GradeResult | null | undefined): DraftComparison | null {
+  const prev = withEstimate(prevResult);
+  const next = withEstimate(nextResult);
   if (!hasMarks(prev) || !hasMarks(next)) return null;
   const before = new Map(prev.criteria.map((c) => [c.letter, c]));
   const rows: CriterionMove[] = next.criteria.map((c) => {
     const b = before.get(c.letter);
-    const to = { low: c.bandLow, high: c.bandHigh };
+    const to = { low: c.bandLow, high: c.bandHigh, mark: criterionMark(c), point: criterionPoint(c) };
     if (!b) return { letter: c.letter, name: c.name, maxMarks: c.maxMarks, from: null, to, move: "new" };
-    const from = { low: b.bandLow, high: b.bandHigh };
-    return { letter: c.letter, name: c.name, maxMarks: c.maxMarks, from, to, move: movement(from, to) };
+    const from = { low: b.bandLow, high: b.bandHigh, mark: criterionMark(b), point: criterionPoint(b) };
+    return { letter: c.letter, name: c.name, maxMarks: c.maxMarks, from, to, move: movement(from.point, to.point) };
   });
   const count = (m: Movement) => rows.filter((r) => r.move === m).length;
+  const from = prediction(prev.overall, prev.overall.totalMarks);
+  const to = prediction(next.overall, next.overall.totalMarks);
   return {
     rows,
     up: count("up"),
     down: count("down"),
     same: count("same"),
-    overall: {
-      from: prev.overall,
-      to: next.overall,
-      move: movement({ low: prev.overall.marksLow, high: prev.overall.marksHigh }, { low: next.overall.marksLow, high: next.overall.marksHigh }),
-    },
+    overall: { from, to, move: movement(from.estimate, to.estimate) },
   };
 }
 
@@ -588,17 +688,19 @@ export interface RingSegment {
   /** How far along the arc the band's low and high marks reach (0–1). */
   low: number;
   high: number;
+  /** How far the best-estimate mark reaches (0–1); the band's midpoint on older results. */
+  mark: number;
 }
 
 /** Each criterion gets a share of the circle in proportion to its marks; its band is drawn along its arc. */
-export function ringSegments(criteria: Array<{ letter: string; maxMarks: number; bandLow: number; bandHigh: number }>, gap = 0.018): RingSegment[] {
+export function ringSegments(criteria: Array<{ letter: string; maxMarks: number; bandLow: number; bandHigh: number; mark?: number | null }>, gap = 0.018): RingSegment[] {
   const total = criteria.reduce((n, c) => n + Math.max(0, c.maxMarks), 0);
   if (total <= 0) return [];
   let at = 0;
   const g = criteria.length > 1 ? gap : 0;
   return criteria.map((c) => {
     const share = c.maxMarks / total;
-    const seg = { letter: c.letter, start: at + g / 2, end: at + share - g / 2, low: c.maxMarks > 0 ? c.bandLow / c.maxMarks : 0, high: c.maxMarks > 0 ? c.bandHigh / c.maxMarks : 0 };
+    const seg = { letter: c.letter, start: at + g / 2, end: at + share - g / 2, low: c.maxMarks > 0 ? c.bandLow / c.maxMarks : 0, high: c.maxMarks > 0 ? c.bandHigh / c.maxMarks : 0, mark: c.maxMarks > 0 ? criterionPoint(c) / c.maxMarks : 0 };
     at += share;
     return seg;
   });

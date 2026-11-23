@@ -85,18 +85,18 @@ export function GuideReader({ rubricKey }: { rubricKey: string }) {
             {t("cw.guide.group")}
           </Link>
         </nav>
-        <header className="subject-band nl-band mt-4 px-5 pb-6 pt-5 sm:px-10 sm:pb-9 sm:pt-8 sm:pr-[220px] lg:pr-[340px]" style={familyVars(family) as CSSProperties}>
+        <header className="subject-band nl-band mt-4 px-[var(--band-pad-x)] py-[var(--band-pad-y)] sm:pr-[220px] lg:pr-[280px]" style={familyVars(family) as CSSProperties}>
           <SubjectArt family={family} eager />
-          <p className="nl-rise flex min-h-[84px] items-center pr-[96px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
+          <p className="nl-rise flex min-h-[56px] items-center pr-[76px] text-ui font-bold text-white/90 sm:min-h-0 sm:pr-0">
             <span>
               <span className="font-extrabold text-white">{rubric.board}</span> · {t("cw.guide.eyebrow")}
             </span>
           </p>
-          <h1 className="nl-rise mt-2 text-balance text-[34px] font-black leading-[1.04] sm:mt-3 sm:text-[50px] lg:text-[56px]" style={{ ["--i" as string]: 1 }}>
+          <h1 className="nl-rise mt-1.5 text-balance text-[28px] font-black leading-[1.06] sm:mt-2 sm:text-[36px] lg:text-[40px]" style={{ ["--i" as string]: 1 }}>
             {title}
           </h1>
           {guide && (
-            <p className="nl-rise mt-3 text-read font-semibold text-white/95" style={{ ["--i" as string]: 2 }}>
+            <p className="nl-rise mt-2 text-ui font-semibold text-white/95 sm:text-read" style={{ ["--i" as string]: 2 }}>
               {guide.objectiveLine}
             </p>
           )}
@@ -106,7 +106,7 @@ export function GuideReader({ rubricKey }: { rubricKey: string }) {
             <li>{rubric.sessionLabel}</li>
             <li>{t(rubric.status === "reviewed" ? "cw.guide.reviewed" : "cw.guide.draft")}</li>
           </ul>
-          <div className="nl-rise mt-5 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-3" style={{ ["--i" as string]: 4 }}>
+          <div className="nl-rise mt-4 flex flex-col gap-1.5 sm:flex-row sm:flex-wrap sm:gap-3" style={{ ["--i" as string]: 4 }}>
             <Link href={`/coursework/new?rubric=${encodeURIComponent(rubric.key)}`} className="nl-btn">
               {t("cw.guide.review", { name })}
             </Link>

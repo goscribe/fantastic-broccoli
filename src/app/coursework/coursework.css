@@ -50,6 +50,13 @@
   /* A Word draft: the pages docx-preview lays out, on the same quiet desk, with the quoted passages marked in the text. */
   .cw-docx-host .cw-docx-wrapper { background: transparent !important; padding: 0 !important; display: flex; flex-flow: column; align-items: center; gap: 16px; }
   .cw-docx-host .cw-docx-wrapper > section.cw-docx { background: #fff; box-shadow: 0 1px 2px rgb(22 22 26 / 0.08), 0 0 0 1px var(--border) !important; margin: 0 !important; max-width: none; color: #16161a; }
+  /* A Word equation drawn with KaTeX inside the page (docx-view.tsx). docx-preview's own sheet (unlayered) sets every
+     span to pre-wrap, which breaks KaTeX's rows apart, and every svg to no fill, which hides tall brackets: only
+     !important from a layer outranks it. */
+  .cw-docx-math { white-space: nowrap !important; overflow-wrap: normal !important; }
+  .cw-docx-math span { white-space: inherit !important; overflow-wrap: inherit !important; }
+  .cw-docx-math svg { fill: currentColor !important; }
+
   /* The server's HTML of the file, when the original cannot be drawn: one page-shaped column. */
   .cw-docx-plain { width: 794px; padding: 72px 80px; font: 15px/1.6 Georgia, "Times New Roman", serif; color: #16161a; overflow-wrap: anywhere; }
   .cw-docx-plain h1 { font-size: 24px; font-weight: 700; margin: 22px 0 10px; }
@@ -85,6 +92,11 @@
   /* Band tracks and anything else drawn in the subject's colour. */
   .cw-fill { background: var(--tile-a, var(--foreground)); }
   .cw-fill--faint { background: transparent; box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--tile-a, var(--foreground)) 55%, transparent); }
+  /* The rest of a criterion's band around its best-estimate mark, and the likely range around a predicted total: the same colour, light. */
+  .cw-fill--soft { background: color-mix(in srgb, var(--tile-a, var(--foreground)) 30%, #fff); }
+  .cw-fill--range { background: color-mix(in srgb, var(--tile-a, var(--foreground)) 22%, transparent); }
+  /* The predicted total as a point on its track. */
+  .cw-point { box-shadow: 0 0 0 2px var(--card, #fff); }
 
   /* The numeral of a fix: the subject's colour, a size up from the title. */
   .cw-num {

@@ -7,6 +7,7 @@
  * (goscribe/server lib/coursework/limits.ts); these read its answers.
  */
 import type { GraderStatus, GradeResult, MarkedCriterion, ReviewStatus } from "./api/grader";
+import { prediction } from "./coursework";
 
 /** Server COURSEWORK_LIMIT_PREFIX: a refused review request starts with it. */
 export const COURSEWORK_LIMIT_PREFIX = "Coursework review limit";
@@ -90,13 +91,14 @@ export function bandLabel(low: number, high: number, max: number): string {
   return `${low === high ? low : `${low}–${high}`} / ${max}`;
 }
 
-/** The predicted range line: "19–23 / 30" plus the grade range when the rubric has boundaries. */
+/** The predicted total line: "21 / 30 (likely 19–23)" plus the predicted grade when the rubric has boundaries. */
 export function overallLabel(result: GradeResult): string | null {
   if (result.mode !== "marked") return null;
   const o = result.overall;
-  const marks = bandLabel(o.marksLow, o.marksHigh, o.totalMarks);
-  if (!o.gradeLow || !o.gradeHigh) return marks;
-  return `${marks} · ${o.gradeLow === o.gradeHigh ? o.gradeLow : `${o.gradeLow}–${o.gradeHigh}`}`;
+  const p = prediction(o, o.totalMarks);
+  const marks = `${p.estimate} / ${p.max}${p.low !== p.high ? ` (likely ${p.low}–${p.high})` : ""}`;
+  const grade = o.gradeEstimate ?? (o.gradeLow && o.gradeHigh ? (o.gradeLow === o.gradeHigh ? o.gradeLow : `${o.gradeLow}–${o.gradeHigh}`) : null);
+  return grade ? `${marks} · ${grade}` : marks;
 }
 
 /** Still being worked on (poll). */

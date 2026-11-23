@@ -6,8 +6,8 @@
  * tables, figures and captions, equations, code, citations, the bibliography
  * and appendices are left out. Each rubric carries its rules
  * (`wordCount.excludes`); a rubric without rules falls back to leaving out
- * the title page, contents, bibliography, appendices, tables and code. A
- * rubric whose limit covers only part of the work (the CS IA: criteria A, C
+ * the title page, contents, bibliography, appendices, tables, equations and
+ * code. A rubric whose limit covers only part of the work (the CS IA: criteria A, C
  * and E) names the headings of the parts that count and of those that do
  * not (`wordCount.sections`); it applies when the work has such headings.
  *
@@ -17,7 +17,8 @@
  *
  *  - Word files: mammoth's HTML (headings, tables, images, footnote lists,
  *    contents links are real elements; paragraphs set in a monospace font
- *    arrive as <pre>, see file-extract.ts);
+ *    arrive as <pre>, and equations as the editor's maths nodes with their
+ *    LaTeX, see file-extract.ts and omml.ts);
  *  - editor documents: tiptap JSON (tables, code blocks, maths, images);
  *  - PDFs and plain text: line heuristics (bibliography / appendix headings,
  *    contents lines with dot leaders, "Figure 3:" captions, code-like and
@@ -97,9 +98,9 @@ export interface ResolvedWordCountRules extends WordCountRules {
 }
 
 /** No board counts a title page or a table of contents, so the fallback leaves them out too. */
-export const FALLBACK_EXCLUDES: WordCountExclude[] = ['title_page', 'contents', 'bibliography', 'appendices', 'tables', 'code'];
+export const FALLBACK_EXCLUDES: WordCountExclude[] = ['title_page', 'contents', 'bibliography', 'appendices', 'tables', 'equations', 'code'];
 export const FALLBACK_NOTE =
-  'General rule (this component\'s own counting rules are not loaded yet): the title page, contents, bibliography, appendices, tables and code are not counted. Check your subject guide for the exact rule.';
+  'General rule (this component\'s own counting rules are not loaded yet): the title page, contents, bibliography, appendices, tables, equations and code are not counted. Check your subject guide for the exact rule.';
 
 function sectionRules(v: unknown): WordCountSectionRule[] {
   if (!Array.isArray(v)) return [];
@@ -321,6 +322,9 @@ function tableLine(line: string): boolean {
 
 const REF_LIKE = /https?:|www\.|\bdoi\b|\bibid\b|\bop\. ?cit|\bpp?\.\s*\d|\b(?:1[5-9]|20)\d{2}[a-z]?\b|\bet al\b|\baccessed\b|\bretrieved\b|\bn\.d\.|\bvol\.|\bed\.|\bpress\b/i;
 
+/** The symbols of an equation as words ("\\frac{a}{b}" is a and b): what an equation would add to the total. */
+export const latexWords = (latex: string): string => latex.replace(/\\[A-Za-z]+/g, ' ').replace(/[{}^_&\\$]/g, ' ');
+
 /** Pulls `$$…$$`, maths-like `$…$` and `[figure…]` markers (the editor's plain-text forms) out of prose. */
 function splitInlineMarkers(text: string, out: Segment[]): string {
   return text
@@ -329,11 +333,11 @@ function splitInlineMarkers(text: string, out: Segment[]): string {
       return ' ';
     })
     .replace(/\$\$[\s\S]*?\$\$/g, (m) => {
-      out.push({ kind: 'equation', text: m });
+      out.push({ kind: 'equation', text: latexWords(m) });
       return ' ';
     })
     .replace(/\$(?=[^$\n]*[\\^_={}])[^$\n]{1,400}\$/g, (m) => {
-      out.push({ kind: 'equation', text: m });
+      out.push({ kind: 'equation', text: latexWords(m) });
       return ' ';
     });
 }
@@ -458,6 +462,18 @@ export function segmentsFromHtml(html: string): Segment[] {
       continue;
     }
     if (skip) continue;
+    // An equation (a Word file's maths, see omml.ts; the editor's maths nodes in HTML): its LaTeX is not prose.
+    const math = !close && (name === 'span' || name === 'div') ? /\bdata-type\s*=\s*"(inline|block)-math"/i.exec(attrs) : null;
+    if (math) {
+      if (math[1] === 'block' && !table) flush();
+      raw.push({ kind: 'equation', text: latexWords(decode(attrOf(attrs, 'data-latex') ?? '')) });
+      const end = html.indexOf(`</${name}>`, last);
+      if (end >= 0) {
+        last = end + name.length + 3;
+        tag.lastIndex = last;
+      }
+      continue;
+    }
     switch (name) {
       case 'table':
         flush();
@@ -540,7 +556,7 @@ function inlineText(nodes: Node[] | undefined, out: Segment[], depth: number): s
         break;
       case 'inlineMath':
       case 'mathInline':
-        out.push({ kind: 'equation', text: nodeAttr(n, 'latex') });
+        out.push({ kind: 'equation', text: latexWords(nodeAttr(n, 'latex')) });
         s += ' ';
         break;
       case 'image':
@@ -580,10 +596,18 @@ function walk(n: Node, out: Segment[], depth: number): void {
     }
     case 'blockMath':
     case 'mathBlock':
-      out.push({ kind: 'equation', text: nodeAttr(n, 'latex') });
+      out.push({ kind: 'equation', text: latexWords(nodeAttr(n, 'latex')) });
       return;
     case 'image':
     case 'figure': {
+      // A `/diagram` block (api/my-notes.ts DiagramFigure) carries a spec: a figure whose caption is its title and caption line. Mirrors the server.
+      const spec = (n.attrs as { figure?: { title?: unknown; caption?: unknown } } | undefined)?.figure;
+      if (spec && typeof spec === 'object' && typeof spec.title === 'string') {
+        out.push({ kind: 'figure', text: '' });
+        const words = [spec.title, typeof spec.caption === 'string' ? spec.caption : ''].filter(Boolean).join('. ');
+        if (words) out.push({ kind: 'caption', text: words });
+        return;
+      }
       const caption = inlineText(n.content, out, depth + 1).trim();
       out.push({ kind: 'figure', text: nodeAttr(n, 'alt') || nodeAttr(n, 'title') });
       if (caption) out.push({ kind: 'caption', text: caption });

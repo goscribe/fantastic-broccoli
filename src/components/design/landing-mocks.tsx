@@ -245,19 +245,21 @@ const BARS: [string, number, number, string][] = [
 export function FinishMock() {
   return (
     <Mock label="The end of a Scribe session: a score of 100%, 12 of 12 right, points earned, a four-day streak, and how far each topic’s mastery moved.">
-      <div className="hero-card relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border px-5 pb-5 pt-[150px] sm:min-h-[264px] sm:px-8 sm:pb-7 sm:pt-7">
-        <div className="hero-field absolute inset-x-0 top-0 -z-10 h-[136px] sm:inset-0 sm:h-auto">
-          <div className="absolute bottom-[14px] left-1/2 h-[104px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[5%] sm:h-[150px] sm:translate-x-0">
+      <div className="hero-card relative isolate overflow-hidden rounded-[var(--r-panel)] border border-border pt-[var(--banner-band)] sm:flex sm:min-h-[var(--banner-min)] sm:items-center sm:p-4">
+        <div className="hero-field absolute inset-x-0 top-0 -z-10 h-[var(--banner-band)] sm:inset-0 sm:h-auto">
+          <div className="absolute bottom-[10px] left-1/2 h-[92px] -translate-x-1/2 sm:bottom-[7%] sm:left-auto sm:right-[5%] sm:h-[70%] sm:max-h-[150px] sm:translate-x-0">
             <span className="hero-field__ground" />
             <Cat pose="trophy" className="relative h-full" />
           </div>
         </div>
-        <div className="hero-eyebrow relative text-[13px] font-extrabold">Biology · Session complete!</div>
-        <div className="relative mt-1 text-[30px] font-extrabold leading-[1.08] tracking-tight sm:text-[34px]">Flawless!</div>
-        <div className="relative mt-1 text-[15px] font-semibold text-foreground/75">Osmosis is locked in</div>
-        <div className="relative mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 sm:max-w-[56%]">
-          <span className="text-[56px] font-extrabold leading-[0.9] tracking-tight tabular-nums sm:text-[64px]">100<span className="text-[0.55em]">%</span></span>
-          <span className="text-[14.5px] font-bold text-foreground/75">12 of 12 right</span>
+        <div className="hero-copy relative px-5 pb-5 pt-4 max-sm:rounded-none max-sm:border-0 max-sm:bg-transparent max-sm:shadow-none sm:w-[60%] sm:py-5">
+          <div className="hero-eyebrow text-small font-extrabold">Biology · Session complete!</div>
+          <div className="mt-1 text-[28px] font-extrabold leading-[1.08] tracking-tight sm:text-[30px]">Flawless!</div>
+          <div className="mt-1 text-ui font-semibold text-foreground/75">Osmosis is locked in</div>
+          <div className="mt-3 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+            <span className="text-[52px] font-extrabold leading-[0.9] tracking-tight tabular-nums sm:text-[56px]">100<span className="text-[0.55em]">%</span></span>
+            <span className="text-ui font-bold text-foreground/75">12 of 12 right</span>
+          </div>
         </div>
       </div>
       <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 px-1">

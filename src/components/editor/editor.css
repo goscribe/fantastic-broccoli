@@ -79,6 +79,18 @@
   }
   @keyframes se-flash { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--se-anchor, var(--hl)) 70%, transparent); } 100% { box-shadow: 0 0 0 10px transparent; } }
 
+  /* The student's own highlighter: a marker stroke in one of the four note colours. */
+  .se-hl { background: var(--hl-yellow, #ffe08f); color: inherit; border-radius: 3px; padding: 0.05em 0; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+  .se-hl[data-color="green"] { background: var(--hl-green, #bfeccb); }
+  .se-hl[data-color="pink"] { background: var(--hl-pink, #ffc7dc); }
+  .se-hl[data-color="blue"] { background: var(--hl-blue, #bfdcff); }
+  .se-hl--flash { animation: se-flash 0.9s var(--ease-out, ease-out) 1; --se-anchor: var(--foreground); }
+
+  /* A /diagram figure: the drawing is a separate item in the text, so it has an edge; selected, the edge is the accent. */
+  .se-figure { margin: 1.2em 0; cursor: default; }
+  .se-figure[data-selected] > div:first-child,
+  .se-figure.ProseMirror-selectednode > div:first-child { outline: 2px solid color-mix(in srgb, var(--accent) 55%, transparent); outline-offset: 3px; }
+
   .se-menu {
     background: #fff;
     border: 1px solid var(--border);

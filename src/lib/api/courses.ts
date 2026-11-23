@@ -117,4 +117,7 @@ export const coursesApi = {
     rpc<{ workspaceId: string }>("course.enroll", "mutation", { courseId, ...(level ? { level } : {}) }),
   startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel; mode?: "quick5" | "session" }) =>
     rpc<{ workspaceId: string; sessionId: string }>("course.startTopic", "mutation", input),
+  /** One session over several topics of a course, its questions mixed across them (one topic is a Quick 5). */
+  startTopics: (input: { courseId: string; topicIds: string[]; level?: CourseLevel; durationMinutes?: number }) =>
+    rpc<{ workspaceId: string; sessionId: string }>("course.startTopics", "mutation", input),
 };

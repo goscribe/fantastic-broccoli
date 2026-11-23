@@ -125,7 +125,7 @@ const english = {
   "cw.wait.keep": "You can keep editing. This review reads the draft you sent.",
 
   // Results
-  "cw.band.predicted": "Predicted range",
+  "cw.band.predicted": "Predicted mark",
   "cw.band.grade": "Predicted grade {g}",
   "cw.band.strong": "Top-band territory",
   "cw.band.okay": "A solid draft",
@@ -136,7 +136,6 @@ const english = {
   "cw.band.new": "Not reviewed yet",
   "cw.band.newSub": "Write or paste your work, then ask for a review.",
   "cw.band.outOf": "out of {n}",
-  "cw.band.spoken": "Predicted range {a} to {b} marks out of {n}",
   "cw.fixes": "Your three highest-value fixes",
   "cw.fixes.criterion": "Criterion {a} · {name}",
   "cw.criteria": "Criterion by criterion",

@@ -27,6 +27,9 @@ export type FunnelEvent =
   | "notes.attached"
   | "notes.detached"
   | "notes.attached_session_started"
+  /** A student's own note opened in the editor; a highlight made in one (the server records notes.own_created, Scribe-note highlights and notes.diagram_generated itself). */
+  | "notes.own_opened"
+  | "notes.highlight_added"
   /** First run: Scribe's notes for the picked course offered, taken, or passed over. */
   | "first_run.notes_offered"
   | "first_run.notes_accepted"

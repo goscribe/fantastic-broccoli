@@ -89,6 +89,11 @@
   --cream: #f4f4f6;
   --cream-edge: #e8e8ec;
   --hl: #ffe08f;
+  /* The four highlighters a reader marks a note with: the app's yellow and three from the subject palette, as light as a marker stroke. */
+  --hl-yellow: var(--hl);
+  --hl-green: #bfeccb;
+  --hl-pink: #ffc7dc;
+  --hl-blue: #bfdcff;
   --flame: #ff9a1f;
   --flame-edge: #e67700;
   --flame-soft: #fff4e2;
@@ -273,13 +278,31 @@
   /*
    * The hero (home, the notes index): an illustrated landscape that follows the
    * visitor's own time of day. <html data-daypart> is written by a head script
-   * before first paint (src/lib/daypart.ts); with no attribute it is afternoon.
-   * Only the one matching file is fetched: 800px on phones, 1600px from sm up.
+   * before first paint (src/lib/daypart.ts), which also preloads the one
+   * matching file; with no attribute it is afternoon. 800px on phones, 1600px
+   * from sm up.
    * .hero-card is the card; .hero-field the scene inside it; --hero-sky is the
    * scene's sky colour, shown until the image arrives; --hero-wash is the card
-   * colour, washed over the scene's left where the words sit.
+   * colour under a scene band (white by day, the night sky after dark).
+   *
+   * Nothing is ever faded over the scene. Words that sit on it go on a solid
+   * card (.hero-copy, or the home week's .hero-cell) in --hero-surface: white
+   * by day, the night sky lifted a step after dark.
+   *
+   * Banner heights, shared by every screen with a scene:
+   *   --banner-band  the scene band above the words on a narrow banner
+   *   --banner-min   the least height of a wide banner (scene behind, words on a card)
+   * Subject bands (.nl-band) have no fixed height; their padding is --band-pad-*.
    */
-  .hero-card { --hero-wash: #ffffff; --hero-sky: #a8dafb; background-color: var(--hero-wash); }
+  :root { --banner-band: 112px; --banner-min: 200px; --band-pad-y: 20px; --band-pad-x: 20px; }
+  @media (min-width: 640px) { :root { --band-pad-y: 24px; --band-pad-x: 32px; } }
+  .hero-card { --hero-wash: #ffffff; --hero-sky: #a8dafb; --hero-surface: #ffffff; background-color: var(--hero-wash); }
+  .hero-copy {
+    background: var(--hero-surface);
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    border-radius: var(--r-card);
+    box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 8px 18px -10px rgb(22 22 26 / 0.35);
+  }
   .hero-field {
     background-color: var(--hero-sky);
     background-image: url("/design/hero/afternoon-800.webp");
@@ -289,8 +312,8 @@
   }
   /* The cat's contact shadow on the grass; goes inside the box that holds the cat. */
   .hero-field__ground { position: absolute; left: 52%; bottom: -3%; width: 74%; height: 9%; transform: translateX(-50%); border-radius: 50%; background: rgb(20 40 30 / 0.2); pointer-events: none; }
-  html[data-daypart="morning"] .hero-card { --hero-wash: #fffdf8; --hero-sky: #e6e9f6; }
-  html[data-daypart="evening"] .hero-card { --hero-wash: #fff4ea; --hero-sky: #d9719a; }
+  html[data-daypart="morning"] .hero-card { --hero-sky: #e6e9f6; }
+  html[data-daypart="evening"] .hero-card { --hero-sky: #d9719a; }
   /* After dark the card goes dark with the sky, and its words turn light. */
   html[data-daypart="night"] .hero-card,
   html[data-daypart="late"] .hero-card {
@@ -299,20 +322,20 @@
     color: #ffffff; border-color: #0b1351;
   }
   html[data-daypart="late"] .hero-card { --hero-wash: #0d013c; --hero-sky: #0d013c; border-color: #0d013c; }
+  /* After dark the solid cards are the night sky lifted a step, so they read as cards against it. */
+  html[data-daypart="night"] .hero-card,
+  html[data-daypart="late"] .hero-card { --hero-surface: color-mix(in srgb, var(--hero-wash) 86%, #ffffff); }
   .hero-eyebrow { color: var(--hero-eyebrow, var(--accent-dim)); }
   html[data-daypart="morning"] .hero-field { background-image: url("/design/hero/morning-800.webp"); }
   html[data-daypart="evening"] .hero-field { background-image: url("/design/hero/evening-800.webp"); }
   html[data-daypart="night"] .hero-field { background-image: url("/design/hero/night-800.webp"); }
   html[data-daypart="late"] .hero-field { background-image: url("/design/hero/late-800.webp"); }
   @media (min-width: 640px) {
-    .hero-field {
-      --wash: linear-gradient(90deg, var(--hero-wash) 0%, color-mix(in srgb, var(--hero-wash) 94%, transparent) 38%, color-mix(in srgb, var(--hero-wash) 62%, transparent) 56%, transparent 76%);
-      background-image: var(--wash), url("/design/hero/afternoon-1600.webp");
-    }
-    html[data-daypart="morning"] .hero-field { background-image: var(--wash), url("/design/hero/morning-1600.webp"); }
-    html[data-daypart="evening"] .hero-field { background-image: var(--wash), url("/design/hero/evening-1600.webp"); }
-    html[data-daypart="night"] .hero-field { background-image: var(--wash), url("/design/hero/night-1600.webp"); }
-    html[data-daypart="late"] .hero-field { background-image: var(--wash), url("/design/hero/late-1600.webp"); }
+    .hero-field { background-image: url("/design/hero/afternoon-1600.webp"); }
+    html[data-daypart="morning"] .hero-field { background-image: url("/design/hero/morning-1600.webp"); }
+    html[data-daypart="evening"] .hero-field { background-image: url("/design/hero/evening-1600.webp"); }
+    html[data-daypart="night"] .hero-field { background-image: url("/design/hero/night-1600.webp"); }
+    html[data-daypart="late"] .hero-field { background-image: url("/design/hero/late-1600.webp"); }
   }
   @media (prefers-reduced-motion: reduce) {
     .subject-tile, .subject-tile__art { transition: none; }

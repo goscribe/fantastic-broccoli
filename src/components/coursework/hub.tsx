@@ -8,12 +8,12 @@ import { Mascot } from "@/components/rewards/mascot";
 import { buttonClass } from "@/components/ui/button";
 import { PageHeader, PageShell, SectionTitle } from "@/components/ui/page-header";
 import { courseworkApi, isMissingEndpoint, type DocumentSummary, type GraderStatus, type RubricSummary } from "@/lib/api/coursework";
-import { componentTitle, familyText, formatBand } from "@/lib/coursework";
+import { componentTitle, familyText, likelyLabel, prediction, predictionSpoken } from "@/lib/coursework";
 import { SAMPLE_CITATIONS, SAMPLE_RESULT, SAMPLE_RUBRIC } from "@/lib/coursework-sample";
 import { track } from "@/lib/funnel";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { cn, formatRelativeDate } from "@/lib/utils";
-import { BandTrack } from "./band-track";
+import { PredictionTrack } from "./band-track";
 import { CitationsCard, CriterionCard, TopFixes } from "./feedback";
 import { AllowanceGate } from "./grade-panel";
 import { ResultSummary } from "./summary";
@@ -49,7 +49,8 @@ function PieceCard({ doc, rubric }: { doc: DocumentSummary; rubric: RubricSummar
   const family = resolveSubjectFamily(null, rubric ? familyText(rubric) : doc.title);
   const last = doc.lastReview;
   const running = last?.status === "queued" || last?.status === "grading";
-  const marks = last?.status === "completed" && last.marksLow !== null && last.marksHigh !== null && rubric ? { low: last.marksLow, high: last.marksHigh, max: rubric.totalMarks } : null;
+  const marks = last?.status === "completed" && last.marksLow !== null && last.marksHigh !== null && rubric ? prediction({ marksEstimate: last.marksEstimate, marksLow: last.marksLow, marksHigh: last.marksHigh }, rubric.totalMarks) : null;
+  const likely = marks ? likelyLabel(marks) : null;
   const state = !last || last.status === "failed" ? t("cw.notReviewed") : running ? t("cw.reviewing") : marks ? null : t("cw.feedbackOnly");
   return (
     <Link href={`/coursework/${encodeURIComponent(doc.id)}`} className="life-card life-press flex h-full flex-col p-5" style={familyVars(family) as CSSProperties}>
@@ -71,11 +72,15 @@ function PieceCard({ doc, rubric }: { doc: DocumentSummary; rubric: RubricSummar
             <span className="flex items-baseline justify-between gap-3 text-small">
               <span className="font-bold text-muted-foreground">{t("cw.draftN", { n: last!.draftNumber })}</span>
               <span className="tabular-nums">
-                <span className="font-extrabold text-foreground">{formatBand(marks.low, marks.high)}</span>
-                <span className="font-semibold text-muted-foreground"> {t("cw.ofMarks", { n: marks.max })}</span>
+                <span className="sr-only">{predictionSpoken(marks)}</span>
+                <span aria-hidden>
+                  <span className="text-ui font-extrabold text-foreground">{marks.estimate}</span>
+                  <span className="font-semibold text-muted-foreground"> {t("cw.ofMarks", { n: marks.max })}</span>
+                  {likely && <span className="font-semibold text-muted-foreground"> · {likely}</span>}
+                </span>
               </span>
             </span>
-            <BandTrack low={marks.low} high={marks.high} max={marks.max} className="mt-2" />
+            <PredictionTrack prediction={marks} className="mt-2" />
           </>
         ) : (
           <span className="block text-small font-bold text-muted-foreground">

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useImperativeHandle, useRef, useState, type Ref } from "react";
+import { bodyMath, LONE_PAGE_NUMBER, MATH_CLASS, type DocMath } from "@/lib/docx-math";
 import { findQuote } from "@/lib/quote-match";
 import { safeHtml } from "@/lib/safe-html";
 import { useCw } from "./use-cw";
@@ -34,25 +35,76 @@ const BLOCK = "p,li,td,th,h1,h2,h3,h4,h5,h6,div,section,article,header,footer,tr
 const MARK = "cw-docx-mark";
 const wordsIn = (t: string) => (t.match(/[\p{L}\p{N}]+/gu) ?? []).length;
 
-/** The drawn text as one string, and which text node each stretch of it came from. */
+/**
+ * The drawn text as one string, and which text node each stretch of it came
+ * from. An equation drawn from the server's LaTeX counts as that LaTeX
+ * ("$\frac{a}{b}$", as in the text that was reviewed) and is never wrapped;
+ * page headers and footers are not the work and are left out.
+ */
 function textIndex(root: HTMLElement): { text: string; nodes: Array<{ node: Text; start: number; end: number }> } {
-  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
-    acceptNode: (n) => (n.parentElement?.closest("style,script") ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT),
-  });
   let text = "";
   let lastBlock: Element | null = null;
   const nodes: Array<{ node: Text; start: number; end: number }> = [];
-  for (let n = walker.nextNode(); n; n = walker.nextNode()) {
-    const node = n as Text;
-    if (!node.data) continue;
-    const block = node.parentElement?.closest(BLOCK) ?? null;
-    // A new paragraph or cell is a word break, even when the file has no space there.
-    if (block !== lastBlock && text && !/\s$/.test(text)) text += " ";
-    lastBlock = block;
-    nodes.push({ node, start: text.length, end: text.length + node.data.length });
-    text += node.data;
-  }
+  const visit = (n: Node) => {
+    if (n.nodeType === Node.TEXT_NODE) {
+      const node = n as Text;
+      if (!node.data) return;
+      const block = node.parentElement?.closest(BLOCK) ?? null;
+      // A new paragraph or cell is a word break, even when the file has no space there.
+      if (block !== lastBlock && text && !/\s$/.test(text)) text += " ";
+      lastBlock = block;
+      nodes.push({ node, start: text.length, end: text.length + node.data.length });
+      text += node.data;
+      return;
+    }
+    if (!(n instanceof Element) || /^(?:STYLE|SCRIPT|HEADER|FOOTER)$/.test(n.tagName)) return;
+    if (n.classList.contains(MATH_CLASS)) {
+      const latex = n.getAttribute("data-latex") ?? "";
+      const display = n.getAttribute("data-block") === "1";
+      text += `${text && !/\s$/.test(text) ? " " : ""}${display ? `$$${latex}$$` : `$${latex}$`} `;
+      return;
+    }
+    for (const c of n.childNodes) visit(c);
+  };
+  visit(root);
   return { text, nodes };
+}
+
+type Katex = { render(latex: string, el: HTMLElement, o: object): void };
+
+/** An equation drawn with KaTeX from its LaTeX (a formula KaTeX cannot read shows its source). */
+function mathElement(katex: Katex, m: DocMath): HTMLElement {
+  const el = document.createElement("span");
+  el.className = MATH_CLASS;
+  el.setAttribute("data-latex", m.latex);
+  el.setAttribute("data-block", m.block ? "1" : "0");
+  try {
+    katex.render(m.latex, el, { throwOnError: false, displayMode: m.block, strict: "ignore" });
+  } catch {
+    el.textContent = m.latex;
+  }
+  return el;
+}
+
+/**
+ * The original's equations (docx-preview's MathML: accents lost, every token
+ * on its own line) drawn again from the server's LaTeX, in document order.
+ * Only when both found the same number of body equations, so each is paired
+ * with its own; otherwise the original's drawing stays.
+ */
+function redrawMath(root: HTMLElement, maths: DocMath[], katex: Katex): number {
+  const drawn = [...root.querySelectorAll("section.cw-docx > article math")];
+  if (!drawn.length || drawn.length !== maths.length) return 0;
+  drawn.forEach((m, i) => m.replaceWith(mathElement(katex, maths[i])));
+  return drawn.length;
+}
+
+/** Headers and footers that hold only a page number: Word saves one value ("1") that would show on every page. */
+function dropPageNumbers(root: HTMLElement) {
+  for (const el of root.querySelectorAll<HTMLElement>("section.cw-docx > header, section.cw-docx > footer")) {
+    const t = (el.textContent ?? "").trim();
+    if (t && LONE_PAGE_NUMBER.test(t) && !el.querySelector("img,svg,table")) el.replaceChildren();
+  }
 }
 
 function clearMarks(root: HTMLElement) {
@@ -173,10 +225,21 @@ export default function DocxView({
     const el = host.current;
     if (!el) return;
     let cancelled = false;
-    const plain = () => {
+    const maths = bodyMath(html);
+    const loadKatex = (): Promise<Katex | null> => (maths.length ? import("katex").then((m) => m.default as unknown as Katex).catch(() => null) : Promise.resolve(null));
+    const plain = async () => {
       if (cancelled) return;
       if (!html) return setMode({ key, kind: "failed" });
       el.innerHTML = `<div class="cw-docx-wrapper"><section class="cw-docx cw-docx-plain">${safeHtml(html)}</section></div>`;
+      // The server's HTML carries each equation's LaTeX: drawn with KaTeX in place of its source text.
+      const katex = await loadKatex();
+      if (cancelled) return;
+      if (katex) {
+        for (const m of el.querySelectorAll<HTMLElement>('[data-type="inline-math"][data-latex], [data-type="block-math"][data-latex]')) {
+          const latex = m.getAttribute("data-latex") ?? "";
+          m.replaceWith(mathElement(katex, { latex, block: m.getAttribute("data-type") === "block-math" || latex.startsWith("\\displaystyle") }));
+        }
+      }
       setMode({ key, kind: "plain" });
     };
     if (!url) {
@@ -185,7 +248,7 @@ export default function DocxView({
     }
     (async () => {
       try {
-        const [lib, res] = await Promise.all([import("docx-preview"), fetch(url)]);
+        const [lib, res, katex] = await Promise.all([import("docx-preview"), fetch(url), loadKatex()]);
         if (!res.ok) throw new Error("file");
         const blob = await res.blob();
         if (cancelled) return;
@@ -209,9 +272,11 @@ export default function DocxView({
         const want = wordsIn(text);
         const got = wordsIn([...pages].map((p) => p.textContent ?? "").join(" "));
         if (pages.length === 0 || (want > 80 && got < want * 0.6)) throw new Error("incomplete");
+        dropPageNumbers(el);
+        if (katex) redrawMath(el, maths, katex);
         setMode({ key, kind: "docx" });
       } catch {
-        plain();
+        await plain();
       }
     })();
     return () => {

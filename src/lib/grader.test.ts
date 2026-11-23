@@ -89,8 +89,11 @@ test("band and overall labels; feedback mode has no overall marks", () => {
   assert.equal(bandLabel(4, 5, 6), "4–5 / 6");
   assert.equal(bandLabel(6, 6, 6), "6 / 6");
   const marked = { mode: "marked", overall: { marksLow: 19, marksHigh: 23, totalMarks: 30, gradeLow: null, gradeHigh: null, summary: "" } } as unknown as MarkedResult;
-  assert.equal(overallLabel(marked), "19–23 / 30");
-  assert.equal(overallLabel({ ...marked, overall: { ...marked.overall, gradeLow: "B", gradeHigh: "A" } }), "19–23 / 30 · B–A");
+  // A server before the estimate sent the band sums: the midpoint (rounded down) with the narrow range inside them.
+  assert.equal(overallLabel(marked), "21 / 30 (likely 19–23)");
+  assert.equal(overallLabel({ ...marked, overall: { ...marked.overall, gradeLow: "B", gradeHigh: "A" } }), "21 / 30 (likely 19–23) · B–A");
+  const current = { ...marked, overall: { ...marked.overall, marksEstimate: 22, marksLow: 20, marksHigh: 24, gradeEstimate: "A", gradeLow: "B", gradeHigh: "A" } };
+  assert.equal(overallLabel(current), "22 / 30 (likely 20–24) · A");
   assert.equal(overallLabel({ mode: "feedback", overall: { summary: "x" } } as never), null);
   assert.equal(pollDelayMs(1000), 3000);
   assert.equal(pollDelayMs(60_000), 5000);
