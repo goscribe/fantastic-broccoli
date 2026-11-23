@@ -234,11 +234,15 @@ export interface MarkScheme {
   totalPoints: number;
   /** Level-marked essays: marked by best-fit level. */
   bands?: MarkBand[];
+  /** Long-answer questions: the board's level descriptors (marking guidance; marks stay per point). */
+  levels?: MarkBand[];
 }
 
 export interface MarkedPoint extends MarkSchemePoint {
   achievedPoints: number;
   feedback: string;
+  /** Long-answer marking: the words of the answer that earned (or attempted) this point, verbatim. */
+  quote?: string;
 }
 
 export interface PartMarking {
@@ -246,6 +250,8 @@ export interface PartMarking {
   achievedPoints: number;
   totalPoints: number;
   correct: boolean;
+  /** Long-answer marking: how the answer did and the one change worth the most marks. */
+  summary?: string;
 }
 
 export interface WorksheetPart {
@@ -298,6 +304,8 @@ export interface PaperInfo {
 
 export interface WorksheetContent {
   type: "worksheet";
+  /** "long_answer": one exam-style extended response, shown by LongAnswerActivity. */
+  format?: "long_answer";
   source?: { file: string; generatedByAi?: boolean };
   /** Set when this worksheet is a whole practice paper. */
   paper?: PaperInfo;

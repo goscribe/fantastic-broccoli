@@ -50,12 +50,18 @@ export interface ApiPartMarking {
       requirements: string;
       achievedPoints: number;
       feedback: string;
+      /** Long-answer marking only. */
+      quote?: string;
     }>;
     totalPoints: number;
+    summary?: string;
   };
   achievedPoints: number;
   totalPoints: number;
   correct: boolean;
+  /** Set when the part was a long-answer question. */
+  longAnswer?: boolean;
+  summary?: string;
 }
 
 export interface ApiSessionActivity {
