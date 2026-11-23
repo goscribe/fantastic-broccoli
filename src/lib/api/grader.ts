@@ -49,11 +49,46 @@ export interface GraderRubric {
   sessionLabel: string;
   totalMarks: number;
   wordLimit: number | null;
+  /** How the board counts words for this component (absent on a server without counting rules: the app falls back). */
+  wordCount?: WordCountRules & { fallback?: boolean };
   status: "draft" | "reviewed";
   sourceNote: string;
   criteria: Array<{ letter: string; name: string; maxMarks: number }>;
   /** Matches one of the student's own subjects: prefill the picker with it. */
   suggested: boolean;
+  /**
+   * Guide versions (absent on a server without them). Rubrics with the same `family` are versions of one
+   * component (Computer Science IA: first assessment 2014 and 2027); `guideYear` orders them and
+   * `versionCount` says how many there are (1 = nothing to choose).
+   */
+  family?: string;
+  guideYear?: number | null;
+  versionCount?: number;
+}
+
+/** Server `coursework.rubricVersions`: a component's guide versions, and the one a piece of work looks written for. */
+export interface GraderRubricVersions {
+  family: string;
+  rubricId: string;
+  /** Newest guide first. */
+  versions: Array<{ rubricId: string; key: string; sessionLabel: string; guideYear: number | null; totalMarks: number; status: "draft" | "reviewed"; criteria: Array<{ letter: string; name: string }>; matched: string[] }>;
+  /** Null when there is one version or the work's headings do not say. */
+  suggestedRubricId: string | null;
+  /** The work's headings that decided it (at most four). */
+  headings: string[];
+  /** Set when the rubric asked about clearly does not fit the work. */
+  mismatch: { message: string; headings: string[]; suggested: { rubricId: string; key: string; sessionLabel: string } | null } | null;
+}
+
+/** Server lib/coursework/word-count.ts WordCountRules. */
+export interface WordCountRules {
+  limit: number | null;
+  kind: "words" | "pages" | "none";
+  excludes: string[];
+  /** What the count covers, in plain words. */
+  note: string;
+  /** For a limit that covers only part of the work: headings of the parts that count and of those that do not. */
+  sections?: { count: Array<{ label: string; match: string }>; exclude: Array<{ label: string; match: string }> } | null;
 }
 
 export type GuideBlock =
@@ -143,8 +178,13 @@ interface ResultBase {
   schemaVersion: 1;
   disclaimer: string;
   topFixes: Array<{ title: string; detail: string; criterion: string }>;
-  words: { counted: number; limit: number | null; overLimit: boolean; graded: number; bibliographyFound: boolean };
+  /** `counted` is what counts toward the limit (an estimate for files); `declared` the student's own count; nothing is cut at the limit (`truncated` only beyond the safety cap). Fields after `bibliographyFound` are absent on older results. */
+  words: { counted: number; limit: number | null; overLimit: boolean; graded: number; bibliographyFound: boolean; total?: number; notCounted?: number; excluded?: Record<string, number>; estimate?: boolean; declared?: number | null; overBy?: number; limitKind?: "words" | "pages" | "none"; truncated?: boolean };
   flags: { quotesDropped: number; rewritesRemoved: number; bandsAdjusted: number; marksRemoved: number; notes: string[] };
+  /** The rubric clearly does not fit the work's own structure (another guide version, or another component): said at the top of the review. Null when it fits; absent on older results. */
+  rubricFit?: { status: "mismatch"; message: string; headings: string[]; suggested: { rubricId: string; key: string; sessionLabel: string } | null } | null;
+  /** Tables the review read in full and images it could not see inside (`note` says so to the student). Absent on older results. */
+  seen?: { tables: number; figures: number; note: string | null };
 }
 
 export interface MarkedResult extends ResultBase {
@@ -193,7 +233,7 @@ export interface GraderReview {
   wordCount: number | null;
   createdAt: Date;
   completedAt: Date | null;
-  rubric: Pick<GraderRubric, "id" | "board" | "qualification" | "subject" | "component" | "componentKind" | "level" | "sessionLabel" | "totalMarks" | "wordLimit" | "status" | "sourceNote">;
+  rubric: Pick<GraderRubric, "id" | "board" | "qualification" | "subject" | "component" | "componentKind" | "level" | "sessionLabel" | "totalMarks" | "wordLimit" | "wordCount" | "status" | "sourceNote">;
   /** The exact text reviewed; evidence offsets point into it. */
   snapshotText: string | null;
   result: GradeResult | null;
@@ -221,6 +261,8 @@ export interface RequestReviewInput {
   mode?: ReviewMode;
   label?: string;
   timezone?: string;
+  /** The student's own word count: used for the limit feedback instead of Scribe's estimate. */
+  declaredWords?: number;
 }
 
 /* --------------------------------- Transport -------------------------------- */

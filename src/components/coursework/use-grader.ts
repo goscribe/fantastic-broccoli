@@ -11,8 +11,9 @@ import {
   type ReviewMode,
   type ReviewRow,
   type RubricSummary,
+  type RubricVersions,
 } from "@/lib/api/coursework";
-import type { UltraOffer } from "@/lib/coursework";
+import { guideVersions, type UltraOffer } from "@/lib/coursework";
 
 /* ---------- Shared, cached reads ---------- */
 
@@ -97,6 +98,12 @@ export interface Grader {
   rubrics: RubricSummary[];
   rubric: RubricSummary | null;
   setRubric: (id: string) => void;
+  /** The component the next review reads against (the document's own choice, whatever review is on screen). */
+  chosen: RubricSummary | null;
+  /** Every guide version of that component, newest first; one entry when there is nothing to choose. */
+  versions: RubricSummary[];
+  /** Which version the draft's headings point to (the server's reading); null while unknown or with one version. */
+  suggestion: RubricVersions | null;
   /** Reviews of this document, oldest first. */
   rows: ReviewRow[];
   /** The review being shown (the newest unless the student picked an older draft). */
@@ -111,7 +118,8 @@ export interface Grader {
   setMode: (m: ReviewMode) => void;
   hideMarks: boolean;
   setHideMarks: (v: boolean) => void;
-  request: () => Promise<void>;
+  /** Asks for a review; `rubricId` switches the component first (review again with another guide version). */
+  request: (rubricId?: string) => Promise<void>;
   requesting: boolean;
   /** Why the last request did not start (the server's words), or "limit". */
   requestError: string | null;
@@ -129,8 +137,9 @@ const isRunning = (s: string | undefined) => s === "queued" || s === "grading";
  * while it runs). `flush` saves the document first, so a review always reads
  * what the student sees.
  */
-export function useGrader(input: { documentId: string | null; rubricId: string | null; /** The draft on screen: the one a review is asked for (absent on a server without drafts). */ draftId?: string | null; onRubric: (id: string) => void; flush: () => Promise<void> }): Grader {
+export function useGrader(input: { documentId: string | null; rubricId: string | null; /** The draft on screen: the one a review is asked for (absent on a server without drafts). */ draftId?: string | null; /** The student's own word count, when they gave one: the review checks the limit with it. */ declaredWords?: number | null; onRubric: (id: string) => void; flush: () => Promise<void> }): Grader {
   const { documentId, rubricId, onRubric, flush } = input;
+  const docRubricId = rubricId;
   const draftId = input.draftId ?? null;
   const [phase, setPhase] = useState<GraderPhase>("loading");
   const [status, setStatus] = useState<GraderStatus | null>(null);
@@ -144,9 +153,10 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
   const [hideMarks, setHideMarks] = useState(false);
   const [attempt, setAttempt] = useState(0);
   const [mode, setMode] = usePreferredMode();
-  const live = useRef({ flush, onRubric });
+  const declaredWords = input.declaredWords ?? null;
+  const live = useRef({ flush, onRubric, declaredWords });
   useEffect(() => {
-    live.current = { flush, onRubric };
+    live.current = { flush, onRubric, declaredWords };
   });
 
   useEffect(() => {
@@ -202,17 +212,37 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     };
   }, [selectedId]);
 
+  // Guide versions of the chosen component, and which one this draft's headings point to.
+  const chosen = useMemo(() => rubrics.find((r) => r.id === rubricId) ?? null, [rubrics, rubricId]);
+  const versions = useMemo(() => (chosen ? guideVersions(rubrics, chosen) : []), [rubrics, chosen]);
+  const [suggestion, setSuggestion] = useState<{ key: string; value: RubricVersions } | null>(null);
+  const suggestKey = versions.length > 1 && rubricId && draftId ? `${rubricId}:${draftId}` : null;
+  useEffect(() => {
+    if (!suggestKey || !rubricId || !draftId) return;
+    let cancelled = false;
+    // A server without guide versions has nothing to suggest: the choice still works.
+    courseworkApi
+      .rubricVersions({ rubricId, draftId })
+      .then((value) => !cancelled && setSuggestion({ key: suggestKey, value }))
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, [suggestKey, rubricId, draftId]);
+
   const shown = review && review.id === selectedId ? review : null;
   const rubric = useMemo(() => rubrics.find((r) => r.id === (shown?.rubric.id ?? rubricId)) ?? rubrics.find((r) => r.id === rubricId) ?? null, [rubrics, rubricId, shown]);
   const running = isRunning(shown?.status) || (!!selectedId && !shown && isRunning(rows.find((r) => r.id === selectedId)?.status));
 
-  const request = useCallback(async () => {
+  const request = useCallback(async (switchTo?: string) => {
     if (!documentId || requesting) return;
+    const rubricId = typeof switchTo === "string" ? switchTo : docRubricId;
+    if (rubricId && rubricId !== docRubricId) live.current.onRubric(rubricId);
     setRequesting(true);
     setRequestError(null);
     try {
       await live.current.flush();
-      const out = await courseworkApi.requestReview({ documentId, ...(draftId ? { draftId } : {}), rubricId: rubricId ?? undefined, mode });
+      const out = await courseworkApi.requestReview({ documentId, ...(draftId ? { draftId } : {}), rubricId: rubricId ?? undefined, mode, ...(live.current.declaredWords ? { declaredWords: live.current.declaredWords } : {}) });
       setFresh(false);
       setHideMarks(false);
       setStatus((s) => (s ? { ...s, usedToday: s.usedToday + 1, remainingToday: out.remainingToday, allowed: out.remainingToday === null || out.remainingToday > 0, reason: out.remainingToday === 0 ? "daily_limit" : s.reason } : s));
@@ -246,7 +276,7 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     } finally {
       setRequesting(false);
     }
-  }, [documentId, draftId, requesting, rubricId, mode, rubrics]);
+  }, [documentId, draftId, requesting, docRubricId, mode, rubrics]);
 
   const remove = useCallback(
     async (reviewId: string) => {
@@ -276,6 +306,9 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
     rubrics,
     rubric,
     setRubric: (id) => live.current.onRubric(id),
+    chosen,
+    versions,
+    suggestion: suggestion && suggestion.key === suggestKey ? suggestion.value : null,
     rows,
     review: shown,
     select: (id) => {

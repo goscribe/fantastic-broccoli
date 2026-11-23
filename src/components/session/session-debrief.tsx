@@ -442,11 +442,12 @@ export function SessionDebrief({
     staleTime: 5 * 60_000,
     retry: false,
     queryFn: async () => {
-      const progress = await coursesApi.progress(workspaceId!).catch(() => null);
-      if (!progress) return null;
+      // Only the course's id is needed, and most subjects follow no course: the student's course subjects say which do.
+      const courseId = (await coursesApi.mine().catch(() => [])).find((c) => c.workspaceId === workspaceId)?.courseId;
+      if (!courseId) return null;
       const [course, notes] = await Promise.all([
-        loadCourse(progress.courseId).catch(() => null),
-        notesApi.listForCourse(progress.courseId).catch(() => []),
+        loadCourse(courseId).catch(() => null),
+        notesApi.listForCourse(courseId).catch(() => []),
       ]);
       return course ? { course, withNotes: new Set(notes.map((n) => n.topicId)) } : null;
     },

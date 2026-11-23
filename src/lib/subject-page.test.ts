@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { chipAction, filesForCourseTopics, latestUpload, newSessionScope, pickSubjectNext, reviewBreakdown, subjectChips, subjectNextCopy } from "./subject-page";
+import { chipAction, courseLookup, filesForCourseTopics, latestUpload, newSessionScope, pickSubjectNext, reviewBreakdown, subjectChips, subjectNextCopy } from "./subject-page";
 
 const base = { loading: false, sessions: [], review: { mistakes: 0, dueItems: 0, dueCards: 0 }, planTasks: [], courseNext: null, materialCount: 2 };
 const session = (o: Partial<{ id: string; status: string; generating: boolean; quickStart: boolean; createdAt: string; done: number; open: number }>) => ({
@@ -99,4 +99,15 @@ test("the student's files land on the course topic they cover; the rest stay lis
   assert.deepEqual(byTopic.get("c1"), ["u3"]);
   assert.equal(byTopic.get("x"), undefined);
   assert.deepEqual(unmatched.map((o) => o.title), ["Exam technique"]);
+});
+
+test("course progress is asked for only when the subject follows a course", () => {
+  // Still loading: nothing is asked yet.
+  assert.equal(courseLookup(undefined), "wait");
+  // The student's own notes (no course), or not their subject: no request at all.
+  assert.equal(courseLookup({ courseId: null }), "skip");
+  assert.equal(courseLookup(null), "skip");
+  // A course subject, or an older server that does not say which it is.
+  assert.equal(courseLookup({ courseId: "ib-biology" }), "ask");
+  assert.equal(courseLookup({}), "ask");
 });

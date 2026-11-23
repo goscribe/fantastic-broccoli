@@ -343,7 +343,7 @@ function WeekPlan({ action, subjects }: { action: Exclude<HomeAction, { kind: "u
           <Settings2 className="size-4" />
         </button>
       )}
-      <Link href="/planner" className="flex h-9 items-center rounded-full px-2.5 text-[12.5px] font-extrabold text-foreground underline decoration-foreground/25 underline-offset-[3px] hover:bg-foreground/5 hover:decoration-foreground">
+      <Link href="/planner" onClick={() => track("home.today_tapped", { action: "planner" })} className="flex h-9 items-center rounded-full px-2.5 text-[12.5px] font-extrabold text-foreground underline decoration-foreground/25 underline-offset-[3px] hover:bg-foreground/5 hover:decoration-foreground">
         {t("week.open")}
       </Link>
     </div>
@@ -451,6 +451,8 @@ function ItemChip({ item, colour, muted = false, inline = false }: { item: WeekI
   return (
     <Link
       href={item.href}
+      // A study time on the week is a way into today's work too (funnel: which way in gets taken).
+      onClick={() => track("home.today_tapped", { action: "week_item" }, item.workspaceId)}
       title={full}
       aria-label={full}
       className={cn("week-chip min-w-0 text-left", plain && "week-chip--plain", inline ? "inline-flex max-w-full items-baseline gap-1 px-2 py-1" : "block px-1.5 py-1.5", muted && "text-foreground/70")}
@@ -646,7 +648,7 @@ function DayCell({
                 ))}
               </ul>
               {cell.items.length > shown.length && (
-                <Link href="/planner" className="mt-1 block rounded-md px-0.5 text-caption font-extrabold text-foreground/70 hover:text-foreground hover:underline">
+                <Link href="/planner" onClick={() => track("home.today_tapped", { action: "planner" })} className="mt-1 block rounded-md px-0.5 text-caption font-extrabold text-foreground/70 hover:text-foreground hover:underline">
                   {t("week.more").replace("{n}", String(cell.items.length - shown.length))}
                 </Link>
               )}

@@ -321,6 +321,8 @@ export function Feedback({
     <div className="flex flex-col gap-7">
       {summary}
       {result.overall.summary && <p className="-mt-2 text-ui text-foreground">{result.overall.summary}</p>}
+      {/* What the review could not see (images): said with the result, not left for the student to guess. */}
+      {result.seen?.note && <p className="-mt-4 text-small text-muted-foreground" data-cw-unseen>{result.seen.note}</p>}
       {onNextSteps && (
         <button type="button" onClick={onNextSteps} className="-mt-2 flex min-h-12 w-full items-center justify-between gap-3 rounded-[var(--r-control)] bg-muted px-4 text-left text-ui font-extrabold text-foreground hover:bg-border">
           {t(marked ? "cw.next.cta" : "cw.next.ctaFeedback")}

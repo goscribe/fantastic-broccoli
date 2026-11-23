@@ -26,6 +26,8 @@ interface TreeWorkspaceRow {
   coverUrl?: string | null;
   /** Not sent by a server older than the subject-family release. */
   subjectFamily?: string | null;
+  /** The catalog course the subject follows (null: none). Not sent by an older server. */
+  courseId?: string | null;
   updatedAt: Date | string;
   uploads: UploadRow[];
   owner?: MemberUserRow | null;
@@ -106,6 +108,7 @@ function mapWorkspace(row: TreeWorkspaceRow): Workspace {
     color: row.color ?? "green",
     coverUrl: row.coverUrl ?? undefined,
     subjectFamily: isSubjectFamily(row.subjectFamily) ? row.subjectFamily : undefined,
+    courseId: row.courseId,
     folderId: row.folderId ?? undefined,
     sessions: [],
     materials: (row.uploads ?? []).map((u) => mapUploadToMaterial(u, row.id)),

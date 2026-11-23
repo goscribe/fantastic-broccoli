@@ -118,7 +118,8 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   const [attachOpen, setAttachOpen] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
   const attached = useAttachedNotes(workspaceId);
-  const course = useSubjectCourse(workspaceId);
+  // Course progress is asked for once the subject is known to follow a course (most follow none).
+  const course = useSubjectCourse(workspaceId, loading && !workspace ? undefined : workspace);
   const notes = useNotesOutline(workspaceId);
   const startCourseTopic = useStartCourseTopic();
   const planStarter = useStartTask();
