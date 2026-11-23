@@ -70,9 +70,37 @@ export interface DiagramSpec {
   edges: { from: string; to: string; label: string | null }[];
 }
 
-/** What a figure block stores and the app draws: a plot (the topic-note graph format) or a labelled diagram as data. */
+export type SketchColor = "blue" | "red" | "green" | "amber" | "violet" | "neutral";
+
+export interface SketchXY {
+  x: number;
+  y: number;
+}
+
+/**
+ * A schematic graph as in a textbook (AD–AS, supply and demand, a v–t graph,
+ * an energy profile), drawn without numbers on the axes. Coordinates are
+ * illustrative, on a canvas the model chose (normally 0–10). Mirrors the
+ * server's lib/notes/sketch.ts.
+ */
+export interface SketchSpec {
+  xLabel: string;
+  yLabel: string;
+  axes: boolean;
+  bounds: { left: number; right: number; bottom: number; top: number };
+  curves: { id: string; label: string | null; color: SketchColor; dashed: boolean; smooth: boolean; points: SketchXY[] }[];
+  /** A guide that is not null is a dashed line to that axis, with that mark ("" for none). */
+  points: { label: string | null; x: number; y: number; xGuide: string | null; yGuide: string | null }[];
+  marks: { axis: "x" | "y"; at: number; label: string }[];
+  arrows: { from: SketchXY; to: SketchXY; label: string | null; double: boolean }[];
+  regions: { label: string | null; color: SketchColor; polygon: SketchXY[] | null; between: { upper: string; lower: string | null; from: number; to: number } | null }[];
+  texts: { x: number; y: number; text: string }[];
+}
+
+/** What a figure block stores and the app draws: a plot (the topic-note graph format), a schematic sketch, or a labelled diagram as data. */
 export type DiagramFigure =
   | { kind: "graph"; title: string; caption: string; alt: string; graph: GraphSpec }
+  | { kind: "sketch"; title: string; caption: string; alt: string; sketch: SketchSpec }
   | { kind: "diagram"; title: string; caption: string; alt: string; diagram: DiagramSpec };
 
 export interface DiagramStatus {

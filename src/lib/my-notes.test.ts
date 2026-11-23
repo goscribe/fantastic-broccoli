@@ -73,6 +73,9 @@ test("highlights in an editor document are its highlight marks, in reading order
 test("a figure block is only drawn from a well-formed spec", () => {
   assert.ok(isDiagramFigure({ kind: "graph", title: "t", caption: "", alt: "", graph: { xLabel: "x", yLabel: "y", bounds: { left: 0, right: 1, bottom: 0, top: 1 }, expressions: [] } }));
   assert.ok(isDiagramFigure({ kind: "diagram", title: "t", caption: "", alt: "", diagram: { layout: "flow", nodes: [], edges: [] } }));
+  const sketch = { xLabel: "Real GDP (Y)", yLabel: "Price level (PL)", axes: true, bounds: { left: 0, right: 10, bottom: 0, top: 10 }, curves: [], points: [], marks: [], arrows: [], regions: [], texts: [] };
+  assert.ok(isDiagramFigure({ kind: "sketch", title: "t", caption: "", alt: "", sketch }));
+  assert.ok(!isDiagramFigure({ kind: "sketch", title: "t", caption: "", alt: "", sketch: { ...sketch, curves: undefined } }));
   assert.ok(!isDiagramFigure({ kind: "graph", title: "t" }));
   assert.ok(!isDiagramFigure({ kind: "html", title: "t", html: "<svg/>" }));
   assert.ok(!isDiagramFigure(null));

@@ -225,6 +225,10 @@ export function isDiagramFigure(v: unknown): v is DiagramFigure {
   if (!f || typeof f !== "object" || typeof f.title !== "string") return false;
   if (f.kind === "graph") return !!f.graph && Array.isArray(f.graph.expressions) && !!f.graph.bounds;
   if (f.kind === "diagram") return !!f.diagram && Array.isArray(f.diagram.nodes) && Array.isArray(f.diagram.edges);
+  if (f.kind === "sketch") {
+    const k = f.sketch;
+    return !!k && !!k.bounds && ["curves", "points", "marks", "arrows", "regions", "texts"].every((part) => Array.isArray(k[part as keyof typeof k]));
+  }
   return false;
 }
 
