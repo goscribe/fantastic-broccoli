@@ -17,7 +17,8 @@ const PRESETS = [
   PRODUCTION,
   "deepseek/deepseek-v4.1-flash",
   "z-ai/glm-5.3-flash",
-  "qwen/qwen-3.8",
+  "qwen/qwen3.8-flash",
+  "qwen/qwen4-max",
   "anthropic/claude-sonnet-5.5",
   "google/gemini-4-carbon",
 ];
@@ -30,6 +31,8 @@ const label = (model: string | null) => model ?? "Production (current models)";
 /** "claude-sonnet-5.5" for "anthropic/claude-sonnet-5.5": fits a stat card. */
 const shortLabel = (model: string | null) => (model ? model.split("/").pop()! : "Production");
 const keyOf = (model: string | null) => model ?? PRODUCTION;
+/** The ranking score (failures count as 0); an older server only sends the finished-only average. */
+const rankScore = (m: BenchmarkModelLine) => (m.score === undefined ? m.overall : m.score);
 
 function scoreTone(score: number | null) {
   if (score === null) return "text-faint";
@@ -86,7 +89,7 @@ export default function AdminBenchmarkPage() {
   const report = data?.report;
   const best = report?.models[0];
   const cheapestGood = report?.models
-    .filter((m) => (m.overall ?? 0) >= 7 && m.avgCostUsd !== null)
+    .filter((m) => (rankScore(m) ?? 0) >= 7 && m.avgCostUsd !== null)
     .sort((a, b) => (a.avgCostUsd ?? 0) - (b.avgCostUsd ?? 0))[0];
 
   return (
@@ -207,29 +210,35 @@ export default function AdminBenchmarkPage() {
 
         {report && (
           <div className="grid gap-3 sm:grid-cols-3">
-            <StatCard label="Best overall" value={best ? shortLabel(best.model) : "–"} hint={best ? `${label(best.model)} · ${score(best.overall)}/10 · ${pct(best.passRate)} pass` : undefined} />
-            <StatCard label="Cheapest at 7+" value={cheapestGood ? shortLabel(cheapestGood.model) : "–"} hint={cheapestGood ? `${label(cheapestGood.model)} · ${usd(cheapestGood.avgCostUsd)} a session` : "No OpenRouter model averaged 7+"} />
+            <StatCard label="Best overall" value={best ? shortLabel(best.model) : "–"} hint={best ? `${label(best.model)} · ${score(rankScore(best))}/10 · ${pct(best.passRate)} pass` : undefined} />
+            <StatCard label="Cheapest at 7+" value={cheapestGood ? shortLabel(cheapestGood.model) : "–"} hint={cheapestGood ? `${label(cheapestGood.model)} · ${usd(cheapestGood.avgCostUsd)} a session` : "No OpenRouter model scored 7+"} />
             <StatCard label="Materials" value={String(report.materials.length)} hint={report.skippedMaterials ? `${report.skippedMaterials} could not be fetched or analysed` : "All reached generation"} />
           </div>
         )}
 
-        <Table headers={["#", "Model", "Overall", "Fits material", "Quality", "Device fit", "Pass (7+)", "Failed", "Time", "Cost / session"]}>
+        <p className="text-[13px] text-muted-foreground">
+          Score counts a session that failed to generate as 0, so a model that finishes few materials cannot rank high. The next four columns average the finished sessions only.
+        </p>
+
+        <Table headers={["#", "Model", "Score", "When finished", "Fits material", "Quality", "Device fit", "Pass (7+)", "Failed", "Time", "Cost / session"]}>
           {isLoading ? (
-            <TableSkeletonRows cols={10} rows={4} />
+            <TableSkeletonRows cols={11} rows={4} />
           ) : !report || report.models.length === 0 ? (
-            <EmptyRow colSpan={10}>No benchmark yet. Pick models above and run one.</EmptyRow>
+            <EmptyRow colSpan={11}>No benchmark yet. Pick models above and run one.</EmptyRow>
           ) : (
             report.models.map((m: BenchmarkModelLine, i) => (
               <tr key={keyOf(m.model)} className="border-t border-border">
                 <Td className="tabular-nums text-faint">{i + 1}</Td>
                 <Td className="font-semibold">{label(m.model)}</Td>
-                <Td className={cn("font-bold tabular-nums", scoreTone(m.overall))}>{score(m.overall)}</Td>
+                <Td className={cn("font-bold tabular-nums", scoreTone(rankScore(m)))}>{score(rankScore(m))}</Td>
+                <Td className="tabular-nums">{score(m.overall)}</Td>
                 <Td className="tabular-nums">{score(m.materialFit)}</Td>
                 <Td className="tabular-nums">{score(m.quality)}</Td>
                 <Td className="tabular-nums" title={`Laptop ${score(m.laptopFit)} · phone ${score(m.phoneFit)}`}>{score(m.mediumFit)}</Td>
                 <Td className="tabular-nums">{pct(m.passRate)}</Td>
                 <Td className={cn("tabular-nums", m.failed > 0 && "font-semibold text-red-600")}>
                   {m.failed}/{m.attempted}
+                  {m.tooSlow ? <span className="font-normal text-muted-foreground"> ({m.tooSlow} too slow)</span> : null}
                 </Td>
                 <Td className="whitespace-nowrap tabular-nums">{secs(m.avgSeconds)}</Td>
                 <Td className="tabular-nums" title={m.totalCostUsd !== null ? `Total ${usd(m.totalCostUsd)}` : "Production models are not billed through OpenRouter"}>
