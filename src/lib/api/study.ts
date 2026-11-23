@@ -74,11 +74,13 @@ export async function markWorksheetAnswer(input: {
   answerImage?: string;
 }): Promise<PartMarking> {
   const result = await studySessionApi.markWorksheetAnswer(input);
+  const summary = result.summary ?? result.marking.summary;
   return {
     points: result.marking.points,
     achievedPoints: result.achievedPoints,
     totalPoints: result.totalPoints,
     correct: result.correct,
+    ...(summary ? { summary } : {}),
   };
 }
 
