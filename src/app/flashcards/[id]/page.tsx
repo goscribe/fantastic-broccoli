@@ -3,6 +3,8 @@
 import "@/lib/i18n/flashcards";
 import { ShareItemButton } from "@/components/growth/share-item-button";
 import Image from "next/image";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
+import { WaitScreen } from "@/components/ui/wait-screen";
 import { MathText } from "@/components/ui/markdown-text";
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
@@ -23,21 +25,15 @@ import { DeckTestView } from "@/components/flashcards/deck-test-view";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n, type TranslationKey } from "@/lib/i18n";
-import {
-  ArrowLeft,
-  ClipboardCheck,
-  GraduationCap,
-  Layers,
-  Sparkles,
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { chooseStudyLength } from "@/lib/study-length-client";
 
 type DeckMode = "cards" | "learn" | "test";
 
-const MODES: { id: DeckMode; labelKey: TranslationKey; icon: typeof Layers }[] = [
-  { id: "cards", labelKey: "fc.modeCards", icon: Layers },
-  { id: "learn", labelKey: "fc.modeLearn", icon: GraduationCap },
-  { id: "test", labelKey: "fc.modeTest", icon: ClipboardCheck },
+const MODES: { id: DeckMode; labelKey: TranslationKey }[] = [
+  { id: "cards", labelKey: "fc.modeCards" },
+  { id: "learn", labelKey: "fc.modeLearn" },
+  { id: "test", labelKey: "fc.modeTest" },
 ];
 
 function FlashcardDeck() {
@@ -136,7 +132,7 @@ function FlashcardDeck() {
 
   if (isLoading) {
     return (
-      <div className="mx-auto w-full max-w-3xl space-y-4">
+      <div className="w-full max-w-3xl space-y-4">
         <Skeleton className="h-8 w-40" />
         <Skeleton className="h-[380px] w-full rounded-3xl" />
       </div>
@@ -145,15 +141,12 @@ function FlashcardDeck() {
 
   if (deckEmpty && gen?.generating) {
     return (
-      <div className="mx-auto w-full max-w-3xl">
-        <div className="rounded-3xl border border-border bg-card p-10 text-center">
-          <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="mx-auto h-[110px] w-auto animate-pulse" />
-          <div className="mt-4 text-[18px] font-bold">Building your deck…</div>
-          <p className="mt-1 text-[14px] text-muted-foreground">
-            {gen.metadata?.quantity ? `${gen.metadata.quantity} cards` : "A set of cards"} from your material — about a minute. This page updates by itself.
-          </p>
-        </div>
-      </div>
+      <WaitScreen
+        pose="book"
+        title="Your flashcards"
+        status={gen.metadata?.quantity ? `Writing ${gen.metadata.quantity} cards from your material` : "Writing cards from your material"}
+        time="About a minute. The deck opens here by itself."
+      />
     );
   }
 
@@ -178,61 +171,34 @@ function FlashcardDeck() {
   const cardCount = deck.entries.length;
 
   return (
-    <div className="mx-auto w-full max-w-3xl space-y-6">
-      <div>
-        <Link
-          href="/flashcards"
-          className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground"
-        >
-          <ArrowLeft className="h-3.5 w-3.5" />
-          {t("fc.backToFlashcards")}
-        </Link>
-        <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight">
-              <MathText text={item.title} />
-            </h1>
-            <p className="mt-1 flex items-center gap-2 text-sm text-muted-foreground">
-              <span>
-                {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
-              </span>
-              {item.topic && (
-                <>
-                  <span>·</span>
-                  <span>{item.topic}</span>
-                </>
-              )}
-              {hasPooledCards && progress && (
-                <>
-                  <span>·</span>
-                  <span>
-                    {t("fc.masteredCount").replace(
-                      "{count}",
-                      String(masteredCount),
-                    )}
-                  </span>
-                </>
-              )}
-            </p>
-          </div>
-
+    <div className="w-full max-w-3xl space-y-6">
+      <PageHeader
+        back={{ href: "/flashcards", label: t("fc.backToFlashcards") }}
+        title={<MathText text={item.title} />}
+        subtitle={
+          <>
+            {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
+            {item.topic && <> · {item.topic}</>}
+            {hasPooledCards && progress && <> · {t("fc.masteredCount").replace("{count}", String(masteredCount))}</>}
+          </>
+        }
+        actions={
           <div className="flex flex-wrap items-center gap-2">
             <ShareItemButton artifactId={item.id} kind={item.kind} title={item.title} />
             <div className="flex items-center gap-1 rounded-full border border-border bg-card p-1">
-            {MODES.map(({ id, labelKey, icon: Icon }) => (
+            {MODES.map(({ id, labelKey }) => (
               <button
                 key={id}
                 type="button"
                 onClick={() => selectMode(id)}
                 disabled={id === "test" && openTest.isPending}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[13px] font-medium transition-colors",
+                  "flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-small font-semibold transition-colors",
                   mode === id
-                    ? "bg-accent-soft text-accent"
+                    ? "bg-muted text-foreground"
                     : "text-muted-foreground hover:text-foreground",
                 )}
               >
-                <Icon className="h-3.5 w-3.5" />
                 {t(labelKey)}
               </button>
             ))}
@@ -242,12 +208,11 @@ function FlashcardDeck() {
               onClick={() => startSession.mutate()}
               disabled={startSession.isPending}
             >
-              <Sparkles className="mr-1.5 h-3.5 w-3.5" />
               {t(startSession.isPending ? "fc.starting" : "fc.study")}
             </Button>
           </div>
-        </div>
-      </div>
+        }
+      />
 
       {mode === "cards" && (
         <DeckCardsView
@@ -279,10 +244,10 @@ function FlashcardDeck() {
 
 export default function FlashcardDeckPage() {
   return (
-    <main className="flex-1 px-6 py-6 md:px-10">
+    <PageShell max="max-w-none">
       <Suspense fallback={null}>
         <FlashcardDeck />
       </Suspense>
-    </main>
+    </PageShell>
   );
 }

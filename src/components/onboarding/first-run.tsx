@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Loader2, Upload } from "lucide-react";
+import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Upload } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
 import { addPastedText, analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
@@ -11,6 +11,7 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { cn } from "@/lib/utils";
+import { WaitScreen } from "@/components/ui/wait-screen";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/first-run";
 import "@/lib/i18n/courses";
@@ -306,6 +307,8 @@ export function FirstRun({
     // above the top edge, where scrolling cannot reach.
     <div className="flex min-h-full w-full shrink-0 flex-col items-center bg-white px-4 pb-10 pt-8 sm:px-6 sm:py-12">
       <div className="w-full max-w-[520px] animate-fade-up sm:my-auto">
+        {!busy && (
+          <>
         <Image
           src="/design/cat3-wave.webp"
           alt=""
@@ -325,15 +328,14 @@ export function FirstRun({
         <p className="mx-auto mt-2 max-w-[440px] text-balance text-center text-[14.5px] leading-snug text-muted-foreground">
           {firstRun ? t("firstRun.subtitle") : t("firstRun.newSubtitle")}
         </p>
-
+          </>
+        )}
         {busy && (
-          <div className="mt-10 flex flex-col items-center text-center" role="status" aria-live="polite">
-            <Loader2 className="size-6 animate-spin text-accent" />
-            <p className="mt-3 text-[15px] font-semibold">
-              {t(busy === "uploading" ? "firstRun.uploading" : busy === "saving" ? "firstRun.saving" : "firstRun.building")}
-            </p>
-            <p className="mt-1 text-[13px] text-muted-foreground">{t("firstRun.busyHint")}</p>
-          </div>
+          <WaitScreen
+            title={t("firstRun.waitTitle")}
+            status={t(busy === "uploading" ? "firstRun.uploading" : busy === "saving" ? "firstRun.saving" : "firstRun.building")}
+            time={t("firstRun.busyHint")}
+          />
         )}
         {/* Kept mounted while a session is made, so a start that fails comes back to the same course and picks. */}
         <div className={busy ? "hidden" : undefined}>
