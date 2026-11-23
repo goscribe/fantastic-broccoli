@@ -175,7 +175,6 @@ function FlashcardDeck() {
       <PageHeader
         back={{ href: "/flashcards", label: t("fc.backToFlashcards") }}
         title={<MathText text={item.title} />}
-        className="mb-0"
         subtitle={
           <>
             {cardCount} {t(cardCount === 1 ? "fc.card" : "fc.cards")}
