@@ -16,6 +16,8 @@ import { GuideTile } from "@/components/coursework/hub";
 import { loadRubrics } from "@/components/coursework/use-grader";
 import type { RubricSummary } from "@/lib/api/coursework";
 import { componentTitle } from "@/lib/coursework";
+import { NewNoteDialog, YourNotes } from "@/components/my-notes/library-notes";
+import { useOwnNotes } from "@/components/my-notes/use-my-notes";
 import "@/app/notes/notes-look.css";
 
 /**
@@ -28,6 +30,9 @@ export function NotesLibrary() {
   const entitled = useNotesEntitled();
   const [mine, setMine] = useState<CourseSubject[]>([]);
   const [query, setQuery] = useState("");
+  /** The student's own notes, across subjects (nothing, and no "New note", on a server without them). */
+  const ownNotes = useOwnNotes();
+  const [newNote, setNewNote] = useState(false);
   /** Coursework guides (how each IA, the EE and TOK are marked); none on a server without the grader. */
   const [guides, setGuides] = useState<RubricSummary[]>([]);
   useEffect(() => {
@@ -91,7 +96,13 @@ export function NotesLibrary() {
               </p>
             )}
           </div>
-          <label className="flex h-11 w-full shrink-0 items-center gap-2.5 rounded-xl bg-muted px-3.5 text-[14.5px] sm:w-[280px]">
+          <div className="flex w-full shrink-0 items-center gap-2 sm:w-auto">
+          {ownNotes.available && (
+            <button type="button" onClick={() => setNewNote(true)} className="order-2 h-11 shrink-0 rounded-xl border border-border bg-white px-4 text-[14.5px] font-bold text-foreground hover:border-border-strong hover:bg-muted">
+              New note
+            </button>
+          )}
+          <label className="flex h-11 min-w-0 flex-1 items-center gap-2.5 rounded-xl bg-muted px-3.5 text-[14.5px] sm:w-[280px] sm:flex-none">
             <Search className="size-4 shrink-0 text-faint" aria-hidden="true" />
             <span className="sr-only">Search courses</span>
             <input
@@ -101,7 +112,10 @@ export function NotesLibrary() {
               className="min-w-0 flex-1 bg-transparent font-semibold text-foreground placeholder:font-medium placeholder:text-faint focus:outline-none"
             />
           </label>
+          </div>
         </div>
+        {newNote && <NewNoteDialog onClose={() => setNewNote(false)} />}
+        {ownNotes.available && <YourNotes notes={ownNotes.notes} query={query} />}
 
         {courses.state === "loading" && (
           <div className="mt-8 grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3" aria-busy="true">

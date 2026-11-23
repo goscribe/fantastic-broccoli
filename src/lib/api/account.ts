@@ -39,6 +39,13 @@ export interface PlanCaps {
    * access, but is not a paid conversion. Absent from servers before it was added.
    */
   complimentary?: boolean;
+  /**
+   * An admin gave this account the top tier for free, with no end date. Shown
+   * as "Unlimited · free": no renewal date and nothing to buy. Independent of
+   * `paid` (the user may still pay for a plan of their own). Absent from
+   * servers before it was added.
+   */
+  unlimitedGrant?: boolean;
   caps: {
     workspaces: number;
     studySessions: number;

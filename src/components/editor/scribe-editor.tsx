@@ -1,15 +1,19 @@
 "use client";
 
 import { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, type ReactNode, type Ref } from "react";
-import { EditorContent, useEditor, type Editor } from "@tiptap/react";
+import { EditorContent, ReactNodeViewRenderer, useEditor, type Editor } from "@tiptap/react";
+import type { AnyExtension } from "@tiptap/core";
 import StarterKit from "@tiptap/starter-kit";
 import { BlockMath, InlineMath } from "@tiptap/extension-mathematics";
 import { Placeholder } from "@tiptap/extensions";
 import { addColumnAfter, addRowAfter, deleteColumn, deleteRow, deleteTable } from "@tiptap/pm/tables";
-import { Bold, Heading1, Heading2, Italic, List, ListOrdered, Plus, Quote, Redo2, Undo2 } from "lucide-react";
+import { Bold, Heading1, Heading2, Highlighter, Italic, List, ListOrdered, Plus, Quote, Redo2, Undo2 } from "lucide-react";
+import type { DiagramFigure, HighlightColor } from "@/lib/api/my-notes";
+import { HIGHLIGHT_COLORS, lastHighlightColor, rememberHighlightColor } from "@/lib/my-notes";
 import { looksLikeLatex, typedToLatex } from "@/lib/typed-maths";
 import { cn } from "@/lib/utils";
-import { ANCHOR_EVENT, Anchors, Image, Table, TableCell, TableHeader, TableRow, anchorKey, type EditorAnchor } from "./extensions";
+import { ANCHOR_EVENT, Anchors, FIGURE_EVENT, Figure, Highlight, Image, Table, TableCell, TableHeader, TableRow, anchorKey, highlightRanges, type EditorAnchor } from "./extensions";
+import { FigureNodeView, type FigureAction } from "./figure-view";
 import { SLASH_COMMANDS, filterCommands, slashQuery, type SlashCommand, type SlashContext } from "./slash-commands";
 import "./editor.css";
 
@@ -28,6 +32,10 @@ export interface ScribeEditorHandle {
   setContent: (content: unknown) => void;
   /** Scrolls a marked passage into view and lights it; false when its words are no longer in the text. */
   showAnchor: (id: string) => boolean;
+  /** Scrolls the nth highlighted passage (reading order, as my-notes.ts docHighlights lists them) into view; false when there is none. */
+  showHighlight: (index: number) => boolean;
+  /** Takes the highlighter off the nth highlighted passage. */
+  removeHighlight: (index: number) => void;
   focus: () => void;
 }
 
@@ -44,8 +52,21 @@ export interface ScribeEditorProps {
   onAnchorClick?: (id: string) => void;
   /** Stores a picture and answers with its address. Without it `/image` is not offered. */
   uploadImage?: (file: File) => Promise<string>;
-  /** Reserved: a described diagram drawn by the server. Without it `/diagram` is not offered. */
-  createDiagram?: (prompt: string) => Promise<{ src: string; alt: string }>;
+  /**
+   * Turns a description into a figure spec (the server's `/diagram`). Without it `/diagram` is not offered,
+   * and figure blocks already in the document are shown but cannot be redrawn. A rejection's message is shown to the student.
+   */
+  createDiagram?: (prompt: string) => Promise<DiagramFigure>;
+  /** The highlighter: select text, pick a colour. Off unless the host asks for it (a student's own notes). */
+  highlighter?: boolean;
+  /** A highlight was made (for the host's own counting). */
+  onHighlight?: (color: HighlightColor) => void;
+  /**
+   * More editor extensions from the host. This is where live shared editing
+   * plugs in later (a Yjs Collaboration extension and its provider): the
+   * editor itself keeps no opinion on how the document is persisted.
+   */
+  extensions?: AnyExtension[];
   /** The right end of the toolbar: the host's own actions (word count, save state, review). */
   toolbarEnd?: ReactNode;
   /** Under the toolbar, above the text (a title field, a notice). */
@@ -84,6 +105,9 @@ export function ScribeEditor({
   onAnchorClick,
   uploadImage,
   createDiagram,
+  highlighter = false,
+  onHighlight,
+  extensions,
   toolbarEnd,
   header,
   handleRef,
@@ -97,9 +121,15 @@ export function ScribeEditor({
   const [menu, setMenu] = useState<{ query: string; from: number; left: number; top: number; /** Opens upwards from here when there is no room under the line. */ bottom: number | null; manual: boolean } | null>(null);
   const [menuIndex, setMenuIndex] = useState(0);
   const [imageBusy, setImageBusy] = useState(false);
+  /** The "Describe the graph or diagram" box: for a new figure at the caret (`pos` null) or for the figure block at `pos`. */
+  const [diagram, setDiagram] = useState<{ pos: number | null; at: number; prompt: string; busy: boolean; error: string | null } | null>(null);
+  const [diagramBox, setDiagramBox] = useState<{ left: number; top?: number; bottom?: number } | null>(null);
+  const diagramInput = useRef<HTMLTextAreaElement>(null);
+  /** The highlighter's colours over a selection. */
+  const [bubble, setBubble] = useState<{ left: number; top: number; below: boolean } | null>(null);
 
   // Latest callbacks for the editor's own handlers (created once).
-  const live = useRef({ onChange, onAnchorClick, menu, menuIndex, run: (() => {}) as (c: SlashCommand) => void, commands: [] as SlashCommand[] });
+  const live = useRef({ onChange, onAnchorClick, menu, menuIndex, run: (() => {}) as (c: SlashCommand) => void, commands: [] as SlashCommand[], highlighter, toggleHighlight: () => {}, onFigure: (() => {}) as (pos: number, action: FigureAction) => void });
 
   const openMath = useCallback((pos: number, block: boolean, latex: string) => setMath({ pos, block, input: latex.trim() }), []);
 
@@ -114,6 +144,9 @@ export function ScribeEditor({
       BlockMath.configure({ katexOptions: { throwOnError: false, displayMode: true }, onClick: (node, pos) => openMath(pos, true, String(node.attrs.latex ?? "")) }),
       Placeholder.configure({ placeholder: placeholder ?? "" }),
       Image,
+      Highlight,
+      Figure.extend({ addNodeView: () => ReactNodeViewRenderer(FigureNodeView) }),
+      ...(extensions ?? []),
       Table,
       TableRow,
       TableHeader,
@@ -123,6 +156,12 @@ export function ScribeEditor({
     editorProps: {
       attributes: { class: "se-doc", role: "textbox", "aria-multiline": "true", "aria-label": label },
       handleKeyDown: (_view, event) => {
+        // Ctrl/Cmd+Shift+H: the highlighter in the colour last used (again to take it off).
+        if (live.current.highlighter && (event.metaKey || event.ctrlKey) && event.shiftKey && event.key.toLowerCase() === "h") {
+          event.preventDefault();
+          live.current.toggleHighlight();
+          return true;
+        }
         const m = live.current.menu;
         if (!m) return false;
         const items = live.current.commands;
@@ -274,14 +313,120 @@ export function ScribeEditor({
           break;
         }
         case "diagram":
+          setDiagram({ pos: null, at: editor.state.selection.from, prompt: "", busy: false, error: null });
           break;
       }
     },
     [editor, insertMath],
   );
 
+  /* ---------- Highlighter ---------- */
+
+  const applyHighlight = useCallback(
+    (color: HighlightColor | null) => {
+      if (!editor) return;
+      if (color === null) editor.chain().focus().unsetHighlight().run();
+      else {
+        editor.chain().focus().setHighlight(color).run();
+        rememberHighlightColor(color);
+        onHighlight?.(color);
+      }
+      // The mark is made: put the caret at its end so typing carries on unmarked.
+      const end = editor.state.selection.to;
+      editor.chain().setTextSelection(end).unsetMark("highlight").run();
+      setBubble(null);
+    },
+    [editor, onHighlight],
+  );
+  const toggleHighlight = useCallback(() => {
+    if (!editor || editor.state.selection.empty) return;
+    applyHighlight(editor.isActive("highlight") ? null : lastHighlightColor());
+  }, [editor, applyHighlight]);
+
+  // The colours appear over a selection (under it on touch, where the system's own menu sits above).
+  const selectionTo = editor?.state.selection.to;
   useEffect(() => {
-    live.current = { onChange, onAnchorClick, menu, menuIndex: index, run, commands };
+    if (!editor || !editable || !highlighter) return;
+    const { selection } = editor.state;
+    const box = wrap.current?.getBoundingClientRect();
+    if (selection.empty || !box || !editor.isFocused || selection.to - selection.from < 1 || editor.state.doc.textBetween(selection.from, selection.to, " ").trim() === "") {
+      setBubble(null);
+      return;
+    }
+    const start = editor.view.coordsAtPos(selection.from);
+    const end = editor.view.coordsAtPos(selection.to);
+    const touch = window.matchMedia("(pointer: coarse)").matches;
+    const below = touch || start.top - box.top < 56;
+    const mid = (Math.min(start.left, end.left) + Math.max(start.right, end.right)) / 2;
+    setBubble({ left: Math.max(100, Math.min(mid - box.left, box.width - 100)), top: below ? end.bottom - box.top + (touch ? 44 : 8) : start.top - box.top - 8, below });
+  }, [editor, editable, highlighter, selectionFrom, selectionTo, docSize]);
+
+  /* ---------- Figures (/diagram) ---------- */
+
+  const draw = useCallback(
+    async (d: { pos: number | null; at: number; prompt: string }) => {
+    const prompt = d.prompt.trim();
+    if (!editor || !createDiagram || prompt.length < 3) return;
+    setDiagram({ ...d, busy: true, error: null });
+    try {
+      const figure = await createDiagram(prompt);
+      if (d.pos !== null && editor.state.doc.nodeAt(d.pos)?.type.name === "figure") {
+        editor.view.dispatch(editor.state.tr.setNodeMarkup(d.pos, undefined, { figure, prompt }));
+      } else {
+        editor.chain().focus().insertContentAt(Math.min(d.at, editor.state.doc.content.size), { type: "figure", attrs: { figure, prompt } }).run();
+      }
+      setDiagram(null);
+    } catch (err) {
+      setDiagram({ ...d, busy: false, error: err instanceof Error && err.message ? err.message : "We couldn't draw that one. Try describing it another way." });
+    }
+  },
+    [editor, createDiagram],
+  );
+
+  const onFigure = useCallback(
+    (pos: number, action: FigureAction) => {
+      if (!editor) return;
+      const node = editor.state.doc.nodeAt(pos);
+      if (!node || node.type.name !== "figure") return;
+      if (action === "delete") {
+        editor.chain().focus().deleteRange({ from: pos, to: pos + node.nodeSize }).run();
+        return;
+      }
+      const prompt = String(node.attrs.prompt ?? "");
+      setDiagram({ pos, at: pos, prompt, busy: false, error: null });
+      if (action === "redraw" && prompt.trim()) void draw({ pos, at: pos, prompt });
+    },
+    [editor, draw],
+  );
+
+  useEffect(() => {
+    const el = wrap.current;
+    if (!el) return;
+    const onEvent = (e: Event) => {
+      const detail = (e as CustomEvent).detail as { pos: number; action: FigureAction };
+      live.current.onFigure(detail.pos, detail.action);
+    };
+    el.addEventListener(FIGURE_EVENT, onEvent);
+    return () => el.removeEventListener(FIGURE_EVENT, onEvent);
+  }, []);
+
+  const diagramAt = diagram?.at ?? null;
+  useEffect(() => {
+    if (!editor || diagramAt === null) return;
+    const id = requestAnimationFrame(() => {
+      setDiagramBox(positionUnder(editor, Math.max(0, diagramAt - 1), wrap.current, 360) ?? { left: 0, top: 56 });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [editor, diagramAt]);
+
+  // The open box takes the keyboard (once it is on the page).
+  const diagramOpen = diagram !== null && diagramBox !== null;
+  useEffect(() => {
+    if (diagramOpen && document.activeElement !== diagramInput.current) diagramInput.current?.focus();
+  }, [diagramOpen, diagramAt]);
+
+  useEffect(() => {
+    live.current = { onChange, onAnchorClick, menu, menuIndex: index, run, commands, highlighter, toggleHighlight, onFigure };
   });
 
   // The equation box sits under its formula, placed once the formula is on the page.
@@ -334,6 +479,22 @@ export function ScribeEditor({
       getHTML: () => editor?.getHTML() ?? "",
       setContent: (next) => editor?.commands.setContent(next as object, { emitUpdate: true }),
       focus: () => editor?.commands.focus(),
+      showHighlight: (n) => {
+        const r = editor ? highlightRanges(editor.state.doc)[n] : undefined;
+        if (!editor || !r) return false;
+        const dom = editor.view.domAtPos(r.from + 1).node;
+        const el = dom instanceof HTMLElement ? dom : dom.parentElement;
+        const calm = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        el?.scrollIntoView({ block: "center", behavior: calm ? "auto" : "smooth" });
+        const mark = el?.closest("mark") ?? el?.querySelector("mark");
+        mark?.classList.add("se-hl--flash");
+        window.setTimeout(() => mark?.classList.remove("se-hl--flash"), 1200);
+        return true;
+      },
+      removeHighlight: (n) => {
+        const r = editor ? highlightRanges(editor.state.doc)[n] : undefined;
+        if (editor && r) editor.view.dispatch(editor.state.tr.removeMark(r.from, r.to, editor.schema.marks.highlight));
+      },
       showAnchor: (id) => {
         const el = editor?.view.dom.querySelector<HTMLElement>(`[data-anchor="${CSS.escape(id)}"]`);
         if (!el) return false;
@@ -373,6 +534,20 @@ export function ScribeEditor({
           <button type="button" className={toolBtn} aria-label="Quote" title="Quote" aria-pressed={editor?.isActive("blockquote") ?? false} onClick={() => editor?.chain().focus().toggleBlockquote().run()}>
             <Quote className="size-[17px]" />
           </button>
+          {highlighter && (
+            <button
+              type="button"
+              className={toolBtn}
+              aria-label="Highlight"
+              title="Highlight the selected text (Ctrl+Shift+H)"
+              aria-pressed={editor?.isActive("highlight") ?? false}
+              disabled={!editor || editor.state.selection.empty}
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={toggleHighlight}
+            >
+              <Highlighter className="size-[18px]" />
+            </button>
+          )}
           <button
             type="button"
             className={cn(toolBtn, "gap-1 pl-2 pr-3")}
@@ -443,6 +618,79 @@ export function ScribeEditor({
         </div>
       )}
 
+      {bubble && highlighter && editable && !menu && !math && !diagram && (
+        <div
+          className="se-menu se-bubble absolute z-30 flex items-center gap-1 !rounded-full !p-1"
+          style={{ left: bubble.left, top: bubble.top, transform: `translateX(-50%)${bubble.below ? "" : " translateY(-100%)"}` }}
+          role="toolbar"
+          aria-label="Highlight"
+          onMouseDown={(e) => e.preventDefault()}
+        >
+          {HIGHLIGHT_COLORS.map((c) => (
+            <button key={c.id} type="button" className="grid size-11 place-items-center rounded-full hover:bg-muted" aria-label={`Highlight ${c.label.toLowerCase()}`} title={c.label} onClick={() => applyHighlight(c.id)}>
+              <span className="size-6 rounded-full shadow-[inset_0_0_0_1px_rgb(0_0_0/0.12)]" style={{ background: `var(${c.var})` }} />
+            </button>
+          ))}
+          {editor?.isActive("highlight") && (
+            <button type="button" className="h-11 rounded-full px-3 text-small font-bold text-muted-foreground hover:bg-muted hover:text-foreground" onClick={() => applyHighlight(null)}>
+              Remove
+            </button>
+          )}
+        </div>
+      )}
+
+      {diagram && diagramBox && createDiagram && (
+        <form
+          className="se-menu absolute z-30 flex w-[360px] max-w-[calc(100vw-32px)] flex-col gap-2 p-3"
+          style={diagramBox}
+          aria-label="Diagram"
+          onSubmit={(e) => {
+            e.preventDefault();
+            void draw(diagram);
+          }}
+        >
+          <label className="text-ui font-extrabold text-foreground" htmlFor="se-diagram-prompt">
+            Describe the graph or diagram
+          </label>
+          <textarea
+            id="se-diagram-prompt"
+            ref={diagramInput}
+            value={diagram.prompt}
+            onChange={(e) => setDiagram({ ...diagram, prompt: e.target.value.slice(0, 600), error: null })}
+            onKeyDown={(e) => {
+              if (e.key === "Escape") {
+                e.preventDefault();
+                setDiagram(null);
+                editor?.commands.focus();
+              }
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                void draw(diagram);
+              }
+            }}
+            rows={3}
+            disabled={diagram.busy}
+            placeholder="y = x^2 - 4 from -3 to 3 with the roots marked"
+            className="min-h-[84px] w-full resize-none rounded-[10px] bg-muted px-3 py-2.5 text-ui text-foreground placeholder:text-faint focus:outline-none"
+          />
+          {diagram.error ? (
+            <p className="px-1 text-small font-semibold text-foreground" role="alert">
+              {diagram.error}
+            </p>
+          ) : (
+            <p className="px-1 text-caption text-muted-foreground">Equations and numbers you give are plotted exactly.</p>
+          )}
+          <div className="flex items-center justify-end gap-1">
+            <button type="button" onClick={() => setDiagram(null)} className="h-11 rounded-[10px] px-3 text-[14px] font-bold text-muted-foreground hover:bg-muted hover:text-foreground">
+              Cancel
+            </button>
+            <button type="submit" disabled={diagram.busy || diagram.prompt.trim().length < 3} aria-busy={diagram.busy} className="h-11 rounded-[10px] px-3.5 text-[14px] font-extrabold text-foreground hover:bg-muted disabled:opacity-40">
+              {diagram.busy ? "Drawing…" : diagram.pos !== null ? "Redraw" : "Draw"}
+            </button>
+          </div>
+        </form>
+      )}
+
       {math && mathBox && (
         <div className="se-menu absolute z-30 flex w-[340px] max-w-[calc(100vw-32px)] flex-col gap-1.5 p-2.5" style={mathBox}>
           <div className="flex items-center gap-2">
@@ -479,15 +727,15 @@ export function ScribeEditor({
   );
 }
 
-function positionUnder(editor: Editor, pos: number, wrap: HTMLElement | null): { left: number; top?: number; bottom?: number } | null {
+function positionUnder(editor: Editor, pos: number, wrap: HTMLElement | null, width = 340): { left: number; top?: number; bottom?: number } | null {
   if (!wrap) return null;
   try {
     const box = wrap.getBoundingClientRect();
     const at = editor.view.coordsAtPos(Math.min(pos + 1, editor.state.doc.content.size));
-    const left = Math.max(0, Math.min(at.left - box.left - 40, box.width - 340));
+    const left = Math.max(0, Math.min(at.left - box.left - 40, box.width - width));
     // No room under the formula (a phone's keyboard and tab bar): the box goes above it.
     const room = window.innerHeight - at.bottom - (window.innerWidth < 768 ? 72 : 8);
-    if (room < 120 && at.top > 200) return { left, bottom: box.bottom - at.top + 10 };
+    if (room < (width > 340 ? 230 : 120) && at.top > 200) return { left, bottom: box.bottom - at.top + 10 };
     return { left, top: at.bottom - box.top + 10 };
   } catch {
     return null;

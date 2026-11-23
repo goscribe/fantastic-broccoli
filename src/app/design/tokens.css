@@ -89,6 +89,11 @@
   --cream: #f4f4f6;
   --cream-edge: #e8e8ec;
   --hl: #ffe08f;
+  /* The four highlighters a reader marks a note with: the app's yellow and three from the subject palette, as light as a marker stroke. */
+  --hl-yellow: var(--hl);
+  --hl-green: #bfeccb;
+  --hl-pink: #ffc7dc;
+  --hl-blue: #bfdcff;
   --flame: #ff9a1f;
   --flame-edge: #e67700;
   --flame-soft: #fff4e2;

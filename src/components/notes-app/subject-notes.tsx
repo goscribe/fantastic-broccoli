@@ -117,8 +117,8 @@ export function NoteMaterialCard({
   );
 }
 
-/** "Add material" with its two ways in: upload files, or take Scribe's notes for a course. */
-export function AddMaterialMenu({ uploading, onUpload, onNotes }: { uploading: boolean; onUpload: () => void; onNotes: () => void }) {
+/** "Add material" with its ways in: upload files, take Scribe's notes for a course, or write a note of your own. */
+export function AddMaterialMenu({ uploading, onUpload, onNotes, onWrite }: { uploading: boolean; onUpload: () => void; /** Absent when no course has Scribe notes yet. */ onNotes?: () => void; /** Absent on a server without the student's own notes. */ onWrite?: () => void }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -145,7 +145,7 @@ export function AddMaterialMenu({ uploading, onUpload, onNotes }: { uploading: b
         <ChevronDown className="size-3.5" aria-hidden="true" />
       </button>
       {open && (
-        <div role="menu" className="absolute right-0 top-10 z-30 w-[236px] rounded-xl border border-border bg-white p-1.5 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]">
+        <div role="menu" className="absolute top-10 z-30 w-[236px] rounded-xl max-sm:left-1/2 max-sm:-translate-x-1/2 sm:right-0 border border-border bg-white p-1.5 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]">
           <button
             type="button"
             role="menuitem"
@@ -158,18 +158,34 @@ export function AddMaterialMenu({ uploading, onUpload, onNotes }: { uploading: b
             <span className="text-ui font-bold">Upload files</span>
             <span className="text-caption text-faint">PDF, slides, photos of notes</span>
           </button>
-          <button
-            type="button"
-            role="menuitem"
-            className={item}
-            onClick={() => {
-              setOpen(false);
-              onNotes();
-            }}
-          >
-            <span className="text-ui font-bold">From Scribe notes</span>
-            <span className="text-caption text-faint">Our notes for your course</span>
-          </button>
+          {onNotes && (
+            <button
+              type="button"
+              role="menuitem"
+              className={item}
+              onClick={() => {
+                setOpen(false);
+                onNotes();
+              }}
+            >
+              <span className="text-ui font-bold">From Scribe notes</span>
+              <span className="text-caption text-faint">Our notes for your course</span>
+            </button>
+          )}
+          {onWrite && (
+            <button
+              type="button"
+              role="menuitem"
+              className={item}
+              onClick={() => {
+                setOpen(false);
+                onWrite();
+              }}
+            >
+              <span className="text-ui font-bold">Write a note</span>
+              <span className="text-caption text-faint">Your own, kept in this subject</span>
+            </button>
+          )}
         </div>
       )}
     </div>

@@ -9,6 +9,7 @@ import {
   DollarSign,
   FileText,
   Flame,
+  Gift,
   LayoutDashboard,
   Library,
   MessageSquareText,
@@ -35,6 +36,7 @@ const NAV = [
   { href: "/admin/logs", label: "Activity logs", icon: ScrollText },
   { href: "/admin/invoices", label: "Invoices", icon: FileText },
   { href: "/admin/plans", label: "Plans", icon: CreditCard },
+  { href: "/admin/grants", label: "Free access", icon: Gift },
   { href: "/admin/costs", label: "Costs", icon: DollarSign },
 ];
 
