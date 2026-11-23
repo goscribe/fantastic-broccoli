@@ -6,14 +6,18 @@
  * tables, figures and captions, equations, code, citations, the bibliography
  * and appendices are left out. Each rubric carries its rules
  * (`wordCount.excludes`); a rubric without rules falls back to leaving out
- * the bibliography, appendices, tables and code.
+ * the title page, contents, bibliography, appendices, tables and code. A
+ * rubric whose limit covers only part of the work (the CS IA: criteria A, C
+ * and E) names the headings of the parts that count and of those that do
+ * not (`wordCount.sections`); it applies when the work has such headings.
  *
  * Counting is a separate pass over the work: nothing is removed from the
  * text that is reviewed (quote offsets point into it). The work is turned
  * into segments from the best structure there is:
  *
  *  - Word files: mammoth's HTML (headings, tables, images, footnote lists,
- *    contents links are real elements);
+ *    contents links are real elements; paragraphs set in a monospace font
+ *    arrive as <pre>, see file-extract.ts);
  *  - editor documents: tiptap JSON (tables, code blocks, maths, images);
  *  - PDFs and plain text: line heuristics (bibliography / appendix headings,
  *    contents lines with dot leaders, "Figure 3:" captions, code-like and
@@ -21,8 +25,14 @@
  *    deliberately conservative: when a line is not clearly something else it
  *    counts as prose.
  *
+ * Code that is not marked as such (ordinary paragraphs, PDF lines) is found
+ * by its lines: a line that can only be code, or a run of three or more
+ * short lines that mostly look like code. Prose with a semicolon, brackets
+ * or an arrow in it stays prose.
+ *
  * The same sections pass then runs over the segments: title page, contents,
- * acknowledgements, bibliography, appendices.
+ * acknowledgements, bibliography, appendices (and a "Source code" / "Code
+ * listing" section, up to the next heading), and the rubric's own sections.
  *
  * This file has no imports on purpose: it is a copy of the server's
  * src/lib/coursework/word-count.ts (goscribe/server), kept identical so the
@@ -47,10 +57,29 @@ export const WORD_COUNT_EXCLUDES = [
 ] as const;
 export type WordCountExclude = (typeof WORD_COUNT_EXCLUDES)[number];
 /** Page headers/footers of a PDF are never the student's prose, whatever the rubric says. */
-export type WordCountCategory = WordCountExclude | 'page_furniture';
+/** `sections`: parts of the work the limit does not cover (the rubric's `wordCount.sections`). */
+export type WordCountCategory = WordCountExclude | 'page_furniture' | 'sections';
 
 export const WORD_COUNT_KINDS = ['words', 'pages', 'none'] as const;
 export type WordCountKind = (typeof WORD_COUNT_KINDS)[number];
+
+/** A part of the work, found by its heading: `match` is a regular expression (case-insensitive) tested on the heading without its numbering. */
+export interface WordCountSectionRule {
+  label: string;
+  match: string;
+}
+
+/**
+ * The limit covers only some parts of the work. A part starts at a heading
+ * matching one of the rules and runs to the next matching heading (or a
+ * heading above it). Used only when the work has such headings.
+ */
+export interface WordCountSections {
+  /** Parts that count toward the limit. */
+  count: WordCountSectionRule[];
+  /** Parts that do not. */
+  exclude: WordCountSectionRule[];
+}
 
 export interface WordCountRules {
   /** The word limit; null when the component has none (or a page guide). */
@@ -59,6 +88,7 @@ export interface WordCountRules {
   excludes: WordCountExclude[];
   /** What the count covers, in plain words, shown to the student. */
   note: string;
+  sections?: WordCountSections | null;
 }
 
 export interface ResolvedWordCountRules extends WordCountRules {
@@ -66,9 +96,29 @@ export interface ResolvedWordCountRules extends WordCountRules {
   fallback: boolean;
 }
 
-export const FALLBACK_EXCLUDES: WordCountExclude[] = ['bibliography', 'appendices', 'tables', 'code'];
+/** No board counts a title page or a table of contents, so the fallback leaves them out too. */
+export const FALLBACK_EXCLUDES: WordCountExclude[] = ['title_page', 'contents', 'bibliography', 'appendices', 'tables', 'code'];
 export const FALLBACK_NOTE =
-  'General rule (this component\'s own counting rules are not loaded yet): the bibliography, appendices, tables and code are not counted. Check your subject guide for the exact rule.';
+  'General rule (this component\'s own counting rules are not loaded yet): the title page, contents, bibliography, appendices, tables and code are not counted. Check your subject guide for the exact rule.';
+
+function sectionRules(v: unknown): WordCountSectionRule[] {
+  if (!Array.isArray(v)) return [];
+  return v.filter((r): r is WordCountSectionRule => {
+    if (!r || typeof r !== 'object' || typeof (r as WordCountSectionRule).label !== 'string' || typeof (r as WordCountSectionRule).match !== 'string') return false;
+    try {
+      new RegExp((r as WordCountSectionRule).match, 'i');
+      return true;
+    } catch {
+      return false;
+    }
+  });
+}
+
+function resolveSections(v: unknown): WordCountSections | null {
+  if (!v || typeof v !== 'object') return null;
+  const s = { count: sectionRules((v as WordCountSections).count), exclude: sectionRules((v as WordCountSections).exclude) };
+  return s.exclude.length ? s : null;
+}
 
 /** The rubric's stored rules, or the general fallback built from its word limit. */
 export function resolveWordCountRules(stored: unknown, wordLimit: number | null): ResolvedWordCountRules {
@@ -81,10 +131,11 @@ export function resolveWordCountRules(stored: unknown, wordLimit: number | null)
       kind,
       excludes: s.excludes.filter((e): e is WordCountExclude => (WORD_COUNT_EXCLUDES as readonly string[]).includes(String(e))),
       note: typeof s.note === 'string' ? s.note : '',
+      sections: resolveSections(s.sections),
       fallback: false,
     };
   }
-  return { limit: wordLimit, kind: wordLimit ? 'words' : 'none', excludes: [...FALLBACK_EXCLUDES], note: FALLBACK_NOTE, fallback: true };
+  return { limit: wordLimit, kind: wordLimit ? 'words' : 'none', excludes: [...FALLBACK_EXCLUDES], note: FALLBACK_NOTE, sections: null, fallback: true };
 }
 
 export type WordCountSource = 'docx' | 'editor' | 'pdf' | 'text';
@@ -102,6 +153,13 @@ export interface WordBreakdown {
   method: 'structure' | 'text';
   /** A count from an uploaded file is an estimate; an editor document's is exact for its structure. */
   estimate: boolean;
+  /**
+   * Only for a component whose limit covers part of the work: whether the
+   * work has the headings that tell the parts apart (when it has none the
+   * count may include parts that do not count), and the words left out per
+   * part (they add up to `excluded.sections`).
+   */
+  sections?: { found: boolean; excluded: Array<{ label: string; words: number }> };
 }
 
 const WORD = /[\p{L}\p{N}]+(?:['’\-][\p{L}\p{N}]+)*/gu;
@@ -119,45 +177,130 @@ export interface Segment {
   /** Range in the source text (text mode only). */
   start?: number;
   end?: number;
+  /** A paragraph not yet looked at (code, tab-set columns, caption, contents line, equation): see finish(). */
+  pending?: boolean;
 }
 
 const CAPTION = /^(?:figure|fig\.?|table|diagram|chart|graph|image|screenshot|illustration|picture|photo|listing|equation|map|plate)\s+\d+[a-z]?(?:[.\-]\d+)*\s*(?:[:.\-–—|]|$)/i;
 const DOT_LEADER = /(?:\.{4,}|…{2,}|(?:\. ){4,}|_{4,})\s*\d{1,4}\s*$/;
 const ENDS_WITH_PAGE = /\S\s+\d{1,4}\s*$/;
 
+/* ---------------------------------- Code ---------------------------------- */
+
+/** Lines that can only be code. Case matters: "SELECT … FROM" is SQL, "select an option from the menu" is not. */
 const CODE_STRONG = [
-  /[;{}]\s*$/,
-  /^\s*(?:\/\/|\/\*|\*\/|<!--|#!|#include\b|@\w+\s*$)/,
-  /^\s*(?:def|class)\s+\w+\s*[(:]/,
-  /^\s*(?:import\s+[\w.*{},\s]+|from\s+[\w.]+\s+import\b.*|using\s+[\w.]+;?|package\s+[\w.]+;?)\s*$/,
-  /^\s*(?:if|elif|while|for|with|switch|case)\b.*[()=<>\[\].].*(?::|\{)\s*$/,
-  /^\s*(?:else|try|finally|do|except(?:\s+[\w.]+)?(?:\s+as\s+\w+)?)\s*(?::|\{)\s*$/,
-  /^\s*(?:public|private|protected|static|final|void|function|const|let|var|return|print|println|echo|console\.log|System\.out)\b.*[(){}=;]/,
-  /^\s*(?:SELECT|INSERT INTO|UPDATE|DELETE FROM|CREATE TABLE|ALTER TABLE|DROP TABLE)\b/,
-  /^\s*[\w.$\[\]'"]+\s*(?:[+\-*/]?=)\s*[^=\s].*[)\]"'\d]\s*$/,
-  /^\s*[\w.$]+\(.*\)\s*;?\s*$/,
-  /^\s*(?:return|break|continue|pass|raise|throw|yield)\b.{0,40}$/,
-  /^\s*<\/?[a-zA-Z][\w-]*(?:\s[^>]*)?>\s*$/,
-  /(?:===?|!==?|=>|->|&&|\|\||\+\+|::)/,
+  /^(?:\/\/|\/\*|\*\/|<!--|#!|#include\b)/,
+  /^def\s+\w+\s*\(/,
+  /^class\s+[A-Z]\w*\s*(?:\(.*\))?\s*:$/,
+  /^(?:(?:public|private|protected|abstract|final|static|export)\s+)+(?:class|interface|enum)\s+\w+/,
+  /^(?:class|interface|enum|struct)\s+\w+.*\{$/,
+  /^(?:export\s+)?(?:async\s+)?function\s*\*?\s*\w*\s*\(/,
+  /^(?:public|private|protected)\s+(?:(?:static|final|abstract|override|async|virtual|synchronized)\s+)*[\w<>\[\],.?]+\s+\w+\s*(?:\(|=|;)/,
+  /^(?:public|private|protected)\s+\w+\s*\(.*\)\s*\{?$/,
+  /^import\s+(?:static\s+)?[\w*]+(?:\.[\w*]+)+;?$/,
+  /^import\s+\w+(?:\s*,\s*\w+)*\s+as\s+\w+$/,
+  /^import\s+.*\sfrom\s+['"][^'"]+['"];?$/,
+  /^from\s+[\w.]+\s+import\s+[\w*,\s()]+$/,
+  /^(?:using|package)\s+[\w.]+;$/,
+  /^(?:SELECT\b.+\bFROM\b|INSERT\s+INTO\b|DELETE\s+FROM\b|CREATE\s+TABLE\b|ALTER\s+TABLE\b|DROP\s+TABLE\b|UPDATE\s+\w+\s+SET\b)/,
+  /^[\w.$\[\]]+\s*\(.*\)\s*;$/,
+  /^(?:[\w<>\[\]]+\s+)?[\w.$\[\]'"]+\s*[+\-*/%]?=\s*[^=\s].*;$/,
+  /^(?:if|while|for|foreach|switch|catch|else\s+if|elif)\s*\(.*\)\s*\{?$/,
+  /^\}?\s*(?:else|try|finally|do)\s*\{$/,
+  /^\}\s*(?:else\b.*|catch\s*\(.*\)\s*|finally\s*)\{?$/,
+  /^(?:console\.log|System\.out\.print(?:ln)?|print|println|printf|echo|Console\.Write(?:Line)?)\s*\(.*\)\s*;?$/,
+  /^(?:const|let|var)\s+[\w${}\[\],\s]+=/,
+  /^return\s+.*;$/,
+  /^throw\s+new\s+[\w.]+\(.*\);?$/,
+  /^<\/?[a-zA-Z][\w-]*(?:\s[^>]*)?>$/,
+  /^<[a-zA-Z][\w-]*(?:\s[^>]*)?>.*<\/[a-zA-Z][\w-]*>$/,
 ];
 
-function codeLine(line: string): boolean {
-  const t = line.trim();
-  if (!t) return false;
-  if (/^[{}()\[\];]+$/.test(t)) return true;
+/** Lines that look like code but could be prose or notes: they only count as code inside a run of code. */
+const CODE_WEAK = [
+  /^(?:if|elif|while|for|with|else|try|except|finally)\b.*:$/,
+  /^[\w.$\[\]'"]+\s*[+\-*/%]?=\s*[^=\s]/,
+  /^[\w.$]+\(.*\)$/,
+  /^(?:return|break|continue|pass|raise|throw|yield)\b.{0,40}$/,
+  /(?:===?|!==?|=>|->|&&|\|\||\+\+|::|\+=|-=)/,
+  /^import\s+\w+$/,
+  /^@\w+/,
+  /^#\s?\w/,
+  /^(?:public|private|protected|static|final|void|function|const|let|var)\b.*[(){}=;]/,
+  /^(?:end\s*(?:if|while|for|function|sub|loop|method)|loop\b.*|next\s+\w+|output\s+.+|input\s+\w+)$/i,
+];
+
+type CodeHint = 'strong' | 'weak' | 'filler' | 'blank' | null;
+
+function codeHintOf(t: string): 'strong' | 'weak' | null {
+  if (/^[{}()\[\];]+$/.test(t)) return 'strong';
   const n = words(t);
-  // A sentence stays prose: long, and ending like one.
-  if (n > 16) return false;
-  if (n >= 8 && /[.!?]["”)]?$/.test(t) && !/[;{}=]/.test(t)) return false;
-  return CODE_STRONG.some((re) => re.test(t));
+  // A sentence stays prose: long, or ending like one.
+  if (n > 16) return null;
+  if (n >= 8 && /[.!?]["”)]?$/.test(t) && !/[;{}=]/.test(t)) return null;
+  if (CODE_STRONG.some((re) => re.test(t))) return 'strong';
+  if (n >= 5 && /[.!?]$/.test(t)) return null;
+  // A line that reads as English (four or more plain words) is not a look-alike, unless it is a comment.
+  if (!/^(?:#|\/\/|--)/.test(t) && (t.replace(/"[^"]*"|'[^']*'/g, '""').match(/(?:^|\s)\p{L}{2,}[,;:]?(?=\s|$)/gu)?.length ?? 0) >= 4) return null;
+  if (CODE_WEAK.some((re) => re.test(t))) return 'weak';
+  // "total;" or "}" at the end of a line that holds more than words: "Easy to use;" in a list is prose.
+  if (/[;{}]$/.test(t) && /[^\p{L}\s,;'’\-]/u.test(t.slice(0, -1))) return 'weak';
+  return null;
 }
 
-/** A block of lines that is code: most lines look like code (one line must look like it strongly). */
-function codeBlock(text: string): boolean {
-  const lines = text.split('\n').filter((l) => l.trim());
-  if (!lines.length) return false;
-  const hits = lines.filter(codeLine).length;
-  return lines.length === 1 ? hits === 1 : hits / lines.length >= 0.6;
+function codeHint(line: string): CodeHint {
+  const t = line.trim();
+  if (!t) return 'blank';
+  // A listing pasted with its line numbers: "12  total += 1".
+  const numbered = /^\d{1,4}[.:|)]?\s+(?=\S)/.exec(t);
+  const hint = codeHintOf(t) ?? (numbered ? codeHintOf(t.slice(numbered[0].length)) : null);
+  if (hint) return hint;
+  // A short line that is not a sentence may sit inside a listing ("pass", a name on its own).
+  return words(t) <= 8 && !/[.!?:]["”)]?$/.test(t) ? 'filler' : null;
+}
+
+const MAX_FILLER_STREAK = 2;
+
+/**
+ * Which lines are code. `null` is a break (something that is not a line of
+ * prose: a table, a heading, the end of the text). A line that can only be
+ * code is code. Otherwise code is a run of consecutive lines with at least
+ * three code-like lines, one of which can only be code (or four that look
+ * like it), making up most of the run; short non-sentences inside such a run
+ * belong to it.
+ */
+export function codeFlags(lines: Array<string | null>): boolean[] {
+  const hints: CodeHint[] = lines.map((l) => (l === null ? null : codeHint(l)));
+  const flags = hints.map((h) => h === 'strong');
+  const like = (h: CodeHint) => h === 'strong' || h === 'weak';
+  let i = 0;
+  while (i < hints.length) {
+    if (!like(hints[i])) {
+      i++;
+      continue;
+    }
+    // Extend the run from its first code-like line; it ends at a break, a line of prose, or too many fillers in a row.
+    let end = i;
+    let fillers = 0;
+    let j = i + 1;
+    for (; j < hints.length; j++) {
+      const h = hints[j];
+      if (h === null) break;
+      if (like(h)) {
+        end = j;
+        fillers = 0;
+      } else if (h === 'filler' && ++fillers > MAX_FILLER_STREAK) break;
+    }
+    const run = hints.slice(i, end + 1);
+    const strong = run.filter((h) => h === 'strong').length;
+    const weak = run.filter((h) => h === 'weak').length;
+    const lined = run.filter((h) => h !== 'blank').length;
+    if (strong + weak >= 3 && (strong >= 1 || weak >= 4) && (strong + weak) / lined >= 0.6) {
+      for (let k = i; k <= end; k++) if (hints[k] !== 'blank') flags[k] = true;
+    }
+    i = end + 1;
+  }
+  return flags;
 }
 
 function equationLine(line: string): boolean {
@@ -195,7 +338,7 @@ function splitInlineMarkers(text: string, out: Segment[]): string {
     });
 }
 
-/** Prose blocks that are really a caption, code, a contents line or an equation. */
+/** Prose blocks that are really a caption, a contents line or an equation (code and columns are found in finish()). */
 function refine(seg: Segment, out: Segment[]): void {
   if (seg.kind !== 'para') {
     out.push(seg);
@@ -207,9 +350,59 @@ function refine(seg: Segment, out: Segment[]): void {
   let kind: SegKind = 'para';
   if (DOT_LEADER.test(t)) kind = 'toc';
   else if (CAPTION.test(t) && words(t) <= 45) kind = 'caption';
-  else if (codeBlock(t)) kind = 'code';
   else if (!t.includes('\n') && equationLine(t)) kind = 'equation';
   out.push({ ...seg, kind, text });
+}
+
+/** A paragraph set out in columns with tabs: at least three cells. */
+const tabRow = (text: string): boolean => !text.includes('\n') && text.split(/\t+/).filter((c) => c.trim()).length >= 3;
+
+/**
+ * The paragraphs of a structured document (a Word file's HTML, an editor
+ * document) looked at together: code written as ordinary paragraphs (Word
+ * has no code block: a listing is a run of one-line paragraphs), rows of a
+ * "table" made with tabs (two or more in a row), then each one on its own.
+ */
+function finish(raw: Segment[]): Segment[] {
+  const lines: Array<string | null> = [];
+  const owner: number[] = [];
+  raw.forEach((s, i) => {
+    const t = s.text.trim();
+    if (s.kind === 'para' && s.pending && !DOT_LEADER.test(t) && !(CAPTION.test(t) && words(t) <= 45)) {
+      for (const l of s.text.split('\n')) {
+        lines.push(l);
+        owner.push(i);
+      }
+    } else {
+      lines.push(null);
+      owner.push(i);
+    }
+  });
+  const flags = codeFlags(lines);
+  const coded = new Map<number, [number, number]>();
+  lines.forEach((l, k) => {
+    if (l === null || !l.trim()) return;
+    const c = coded.get(owner[k]) ?? [0, 0];
+    c[0] += flags[k] ? 1 : 0;
+    c[1] += 1;
+    coded.set(owner[k], c);
+  });
+  const out: Segment[] = [];
+  raw.forEach((s, i) => {
+    if (!s.pending) {
+      out.push(s);
+      return;
+    }
+    const seg: Segment = { ...s };
+    delete seg.pending;
+    const text = seg.text.replace(/\t+/g, ' ');
+    const c = coded.get(i);
+    const row = (x: Segment | undefined) => !!x && x.kind === 'para' && !!x.pending && tabRow(x.text);
+    if (c && c[0] / c[1] >= 0.6) out.push({ ...seg, kind: 'code', text });
+    else if (row(s) && (row(raw[i - 1]) || row(raw[i + 1]))) out.push({ ...seg, kind: 'table', text });
+    else refine({ ...seg, text }, out);
+  });
+  return out;
 }
 
 /* ---------------------------------- HTML ---------------------------------- */
@@ -240,7 +433,8 @@ export function segmentsFromHtml(html: string): Segment[] {
   let skip = 0;
   let toc = false;
   const flush = () => {
-    const text = decode(buf).replace(/[ \t ]+/g, ' ').replace(/ ?\n ?/g, '\n').trim();
+    // Tabs are kept until finish(): columns set with tabs are a table.
+    const text = decode(buf).replace(/[  ]*\t[ \t ]*/g, '\t').replace(/[  ]+/g, ' ').replace(/[ \t]?\n[ \t]?/g, '\n').trim();
     buf = '';
     const wasToc = toc;
     toc = false;
@@ -250,7 +444,7 @@ export function segmentsFromHtml(html: string): Segment[] {
     else if (footnote) raw.push({ kind: 'footnote', text });
     else if (heading) raw.push({ kind: 'heading', text, level: heading });
     else if (wasToc && (ENDS_WITH_PAGE.test(text) || words(text) <= 15)) raw.push({ kind: 'toc', text });
-    else raw.push({ kind: 'para', text });
+    else raw.push({ kind: 'para', text, pending: true });
   };
   for (let m = tag.exec(html); m; m = tag.exec(html)) {
     if (!skip) buf += html.slice(last, m.index);
@@ -319,22 +513,7 @@ export function segmentsFromHtml(html: string): Segment[] {
   }
   buf += html.slice(last);
   flush();
-  const out: Segment[] = [];
-  for (const s of raw) refine(s, out);
-  return joinCode(out);
-}
-
-/**
- * Word has no code blocks: a listing is a run of one-line paragraphs. A short
- * line that is not a sentence, sitting between two code lines, is code too
- * ("pass", "total += used").
- */
-function joinCode(segs: Segment[]): Segment[] {
-  return segs.map((s, i) => {
-    if (s.kind !== 'para' || segs[i - 1]?.kind !== 'code' || segs[i + 1]?.kind !== 'code') return s;
-    const t = s.text.trim();
-    return words(t) <= 8 && !/[.!?]["”)]?$/.test(t) ? { ...s, kind: 'code' as const } : s;
-  });
+  return finish(raw);
 }
 
 /* --------------------------------- tiptap --------------------------------- */
@@ -396,7 +575,7 @@ function walk(n: Node, out: Segment[], depth: number): void {
     }
     case 'paragraph': {
       const t = inlineText(n.content, out, depth + 1).trim();
-      if (t) refine({ kind: 'para', text: t }, out);
+      if (t) out.push({ kind: 'para', text: t, pending: true });
       return;
     }
     case 'blockMath':
@@ -425,7 +604,7 @@ function walk(n: Node, out: Segment[], depth: number): void {
     default:
       if (n.content?.some((c) => c.type === 'text')) {
         const t = inlineText(n.content, out, depth + 1).trim();
-        if (t) refine({ kind: 'para', text: t }, out);
+        if (t) out.push({ kind: 'para', text: t, pending: true });
         return;
       }
       for (const c of n.content ?? []) walk(c, out, depth + 1);
@@ -436,7 +615,7 @@ function walk(n: Node, out: Segment[], depth: number): void {
 export function segmentsFromDoc(doc: unknown): Segment[] {
   const out: Segment[] = [];
   if (doc && typeof doc === 'object') walk(doc as Node, out, 0);
-  return out;
+  return finish(out);
 }
 
 /* ------------------------------- Plain text ------------------------------- */
@@ -452,10 +631,12 @@ export interface PageSpan {
 const SECTION_LINE_MAX_WORDS = 9;
 const BIB_HEADING = /^(?:\d+(?:\.\d+)*\.?\s+|[IVX]+\.\s+)?(?:bibliography|works cited|works consulted|references|reference list|list of references|sources|list of sources|sources cited|literature cited)\s*:?$/i;
 const APPENDIX_HEADING = /^(?:\d+(?:\.\d+)*\.?\s+|[IVX]+\.\s+)?(?:appendix|appendices|annex|annexes|annexe)(?:\s+[A-Z0-9]{1,4})?(?:\s*[:.\-–—]\s*.{0,90}|\s+\(.{0,60}\))?$/i;
+/** A code listing under its own heading ("Source code", "Appendix"-less): left out like an appendix, up to the next heading. */
+const CODE_LISTING_HEADING = /^(?:\d+(?:\.\d+)*\.?\s+|[IVX]+\.\s+)?(?:(?:full|complete|program|programme|project|final)\s+)?(?:source\s+code|code\s+listings?|program(?:me)?\s+listings?|program(?:me)?\s+code)(?:\s+listings?)?\s*:?$/i;
 const CONTENTS_HEADING = /^(?:table of contents|contents|contents page|index|list of (?:figures|tables|illustrations)|table of figures)\s*:?$/i;
 const ACK_HEADING = /^acknowledge?ments?\s*:?$/i;
 
-const sectionHeading = (t: string): boolean => BIB_HEADING.test(t) || APPENDIX_HEADING.test(t) || CONTENTS_HEADING.test(t) || ACK_HEADING.test(t);
+const sectionHeading = (t: string): boolean => BIB_HEADING.test(t) || APPENDIX_HEADING.test(t) || CODE_LISTING_HEADING.test(t) || CONTENTS_HEADING.test(t) || ACK_HEADING.test(t);
 
 const HEADING_LINE = /^(?:(?:\d+(?:\.\d+)*\.?|[IVX]+\.|Chapter \d+|Section \d+|Criterion [A-G]|Part [A-Z0-9]+)[\s:.\-–—]*)?\p{Lu}[^.!?;|]{0,90}$/u;
 
@@ -509,6 +690,7 @@ export function segmentsFromText(text: string, pages?: PageSpan[] | null): Segme
     while (tableAt < tables.length && tables[tableAt][1] <= start) tableAt++;
     return tableAt < tables.length && start >= tables[tableAt][0];
   };
+  const code = codeFlags(lines.map((l) => l.text));
   const raw: Segment[] = [];
   let para: { text: string; start: number; end: number } | null = null;
   const flush = () => {
@@ -535,7 +717,7 @@ export function segmentsFromText(text: string, pages?: PageSpan[] | null): Segme
     else if (DOT_LEADER.test(t)) kind = 'toc';
     else if (CAPTION.test(t) && words(t) <= 45) kind = 'caption';
     else if (inTable(line.start + (line.text.length - line.text.trimStart().length)) || tableLine(line.text)) kind = 'table';
-    else if (codeLine(line.text)) kind = 'code';
+    else if (code[i]) kind = 'code';
     else if (equationLine(t)) kind = 'equation';
     // A reference footnote at the foot of a PDF page: "12 Smith, J. (2019) …", "3 Ibid., p. 4".
     else if (/^\d{1,3}\s?\p{Lu}/u.test(t) && !/^\d{1,2}\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)/.test(t) && REF_LIKE.test(t) && words(t) >= 5 && words(t) <= 60) kind = 'footnote';
@@ -574,6 +756,41 @@ interface Classified {
   seg: Segment;
   category: WordCountCategory | 'body';
   words: number;
+  /** The rubric part this sits in (category 'sections'). */
+  part?: string;
+}
+
+interface CompiledSections {
+  count: Array<{ label: string; re: RegExp }>;
+  exclude: Array<{ label: string; re: RegExp }>;
+}
+
+function compileSections(s: WordCountSections | null | undefined): CompiledSections | null {
+  if (!s?.exclude?.length) return null;
+  const compile = (rules: WordCountSectionRule[]) =>
+    (rules ?? []).flatMap((r) => {
+      try {
+        return [{ label: r.label, re: new RegExp(r.match, 'i') }];
+      } catch {
+        return [];
+      }
+    });
+  const out = { count: compile(s.count), exclude: compile(s.exclude) };
+  return out.exclude.length ? out : null;
+}
+
+const NUMBERING = /^(?:\d+(?:\.\d+)*\.?|[IVX]+\.)\s+/;
+
+/** The rubric part a heading starts: a real heading, or a short line standing alone that is not a sentence. */
+function partOf(seg: Segment, s: CompiledSections): { counts: boolean; label: string } | null {
+  if (seg.kind !== 'heading' && seg.kind !== 'para') return null;
+  const t = seg.text.trim();
+  if (t.includes('\n') || words(t) > 10 || (seg.kind === 'para' && /[.!?,;]$/.test(t))) return null;
+  const title = t.replace(NUMBERING, '');
+  const ex = s.exclude.find((r) => r.re.test(title));
+  if (ex) return { counts: false, label: ex.label };
+  const inc = s.count.find((r) => r.re.test(title));
+  return inc ? { counts: true, label: inc.label } : null;
 }
 
 const PROSE_MIN_WORDS = 30;
@@ -601,7 +818,7 @@ const KIND_CATEGORY: Record<SegKind, WordCountCategory | 'body'> = {
   furniture: 'page_furniture',
 };
 
-function classify(segs: Segment[], structured: boolean): Classified[] {
+function classify(segs: Segment[], structured: boolean, sections?: CompiledSections | null): Classified[] {
   const counts = segs.map((s) => words(s.text));
   const total = counts.reduce((a, b) => a + b, 0);
   const before: number[] = [];
@@ -622,6 +839,10 @@ function classify(segs: Segment[], structured: boolean): Classified[] {
   const out: Classified[] = [];
   let section: Section = 'body';
   let bibLevel: number | undefined;
+  /** Inside a "Source code" section: it ends at the next heading (of its level or above, when levels are known). */
+  let listing: { level: number | undefined } | null = null;
+  /** Inside a part of the work the limit does not cover. */
+  let part: { label: string; level: number | undefined } | null = null;
   segs.forEach((seg, i) => {
     const n = counts[i];
     if (seg.kind === 'furniture') {
@@ -629,10 +850,23 @@ function classify(segs: Segment[], structured: boolean): Classified[] {
       return;
     }
     const enoughBefore = before[i] >= Math.max(50, total * 0.1);
+    if (listing && seg.kind === 'heading' && !isSection(seg, CODE_LISTING_HEADING) && (!structured || listing.level === undefined || (seg.level ?? 9) <= listing.level)) {
+      listing = null;
+      section = 'body';
+    }
+    if (sections) {
+      const p = partOf(seg, sections);
+      if (p) part = p.counts ? null : { label: p.label, level: seg.kind === 'heading' ? seg.level : undefined };
+      else if (part && seg.kind === 'heading' && seg.level !== undefined && part.level !== undefined && seg.level < part.level) part = null;
+    }
     // "Appendices 14" inside a contents list is an entry, not the appendices.
     const contentsEntry = section === 'contents' && (seg.kind === 'toc' || ENDS_WITH_PAGE.test(seg.text.trim()));
     if (!contentsEntry && isSection(seg, APPENDIX_HEADING) && (section === 'appendices' || section === 'bibliography' || enoughBefore) && (structured ? seg.kind === 'heading' || words(seg.text) <= 6 : true)) {
       section = 'appendices';
+      listing = null;
+    } else if (!contentsEntry && section === 'body' && enoughBefore && isSection(seg, CODE_LISTING_HEADING) && (structured ? seg.kind === 'heading' || words(seg.text) <= 6 : true)) {
+      section = 'appendices';
+      listing = { level: seg.kind === 'heading' ? seg.level : undefined };
     } else if (!contentsEntry && isSection(seg, BIB_HEADING) && (structured ? before[i] >= total * 0.25 : i === textBibAt)) {
       section = 'bibliography';
       bibLevel = seg.kind === 'heading' ? seg.level : undefined;
@@ -652,7 +886,9 @@ function classify(segs: Segment[], structured: boolean): Classified[] {
     let category: WordCountCategory | 'body' = section === 'body' ? KIND_CATEGORY[seg.kind] : section;
     // Word puts the notes list after everything else (after the appendices): a note belongs to the body it annotates.
     if (seg.kind === 'footnote' && (structured || section === 'body')) category = REF_LIKE.test(seg.text) ? 'footnote_citations' : 'body';
-    out.push({ seg, category, words: n });
+    // A part the limit does not cover leaves out everything in it (its own tables and code included).
+    if (part && section === 'body' && seg.kind !== 'footnote') out.push({ seg, category: 'sections', words: n, part: part.label });
+    else out.push({ seg, category, words: n });
   });
 
   markTitlePage(out);
@@ -707,7 +943,7 @@ export function citationWords(text: string): number {
   return n;
 }
 
-function tally(items: Classified[], rules: Pick<WordCountRules, 'excludes'>, method: WordBreakdown['method'], estimate: boolean): WordBreakdown {
+function tally(items: Classified[], rules: Pick<WordCountRules, 'excludes'>, method: WordBreakdown['method'], estimate: boolean, sections: CompiledSections | null): WordBreakdown {
   const excludes = new Set<string>(rules.excludes);
   const excluded: Partial<Record<WordCountCategory, number>> = {};
   let total = 0;
@@ -715,9 +951,16 @@ function tally(items: Classified[], rules: Pick<WordCountRules, 'excludes'>, met
   const leave = (cat: WordCountCategory, n: number) => {
     if (n > 0) excluded[cat] = (excluded[cat] ?? 0) + n;
   };
+  const parts = new Map<string, number>();
   for (const c of items) {
     total += c.words;
     if (c.category === 'page_furniture') leave('page_furniture', c.words);
+    else if (c.category === 'sections') {
+      leave('sections', c.words);
+      if (c.words > 0) parts.set(c.part ?? '', (parts.get(c.part ?? '') ?? 0) + c.words);
+    }
+    // Code in an appendix is shown as code, so the student sees how much of the file is code.
+    else if (c.category === 'appendices' && c.seg.kind === 'code' && excludes.has('code')) leave('code', c.words);
     else if (c.category !== 'body' && excludes.has(c.category)) leave(c.category, c.words);
     else {
       const cites = excludes.has('citations') && c.seg.kind !== 'heading' ? Math.min(c.words, citationWords(c.seg.text)) : 0;
@@ -725,7 +968,9 @@ function tally(items: Classified[], rules: Pick<WordCountRules, 'excludes'>, met
       counted += c.words - cites;
     }
   }
-  return { total, counted, notCounted: total - counted, excluded, method, estimate };
+  const out: WordBreakdown = { total, counted, notCounted: total - counted, excluded, method, estimate };
+  if (sections) out.sections = { found: items.some((c) => partOf(c.seg, sections) !== null), excluded: [...parts].map(([label, w]) => ({ label, words: w })) };
+  return out;
 }
 
 export interface CountInput {
@@ -742,10 +987,11 @@ export interface CountInput {
 }
 
 /** The word count of a piece of work under a rubric's counting rules. */
-export function countWork(input: CountInput, rules: Pick<WordCountRules, 'excludes'>): WordBreakdown {
-  if (input.html) return tally(classify(segmentsFromHtml(input.html), true), rules, 'structure', true);
-  if (input.doc && typeof input.doc === 'object') return tally(classify(segmentsFromDoc(input.doc), true), rules, 'structure', Boolean(input.file));
-  return tally(classify(segmentsFromText(input.text ?? '', input.pages), false), rules, 'text', true);
+export function countWork(input: CountInput, rules: Pick<WordCountRules, 'excludes' | 'sections'>): WordBreakdown {
+  const sections = compileSections(rules.sections);
+  if (input.html) return tally(classify(segmentsFromHtml(input.html), true, sections), rules, 'structure', true, sections);
+  if (input.doc && typeof input.doc === 'object') return tally(classify(segmentsFromDoc(input.doc), true, sections), rules, 'structure', Boolean(input.file), sections);
+  return tally(classify(segmentsFromText(input.text ?? '', input.pages), false, sections), rules, 'text', true, sections);
 }
 
 export interface WorkSplit {
@@ -806,6 +1052,7 @@ export const CATEGORY_LABEL: Record<WordCountCategory, string> = {
   bibliography: 'bibliography',
   appendices: 'appendices',
   page_furniture: 'page headers and footers',
+  sections: 'parts that do not count',
 };
 
 /** "tables, code, appendices, bibliography": the reasons that left most words out first. */

@@ -75,7 +75,12 @@ const n = (v: number) => v.toLocaleString("en-GB");
 export function WordCountDetails({ breakdown, rules, declared, onDeclared, uncertain, className }: { breakdown: WordBreakdown; rules: ResolvedWordCountRules; declared: number | null; onDeclared: (v: number | null) => void; /** The rules are a draft (or the general fallback): say so. */ uncertain: boolean; className?: string }) {
   const { t } = useCw();
   const id = useId();
-  const left = (Object.entries(breakdown.excluded) as Array<[WordCountCategory, number]>).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+  // The parts of the work the limit does not cover are listed by name ("Criterion B: record of tasks and design"), not as one sum.
+  const parts = breakdown.sections?.excluded.filter((p) => p.words > 0) ?? [];
+  const left: Array<[string, string, number]> = [
+    ...parts.map((p): [string, string, number] => [`part:${p.label}`, p.label, p.words]),
+    ...(Object.entries(breakdown.excluded) as Array<[WordCountCategory, number]>).filter(([k, v]) => v > 0 && !(k === "sections" && parts.length)).map(([k, v]): [string, string, number] => [k, CATEGORY_LABEL[k], v]),
+  ].sort((a, b) => b[2] - a[2]);
   return (
     <details className={cn("cw-wc group", className)}>
       <summary className="inline-flex min-h-11 cursor-pointer list-none items-center text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4 [&::-webkit-details-marker]:hidden">{t("cw.wc.what")}</summary>
@@ -88,15 +93,16 @@ export function WordCountDetails({ breakdown, rules, declared, onDeclared, uncer
             <p>{t("cw.wc.nothing")}</p>
           ) : (
             <ul className="mt-1 grid grid-cols-1 gap-x-6 gap-y-0.5 sm:grid-cols-2">
-              {left.map(([k, v]) => (
+              {left.map(([k, label, v]) => (
                 <li key={k} className="flex items-baseline justify-between gap-3">
-                  <span className="first-letter:uppercase">{CATEGORY_LABEL[k]}</span>
+                  <span className="first-letter:uppercase">{label}</span>
                   <span className="tabular-nums text-muted-foreground">{n(v)}</span>
                 </li>
               ))}
             </ul>
           )}
         </div>
+        {breakdown.sections && !breakdown.sections.found && <p>{t("cw.wc.noParts")}</p>}
         <p>{t(breakdown.estimate ? "cw.wc.estimate" : "cw.wc.exact")}</p>
         {rules.kind === "words" && (
           <div>

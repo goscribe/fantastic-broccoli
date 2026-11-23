@@ -259,10 +259,11 @@ test("the count follows the component's rules, and falls back when a rubric has 
   const prose = "The club secretary records every court booking by hand in a paper diary kept at the front desk. ".repeat(8);
   const html = `<h1>Development</h1><p>${prose}</p><table><tr><td><p>Task one</p></td><td><p>Meet the client</p></td></tr></table><p>total = total + used;</p><h1>Bibliography</h1><p>Lutz, M. (2013) Learning Python. Sebastopol: O'Reilly Media.</p><h1>Appendix A: Source code</h1><p>${prose}</p>`;
   const fallback = resolveWordCountRules(undefined, 2000);
-  assert.deepEqual({ fallback: fallback.fallback, excludes: fallback.excludes, limit: fallback.limit }, { fallback: true, excludes: ["bibliography", "appendices", "tables", "code"], limit: 2000 });
+  assert.deepEqual({ fallback: fallback.fallback, excludes: fallback.excludes, limit: fallback.limit }, { fallback: true, excludes: ["title_page", "contents", "bibliography", "appendices", "tables", "code"], limit: 2000 });
   const b = countWork({ html, file: true }, fallback);
-  assert.equal(b.counted, 8 * 18 + 1, "the prose and its heading");
-  assert.deepEqual(Object.keys(b.excluded).sort(), ["appendices", "bibliography", "code", "tables"]);
+  // The prose; the lone line before it reads as the work's title, which no board counts.
+  assert.equal(b.counted, 8 * 18);
+  assert.deepEqual(Object.keys(b.excluded).sort(), ["appendices", "bibliography", "code", "tables", "title_page"]);
   assert.equal(b.estimate, true);
   const rules = resolveWordCountRules({ limit: null, kind: "pages", excludes: ["headings", "bibliography", "appendices"], note: "A page guide." }, null);
   assert.deepEqual({ kind: rules.kind, limit: rules.limit, fallback: rules.fallback }, { kind: "pages", limit: null, fallback: false });
