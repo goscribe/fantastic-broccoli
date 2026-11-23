@@ -44,7 +44,7 @@ export type {
 export type GraderStatus = Status & { chat?: boolean; chatLimit?: number | null; chatUsedToday?: number; chatRemainingToday?: number };
 export type GraderPlanTier = Status["tier"];
 /** The allowance part of the status (server limits.ts ReviewAllowance). */
-export type ReviewAllowance = Pick<Status, "tier" | "allowed" | "limit" | "usedToday" | "remainingToday" | "reason" | "resetsAt">;
+export type ReviewAllowance = Pick<Status, "tier" | "allowed" | "limit" | "usedToday" | "remainingToday" | "reason" | "resetsAt"> & Partial<Pick<Status, "creditsLeft" | "useCredit">>;
 export type RubricSummary = GraderRubric;
 export type RubricCriterion = GraderRubric["criteria"][number];
 /** A rubric without its criteria: what a review carries. */

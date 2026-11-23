@@ -27,6 +27,7 @@ import { examPassPitch, freePerks, paidPerks, plural, type ExamPitch, type FreeC
 /** The free plan's caps when the server didn't say (server FREE_TIER_CAPS). */
 const DEFAULT_FREE_CAPS: FreeCaps = { workspaces: 2, studySessions: 3, flashcardTests: 2 };
 import { cn } from "@/lib/utils";
+import { parsePricingQuery, pricingPick } from "@/lib/coursework-access";
 
 function PlanCard({
   plan,
@@ -36,9 +37,12 @@ function PlanCard({
   freeCaps,
   pitch,
   featured,
+  picked,
 }: {
-  /** The one primary on the page: the cheapest subscription (the trial). */
+  /** The one primary on the page: the cheapest subscription (the trial), or the plan the link asked for. */
   featured: boolean;
+  /** The plan the link asked for (`?plan=` / `?for=coursework`): marked, outlined in ink, scrolled to. */
+  picked?: string | null;
   plan: PlanOption;
   onSelect: (id: string) => void;
   switching: boolean;
@@ -60,10 +64,16 @@ function PlanCard({
   // Outcomes, not tokens: every line is a fact of the plan (see wall.ts paidPerks / freePerks).
   const perks = paid ? [...paidPerks(plan, { examLine: pitched?.line ?? null }), ...storage] : [...freePerks(freeCaps), ...storage];
   return (
-    <div className={cn("life-card flex flex-col p-5 sm:p-6", isCurrent && "border-border-strong")}>
+    <div
+      id={picked ? "picked-plan" : undefined}
+      data-picked={picked ? "" : undefined}
+      className={cn("life-card flex scroll-mt-24 flex-col p-5 max-md:scroll-mb-24 sm:p-6", isCurrent && "border-border-strong", picked && "border-foreground ring-1 ring-foreground")}
+    >
       <div className="flex items-baseline justify-between gap-3">
         <h2 className="text-[18px] font-extrabold leading-tight">{planDisplayName(plan.name)}</h2>
-        {isCurrent ? (
+        {picked ? (
+          <span className="shrink-0 text-[13px] font-bold text-muted-foreground">{picked}</span>
+        ) : isCurrent ? (
           <span className="shrink-0 text-[13px] font-bold text-muted-foreground">Current plan</span>
         ) : paid && planBilling(plan) === "once" && pitch ? (
           <span className="shrink-0 text-[13px] font-bold text-muted-foreground">For your exam</span>
@@ -110,6 +120,9 @@ export default function PricingPage() {
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
   const [pitch, setPitch] = useState<ExamPitch | null>(null);
+  // `?plan=ultra&for=coursework` (a locked Coursework): the plan to pick, from the plans the server lists.
+  const [pickedId, setPickedId] = useState<string | null>(null);
+  const [pickedFor, setPickedFor] = useState<string | null>(null);
   useEffect(() => {
     Promise.all([
       fetchAccountSummary(),
@@ -124,6 +137,9 @@ export default function PricingPage() {
         const locale = typeof navigator !== "undefined" ? navigator.language : "en-GB";
         const nextPitch = pass && today ? examPassPitch(today.exams, pass, today.today, locale) : null;
         setPitch(nextPitch);
+        const query = parsePricingQuery(window.location.search);
+        setPickedId(pricingPick(nextPlans, query));
+        setPickedFor(query.for);
         // With an exam date the pass sits right after the cheapest subscription (the trial).
         if (nextPitch && pass) {
           const rest = nextPlans.filter((p) => p.id !== pass.id);
@@ -139,9 +155,16 @@ export default function PricingPage() {
   const freeCaps = caps?.caps ?? DEFAULT_FREE_CAPS;
   // The one primary: the cheapest subscription for someone without a plan; for someone on one, the next plan up (never a downgrade).
   const activePrice = plans.find((p) => p.isActive && p.priceDollars > 0)?.priceDollars ?? 0;
-  const featuredId = [...plans]
-    .filter((p) => p.priceDollars > activePrice && planBilling(p) !== "once" && !p.isActive)
-    .sort((a, b) => a.priceDollars - b.priceDollars)[0]?.id;
+  const featuredId =
+    pickedId ??
+    [...plans]
+      .filter((p) => p.priceDollars > activePrice && planBilling(p) !== "once" && !p.isActive)
+      .sort((a, b) => a.priceDollars - b.priceDollars)[0]?.id;
+  const pickedLabel = pickedFor === "coursework" ? "For coursework" : "Selected";
+  useEffect(() => {
+    if (loading || !pickedId) return;
+    document.getElementById("picked-plan")?.scrollIntoView({ block: "nearest" });
+  }, [loading, pickedId]);
 
   const trialDays = caps?.trialDays ?? 0;
   const trialEndsAt = caps?.trialEndsAt ? new Date(caps.trialEndsAt) : null;
@@ -254,7 +277,7 @@ export default function PricingPage() {
                 <Skeleton className="h-28 w-full rounded-xl" />
               </div>
             ))
-          : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} freeCaps={freeCaps} pitch={pitch} featured={plan.id === featuredId} />)}
+          : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} freeCaps={freeCaps} pitch={pitch} featured={plan.id === featuredId} picked={plan.id === pickedId ? pickedLabel : null} />)}
       </section>
     </PageShell>
   );

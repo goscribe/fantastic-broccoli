@@ -32,6 +32,12 @@ export interface GraderStatus {
   remainingToday: number | null;
   resetsAt: Date;
   timezone: string;
+  /** The grader is open: the plan includes reviews, or free review credits are left (absent on an older server). */
+  access?: boolean;
+  /** Free review credits left; they never expire and are spent only after the plan's reviews for the day (absent on an older server). */
+  creditsLeft?: number;
+  /** The next review spends a credit (absent on an older server). */
+  useCredit?: boolean;
   /** Ultra's price is configured: the Ultra upsell may be shown. */
   ultraAvailable: boolean;
   ultraPlanId: string | null;

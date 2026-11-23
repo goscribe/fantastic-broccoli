@@ -356,3 +356,19 @@ test("an old 13–18 of 20 result reads as 16, likely 15–17, and keeps its ban
   assert.deepEqual([withEstimate(cs).overall.marksEstimate, withEstimate(cs).overall.marksLow, withEstimate(cs).overall.marksHigh], [23, 21, 25]);
   assert.equal(withEstimate(null), null);
 });
+
+test("free review credits: the line says how many are left, and they are used after the plan's reviews", () => {
+  // Free (or Starter) with credits: open, every review spends one.
+  const free = allowanceCopy(allowance({ tier: "free", allowed: true, limit: 0, usedToday: 0, remainingToday: 0, reason: null, creditsLeft: 5, useCredit: true }), ultra, now);
+  assert.deepEqual([free.state, free.line, free.upsell], ["credits", "5 free reviews left", null]);
+  assert.equal(allowanceCopy(allowance({ tier: "free", limit: 0, remainingToday: 0, creditsLeft: 1, useCredit: true }), ultra, now).line, "1 free review left");
+  // Pro with plan reviews left: those first, the credits said beside them.
+  assert.equal(allowanceCopy(allowance({ creditsLeft: 5, useCredit: false }), ultra, now).line, "1 of 2 reviews left today · 5 free reviews left");
+  // Pro after its 2: the next review is a credit, not the limit.
+  const pro = allowanceCopy(allowance({ usedToday: 2, remainingToday: 0, creditsLeft: 3, useCredit: true }), ultra, now);
+  assert.deepEqual([pro.state, pro.line], ["credits", "3 free reviews left"]);
+  // Out of credits on free: locked again.
+  assert.equal(allowanceCopy(allowance({ tier: "free", allowed: false, limit: 0, remainingToday: 0, reason: "locked", creditsLeft: 0, useCredit: false }), ultra, now).state, "locked");
+  // An older server (no credit fields): unchanged.
+  assert.equal(allowanceCopy(allowance({}), ultra, now).line, "1 of 2 reviews left today");
+});
