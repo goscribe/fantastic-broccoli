@@ -14,6 +14,7 @@ import {
   type RubricVersions,
 } from "@/lib/api/coursework";
 import { guideVersions, type UltraOffer } from "@/lib/coursework";
+import { courseworkAccess, creditsLeft, type CourseworkAccess } from "@/lib/coursework-access";
 
 /* ---------- Shared, cached reads ---------- */
 
@@ -334,49 +335,71 @@ export function useGrader(input: { documentId: string | null; rubricId: string |
   };
 }
 
-/* ---------- Is Coursework one of this student's places? ---------- */
+/* ---------- Coursework in the navigation: open, or locked with a crown ---------- */
 
-const NAV_KEY = "scribe.coursework.nav";
-let navCheck: Promise<boolean> | null = null;
+export interface CourseworkEntry {
+  /** hidden: the server has no grader (or has not answered yet); locked: no plan reviews and no credits; open: everything else. */
+  state: "hidden" | CourseworkAccess;
+  /** Free review credits left. */
+  creditsLeft: number;
+}
+
+const NAV_KEY = "scribe.coursework.nav.v2";
+const HIDDEN: CourseworkEntry = { state: "hidden", creditsLeft: 0 };
+let navCheck: Promise<CourseworkEntry> | null = null;
+
+function readEntry(raw: string | null): CourseworkEntry | null {
+  if (!raw) return null;
+  try {
+    const v = JSON.parse(raw) as Partial<CourseworkEntry>;
+    if (v.state !== "hidden" && v.state !== "open" && v.state !== "locked") return null;
+    return { state: v.state, creditsLeft: Math.max(0, Number(v.creditsLeft) || 0) };
+  } catch {
+    return null;
+  }
+}
 
 /**
- * Coursework is in the navigation when the server reviews coursework AND it
- * is this student's business: one of their subjects has a component (v1: IB),
- * or they already have a piece. Everyone else still reaches it from the
- * Coursework guides in Notes. Remembered for the tab, so the nav does not
- * shift on every page.
+ * Coursework is in the navigation (and its entry points) for everyone when
+ * the server reviews coursework: open when the plan includes reviews or the
+ * student has free review credits, otherwise locked (shown muted with a
+ * crown, leading to the upgrade page; never hidden). The last answer is
+ * remembered for the tab so the first paint does not shift, and checked
+ * again once per page load (a plan bought or the last credit spent shows up
+ * on the next page).
  */
-export function useCourseworkNav(enabled: boolean): boolean {
-  const [show, setShow] = useState(false);
+export function useCourseworkNav(enabled: boolean): CourseworkEntry {
+  const [entry, setEntry] = useState<CourseworkEntry>(HIDDEN);
   useEffect(() => {
     if (!enabled) return;
     let cancelled = false;
+    let frame = 0;
     try {
-      const known = sessionStorage.getItem(NAV_KEY);
-      if (known) {
-        const id = requestAnimationFrame(() => !cancelled && setShow(known === "1"));
-        return () => {
-          cancelled = true;
-          cancelAnimationFrame(id);
-        };
-      }
+      const known = readEntry(sessionStorage.getItem(NAV_KEY));
+      if (known) frame = requestAnimationFrame(() => !cancelled && setEntry(known));
     } catch {
       /* storage blocked */
     }
-    navCheck ??= loadRubrics()
-      .then(async (rubrics) => (rubrics.some((r) => r.suggested) ? true : (await courseworkApi.documents().catch(() => [])).length > 0))
-      .catch(() => false);
+    navCheck ??= courseworkApi
+      .status()
+      .then((s): CourseworkEntry => ({ state: courseworkAccess(s), creditsLeft: creditsLeft(s) }))
+      .catch((err): CourseworkEntry => {
+        // Not answered (offline, a blip): ask again on the next page.
+        if (!isMissingEndpoint(err)) navCheck = null;
+        return HIDDEN;
+      });
     void navCheck.then((v) => {
       try {
-        sessionStorage.setItem(NAV_KEY, v ? "1" : "0");
+        if (v.state !== "hidden") sessionStorage.setItem(NAV_KEY, JSON.stringify(v));
       } catch {
         /* storage blocked */
       }
-      if (!cancelled) setShow(v);
+      if (!cancelled) setEntry(v);
     });
     return () => {
       cancelled = true;
+      cancelAnimationFrame(frame);
     };
   }, [enabled]);
-  return show;
+  return entry;
 }

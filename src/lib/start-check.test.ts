@@ -17,6 +17,7 @@ import {
   sliderKeyValue,
   tidyFocusNote,
   valueFromPointer,
+  materialName,
   type MaterialPrimer,
 } from "./start-check";
 
@@ -187,4 +188,18 @@ test("small helpers: the session's topics, the focus note, and a skip that stays
   assert.equal(skippedRecently(1000, 1000 + SKIP_QUIET_MS - 1), true);
   assert.equal(skippedRecently(1000, 1000 + SKIP_QUIET_MS + 1), false);
   assert.equal(skippedRecently(null, 5), false);
+});
+
+test("own material is asked about by name, without \"notes\" tacked on; a title that names nothing asks about \"this\"", () => {
+  assert.equal(materialName("Cell membranes notes"), "Cell membranes");
+  assert.equal(materialName("Cell membranes"), "Cell membranes");
+  assert.equal(materialName("My Physics revision notes"), "Physics");
+  assert.equal(materialName("Chapter 3 - Notes"), "Chapter 3");
+  assert.equal(materialName("thermodynamics.pdf"), "thermodynamics");
+  assert.equal(materialName("Notes"), "");
+  assert.equal(materialName("Quick 5"), "");
+  assert.equal(materialName("Review: Water"), "");
+  assert.equal(materialName("  "), "");
+  // A catalog topic's name never goes through this: "Water" stays "Water".
+  assert.equal(materialName("Keynotes on jazz"), "Keynotes on jazz");
 });

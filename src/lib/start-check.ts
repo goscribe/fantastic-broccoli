@@ -251,3 +251,23 @@ export const SKIP_QUIET_MS = 7 * 86_400_000;
 export function skippedRecently(skippedAt: number | null | undefined, now: number): boolean {
   return typeof skippedAt === "number" && skippedAt > 0 && now - skippedAt < SKIP_QUIET_MS;
 }
+
+/** Session titles that say nothing about the content ("Quick 5", "Review: …"). */
+const GENERIC_TITLE = /^(quick 5|review\b|study session|session\b)/i;
+
+/**
+ * What an own-material session is about, for "How confident are you with X?":
+ * its title without a file extension or a trailing "notes" ("Cell membranes
+ * notes" asks about Cell membranes). '' when the title names nothing, and the
+ * question becomes "…with this?".
+ */
+export function materialName(title: string): string {
+  const t = title.trim();
+  if (!t || GENERIC_TITLE.test(t)) return "";
+  const name = t
+    .replace(/\.(pdf|docx?|pptx?|txt|md|png|jpe?g)$/i, "")
+    .replace(/[\s:,·-]*\b(my\s+)?(study\s+|revision\s+|class\s+|lecture\s+)?notes?$/i, "")
+    .replace(/^(my|your)\s+/i, "")
+    .trim();
+  return name;
+}

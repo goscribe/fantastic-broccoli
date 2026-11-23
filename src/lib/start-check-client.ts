@@ -10,7 +10,7 @@
  */
 import { useSyncExternalStore } from "react";
 import { rpc, type PaperChoice, type StartCheckAnswers, type StartCheckOptions } from "@/lib/api/study-session";
-import { skippedRecently } from "@/lib/start-check";
+import { materialName, skippedRecently } from "@/lib/start-check";
 
 const SKIP_KEY = "scribe.start-check.skipped";
 
@@ -121,14 +121,11 @@ export function askTopicsStartCheck(input: { courseId: string; topics: { id: str
   });
 }
 
-/** Sessions whose title says nothing about the content ("Quick 5", "Review: …"). */
-const GENERIC_TITLE = /^(quick 5|review\b|study session|session\b)/i;
-
 /** Before `studySession.create`: asked the first time a learner studies a subject's own material. */
 export function askSubjectStartCheck(input: { workspaceId: string; title: string }): Promise<StartCheckAnswers | undefined> {
   return ask({
     skipKey: `subject:${input.workspaceId}`,
     options: () => rpc<StartCheckOptions>("studySession.startCheck", "query", { workspaceId: input.workspaceId }),
-    what: GENERIC_TITLE.test(input.title.trim()) ? "" : input.title.trim(),
+    what: materialName(input.title),
   });
 }
