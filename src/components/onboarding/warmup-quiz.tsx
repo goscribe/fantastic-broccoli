@@ -81,23 +81,17 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
   }, []);
 
   if (questions.length === 0) {
+    // On the wait screen (hero) nothing is shown until a question exists: the
+    // screen above already says what is being made, and a block of skeletons
+    // under its progress bar was a second loader.
+    if (hero) return null;
     return (
-      <div className={hero ? HERO : SECTION}>
-        <p className={hero ? "text-[12px] font-bold uppercase tracking-wide text-accent" : "text-sm font-semibold"}>Warm-up quiz incoming…</p>
-        <p className={hero ? "mt-1 text-[12.5px] leading-snug text-muted-foreground" : "mt-1 text-xs text-muted-foreground"}>
+      <div className={SECTION}>
+        <p className="text-sm font-semibold">Warm-up quiz incoming…</p>
+        <p className="mt-1 text-xs text-muted-foreground">
           Writing a few quick questions from your materials so you can practice
           while the session builds.
         </p>
-        {hero && (
-          // Where the first question will land, so the card is not empty while it is written.
-          <div className="mt-5 grid gap-2.5" aria-hidden="true">
-            <span className="skeleton h-5 w-[88%] rounded-full" />
-            <span className="skeleton h-5 w-[64%] rounded-full" />
-            {[0, 1, 2, 3].map((i) => (
-              <span key={i} className="skeleton mt-1 h-12 rounded-2xl" />
-            ))}
-          </div>
-        )}
       </div>
     );
   }
@@ -119,7 +113,7 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
   return (
     <div className={hero ? HERO : SECTION}>
       <div className="flex items-center justify-between">
-        <p className={cn("text-accent", hero ? "text-[12px] font-bold uppercase tracking-wide" : "text-[11px] font-semibold uppercase tracking-wide")}>
+        <p className={hero ? "text-small font-bold text-muted-foreground" : "text-[11px] font-semibold uppercase tracking-wide text-accent"}>
           Warm-up while you wait
         </p>
         <p className="text-[11px] text-muted-foreground">

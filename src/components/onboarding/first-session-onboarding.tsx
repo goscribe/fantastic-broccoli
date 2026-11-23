@@ -355,6 +355,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
       return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4">
           <div className="flex max-h-full w-full max-w-[640px] flex-col items-center gap-5 overflow-y-auto animate-fade-up">
+            <div className="w-full rounded-[var(--r-panel,24px)] bg-card px-5">
             <BuildStage
               title={title}
               pct={buildPercent / 100}
@@ -363,6 +364,7 @@ export function FirstSessionOnboarding({ onSkip }: { onSkip: () => void }) {
               stageCount={BUILD_STEPS.length}
               hint="This can take a couple of minutes for large files. Your session opens by itself."
             />
+            </div>
             <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 sm:p-7">
               {warmupWorkspaceId ? (
                 <WarmupQuiz workspaceId={warmupWorkspaceId} hero />
