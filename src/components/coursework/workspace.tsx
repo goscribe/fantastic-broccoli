@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, MoreHorizontal, Plus } from "lucide-react";
 import { ScribeEditor, type EditorDoc, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
-import { courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type DraftDetail, type DraftSummary, type ImportFailure } from "@/lib/api/coursework";
+import { awaitRead, courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type DraftDetail, type DraftSummary, type ImportFailure } from "@/lib/api/coursework";
 import { SubjectArt } from "@/components/learn/subject-tile";
 import { EDIT_UPLOADS_AS_TEXT, componentTitle, draftEntries, familyText, feedbackAnchors, locateAnchors } from "@/lib/coursework";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
@@ -121,6 +121,8 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [importing, setImporting] = useState<string | null>(null);
   const [importError, setImportError] = useState<string | null>(null);
+  /** A read that was still running when this page opened and then failed: the message's key. */
+  const [readFailed, setReadFailed] = useState<string | null>(null);
 
   // What the server holds, and what is waiting to be saved.
   const sync = useRef<{ version: number; draftId: string; currentDraftId: string | null; pending: EditorDoc | null; title: string; rubricId: string | null; timer: ReturnType<typeof setTimeout> | null; saving: Promise<void> | null }>({
@@ -190,6 +192,20 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
         setTitle(d.title);
         showDraft(first);
         setLoadState("ready");
+        // Opened (or reloaded) while the file is still being read: say so, wait, then show it as read.
+        if (first.kind === "file" && first.status === "failed") setReadFailed("cw.err.unreadable");
+        if (first.kind === "file" && first.status === "extracting") {
+          setImporting(first.fileName ?? first.title);
+          awaitRead({ documentId, draftId: first.id }, null, { startedAt: new Date(first.updatedAt).getTime() })
+            .then(async (out) => {
+              const fresh = await courseworkApi.document(documentId);
+              if (cancelled) return;
+              setDoc(fresh);
+              if (out.detail) showDraft(out.detail);
+            })
+            .catch((err) => !cancelled && setReadFailed(importErrorKey(err)))
+            .finally(() => !cancelled && setImporting(null));
+        }
       })
       .catch((err) => !cancelled && setLoadState(err instanceof Error && /not found/i.test(err.message) ? "missing" : "error"));
     return () => {
@@ -353,6 +369,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const onImport = async (file: File | undefined) => {
     if (!file) return;
     setImportError(null);
+    setReadFailed(null);
     setImporting(file.name);
     try {
       await flush();
@@ -777,10 +794,11 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             }
             header={
               <div className="pt-5">
-                {(ws.state === "over" || importing || importError || save === "local" || save === "conflict" || !online) && (
+                {(ws.state === "over" || importing || importError || readFailed || save === "local" || save === "conflict" || !online) && (
                   <div className="mb-4 flex flex-col gap-1.5 text-small font-semibold text-foreground" role="status">
                     {importing && <p>{t("cw.doc.importing", { name: importing })}</p>}
                     {importError && <p role="alert">{importError}</p>}
+                    {readFailed && !importError && <p role="alert">{t(readFailed)}</p>}
                     {ws.state === "over" && <p>{ws.note}</p>}
                     {!online ? <p>{t("cw.err.offline")}</p> : save === "local" ? <p>{t("cw.doc.local")}</p> : null}
                     {save === "conflict" && (

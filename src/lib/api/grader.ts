@@ -65,6 +65,8 @@ export interface WordCountRules {
   excludes: string[];
   /** What the count covers, in plain words. */
   note: string;
+  /** For a limit that covers only part of the work: headings of the parts that count and of those that do not. */
+  sections?: { count: Array<{ label: string; match: string }>; exclude: Array<{ label: string; match: string }> } | null;
 }
 
 export type GuideBlock =

@@ -7,7 +7,8 @@ import { ChevronRight } from "lucide-react";
 import { SubjectTile } from "@/components/learn/subject-tile";
 import { Button } from "@/components/ui/button";
 import { PageHeader, PageShell } from "@/components/ui/page-header";
-import { UPLOAD_ACCEPT, courseworkApi, importFile, isCourseworkLimit, isMissingEndpoint, type DraftDetail, type GraderStatus, type RubricSummary } from "@/lib/api/coursework";
+import { UPLOAD_ACCEPT, awaitRead, courseworkApi, importFile, isCourseworkLimit, isMissingEndpoint, readAgain, type DraftDetail, type GraderStatus, type ImportedFile, type RubricSummary } from "@/lib/api/coursework";
+import { parsePendingRead, readPhase, type PendingRead } from "@/lib/coursework-read";
 import { componentTitle, countWords, familyText, rubricLine } from "@/lib/coursework";
 import { countWork, type WordBreakdown } from "@/lib/coursework-word-count";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
@@ -21,9 +22,22 @@ import { importErrorKey } from "./workspace";
 import "@/app/coursework/coursework.css";
 
 type Upload =
-  | { name: string; state: "reading" }
+  /** `since`: when the file was stored and reading began (null while it is still being sent). */
+  | { name: string; state: "reading"; since: number | null }
   | { name: string; state: "ready"; documentId: string; words: number; /** The file as the server read it (text, pages, a Word file's HTML): what the count and the preview are made from. */ detail: DraftDetail | null; /** A signed link to the original, for the preview. */ url: string | null }
-  | { name: string; state: "failed"; message: string };
+  /** `at`: the stored file, when there is one to read again. */
+  | { name: string; state: "failed"; message: string; at: { documentId: string; draftId: string } | null };
+
+/** The upload being read (or read) on this page, kept for the tab so a reload shows it again instead of an empty form. */
+const PENDING_KEY = "scribe.coursework.start.upload";
+function rememberUpload(v: PendingRead | null) {
+  try {
+    if (v) sessionStorage.setItem(PENDING_KEY, JSON.stringify(v));
+    else sessionStorage.removeItem(PENDING_KEY);
+  } catch {
+    /* private mode: a reload starts the form empty */
+  }
+}
 
 /** Every word counts (a server that only gave a total). */
 const plainCount = (words: number): WordBreakdown => ({ total: words, counted: words, notCounted: 0, excluded: {}, method: "text", estimate: true });
@@ -39,6 +53,9 @@ export function CourseworkStart() {
   const params = useSearchParams();
   const online = useOnline();
   const fileInput = useRef<HTMLInputElement>(null);
+  const pasteBox = useRef<HTMLTextAreaElement>(null);
+  /** The read being waited for: a newer upload, a retry or "paste instead" makes an older answer irrelevant. */
+  const reading = useRef(0);
   const [status, setStatus] = useState<GraderStatus | null>(null);
   const [rubrics, setRubrics] = useState<RubricSummary[] | null>(null);
   const [failed, setFailed] = useState<"error" | "unavailable" | null>(null);
@@ -89,28 +106,130 @@ export function CourseworkStart() {
     };
   }, [rubric]);
 
+  /** The file is read: show it (its count and preview), and fetch what the preview needs. */
+  const showRead = async (name: string, out: ImportedFile) => {
+    // The file as read (for the count by the component's rules, and the preview); the review does not wait for these.
+    const detail = out.detail ?? (out.draftId ? await courseworkApi.draft(out.draftId).catch(() => null) : null);
+    setUpload({ name, state: "ready", documentId: out.documentId, words: out.wordCount, detail, url: null });
+    setPasted("");
+    setDeclared(null);
+    if (out.draftId && detail?.kind === "file" && (detail.format === "pdf" || detail.format === "docx")) {
+      courseworkApi
+        .fileUrl(out.draftId)
+        .then((link) => setUpload((u) => (u?.state === "ready" && u.documentId === out.documentId ? { ...u, url: link.url } : u)))
+        .catch(() => {});
+    }
+  };
+
+  const showFailed = (name: string, err: unknown) => {
+    const e = err as { documentId?: string; draftId?: string } | null;
+    const at = e?.documentId && e.draftId ? { documentId: e.documentId, draftId: e.draftId } : null;
+    // A file that could not be read is not offered again after a reload; one whose read can be retried is.
+    if (!at) rememberUpload(null);
+    setUpload({ name, state: "failed", message: t(importErrorKey(err)), at });
+  };
+
   const onFile = async (file: File | undefined) => {
     if (!file) return;
     setError(null);
-    setUpload({ name: file.name, state: "reading" });
+    const mine = ++reading.current;
+    setUpload({ name: file.name, state: "reading", since: null });
     try {
       const prior = upload?.state === "ready" ? upload.documentId : undefined;
-      const out = await importFile(file, { documentId: prior, rubricId: rubric?.id });
-      // The file as read (for the count by the component's rules, and the preview); the review does not wait for these.
-      const detail = out.draftId ? await courseworkApi.draft(out.draftId).catch(() => null) : null;
-      setUpload({ name: file.name, state: "ready", documentId: out.documentId, words: out.wordCount, detail, url: null });
-      setPasted("");
-      setDeclared(null);
-      if (out.draftId && detail?.kind === "file" && (detail.format === "pdf" || detail.format === "docx")) {
-        courseworkApi
-          .fileUrl(out.draftId)
-          .then((link) => setUpload((u) => (u?.state === "ready" && u.documentId === out.documentId ? { ...u, url: link.url } : u)))
-          .catch(() => {});
-      }
+      const out = await importFile(file, {
+        documentId: prior,
+        rubricId: rubric?.id,
+        onUploaded: (at) => {
+          if (mine !== reading.current) return;
+          const since = Date.now();
+          setUpload((u) => (u?.state === "reading" ? { ...u, since } : u));
+          if (at.draftId) rememberUpload({ documentId: at.documentId, draftId: at.draftId, name: file.name, since });
+        },
+      });
+      if (mine === reading.current) await showRead(file.name, out);
     } catch (err) {
-      setUpload({ name: file.name, state: "failed", message: t(importErrorKey(err)) });
+      if (mine === reading.current) showFailed(file.name, err);
     }
   };
+
+  /** Reads the stored file again after a failure. */
+  const retry = async () => {
+    if (upload?.state !== "failed") return;
+    if (!upload.at) return fileInput.current?.click();
+    const { name, at } = upload;
+    const since = Date.now();
+    const mine = ++reading.current;
+    setUpload({ name, state: "reading", since });
+    rememberUpload({ ...at, name, since });
+    try {
+      const out = await readAgain(at);
+      if (mine === reading.current) await showRead(name, out);
+    } catch (err) {
+      if (mine === reading.current) showFailed(name, err);
+    }
+  };
+
+  const clearUpload = () => {
+    reading.current++;
+    rememberUpload(null);
+    setUpload(null);
+    setDeclared(null);
+  };
+
+  // After a reload: the upload this tab was reading (or had read) comes back, and the wait carries on.
+  useEffect(() => {
+    let pending: PendingRead | null = null;
+    try {
+      pending = parsePendingRead(sessionStorage.getItem(PENDING_KEY), Date.now());
+    } catch {
+      /* no storage */
+    }
+    if (!pending) return;
+    const { documentId, draftId, name, since } = pending;
+    const ctl = new AbortController();
+    const mine = ++reading.current;
+    const current = () => !ctl.signal.aborted && mine === reading.current;
+    // Restoring what this tab remembers is the point of the effect.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUpload((u) => u ?? { name, state: "reading", since });
+    (async () => {
+      try {
+        const draft = await courseworkApi.draft(draftId);
+        if (!current()) return;
+        // Never stored (the tab closed mid-upload): nothing to wait for.
+        if (draft.status === "uploading") {
+          rememberUpload(null);
+          return setUpload((u) => (u?.state === "reading" && u.name === name ? null : u));
+        }
+        const out = await awaitRead({ documentId, draftId }, { documentId, draftId, importStatus: null, status: draft.status ?? "ready", error: draft.error, draft }, { signal: ctl.signal, startedAt: since });
+        if (current()) await showRead(name, out);
+      } catch (err) {
+        if (!current()) return;
+        const kind = (err as { kind?: string } | null)?.kind;
+        // The piece is gone (deleted elsewhere): start empty.
+        if (!kind) {
+          rememberUpload(null);
+          return setUpload((u) => (u?.state === "reading" && u.name === name ? null : u));
+        }
+        showFailed(name, err);
+      }
+    })();
+    return () => ctl.abort();
+    // Once, on arrival.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // While a file is being read the card says how it is going; the clock only runs then.
+  const readingSince = upload?.state === "reading" ? upload.since : undefined;
+  const [readingFor, setReadingFor] = useState(0);
+  useEffect(() => {
+    if (readingSince === undefined) return;
+    const tick = () => setReadingFor(readingSince === null ? 0 : Date.now() - readingSince);
+    tick();
+    const id = setInterval(tick, 1000);
+    return () => clearInterval(id);
+  }, [readingSince]);
+  const phase = readPhase(readingSince !== null && readingSince !== undefined, readingFor);
 
   // Counted the way the board counts for this component: a separate pass over the work, nothing is removed from it.
   const rules = useMemo(() => rulesOf(rubric), [rubric]);
@@ -134,6 +253,7 @@ export function CourseworkStart() {
       }
       const mine = rules.kind === "words" && declared ? declared : null;
       saveDeclaredWords(documentId, mine);
+      rememberUpload(null);
       if (review) await courseworkApi.requestReview({ documentId, rubricId: rubric.id, mode, ...(mine ? { declaredWords: mine } : {}) });
       router.push(`/coursework/${encodeURIComponent(documentId)}`);
     } catch (err) {
@@ -247,7 +367,9 @@ export function CourseworkStart() {
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-ui font-extrabold text-foreground">{upload.name}</p>
                     {upload.state === "reading" ? (
-                      <p className="text-small text-muted-foreground">{t("cw.start.reading", { name: "" }).replace(/\s+…/, "…")}</p>
+                      <p className="text-small text-muted-foreground" aria-live="polite">
+                        {t(phase === "uploading" ? "cw.start.uploading" : phase === "slow" ? "cw.start.readingSlow" : "cw.start.readingFile")}
+                      </p>
                     ) : (
                       <>
                         <p className="text-small font-bold tabular-nums text-foreground">{ws.count}</p>
@@ -255,8 +377,13 @@ export function CourseworkStart() {
                       </>
                     )}
                   </div>
+                  {upload.state === "reading" && phase === "slow" && (
+                    <button type="button" onClick={() => { clearUpload(); requestAnimationFrame(() => pasteBox.current?.focus()); }} className="min-h-11 shrink-0 self-start px-1 text-small font-extrabold text-muted-foreground hover:text-foreground">
+                      {t("cw.start.pasteInstead")}
+                    </button>
+                  )}
                   {upload.state === "ready" && (
-                    <button type="button" onClick={() => { setUpload(null); setDeclared(null); }} className="min-h-11 shrink-0 self-start px-1 text-small font-extrabold text-muted-foreground hover:text-foreground">
+                    <button type="button" onClick={clearUpload} className="min-h-11 shrink-0 self-start px-1 text-small font-extrabold text-muted-foreground hover:text-foreground">
                       {t("cw.start.remove")}
                     </button>
                   )}
@@ -264,6 +391,7 @@ export function CourseworkStart() {
               ) : (
                 <>
                   <textarea
+                    ref={pasteBox}
                     value={pasted}
                     onChange={(e) => setPasted(e.target.value)}
                     aria-label={t("cw.start.paste")}
@@ -288,9 +416,26 @@ export function CourseworkStart() {
                 e.target.value = "";
               }} />
               {upload?.state === "failed" && (
-                <p className="mt-2 text-small font-semibold text-foreground" role="alert">
-                  <span className="font-extrabold">{upload.name}:</span> {upload.message}
-                </p>
+                <div className="mt-2" role="alert">
+                  <p className="text-small font-semibold text-foreground">
+                    <span className="font-extrabold">{upload.name}:</span> {upload.message}
+                  </p>
+                  <div className="flex flex-wrap gap-x-5">
+                    <button type="button" onClick={() => void retry()} className="min-h-11 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4">
+                      {t(upload.at ? "cw.start.readAgain" : "cw.start.replace")}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        clearUpload();
+                        pasteBox.current?.focus();
+                      }}
+                      className="min-h-11 text-small font-extrabold text-foreground underline decoration-border-strong decoration-2 underline-offset-4"
+                    >
+                      {t("cw.start.pasteInstead")}
+                    </button>
+                  </div>
+                </div>
               )}
               {words > 0 && upload?.state !== "reading" && (
                 <WordInfo className="mt-2" status={ws} breakdown={breakdown} rules={rules} declared={declared} onDeclared={setDeclared} uncertain={rubric.status === "draft" || rules.fallback} showCount={false} showDetail={!upload} />
@@ -307,6 +452,8 @@ export function CourseworkStart() {
                       </Button>
                       <p className="text-center text-small font-bold text-muted-foreground sm:text-left">{line}</p>
                     </div>
+                    {/* The button is off while the file is read: say so, and when it will come on. */}
+                    {upload?.state === "reading" && <p className="mt-2 text-small font-semibold text-foreground" role="status">{t(phase === "slow" ? "cw.start.waitReadSlow" : "cw.start.waitRead")}</p>}
                     {!online && <p className="mt-2 text-small font-semibold text-foreground" role="status">{t("cw.err.offline")}</p>}
                     {error && <p className="mt-2 text-small font-semibold text-rose-700" role="alert">{error}</p>}
                   </>

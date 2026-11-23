@@ -21,6 +21,7 @@ import {
   type ReviewMode,
 } from "./grader";
 import { rpc } from "./study-session";
+import { waitForRead, type ReadStatus } from "../coursework-read";
 
 export type {
   CitationsResult,
@@ -193,44 +194,99 @@ export const UPLOAD_ACCEPT = ".pdf,.doc,.docx,.txt,application/pdf,application/m
 
 export type ImportFailure = "unreadable" | "too_large" | "unsupported" | "offline" | "failed";
 
+/** What `finishUpload` / `retryRead` answer. `status` and `draft` are absent on a server that always queues the read. */
+export interface ReadState {
+  documentId: string;
+  draftId?: string;
+  importStatus: null | "uploading" | "extracting" | "failed";
+  status?: ReadStatus;
+  error?: string | null;
+  /** The draft as read, when it was read inside the request. */
+  draft?: DraftDetail | null;
+}
+
+export interface ImportedFile {
+  documentId: string;
+  draftId: string | null;
+  wordCount: number;
+  /** The file as read, when the server sent it along (no need to fetch the draft). */
+  detail: DraftDetail | null;
+}
+
+/** An import that failed: `kind` says how; `draftId` is there when the file is stored and can be read again. */
+export type ImportError = Error & { kind: ImportFailure; documentId?: string; draftId?: string };
+
+const importError = (kind: ImportFailure, message?: string, at?: { documentId?: string; draftId?: string | null }): ImportError =>
+  Object.assign(new Error(message ?? kind), { kind, ...(at?.documentId ? { documentId: at.documentId } : {}), ...(at?.draftId ? { draftId: at.draftId } : {}) });
+
 /**
- * Uploads a file and waits for its text to land in the document. Resolves
- * with the document id; rejects with an ImportFailure (`kind`) and, for an
- * unreadable file, the server's words.
+ * Waits for a stored upload to be read: at once when the server already read
+ * it (`first`), else by asking with the backoff in coursework-read.ts.
  */
-export async function importFile(file: File, opts: { documentId?: string; rubricId?: string } = {}, signal?: AbortSignal): Promise<{ documentId: string; draftId: string | null; wordCount: number }> {
-  const fail = (kind: ImportFailure, message?: string) => Object.assign(new Error(message ?? kind), { kind });
-  if (file.size > MAX_UPLOAD_BYTES) throw fail("too_large");
-  if (!/\.(pdf|docx?|txt)$/i.test(file.name)) throw fail("unsupported");
-  if (typeof navigator !== "undefined" && navigator.onLine === false) throw fail("offline");
+export async function awaitRead(at: { documentId: string; draftId: string | null }, first: ReadState | null, opts: { signal?: AbortSignal; startedAt?: number } = {}): Promise<ImportedFile> {
+  const { documentId, draftId } = at;
+  if (first?.status === "ready" && first.draft) return { documentId, draftId: first.draft.id, wordCount: first.draft.wordCount, detail: first.draft };
+  if (first?.status === "failed") throw importError("unreadable", first.error ?? undefined, at);
+  const aborted = () => !!opts.signal?.aborted;
+  if (draftId) {
+    const res = await waitForRead(() => courseworkApi.draft(draftId), { aborted, startedAt: opts.startedAt });
+    if (res.outcome === "ready") return { documentId, draftId, wordCount: res.value.wordCount, detail: res.value };
+    if (res.outcome === "failed") throw importError("unreadable", res.value.error ?? undefined, at);
+    throw importError(res.outcome === "timeout" ? "unreadable" : "failed", undefined, at);
+  }
+  // A v1 server: the document itself carries the import's state.
+  const res = await waitForRead(async () => {
+    const doc = await graderApi.document(documentId);
+    return { status: (doc.importStatus === null ? "ready" : doc.importStatus) as ReadStatus, doc };
+  }, { aborted, startedAt: opts.startedAt });
+  if (res.outcome === "ready") return { documentId, draftId: null, wordCount: res.value.doc.wordCount, detail: null };
+  if (res.outcome === "failed") throw importError("unreadable", res.value.doc.importError ?? undefined, at);
+  throw importError(res.outcome === "timeout" ? "unreadable" : "failed", undefined, at);
+}
+
+/**
+ * Uploads a file and waits for its text. Most files are read while the
+ * upload is being confirmed, so this resolves with that one answer; scans
+ * and photos are waited for. Resolves with the document and the draft as
+ * read; rejects with an ImportError (`kind`, and for an unreadable file the
+ * server's words). `onUploaded` fires when the file is stored and reading
+ * starts, with the ids (so the wait can be picked up again after a reload).
+ */
+export async function importFile(
+  file: File,
+  opts: { documentId?: string; rubricId?: string; onUploaded?: (at: { documentId: string; draftId: string | null }) => void } = {},
+  signal?: AbortSignal,
+): Promise<ImportedFile> {
+  if (file.size > MAX_UPLOAD_BYTES) throw importError("too_large");
+  if (!/\.(pdf|docx?|txt)$/i.test(file.name)) throw importError("unsupported");
+  if (typeof navigator !== "undefined" && navigator.onLine === false) throw importError("offline");
   let documentId: string;
   let draftId: string | null = null;
+  let first: ReadState | null;
   try {
     const contentType = file.type || "application/octet-stream";
-    const up = (await graderApi.importUpload({ ...opts, fileName: file.name, contentType, size: file.size })) as { documentId: string; uploadUrl: string; draftId?: string };
+    const up = (await graderApi.importUpload({ documentId: opts.documentId, rubricId: opts.rubricId, fileName: file.name, contentType, size: file.size })) as { documentId: string; uploadUrl: string; draftId?: string };
     documentId = up.documentId;
     draftId = up.draftId ?? null;
     const put = await fetch(up.uploadUrl, { method: "PUT", headers: { "content-type": contentType }, body: file, signal });
     if (!put.ok) throw new Error("upload");
-    await rpc("coursework.finishUpload", "mutation", { documentId, ...(draftId ? { draftId } : {}) });
+    opts.onUploaded?.({ documentId, draftId });
+    first = await rpc<ReadState>("coursework.finishUpload", "mutation", { documentId, ...(draftId ? { draftId } : {}) });
   } catch (err) {
     if (isCourseworkLimit(err)) throw err;
-    throw fail("failed");
+    throw importError("failed");
   }
-  // Extraction is a worker job: a few seconds for a PDF or a Word file.
-  for (let i = 0; i < 90; i++) {
-    if (signal?.aborted) throw fail("failed");
-    await new Promise((r) => setTimeout(r, i < 5 ? 1000 : 2000));
-    if (draftId) {
-      const draft = await courseworkApi.draft(draftId);
-      if (draft.status === "ready") return { documentId, draftId, wordCount: draft.wordCount };
-      if (draft.status === "failed") throw fail("unreadable", draft.error ?? undefined);
-    } else {
-      // A v1 server: the document itself carries the import's state.
-      const doc = await graderApi.document(documentId);
-      if (doc.importStatus === null) return { documentId, draftId: null, wordCount: doc.wordCount };
-      if (doc.importStatus === "failed") throw fail("unreadable", doc.importError ?? undefined);
-    }
+  return awaitRead({ documentId, draftId }, first, { signal });
+}
+
+/** Reads a stored file again after it failed (the original is kept): same result as importFile. */
+export async function readAgain(at: { documentId: string; draftId: string }, signal?: AbortSignal): Promise<ImportedFile> {
+  let first: ReadState;
+  try {
+    first = await rpc<ReadState>("coursework.retryRead", "mutation", { draftId: at.draftId });
+  } catch (err) {
+    if (isCourseworkLimit(err)) throw err;
+    throw importError("failed", undefined, at);
   }
-  throw fail("failed");
+  return awaitRead(at, first, { signal });
 }
