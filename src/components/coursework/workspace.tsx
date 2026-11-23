@@ -18,6 +18,8 @@ import { AskInput, useChat } from "./panel-views";
 import type { DocxViewHandle } from "./docx-view";
 import type { PdfViewHandle } from "./pdf-view";
 import { useCw } from "./use-cw";
+import { createDiagram } from "@/components/my-notes/note-editor";
+import { useMyNotesAvailable } from "@/components/my-notes/use-my-notes";
 import { useGrader, useOnline, useWide } from "./use-grader";
 import { WordInfo, draftBreakdown, lineFor, rulesOf, useDeclaredWords } from "./word-count";
 import "@/app/coursework/coursework.css";
@@ -89,6 +91,8 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const wide = useWide();
   const online = useOnline();
   const editor = useRef<ScribeEditorHandle>(null);
+  /** `/diagram` is the notes server's: offered here only where that is deployed. */
+  const diagrams = useMyNotesAvailable();
   const fileInput = useRef<HTMLInputElement>(null);
   const pdf = useRef<PdfViewHandle>(null);
   const docx = useRef<DocxViewHandle>(null);
@@ -780,6 +784,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             activeAnchor={activeAnchor}
             onAnchorClick={onAnchorClick}
             uploadImage={inlineImage}
+            createDiagram={diagrams ? createDiagram : undefined}
             onChange={(d) => {
               setText(d.text);
               setJson(d.json);

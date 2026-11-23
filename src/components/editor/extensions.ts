@@ -1,4 +1,4 @@
-import { Extension, Node, mergeAttributes } from "@tiptap/core";
+import { Extension, Mark, Node, mergeAttributes } from "@tiptap/core";
 import type { Node as PmNode } from "@tiptap/pm/model";
 import { Plugin, PluginKey } from "@tiptap/pm/state";
 import { goToNextCell, tableEditing } from "@tiptap/pm/tables";
@@ -222,5 +222,127 @@ export const Table = Node.create({
   },
   addProseMirrorPlugins() {
     return [tableEditing()];
+  },
+});
+
+/* ---------- Highlight (a student's own mark, stored in the document) ---------- */
+
+declare module "@tiptap/core" {
+  interface Commands<ReturnType> {
+    scribeHighlight: {
+      setHighlight: (color: string) => ReturnType;
+      unsetHighlight: () => ReturnType;
+    };
+    scribeFigure: {
+      insertFigure: (attrs: { figure: unknown; prompt: string }) => ReturnType;
+    };
+  }
+}
+
+/** The highlighter: a mark with one of the note colours (my-notes.ts HIGHLIGHT_COLORS). */
+export const Highlight = Mark.create({
+  name: "highlight",
+  addAttributes() {
+    return {
+      color: {
+        default: "yellow",
+        parseHTML: (el) => el.getAttribute("data-color") ?? "yellow",
+        renderHTML: (attrs) => ({ "data-color": attrs.color }),
+      },
+    };
+  },
+  parseHTML() {
+    return [{ tag: "mark" }];
+  },
+  renderHTML({ HTMLAttributes }) {
+    return ["mark", mergeAttributes({ class: "se-hl" }, HTMLAttributes), 0];
+  },
+  addCommands() {
+    return {
+      setHighlight:
+        (color) =>
+        ({ commands }) =>
+          commands.setMark(this.name, { color }),
+      unsetHighlight:
+        () =>
+        ({ commands }) =>
+          commands.unsetMark(this.name),
+    };
+  },
+});
+
+/** Where each highlighted passage is, in reading order (a run of one colour inside one block is one highlight, as in my-notes.ts docHighlights). */
+export function highlightRanges(doc: PmNode): { from: number; to: number; color: string }[] {
+  const out: { from: number; to: number; color: string }[] = [];
+  doc.descendants((node, pos) => {
+    if (!node.isTextblock) return true;
+    let open: { from: number; to: number; color: string } | null = null;
+    node.forEach((child, offset) => {
+      const mark = child.isText ? child.marks.find((m) => m.type.name === "highlight") : undefined;
+      const start = pos + 1 + offset;
+      if (mark) {
+        const color = String(mark.attrs.color ?? "yellow");
+        if (open && open.color === color && open.to === start) open.to = start + child.nodeSize;
+        else {
+          if (open) out.push(open);
+          open = { from: start, to: start + child.nodeSize, color };
+        }
+      } else if (open) {
+        out.push(open);
+        open = null;
+      }
+    });
+    if (open) out.push(open);
+    return false;
+  });
+  return out;
+}
+
+/* ---------- Figure (/diagram): a spec the app draws ---------- */
+
+/** Raised on the editor's element when a figure block asks for something: `{ pos, action }`. */
+export const FIGURE_EVENT = "scribe-figure";
+
+/**
+ * A described graph or diagram on its own line. The block stores the SPEC
+ * (`figure`: a plot or a labelled diagram as data, see api/my-notes.ts) and
+ * the student's description (`prompt`), never markup; how it is drawn is the
+ * node view's business (set with `.extend({ addNodeView })` by the editor).
+ */
+export const Figure = Node.create({
+  name: "figure",
+  group: "block",
+  atom: true,
+  draggable: true,
+  addAttributes() {
+    const json = (name: string) => ({
+      default: null,
+      parseHTML: (el: HTMLElement) => {
+        try {
+          return JSON.parse(el.getAttribute(name) ?? "null");
+        } catch {
+          return null;
+        }
+      },
+    });
+    return {
+      figure: { ...json("data-figure"), renderHTML: (attrs: Record<string, unknown>) => ({ "data-figure": JSON.stringify(attrs.figure) }) },
+      prompt: { default: "", parseHTML: (el: HTMLElement) => el.getAttribute("data-prompt") ?? "", renderHTML: (attrs: Record<string, unknown>) => ({ "data-prompt": String(attrs.prompt ?? "") }) },
+    };
+  },
+  parseHTML() {
+    return [{ tag: "figure[data-figure]" }];
+  },
+  renderHTML({ HTMLAttributes, node }) {
+    const f = node.attrs.figure as { title?: string; caption?: string } | null;
+    return ["figure", mergeAttributes({ class: "se-figure" }, HTMLAttributes), ["figcaption", {}, [f?.title, f?.caption].filter(Boolean).join(". ")]];
+  },
+  addCommands() {
+    return {
+      insertFigure:
+        (attrs) =>
+        ({ commands }) =>
+          commands.insertContent({ type: this.name, attrs }),
+    };
   },
 });

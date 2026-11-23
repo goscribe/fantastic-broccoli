@@ -1,0 +1,18 @@
+@layer properties, theme, base, components, utilities;
+
+/*
+ * A student's own note as a card (a subject's materials, the library's "Your
+ * notes"): a sheet of ruled paper with a plain header strip that says whose
+ * it is. Neutral, like every material that is not Scribe's.
+ */
+@layer components {
+  .own-note-paper {
+    background-color: #fff;
+    background-image: linear-gradient(to bottom, transparent 21px, var(--border, #e8e8ec) 21px);
+    background-size: 100% 22px;
+    background-position: 0 14px;
+    box-shadow: inset 0 0 0 1px var(--border, #e8e8ec);
+  }
+  .own-note-paper-head { position: absolute; left: 0; right: 0; top: 0; height: 36px; background: var(--muted, #f4f4f6); border-bottom: 1px solid var(--border, #e8e8ec); }
+  a.own-note-paper:hover { box-shadow: inset 0 0 0 1px var(--border-strong, #d5d5dc); }
+}
