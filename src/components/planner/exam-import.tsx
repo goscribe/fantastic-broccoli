@@ -4,7 +4,7 @@ import "@/lib/i18n/exam-planner";
 import "@/lib/i18n/exam-import";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Loader2, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button, buttonClass } from "@/components/ui/button";
 import { inputClass } from "@/components/ui/input";
 import { apiUrl } from "@/lib/api/config";
@@ -31,6 +31,7 @@ import { track } from "@/lib/funnel";
 import { useI18n } from "@/lib/i18n";
 import { familyVars, resolveSubjectFamily } from "@/lib/subject-family";
 import { toast, toastError } from "@/lib/toast";
+import { WaitScreen } from "@/components/ui/wait-screen";
 import { cn } from "@/lib/utils";
 import type { Folder, Workspace } from "@/types";
 import { PLAN_KEY } from "@/components/planner/plan-task";
@@ -290,11 +291,12 @@ export function ExamImportSheet({
           )}
 
           {view === "busy" && (
-            <div className="flex flex-col items-center px-4 py-14 text-center" role="status">
-              <Loader2 className="size-7 animate-spin text-faint" />
-              <p className="mt-4 text-ui font-semibold">{t(busy === "google" ? "ei.busy.google" : "ei.busy.file")}</p>
-              {busy === "file" && <p className="mt-1 text-small text-muted-foreground">{t("ei.busy.fileSlow")}</p>}
-            </div>
+            <WaitScreen
+              compact
+              pose="book"
+              title={t(busy === "google" ? "ei.busy.google" : "ei.busy.file").replace(/…$/, "")}
+              time={busy === "file" ? t("ei.busy.fileSlow") : undefined}
+            />
           )}
 
           {view === "summary" && result && headline && (
