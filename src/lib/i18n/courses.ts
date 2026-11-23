@@ -67,6 +67,13 @@ const english = {
   "course.selectClear": "Clear",
   "course.selectStart": "Start session",
   "course.selectMax": "One session takes up to {max} topics",
+  "course.pickedFrom": "{topics} from {units}",
+  "course.pickedTopicsOne": "1 topic",
+  "course.pickedTopicsMany": "{count} topics",
+  "course.pickedUnitsOne": "1 unit",
+  "course.pickedUnitsMany": "{count} units",
+  "course.pickedInUnit": "{picked} of {count} topics selected",
+  "course.pickedOver": "One session takes up to {max} topics, so this one starts with the first {max}.",
 };
 
 registerTranslations(english, {

@@ -15,6 +15,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/first-run";
 import "@/lib/i18n/courses";
 import { CoursePicker } from "@/components/courses/course-picker";
+import { startPickedTopics } from "@/components/courses/use-start-topic";
 import { coursesApi, type CatalogTopic, type Course, type CourseLevel } from "@/lib/api/courses";
 import { markFirstScreenShown, track as trackFunnel, type FirstRunOption } from "@/lib/funnel";
 import { NotesOffer, type NotesOfferSelection } from "@/components/onboarding/notes-offer";
@@ -272,6 +273,23 @@ export function FirstRun({
     );
   };
 
+  /** Several units or topics ticked in the picker: the course's subject is added and one session starts over all of them. */
+  const startCourseTopics = (course: Course, topics: CatalogTopic[], level?: CourseLevel) => {
+    if (topics.length === 0) return;
+    if (offered.current?.courseId === course.id) track("first_run.notes_skipped", { courseId: course.id, noteCount: offered.current.noteCount });
+    void run(
+      "curriculum",
+      async () => {
+        // "How long?" is asked (a learner's first sessions) while the picker is still on screen.
+        const { workspaceId, sessionId } = await startPickedTopics({ courseId: course.id, topicIds: topics.map((x) => x.id), level }, () => setBusy("building"));
+        emitTreeChanged();
+        track("first_run.session_requested", { option: "curriculum" }, workspaceId);
+        router.push(`/workspace/${workspaceId}/session/${sessionId}`);
+      },
+      t("course.errorStart"),
+    );
+  };
+
   // Your course first: it is the way in that needs nothing to hand, and typing a topic lives in its search.
   const options: { id: Mode; label: string; hint: string; icon: typeof Upload }[] = [
     { id: "course", label: t("course.optPick"), hint: t("course.optPickHint"), icon: GraduationCap },
@@ -308,7 +326,7 @@ export function FirstRun({
           {firstRun ? t("firstRun.subtitle") : t("firstRun.newSubtitle")}
         </p>
 
-        {busy ? (
+        {busy && (
           <div className="mt-10 flex flex-col items-center text-center" role="status" aria-live="polite">
             <Loader2 className="size-6 animate-spin text-accent" />
             <p className="mt-3 text-[15px] font-semibold">
@@ -316,8 +334,9 @@ export function FirstRun({
             </p>
             <p className="mt-1 text-[13px] text-muted-foreground">{t("firstRun.busyHint")}</p>
           </div>
-        ) : (
-          <>
+        )}
+        {/* Kept mounted while a session is made, so a start that fails comes back to the same course and picks. */}
+        <div className={busy ? "hidden" : undefined}>
             <div role="tablist" aria-label={t("firstRun.optionsLabel")} className="mt-7 grid grid-cols-3 gap-2">
               {options.map(({ id, label, hint, icon: Icon }) => (
                 <button
@@ -418,6 +437,7 @@ export function FirstRun({
               {mode === "course" && (
                 <CoursePicker
                   onStart={startCourse}
+                  onStartTopics={startCourseTopics}
                   onFreeTopic={startTopic}
                   unitTop={(course, level) => (
                     <NotesOffer
@@ -485,8 +505,7 @@ export function FirstRun({
                 {firstRun ? t("firstRun.skip") : t("firstRun.backHome")}
               </button>
             )}
-          </>
-        )}
+        </div>
       </div>
     </div>
   );

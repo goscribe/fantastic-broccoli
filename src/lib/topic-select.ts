@@ -59,6 +59,32 @@ export function selectedInOrder(units: readonly { topics: readonly { id: string 
   return units.flatMap((u) => u.topics.filter((t) => selected.has(t.id)).map((t) => t.id));
 }
 
+export interface PickSummary {
+  /** Every picked topic still listed, in syllabus order. */
+  ids: string[];
+  /** Units with at least one picked topic. */
+  unitCount: number;
+  /** What one session starts on: the first `max` of `ids`. */
+  startIds: string[];
+  /** More is picked than one session takes. */
+  over: boolean;
+}
+
+/**
+ * A selection made across several units (the course picker, which lets whole
+ * units be ticked without a cap): what the bar says and what the session
+ * starts on. Past the cap the session takes the first topics in syllabus order.
+ */
+export function pickSummary(units: readonly { topics: readonly { id: string }[] }[], selected: ReadonlySet<string>, max = MAX_SELECTED_TOPICS): PickSummary {
+  const ids = selectedInOrder(units, selected);
+  return {
+    ids,
+    unitCount: units.filter((u) => u.topics.some((t) => selected.has(t.id))).length,
+    startIds: ids.slice(0, max),
+    over: ids.length > max,
+  };
+}
+
 /**
  * Minutes the server gives a session over this many topics when the learner
  * has not chosen a length (goscribe/server src/lib/courses/mixed.ts): the
