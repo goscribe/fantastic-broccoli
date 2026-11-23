@@ -26,6 +26,8 @@ import "@/lib/i18n/habits";
 import "@/lib/i18n/voice";
 import { cn } from "@/lib/utils";
 import { ItemDots, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
+import { LongAnswerActivity } from "@/components/session/long-answer-activity";
+import { isLongAnswer } from "@/lib/long-answer";
 import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, SkipForward, Undo2, X } from "lucide-react";
 
 interface WorksheetActivityProps {
@@ -61,7 +63,12 @@ interface WorksheetDraft {
   skipped: Record<string, boolean>;
 }
 
-export function WorksheetActivity({
+/** A worksheet, or a long-answer question (one extended response) stored as one. */
+export function WorksheetActivity(props: WorksheetActivityProps) {
+  return isLongAnswer(props.content) ? <LongAnswerActivity {...props} /> : <WorksheetQuestions {...props} />;
+}
+
+function WorksheetQuestions({
   activityId,
   content,
   draft,
