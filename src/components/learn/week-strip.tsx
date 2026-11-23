@@ -17,7 +17,7 @@ import {
   type PlannerSlot,
 } from "@/lib/api/planner";
 import { analyzeFiles, detectSections, uploadFiles } from "@/lib/api/materials";
-import { createStudySession } from "@/lib/api/study";
+import { createStudySession, createStudySessionQuietly } from "@/lib/api/study";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { accentForId } from "@/lib/accent-palette";
@@ -81,7 +81,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
       const { sections } = await detectSections(workspaceId, fileIds).catch(() => ({ sections: [] }));
       if (sections.length >= 2) {
         for (const sec of sections) {
-          await createStudySession({
+          await createStudySessionQuietly({
             workspaceId,
             title: sec.title,
             depth: "moderate",

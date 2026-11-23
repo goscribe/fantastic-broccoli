@@ -19,7 +19,7 @@ import {
 } from "@/lib/api/mistakes";
 import { fixMinutes, mistakeSessionHref, mistakeTopicHref, mixedRoundSubjects } from "@/lib/mistakes";
 import { coursesApi } from "@/lib/api/courses";
-import { createStudySession } from "@/lib/api/study";
+import { createStudySessionQuietly } from "@/lib/api/study";
 import { toastError } from "@/lib/toast";
 import "@/lib/i18n/purpose";
 import { useI18n } from "@/lib/i18n";
@@ -110,7 +110,7 @@ function PractiseTopic({ m }: { m: Mistake }) {
         const r = await coursesApi.startTopic({ courseId: m.courseTopic.courseId, topicId: m.courseTopic.topicId });
         return `/workspace/${r.workspaceId}/session/${r.sessionId}`;
       }
-      const s = await createStudySession({ workspaceId: m.workspaceId, title: m.label, topics: m.label, depth: "light", durationMinutes: 5, quickStart: true });
+      const s = await createStudySessionQuietly({ workspaceId: m.workspaceId, title: m.label, topics: m.label, depth: "light", durationMinutes: 5, quickStart: true });
       return s ? `/workspace/${m.workspaceId}/session/${s.id}` : `/workspace/${m.workspaceId}`;
     },
     onSuccess: (href) => router.push(href),

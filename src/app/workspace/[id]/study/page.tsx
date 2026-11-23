@@ -10,6 +10,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchWorkspace } from "@/lib/api/workspace";
 import {
   createStudySession,
+  type CreateSessionInput,
   deleteStudySession,
   fetchStudySessions,
   retryStudySession,
@@ -71,7 +72,7 @@ function WorkspaceStudyPage() {
     queryFn: () => studySessionApi.listBank({ workspaceId }),
   });
   const createSession = useMutation({
-    mutationFn: createStudySession,
+    mutationFn: (input: CreateSessionInput) => createStudySession(input),
     onSuccess: (created) => {
       queryClient.invalidateQueries({
         queryKey: ["study-sessions", workspaceId],

@@ -51,6 +51,8 @@ import { notesApi } from "@/lib/api/notes";
 import { noteHref } from "@/lib/notes";
 import { track, type DebriefNextKind } from "@/lib/funnel";
 import "@/lib/i18n/purpose";
+import "@/lib/i18n/start-check";
+import { confidenceCat, confidenceFace, confidenceResult, type ConfidenceFace } from "@/lib/start-check";
 import type { ApiSessionDebrief, ApiSessionStats } from "@/lib/api/study-session";
 
 /** How long the mastery rows get on screen before the study-time sheet opens over them. */
@@ -284,6 +286,22 @@ function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: 
   );
 }
 
+/** One side of "You said 3/10 → You got 7/10": the cat's face for that number, then the number. */
+function SaidGot({ face, label, value, strong = false }: { face: ConfidenceFace; label: string; value: number; strong?: boolean }) {
+  return (
+    <span className="flex items-center gap-2">
+      <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-11 w-auto" />
+      <span className="flex flex-col">
+        <span className="text-caption font-bold leading-4 text-muted-foreground">{label}</span>
+        <span className={cn("text-[22px] font-extrabold leading-6 tabular-nums", strong ? "text-foreground" : "text-muted-foreground")}>
+          {value}
+          <span className="text-[0.6em]">/10</span>
+        </span>
+      </span>
+    </span>
+  );
+}
+
 /** A secondary action at the end of a session: words on the page, underlined, with a quiet note after them. */
 function TextAction({
   title,
@@ -337,7 +355,10 @@ export function SessionDebrief({
   streakLitDays = null,
   onAskCopilot,
   activities,
+  confidenceBefore = null,
 }: {
+  /** The learner's own 0-10 confidence from the start check; null when it was not asked. */
+  confidenceBefore?: number | null;
   /** The session's activities: their saved answers draw the row of answer dots. */
   activities?: SessionActivity[];
   onBack: () => void;
@@ -577,6 +598,8 @@ export function SessionDebrief({
     const fixFirst = mistakes > 0 && !handOff;
     const fixTitle = (mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes));
     const fixSub = t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)));
+    // Asked "how confident?" at the start: their number beside the result, on the same scale.
+    const said = stats ? confidenceResult(confidenceBefore, stats.correct, stats.answered) : null;
     const mainButton = "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold sm:w-auto sm:min-w-[300px]";
     // What the main button would have been, as a text link under "Fix N mistakes".
     const demoted = !fixFirst ? null : quickStart ? (
@@ -654,48 +677,21 @@ export function SessionDebrief({
           </div>
         </section>
 
-        {/* What was earned: numbers on the page, ticking up; no tiles. */}
-        {stats && (
-          <ul className="mt-5 flex flex-wrap items-baseline gap-x-7 gap-y-2 px-1 sm:mt-6" aria-label={t("debrief.points")}>
-            <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 2 }}>
-              <span className="text-[24px] font-extrabold leading-none tabular-nums"><CountUp value={points} prefix="+" /></span>
-              <span className="text-small font-bold text-muted-foreground">{t("debrief.points").toLowerCase()}</span>
-            </li>
-            {streakDays !== null && streakDays > 0 && (
-              <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 3 }}>
-                <Flame aria-hidden className={cn("size-[22px] shrink-0 self-center text-[var(--flame)]", streakLitDays !== null && "finish-flame")} fill="currentColor" strokeWidth={1.5} />
-                <span className="text-small font-bold text-foreground">
-                  {streakLitDays !== null ? (
-                    <span className="finish-bump" style={{ animationDelay: "0.85s" }}>{t("rewards.streakDays").replace("{n}", String(streakDays))}</span>
-                  ) : (
-                    t("rewards.streakDays").replace("{n}", String(streakDays))
-                  )}
-                </span>
-              </li>
-            )}
-            <li className="life-rise flex items-baseline gap-1.5" style={{ ["--i" as string]: 11 }}>
-              <span className="text-[24px] font-extrabold leading-none tabular-nums">{stats.minutes}</span>
-              <span className="text-small font-bold text-muted-foreground">{t("debrief.minutes").replace("{n}", "").trim()}</span>
-            </li>
-            {pct !== null && <li className="sr-only">{`${t("debrief.accuracy")} ${pct}%`}</li>}
-          </ul>
-        )}
-
-        {dots && stats && (
-          <div className="life-rise mt-4 px-1" style={{ ["--i" as string]: 12 }}>
-            <AnswerDots dots={dots.dots} correct={stats.correct} wrong={wrong} href={sessionMistakesHref(workspaceId, sessionId)} />
+        {/* What they said beside what they got: the one comparison only this screen can make. */}
+        {said && (
+          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={said.verdict}>
+            <p className="sr-only">{t("finish.saidGot").replace("{a}", String(said.said)).replace("{b}", String(said.got))}</p>
+            <div className="flex items-center gap-3" aria-hidden>
+              <SaidGot face={confidenceFace(said.said)} label={t("finish.said")} value={said.said} />
+              <ArrowRight className="size-5 shrink-0 text-faint" />
+              <SaidGot face={confidenceFace(said.got)} label={t("finish.got")} value={said.got} strong />
+            </div>
+            <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${said.verdict}`)}</p>
           </div>
         )}
 
-        {stats && mastery.length > 0 && (
-          <div className="life-rise mt-6 w-full px-1" style={{ ["--i" as string]: 6 }}>
-            <h3 className="mb-3 text-[12.5px] font-bold text-muted-foreground">{t("debrief.masteryTitle")}</h3>
-            <MasteryRows mastery={mastery} className="space-y-3" hrefFor={topicHref} />
-          </div>
-        )}
-
-        {/* One next step, then everything else as plain links. */}
-        <div className="life-rise mt-7 w-full px-1" style={{ ["--i" as string]: 7 }}>
+        {/* One next step. */}
+        <div className="life-rise mt-6 w-full px-1" style={{ ["--i" as string]: 4 }}>
           {fixFirst ? (
             <>
               <Link href={practiceHref({ sessionId })} className="block w-full sm:w-fit" onClick={() => nextTapped("mistakes")}>
@@ -710,46 +706,95 @@ export function SessionDebrief({
             <div className="[&_button]:sm:w-auto [&_button]:sm:min-w-[300px] [&>a]:sm:w-fit">{primary}</div>
           )}
         </div>
+        {/* At most two other ways on, then everything else behind one disclosure. */}
         <ul className="mt-3 w-full px-1">
           {demoted}
           {mistakes > 0 && !fixFirst && (
-            <TextAction i={8} title={fixTitle} sub={fixSub} href={practiceHref({ sessionId })} />
-          )}
-          {deck && workspaceId && (
-            <TextAction
-              i={1}
-              title={t("habit.flashcardsTitle")}
-              sub={t("habit.flashcardsSub")
-                .replace("{n}", String(deck.cards))
-                .replace("{m}", String(Math.max(1, Math.min(10, Math.ceil(deck.cards / 6)))))}
-              href={`/flashcards/${deck.id}?ws=${workspaceId}&mode=learn`}
-            />
-          )}
-          {askRow && onAskCopilot && (
-            <TextAction i={10} title={askRow.title} sub={askRow.sub} onClick={() => onAskCopilot(askRow.prompt)} />
-          )}
-          <InviteCard variant="link" className="life-rise" />
-          {hasReport && (
-            <li className="life-rise" style={{ ["--i" as string]: 11 }}>
-              <button
-                type="button"
-                onClick={() => setShowReport((v) => !v)}
-                aria-expanded={showReport}
-                className="group flex min-h-11 items-center gap-1 py-1.5 text-[14.5px] font-bold text-foreground"
-              >
-                <span className="underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{t(showReport ? "debrief.hideReport" : "debrief.seeReport")}</span>
-                <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
-              </button>
-            </li>
+            <TextAction i={5} title={fixTitle} sub={fixSub} href={practiceHref({ sessionId })} />
           )}
           {(handOff || !quickStart) && (
-            <li className="life-rise" style={{ ["--i" as string]: 12 }}>
-              <button type="button" onClick={onBack} className="flex min-h-11 items-center py-1.5 text-[14.5px] font-bold text-muted-foreground hover:text-foreground">
-                {t("session.backToWorkspace")}
-              </button>
-            </li>
+            <TextAction i={6} title={t("session.backToWorkspace")} onClick={onBack} />
           )}
+          <li className="life-rise" style={{ ["--i" as string]: 7 }}>
+            <button
+              type="button"
+              onClick={() => setShowReport((v) => !v)}
+              aria-expanded={showReport}
+              aria-controls="finish-details"
+              className="group flex min-h-11 items-center gap-1 py-1.5 text-[14.5px] font-bold text-muted-foreground hover:text-foreground"
+            >
+              {t(showReport ? "finish.hideDetails" : "finish.seeDetails")}
+              <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
+            </button>
+          </li>
         </ul>
+
+        {showReport && (
+          <div id="finish-details" className="mt-2 flex w-full flex-col gap-7 border-t border-border px-1 pt-6 animate-fade-up">
+            {stats && (
+              <section aria-labelledby="finish-earned">
+                <h3 id="finish-earned" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsEarned")}</h3>
+                <ul className="mt-2.5 flex flex-wrap items-baseline gap-x-7 gap-y-2">
+                  <li className="flex items-baseline gap-1.5">
+                    <span className="text-[24px] font-extrabold leading-none tabular-nums">+{points}</span>
+                    <span className="text-small font-bold text-muted-foreground">{t("debrief.points").toLowerCase()}</span>
+                  </li>
+                  {streakDays !== null && streakDays > 0 && (
+                    <li className="flex items-baseline gap-1.5">
+                      <Flame aria-hidden className="size-[22px] shrink-0 self-center text-[var(--flame)]" fill="currentColor" strokeWidth={1.5} />
+                      <span className="text-small font-bold text-foreground">{t("rewards.streakDays").replace("{n}", String(streakDays))}</span>
+                    </li>
+                  )}
+                  <li className="flex items-baseline gap-1.5">
+                    <span className="text-[24px] font-extrabold leading-none tabular-nums">{stats.minutes}</span>
+                    <span className="text-small font-bold text-muted-foreground">{t("debrief.minutes").replace("{n}", "").trim()}</span>
+                  </li>
+                </ul>
+              </section>
+            )}
+            {dots && stats && (
+              <section aria-labelledby="finish-answers">
+                <h3 id="finish-answers" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsAnswers")}</h3>
+                <div className="mt-2.5">
+                  <AnswerDots dots={dots.dots} correct={stats.correct} wrong={wrong} href={sessionMistakesHref(workspaceId, sessionId)} />
+                </div>
+              </section>
+            )}
+            {stats && mastery.length > 0 && (
+              <section aria-labelledby="finish-mastery">
+                <h3 id="finish-mastery" className="text-small font-extrabold text-muted-foreground">{t("debrief.masteryTitle")}</h3>
+                <MasteryRows mastery={mastery} className="mt-3 space-y-3" phoneMax={3} hrefFor={topicHref} />
+              </section>
+            )}
+            {((deck && workspaceId) || (askRow && onAskCopilot)) && (
+              <section aria-labelledby="finish-more">
+                <h3 id="finish-more" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsMore")}</h3>
+                <ul className="mt-1">
+                  {deck && workspaceId && (
+                    <TextAction
+                      i={0}
+                      title={t("habit.flashcardsTitle")}
+                      sub={t("habit.flashcardsSub")
+                        .replace("{n}", String(deck.cards))
+                        .replace("{m}", String(Math.max(1, Math.min(10, Math.ceil(deck.cards / 6)))))}
+                      href={`/flashcards/${deck.id}?ws=${workspaceId}&mode=learn`}
+                    />
+                  )}
+                  {askRow && onAskCopilot && (
+                    <TextAction i={0} title={askRow.title} sub={askRow.sub} onClick={() => onAskCopilot(askRow.prompt)} />
+                  )}
+                  <InviteCard variant="link" />
+                </ul>
+              </section>
+            )}
+            {hasReport && debrief && (
+              <section aria-labelledby="finish-report">
+                <h3 id="finish-report" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsReport")}</h3>
+                <DebriefReport debrief={debrief} bare />
+              </section>
+            )}
+          </div>
+        )}
         {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
         {quickStart && stats && (
           <HabitPrompt
@@ -761,7 +806,6 @@ export function SessionDebrief({
             showAfterMs={mastery.length > 0 ? MASTERY_READ_MS : undefined}
           />
         )}
-        {showReport && debrief && <DebriefReport debrief={debrief} />}
       </div>
     );
   }
@@ -885,9 +929,9 @@ export function SessionDebrief({
 }
 
 /** The model-written report, opened from "See your full report". */
-function DebriefReport({ debrief }: { debrief: ApiSessionDebrief }) {
+function DebriefReport({ debrief, bare = false }: { debrief: ApiSessionDebrief; /** Inside the details: no rule or inset of its own. */ bare?: boolean }) {
   return (
-            <div className="mt-2 space-y-5 border-t border-border px-1 pt-5 animate-fade-up">
+            <div className={bare ? "mt-2.5 space-y-5" : "mt-2 space-y-5 border-t border-border px-1 pt-5 animate-fade-up"}>
               {usefulHeadline(debrief.headline) && debrief.summary && (
                 <p className="text-ui text-foreground">
                   <MathText text={debrief.summary} />

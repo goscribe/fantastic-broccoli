@@ -7,6 +7,7 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
+import { askTopicsStartCheck } from "@/lib/start-check-client";
 import { chooseStudyLength } from "@/lib/study-length-client";
 import { MAX_SELECTED_TOPICS, mixedSessionMinutes } from "@/lib/topic-select";
 
@@ -17,19 +18,24 @@ import { MAX_SELECTED_TOPICS, mixedSessionMinutes } from "@/lib/topic-select";
  * long; an answer is passed on, otherwise the server sets the length.
  */
 export async function startPickedTopics(
-  input: { courseId: string; topicIds: string[]; level?: CourseLevel },
+  input: { courseId: string; topicIds: string[]; level?: CourseLevel; /** Topic names by id, for the start check's title; without them it is not asked. */ topicNames?: Record<string, string> },
   /** Called once the length is settled and the session is being made. */
   onBuilding?: () => void,
 ): Promise<{ workspaceId: string; sessionId: string }> {
   const topicIds = input.topicIds.slice(0, MAX_SELECTED_TOPICS);
   const usual = { depth: "moderate" as const, durationMinutes: mixedSessionMinutes(topicIds.length), quickStart: false };
   const chosen = topicIds.length > 1 ? await chooseStudyLength(usual) : usual;
+  // Topics they have not rated yet: one "How confident are you?" for them (never holds the start up).
+  const startCheck = input.topicNames
+    ? await askTopicsStartCheck({ courseId: input.courseId, topics: topicIds.map((id) => ({ id, name: input.topicNames?.[id] ?? id })) })
+    : undefined;
   onBuilding?.();
   return coursesApi.startTopics({
     courseId: input.courseId,
     topicIds,
     ...(input.level ? { level: input.level } : {}),
     ...(chosen !== usual ? { durationMinutes: chosen.durationMinutes } : {}),
+    ...(startCheck ? { startCheck } : {}),
   });
 }
 
@@ -52,11 +58,13 @@ export function useStartCourseTopic(opts: { onStarted?: (workspaceId: string) =>
     setBusyTopicId(topic.id);
     setBusyMode(mode ?? "quick5");
     try {
+      const startCheck = await askTopicsStartCheck({ courseId: course.id, topics: [{ id: topic.id, name: topic.name }] });
       const { workspaceId, sessionId } = await coursesApi.startTopic({
         courseId: course.id,
         topicId: topic.id,
         ...(level ? { level } : {}),
         ...(mode ? { mode } : {}),
+        ...(startCheck ? { startCheck } : {}),
       });
       emitTreeChanged();
       opts.onStarted?.(workspaceId);
@@ -76,7 +84,7 @@ export function useStartCourseTopic(opts: { onStarted?: (workspaceId: string) =>
     started.current = true;
     setStartingMany(true);
     try {
-      const { workspaceId, sessionId } = await startPickedTopics({ courseId: course.id, topicIds: topics.map((x) => x.id), level });
+      const { workspaceId, sessionId } = await startPickedTopics({ courseId: course.id, topicIds: topics.map((x) => x.id), level, topicNames: Object.fromEntries(topics.map((x) => [x.id, x.name])) });
       emitTreeChanged();
       opts.onStarted?.(workspaceId);
       router.push(`/workspace/${workspaceId}/session/${sessionId}`);
