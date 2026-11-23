@@ -90,7 +90,10 @@ export default function PrivacyPage() {
           to &quot;Prep session&quot; while keeping their time.
         </p>
         <p>
-          <strong>What disconnecting does not remove.</strong> Your chat
+          <strong>What disconnecting does not remove.</strong> Exams you
+          imported from your calendar stay in your Planner with their titles
+          until you delete them; disconnecting only removes their link to the
+          calendar event. Your chat
           history with the Planner, which can mention events, and prep blocks
           or notes created from your calendar before we began labelling them
           as calendar-made, which we cannot tell apart from ones you made
