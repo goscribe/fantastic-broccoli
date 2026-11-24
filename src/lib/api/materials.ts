@@ -1,5 +1,6 @@
 import { api } from "./trpc-client";
 import { rpc } from "./study-session";
+import { track } from "../funnel";
 
 export interface FileImage {
   url: string;
@@ -61,6 +62,7 @@ export async function uploadFiles(
 ): Promise<string[]> {
   const oversized = files.find((f) => f.size > MAX_UPLOAD_BYTES);
   if (oversized) {
+    track("upload.failed", { stage: "too_large", fileCount: files.length, sizeKb: Math.round(oversized.size / 1024) }, workspaceId);
     throw new Error(
       `"${oversized.name}" is ${(oversized.size / (1024 * 1024)).toFixed(1)}MB — files must be under 1GB.`,
     );
@@ -93,6 +95,7 @@ export async function uploadFiles(
     o.status === "rejected" ? [i] : [],
   );
   if (failedIndexes.length > 0) {
+    track("upload.failed", { stage: "transfer", fileCount: failedIndexes.length }, workspaceId);
     // Remove the orphaned file records so the names can be re-uploaded.
     await api.workspace.deleteFiles
       .mutate({

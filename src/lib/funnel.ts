@@ -53,7 +53,11 @@ export type FunnelEvent =
   | "planner.calendar_import_opened"
   | "planner.calendar_import_added"
   | "planner.calendar_exam_removed"
-  | "planner.calendar_event_attached";
+  | "planner.calendar_event_attached"
+  /** An upload given up in the app before the file reached us (`stage`: too_large, or the storage transfer failed). */
+  | "upload.failed"
+  /** "Skip" on the start check (the answers themselves are stored with the session). */
+  | "start_check.skipped";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
@@ -96,6 +100,8 @@ export interface FunnelProps {
   source?: "google" | "ics" | "file";
   /** planner.calendar_import_added: how many exams the import added. */
   count?: number;
+  /** upload.failed: where it failed (server UPLOAD_FAILURE_STAGES). */
+  stage?: "too_large" | "transfer";
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";
