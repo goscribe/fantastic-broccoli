@@ -786,6 +786,11 @@ export interface BenchmarkModelLine {
   attempted: number;
   assessed: number;
   failed: number;
+  /** Of `failed`: generations that ran out of time. Absent on an older server. */
+  tooSlow?: number;
+  /** Ranking score: overall over every attempted material, a failure counting as 0. Absent on an older server. */
+  score?: number | null;
+  /** Overall over the materials that finished only. */
   overall: number | null;
   materialFit: number | null;
   quality: number | null;
