@@ -7,6 +7,7 @@ import { ConfidenceSlider } from "@/components/session/confidence-slider";
 import { answerStartCheck, useStartCheckRequest, type StartCheckRequest } from "@/lib/start-check-client";
 import { CONFIDENCE_START, FOCUS_NOTE_MAX, sessionPath, tidyFocusNote } from "@/lib/start-check";
 import { useI18n } from "@/lib/i18n";
+import { track } from "@/lib/funnel";
 import "@/lib/i18n/start-check";
 import { cn } from "@/lib/utils";
 
@@ -47,7 +48,10 @@ export function StartCheckSheet({ request, onAnswer, initial = CONFIDENCE_START,
     // Focus moves into the dialog; the slider is the first Tab stop (no ring until a key is used).
     formRef.current?.focus({ preventScroll: true });
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onAnswer(null);
+      if (e.key === "Escape") {
+        track("start_check.skipped");
+        onAnswer(null);
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -155,7 +159,10 @@ export function StartCheckSheet({ request, onAnswer, initial = CONFIDENCE_START,
         <Button type="submit" size="lg" className="w-full">
           {t("startCheck.continue")}
         </Button>
-        <button type="button" onClick={() => onAnswer(null)} className="min-h-11 px-4 text-ui font-bold text-muted-foreground hover:text-foreground">
+        <button type="button" onClick={() => {
+            track("start_check.skipped");
+            onAnswer(null);
+          }} className="min-h-11 px-4 text-ui font-bold text-muted-foreground hover:text-foreground">
           {t("startCheck.skip")}
         </button>
       </div>

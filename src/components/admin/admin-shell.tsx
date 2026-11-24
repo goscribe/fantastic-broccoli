@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {
   ArrowLeft,
+  BarChart3,
   CreditCard,
   DollarSign,
   FileText,
@@ -26,6 +27,7 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
+  { href: "/admin/metrics", label: "Metrics", icon: BarChart3 },
   { href: "/admin/workspaces", label: "Workspaces", icon: Library },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/quality", label: "Quality", icon: Sparkles },
