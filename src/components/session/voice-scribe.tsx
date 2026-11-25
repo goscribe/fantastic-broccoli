@@ -13,6 +13,7 @@ import {
   listen,
   questionContext,
   questionStem,
+  readableText,
   recognitionLang,
   setFieldValue,
   speechSupported,
@@ -397,7 +398,7 @@ export function VoiceScribe({
     if (isFiller(phrase)) return;
     if (choicesRef.current.length) {
       const buttons = choicesRef.current.filter((b) => b.isConnected && !b.disabled);
-      const pick = spokenChoice(phrase, buttons.map((b) => b.getAttribute("data-voice-choice-text") ?? b.innerText));
+      const pick = spokenChoice(phrase, buttons.map((b) => b.getAttribute("data-voice-choice-text") ?? readableText(b)));
       if (pick >= 0) {
         // The same as tapping it; Check answer stays the learner's.
         buttons[pick].click();
@@ -479,7 +480,7 @@ export function VoiceScribe({
     const buttons = found.length ? [] : choiceButtons(scope.current);
     choicesRef.current = buttons;
     setPicked(buttons.findIndex((b) => b.getAttribute("aria-pressed") === "true"));
-    setChoices(buttons.map((b) => b.getAttribute("data-voice-choice-text") ?? b.innerText));
+    setChoices(buttons.map((b) => b.getAttribute("data-voice-choice-text") ?? readableText(b)));
     // The part whose "Answer out loud" was tapped, else the box last typed in, else the first empty one.
     const tapped = from?.closest("[data-dictation-label]")?.getAttribute("data-dictation-label") ?? "";
     const focused = found.find((p) => p.field === lastFocused.current && p.field.isConnected);
