@@ -75,6 +75,7 @@ const english = {
   "voice.writtenAs": "Written as",
   "voice.showMore": "Show more",
   "voice.showLess": "Show less",
+  "voice.undone": "Crossed out",
   "voice.options": "Options",
   "voice.picked": "Picked {letter}",
   "voice.sayALetter": "Say a letter, like “B”, or read your answer out",

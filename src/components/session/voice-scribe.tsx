@@ -156,8 +156,8 @@ export const VoiceAnswerContext = createContext<{ toggle: (anchor?: HTMLElement 
 
 /**
  * "Answer out loud": a soft accent pill with the mic, beside the answer
- * controls. While listening, the overlay puts its stop button where this one
- * is, so the control stays under the learner's finger.
+ * controls. While listening, the one stop/done is "Done" beside the
+ * listening indicator (the big button at the bottom on a phone).
  */
 export function VoiceAnswerButton({ className, compact = false }: { className?: string; compact?: boolean }) {
   const { t } = useI18n();
@@ -226,8 +226,7 @@ function HowItWorks({ choice = false }: { choice?: boolean }) {
 export interface VoiceScribeHandle {
   /**
    * Closed: open and start listening. Open: stop and write it in. `anchor` is
-   * the button that was tapped: its part is the one answered, and the stop
-   * button is drawn in its place.
+   * the button that was tapped: its part is the one answered.
    */
   toggle: (anchor?: HTMLElement | null) => void;
 }
@@ -239,6 +238,12 @@ function showWritten(box: Field) {
   void box.offsetWidth;
   box.setAttribute("data-voice-flash", "");
   window.setTimeout(() => box.removeAttribute("data-voice-flash"), 1000);
+}
+
+/** The written line says the same words as the spoken one (case, spacing and punctuation aside). */
+function sameWords(wrote: string, said: string): boolean {
+  const plain = (x: string) => x.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+  return !!said && plain(wrote) === plain(said);
 }
 
 /** "a and b", for the toast after writing into several boxes. */
@@ -283,8 +288,6 @@ export function VoiceScribe({
   /** The main stem, with the givens every part relies on. */
   const [stem, setStem] = useState("");
   const [stemOpen, setStemOpen] = useState(false);
-  /** Where the tapped "Answer out loud" button sits: the stop button goes there. */
-  const [anchor, setAnchor] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
   /** Lines written so far can be corrected by hand. */
   const [editing, setEditing] = useState(false);
 
@@ -462,7 +465,6 @@ export function VoiceScribe({
     stepsRef.current = [];
     setSteps([]);
     setEditing(false);
-    setAnchor(null);
     choicesRef.current = [];
     setChoices([]);
     setOpen(false);
@@ -484,11 +486,6 @@ export function VoiceScribe({
     setCurrent(found.find((p) => p.label === tapped)?.label ?? (focused ?? found.find((p) => !p.field.value.trim()) ?? found[0])?.label ?? "");
     setStem(questionStem(found[0]?.field ?? null, scope.current));
     setStemOpen(false);
-    const r = from?.getBoundingClientRect();
-    // A round mic beside a box keeps its row but sits at the column's right edge, where the lines below leave room for it.
-    const edge = scope.current?.getBoundingClientRect().right ?? 0;
-    const left = r && r.width < 80 && edge > r.right ? edge - r.width : r?.left ?? 0;
-    setAnchor(r && r.width ? { top: r.top, left, width: r.width, height: r.height } : null);
     if (!startListening()) return;
     setOpen(true);
   };
@@ -713,24 +710,17 @@ export function VoiceScribe({
             onClick={() => void stopAndWrite()}
             data-testid="voice-done"
             className={cn(
-              "inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-[13.5px] font-extrabold text-white",
+              // The one stop/done on a desktop, beside the indicator; phones use the big button at the bottom instead.
+              "inline-flex h-10 items-center gap-1.5 rounded-full px-4 text-[13.5px] font-extrabold text-white max-sm:hidden",
               listening ? "bg-rose-500" : "bg-accent",
             )}
           >
             {listening ? <Square className="size-3 fill-current" aria-hidden /> : <Check className="size-4" strokeWidth={3} aria-hidden />}
-            {choices.length || !hasDone ? (
-              t("voice.done")
-            ) : (
-              <>
-                <span className="sm:hidden">{t("voice.done")}</span>
-                <span className="max-sm:hidden">{t("voice.doneWrite")}</span>
-              </>
-            )}
+            {t(choices.length || !hasDone ? "voice.done" : "voice.doneWrite")}
           </button>
         </div>
 
-        {/* A stop button kept beside a box on the right: the lines keep clear of it. */}
-        <ol className={cn("mt-2 min-h-0 flex-1 space-y-3.5 overflow-y-auto", anchor && anchor.width < 80 && "pr-14")} aria-live="polite">
+        <ol className="mt-2 min-h-0 flex-1 space-y-3.5 overflow-y-auto" aria-live="polite">
           {steps.length === 0 && <HowItWorks choice={choices.length > 0} />}
           {steps.map((s, i) => {
             const numbered = s.state !== "note";
@@ -762,6 +752,9 @@ export function VoiceScribe({
                   <span className="text-small font-semibold text-muted-foreground">{t("voice.writing")}</span>
                 ) : s.state === "note" ? (
                   s.wrote && <span className="text-small font-bold text-accent">{s.wrote}</span>
+                ) : !editing && sameWords(s.wrote, s.said) ? (
+                  // Written exactly as said: the spoken line above is the whole story.
+                  s.state === "undone" ? <span className="text-small text-muted-foreground line-through">{t("voice.undone")}</span> : <span />
                 ) : editing && s.state === "done" ? (
                   <input
                     aria-label={t("voice.editLine").replace("{n}", String(n))}
@@ -785,7 +778,7 @@ export function VoiceScribe({
         </ol>
 
         <div className="mt-2 grid grid-cols-[1fr_auto_1fr] items-center">
-          <button type="button" onClick={close} className={cn(playLink, "justify-self-start no-underline")}>
+          <button type="button" onClick={close} className={cn(playLink, "justify-self-start text-[13.5px] font-semibold text-muted-foreground no-underline hover:text-foreground")}>
             {t("voice.cancel")}
           </button>
           {listening || hasDone ? (
@@ -793,8 +786,10 @@ export function VoiceScribe({
               type="button"
               onClick={() => void stopAndWrite()}
               aria-label={t("voice.stopAndWrite")}
+              data-testid="voice-bottom-stop"
               className={cn(
-                "grid size-[68px] place-items-center rounded-full text-white transition-transform active:translate-y-0.5 motion-reduce:transition-none",
+                // Phones only: there it is the one stop/done; on a desktop "Done" sits beside the indicator.
+                "grid size-[68px] place-items-center rounded-full text-white transition-transform active:translate-y-0.5 motion-reduce:transition-none sm:hidden",
                 listening ? "bg-rose-500 shadow-[0_3px_0_#be123c]" : "bg-accent shadow-[0_3px_0_var(--accent-dim)]",
               )}
             >
@@ -814,7 +809,7 @@ export function VoiceScribe({
             type="button"
             onClick={() => undo()}
             disabled={!hasDone}
-            className={cn(playLink, "justify-self-end no-underline disabled:opacity-40")}
+            className={cn(playLink, "col-start-3 justify-self-end text-[13.5px] font-semibold text-muted-foreground no-underline hover:text-foreground disabled:opacity-40")}
           >
             {t("voice.undo")}
           </button>
@@ -825,23 +820,6 @@ export function VoiceScribe({
       </div>
     </div>
 
-      {/* The mic stays where it was tapped: the "Answer out loud" button becomes the stop button, in place (outside the rising overlay, so its position is the page's). */}
-      {anchor && (
-        <button
-          type="button"
-          onClick={() => void stopAndWrite()}
-          data-testid="voice-anchor-stop"
-          aria-label={t("voice.stopAndWrite")}
-          style={{ top: anchor.top - 0, left: anchor.left, minWidth: anchor.width, height: anchor.height }}
-          className={cn(
-            "fixed z-[51] inline-flex items-center justify-center gap-2 rounded-full px-4 text-[14.5px] font-extrabold text-white shadow-[0_8px_20px_-8px_rgba(17,17,20,.5)]",
-            listening ? "bg-rose-500" : "bg-accent",
-          )}
-        >
-          {listening ? <Square className="size-3.5 fill-current" aria-hidden /> : <Check className="size-4" strokeWidth={3} aria-hidden />}
-          {anchor.width > 60 && t(listening ? "voice.stop" : "voice.done")}
-        </button>
-      )}
     </>
   );
 }
