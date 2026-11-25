@@ -48,7 +48,7 @@ export function loadCourse(id: string): Promise<Course> {
 
 /** Every course's outline, for searching topics. Courses that fail to load are left out. */
 let allCache: Promise<Course[]> | null = null;
-function loadAllCourses(list: CourseSummary[]): Promise<Course[]> {
+export function loadAllCourses(list: CourseSummary[]): Promise<Course[]> {
   allCache ??= Promise.all(list.map((c) => loadCourse(c.id).catch(() => null))).then((cs) => {
     const seen = new Set<string>();
     return cs.filter((c): c is Course => !!c && !seen.has(c.id) && !!seen.add(c.id));

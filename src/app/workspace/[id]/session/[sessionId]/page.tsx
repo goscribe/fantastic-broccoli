@@ -86,6 +86,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/first-run";
 import "@/lib/i18n/today";
+import { ChangeCourseLink } from "@/components/onboarding/change-course";
 import { track } from "@/lib/funnel";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
@@ -1921,6 +1922,8 @@ function GeneratingPlanCard({
                 : t("session.generatingHint")
           }
         />
+        {/* A Quick 5 the first screen started without asking: the way back to the choice. */}
+        {quickStart && <ChangeCourseLink workspaceId={workspaceId} sessionId={sessionId} />}
         {/* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */}
         <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 empty:hidden sm:p-7">
           <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
