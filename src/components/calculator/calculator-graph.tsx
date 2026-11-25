@@ -4,9 +4,13 @@ import { useDeferredValue, useMemo } from "react";
 import { NoteGraph } from "@/components/notes/note-graph";
 import type { CalcValue } from "@/lib/calculator/engine";
 import { graphOf } from "@/lib/calculator/graph";
+import { lineLatex } from "@/lib/calculator/pretty";
 import { normaliseTyped } from "@/lib/calculator/state";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/calculator-panel";
+import { cn } from "@/lib/utils";
+import { CalcMath } from "./calculator-math";
+import { FIELD, SCREEN } from "./calculator-ui";
 
 export interface GraphInput {
   expr: string;
@@ -14,8 +18,7 @@ export interface GraphInput {
   right: string;
 }
 
-const field =
-  "h-11 rounded-xl border border-border bg-white px-3 text-ui tabular-nums text-foreground placeholder:text-faint focus:border-foreground focus:outline-none";
+const field = cn(FIELD, "font-mono text-small");
 
 /**
  * Graph mode: y = f(x) over an x range, drawn by NoteGraph, the same static
@@ -28,6 +31,9 @@ export default function CalculatorGraph({ value, onChange, ans }: { value: Graph
     () => (typed.expr.trim() ? graphOf(typed.expr, Number(typed.left.replace("−", "-")), Number(typed.right.replace("−", "-")), ans) : null),
     [typed, ans],
   );
+
+  const typedFn = typed.expr.trim().replace(/^y\s*=\s*/i, "");
+  const fnTex = typedFn ? lineLatex(typedFn, "rad") : null;
 
   return (
     <div className="px-3 pt-3">
@@ -59,15 +65,22 @@ export default function CalculatorGraph({ value, onChange, ans }: { value: Graph
         <input id="calc-graph-right" value={value.right} onChange={(e) => onChange({ ...value, right: e.target.value })} inputMode="decimal" autoComplete="off" className={`${field} w-[76px]`} />
       </div>
 
-      <div className="mt-3" aria-live="polite">
+      {/* The function as maths, like the Calculate screen, then its plot. */}
+      <div className={cn(SCREEN, "mt-3 overflow-hidden")} aria-live="polite">
+        <div aria-hidden className="flex min-h-[44px] items-center overflow-x-auto overflow-y-hidden whitespace-nowrap px-3 text-[20px]">
+          <CalcMath tex={`y=${fnTex ?? "\\square"}`} fallback={`y = ${typedFn}`} />
+        </div>
         {outcome?.ok && (
-          <NoteGraph
-            title={`y = ${typed.expr.trim().replace(/^y\s*=\s*/i, "")}`}
-            graph={{ xLabel: "x", yLabel: "y", bounds: outcome.window, expressions: [{ latex: outcome.latex, label: null }] }}
-          />
+          // The plot sits in the screen under the maths heading: its own card edge and (visible) title would repeat them.
+          <div className="[&>div]:rounded-none [&>div]:border-x-0 [&>div]:border-b-0 [&>div>p:first-child]:sr-only">
+            <NoteGraph
+              title={`y = ${typedFn}`}
+              graph={{ xLabel: "x", yLabel: "y", bounds: outcome.window, expressions: [{ latex: outcome.latex, label: null }] }}
+            />
+          </div>
         )}
         {outcome && !outcome.ok && (
-          <p role="alert" className="text-small font-semibold text-rose-700">
+          <p role="alert" className="px-3 pb-3 text-small font-semibold text-rose-700 dark:text-rose-300">
             {outcome.message}
           </p>
         )}

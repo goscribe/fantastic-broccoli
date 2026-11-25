@@ -182,14 +182,14 @@ export function CalculatorTool({
       {note && (
         <span
           role="status"
-          className="absolute right-0 top-full z-40 mt-1.5 whitespace-nowrap rounded-xl border border-border bg-white px-3 py-2 text-small font-semibold text-foreground shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]"
+          className="absolute right-0 top-full z-40 mt-1.5 whitespace-nowrap rounded-xl border border-border bg-card px-3 py-2 text-small font-semibold text-foreground shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]"
         >
           {t("calc.nonCalculator")}
         </span>
       )}
 
       {menu && (
-        <div id={menuId} role="menu" aria-label={t("calc.tools")} className="absolute right-0 top-full z-40 mt-1.5 w-[220px] rounded-xl border border-border bg-white p-1.5 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]">
+        <div id={menuId} role="menu" aria-label={t("calc.tools")} className="absolute right-0 top-full z-40 mt-1.5 w-[220px] rounded-xl border border-border bg-card p-1.5 shadow-[0_12px_32px_-12px_rgba(0,0,0,0.25)]">
           <button
             type="button"
             role="menuitem"
