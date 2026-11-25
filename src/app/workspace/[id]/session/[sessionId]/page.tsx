@@ -1,7 +1,7 @@
 "use client";
 
 import { SyllabusMatchCard } from "@/components/courses/syllabus-match-card";
-import { BuildStage } from "@/components/session/build-stage";
+import { SessionBuildWait } from "@/components/session/build-wait";
 import { WaitConfidenceCard, useWaitConfidence, type WaitConfidenceState } from "@/components/session/wait-confidence";
 import { useNewUi } from "@/lib/new-ui";
 import { initialCopilotOpen, rememberCopilotOpen } from "@/lib/copilot-pref";
@@ -1936,51 +1936,46 @@ function GeneratingPlanCard({
 
   if (newUi) {
     return (
-      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 pb-12 pt-2 animate-fade-up">
-        <BuildStage
-          title={title}
-          pct={percent / 100}
-          label={detail ?? t(GENERATION_STAGES[progress.stageIndex].label)}
-          stageIndex={progress.stageIndex}
-          stageCount={GENERATION_STAGES.length}
-          planned={progress.planned}
-          finished={progress.finished}
-          writing={progress.stageIndex >= 2}
-          hint={
-            stalled
-              ? t("session.takingLonger")
-              : readingUploads
-                ? // Uploaded notes can take a few minutes: leaving is fine, the session-ready notification (and email once away) follows.
-                  t("upload.readingHint")
-                : quickStart
-                  ? // A Quick 5 is ready in about a minute: it opens here by itself.
-                    t("firstRun.busyHint")
-                  : t("session.generatingHint")
-          }
-          nextLabel={readingUploads ? t("upload.nextLabel") : undefined}
-          nextSteps={
-            readingUploads
-              ? [
-                  { label: detail ?? t("upload.nextRead"), state: "now" },
-                  { label: t("upload.nextWrite"), state: "todo" },
-                  { label: t("upload.nextOpen"), state: "todo" },
-                ]
-              : undefined
-          }
-        />
-        {/* A Quick 5 the first screen started without asking: the way back to the choice. */}
-        {quickStart && <ChangeCourseLink workspaceId={workspaceId} sessionId={sessionId} />}
-        {/* Uploaded notes matched to a syllabus while the session is written: one tap to confirm the course (never blocks the session). */}
-        {fromUploads && !confidence?.open && <SyllabusMatchCard workspaceId={workspaceId} from="upload" watch className="w-full" />}
-        {confidence?.open ? (
-          <WaitConfidenceCard state={confidence} />
-        ) : (
-          /* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */
-          <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 empty:hidden sm:p-7">
-            <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
-          </div>
-        )}
-      </div>
+      <SessionBuildWait
+        workspaceId={workspaceId}
+        focus={title}
+        confidence={confidence}
+        build={{
+          title,
+          pct: percent / 100,
+          label: detail ?? t(GENERATION_STAGES[progress.stageIndex].label),
+          stageIndex: progress.stageIndex,
+          stageCount: GENERATION_STAGES.length,
+          planned: progress.planned,
+          finished: progress.finished,
+          writing: progress.stageIndex >= 2,
+          hint: stalled
+            ? t("session.takingLonger")
+            : readingUploads
+              ? // Uploaded notes can take a few minutes: leaving is fine, the session-ready notification (and email once away) follows.
+                t("upload.readingHint")
+              : quickStart
+                ? // A Quick 5 is ready in about a minute: it opens here by itself.
+                  t("firstRun.busyHint")
+                : t("session.generatingHint"),
+          nextLabel: readingUploads ? t("upload.nextLabel") : undefined,
+          nextSteps: readingUploads
+            ? [
+                { label: detail ?? t("upload.nextRead"), state: "now" },
+                { label: t("upload.nextWrite"), state: "todo" },
+                { label: t("upload.nextOpen"), state: "todo" },
+              ]
+            : undefined,
+        }}
+        extras={
+          <>
+            {/* A Quick 5 the first screen started without asking: the way back to the choice. */}
+            {quickStart && <ChangeCourseLink workspaceId={workspaceId} sessionId={sessionId} />}
+            {/* Uploaded notes matched to a syllabus while the session is written: one tap to confirm the course (never blocks the session). */}
+            {fromUploads && !confidence?.open && <SyllabusMatchCard workspaceId={workspaceId} from="upload" watch className="w-full" />}
+          </>
+        }
+      />
     );
   }
 

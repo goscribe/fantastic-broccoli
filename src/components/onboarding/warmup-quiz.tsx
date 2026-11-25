@@ -5,6 +5,7 @@ import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components
 import { studySessionApi, type ApiWarmupQuestion } from "@/lib/api/study-session";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { cn } from "@/lib/utils";
+import { HERO_KEY, HERO_OPTION } from "@/components/session/quiz-row";
 import { Check, X } from "lucide-react";
 
 /** Divider-separated section, so the quiz sits inside the caller's progress card. */
@@ -20,7 +21,19 @@ const SECTION = "mt-4 border-t border-border pt-3 text-left";
  */
 const HERO = "w-full";
 
-export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string; hero?: boolean }) {
+export function WarmupQuiz({
+  workspaceId,
+  hero = false,
+  load = studySessionApi.getWarmupQuiz,
+  onShown,
+}: {
+  workspaceId: string;
+  hero?: boolean;
+  /** Where the questions come from; /design previews pass fixtures. */
+  load?: (workspaceId: string) => Promise<ApiWarmupQuestion[]>;
+  /** Whether a question is on screen (the hero version shows nothing until one is). */
+  onShown?: (shown: boolean) => void;
+}) {
   const [questions, setQuestions] = useState<ApiWarmupQuestion[]>([]);
   const [index, setIndex] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
@@ -29,12 +42,16 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
   const stopRef = useRef(false);
   const seenRef = useRef<Set<string>>(new Set());
   const fetchingRef = useRef(false);
+  const shown = questions.length > 0;
+  useEffect(() => {
+    onShown?.(shown);
+  }, [shown, onShown]);
 
   const fetchBatch = useCallback(async () => {
     if (fetchingRef.current) return;
     fetchingRef.current = true;
     try {
-      const rows = await studySessionApi.getWarmupQuiz(workspaceId);
+      const rows = await load(workspaceId);
       if (stopRef.current) return;
       const fresh = rows.filter((r) => !seenRef.current.has(r.question));
       const batch = fresh.length > 0 ? fresh : rows;
@@ -47,7 +64,7 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
     } finally {
       fetchingRef.current = false;
     }
-  }, [workspaceId]);
+  }, [workspaceId, load]);
 
   useEffect(() => {
     stopRef.current = false;
@@ -113,17 +130,17 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
   return (
     <div className={hero ? HERO : SECTION}>
       <div className="flex items-center justify-between">
-        <p className={hero ? "text-small font-bold text-muted-foreground" : "text-[11px] font-semibold uppercase tracking-wide text-accent"}>
+        <p className={hero ? "text-caption font-bold uppercase tracking-wide text-accent" : "text-[11px] font-semibold uppercase tracking-wide text-accent"}>
           Warm-up while you wait
         </p>
-        <p className="text-[11px] text-muted-foreground">
+        <p className={hero ? "text-caption tabular-nums text-muted-foreground" : "text-[11px] text-muted-foreground"}>
           {score}/{answered} correct
         </p>
       </div>
-      <div className={hero ? "mt-3 text-[20px] font-bold leading-[1.35]" : "mt-1.5 text-sm font-medium"}>
+      <div className={hero ? "mt-3 text-read font-bold leading-snug" : "mt-1.5 text-sm font-medium"}>
         <McqQuestionBody text={q.question} figures={q.figures} options={q.options} />
       </div>
-      <div className={cn(hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(q.options) && "grid-cols-2")}>
+      <div className={cn(hero ? "mt-3 grid gap-2" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(q.options) && "grid-cols-2")}>
         {q.options.map((option, i) => {
           const hasPicked = picked !== null;
           const isCorrect = i === q.correctIndex;
@@ -139,7 +156,7 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
                 if (isCorrect) setScore((s) => s + 1);
               }}
               className={cn(
-                hero ? "flex w-full items-center gap-3.5 rounded-[14px] border bg-card px-4 py-3 text-left text-[15px] font-medium transition-colors" : "flex w-full items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left text-xs transition-colors",
+                hero ? cn("flex w-full items-center border bg-card text-left font-medium transition-colors", HERO_OPTION) : "flex w-full items-center gap-2 rounded-lg border px-2.5 py-1.5 text-left text-xs transition-colors",
                 !hasPicked && "border-border hover:border-accent hover:bg-accent-soft/40",
                 hasPicked && isCorrect && "border-accent bg-accent-soft/50",
                 hasPicked && isPicked && !isCorrect && "border-rose/50 bg-rose/10",
@@ -147,7 +164,7 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
               )}
             >
               {hero && !hasPicked && (
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-muted text-[13px] font-semibold text-muted-foreground">{i + 1}</span>
+                <span className={cn(HERO_KEY, "bg-muted text-muted-foreground")}>{i + 1}</span>
               )}
               {hasPicked && isCorrect && (
                 <Check className="h-3.5 w-3.5 shrink-0 text-accent" />
@@ -163,14 +180,17 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
         })}
       </div>
       {picked !== null && (
-        <div className="mt-2 flex items-start justify-between gap-3">
-          <div className="min-w-0 flex-1 text-xs text-muted-foreground">
+        <div className={cn("flex items-start justify-between gap-3", hero ? "mt-3" : "mt-2")}>
+          <div className={cn("min-w-0 flex-1 text-muted-foreground", hero ? "text-small" : "text-xs")}>
             {q.explanation && <MarkdownText text={q.explanation} />}
           </div>
           <button
             type="button"
             onClick={next}
-            className="shrink-0 rounded-lg bg-accent px-3 py-1.5 text-xs font-semibold text-accent-foreground hover:opacity-90 transition-opacity"
+            className={cn(
+              "shrink-0 bg-accent font-semibold text-accent-foreground transition-opacity hover:opacity-90",
+              hero ? "h-10 rounded-[var(--r-control)] px-4 text-small" : "rounded-lg px-3 py-1.5 text-xs",
+            )}
           >
             Next question
           </button>
