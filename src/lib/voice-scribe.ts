@@ -42,6 +42,37 @@ export function defaultAnswerField(scope: HTMLElement | null) {
   return fields.find((f) => !f.value.trim()) ?? fields[0] ?? null;
 }
 
+const BLOCK_TAGS = new Set(["P", "DIV", "LI", "TR", "H1", "H2", "H3", "H4", "SECTION", "UL", "OL", "TABLE", "FIGURE"]);
+
+/**
+ * An element's words as plain text with its maths as `$…$` LaTeX. KaTeX puts
+ * a MathML copy and a visual copy of every formula in the page, so innerText
+ * reads "P(X=0)=0.2" as one symbol per line followed by the same formula
+ * again; this reads each formula's source from its TeX annotation instead.
+ */
+export function readableText(el: HTMLElement | null): string {
+  if (!el) return "";
+  const clone = el.cloneNode(true) as HTMLElement;
+  const doc = clone.ownerDocument;
+  // Outermost formulas first; a .katex inside a replaced .katex-display is gone with it.
+  clone.querySelectorAll(".katex-display, .katex").forEach((k) => {
+    if (!clone.contains(k)) return;
+    const tex = k.querySelector('annotation[encoding="application/x-tex"]')?.textContent?.trim();
+    const display = k.classList.contains("katex-display");
+    const text = tex ? (display ? `\n$${tex}$\n` : `$${tex}$`) : (k.querySelector(".katex-html")?.textContent ?? k.textContent ?? "");
+    k.replaceWith(doc.createTextNode(text));
+  });
+  clone.querySelectorAll("br").forEach((b) => b.replaceWith(doc.createTextNode("\n")));
+  clone.querySelectorAll("*").forEach((n) => {
+    if (BLOCK_TAGS.has(n.tagName)) n.append(doc.createTextNode("\n"));
+  });
+  return (clone.textContent ?? "")
+    .replace(/[ \t]+/g, " ")
+    .replace(/ *\n */g, "\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
 const MAX_CONTEXT_CHARS = 4000;
 
 /**
@@ -52,8 +83,8 @@ export function questionContext(field: Element | null, scope: HTMLElement | null
   const holder = (field?.closest("[data-dictation-context]") as HTMLElement | null) ?? scope;
   if (!holder) return "";
   // The question's words, not the page's buttons ("Add a drawing", "Skip this part").
-  const controls = new Set(Array.from(holder.querySelectorAll("button")).map((b) => b.innerText.trim()).filter(Boolean));
-  const text = (holder.innerText || holder.textContent || "")
+  const controls = new Set(Array.from(holder.querySelectorAll("button")).map((b) => readableText(b)).filter(Boolean));
+  const text = readableText(holder)
     .split("\n")
     .filter((line) => !controls.has(line.trim()))
     .join("\n")
@@ -370,5 +401,5 @@ export function choiceButtons(scope: HTMLElement | null): HTMLButtonElement[] {
 export function questionStem(field: Element | null, scope: HTMLElement | null): string {
   const holder = (field?.closest("[data-dictation-context]") as HTMLElement | null) ?? scope;
   const stem = holder?.querySelector<HTMLElement>("[data-dictation-stem]") ?? scope?.querySelector<HTMLElement>("[data-dictation-stem]");
-  return (stem?.innerText || stem?.textContent || "").replace(/[ \t]+/g, " ").trim();
+  return readableText(stem ?? null);
 }
