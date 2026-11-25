@@ -134,9 +134,9 @@ export interface CalculatorPanelProps {
 }
 
 /**
- * The calculator. On a desktop it docks to the right edge (pages leave room
- * for it through `--calc-dock`, so it never sits on the question) and can be
- * dragged free by its title bar; on a phone it is a bottom sheet (`--calc-sheet`
+ * The calculator. On a desktop it floats by default and can be dragged by its
+ * title bar, or docked to the right edge (pages leave room for it through
+ * `--calc-dock`, so it never sits on the question; the choice is remembered); on a phone it is a bottom sheet (`--calc-sheet`
  * is its height). It is not modal: the question stays readable and usable.
  *
  * It stays mounted while closed, so the history, memory and the list in
@@ -151,7 +151,7 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
   const [inv, setInv] = useState(false);
   const [moreKeys, setMoreKeys] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
-  const [docked, setDocked] = useState(() => stored(DOCK_KEY) !== "float");
+  const [docked, setDocked] = useState(() => stored(DOCK_KEY) === "dock");
   const [pos, setPos] = useState<{ x: number; y: number } | null>(null);
   const [status, setStatus] = useState("");
   // Kept here, not in the tabs, so a list or a function survives a look at another tab.
