@@ -1,7 +1,7 @@
 "use client";
 
 import { ItemDots, RunBadge, runOfRight } from "@/components/session/play-ui";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components/session/mcq-rich";
 import { McqContent } from "@/types";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -11,6 +11,7 @@ import "@/lib/i18n/purpose";
 import { Button } from "@/components/ui/button";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { FeedbackCard } from "@/components/session/feedback-card";
+import { VoiceAnswerButton, VoiceAnswerContext } from "@/components/session/voice-scribe";
 import { useNewUi } from "@/lib/new-ui";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
@@ -77,6 +78,9 @@ export function McqActivity({
   );
   const [burst, setBurst] = useState(0);
   const feedbackRef = useRef<HTMLDivElement>(null);
+  // "Answer out loud" sits with Hint, beside Check answer (only inside the player, which owns the microphone).
+  const voiceCtx = useContext(VoiceAnswerContext);
+  const voiceOn = newUi && voiceCtx !== null;
 
   useReportCurrentItem(activityId, index);
   useActivityDraft(activityId, {
@@ -222,7 +226,7 @@ export function McqActivity({
         )}
       </div>
 
-      <p key={`q-${index}`} data-scroll-line className={newUi ? "life-rise text-[20px] font-extrabold leading-[1.3] sm:text-[22px]" : "text-ui font-medium"}>
+      <p key={`q-${index}`} data-scroll-line data-dictation-stem className={newUi ? "life-rise text-[20px] font-extrabold leading-[1.3] sm:text-[22px]" : "text-ui font-medium"}>
         <McqQuestionBody text={question.question} figures={question.figures} options={question.options} />
       </p>
 
@@ -232,6 +236,9 @@ export function McqActivity({
             key={i}
             type="button"
             data-scroll-line
+            data-voice-choice={String.fromCharCode(65 + i)}
+            data-voice-choice-text={option}
+            aria-pressed={!revealed ? selected === i : undefined}
             onClick={() => !revealed && setSelected(i)}
             disabled={revealed}
             className={cn(
@@ -274,15 +281,20 @@ export function McqActivity({
       </div>
 
       {!revealed && (
-        <div className={cn("flex justify-end", newUi && onHint && "flex-col-reverse items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between")}>
-          {newUi && onHint && (
-            <button
-              type="button"
-              onClick={() => onHint(index)}
-              className="-my-1 inline-flex min-h-11 items-center justify-center self-center px-2 text-[14px] font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground hover:decoration-foreground sm:self-auto"
-            >
-              {t("purpose.hint")}
-            </button>
+        <div className={cn("flex justify-end", newUi && (onHint || voiceOn) && "flex-col-reverse items-stretch gap-2 sm:flex-row sm:items-center sm:justify-between")}>
+          {newUi && (onHint || voiceOn) && (
+            <div className="flex items-center justify-center gap-3 sm:justify-start" data-testid="mcq-aside-actions">
+              {voiceOn && <VoiceAnswerButton />}
+              {onHint && (
+                <button
+                  type="button"
+                  onClick={() => onHint(index)}
+                  className="-my-1 inline-flex min-h-11 items-center justify-center px-2 text-[14px] font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground hover:decoration-foreground"
+                >
+                  {t("purpose.hint")}
+                </button>
+              )}
+            </div>
           )}
           <Button
             variant="primary"

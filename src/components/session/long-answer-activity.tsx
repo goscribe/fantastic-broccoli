@@ -14,6 +14,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/long-answer";
 import "@/lib/i18n/written-work";
 import { cn } from "@/lib/utils";
+import { VoiceAnswerButton } from "@/components/session/voice-scribe";
 
 type Marker = typeof markWorksheetAnswer;
 
@@ -132,6 +133,8 @@ export function LongAnswerActivity({ activityId, content, draft, estimatedMinute
               <span data-testid="laq-words">{t(words === 1 ? "laq.word" : "laq.words").replace("{n}", String(words))}</span>
               <span aria-hidden>·</span>
               <span>{t("laq.aim").replace("{n}", String(aimWords(marks)))}</span>
+              {/* The mic, right under the box it writes into. */}
+              <VoiceAnswerButton className="ml-auto" />
             </p>
           </div>
           <div className="flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-between">

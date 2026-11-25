@@ -281,3 +281,94 @@ export function spokenSwitch(transcript: string, labels: string[]): PartSwitch |
   if (Number.isInteger(n) && n >= 1 && n <= labels.length) return { to: labels[n - 1], rest: rest(i + 2) };
   return null;
 }
+
+/* ---------------------------- filler & choices ---------------------------- */
+
+const FILLER = new Set([
+  "hello", "hi", "hey", "hiya", "um", "umm", "uh", "uhh", "er", "erm", "hmm", "hm", "mm", "okay", "ok", "so", "right",
+  "yeah", "yes", "yep", "no", "wait", "oh", "ah", "alright", "test", "testing", "one", "two", "three", "well", "like",
+  "and", "then", "can", "you", "hear", "me", "is", "this", "working", "on", "let", "see", "lets", "let's", "thing",
+]);
+
+/**
+ * Throwaway speech that is not working: a greeting, a mic check, a false
+ * start ("hello", "um okay", "testing one two", "can you hear me"). Dropped
+ * before it becomes a numbered step.
+ */
+export function isFiller(transcript: string): boolean {
+  const ws = transcript.toLowerCase().replace(/[^\p{L}\p{N}'\s]/gu, " ").split(/\s+/).filter(Boolean);
+  if (!ws.length) return true;
+  return ws.length <= 6 && ws.every((w) => FILLER.has(w));
+}
+
+const LETTER_SPOKEN: Record<string, string> = {
+  a: "a", ay: "a", eh: "a", b: "b", be: "b", bee: "b", c: "c", see: "c", sea: "c", d: "d", dee: "d", e: "e", ee: "e",
+  f: "f", eff: "f",
+};
+const ORDINALS: Record<string, number> = { first: 0, second: 1, third: 2, fourth: 3, fifth: 4, last: -1 };
+
+const tokens = (s: string) =>
+  s.toLowerCase().replace(/[’']/g, "").replace(/\$[^$]*\$/g, (m) => m.replace(/[{}\\]/g, " ")).replace(/[^\p{L}\p{N}.\s]/gu, " ").split(/\s+/).filter(Boolean);
+
+/**
+ * Which option a spoken answer picks on a multiple-choice question: a letter
+ * ("B", "option bee", "I think it's C"), a position ("the second one"), or
+ * the option read out. Options that share a long opening ("The reported
+ * estimate of 1 …") are told apart by the words that differ. -1 when unsure.
+ */
+export function spokenChoice(transcript: string, options: string[]): number {
+  const ws = tokens(transcript).filter((w) => !["um", "uh", "er", "erm", "okay", "ok", "so"].includes(w));
+  if (!ws.length || !options.length) return -1;
+  const letterAt = (w: string | undefined) => {
+    const l = w ? LETTER_SPOKEN[w] : undefined;
+    const i = l ? l.charCodeAt(0) - 97 : -1;
+    return i >= 0 && i < options.length ? i : -1;
+  };
+  // Just a letter.
+  if (ws.length === 1 && letterAt(ws[0]) >= 0) return letterAt(ws[0]);
+  // "option b", "answer c", "letter d", "it's b", "go with a", "pick c".
+  for (let i = 0; i < ws.length - 1; i++) {
+    if (["option", "answer", "letter", "choice", "its", "it's", "with", "pick", "choose", "is"].includes(ws[i])) {
+      const at = letterAt(ws[i + 1]);
+      // "it's a …" reads on into a sentence; a letter counts only at the end or before a stop word.
+      if (at >= 0 && (i + 2 === ws.length || ["option", "one", "please", "because", "since"].includes(ws[i + 2]) || ws[i] !== "its" && ws[i] !== "it's" && ws[i] !== "is")) return at;
+    }
+  }
+  // "the second one", "the last option".
+  for (let i = 0; i < ws.length - 1; i++) {
+    if (ws[i] in ORDINALS && ["one", "option", "answer", "choice"].includes(ws[i + 1])) {
+      const n = ORDINALS[ws[i]];
+      return n === -1 ? options.length - 1 : n < options.length ? n : -1;
+    }
+  }
+  // The option read out: compare only the words that tell the options apart.
+  const sets = options.map((o) => new Set(tokens(o)));
+  const shared = new Set([...sets[0]].filter((w) => sets.every((s) => s.has(w))));
+  const said = new Set(ws.filter((w) => !shared.has(w)));
+  if (said.size < 2) return -1;
+  const scores = sets.map((s) => {
+    const own = [...s].filter((w) => !shared.has(w));
+    if (!own.length) return 0;
+    const hit = own.filter((w) => said.has(w)).length;
+    return hit / own.length;
+  });
+  const order = scores.map((s, i) => [s, i] as const).sort((x, y) => y[0] - x[0]);
+  const [best, second] = order;
+  return best[0] >= 0.6 && best[0] - (second?.[0] ?? 0) >= 0.25 ? best[1] : -1;
+}
+
+/** The multiple-choice options on the page: buttons marked `data-voice-choice`. */
+export function choiceButtons(scope: HTMLElement | null): HTMLButtonElement[] {
+  if (!scope) return [];
+  return Array.from(scope.querySelectorAll<HTMLButtonElement>("button[data-voice-choice]")).filter((b) => !b.disabled);
+}
+
+/**
+ * The question's main stem, the givens every part relies on: the nearest
+ * `[data-dictation-stem]` around (or in) the scope.
+ */
+export function questionStem(field: Element | null, scope: HTMLElement | null): string {
+  const holder = (field?.closest("[data-dictation-context]") as HTMLElement | null) ?? scope;
+  const stem = holder?.querySelector<HTMLElement>("[data-dictation-stem]") ?? scope?.querySelector<HTMLElement>("[data-dictation-stem]");
+  return (stem?.innerText || stem?.textContent || "").replace(/[ \t]+/g, " ").trim();
+}
