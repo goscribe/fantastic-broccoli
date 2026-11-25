@@ -33,6 +33,8 @@ import { pickStudyNowSession } from "@/components/session/study-now-card";
 import { deckEntries } from "@/components/bank/bank-content";
 import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
+import { toastStartError } from "@/lib/no-materials";
+import { handOffCta } from "@/lib/session-start";
 import type { StudySession } from "@/types";
 import { SESSION_COMPLETED_EVENT, type SessionCompletedDetail } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
@@ -393,6 +395,15 @@ export function SessionDebrief({
       : remainingMinutes(fullSession.activities) || fullSession.durationMinutes
     : FOLLOW_UP_MINUTES;
   const openSession = (id: string) => router.push(`/workspace/${workspaceId}/session/${id}`);
+  // A course subject's session is on the course's next topic: the button names it (null: no course, or an older server).
+  const { data: nextCourse } = useQuery({
+    queryKey: ["course-next-session", workspaceId, FOLLOW_UP_MINUTES],
+    queryFn: () => coursesApi.nextSession(workspaceId!, FOLLOW_UP_MINUTES).catch(() => null),
+    enabled: handOff && !!subjectSessions && !fullSession,
+    staleTime: 60_000,
+    retry: false,
+  });
+  const cta = handOffCta({ hasFullSession: !!fullSession, nextTitle: nextCourse?.title });
   const startFull = useMutation({
     mutationFn: () =>
       createStudySession({
@@ -405,7 +416,8 @@ export function SessionDebrief({
       queryClient.invalidateQueries({ queryKey: ["study-sessions", workspaceId] });
       if (created) openSession(created.id);
     },
-    onError: (error) => toastError(error, t("session.quick5StartFailed")),
+    onError: (error) =>
+      toastStartError(error, t("session.quick5StartFailed"), { workspaceId, addLabel: t("session.addMaterial"), open: (href) => router.push(href) }),
   });
 
   // "Next: <weakest topic>": a session on the subject's weakest topic.
@@ -528,7 +540,7 @@ export function SessionDebrief({
       ) : (
         <Play className="mr-2 h-4 w-4 fill-current" />
       )}
-      {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace("{n}", String(fullMinutes))}
+      <span className="min-w-0 truncate">{t(cta.key).replace("{topic}", cta.topic ?? "").replace("{n}", String(fullMinutes))}</span>
     </Button>
   ) : quickStart ? (
     <Button
