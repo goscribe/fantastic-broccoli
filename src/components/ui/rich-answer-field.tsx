@@ -71,6 +71,10 @@ export function RichAnswerField({
   const mathInput = useRef<HTMLInputElement>(null);
   const lastSent = useRef(value);
   const [focused, setFocused] = useState(false);
+  const blurTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  useEffect(() => () => {
+    if (blurTimer.current) clearTimeout(blurTimer.current);
+  }, []);
   // The formula being edited: where it is, its LaTeX, and where the caret goes.
   const [math, setMath] = useState<{ pos: number; latex: string; caret: number } | null>(null);
 
@@ -176,11 +180,17 @@ export function RichAnswerField({
   return (
     <div
       data-rich-answer
-      onFocus={() => setFocused(true)}
+      onFocus={() => {
+        if (blurTimer.current) clearTimeout(blurTimer.current);
+        setFocused(true);
+      }}
       onBlur={(e) => {
         if (e.currentTarget.contains(e.relatedTarget as Node | null)) return;
-        setFocused(false);
         closeMath(editor);
+        // The toolbar folds away a moment after the tap that left the box: folding
+        // it at once moved the button under the finger ("Check") and lost the tap.
+        if (blurTimer.current) clearTimeout(blurTimer.current);
+        blurTimer.current = setTimeout(() => setFocused(false), 250);
       }}
     >
       {/* The answer as text, for the voice scribe and anything else that fills answer boxes. */}
