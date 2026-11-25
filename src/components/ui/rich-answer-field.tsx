@@ -6,7 +6,13 @@ import StarterKit from "@tiptap/starter-kit";
 import { InlineMath } from "@tiptap/extension-mathematics";
 import { Placeholder } from "@tiptap/extensions";
 import { Check, Trash2 } from "lucide-react";
-import { answerToDoc, docToAnswer } from "@/lib/rich-answer";
+import { NodeSelection } from "@tiptap/pm/state";
+import { answerToDoc, cleanCaption, docToAnswer } from "@/lib/rich-answer";
+import { addFigure } from "@/lib/api/answer-figures";
+import { AnswerFigure, answerTableExtensions, countFigures } from "./rich-answer-extensions";
+import { FigurePanel, type FigureUploader } from "./rich-answer-figure";
+import "@/lib/i18n/answer-media";
+import "./rich-answer-media.css";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/voice";
 import { cn } from "@/lib/utils";
@@ -57,6 +63,8 @@ export function RichAnswerField({
   disabled,
   placeholder,
   rows = 2,
+  media = true,
+  uploadFigure = addFigure,
 }: {
   value: string;
   onChange: (value: string) => void;
@@ -65,6 +73,10 @@ export function RichAnswerField({
   disabled?: boolean;
   placeholder?: string;
   rows?: number;
+  /** The Table and Figure tools (off for one-line answers). */
+  media?: boolean;
+  /** Where a figure's picture is stored (the server by default; a design preview passes its own). */
+  uploadFigure?: FigureUploader;
 }) {
   const { t } = useI18n();
   const source = useRef<HTMLTextAreaElement>(null);
@@ -77,6 +89,8 @@ export function RichAnswerField({
   }, []);
   // The formula being edited: where it is, its LaTeX, and where the caret goes.
   const [math, setMath] = useState<{ pos: number; latex: string; caret: number } | null>(null);
+  /** The Figure tool's panel: open, with a pasted or dropped picture when there is one. */
+  const [figure, setFigure] = useState<{ file: File | null } | null>(null);
 
   const boxClass = cn(className, "rich-answer cursor-text", rows > 1 ? "min-h-[84px]" : "min-h-[52px]");
 
@@ -105,8 +119,9 @@ export function RichAnswerField({
         onClick: (node, pos) => setMath({ pos, latex: String(node.attrs.latex ?? ""), caret: String(node.attrs.latex ?? "").length }),
       }),
       Placeholder.configure({ placeholder: placeholder ?? "" }),
+      ...(media ? [...answerTableExtensions, AnswerFigure] : []),
     ],
-    editorProps: { attributes: { class: boxClass, role: "textbox", "aria-multiline": "true", "aria-label": placeholder ?? "" } },
+    editorProps: { attributes: { class: boxClass, role: "textbox", "aria-multiline": "true", "aria-label": placeholder ?? "" }, ...pictureDrops(media, setFigure) },
     onUpdate: ({ editor: e }) => {
       const next = docToAnswer(e.getJSON());
       if (next === lastSent.current) return;
@@ -128,8 +143,8 @@ export function RichAnswerField({
 
   // The box's look follows the activity's (marked right or wrong after checking).
   useEffect(() => {
-    editor?.setOptions({ editorProps: { attributes: { class: boxClass, role: "textbox", "aria-multiline": "true", "aria-label": placeholder ?? "" } } });
-  }, [editor, boxClass, placeholder]);
+    editor?.setOptions({ editorProps: { attributes: { class: boxClass, role: "textbox", "aria-multiline": "true", "aria-label": placeholder ?? "" }, ...pictureDrops(media, setFigure) } });
+  }, [editor, boxClass, placeholder, media]);
 
   // Opening a formula puts the caret in it, inside the {} the tool made.
   useEffect(() => {
@@ -250,8 +265,34 @@ export function RichAnswerField({
         </div>
       )}
 
+      {media && !disabled && editor && <AnswerMediaControls editor={editor} />}
+
+      {figure && !disabled && editor && (
+        <FigurePanel
+          key={figure.file ? `${figure.file.name}-${figure.file.size}` : "new"}
+          initial={figure.file}
+          used={countFigures(editor.state.doc)}
+          upload={uploadFigure}
+          onCancel={() => setFigure(null)}
+          onInsert={(src, caption) => {
+            setFigure(null);
+            editor.chain().focus().insertAnswerFigure({ src, caption }).run();
+          }}
+        />
+      )}
+
       {focused && !disabled && editor && (
         <div role="toolbar" aria-label={t("rich.toolbar")} className="mt-2 flex gap-1.5 overflow-x-auto pb-0.5 [scrollbar-width:none]">
+          {media && (
+            <>
+              <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run()} aria-label={t("rich.table")} title={t("rich.table")} disabled={editor.isActive("table")} className={cn(chip, "bg-muted text-foreground hover:bg-[var(--edge)] disabled:opacity-40")}>
+                {t("rich.table")}
+              </button>
+              <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => setFigure({ file: null })} aria-label={t("rich.figure")} title={t("rich.figure")} aria-expanded={!!figure} className={cn(chip, figure ? "bg-foreground text-background" : "bg-muted text-foreground hover:bg-[var(--edge)]")}>
+                {t("rich.figure")}
+              </button>
+            </>
+          )}
           {TOOLS.map((tool) => {
             const active = tool.kind === "mark" && editor.isActive(tool.id);
             return (
@@ -279,3 +320,70 @@ export function RichAnswerField({
     </div>
   );
 }
+
+/** The editor's paste and drop handlers: a picture pasted or dropped into the box opens the Figure tool on it. */
+function pictureDrops(media: boolean, setFigure: (figure: { file: File }) => void) {
+  const open = (file: File) => setFigure({ file });
+  return {
+    handlePaste: (_view: unknown, event: ClipboardEvent) => pastedPicture(media, event.clipboardData?.files, open),
+    handleDrop: (_view: unknown, event: Event) => pastedPicture(media, (event as DragEvent).dataTransfer?.files, open),
+  };
+}
+
+/** Pasted or dropped files: the first picture opens the Figure tool (and the paste is handled). */
+function pastedPicture(media: boolean, files: FileList | null | undefined, open: (file: File) => void): boolean {
+  const picture = media ? Array.from(files ?? []).find((f) => f.type.startsWith("image/")) : undefined;
+  if (!picture) return false;
+  open(picture);
+  return true;
+}
+
+const tableBtn = "min-h-11 shrink-0 touch-manipulation whitespace-nowrap px-1 text-[13.5px] font-bold text-muted-foreground hover:text-foreground";
+
+/** With the caret in a table: add and remove rows and columns. With a figure selected: its caption, or remove it. */
+function AnswerMediaControls({ editor }: { editor: Editor }) {
+  const { t } = useI18n();
+  const sel = editor.state.selection;
+  const selectedFigure = sel instanceof NodeSelection && sel.node.type.name === "answerFigure" ? sel : null;
+  if (selectedFigure) {
+    const pos = selectedFigure.from;
+    return (
+      <div className="mt-2 flex flex-wrap items-center gap-2 rounded-[14px] bg-muted px-3 py-1.5" role="group" aria-label={t("rich.figureSelected")} data-figure-controls>
+        <label htmlFor="rich-figure-edit" className="text-[13px] font-bold text-muted-foreground">
+          {t("rich.figureCaption")}
+        </label>
+        <input
+          id="rich-figure-edit"
+          key={pos}
+          defaultValue={String(selectedFigure.node.attrs.caption ?? "")}
+          maxLength={140}
+          onChange={(e) => {
+            const caption = cleanCaption(e.target.value);
+            const tr = editor.state.tr.setNodeAttribute(pos, "caption", caption);
+            // Keep the figure selected, so this caption box stays open while typing.
+            editor.view.dispatch(tr.setSelection(NodeSelection.create(tr.doc, pos)));
+          }}
+          placeholder={t("rich.figureCaptionPlaceholder")}
+          data-calculator-ignore
+          className="h-10 min-w-0 flex-1 rounded-lg bg-card px-2.5 text-[14px] focus:outline-none focus:ring-2 focus:ring-[var(--border-strong)]"
+        />
+        <button type="button" onClick={() => editor.chain().focus().deleteSelection().run()} className={cn(tableBtn, "hover:text-rose-600")}>
+          {t("rich.figureRemove")}
+        </button>
+      </div>
+    );
+  }
+  if (!editor.isActive("table")) return null;
+  const run = (cmd: "addRowAfter" | "addColumnAfter" | "deleteRow" | "deleteColumn" | "deleteTable") => editor.chain().focus()[cmd]().run();
+  return (
+    <div className="mt-2 flex gap-x-3 overflow-x-auto rounded-[14px] bg-muted px-3 [scrollbar-width:none]" role="toolbar" aria-label={t("rich.tableTools")} data-table-controls>
+      {/* The buttons never take focus, so the caret stays in the cell. */}
+      <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => run("addRowAfter")} className={tableBtn}>{t("rich.addRow")}</button>
+      <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => run("addColumnAfter")} className={tableBtn}>{t("rich.addColumn")}</button>
+      <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => run("deleteRow")} className={tableBtn}>{t("rich.removeRow")}</button>
+      <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => run("deleteColumn")} className={tableBtn}>{t("rich.removeColumn")}</button>
+      <button type="button" onMouseDown={(e) => e.preventDefault()} onClick={() => run("deleteTable")} className={cn(tableBtn, "hover:text-rose-600")}>{t("rich.removeTable")}</button>
+    </div>
+  );
+}
+

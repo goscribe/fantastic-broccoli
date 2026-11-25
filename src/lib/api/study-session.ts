@@ -62,6 +62,8 @@ export interface ApiPartMarking {
   /** Set when the part was a long-answer question. */
   longAnswer?: boolean;
   summary?: string;
+  /** A figure in the answer could not be seen, so it was marked on the text. */
+  figureNote?: string;
 }
 
 export interface ApiSessionActivity {

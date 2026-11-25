@@ -309,7 +309,7 @@ export function useResolvedFigureUrl(src: string): string | null {
     };
   }, [src, isKey]);
 
-  if (/^https?:\/\//.test(src)) return src;
+  if (/^(?:https?:\/\/|data:image\/)/.test(src)) return src;
   return signed?.src === src ? signed.url : null;
 }
 
@@ -398,6 +398,12 @@ function splitTableRow(line: string): string[] {
   let inMath = false;
   for (let i = 0; i < trimmed.length; i++) {
     const ch = trimmed[i];
+    // `\|` is a pipe inside a cell (GFM), in maths too (answers' tables, lib/rich-answer.ts).
+    if (ch === "\\" && trimmed[i + 1] === "|") {
+      current += "|";
+      i++;
+      continue;
+    }
     if (ch === "$") {
       if (inMath) inMath = false;
       else {
@@ -421,6 +427,11 @@ function splitTableRow(line: string): string[] {
   return cells;
 }
 
+/** A cell's text: `<br>` is a line break in it (GFM has no other way to write one). */
+function renderCell(cell: string): React.ReactNode[] {
+  return cell.split(/<br\s*\/?>/i).flatMap((piece, i) => (i ? [<br key={`br${i}`} />, ...renderInline(piece)] : renderInline(piece)));
+}
+
 export function MarkdownTable({ lines }: { lines: string[] }) {
   const [header, ...rest] = lines;
   const body = rest.filter((l) => !TABLE_SEPARATOR.test(l));
@@ -435,7 +446,7 @@ export function MarkdownTable({ lines }: { lines: string[] }) {
                 key={i}
                 className="border border-border bg-muted/50 px-2.5 py-1.5 text-left font-semibold"
               >
-                {renderInline(cell)}
+                {renderCell(cell)}
               </th>
             ))}
           </tr>
@@ -445,7 +456,7 @@ export function MarkdownTable({ lines }: { lines: string[] }) {
             <tr key={r}>
               {splitTableRow(row).map((cell, c) => (
                 <td key={c} className="border border-border px-2.5 py-1.5 align-top">
-                  {renderInline(cell)}
+                  {renderCell(cell)}
                 </td>
               ))}
             </tr>

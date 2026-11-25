@@ -89,6 +89,7 @@ export async function markWorksheetAnswer(input: {
     totalPoints: result.totalPoints,
     correct: result.correct,
     ...(summary ? { summary } : {}),
+    ...(result.figureNote ? { figureNote: result.figureNote } : {}),
   };
 }
 
