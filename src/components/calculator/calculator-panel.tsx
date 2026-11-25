@@ -583,7 +583,7 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
         )}
       </div>
 
-      <p role="status" aria-live="polite" className={cn("pointer-events-none absolute inset-x-0 mx-auto w-fit rounded-full", phone ? "-top-12" : "bottom-3", " bg-foreground px-3 py-1.5 text-small font-bold text-background transition-opacity", status ? "opacity-100" : "opacity-0")}>
+      <p role="status" aria-live="polite" className={cn("pointer-events-none absolute inset-x-0 mx-auto w-fit rounded-full", phone ? "top-[62px]" : "bottom-3", " bg-foreground px-3 py-1.5 text-small font-bold text-background transition-opacity", status ? "opacity-100" : "opacity-0")}>
         {status}
       </p>
     </div>,
