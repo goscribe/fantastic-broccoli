@@ -500,9 +500,26 @@ export function FirstScoresSection({ days }: { days: MetricDays }) {
                   ))}
                 </div>
                 <p className="mt-2 text-[11px] text-muted-foreground">
-                  {data.definitions.confidence} Asked before {data.confidence.firstSessionsAsked.toLocaleString()} of {data.starters.current.toLocaleString()} first sessions.
+                  {data.definitions.confidence} Asked in {data.confidence.firstSessionsAsked.toLocaleString()} of {data.starters.current.toLocaleString()} first sessions.
                 </p>
               </div>
+              {data.byDifficulty && data.byDifficulty.some((d) => d.answered > 0) && (
+                <div className="border-t border-border px-3 py-3">
+                  <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">First test by question difficulty</p>
+                  <table className="mt-1 w-full text-sm">
+                    <tbody className="divide-y divide-border">
+                      {data.byDifficulty.map((d) => (
+                        <tr key={d.key}>
+                          <td className={TD}>{d.key === "easy" ? "Warm-up (easy)" : d.key === "medium" ? "Exam level (medium)" : "Exam level (hard)"}</td>
+                          <td className={`${TD} text-right tabular-nums`}>{d.answered ? `${d.correct.toLocaleString()} / ${d.answered.toLocaleString()}` : "–"}</td>
+                          <td className={`${TD} text-right tabular-nums`}>{pctText(d.pct)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                  {data.definitions.difficulty && <p className="mt-2 text-[11px] text-muted-foreground">{data.definitions.difficulty}</p>}
+                </div>
+              )}
             </Card>
           </div>
         </div>

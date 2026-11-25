@@ -52,6 +52,7 @@ function mcqQuestion(raw: Raw): McqQuestion {
         ? raw.sourceFlashcardId
         : undefined,
     bankRef: bankRef(raw.bankRef),
+    difficulty: raw.difficulty === "easy" || raw.difficulty === "medium" || raw.difficulty === "hard" ? raw.difficulty : undefined,
   };
 }
 
