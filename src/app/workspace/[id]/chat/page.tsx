@@ -1,6 +1,8 @@
 "use client";
 
 import { Copilot } from "@/components/ai/copilot";
+import { toastStartError } from "@/lib/no-materials";
+import "@/lib/i18n/session";
 import { useNewUi } from "@/lib/new-ui";
 
 import { useEffect, useRef, useState } from "react";
@@ -261,7 +263,8 @@ function WorkspaceChatPage() {
       });
       if (created) router.push(`/workspace/${workspaceId}/session/${created.id}`);
     },
-    onError: (error) => toastError(error, t("ws.studyNow.startFailed")),
+    onError: (error) =>
+      toastStartError(error, t("ws.studyNow.startFailed"), { workspaceId, addLabel: t("session.addMaterial"), open: (href) => router.push(href) }),
   });
   const { data: masteryMatrix = [] } = useQuery({
     queryKey: ["mastery-matrix", workspaceId],

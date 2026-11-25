@@ -102,6 +102,14 @@ export interface CourseSubject {
 
 export type CourseLevel = "SL" | "HL";
 
+/** What a start without a topic ("Start today's session") in a course subject will be on. */
+export interface NextCourseSession {
+  courseId: string;
+  topics: Array<{ id: string; code: string; name: string }>;
+  /** "1.2 Competitive markets", or "2 topics · <unit>". */
+  title: string;
+}
+
 export const coursesApi = {
   list: () => rpc<CourseSummary[]>("course.list", "query", undefined),
   get: (courseId: string) => rpc<Course>("course.get", "query", { courseId }),
@@ -113,6 +121,13 @@ export const coursesApi = {
    * NOT_FOUND instead, which callers treat the same way.
    */
   progress: (workspaceId: string) => rpc<CourseProgress | null>("course.progress", "query", { workspaceId }),
+  /**
+   * The next topics in the syllabus a topic-less start in this subject plans
+   * from; null when the subject follows no course. An older server has no
+   * such query: callers treat a failure as null.
+   */
+  nextSession: (workspaceId: string, durationMinutes: number) =>
+    rpc<NextCourseSession | null>("course.nextSession", "query", { workspaceId, durationMinutes }),
   enroll: (courseId: string, level?: CourseLevel) =>
     rpc<{ workspaceId: string }>("course.enroll", "mutation", { courseId, ...(level ? { level } : {}) }),
   /** Before a start on these topics: which still need a confidence, and the course's papers. */
