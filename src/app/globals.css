@@ -10,6 +10,15 @@
 }
 
 
+/*
+ * The calculator docked to the right edge on a desktop takes this much of
+ * the window (calculator-panel.tsx sets --calc-dock while it is open), so
+ * the page lays out beside it instead of under it.
+ */
+body {
+  padding-right: var(--calc-dock, 0px);
+}
+
 :root {
   --background: #faf9fc;
   --foreground: #131118;
