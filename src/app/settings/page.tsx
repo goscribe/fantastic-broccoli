@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-return";
+import { CHECKOUT_CLOSED_FREE_LINE, CHECKOUT_UNAVAILABLE_LINE } from "@/lib/checkout-failure";
+import { landingAfterCheckoutReturn } from "@/lib/checkout-landing";
 import { planBilling, planDisplayName } from "@/lib/plan-display";
 import { hasUnlimitedGrant } from "@/lib/plan-access";
 import { CourseworkPlanRow } from "@/components/coursework/settings-row";
@@ -137,7 +139,7 @@ const SETTINGS_SECTIONS = [
 ] as const;
 
 /**
- * Back from the hosted checkout (`/settings?checkout=success|cancelled`): say what
+ * Back from the hosted checkout (`/settings?checkout=success|cancelled|failed`): say what
  * happened without claiming a payment or the lack of one, then re-read the plan a
  * few times for either return. The plan itself only changes when the server hears
  * from the payment provider; checkout is never reopened from here.
@@ -154,9 +156,18 @@ function CheckoutReturnNotice({ onRefresh }: { onRefresh: () => Promise<void> })
   useEffect(() => {
     const outcome = checkoutReturn(param);
     if (!outcome) return;
-    toast.message(outcome.message);
     // Dropping the query re-runs this effect with no outcome; the timers outlive that on purpose.
     router.replace("/settings");
+    if (outcome.kind === "finished") {
+      toast.message(outcome.message);
+    } else {
+      // Closed or failed: a student with no subject yet goes on into the first run, not a billing page.
+      void landingAfterCheckoutReturn().then((to) => {
+        if (!to) return toast.message(outcome.message);
+        toast.message(outcome.kind === "failed" ? CHECKOUT_UNAVAILABLE_LINE : CHECKOUT_CLOSED_FREE_LINE);
+        router.replace(to);
+      });
+    }
     timers.current = CHECKOUT_REFRESH_DELAYS_MS.map((ms) =>
       setTimeout(() => void refreshRef.current().catch(() => {}), ms),
     );

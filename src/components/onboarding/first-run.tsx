@@ -5,7 +5,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowRight, Camera, ClipboardPaste, GraduationCap, Upload } from "lucide-react";
 import { createWorkspace } from "@/lib/api/workspace";
-import { addPastedText, analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import { addPastedText, analyzeFiles } from "@/lib/api/materials";
+import { UploadStage, useReliableUpload } from "@/components/upload/reliable-upload";
+import { isUploadCancelled } from "@/lib/upload-transfer";
 import { createStudySessionQuietly } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
@@ -51,6 +53,7 @@ export function FirstRun({
   onSkip,
   fallbackWorkspaceId,
   context = "first_run",
+  initialMode = "course",
 }: {
   firstName?: string;
   /** Offered only to learners who already have a subject to look around in. */
@@ -59,6 +62,8 @@ export function FirstRun({
   fallbackWorkspaceId?: string;
   /** "new_subject": the same screen for adding a subject later; the first-run funnel events are not sent. */
   context?: "first_run" | "new_subject";
+  /** The way in shown first ("paste" after an upload elsewhere didn't finish). */
+  initialMode?: Mode;
 }) {
   const { t } = useI18n();
   const router = useRouter();
@@ -70,7 +75,9 @@ export function FirstRun({
     },
     [firstRun],
   );
-  const [mode, setMode] = useState<Mode>("course");
+  const [mode, setMode] = useState<Mode>(initialMode);
+  // Retries the storage PUT, resumes after the background, and shows "didn't finish — try again" instead of failing silently.
+  const upload = useReliableUpload();
   const [busy, setBusy] = useState<Busy>(null);
   const [error, setError] = useState<string | null>(null);
   const [pasted, setPasted] = useState("");
@@ -166,14 +173,25 @@ export function FirstRun({
         const workspaceId = await subjectFor(title);
         let fileIds: string[];
         try {
-          fileIds = await uploadFiles(workspaceId, files);
+          // Resolves once every file is in, including after "Try again" on the failure screen.
+          fileIds = await upload.run(workspaceId, files);
         } catch (err) {
           track("first_run.upload_failed", { option, durationMs: Date.now() - startedAt }, workspaceId);
+          if (isUploadCancelled(err)) {
+            // "Paste text instead": back to the screen, on the paste box.
+            started.current = false;
+            setBusy(null);
+            pickMode("paste");
+            return;
+          }
           throw err;
         }
         track("first_run.upload_finished", { option, fileCount: files.length, sizeKb, durationMs: Date.now() - startedAt }, workspaceId);
         // Queues analysis; the Quick 5 starts once the first file is read.
-        await analyzeFiles(workspaceId, fileIds);
+        await analyzeFiles(workspaceId, fileIds).catch((err: unknown) => {
+          trackFunnel("upload.failed", { stage: "analyze", fileCount: fileIds.length }, workspaceId);
+          throw err;
+        });
         await openSession(workspaceId, title, option);
       },
       t("firstRun.errorUpload"),
@@ -330,10 +348,19 @@ export function FirstRun({
         </p>
           </>
         )}
-        {busy && (
+        {busy === "uploading" && (
+          <UploadStage
+            upload={upload}
+            title={t("firstRun.waitTitle")}
+            fallbackStatus={t("firstRun.uploading")}
+            time={t("firstRun.busyHint")}
+            onPaste={upload.giveUp}
+          />
+        )}
+        {busy && busy !== "uploading" && (
           <WaitScreen
             title={t("firstRun.waitTitle")}
-            status={t(busy === "uploading" ? "firstRun.uploading" : busy === "saving" ? "firstRun.saving" : "firstRun.building")}
+            status={t(busy === "saving" ? "firstRun.saving" : "firstRun.building")}
             time={t("firstRun.busyHint")}
           />
         )}

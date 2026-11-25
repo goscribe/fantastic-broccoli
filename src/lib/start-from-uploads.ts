@@ -23,7 +23,11 @@ export function workspaceTitleFromFiles(files: File[]): string {
  * Create a workspace named after the files, upload + kick analysis, and
  * generate a first study session from those names.
  */
-export async function startWorkspaceFromUploads(files: File[]): Promise<{
+export async function startWorkspaceFromUploads(
+  files: File[],
+  /** Defaults to `uploadFiles`; the create menu passes its retrying upload (useReliableUpload). */
+  upload: (workspaceId: string, files: File[]) => Promise<string[]> = uploadFiles,
+): Promise<{
   workspaceId: string;
   session?: StudySession;
 }> {
@@ -35,7 +39,7 @@ export async function startWorkspaceFromUploads(files: File[]): Promise<{
   if (!workspaceId) throw new Error("Could not create a workspace");
   emitTreeChanged();
 
-  const fileIds = await uploadFiles(workspaceId, files);
+  const fileIds = await upload(workspaceId, files);
   analyzeFiles(workspaceId, fileIds).catch(() => {});
 
   const topics = files

@@ -59,6 +59,7 @@ import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief, SessionUnfinished } from "@/components/session/session-debrief";
 import { localizePracticeSession, mistakesApi } from "@/lib/api/mistakes";
+import "@/lib/i18n/uploads";
 import "@/lib/i18n/mistakes";
 import {
   ActivityRewardCard,
@@ -1900,6 +1901,9 @@ function GeneratingPlanCard({
     detail = `${t("session.progressRevising")} ${progress.completed} ${t("session.progressOf")} ${progress.total}${progress.label ? ` — ${progress.label}` : ""}`;
   }
 
+  // Waiting on uploaded notes to be read (no plan yet): say what happens next, and that leaving is fine.
+  const readingUploads = currentStage === "gathering" && hasCount && (progress.total ?? 0) > 0 && progress.planned.length === 0;
+
   if (newUi) {
     return (
       <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 pb-12 pt-2 animate-fade-up">
@@ -1915,10 +1919,23 @@ function GeneratingPlanCard({
           hint={
             stalled
               ? t("session.takingLonger")
-              : quickStart
-                ? // A Quick 5 is ready in about a minute: it opens here by itself, there is nothing to email.
-                  t("firstRun.busyHint")
-                : t("session.generatingHint")
+              : readingUploads
+                ? // Uploaded notes can take a few minutes: leaving is fine, the session-ready notification (and email once away) follows.
+                  t("upload.readingHint")
+                : quickStart
+                  ? // A Quick 5 is ready in about a minute: it opens here by itself.
+                    t("firstRun.busyHint")
+                  : t("session.generatingHint")
+          }
+          nextLabel={readingUploads ? t("upload.nextLabel") : undefined}
+          nextSteps={
+            readingUploads
+              ? [
+                  { label: detail ?? t("upload.nextRead"), state: "now" },
+                  { label: t("upload.nextWrite"), state: "todo" },
+                  { label: t("upload.nextOpen"), state: "todo" },
+                ]
+              : undefined
           }
         />
         {/* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */}
