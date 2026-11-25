@@ -10,6 +10,7 @@ import { useAuthUser } from "@/lib/api/auth";
 import { CHECKOUT_REFRESH_DELAYS_MS } from "@/lib/checkout-return";
 import { reportActivationConversion, reportPaidConversion } from "@/lib/gtag";
 import { isPaidConversion } from "@/lib/plan-access";
+import { paidConversionPlan } from "@/lib/pass";
 
 /**
  * After the debrief announces a finished session, re-check a few times: the
@@ -46,10 +47,12 @@ export function ConversionTracker() {
           reportActivationConversion(user.id);
         }
         // A complimentary grant is not a purchase: never reported as one.
+        // An exam pass is a paid conversion worth its one-off price (29 / 59),
+        // including one a parent paid through a pay link while the student was away.
         if (isPaidConversion(caps)) {
-          const plans = await fetchPlanOptions();
-          const active = plans.find((p) => p.isActive && p.priceDollars > 0);
-          if (active && !cancelled) reportPaidConversion(user.id, active.id, active.priceDollars);
+          const plans = caps.paidPlan ? [] : await fetchPlanOptions();
+          const paid = paidConversionPlan(caps, plans);
+          if (paid && !cancelled) reportPaidConversion(user.id, paid.id, paid.price);
         }
       } catch {
         // tracking is best-effort

@@ -37,6 +37,8 @@ import {
   type Locale,
 } from "@/lib/i18n";
 import "@/lib/i18n/settings";
+import "@/lib/i18n/billing";
+import { RefundLinkRow } from "@/components/billing/refund-link-row";
 import "@/lib/i18n/reminders";
 import { ReminderSettings } from "@/components/reminders/reminder-settings";
 import { inputClass } from "@/components/ui/input";
@@ -511,6 +513,7 @@ export default function SettingsPage() {
             onResume={handleResume}
           />
           <CourseworkPlanRow />
+          <RefundLinkRow className="mt-3" />
         </section>
 
         <section className="mt-8">

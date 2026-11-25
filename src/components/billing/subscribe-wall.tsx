@@ -40,6 +40,8 @@ import { toast } from "@/lib/toast";
 import { checkoutFailure } from "@/lib/checkout-failure";
 import { handleCheckoutFailure } from "@/lib/checkout-landing";
 import { cn } from "@/lib/utils";
+import { AskParentLink, PassDisclosure } from "./pass-options";
+import { AskParentDialog, payablePlans } from "./ask-parent-dialog";
 
 /** Routes where the wall must never render (billing surfaces, verification). */
 const EXEMPT_PREFIXES = ["/pricing", "/settings", "/verify-email"];
@@ -89,14 +91,18 @@ async function completedFullSessions(current: { id: string; quickStart: boolean 
   }
 }
 
-/** The pitch for the pass against the student's exam date, when there is one. */
-async function loadExamPitch(plans: PlanOption[]): Promise<ExamPitch | null> {
-  const pass = plans.find((p) => planBilling(p) === "once");
-  if (!pass) return null;
+/** The cheapest pass that covers the student's exam date, with its pitch, when there is one. */
+async function loadExamPitch(plans: PlanOption[]): Promise<{ pitch: ExamPitch; passId: string } | null> {
+  const passes = plans.filter((p) => planBilling(p) === "once").sort((a, b) => a.priceDollars - b.priceDollars);
+  if (passes.length === 0) return null;
   try {
     const today = await fetchPlanToday();
     const locale = typeof navigator !== "undefined" ? navigator.language : "en-GB";
-    return examPassPitch(today.exams, pass, today.today, locale);
+    for (const pass of passes) {
+      const pitch = examPassPitch(today.exams, pass, today.today, locale);
+      if (pitch) return { pitch, passId: pass.id };
+    }
+    return null;
   } catch {
     return null;
   }
@@ -123,6 +129,8 @@ export function SubscribeWall() {
   const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [pitch, setPitch] = useState<ExamPitch | null>(null);
+  const [pitchedPassId, setPitchedPassId] = useState<string | null>(null);
+  const [asking, setAsking] = useState(false);
   const [open, setOpen] = useState<OpenWall | null>(null);
   const [switching, setSwitching] = useState<string | null>(null);
   const openRef = useRef<OpenWall | null>(null);
@@ -159,7 +167,7 @@ export function SubscribeWall() {
         const nextPitch = await loadExamPitch(paidPlans);
         if (cancelled) return false;
         const reason: WallReason = kind === "post-session" ? "post_session" : wallReason(opts.message);
-        const variant: WallVariant = nextPitch
+        const variant: WallVariant = nextPitch?.pitch
           ? "exam_pass"
           : kind === "post-session"
             ? "post_session"
@@ -168,7 +176,8 @@ export function SubscribeWall() {
               : "limit";
         setCaps(nextCaps);
         setPlans(paidPlans);
-        setPitch(nextPitch);
+        setPitch(nextPitch?.pitch ?? null);
+        setPitchedPassId(nextPitch?.passId ?? null);
         const reveal = () => {
           if (cancelled) return;
           if (kind === "post-session") {
@@ -258,9 +267,13 @@ export function SubscribeWall() {
 
   const byPrice = [...plans].sort((a, b) => a.priceDollars - b.priceDollars);
   const subscriptions = byPrice.filter((p) => planBilling(p) !== "once");
-  const pass = byPrice.find((p) => planBilling(p) === "once");
-  // With an exam date: the trial and the pass side by side, nothing else.
-  const shown = pitch && pass ? [...subscriptions.slice(0, 1), pass] : byPrice;
+  const passes = byPrice.filter((p) => planBilling(p) === "once");
+  const pass = passes.find((p) => p.id === pitchedPassId);
+  // With an exam date: the trial and the pass for it side by side. Otherwise the
+  // subscriptions as cards, and the passes folded into one "Pay once instead" row.
+  const shown = pitch && pass ? [...subscriptions.slice(0, 1), pass] : subscriptions.length ? subscriptions : byPrice;
+  const otherPasses = passes.filter((p) => !shown.some((s) => s.id === p.id));
+  const payable = payablePlans(plans);
   // Students are price-sensitive: lead with the cheapest subscription (the trial).
   const featured = subscriptions[0] ?? byPrice[0];
   const freeCaps = caps?.caps ?? null;
@@ -387,7 +400,16 @@ export function SubscribeWall() {
             .filter(Boolean)
             .join(" · ")}
         </p>
-        {shown.length < plans.length && (
+        {(otherPasses.length > 0 || payable.length > 0) && (
+          <div className="mx-auto mt-4 max-w-md space-y-1">
+            <PassDisclosure passes={otherPasses} busyId={switching} onBuy={(id) => {
+              const plan = plans.find((p) => p.id === id);
+              if (plan) void choose(plan);
+            }} />
+            {payable.length > 0 && <AskParentLink onOpen={() => setAsking(true)} />}
+          </div>
+        )}
+        {subscriptions.some((p) => !shown.includes(p)) && (
           <p className="mt-2 text-center text-[13px]">
             <Link href="/pricing" onClick={dismiss} className="font-semibold text-muted-foreground underline underline-offset-4 hover:text-foreground">
               See all plans
@@ -405,6 +427,14 @@ export function SubscribeWall() {
           </button>
         </div>
       </div>
+      {asking && (
+        <AskParentDialog
+          plans={payable}
+          defaultPlanId={pitchedPassId ?? payable[0]?.id}
+          defaultFirstName={user.name.split(" ")[0] ?? ""}
+          onClose={() => setAsking(false)}
+        />
+      )}
     </div>
   );
 }

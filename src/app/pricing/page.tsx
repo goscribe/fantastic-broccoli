@@ -29,6 +29,8 @@ import { examPassPitch, freePerks, paidPerks, plural, type ExamPitch, type FreeC
 const DEFAULT_FREE_CAPS: FreeCaps = { workspaces: 2, studySessions: 3, flashcardTests: 2 };
 import { cn } from "@/lib/utils";
 import { parsePricingQuery, pricingPick } from "@/lib/coursework-access";
+import { AskParentBand, PassOptions, type PitchedPass } from "@/components/billing/pass-options";
+import { AskParentDialog, payablePlans } from "@/components/billing/ask-parent-dialog";
 
 function PlanCard({
   plan,
@@ -115,13 +117,15 @@ function PlanCard({
 
 export default function PricingPage() {
   const pageRouter = useRouter();
-  useAuthUser();
+  const { user } = useAuthUser();
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
-  const [pitch, setPitch] = useState<ExamPitch | null>(null);
+  const [pitched, setPitched] = useState<PitchedPass | null>(null);
+  const [buying, setBuying] = useState<string | null>(null);
+  const [asking, setAsking] = useState(false);
   // `?plan=ultra&for=coursework` (a locked Coursework): the plan to pick, from the plans the server lists.
   const [pickedId, setPickedId] = useState<string | null>(null);
   const [pickedFor, setPickedFor] = useState<string | null>(null);
@@ -135,31 +139,35 @@ export default function PricingPage() {
       .then(([acct, nextPlans, nextCaps, today]) => {
         setSummary(acct);
         setCaps(nextCaps);
-        const pass = nextPlans.find((p) => p.priceDollars > 0 && planBilling(p) === "once");
+        // The cheapest pass that covers the student's exam date gets the pitch.
         const locale = typeof navigator !== "undefined" ? navigator.language : "en-GB";
-        const nextPitch = pass && today ? examPassPitch(today.exams, pass, today.today, locale) : null;
-        setPitch(nextPitch);
+        const passes = nextPlans.filter((p) => p.priceDollars > 0 && planBilling(p) === "once").sort((a, b) => a.priceDollars - b.priceDollars);
+        let nextPitched: PitchedPass | null = null;
+        for (const pass of today ? passes : []) {
+          const pitch = examPassPitch(today!.exams, pass, today!.today, locale);
+          if (pitch) {
+            nextPitched = { planId: pass.id, pitch };
+            break;
+          }
+        }
+        setPitched(nextPitched);
         const query = parsePricingQuery(window.location.search);
         setPickedId(pricingPick(nextPlans, query));
         setPickedFor(query.for);
-        // With an exam date the pass sits right after the cheapest subscription (the trial).
-        if (nextPitch && pass) {
-          const rest = nextPlans.filter((p) => p.id !== pass.id);
-          const firstSub = rest.findIndex((p) => p.priceDollars > 0);
-          rest.splice(firstSub >= 0 ? firstSub + 1 : rest.length, 0, pass);
-          setPlans(rest);
-        } else {
-          setPlans(nextPlans);
-        }
+        setPlans(nextPlans);
       })
       .finally(() => setLoading(false));
   }, []);
   const freeCaps = caps?.caps ?? DEFAULT_FREE_CAPS;
+  // Monthly plans as cards; the exam passes ("pay once") in their own section below them.
+  const monthlyPlans = plans.filter((p) => planBilling(p) !== "once");
+  const passPlans = plans.filter((p) => p.priceDollars > 0 && planBilling(p) === "once");
+  const payable = payablePlans(plans);
   // The one primary: the cheapest subscription for someone without a plan; for someone on one, the next plan up (never a downgrade).
   const activePrice = plans.find((p) => p.isActive && p.priceDollars > 0)?.priceDollars ?? 0;
   const featuredId =
-    pickedId ??
-    [...plans]
+    (pickedId && monthlyPlans.some((p) => p.id === pickedId) ? pickedId : null) ??
+    [...monthlyPlans]
       .filter((p) => p.priceDollars > activePrice && planBilling(p) !== "once" && !p.isActive)
       .sort((a, b) => a.priceDollars - b.priceDollars)[0]?.id;
   const pickedLabel = pickedFor === "coursework" ? "For coursework" : "Selected";
@@ -180,6 +188,7 @@ export default function PricingPage() {
       return;
     }
     setSwitching(true);
+    setBuying(planId);
     try {
       await switchPlan(planId);
     } catch (err) {
@@ -187,6 +196,7 @@ export default function PricingPage() {
       await handleCheckoutFailure(err, pageRouter);
     } finally {
       setSwitching(false);
+      setBuying(null);
     }
   };
 
@@ -271,7 +281,7 @@ export default function PricingPage() {
         )}
       </section>
 
-      <section className={cn("mt-6 grid gap-4", plans.length >= 4 ? "sm:grid-cols-2 xl:grid-cols-4" : plans.length === 3 ? "md:grid-cols-3" : plans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
+      <section className={cn("mt-6 grid gap-4", monthlyPlans.length >= 4 ? "sm:grid-cols-2 xl:grid-cols-4" : monthlyPlans.length === 3 ? "md:grid-cols-3" : monthlyPlans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
         {loading
           ? Array.from({ length: 2 }, (_, i) => (
               <div key={i} className="life-card space-y-3 p-5">
@@ -280,8 +290,30 @@ export default function PricingPage() {
                 <Skeleton className="h-28 w-full rounded-xl" />
               </div>
             ))
-          : plans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} freeCaps={freeCaps} pitch={pitch} featured={plan.id === featuredId} picked={plan.id === pickedId ? pickedLabel : null} />)}
+          : monthlyPlans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} freeCaps={freeCaps} pitch={null} featured={plan.id === featuredId} picked={plan.id === pickedId ? pickedLabel : null} />)}
       </section>
+
+      {!loading && (
+        <PassOptions
+          className="mt-10"
+          passes={passPlans}
+          busyId={buying}
+          disabled={switching}
+          onBuy={handleSwitch}
+          pitched={pitched}
+          pickedId={pickedId}
+          pickedLabel={pickedLabel}
+        />
+      )}
+      {!loading && payable.length > 0 && !BILLING_PAUSED && <AskParentBand className="mt-10" onOpen={() => setAsking(true)} />}
+      {asking && (
+        <AskParentDialog
+          plans={payable}
+          defaultPlanId={pitched?.planId ?? payable[0]?.id}
+          defaultFirstName={user?.name?.split(" ")[0] ?? ""}
+          onClose={() => setAsking(false)}
+        />
+      )}
     </PageShell>
   );
 }

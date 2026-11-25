@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { absoluteUrl, landingOgImages } from "@/lib/seo";
 import { CtaBand, PageHero, PageSection } from "@/components/graphics/marketing-art";
-import { plans } from "../data";
+import { passFeatures, passes, plans } from "../data";
 import { BILLING_PAUSED } from "@/lib/billing-paused";
 
 export const metadata: Metadata = {
@@ -55,6 +55,36 @@ export default function LandingPricingPage() {
             </div>
           ))}
         </div>
+        <section className="mt-12 border-t border-border pt-8" aria-labelledby="passes-title">
+          <h2 id="passes-title" className="text-[22px] font-extrabold leading-tight">Pay once — until your exams</h2>
+          <p className="mt-2 max-w-2xl text-ui text-muted-foreground">
+            Starter until a fixed date, paid once. No subscription and nothing renews. No card? Send a parent a secure pay link; they don&apos;t need an account.
+          </p>
+          <div className="mt-6 grid gap-3 sm:gap-4 md:grid-cols-3">
+            {passes.map((pass) => (
+              <div key={pass.name} className="life-card flex flex-col p-6">
+                <h3 className="text-[16px] font-extrabold">{pass.name}</h3>
+                <p className="mt-3 text-[34px] font-extrabold leading-none tracking-tight">
+                  {pass.price}
+                  <span className="text-[14px] font-semibold tracking-normal text-muted-foreground"> once</span>
+                </p>
+                <p className="mt-3 text-ui text-muted-foreground">{pass.note}</p>
+                <p className="mt-1 flex-1 text-ui text-muted-foreground">{pass.until}</p>
+                <Link
+                  href="/signup"
+                  className="mt-6 flex h-12 items-center justify-center rounded-[var(--r-button)] border border-border-strong text-[15.5px] font-extrabold text-foreground hover:border-foreground/40"
+                >
+                  Get the pass
+                </Link>
+              </div>
+            ))}
+            <ul className="list-disc space-y-2 self-center pl-5 text-ui text-muted-foreground marker:text-border-strong">
+              {passFeatures.map((feature) => (
+                <li key={feature}>{feature}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
         <p className="mt-6 text-center text-small text-muted-foreground">
           Manage or switch plans anytime from the{" "}
           <Link href="/pricing" className="underline hover:text-foreground">
