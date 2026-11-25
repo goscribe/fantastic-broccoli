@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { ScribeLogo } from "@/components/graphics/logo";
 import { signUp, signIn } from "@/lib/api/auth";
 import { reportSignupConversion } from "@/lib/gtag";
 import { useI18n } from "@/lib/i18n";
+import { rememberSignupCourse } from "@/lib/known-course";
 import "@/lib/i18n/misc";
 import {
   GoogleSignInButton,
@@ -25,6 +26,9 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+
+  // A note page's "Sign up" names its course and topic (?course=…&topic=…): kept so home can start there.
+  useEffect(() => rememberSignupCourse(window.location.search), []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
