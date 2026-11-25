@@ -9,6 +9,9 @@ import { calcReducer, initialState, keyAction, type CalcAction } from "@/lib/cal
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/calculator-panel";
 import { cn } from "@/lib/utils";
+import { lineLatex, resultLatex } from "@/lib/calculator/pretty";
+import { CalcMath } from "./calculator-math";
+import { chipClass, SCREEN } from "./calculator-ui";
 import { CalculatorStats } from "./calculator-stats";
 
 /** Graph mode draws with the note figures' plot (and its maths rendering), so it loads only when that tab is opened. */
@@ -58,24 +61,27 @@ function useMedia(query: string): boolean {
 interface KeyDef {
   id: string;
   label: string;
+  /** The face drawn as maths (x², √□, sin⁻¹), where the plain label is only an approximation. */
+  tex?: string;
   /** Spoken name (a key in the i18n file), for keys whose face is a symbol. */
   name?: string;
   /** Typed into the line. */
   text?: string;
   action?: CalcAction;
   /** What the key becomes while Inv is on. */
-  inv?: { label: string; name: string; text?: string; action?: CalcAction };
-  tone?: "digit" | "operator" | "primary";
+  inv?: { label: string; tex?: string; name: string; text?: string; action?: CalcAction };
+  /** Key hierarchy, as on a real calculator: digits raised and plain, operators tinted, "=" solid, AC and ⌫ warm; the rest are function keys. */
+  tone?: "digit" | "operator" | "primary" | "clear";
   span?: number;
 }
 
 /** Shown only with "More keys" on a phone; always on a wider screen. */
 const EXTRA_KEYS: KeyDef[] = [
   { id: "factorial", label: "x!", name: "calc.key.factorial", text: "!" },
-  { id: "ncr", label: "nCr", name: "calc.key.ncr", text: "C" },
-  { id: "npr", label: "nPr", name: "calc.key.npr", text: "P" },
+  { id: "ncr", label: "nCr", tex: "{}^{n}\\mathrm{C}_{r}", name: "calc.key.ncr", text: "C" },
+  { id: "npr", label: "nPr", tex: "{}^{n}\\mathrm{P}_{r}", name: "calc.key.npr", text: "P" },
   { id: "percent", label: "%", name: "calc.key.percent", text: "%" },
-  { id: "exp", label: "EXP", name: "calc.key.exp", text: "E" },
+  { id: "exp", label: "×10ˣ", tex: "\\times10^{x}", name: "calc.key.exp", text: "E" },
   { id: "inv", label: "Inv", name: "calc.key.inv" },
   { id: "pi", label: "π", name: "calc.key.pi", text: "π" },
   { id: "e", label: "e", name: "calc.key.e", text: "e" },
@@ -84,24 +90,24 @@ const EXTRA_KEYS: KeyDef[] = [
 ];
 
 const FUNCTION_KEYS: KeyDef[] = [
-  { id: "sin", label: "sin", name: "calc.key.sin", text: "sin(", inv: { label: "sin⁻¹", name: "calc.key.asin", text: "sin⁻¹(" } },
-  { id: "cos", label: "cos", name: "calc.key.cos", text: "cos(", inv: { label: "cos⁻¹", name: "calc.key.acos", text: "cos⁻¹(" } },
-  { id: "tan", label: "tan", name: "calc.key.tan", text: "tan(", inv: { label: "tan⁻¹", name: "calc.key.atan", text: "tan⁻¹(" } },
-  { id: "ln", label: "ln", name: "calc.key.ln", text: "ln(", inv: { label: "eˣ", name: "calc.key.expE", text: "e^(" } },
-  { id: "log", label: "log", name: "calc.key.log", text: "log(", inv: { label: "10ˣ", name: "calc.key.exp10", text: "10^(" } },
+  { id: "sin", label: "sin", name: "calc.key.sin", text: "sin(", inv: { label: "sin⁻¹", tex: "\\sin^{-1}", name: "calc.key.asin", text: "sin⁻¹(" } },
+  { id: "cos", label: "cos", name: "calc.key.cos", text: "cos(", inv: { label: "cos⁻¹", tex: "\\cos^{-1}", name: "calc.key.acos", text: "cos⁻¹(" } },
+  { id: "tan", label: "tan", name: "calc.key.tan", text: "tan(", inv: { label: "tan⁻¹", tex: "\\tan^{-1}", name: "calc.key.atan", text: "tan⁻¹(" } },
+  { id: "ln", label: "ln", name: "calc.key.ln", text: "ln(", inv: { label: "eˣ", tex: "e^{x}", name: "calc.key.expE", text: "e^(" } },
+  { id: "log", label: "log", name: "calc.key.log", text: "log(", inv: { label: "10ˣ", tex: "10^{x}", name: "calc.key.exp10", text: "10^(" } },
   { id: "open", label: "(", name: "calc.key.open", text: "(" },
   { id: "close", label: ")", name: "calc.key.close", text: ")" },
-  { id: "square", label: "x²", name: "calc.key.square", text: "²", inv: { label: "x³", name: "calc.key.cube", text: "³" } },
-  { id: "power", label: "xʸ", name: "calc.key.power", text: "^" },
-  { id: "sqrt", label: "√", name: "calc.key.sqrt", text: "√(", inv: { label: "∛", name: "calc.key.cbrt", text: "∛(" } },
+  { id: "square", label: "x²", tex: "x^{2}", name: "calc.key.square", text: "²", inv: { label: "x³", tex: "x^{3}", name: "calc.key.cube", text: "³" } },
+  { id: "power", label: "xʸ", tex: "x^{y}", name: "calc.key.power", text: "^" },
+  { id: "sqrt", label: "√", tex: "\\sqrt{\\square}", name: "calc.key.sqrt", text: "√(", inv: { label: "∛", tex: "\\sqrt[3]{\\square}", name: "calc.key.cbrt", text: "∛(" } },
 ];
 
 const digit = (d: string): KeyDef => ({ id: `d${d}`, label: d, text: d, tone: "digit" });
 
 const MAIN_KEYS: KeyDef[] = [
   digit("7"), digit("8"), digit("9"),
-  { id: "backspace", label: "⌫", name: "calc.key.backspace", action: { type: "backspace" } },
-  { id: "clear", label: "AC", name: "calc.key.clear", action: { type: "clear" } },
+  { id: "backspace", label: "⌫", name: "calc.key.backspace", action: { type: "backspace" }, tone: "clear" },
+  { id: "clear", label: "AC", name: "calc.key.clear", action: { type: "clear" }, tone: "clear" },
   digit("4"), digit("5"), digit("6"),
   { id: "times", label: "×", name: "calc.key.times", text: "×", tone: "operator" },
   { id: "divide", label: "÷", name: "calc.key.divide", text: "÷", tone: "operator" },
@@ -110,18 +116,25 @@ const MAIN_KEYS: KeyDef[] = [
   { id: "minus", label: "−", name: "calc.key.minus", text: "−", tone: "operator" },
   digit("0"),
   { id: "point", label: ".", name: "calc.key.point", text: ".", tone: "digit" },
-  { id: "ans", label: "Ans", name: "calc.key.ans", text: "Ans" },
+  { id: "ans", label: "Ans", name: "calc.key.ans", text: "Ans", tone: "operator" },
   { id: "equals", label: "=", name: "calc.key.equals", action: { type: "evaluate" }, tone: "primary", span: 2 },
 ];
 
+/**
+ * Keys are raised (a 2px ledge underneath) and sink when pressed, like a
+ * physical keypad. Colour carries the hierarchy, size the importance.
+ */
 const KEY_BASE =
-  "h-11 touch-manipulation select-none rounded-[10px] border text-ui tabular-nums transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60";
+  "flex h-11 touch-manipulation select-none sm:h-9 items-center justify-center rounded-xl text-ui tabular-nums shadow-[0_2px_0_var(--key-ledge)] transition-[background-color,transform,box-shadow] duration-75 active:translate-y-[2px] active:shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/60";
 
-const chipClass = (on: boolean) =>
-  cn(
-    "h-9 touch-manipulation whitespace-nowrap rounded-[10px] border px-2.5 text-small font-bold transition-colors disabled:opacity-40",
-    on ? "border-foreground bg-foreground text-background" : "border-border bg-white text-foreground hover:bg-muted",
-  );
+const KEY_TONE = {
+  digit: "bg-card text-[19px] font-bold text-foreground ring-1 ring-inset ring-border [--key-ledge:var(--border-strong)] hover:bg-[var(--card-hover)]",
+  operator: "bg-accent-soft text-[20px] font-bold leading-none text-accent [--key-ledge:color-mix(in_srgb,var(--accent)_30%,transparent)] hover:bg-[color-mix(in_srgb,var(--accent)_16%,var(--card))]",
+  primary: "bg-accent text-[24px] font-bold leading-none text-white [--key-ledge:var(--accent-dim)] hover:bg-[var(--accent-dim)]",
+  clear: "bg-[color-mix(in_srgb,#f43f5e_12%,var(--card))] text-[15px] font-extrabold text-rose-700 [--key-ledge:color-mix(in_srgb,#f43f5e_30%,transparent)] hover:bg-[color-mix(in_srgb,#f43f5e_18%,var(--card))] dark:text-rose-300",
+  function: "bg-muted text-[14px] font-semibold text-foreground [--key-ledge:var(--border-strong)] hover:bg-[color-mix(in_srgb,var(--foreground)_7%,var(--muted))]",
+  on: "bg-foreground text-[14px] font-bold text-background [--key-ledge:var(--ink)]",
+} as const;
 
 // ── Panel ─────────────────────────────────────────────────────────────────
 
@@ -146,6 +159,9 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
   const { t } = useI18n();
   const phone = useMedia("(max-width: 639px)");
   const touch = useMedia("(pointer: coarse)");
+  // A short window (a 768px laptop) has no room for every key under the screen: the rarer ones go behind "More keys", as on a phone.
+  const short = useMedia("(max-height: 820px)");
+  const compact = phone || short;
   const [state, dispatch] = useReducer(calcReducer, undefined, () => initialState(stored(ANGLE_KEY) === "rad" ? "rad" : "deg"));
   const [mode, setMode] = useState<Mode>("calculate");
   const [inv, setInv] = useState(false);
@@ -334,7 +350,7 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
 
   const floating = !phone && !docked;
   const floatAt = pos ?? { x: Math.max(8, window.innerWidth - FLOAT_WIDTH - 24), y: 80 };
-  const showExtra = !phone || moreKeys;
+  const showExtra = !compact || moreKeys;
   const history = state.history;
   const historyShown = phone ? historyOpen : true;
 
@@ -354,18 +370,9 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
         title={name}
         aria-pressed={isInv ? inv : undefined}
         style={key.span ? { gridColumn: `span ${key.span}` } : undefined}
-        className={cn(
-          KEY_BASE,
-          key.tone === "primary"
-            ? "border-accent bg-accent text-[22px] font-bold leading-none text-white hover:bg-[var(--accent-dim)]"
-            : key.tone === "digit"
-              ? "border-border bg-white text-[17px] font-bold text-foreground hover:bg-muted active:bg-[var(--edge)]"
-              : isInv && inv
-                ? "border-foreground bg-foreground font-bold text-background"
-                : cn("border-border bg-muted text-foreground hover:bg-[var(--edge)]", key.tone === "operator" ? "text-[20px] font-semibold leading-none" : "font-semibold"),
-        )}
+        className={cn(KEY_BASE, isInv && inv ? KEY_TONE.on : KEY_TONE[key.tone ?? "function"], inv && key.inv && "text-accent", key.tone === "operator" && face.label.length > 1 && "text-[15px]")}
       >
-        {face.label}
+        {face.tex ? <CalcMath tex={face.tex} fallback={face.label} className="[&_.katex]:text-[0.95em]" /> : face.label}
       </button>
     );
   };
@@ -384,12 +391,12 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
       data-calculator
       data-voice-ignore
       onKeyDown={onKeyDown}
-      style={floating ? { left: floatAt.x, top: floatAt.y, width: FLOAT_WIDTH } : docking ? { width: DOCK_WIDTH } : undefined}
+      style={floating ? { left: floatAt.x, top: floatAt.y, width: FLOAT_WIDTH, maxHeight: `calc(100dvh - ${floatAt.y + 8}px)` } : docking ? { width: DOCK_WIDTH } : undefined}
       className={cn(
-        "fixed z-50 flex flex-col bg-white text-foreground",
+        "fixed z-50 flex flex-col bg-card text-foreground",
         phone && "inset-x-0 bottom-0 max-h-[82dvh] rounded-t-[22px] border-t border-border pb-[env(safe-area-inset-bottom)] shadow-[0_-18px_40px_-20px_rgba(0,0,0,0.35)]",
         docking && "inset-y-0 right-0 border-l border-border",
-        floating && "max-h-[calc(100dvh-16px)] rounded-2xl border border-border shadow-[0_18px_50px_-18px_rgba(0,0,0,0.4)]",
+        floating && "rounded-2xl border border-border shadow-[0_18px_50px_-18px_rgba(0,0,0,0.4)]",
       )}
     >
       {/* Title bar: the handle for dragging on a desktop. A phone has no room to spare, so its tabs and Close share one row. */}
@@ -429,7 +436,7 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
                 setMode(next);
                 document.getElementById(`calc-tab-${next}`)?.focus();
               }}
-              className={cn("h-9 flex-1 touch-manipulation rounded-[9px] text-small font-bold transition-colors", mode === m ? "bg-white text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.08)]" : "text-muted-foreground hover:text-foreground")}
+              className={cn("h-9 flex-1 touch-manipulation rounded-[9px] text-small font-bold transition-colors", mode === m ? "bg-card text-foreground shadow-[0_1px_2px_rgba(0,0,0,0.08)]" : "text-muted-foreground hover:text-foreground")}
             >
               {t(`calc.mode.${m}`)}
             </button>
@@ -441,7 +448,7 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
       <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-3">
         {mode === "calculate" && (
           <div role="tabpanel" id="calc-panel-calculate" aria-labelledby="calc-tab-calculate">
-            <div className="flex items-center gap-2 px-3 pt-3">
+            <div className="flex items-center gap-2 px-3 pt-2.5">
               <div role="radiogroup" aria-label={t("calc.angle")} className="flex gap-1">
                 {(["deg", "rad"] as const).map((unit) => (
                   <button
@@ -472,65 +479,81 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
                   {t("calc.history")}
                 </button>
               )}
-              {phone && (
+              {compact && (
                 <button type="button" aria-pressed={moreKeys} onClick={() => setMoreKeys((v) => !v)} className={chipClass(moreKeys)}>
                   {t(moreKeys ? "calc.fewerKeys" : "calc.moreKeys")}
                 </button>
               )}
             </div>
 
-            {historyShown && history.length > 0 && (
-              <ul aria-label={t("calc.history")} className="mx-3 mt-2 max-h-[104px] overflow-y-auto overscroll-contain rounded-xl border border-border">
-                {history.map((entry, index) => {
-                  const result = prettyResult(formatResult(entry.result));
-                  return (
-                    <li key={`${history.length - index}`} className="border-b border-border last:border-b-0">
-                      <button
-                        type="button"
-                        onPointerDown={(e) => e.preventDefault()}
-                        onClick={() => {
-                          dispatch({ type: "recall", index });
-                          focusLine();
-                        }}
-                        aria-label={t("calc.historyReuse").replace("{result}", result).replace("{expr}", entry.expr)}
-                        className="flex min-h-[34px] w-full items-baseline gap-2 px-2.5 py-1 text-left text-small tabular-nums hover:bg-muted"
-                      >
-                        <span className="min-w-0 flex-1 truncate text-muted-foreground">{entry.expr}</span>
-                        <span className="shrink-0 font-bold">= {result}</span>
-                      </button>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
+            {/* The screen: past calculations scroll above the current one, as on a natural-display calculator. */}
+            <div className={cn(SCREEN, "mx-3 mt-2 overflow-hidden focus-within:border-border-strong")}>
+              {historyShown && history.length > 0 && (
+                <ul aria-label={t("calc.history")} className="max-h-[116px] overflow-y-auto sm:max-h-[76px] overscroll-contain border-b border-dashed border-border-strong/70 px-1 py-1">
+                  {history.map((entry, index) => {
+                    const result = prettyResult(formatResult(entry.result));
+                    return (
+                      <li key={`${history.length - index}`}>
+                        <button
+                          type="button"
+                          onPointerDown={(e) => e.preventDefault()}
+                          onClick={() => {
+                            dispatch({ type: "recall", index });
+                            focusLine();
+                          }}
+                          aria-label={t("calc.historyReuse").replace("{result}", result).replace("{expr}", entry.expr)}
+                          className="flex min-h-[36px] w-full items-center gap-2 rounded-lg px-2 py-0.5 text-left text-small tabular-nums hover:bg-card/80"
+                        >
+                          <CalcMath tex={lineLatex(entry.expr, state.angle)} fallback={entry.expr} className="min-w-0 flex-1 truncate text-muted-foreground" />
+                          <span className="shrink-0 font-bold text-foreground">
+                            <span aria-hidden className="text-muted-foreground">= </span>
+                            {result}
+                          </span>
+                        </button>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
 
-            <div className="mx-3 mt-2 rounded-xl border border-border px-3 pb-2 pt-1 focus-within:border-foreground">
-              <input
-                ref={line}
-                value={state.expr}
-                onChange={(e) => dispatch({ type: "edit", expr: e.target.value, caret: e.target.selectionStart ?? e.target.value.length })}
-                onSelect={(e) => dispatch({ type: "select", start: e.currentTarget.selectionStart ?? 0, end: e.currentTarget.selectionEnd ?? 0 })}
-                aria-label={t("calc.line")}
-                aria-invalid={state.error ? true : undefined}
-                aria-describedby="calc-result"
-                placeholder={t("calc.linePlaceholder")}
-                // A phone keeps its own keyboard down: the keypad below is the keyboard.
-                inputMode={touch ? "none" : "text"}
-                autoComplete="off"
-                autoCorrect="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                className="h-9 w-full bg-transparent text-ui tabular-nums text-foreground placeholder:text-faint focus:outline-none"
-              />
-              <div id="calc-result" role="status" aria-live="polite" aria-atomic="true" className="flex min-h-9 items-center justify-end">
-                {state.error ? (
-                  <span className="w-full text-small font-semibold text-rose-700">{state.error.message}</span>
-                ) : state.result ? (
-                  <output aria-label={t("calc.result")} className="max-w-full overflow-x-auto whitespace-nowrap text-[26px] font-extrabold leading-9 tabular-nums">
-                    <span aria-hidden>= </span>
-                    {prettyResult(shown)}
-                  </output>
-                ) : null}
+              <div className="px-3 pb-2 pt-2">
+                {/* The line as maths, live: drawn from the same reading "=" will use. */}
+                <div aria-hidden className="flex min-h-[38px] items-center overflow-x-auto sm:min-h-[34px] overflow-y-hidden whitespace-nowrap text-[21px] leading-tight text-foreground">
+                  {state.expr ? (
+                    <CalcMath tex={lineLatex(state.expr, state.angle)} fallback={state.expr} />
+                  ) : (
+                    <span className="text-faint">0</span>
+                  )}
+                </div>
+                <input
+                  ref={line}
+                  value={state.expr}
+                  onChange={(e) => dispatch({ type: "edit", expr: e.target.value, caret: e.target.selectionStart ?? e.target.value.length })}
+                  onSelect={(e) => dispatch({ type: "select", start: e.currentTarget.selectionStart ?? 0, end: e.currentTarget.selectionEnd ?? 0 })}
+                  aria-label={t("calc.line")}
+                  aria-invalid={state.error ? true : undefined}
+                  aria-describedby="calc-result"
+                  placeholder={t("calc.linePlaceholder")}
+                  // A phone keeps its own keyboard down: the keypad below is the keyboard.
+                  inputMode={touch ? "none" : "text"}
+                  autoComplete="off"
+                  autoCorrect="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
+                  className="mt-1 h-8 w-full rounded-lg bg-card/70 sm:h-7 px-2 font-mono text-small tabular-nums text-muted-foreground ring-1 ring-inset ring-border focus:text-foreground focus:outline-none focus:ring-foreground/40"
+                />
+                <div id="calc-result" role="status" aria-live="polite" aria-atomic="true" className="flex min-h-11 items-center justify-end pt-1 sm:min-h-10">
+                  {state.error ? (
+                    <span className="w-full text-small font-semibold text-rose-700 dark:text-rose-300">{state.error.message}</span>
+                  ) : state.result ? (
+                    <output aria-label={t("calc.result")} className={cn("max-w-full overflow-x-auto overflow-y-hidden whitespace-nowrap text-[28px] font-extrabold leading-[44px] tabular-nums transition-opacity", !state.finished && "opacity-40")}>
+                      <span aria-hidden className="mr-1.5 font-semibold text-muted-foreground">=</span>
+                      <span className="sr-only">{shown}</span>
+                      {/* Plain numbers in the app's own figures; fractions and powers of ten drawn as maths. */}
+                      {/^-?[\d.]+$/.test(shown) ? <span aria-hidden>{prettyResult(shown)}</span> : <CalcMath tex={resultLatex(shown)} fallback={prettyResult(shown)} className="[&_.katex]:text-[1em]" />}
+                    </output>
+                  ) : null}
+                </div>
               </div>
             </div>
 
@@ -556,15 +579,17 @@ export default function CalculatorPanel({ open, onClose, findTarget, insert }: C
                 {t("calc.copy")}
               </button>
               {canInsert && (
-                <button type="button" disabled={!state.result} onClick={() => insertText(shown)} title={t("calc.insertLong")} aria-label={t("calc.insertLong")} className={chipClass(false)}>
+                <button type="button" disabled={!state.result} onClick={() => insertText(shown)} title={t("calc.insertLong")} aria-label={t("calc.insertLong")} className={cn(chipClass(false), "border-accent bg-accent text-white hover:bg-[var(--accent-dim)]")}>
                   {t("calc.insert")}
                 </button>
               )}
             </div>
 
-            <div role="group" aria-label={t("calc.keypad")} className="mt-2.5 grid grid-cols-5 gap-1.5 px-3">
+            <div role="group" aria-label={t("calc.keypad")} className="mx-3 mt-2.5 grid grid-cols-5 gap-x-1.5 gap-y-2 sm:gap-y-1.5">
               {showExtra && EXTRA_KEYS.map(renderKey)}
               {FUNCTION_KEYS.map(renderKey)}
+              {/* The number pad sits apart from the function keys, as on the real thing. */}
+              <div aria-hidden className="col-span-5 my-0.5 h-px bg-border" />
               {MAIN_KEYS.map(renderKey)}
             </div>
           </div>

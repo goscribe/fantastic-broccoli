@@ -5,6 +5,8 @@ import { formatNumber, prettyResult, type Precision } from "@/lib/calculator/for
 import { parseList, summarise } from "@/lib/calculator/stats";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/calculator-panel";
+import { cn } from "@/lib/utils";
+import { FIELD, SCREEN } from "./calculator-ui";
 
 /** Stats mode: a list of numbers in, its summary out; each value can be copied or put into the answer. */
 export function CalculatorStats({
@@ -52,13 +54,13 @@ export function CalculatorStats({
         aria-describedby="calc-stats-help"
         spellCheck={false}
         autoComplete="off"
-        className="mt-1.5 block w-full resize-none rounded-xl border border-border bg-white px-3 py-2 text-ui tabular-nums text-foreground placeholder:text-faint focus:border-foreground focus:outline-none"
+        className={cn(FIELD, "mt-1.5 block h-auto w-full resize-none py-2 font-mono text-small")}
       />
       <p id="calc-stats-help" className="mt-1.5 text-small text-muted-foreground">
         {t("calc.stats.help")}
       </p>
       {list.invalid.length > 0 && (
-        <p role="alert" className="mt-1.5 text-small font-semibold text-rose-700">
+        <p role="alert" className="mt-1.5 text-small font-semibold text-rose-700 dark:text-rose-300">
           {t("calc.stats.invalid").replace("{list}", list.invalid.slice(0, 5).join(", "))}
         </p>
       )}
@@ -75,11 +77,11 @@ export function CalculatorStats({
         </button>
       </div>
 
-      <dl aria-label={t("calc.stats.results")} aria-live="polite" className="mt-2.5 overflow-hidden rounded-xl border border-border">
+      <dl aria-label={t("calc.stats.results")} aria-live="polite" className={cn(SCREEN, "mt-2.5 overflow-hidden")}>
         {(summary ? rows : [{ key: "n", label: t("calc.stats.n"), value: "0" }]).map((row) => (
-          <div key={row.key} className="flex min-h-11 items-center gap-2 border-b border-border px-3 last:border-b-0">
+          <div key={row.key} className="flex min-h-11 items-center gap-2 border-b border-dashed border-border-strong/70 px-3 last:border-b-0">
             <dt className="min-w-0 flex-1 text-small font-semibold text-muted-foreground">{row.label}</dt>
-            <dd className="shrink-0 text-ui font-extrabold tabular-nums">
+            <dd className="shrink-0 text-[17px] font-extrabold tabular-nums">
               {row.value === null ? <span className="text-small font-semibold text-muted-foreground">{t("calc.stats.needTwo")}</span> : prettyResult(row.value)}
             </dd>
             {summary && row.value !== null && (
@@ -88,7 +90,7 @@ export function CalculatorStats({
                   type="button"
                   onClick={() => (onInsert ? onInsert(row.value as string) : onCopy(row.value as string))}
                   aria-label={`${t(onInsert ? "calc.insertLong" : "calc.copy")}: ${row.label} ${row.value}`}
-                  className="h-9 rounded-[10px] px-2 text-small font-bold text-muted-foreground hover:bg-muted hover:text-foreground"
+                  className={cn("h-9 rounded-[10px] px-2.5 text-small font-bold", onInsert ? "bg-accent-soft text-accent hover:bg-accent hover:text-white" : "text-muted-foreground hover:bg-card hover:text-foreground")}
                 >
                   {t(onInsert ? "calc.insert" : "calc.copy")}
                 </button>
