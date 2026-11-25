@@ -122,7 +122,7 @@ export function LevelBadge({ level, className }: { level: ProficiencyLevel; clas
 
 /** Where the quick check (and the warm-up after it) reads and marks questions; /design previews pass fixtures. */
 export interface QuizApi {
-  precheck: (workspaceId: string, focus?: string) => Promise<PrecheckTopic[]>;
+  precheck: (workspaceId: string, focus?: string, sessionId?: string) => Promise<PrecheckTopic[]>;
   answer: (input: { workspaceId: string; artifactId: string; index: number; selectedIndex: number }) => Promise<BankAnswerResult>;
   warmup: (workspaceId: string) => Promise<ApiWarmupQuestion[]>;
 }
@@ -168,12 +168,15 @@ function isTyping(target: EventTarget | null): boolean {
 export function SessionPrecheck({
   workspaceId,
   focus,
+  sessionId,
   hero = false,
   api = LIVE_QUIZ_API,
   onShown,
 }: {
   workspaceId: string;
   focus?: string;
+  /** The session being built: the check asks about its planned topics (`focus` is the fallback). */
+  sessionId?: string;
   hero?: boolean;
   api?: QuizApi;
   /** Whether a question, the results or the warm-up is on screen (the wait screen then shrinks its build header). */
@@ -200,7 +203,7 @@ export function SessionPrecheck({
   useEffect(() => {
     let cancelled = false;
     api
-      .precheck(workspaceId, focus)
+      .precheck(workspaceId, focus, sessionId)
       .then((rows) => {
         if (cancelled) return;
         const usable = rows.filter((r) => r.ladder.length > 0);
@@ -211,7 +214,7 @@ export function SessionPrecheck({
     return () => {
       cancelled = true;
     };
-  }, [workspaceId, focus, api]);
+  }, [workspaceId, focus, sessionId, api]);
 
   const item: PrecheckItem | undefined = useMemo(
     () => (topics && step ? topics[step.topicIndex]?.ladder[step.rung] : undefined),

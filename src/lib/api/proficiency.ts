@@ -40,10 +40,12 @@ export interface BankAnswerResult {
 export const proficiencyApi = {
   list: (workspaceId: string) =>
     rpc<TopicLevel[]>("proficiency.list", "query", { workspaceId }),
-  precheck: (workspaceId: string, focus?: string) =>
+  /** `sessionId`: the session being built; its planned topics choose the questions (the title is the fallback). */
+  precheck: (workspaceId: string, focus?: string, sessionId?: string) =>
     rpc<PrecheckTopic[]>("proficiency.precheck", "query", {
       workspaceId,
       focus: focus?.slice(0, 2000) || undefined,
+      sessionId: sessionId || undefined,
     }),
   /** Marks a question-bank MCQ server-side (pre-check or spaced review). */
   answerBankQuestion: (input: {

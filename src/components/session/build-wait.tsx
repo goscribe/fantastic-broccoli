@@ -21,6 +21,7 @@ import { WaitConfidenceCard, type WaitConfidenceState } from "@/components/sessi
 export function SessionBuildWait({
   build,
   workspaceId,
+  sessionId,
   focus,
   confidence,
   extras,
@@ -28,7 +29,9 @@ export function SessionBuildWait({
 }: {
   build: BuildStageProps;
   workspaceId: string;
-  /** What the quick check is about (the session title). */
+  /** The session being built: the quick check asks about its planned topics. */
+  sessionId?: string;
+  /** What the quick check is about when the session has no planned topics (the session title). */
   focus: string;
   /** The confidence question, asked here while the session is written (once per subject). */
   confidence?: WaitConfidenceState;
@@ -49,7 +52,7 @@ export function SessionBuildWait({
       ) : (
         // Flat under the header, like the session player: a hairline between them, no second card.
         <div className={compact ? "w-full border-t border-border pt-5" : "contents"}>
-          <SessionPrecheck workspaceId={workspaceId} focus={focus} hero api={api} onShown={setQuizShown} />
+          <SessionPrecheck workspaceId={workspaceId} sessionId={sessionId} focus={focus} hero api={api} onShown={setQuizShown} />
         </div>
       )}
     </div>
