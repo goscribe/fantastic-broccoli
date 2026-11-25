@@ -4,7 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, ArrowRight, Camera, Upload } from "lucide-react";
 import { createWorkspace, deleteWorkspace } from "@/lib/api/workspace";
-import { addPastedText, analyzeFiles, uploadFiles } from "@/lib/api/materials";
+import { addPastedText, analyzeFiles } from "@/lib/api/materials";
+import { UploadStage, useReliableUpload } from "@/components/upload/reliable-upload";
+import { isUploadCancelled } from "@/lib/upload-transfer";
 import { createStudySessionQuietly } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
@@ -26,7 +28,6 @@ import { NotesOffer, type NotesOfferSelection } from "@/components/onboarding/no
 import { attachedNotesApi } from "@/lib/api/notes";
 import { getAttribution } from "@/lib/attribution";
 import { hasAutoStarted, knownCourse, markAutoStarted, mayKnowCourse, readKnownCourseSignals, rememberAutoSession, type KnownCourse } from "@/lib/known-course";
-import { askTopicsStartCheck } from "@/lib/start-check-client";
 import {
   PASTE_MAX_CHARS,
   PASTE_MIN_CHARS,
@@ -70,6 +71,7 @@ export function FirstRun({
   fallbackWorkspaceId,
   context = "first_run",
   autoStart = false,
+  initialMode = "start",
 }: {
   firstName?: string;
   /** Offered only to learners who already have a subject to look around in. */
@@ -80,6 +82,8 @@ export function FirstRun({
   context?: "first_run" | "new_subject";
   /** A student with no subject at all: start the course the app already knows without asking (once per browser). */
   autoStart?: boolean;
+  /** The view shown first ("paste" after an upload elsewhere didn't finish). */
+  initialMode?: Mode;
 }) {
   const { t } = useI18n();
   const router = useRouter();
@@ -92,7 +96,9 @@ export function FirstRun({
     },
     [firstRun],
   );
-  const [mode, setMode] = useState<Mode>("start");
+  const [mode, setMode] = useState<Mode>(initialMode);
+  // Retries the storage PUT, resumes after the background, and shows "didn't finish — try again" instead of failing silently.
+  const upload = useReliableUpload();
   const [busy, setBusy] = useState<Busy>(null);
   const [error, setError] = useState<string | null>(null);
   const [pasted, setPasted] = useState("");
@@ -211,14 +217,24 @@ export function FirstRun({
         const workspaceId = await subjectFor(title);
         let fileIds: string[];
         try {
-          fileIds = await uploadFiles(workspaceId, files);
+          // Resolves once every file is in, including after "Try again" on the failure screen.
+          fileIds = await upload.run(workspaceId, files);
         } catch (err) {
           track("first_run.upload_failed", { option, durationMs: Date.now() - startedAt }, workspaceId);
+          if (isUploadCancelled(err)) {
+            // "Paste text instead": back to the screen, on the paste box.
+            reset();
+            pickMode("paste");
+            return;
+          }
           throw err;
         }
         track("first_run.upload_finished", { option, fileCount: files.length, sizeKb, durationMs: Date.now() - startedAt }, workspaceId);
         // Queues analysis; the Quick 5 starts once the first file is read.
-        await analyzeFiles(workspaceId, fileIds);
+        await analyzeFiles(workspaceId, fileIds).catch((err: unknown) => {
+          trackFunnel("upload.failed", { stage: "analyze", fileCount: fileIds.length }, workspaceId);
+          throw err;
+        });
         await openSession(workspaceId, title, option);
       },
       t("firstRun.errorUpload"),
@@ -327,8 +343,8 @@ export function FirstRun({
    * session's own `quick5.started` then carries the time since this screen
    * was first shown, which is the time to the first question.
    *
-   * The very first session is never held up by "How confident are you?"
-   * (as on every first-run path); adding a subject later asks it as usual.
+   * Nothing is asked before the start: "How confident are you?" is asked on
+   * the Quick 5's wait screen while its questions are written.
    */
   const startLikely = (summary: CourseSummary) => {
     void run(
@@ -339,10 +355,9 @@ export function FirstRun({
         const course = await loadCourse(summary.id);
         const first = firstTopic(course);
         if (!first) throw new Error(t("course.errorStart"));
-        const startCheck = firstRun ? undefined : await askTopicsStartCheck({ courseId: course.id, topics: [{ id: first.topic.id, name: first.topic.name }] });
         setBusy("building");
         setMaking(`${course.title} · ${first.topic.name}`);
-        const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.topic.id, ...(startCheck ? { startCheck } : {}) });
+        const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.topic.id });
         emitTreeChanged();
         track("first_run.session_requested", { option: "curriculum", courseId: course.id, durationMs: Date.now() - tappedAt }, workspaceId);
         router.push(`/workspace/${workspaceId}/session/${sessionId}`);
@@ -447,10 +462,19 @@ export function FirstRun({
     <div className="flex min-h-full w-full shrink-0 flex-col items-center bg-white px-4 pb-10 pt-2 sm:px-6 sm:pt-4">
       <div className="w-full max-w-[720px] animate-fade-up">
         {resolving && !waiting && <div className="min-h-[50dvh]" aria-busy="true" />}
-        {waiting && (
+        {busy === "uploading" && (
+          <UploadStage
+            upload={upload}
+            title={t("firstRun.waitTitle")}
+            fallbackStatus={t("firstRun.uploading")}
+            time={t("firstRun.busyHint")}
+            onPaste={upload.giveUp}
+          />
+        )}
+        {waiting && busy !== "uploading" && (
           <WaitScreen
             title={t("firstRun.waitTitle")}
-            status={busy === "building" && making ? making : t(busy === "uploading" ? "firstRun.uploading" : busy === "saving" ? "firstRun.saving" : "firstRun.building")}
+            status={busy === "building" && making ? making : t(busy === "saving" ? "firstRun.saving" : "firstRun.building")}
             time={t("firstRun.busyHint")}
           >
             {auto && (

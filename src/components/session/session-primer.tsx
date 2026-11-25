@@ -59,8 +59,10 @@ export function useSessionPrimer(session: StudySession | undefined): SessionPrim
   const [dismissed, setDismissed] = useState<string | null>(null);
   const confidence = typeof session?.confidenceBefore === "number" ? session.confidenceBefore : null;
   const path = sessionPath(confidence);
+  // A Quick 5 is five questions picked for the answer (no notes screen before them).
   const untouched =
     !!session &&
+    !session.quickStart &&
     session.status !== "completed" &&
     session.status !== "failed" &&
     session.activities.every((a) => a.status === "pending");

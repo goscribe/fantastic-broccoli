@@ -1,6 +1,7 @@
 "use client";
 
 import { BuildStage } from "@/components/session/build-stage";
+import { WaitConfidenceCard, useWaitConfidence, type WaitConfidenceState } from "@/components/session/wait-confidence";
 import { useNewUi } from "@/lib/new-ui";
 import { initialCopilotOpen, rememberCopilotOpen } from "@/lib/copilot-pref";
 import {
@@ -59,6 +60,7 @@ import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
 import { SessionDebrief, SessionUnfinished } from "@/components/session/session-debrief";
 import { localizePracticeSession, mistakesApi } from "@/lib/api/mistakes";
+import "@/lib/i18n/uploads";
 import "@/lib/i18n/mistakes";
 import {
   ActivityRewardCard,
@@ -217,6 +219,8 @@ export default function SessionDetailPage() {
   const planReady = !!session && !generating && !planFailed;
   // Rated their confidence low or middling at the start: the notes (or a recap) come before the questions.
   const primer = useSessionPrimer(planFailed ? undefined : session);
+  // "How confident are you?" is asked on the wait screen (once per subject); in a Quick 5 it picks the five questions.
+  const waitConfidence = useWaitConfidence(planFailed ? undefined : session);
 
   // Deep links (e.g. reminder emails) can point at a specific activity.
   const searchParams = useSearchParams();
@@ -1168,7 +1172,13 @@ export default function SessionDetailPage() {
                   sessionId={sessionId}
                   initial={session.generationProgress}
                   quickStart={session.quickStart}
+                  confidence={waitConfidence}
                 />
+              ) : waitConfidence.open ? (
+                // Ready while the question was still open: one tap, then question 1 (re-picked for the answer).
+                <div className="mx-auto w-full max-w-[640px] pt-2 animate-fade-up">
+                  <WaitConfidenceCard state={waitConfidence} ready />
+                </div>
               ) : primer.state === "loading" ? (
                 // Deciding whether the notes come first: hold the first question back for a moment rather than flash it.
                 <div className="mx-auto w-full max-w-[720px]" aria-busy="true">
@@ -1807,6 +1817,7 @@ function GeneratingPlanCard({
   sessionId,
   initial,
   quickStart = false,
+  confidence,
 }: {
   title: string;
   workspaceId: string;
@@ -1814,6 +1825,8 @@ function GeneratingPlanCard({
   /** Last persisted progress, so a reload resumes instead of restarting at 0. */
   initial?: PlanGenerationSnapshot;
   quickStart?: boolean;
+  /** The confidence question, asked here while the session is written (once per subject). */
+  confidence?: WaitConfidenceState;
 }) {
   const newUi = useNewUi();
   const { t } = useI18n();
@@ -1901,6 +1914,9 @@ function GeneratingPlanCard({
     detail = `${t("session.progressRevising")} ${progress.completed} ${t("session.progressOf")} ${progress.total}${progress.label ? ` — ${progress.label}` : ""}`;
   }
 
+  // Waiting on uploaded notes to be read (no plan yet): say what happens next, and that leaving is fine.
+  const readingUploads = currentStage === "gathering" && hasCount && (progress.total ?? 0) > 0 && progress.planned.length === 0;
+
   if (newUi) {
     return (
       <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 pb-12 pt-2 animate-fade-up">
@@ -1916,18 +1932,35 @@ function GeneratingPlanCard({
           hint={
             stalled
               ? t("session.takingLonger")
-              : quickStart
-                ? // A Quick 5 is ready in about a minute: it opens here by itself, there is nothing to email.
-                  t("firstRun.busyHint")
-                : t("session.generatingHint")
+              : readingUploads
+                ? // Uploaded notes can take a few minutes: leaving is fine, the session-ready notification (and email once away) follows.
+                  t("upload.readingHint")
+                : quickStart
+                  ? // A Quick 5 is ready in about a minute: it opens here by itself.
+                    t("firstRun.busyHint")
+                  : t("session.generatingHint")
+          }
+          nextLabel={readingUploads ? t("upload.nextLabel") : undefined}
+          nextSteps={
+            readingUploads
+              ? [
+                  { label: detail ?? t("upload.nextRead"), state: "now" },
+                  { label: t("upload.nextWrite"), state: "todo" },
+                  { label: t("upload.nextOpen"), state: "todo" },
+                ]
+              : undefined
           }
         />
         {/* A Quick 5 the first screen started without asking: the way back to the choice. */}
         {quickStart && <ChangeCourseLink workspaceId={workspaceId} sessionId={sessionId} />}
-        {/* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */}
-        <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 empty:hidden sm:p-7">
-          <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
-        </div>
+        {confidence?.open ? (
+          <WaitConfidenceCard state={confidence} />
+        ) : (
+          /* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */
+          <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 empty:hidden sm:p-7">
+            <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
+          </div>
+        )}
       </div>
     );
   }

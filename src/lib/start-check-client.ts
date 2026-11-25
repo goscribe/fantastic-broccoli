@@ -58,7 +58,13 @@ function readSkips(): Record<string, number> {
   }
 }
 
-function rememberSkip(key: string): void {
+/** "Skip" was tapped on this check lately (a Quick 5's wait-screen question shares the memory). */
+export function startCheckSkipped(key: string): boolean {
+  if (typeof window === "undefined") return false;
+  return skippedRecently(readSkips()[key], Date.now());
+}
+
+export function rememberSkip(key: string): void {
   try {
     const now = Date.now();
     const kept = Object.fromEntries(Object.entries(readSkips()).filter(([, at]) => skippedRecently(at, now)));

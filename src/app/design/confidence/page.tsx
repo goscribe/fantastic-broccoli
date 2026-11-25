@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { StartCheckSheet } from "@/components/session/start-check-host";
 import { SaidGotRow } from "@/components/session/session-debrief";
-import { confidenceResult } from "@/lib/start-check";
+import { confidenceFace, confidenceResult } from "@/lib/start-check";
 
 /**
  * Design preview of the start check's cat slider and the debrief's "You said /
@@ -20,8 +20,14 @@ function Inner() {
         <h1 className="text-[28px] font-extrabold tracking-tight">7 of 10 right</h1>
         <p className="mt-1 text-ui text-muted-foreground">Cell membranes · 12 min</p>
         {rows.map((r, i) => (
-          <SaidGotRow key={i} result={r} className="mt-6 px-1" />
+          <SaidGotRow key={i} said={r.said} got={r.got} verdict={r.verdict} className="mt-6 px-1" />
         ))}
+        {/* A Quick 5: its own score out of five, and the exam-level line. */}
+        <SaidGotRow said={7} got={3} of={5} gotFace={confidenceFace(6)} verdict="asExpected" className="mt-6 px-1">
+          <p className="mt-2 text-ui font-semibold text-muted-foreground">
+            <span className="font-extrabold text-foreground">Exam-level: 1 of 2.</span> Those are pitched at the real exam.
+          </p>
+        </SaidGotRow>
       </main>
     );
   }

@@ -1,6 +1,15 @@
 import { api } from "./trpc-client";
 import { rpc } from "./study-session";
 import { track } from "../funnel";
+import {
+  browserTransferEnv,
+  retryIncompleteUpload,
+  uploadReliably,
+  type SignedUpload,
+  type UploadApi,
+  type UploadIncompleteError,
+  type UploadProgress,
+} from "../upload-transfer";
 
 export interface FileImage {
   url: string;
@@ -50,15 +59,43 @@ interface FileAnalysisEvent {
   error?: string;
 }
 
-interface SignedUpload {
-  fileId: string;
-  uploadUrl: string;
+export const MAX_UPLOAD_BYTES = 1024 * 1024 * 1024;
+
+/** The server side of an upload, for the retrying transfer in lib/upload-transfer.ts. */
+export function uploadApi(workspaceId: string): UploadApi {
+  return {
+    requestUrls: async (files) =>
+      (await api.workspace.uploadFiles.mutate({
+        id: workspaceId,
+        files: files.map((f) => ({
+          filename: f.name,
+          contentType: f.type || "application/octet-stream",
+          size: f.size,
+        })),
+      })) as unknown as SignedUpload[],
+    // Keeps the records, marked "didn't finish" and retryable (older servers: nothing happens, nothing is deleted).
+    reportFailed: async (fileIds) => {
+      await rpc("workspace.reportUploadFailed", "mutation", { workspaceId, fileIds }).catch(() => {});
+    },
+    retryUrl: async (fileId) => {
+      const out = await rpc<{ uploadUrl?: string } | null>("workspace.retryUpload", "mutation", { workspaceId, fileId });
+      return out?.uploadUrl ?? null;
+    },
+    track: (event, props) => track(event, props as never, workspaceId),
+  };
 }
 
-export const MAX_UPLOAD_BYTES = 1024 * 1024 * 1024;
+/**
+ * Uploads `files` into the subject: signed URLs from the server, then the
+ * bytes straight to storage, retried with backoff and resumed after the phone
+ * comes back from the background. Throws `UploadIncompleteError` (never
+ * silently) when a file still didn't land; the records are kept so
+ * `retryUpload` can send them again.
+ */
 export async function uploadFiles(
   workspaceId: string,
   files: File[],
+  onProgress?: (progress: UploadProgress) => void,
 ): Promise<string[]> {
   const oversized = files.find((f) => f.size > MAX_UPLOAD_BYTES);
   if (oversized) {
@@ -67,49 +104,16 @@ export async function uploadFiles(
       `"${oversized.name}" is ${(oversized.size / (1024 * 1024)).toFixed(1)}MB — files must be under 1GB.`,
     );
   }
+  return uploadReliably(files, uploadApi(workspaceId), browserTransferEnv(), onProgress);
+}
 
-  const result = (await api.workspace.uploadFiles.mutate({
-    id: workspaceId,
-    files: files.map((f) => ({
-      filename: f.name,
-      contentType: f.type || "application/octet-stream",
-      size: f.size,
-    })),
-  })) as unknown as SignedUpload[];
-
-  const outcomes = await Promise.allSettled(
-    result.map((signed, i) =>
-      fetch(signed.uploadUrl, {
-        method: "PUT",
-        headers: {
-          "Content-Type": files[i].type || "application/octet-stream",
-        },
-        body: files[i],
-      }).then((res) => {
-        if (!res.ok) throw new Error(`Upload failed for ${files[i].name}`);
-      }),
-    ),
-  );
-
-  const failedIndexes = outcomes.flatMap((o, i) =>
-    o.status === "rejected" ? [i] : [],
-  );
-  if (failedIndexes.length > 0) {
-    track("upload.failed", { stage: "transfer", fileCount: failedIndexes.length }, workspaceId);
-    // Remove the orphaned file records so the names can be re-uploaded.
-    await api.workspace.deleteFiles
-      .mutate({
-        id: workspaceId,
-        fileId: failedIndexes.map((i) => result[i].fileId),
-      })
-      .catch(() => {});
-    const firstFailure = outcomes[failedIndexes[0]] as PromiseRejectedResult;
-    throw firstFailure.reason instanceof Error
-      ? firstFailure.reason
-      : new Error(`Upload failed for ${files[failedIndexes[0]].name}`);
-  }
-
-  return result.map((r) => r.fileId);
+/** "Try again" after an `UploadIncompleteError`: returns every file id once all are in. */
+export function retryUpload(
+  workspaceId: string,
+  failure: UploadIncompleteError,
+  onProgress?: (progress: UploadProgress) => void,
+): Promise<string[]> {
+  return retryIncompleteUpload(failure, uploadApi(workspaceId), browserTransferEnv(), onProgress);
 }
 
 export async function deleteFiles(

@@ -1,7 +1,7 @@
 "use client";
 
 import { type MascotPose } from "@/components/rewards/mascot";
-import { WaitScreen } from "@/components/ui/wait-screen";
+import { WaitScreen, type WaitStep } from "@/components/ui/wait-screen";
 
 /** What the cat is doing at each stage (gathering, outlining, writing, verifying, finishing). */
 const STAGE_POSE: MascotPose[] = ["book", "think", "pencil", "think", "cheer"];
@@ -22,6 +22,9 @@ export interface BuildStageProps {
   writing?: boolean;
   /** One quiet line under the bar (how long it takes, or that it is taking longer). */
   hint?: string;
+  /** "What happens next", shown while there is no plan yet (an upload being read). */
+  nextSteps?: WaitStep[];
+  nextLabel?: string;
 }
 
 /**
@@ -30,7 +33,7 @@ export interface BuildStageProps {
  * off as each one is written. Everything shown comes from the server's
  * progress events; nothing advances on a timer.
  */
-export function BuildStage({ title, pct, label, stageIndex, planned, finished = [], writing = false, hint }: BuildStageProps) {
+export function BuildStage({ title, pct, label, stageIndex, planned, finished = [], writing = false, hint, nextSteps, nextLabel }: BuildStageProps) {
   const done = new Set(finished);
   const current = writing && planned ? planned.findIndex((a) => !done.has(a.title)) : -1;
   return (
@@ -41,8 +44,12 @@ export function BuildStage({ title, pct, label, stageIndex, planned, finished = 
       status={label}
       pct={pct}
       time={hint}
-      stepsLabel={planned?.length ? `${planned.length} activities planned` : undefined}
-      steps={planned?.map((a, i) => ({ label: a.title, state: done.has(a.title) ? "done" : i === current ? "now" : "todo" }))}
+      stepsLabel={planned?.length ? `${planned.length} activities planned` : nextLabel}
+      steps={
+        planned?.length
+          ? planned.map((a, i) => ({ label: a.title, state: done.has(a.title) ? "done" : i === current ? "now" : "todo" }))
+          : nextSteps
+      }
     />
   );
 }

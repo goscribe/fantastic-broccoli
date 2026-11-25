@@ -16,6 +16,8 @@ import "@/lib/i18n/misc";
 import "@/lib/i18n/courses";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
+import { UploadStage, useReliableUpload, type ReliableUpload } from "@/components/upload/reliable-upload";
+import { isUploadCancelled } from "@/lib/upload-transfer";
 import {
   ArrowLeft,
   Check,
@@ -69,6 +71,7 @@ export function NewWorkspaceMenu({
   const [open, setOpen] = useState(false);
   const [uploading, setUploading] = useState<File[] | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const upload = useReliableUpload();
 
   const pick = (choice: "workspace" | "bot") => {
     setOpen(false);
@@ -79,15 +82,20 @@ export function NewWorkspaceMenu({
     if (files.length === 0 || uploading) return;
     setUploading(files);
     try {
-      const { workspaceId, session } = await startWorkspaceFromUploads(files);
+      const { workspaceId, session } = await startWorkspaceFromUploads(files, upload.run);
       if (session) {
         router.push(`/workspace/${workspaceId}/session/${session.id}`);
       } else {
         router.push(`/workspace/${workspaceId}`);
       }
     } catch (err) {
-      toastError(err, t("misc.couldNotStartSession"));
       setUploading(null);
+      // "Paste text instead" on the failure screen: the paste box of a new subject.
+      if (isUploadCancelled(err)) {
+        router.push("/new-subject?paste=1");
+        return;
+      }
+      toastError(err, t("misc.couldNotStartSession"));
     }
   };
 
@@ -96,7 +104,7 @@ export function NewWorkspaceMenu({
       {children(() => {
         if (!uploading) setOpen((v) => !v);
       })}
-      {uploading && <BusyOverlay files={uploading} />}
+      {uploading && <BusyOverlay files={uploading} upload={upload} />}
       {open && (
         <>
           <div
@@ -197,7 +205,7 @@ export function NewWorkspaceMenu({
  * built from dropped files. Lives outside the menu that started it, so it
  * stays visible after that menu closes and blocks a second submission.
  */
-function BusyOverlay({ files }: { files: File[] }) {
+function BusyOverlay({ files, upload }: { files: File[]; upload: ReliableUpload }) {
   const { t } = useI18n();
   return (
     <div
@@ -206,11 +214,13 @@ function BusyOverlay({ files }: { files: File[] }) {
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
     >
       <div className="w-full max-w-sm rounded-[var(--r-panel,24px)] bg-card px-5">
-        <WaitScreen
+        <UploadStage
           compact
+          upload={upload}
           title={t("misc.buildingFromFiles").replace(/…$/, "")}
-          status={files.length === 1 ? files[0].name : `${files.length} ${t("ws.files")}`}
+          fallbackStatus={files.length === 1 ? files[0].name : `${files.length} ${t("ws.files")}`}
           time={t("firstRun.busyHint")}
+          onPaste={upload.giveUp}
         />
       </div>
     </div>
