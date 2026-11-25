@@ -2,7 +2,7 @@
 
 import { useNewUi } from "@/lib/new-ui";
 import { MathText } from "@/components/ui/markdown-text";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -290,7 +290,7 @@ function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: 
 function SaidGot({ face, label, value, strong = false }: { face: ConfidenceFace; label: string; value: number; strong?: boolean }) {
   return (
     <span className="flex items-center gap-2">
-      <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-11 w-auto" />
+      <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-[52px] w-auto" />
       <span className="flex flex-col">
         <span className="text-caption font-bold leading-4 text-muted-foreground">{label}</span>
         <span className={cn("text-[22px] font-extrabold leading-6 tabular-nums", strong ? "text-foreground" : "text-muted-foreground")}>
@@ -303,6 +303,22 @@ function SaidGot({ face, label, value, strong = false }: { face: ConfidenceFace;
 }
 
 /** A secondary action at the end of a session: words on the page, underlined, with a quiet note after them. */
+/** "You said 3/10 → You got 7/10" and what that means: the one comparison only the debrief can make. */
+export function SaidGotRow({ result, className, style }: { result: NonNullable<ReturnType<typeof confidenceResult>>; className?: string; style?: CSSProperties }) {
+  const { t } = useI18n();
+  return (
+    <div className={className} style={style} data-confidence-result={result.verdict}>
+      <p className="sr-only">{t("finish.saidGot").replace("{a}", String(result.said)).replace("{b}", String(result.got))}</p>
+      <div className="flex items-center gap-3" aria-hidden>
+        <SaidGot face={confidenceFace(result.said)} label={t("finish.said")} value={result.said} />
+        <ArrowRight className="size-5 shrink-0 text-faint" />
+        <SaidGot face={confidenceFace(result.got)} label={t("finish.got")} value={result.got} strong />
+      </div>
+      <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${result.verdict}`)}</p>
+    </div>
+  );
+}
+
 function TextAction({
   title,
   sub,
@@ -679,15 +695,7 @@ export function SessionDebrief({
 
         {/* What they said beside what they got: the one comparison only this screen can make. */}
         {said && (
-          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={said.verdict}>
-            <p className="sr-only">{t("finish.saidGot").replace("{a}", String(said.said)).replace("{b}", String(said.got))}</p>
-            <div className="flex items-center gap-3" aria-hidden>
-              <SaidGot face={confidenceFace(said.said)} label={t("finish.said")} value={said.said} />
-              <ArrowRight className="size-5 shrink-0 text-faint" />
-              <SaidGot face={confidenceFace(said.got)} label={t("finish.got")} value={said.got} strong />
-            </div>
-            <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${said.verdict}`)}</p>
-          </div>
+          <SaidGotRow result={said} className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} />
         )}
 
         {/* One next step. */}

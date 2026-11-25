@@ -19,13 +19,19 @@ export const CONFIDENCE_FACES: ConfidenceFace[] = ["worried", "unsure", "neutral
 
 export const clampConfidence = (n: number) => Math.min(CONFIDENCE_MAX, Math.max(0, Math.round(Number.isFinite(n) ? n : CONFIDENCE_START)));
 
-/** The cat's face along the scale: worried 0-2, unsure 3-4, neutral 5-6, happy 7-8, delighted 9-10. */
+/**
+ * The cat's pose along the scale: worried 0-2 (crouched small, tail wrapped), unsure 3-4 (sitting, paw to
+ * chin), neutral 5-6 (a relaxed sit), happy 7-8 (perky, tail up), delighted 9-10 (mid-hop, arms up).
+ */
 export function confidenceFace(value: number): ConfidenceFace {
   const v = clampConfidence(value);
   return v <= 2 ? "worried" : v <= 4 ? "unsure" : v <= 6 ? "neutral" : v <= 8 ? "happy" : "delighted";
 }
 
-/** The round orange cat with that face (image-generated from the mascot's own art, public/design). */
+/**
+ * The round orange cat in that pose (image-generated from the mascot's own art, public/design). All five
+ * are 336×400 with the feet on one base line, 396px down, so they can be swapped in place.
+ */
 export const confidenceCat = (face: ConfidenceFace) => `/design/cat3-${face}.webp`;
 
 /**
