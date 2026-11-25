@@ -265,6 +265,8 @@ export interface PartMarking {
   correct: boolean;
   /** Long-answer marking: how the answer did and the one change worth the most marks. */
   summary?: string;
+  /** A figure in the answer could not be seen by the marker, so it was marked on the writing. */
+  figureNote?: string;
 }
 
 export interface WorksheetPart {

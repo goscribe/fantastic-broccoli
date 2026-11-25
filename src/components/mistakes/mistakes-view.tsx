@@ -8,7 +8,8 @@ import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
 import { Check, ChevronDown, Loader2, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
+import { InlineMarkdown, MarkdownText, MathText } from "@/components/ui/markdown-text";
+import { hasAnswerBlocks } from "@/lib/rich-answer";
 import { McqQuestionBody } from "@/components/session/mcq-rich";
 import {
   mistakesApi,
@@ -92,7 +93,7 @@ function AnswerRow({ ok, label, children }: { ok: boolean; label: string; childr
       >
         {ok ? <Check className="size-3" strokeWidth={3} /> : <X className="size-3" strokeWidth={3} />}
       </span>
-      <div className="min-w-0 text-ui">
+      <div className="min-w-0 flex-1 text-ui">
         <span className="mr-1.5 text-caption font-semibold text-muted-foreground">{label}</span>
         {children}
       </div>
@@ -171,7 +172,12 @@ function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSu
       {m.kind !== "cloze" && (
         <div className="mt-3 space-y-2">
           <AnswerRow ok={false} label={t("mistakes.yourAnswer")}>
-            {yours ? <MathText text={yours} /> : <span className="text-muted-foreground">{t("mistakes.didntKnow")}</span>}
+            {yours ? (
+              // A written answer with a table or a figure shows them as written.
+              hasAnswerBlocks(yours) ? <MarkdownText text={yours} /> : <MathText text={yours} />
+            ) : (
+              <span className="text-muted-foreground">{t("mistakes.didntKnow")}</span>
+            )}
             {typeof m.detail.total === "number" && m.detail.total > 0 && (
               <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-[11.5px] font-semibold tabular-nums text-muted-foreground">
                 {fill(t("mistakes.marks"), { a: m.detail.achieved ?? 0, b: m.detail.total })}

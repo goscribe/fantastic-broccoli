@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Check, ChevronDown, Loader2, X } from "lucide-react";
 import type { PartMarking, WorksheetContent } from "@/types";
 import { markWorksheetAnswer } from "@/lib/api/study";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
 import { toast } from "@/lib/toast";
 import { MarkdownText, MathText } from "@/components/ui/markdown-text";
+import { RichAnswerField } from "@/components/ui/rich-answer-field";
+import { hasAnswerBlocks } from "@/lib/rich-answer";
 import { PlayPrimary, playLink } from "@/components/session/play-ui";
 import { wordCount } from "@/components/session/paper-parts";
 import { aimWords, answerSegments, groupPoints, needsReview, promptParts } from "@/lib/long-answer";
@@ -52,14 +54,6 @@ export function LongAnswerActivity({ activityId, content, draft, estimatedMinute
   const [skipped, setSkipped] = useState(false);
   const box = useRef<HTMLTextAreaElement>(null);
   useActivityDraft(activityId, { answer, marking });
-
-  // Autosize: the box grows with the answer instead of scrolling inside itself.
-  useLayoutEffect(() => {
-    const el = box.current;
-    if (!el) return;
-    el.style.height = "auto";
-    el.style.height = `${Math.max(el.scrollHeight, 220)}px`;
-  }, [answer, marking]);
 
   useEffect(() => {
     if (marking || typeof window === "undefined" || !window.matchMedia("(pointer: fine)").matches) return;
@@ -117,17 +111,19 @@ export function LongAnswerActivity({ activityId, content, draft, estimatedMinute
       ) : !marking ? (
         <>
           <div data-dictation-label={part.label} data-dictation-prompt={part.prompt}>
-            <label htmlFor={`laq-${activityId}`} className="sr-only">{t("laq.yourAnswer")}</label>
-            <textarea
-              id={`laq-${activityId}`}
-              ref={box}
-              value={answer}
-              disabled={inFlight}
-              onChange={(e) => setAnswer(e.target.value)}
-              placeholder={t("laq.placeholder")}
-              rows={8}
-              className="block min-h-[220px] w-full resize-none overflow-hidden rounded-[20px] bg-muted px-5 py-4 text-[17px] leading-[1.65] text-foreground ring-inset transition-[background-color,box-shadow] duration-150 placeholder:text-faint focus:bg-card focus:outline-none focus:ring-2 focus:ring-[var(--border-strong)] disabled:text-muted-foreground motion-reduce:transition-none sm:text-[18px]"
-            />
+            <p className="sr-only">{t("laq.yourAnswer")}</p>
+            {/* The rich answer box (maths, tables, figures): it grows with the answer; its hidden textarea is the one the voice scribe fills. */}
+            <div>
+              <RichAnswerField
+                textareaRef={box}
+                value={answer}
+                disabled={inFlight}
+                onChange={setAnswer}
+                placeholder={t("laq.placeholder")}
+                rows={8}
+                className="block !min-h-[220px] w-full rounded-[20px] bg-muted px-5 py-4 text-[17px] leading-[1.65] text-foreground ring-inset transition-[background-color,box-shadow] duration-150 focus:bg-card focus:outline-none focus:ring-2 focus:ring-[var(--border-strong)] motion-reduce:transition-none sm:text-[18px]"
+              />
+            </div>
             <p className="mt-2 flex flex-wrap items-center gap-x-3 text-[13.5px] font-semibold tabular-nums text-muted-foreground" aria-live="polite">
               <span data-testid="laq-words">{t(words === 1 ? "laq.word" : "laq.words").replace("{n}", String(words))}</span>
               <span aria-hidden>·</span>
@@ -175,6 +171,12 @@ function Marked({ answer, marking, modelAnswer, onContinue }: { answer: string; 
 
       <div>
         <p className="text-small font-extrabold text-foreground">{t("laq.yourAnswer")}</p>
+        {hasAnswerBlocks(answer) ? (
+          // Tables and figures show as they were written; the quotes that earned marks are listed under each point.
+          <div className="mt-2 text-[17px] leading-[1.65] text-foreground sm:text-[18px]" data-testid="laq-answer">
+            <MarkdownText text={answer} />
+          </div>
+        ) : (
         <p className="mt-2 whitespace-pre-wrap text-[17px] leading-[1.65] text-foreground sm:text-[18px]">
           {segments.map((s, i) =>
             s.point === null ? (
@@ -186,6 +188,8 @@ function Marked({ answer, marking, modelAnswer, onContinue }: { answer: string; 
             ),
           )}
         </p>
+        )}
+        {marking.figureNote && <p className="mt-2 text-small font-semibold text-muted-foreground">{marking.figureNote}</p>}
       </div>
 
       {hit.length > 0 && (

@@ -494,6 +494,7 @@ function WorksheetQuestions({
                       textareaRef={i === partIndex ? firstInput : undefined}
                       value={value}
                       rows={part.type === "numeric" ? 1 : part.type === "essay" ? 12 : 2}
+                      media={part.type !== "numeric"}
                       disabled={isMarked || markingInFlight}
                       onChange={(v) => {
                         setAnswers((a) => ({ ...a, [key(i)]: v }));
@@ -676,6 +677,7 @@ function WorksheetQuestions({
                           );
                         })}
                       </ul>
+                      {marking.figureNote && <p className="mt-2 text-small font-semibold text-muted-foreground">{marking.figureNote}</p>}
                     </div>
                   )}
                   {/* Markscheme breakdown (LLM-marked parts) */}

@@ -19,6 +19,7 @@ const SCREENS: [string, string][] = [
   ["Question · sketch · marked", "/design/question?type=sketch&state=fb"],
   ["Question · text · marked, tooltip open", "/design/question?type=text&state=fb&tip=1"],
   ["Question · numeric", "/design/question?type=numeric"],
+  ["Answer box · tables and figures", "/design/answer-figures"],
   ["Question · numeric · marked", "/design/question?type=numeric&state=fb"],
   ["Question · true / false · marked", "/design/question?type=truefalse&state=fb"],
   ["Question · matching", "/design/question?type=matching"],
