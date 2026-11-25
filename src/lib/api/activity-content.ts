@@ -82,6 +82,15 @@ function normalizeComprehension(raw: Raw): ComprehensionContent {
       (e) => obj(e) as unknown as ComprehensionEvaluation,
     ),
     passedAt: typeof raw.passedAt === "string" ? raw.passedAt : undefined,
+    ...(str(raw.question)
+      ? {
+          question: str(raw.question),
+          options: arr(raw.options).map(str).filter(Boolean),
+          answerIndex: typeof raw.answerIndex === "number" ? raw.answerIndex : -1,
+          keyPoints: arr(raw.keyPoints).map(str).filter(Boolean),
+          modelAnswer: str(raw.modelAnswer) || undefined,
+        }
+      : {}),
   };
 }
 
@@ -223,6 +232,10 @@ function worksheetPart(raw: Raw): WorksheetPart {
     answer: typeof raw.answer === "string" ? raw.answer : undefined,
     userAnswer: typeof raw.userAnswer === "string" ? raw.userAnswer : undefined,
     marks: typeof raw.marks === "number" ? raw.marks : undefined,
+    ...(str(raw.answerGuide) ? { answerGuide: str(raw.answerGuide) } : {}),
+    ...(str(raw.hint) ? { hint: str(raw.hint) } : {}),
+    ...(str(raw.firstStep) ? { firstStep: str(raw.firstStep) } : {}),
+    ...(str(raw.workedAnswer) ? { workedAnswer: str(raw.workedAnswer) } : {}),
     markScheme: markScheme(raw.markScheme ?? raw.mark_scheme),
     worksheetQuestionId:
       typeof raw.worksheetQuestionId === "string"

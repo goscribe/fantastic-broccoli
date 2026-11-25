@@ -12,6 +12,7 @@ import { wordCount } from "@/components/session/paper-parts";
 import { aimWords, answerSegments, groupPoints, needsReview, promptParts } from "@/lib/long-answer";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/long-answer";
+import "@/lib/i18n/written-work";
 import { cn } from "@/lib/utils";
 
 type Marker = typeof markWorksheetAnswer;
@@ -47,6 +48,8 @@ export function LongAnswerActivity({ activityId, content, draft, estimatedMinute
   const [answer, setAnswer] = useState(restored?.answer ?? "");
   const [marking, setMarking] = useState<PartMarking | null>(restored?.marking ?? null);
   const [inFlight, setInFlight] = useState(false);
+  /** Skipped: the model answer is shown before moving on (skipping costs nothing). */
+  const [skipped, setSkipped] = useState(false);
   const box = useRef<HTMLTextAreaElement>(null);
   useActivityDraft(activityId, { answer, marking });
 
@@ -98,7 +101,20 @@ export function LongAnswerActivity({ activityId, content, draft, estimatedMinute
         <span className="ml-1.5 whitespace-nowrap font-extrabold tabular-nums text-muted-foreground">[{marks}]</span>
       </h2>
 
-      {!marking ? (
+      {skipped && !marking ? (
+        <div className="life-rise space-y-4" data-testid="laq-skipped">
+          <p className="text-small font-semibold text-muted-foreground">{t("written.skippedModel")}</p>
+          <div className="text-read text-foreground" data-testid="laq-model">
+            <MarkdownText text={part.answer ?? ""} />
+          </div>
+          <div className="flex sm:justify-end">
+            <PlayPrimary onClick={onComplete}>
+              {t("laq.continue")}
+              <ArrowRight className="ml-1.5 size-4" />
+            </PlayPrimary>
+          </div>
+        </div>
+      ) : !marking ? (
         <>
           <div data-dictation-label={part.label} data-dictation-prompt={part.prompt}>
             <label htmlFor={`laq-${activityId}`} className="sr-only">{t("laq.yourAnswer")}</label>
@@ -119,7 +135,7 @@ export function LongAnswerActivity({ activityId, content, draft, estimatedMinute
             </p>
           </div>
           <div className="flex flex-col-reverse gap-2.5 sm:flex-row sm:items-center sm:justify-between">
-            <button type="button" onClick={onComplete} disabled={inFlight} className={cn(playLink, "justify-center text-muted-foreground")}>
+            <button type="button" onClick={() => (part.answer ? setSkipped(true) : onComplete())} disabled={inFlight} className={cn(playLink, "justify-center text-muted-foreground")}>
               {t("laq.skip")}
             </button>
             <PlayPrimary disabled={!answer.trim() || inFlight} onClick={submit}>

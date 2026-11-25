@@ -10,6 +10,18 @@ import {
   resolvePartMarking,
   serverCanMarkPart,
 } from "@/lib/worksheet-marking";
+import {
+  answerGuideFor,
+  earlierAnswers,
+  firstStepFor,
+  modelAnswerFor,
+  nextHelp,
+  partsToMark,
+  promptWithoutMarks,
+  skippedMarking,
+  stepScore,
+  type HelpLevel,
+} from "@/lib/worksheet-flow";
 import { toast } from "@/lib/toast";
 import { recordWorksheetQuestionProgress } from "@/lib/api/study-session";
 import { restoredDraft, useActivityDraft } from "@/lib/use-activity-draft";
@@ -24,11 +36,12 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/habits";
 import "@/lib/i18n/voice";
+import "@/lib/i18n/written-work";
 import { cn } from "@/lib/utils";
 import { ItemDots, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
 import { LongAnswerActivity } from "@/components/session/long-answer-activity";
 import { isLongAnswer } from "@/lib/long-answer";
-import { ArrowLeft, ArrowRight, Check, Loader2, PenLine, SkipForward, Undo2, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, ChevronDown, Lightbulb, Loader2, PenLine, SkipForward, Undo2, X } from "lucide-react";
 
 interface WorksheetActivityProps {
   activityId: string;
@@ -37,6 +50,8 @@ interface WorksheetActivityProps {
   /** The plan's estimate; shown as "3 questions · ~6 min". */
   estimatedMinutes?: number;
   onComplete: () => void;
+  /** The part marker (the server's); design previews pass a stand-in. */
+  mark?: typeof markWorksheetAnswer;
 }
 
 /** Intros longer than this start collapsed, so the first question is on screen. */
@@ -49,11 +64,6 @@ export function worksheetSummary(content: WorksheetContent, estimatedMinutes?: n
   return { questions, minutes };
 }
 
-/** Marking for a part the learner chose to skip: no marks, no server call. */
-function skippedMarking(marks: number): PartMarking {
-  return { points: [], achievedPoints: 0, totalPoints: marks, correct: false };
-}
-
 interface WorksheetDraft {
   stepIndex: number;
   answers: Record<string, string>;
@@ -61,6 +71,8 @@ interface WorksheetDraft {
   markings: Record<string, PartMarking>;
   checkedSteps: Record<number, boolean>;
   skipped: Record<string, boolean>;
+  /** Help asked for per part: 1 the hint, 2 the first step too. */
+  help: Record<string, HelpLevel>;
 }
 
 /** A worksheet, or a long-answer question (one extended response) stored as one. */
@@ -74,6 +86,7 @@ function WorksheetQuestions({
   draft,
   estimatedMinutes,
   onComplete,
+  mark = markWorksheetAnswer,
 }: WorksheetActivityProps) {
   const { t } = useI18n();
   const newUi = useNewUi();
@@ -95,6 +108,10 @@ function WorksheetQuestions({
   const [skipped, setSkipped] = useState<Record<string, boolean>>(
     restored?.skipped ?? {},
   );
+  const [help, setHelp] = useState<Record<string, HelpLevel>>(restored?.help ?? {});
+  const [modelOpen, setModelOpen] = useState<Record<string, boolean>>({});
+  /** The part a "Check this part" is marking (the spinner goes on its button). */
+  const [checkingPart, setCheckingPart] = useState<string | null>(null);
   const [introOpen, setIntroOpen] = useState<Record<number, boolean>>({});
   // Redesign: one part of a question on screen at a time (per question, so Back returns to it).
   const [partAt, setPartAt] = useState<Record<number, number>>({});
@@ -124,6 +141,7 @@ function WorksheetQuestions({
     markings,
     checkedSteps,
     skipped,
+    help,
   });
 
   const checked = !!checkedSteps[stepIndex];
@@ -133,15 +151,13 @@ function WorksheetQuestions({
   const visited = (i: number) =>
     i <= stepIndex || !!checkedSteps[i] || !!checkedSteps[i - 1];
 
-  const totalMarks = step.parts.reduce((s, p) => s + (p.marks ?? 1), 0);
-  const earnedMarks = step.parts.reduce(
-    (s, _, i) => s + (markings[key(i)]?.achievedPoints ?? 0),
-    0,
-  );
+  const { earned: earnedMarks, total: totalMarks } = stepScore(step, (i) => markings[key(i)]);
   const answered = (i: number) => !!((answers[key(i)] ?? "").trim() || drawings[key(i)]);
-  // Every part either answered or skipped; skipping all of them skips the question.
-  const allAnswered = step.parts.every((_, i) => answered(i) || skipped[key(i)]);
-  const allSkipped = step.parts.every((_, i) => skipped[key(i)] && !answered(i));
+  const marked = (i: number) => !!markings[key(i)];
+  // Marking never waits for every part: unanswered parts end as skipped. With
+  // nothing answered (or marked) the button skips the question.
+  const nothingDone = step.parts.every((_, i) => !answered(i) && !marked(i));
+  const toMark = partsToMark(step, { answered, marked });
   const summary = worksheetSummary(content, estimatedMinutes);
   const introLong = (step.intro?.length ?? 0) > LONG_INTRO_CHARS;
 
@@ -155,68 +171,99 @@ function WorksheetQuestions({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stepIndex, partIndex]);
 
-  const checkStep = async () => {
-    setMarkingInFlight(true);
-    const results = await Promise.all(
-      step.parts.map(async (part, i) => {
-        const value = answers[key(i)] ?? "";
-        const drawing = drawings[key(i)] ?? undefined;
-        if (skipped[key(i)] && !value.trim() && !drawing) return skippedMarking(part.marks ?? 1);
-        // Choice parts stay on the local check. Typed parts with a mark
-        // scheme (or a drawing) are decided by the server — a failed local
-        // comparison must not record them as wrong while that marker can run.
-        // When the server returns a result, it wins over the local check.
-        const serverCanDecide = serverCanMarkPart(part, drawing);
-        if (!serverCanDecide) {
-          return resolvePartMarking(part, value, { serverCanDecide: false });
-        }
-        try {
-          const serverMarking = await markWorksheetAnswer({
-            activityId,
-            stepIndex,
-            partIndex: i,
-            answer: value,
-            answerImage: drawing,
-          });
-          return resolvePartMarking(part, value, {
-            serverMarking,
-            serverCanDecide: true,
-          });
-        } catch {
-          toast.error(t("session.markingFallback"), {
-            id: "marking-fallback",
-          });
-          return resolvePartMarking(part, value, { serverCanDecide: true });
-        }
-      }),
-    );
-    const decided: PartMarking[] = [];
-    for (const result of results) {
-      if (!result) {
-        // Typed answer didn't match the key, and the AI marker didn't
-        // return a decision. Leave the step unmarked rather than wrong.
-        setMarkingInFlight(false);
-        return;
-      }
-      decided.push(result);
+  /** Marks one part (server for typed answers with a scheme, local for choices); null when it could not be decided. */
+  const markOne = async (i: number): Promise<PartMarking | null> => {
+    const part = step.parts[i];
+    const value = answers[key(i)] ?? "";
+    const drawing = drawings[key(i)] ?? undefined;
+    // Choice parts stay on the local check. Typed parts with a mark scheme
+    // (or a drawing) are decided by the server; a failed local comparison
+    // must not record them as wrong while that marker can run.
+    if (!serverCanMarkPart(part, drawing)) return resolvePartMarking(part, value, { serverCanDecide: false });
+    try {
+      const serverMarking = await mark({
+        activityId,
+        stepIndex,
+        partIndex: i,
+        answer: value,
+        answerImage: drawing,
+        // The earlier parts' answers: a later part is marked error carried forward.
+        earlier: earlierAnswers(step, i, (k) => answers[key(k)] ?? ""),
+      });
+      return resolvePartMarking(part, value, { serverMarking, serverCanDecide: true });
+    } catch {
+      toast.error(t("session.markingFallback"), { id: "marking-fallback" });
+      return resolvePartMarking(part, value, { serverCanDecide: true });
     }
+  };
+
+  /** Marks these parts together; true when every one was decided. */
+  const markParts = async (indices: number[]) => {
+    if (indices.length === 0) return true;
+    setMarkingInFlight(true);
+    const results = await Promise.all(indices.map(markOne));
     setMarkings((m) => {
       const next = { ...m };
-      decided.forEach((r, i) => (next[key(i)] = r));
+      indices.forEach((partIdx, n) => {
+        const r = results[n];
+        if (r) next[key(partIdx)] = r;
+      });
       return next;
     });
-    step.parts.forEach((part, i) => {
-      if (!part.worksheetQuestionId) return;
-      if (skipped[key(i)] && !answered(i)) return; // not attempted
+    indices.forEach((partIdx, n) => {
+      const part = step.parts[partIdx];
+      const r = results[n];
+      if (!r || !part.worksheetQuestionId) return;
       recordWorksheetQuestionProgress({
         problemId: part.worksheetQuestionId,
         completed: true,
-        answer: answers[key(i)] ?? "",
-        correct: results[i]?.correct ?? false,
+        answer: answers[key(partIdx)] ?? "",
+        correct: r.correct,
       }).catch(() => {});
     });
-    setCheckedSteps((c) => ({ ...c, [stepIndex]: true }));
     setMarkingInFlight(false);
+    return results.every(Boolean);
+  };
+
+  /** "Check this part": marks the one part now, so feedback comes as the student goes. */
+  const checkPart = async (i: number) => {
+    setCheckingPart(key(i));
+    const ok = await markParts([i]);
+    setCheckingPart(null);
+    if (!ok) toast.error(t("written.retryMarking"), { id: "part-marking-retry" });
+  };
+
+  /**
+   * "Check answers" / "Finish question": marks what is answered and not yet
+   * marked; every part left blank ends as skipped (no marks, its model answer
+   * shown). Never waits for all parts.
+   */
+  const checkStep = async () => {
+    const ok = await markParts(toMark);
+    // A typed answer the marker could not decide stays unmarked (retry), never wrong.
+    if (!ok) return;
+    setMarkings((m) => {
+      const next = { ...m };
+      step.parts.forEach((part, i) => {
+        if (!next[key(i)]) next[key(i)] = skippedMarking(part);
+      });
+      return next;
+    });
+    setSkipped((sk) => {
+      const next = { ...sk };
+      step.parts.forEach((_, i) => {
+        if (!answered(i)) next[key(i)] = true;
+      });
+      return next;
+    });
+    setCheckedSteps((c) => ({ ...c, [stepIndex]: true }));
+  };
+
+  /** Skip moves on: the next part (or the question's check when it was the last). */
+  const skipPart = (i: number) => {
+    const was = !!skipped[key(i)];
+    setSkipped((sk) => ({ ...sk, [key(i)]: !was }));
+    if (!was && onePart && i === partIndex && !lastPart) goPart(partIndex + 1);
   };
 
   const paper = content.paper;
@@ -337,7 +384,7 @@ function WorksheetQuestions({
                     "grid size-9 touch-manipulation place-items-center rounded-full text-[13.5px] font-extrabold ring-inset transition-colors",
                     i === partIndex
                       ? "bg-accent text-white"
-                      : checked && m
+                      : m && answered(i)
                         ? m.correct
                           ? "bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500"
                           : "bg-rose-50 text-rose-900 ring-2 ring-rose-400"
@@ -366,6 +413,14 @@ function WorksheetQuestions({
             const partial =
               !!marking && !marking.correct && marking.achievedPoints > 0;
             const isSkipped = !!skipped[key(i)] && !value.trim() && !drawings[key(i)];
+            // Marked on its own ("Check this part") or with the question.
+            const isMarked = !!marking && !isSkipped;
+            const guide = answerGuideFor(part);
+            const level = help[key(i)] ?? 0;
+            const offer = nextHelp(part, level);
+            const firstStep = firstStepFor(part);
+            const model = modelAnswerFor(part);
+            const busy = checkingPart === key(i);
             return (
               <div key={part.label} className="flex gap-3" data-dictation-label={part.label} data-dictation-prompt={part.prompt}>
                 <span className={cn("shrink-0 flex items-center justify-center font-bold", newUi ? "size-8 rounded-full bg-muted text-[13.5px] font-extrabold text-foreground" : "mt-1.5 h-6 w-6 rounded-full bg-muted text-[11px]")}>
@@ -374,14 +429,20 @@ function WorksheetQuestions({
                 <div className="flex-1 min-w-0">
                   <div className="flex items-baseline justify-between gap-3">
                     <p className={newUi ? "pt-0.5 text-read font-semibold" : "text-ui"}>
-                      <MarkdownText text={part.prompt} />
+                      <MarkdownText text={promptWithoutMarks(part.prompt, part.marks ?? 1)} />
                     </p>
                     <span className={newUi ? "shrink-0 text-small font-bold tabular-nums text-muted-foreground" : "text-caption text-faint shrink-0 tabular-nums"}>
-                      {checked && marking
+                      {isMarked
                         ? `${marking.achievedPoints}/${marking.totalPoints}`
                         : `[${part.marks ?? 1}]`}
                     </span>
                   </div>
+                  {/* How much to write, sized to the marks. */}
+                  {!isMarked && !isSkipped && part.type !== "mcq" && part.type !== "true_false" && (
+                    <p className="mt-1 text-small font-semibold text-muted-foreground" data-testid="ws-guide">
+                      {part.marks ?? 1} {t((part.marks ?? 1) === 1 ? "paper.mark" : "session.marks")} · {"text" in guide ? guide.text : t(guide.key)}
+                    </p>
+                  )}
                   {part.type === "mcq" && part.options?.length ? (
                     <McqOptions
                       options={part.options}
@@ -428,12 +489,12 @@ function WorksheetQuestions({
                         </button>
                       ))}
                     </div>
-                  ) : (
+                  ) : checked && isSkipped ? null : (
                     <RichAnswerField
                       textareaRef={i === partIndex ? firstInput : undefined}
                       value={value}
                       rows={part.type === "numeric" ? 1 : part.type === "essay" ? 12 : 2}
-                      disabled={(checked && correct) || markingInFlight}
+                      disabled={isMarked || markingInFlight}
                       onChange={(v) => {
                         setAnswers((a) => ({ ...a, [key(i)]: v }));
                         // Typing un-skips the part.
@@ -452,7 +513,7 @@ function WorksheetQuestions({
                               playField,
                               "mt-3",
                               part.type === "numeric" && "sm:max-w-[280px]",
-                              checked &&
+                              (isMarked || (checked && isSkipped)) &&
                                 (isSkipped
                                   ? "opacity-70"
                                   : correct
@@ -463,7 +524,7 @@ function WorksheetQuestions({
                             )
                           : cn(
                               "mt-2 w-full rounded-lg border px-3 py-2 text-sm resize-none focus:outline-none",
-                              checked
+                              isMarked || (checked && isSkipped)
                                 ? isSkipped
                                   ? "border-border bg-muted/40"
                                   : correct
@@ -478,8 +539,49 @@ function WorksheetQuestions({
                     />
                   )}
 
-                  {!checked && (
+                  {/* Help a stuck student can ask for: a nudge, then the first step. Free. */}
+                  {!isMarked && !checked && level > 0 && (
+                    <div className="life-rise mt-3 space-y-2 rounded-2xl bg-accent-soft/60 px-4 py-3 text-ui" data-testid="ws-help" data-calculator-ignore>
+                      {part.hint && (
+                        <p>
+                          <span className="font-extrabold">{t("written.hintLabel")}: </span>
+                          <MathText text={part.hint} />
+                        </p>
+                      )}
+                      {level >= 2 && firstStep && (
+                        <p>
+                          <span className="font-extrabold">{t("written.firstStepLabel")}: </span>
+                          <MathText text={firstStep} />
+                        </p>
+                      )}
+                    </div>
+                  )}
+                  {!isMarked && !checked && (
                     <div className={newUi ? "mt-1 flex flex-wrap items-center gap-x-5" : "mt-1.5 flex items-center gap-4"}>
+                      {offer && !isSkipped && part.type !== "mcq" && part.type !== "true_false" && (
+                        <button
+                          type="button"
+                          disabled={markingInFlight}
+                          onClick={() => setHelp((h) => ({ ...h, [key(i)]: (offer === "hint" ? 1 : 2) as HelpLevel }))}
+                          className={newUi ? "flex min-h-10 items-center gap-1.5 text-[13.5px] font-bold text-accent hover:text-foreground" : "flex items-center gap-1.5 text-xs text-accent-dim hover:text-foreground"}
+                        >
+                          <Lightbulb className="h-3.5 w-3.5" />
+                          {t(offer === "hint" ? "written.hint" : "written.firstStep")}
+                        </button>
+                      )}
+                      {/* Partial submission: one part is marked now; the rest can wait or be skipped. */}
+                      {answered(i) && !onePart && (step.parts.length > 1 || !newUi) && (
+                        <button
+                          type="button"
+                          disabled={markingInFlight}
+                          onClick={() => checkPart(i)}
+                          className={newUi ? "flex min-h-10 items-center gap-1.5 text-[13.5px] font-bold text-foreground hover:text-accent disabled:opacity-50" : "flex items-center gap-1.5 text-xs font-semibold text-foreground hover:text-accent"}
+                          data-testid="ws-check-part"
+                        >
+                          {busy ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Check className="h-3.5 w-3.5" />}
+                          {t(busy ? "written.checking" : "written.checkPart")}
+                        </button>
+                      )}
                       {part.type === "essay" && (
                         <span className="min-h-10 text-[13px] font-semibold tabular-nums text-muted-foreground flex items-center">
                           {t("paper.words").replace("{n}", String(wordCount(value)))}
@@ -502,9 +604,7 @@ function WorksheetQuestions({
                           type="button"
                           disabled={markingInFlight}
                           aria-pressed={isSkipped}
-                          onClick={() =>
-                            setSkipped((sk) => ({ ...sk, [key(i)]: !sk[key(i)] }))
-                          }
+                          onClick={() => skipPart(i)}
                           className={newUi ? "flex min-h-10 items-center gap-1.5 text-[13.5px] font-bold text-muted-foreground hover:text-foreground" : "flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground"}
                         >
                           {isSkipped ? (
@@ -522,13 +622,23 @@ function WorksheetQuestions({
                       )}
                     </div>
                   )}
+                  {/* Skipped parts show their model answer once the question is checked. */}
                   {checked && isSkipped && (
-                    <p className={newUi ? "mt-2 text-small font-semibold text-muted-foreground" : "mt-1.5 text-caption text-muted-foreground"}>{t("habit.wsSkipped")}</p>
+                    <div className="mt-2" data-testid="ws-skipped-model">
+                      <p className={newUi ? "text-small font-semibold text-muted-foreground" : "text-caption text-muted-foreground"}>
+                        {model ? t("written.skippedModel") : t("habit.wsSkipped")}
+                      </p>
+                      {model && (
+                        <div className={cn("mt-1.5 rounded-2xl bg-muted px-4 py-3", newUi ? "text-ui" : "text-caption")}>
+                          <MarkdownText text={model} />
+                        </div>
+                      )}
+                    </div>
                   )}
                   {part.type === "text" && drawingOpen[key(i)] && (
                     <DrawingCanvas
                       className="mt-2"
-                      disabled={(checked && correct) || markingInFlight}
+                      disabled={isMarked || markingInFlight}
                       onChange={(dataUrl) =>
                         setDrawings((d) => ({ ...d, [key(i)]: dataUrl }))
                       }
@@ -536,7 +646,7 @@ function WorksheetQuestions({
                   )}
 
                   {/* Mark scheme (redesign): lines on the page under the answer, a tick or a cross per mark; no table. */}
-                  {newUi && checked && marking && marking.points.length > 0 && (
+                  {newUi && isMarked && marking.points.length > 0 && (
                     <div className="life-rise mt-4" role="status">
                       <p className="text-small font-extrabold text-foreground">
                         {t("session.markScheme")}
@@ -555,8 +665,9 @@ function WorksheetQuestions({
                               </span>
                               <div className="min-w-0 flex-1 text-ui">
                                 <MarkdownText text={point.requirements} />
-                                {point.feedback && !earned && (
-                                  <p className="mt-0.5 text-ui text-muted-foreground">
+                                {/* Earned points say why too: error carried forward, or a unit to add. */}
+                                {point.feedback && (
+                                  <p className={cn("mt-0.5 text-muted-foreground", earned ? "text-small" : "text-ui")}>
                                     <MarkdownText text={point.feedback} />
                                   </p>
                                 )}
@@ -568,7 +679,7 @@ function WorksheetQuestions({
                     </div>
                   )}
                   {/* Markscheme breakdown (LLM-marked parts) */}
-                  {!newUi && checked && marking && marking.points.length > 0 && (
+                  {!newUi && isMarked && marking.points.length > 0 && (
                     <div className={newUi ? "mt-3 rounded-2xl border border-border bg-card overflow-hidden shadow-[0_8px_24px_-16px_rgba(17,17,20,.2)]" : "mt-2 rounded-lg border border-border overflow-hidden"}>
                       <div className={cn("flex items-center justify-between border-b border-border", newUi ? "px-4 py-2.5" : "bg-muted/60 px-3 py-1.5")}>
                         <p className={newUi ? "text-small font-semibold" : "text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
@@ -628,15 +739,33 @@ function WorksheetQuestions({
                     </div>
                   )}
 
-                  {checked &&
-                    marking &&
+                  {isMarked &&
                     marking.points.length === 0 &&
                     !correct &&
                     part.answer && (
-                      <p className={cn(newUi ? "mt-2 text-ui font-bold" : "text-caption mt-1.5", isSkipped ? "text-muted-foreground" : newUi ? "text-rose-800" : "text-red-600 dark:text-red-400")}>
+                      <p className={cn(newUi ? "mt-2 text-ui font-bold" : "text-caption mt-1.5", newUi ? "text-rose-800" : "text-red-600 dark:text-red-400")}>
                         {t("session.expected")} {part.answer}
                       </p>
                     )}
+                  {/* After an attempt: the full-marks answer, one tap away. */}
+                  {isMarked && model && (marking.points.length > 0 || correct) && (
+                    <div className="mt-3">
+                      <button
+                        type="button"
+                        aria-expanded={!!modelOpen[key(i)]}
+                        onClick={() => setModelOpen((o) => ({ ...o, [key(i)]: !o[key(i)] }))}
+                        className={newUi ? cn(playLink, "min-h-10 text-[13.5px]") : "flex items-center gap-1 text-xs font-semibold text-accent-dim hover:underline"}
+                      >
+                        {t(modelOpen[key(i)] ? "written.hideModel" : "written.modelAnswer")}
+                        <ChevronDown className={cn("ml-1 size-4 transition-transform", modelOpen[key(i)] && "rotate-180")} aria-hidden />
+                      </button>
+                      {modelOpen[key(i)] && (
+                        <div className={cn("mt-1.5 rounded-2xl bg-muted px-4 py-3", newUi ? "text-ui" : "text-caption")} data-testid="ws-model">
+                          <MarkdownText text={model} />
+                        </div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -663,27 +792,42 @@ function WorksheetQuestions({
               )}
             </div>
             {!lastPart ? (
-              // Not the last part yet: on to the next one (marking waits for the whole question).
-              <PlayPrimary disabled={markingInFlight} onClick={() => goPart(partIndex + 1)}>
-                {t("worksheet.nextPart")}
-                <ArrowRight className="ml-1.5 size-4" />
-              </PlayPrimary>
+              // Not the last part yet: check this one (partial submission) or move on.
+              answered(partIndex) && !marked(partIndex) ? (
+                <PlayPrimary disabled={markingInFlight} onClick={() => checkPart(partIndex)}>
+                  {checkingPart === key(partIndex) ? (
+                    <>
+                      <Loader2 className="mr-2 size-4 animate-spin" />
+                      {t("written.checking")}
+                    </>
+                  ) : (
+                    t("written.checkPart")
+                  )}
+                </PlayPrimary>
+              ) : (
+                <PlayPrimary disabled={markingInFlight} onClick={() => goPart(partIndex + 1)}>
+                  {t("worksheet.nextPart")}
+                  <ArrowRight className="ml-1.5 size-4" />
+                </PlayPrimary>
+              )
             ) : checked ? (
               <PlayPrimary onClick={isLastStep ? onComplete : () => setStepIndex((s) => s + 1)}>
                 {t(isLastStep ? "session.finishWorksheet" : "session.nextQuestion")}
                 <ArrowRight className="ml-1.5 size-4" />
               </PlayPrimary>
             ) : (
-              <PlayPrimary disabled={!allAnswered || markingInFlight} onClick={checkStep}>
+              <PlayPrimary disabled={markingInFlight} onClick={checkStep}>
                 {markingInFlight ? (
                   <>
                     <Loader2 className="mr-2 size-4 animate-spin" />
                     {t("session.marking")}
                   </>
-                ) : allSkipped ? (
+                ) : nothingDone ? (
                   t("habit.wsSkipQuestion")
-                ) : (
+                ) : toMark.length > 0 ? (
                   t("session.checkAnswers")
+                ) : (
+                  t("written.finishQuestion")
                 )}
               </PlayPrimary>
             )}
@@ -723,7 +867,7 @@ function WorksheetQuestions({
           ) : (
             <Button
               size="sm"
-              disabled={!allAnswered || markingInFlight}
+              disabled={markingInFlight}
               onClick={checkStep}
             >
               {markingInFlight ? (
@@ -731,10 +875,12 @@ function WorksheetQuestions({
                   <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
                   {t("session.marking")}
                 </>
-              ) : allSkipped ? (
+              ) : nothingDone ? (
                 t("habit.wsSkipQuestion")
-              ) : (
+              ) : toMark.length > 0 ? (
                 t("session.checkAnswers")
+              ) : (
+                t("written.finishQuestion")
               )}
             </Button>
           )}

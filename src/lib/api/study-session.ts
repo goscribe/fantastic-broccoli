@@ -366,6 +366,8 @@ export const studySessionApi = {
     partIndex: number;
     answer: string;
     answerImage?: string;
+    /** Answers to the question's earlier parts: a later part is marked error carried forward. */
+    earlier?: { partIndex: number; answer: string }[];
   }) =>
     rpc<ApiPartMarking>("studySession.markWorksheetAnswer", "mutation", input),
 
@@ -383,6 +385,8 @@ export const studySessionApi = {
   submitComprehensionRewrite: (input: {
     activityId: string;
     rewrite: string;
+    /** Recall checks: the option picked. */
+    choiceIndex?: number;
   }) =>
     rpc<{
       evaluation: {
@@ -390,6 +394,7 @@ export const studySessionApi = {
         score: number;
         feedback: string;
         passed: boolean;
+        points?: { point: string; made: boolean }[];
       };
       content: Record<string, unknown>;
     }>("studySession.submitComprehensionRewrite", "mutation", input),

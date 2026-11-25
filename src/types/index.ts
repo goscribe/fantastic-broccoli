@@ -132,6 +132,13 @@ export interface McqContent {
 export interface ComprehensionContent {
   type: "comprehension_check";
   originalText: string;
+  /** Short-answer check: ONE question on the passage (old checks have none: rewrite the passage). */
+  question?: string;
+  /** Recall checks: four options (the student then says why); empty for a short answer. */
+  options?: string[];
+  answerIndex?: number;
+  keyPoints?: string[];
+  modelAnswer?: string;
   userRewrites: string[];
   evaluations: ComprehensionEvaluation[];
   passedAt?: string;
@@ -142,6 +149,8 @@ export interface ComprehensionEvaluation {
   score: number;
   feedback: string;
   passed: boolean;
+  /** Short-answer checks: which key points the answer made. */
+  points?: { point: string; made: boolean }[];
 }
 
 export interface FlashcardContent {
@@ -270,6 +279,14 @@ export interface WorksheetPart {
   answer?: string;
   userAnswer?: string;
   marks?: number;
+  /** How much to write ("One line of working and the answer"). */
+  answerGuide?: string;
+  /** A nudge for a stuck student; never the answer. */
+  hint?: string;
+  /** The first step of a full-marks answer, written out. */
+  firstStep?: string;
+  /** The full-marks answer with working, shown after an attempt or a skip. */
+  workedAnswer?: string;
   markScheme?: MarkScheme;
   /** Backing relational `WorksheetQuestion` row for progress tracking. */
   worksheetQuestionId?: string;

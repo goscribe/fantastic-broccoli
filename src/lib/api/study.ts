@@ -79,6 +79,7 @@ export async function markWorksheetAnswer(input: {
   partIndex: number;
   answer: string;
   answerImage?: string;
+  earlier?: { partIndex: number; answer: string }[];
 }): Promise<PartMarking> {
   const result = await studySessionApi.markWorksheetAnswer(input);
   const summary = result.summary ?? result.marking.summary;
@@ -103,11 +104,13 @@ export async function markClozeAnswers(input: {
 export async function submitComprehensionRewrite(input: {
   activityId: string;
   rewrite: string;
+  choiceIndex?: number;
 }): Promise<{
   attempt: number;
   score: number;
   feedback: string;
   passed: boolean;
+  points?: { point: string; made: boolean }[];
 }> {
   const result = await studySessionApi.submitComprehensionRewrite(input);
   return result.evaluation;

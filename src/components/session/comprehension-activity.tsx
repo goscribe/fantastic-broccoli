@@ -12,8 +12,9 @@ import { ProgressBar } from "@/components/ui/progress-bar";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
+import "@/lib/i18n/written-work";
 import { cn } from "@/lib/utils";
-import { Brain, Send, CheckCircle2, RotateCcw, Loader2 } from "lucide-react";
+import { Brain, Send, CheckCircle2, RotateCcw, Loader2, Check, X } from "lucide-react";
 import { textareaClass } from "@/components/ui/input";
 
 interface ComprehensionActivityProps {
@@ -23,7 +24,154 @@ interface ComprehensionActivityProps {
   onComplete: () => void;
 }
 
-export function ComprehensionActivity({
+/** A check with one question is the short form; old checks (no question) are the rewrite. */
+export function ComprehensionActivity(props: ComprehensionActivityProps) {
+  return props.content.question ? <ShortCheck {...props} /> : <RewriteCheck {...props} />;
+}
+
+/**
+ * The short comprehension check: the passage and ONE question, answered in a
+ * sentence or two (a recall check: pick an option, then say why in a line).
+ * One "Check" gives feedback against the key points and the model answer;
+ * Continue is always there after it, and Skip shows the model answer.
+ * The rewrite-the-passage check it replaces was finished 3% of the time.
+ */
+function ShortCheck({ activityId, content, draft, onComplete }: ComprehensionActivityProps) {
+  const { t } = useI18n();
+  const restored = restoredDraft(activityId, draft) as Partial<{ text: string; choice: number | null }> | undefined;
+  const [text, setText] = useState(restored?.text ?? "");
+  const [choice, setChoice] = useState<number | null>(restored?.choice ?? null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [skipped, setSkipped] = useState(false);
+  const [local, setLocal] = useState<ComprehensionEvaluation | null>(null);
+  useActivityDraft(activityId, { text, choice });
+
+  const options = content.options ?? [];
+  const isChoice = options.length >= 2 && (content.answerIndex ?? -1) >= 0;
+  const result = local ?? content.evaluations[content.evaluations.length - 1] ?? null;
+  const done = !!result || skipped;
+  const canCheck = (isChoice ? choice !== null : true) && text.trim().length >= 3 && !busy;
+
+  const check = async () => {
+    setBusy(true);
+    setError("");
+    try {
+      setLocal(await submitComprehensionRewrite({ activityId, rewrite: text.trim(), ...(isChoice && choice !== null ? { choiceIndex: choice } : {}) }));
+    } catch {
+      setError(t("session.evaluationFailed"));
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <div className="space-y-5">
+      <div className="life-rise whitespace-pre-wrap text-read leading-[1.7] text-foreground">
+        <MarkdownText text={content.originalText} />
+      </div>
+      <p className="text-[19px] font-extrabold leading-[1.35] text-foreground" data-testid="comp-question">
+        <MarkdownText text={content.question ?? ""} />
+      </p>
+      {isChoice && (
+        <div className="grid gap-2.5" role="radiogroup">
+          {options.map((opt, i) => {
+            const right = i === content.answerIndex;
+            const picked = choice === i;
+            return (
+              <button
+                key={i}
+                type="button"
+                role="radio"
+                aria-checked={picked}
+                disabled={done || busy}
+                onClick={() => setChoice(i)}
+                className={cn(
+                  "min-h-12 touch-manipulation rounded-2xl px-4 py-3 text-left text-ui font-semibold ring-inset transition-colors",
+                  done && right
+                    ? "bg-emerald-50 text-emerald-900 ring-2 ring-emerald-500"
+                    : done && picked
+                      ? "bg-rose-50 text-rose-900 ring-2 ring-rose-400"
+                      : picked
+                        ? "bg-accent-soft ring-2 ring-accent"
+                        : "bg-muted text-foreground hover:bg-[var(--edge)]",
+                )}
+              >
+                <MarkdownText text={opt} />
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {!done ? (
+        <>
+          {(!isChoice || choice !== null) && (
+            <div>
+              {isChoice && <p className="mb-1.5 text-small font-bold text-muted-foreground">{t("comp.why")}</p>}
+              <textarea
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                placeholder={t(isChoice ? "comp.whyPlaceholder" : "comp.answerPlaceholder")}
+                aria-label={t(isChoice ? "comp.why" : "comp.answerPlaceholder")}
+                rows={isChoice ? 2 : 3}
+                enterKeyHint="done"
+                className={cn(playField, "min-h-[88px] text-[17px] leading-[1.55]")}
+              />
+            </div>
+          )}
+          {error && <p className="text-small font-bold text-rose-700" role="alert">{error}</p>}
+          <PlayActions>
+            <button type="button" onClick={() => setSkipped(true)} disabled={busy} className={cn(playLink, "justify-center text-muted-foreground sm:mr-3")}>
+              {t("comp.skip")}
+            </button>
+            <PlayPrimary onClick={check} disabled={!canCheck}>
+              {busy && <Loader2 className="mr-2 size-4 animate-spin" />}
+              {busy ? t("written.checking") : t("comp.checkAnswer")}
+            </PlayPrimary>
+          </PlayActions>
+        </>
+      ) : (
+        <div className="life-rise space-y-4" role="status">
+          {result?.feedback && (
+            <p className="text-ui text-foreground">
+              <MarkdownText text={result.feedback} />
+            </p>
+          )}
+          {(content.keyPoints?.length ?? 0) > 0 && (
+            <div>
+              <p className="text-small font-extrabold text-foreground">{t("comp.pointsMade")}</p>
+              <ul className="mt-2 space-y-2">
+                {content.keyPoints!.map((point, i) => {
+                  const made = result?.points?.[i]?.made;
+                  return (
+                    <li key={i} className="flex items-start gap-3 text-ui">
+                      <span className={cn("mt-0.5 grid size-6 shrink-0 place-items-center rounded-full text-white", made ? "bg-emerald-600" : made === false ? "bg-rose-500" : "bg-[var(--edge)]")}>
+                        {made ? <Check className="size-3.5" strokeWidth={3.5} /> : made === false ? <X className="size-3.5" strokeWidth={3.5} /> : null}
+                      </span>
+                      <span className="min-w-0 flex-1"><MarkdownText text={point} /></span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+          {content.modelAnswer && (
+            <div className="rounded-2xl bg-muted px-4 py-3 text-ui" data-testid="comp-model">
+              <p className="mb-1 text-small font-extrabold">{t("written.modelAnswerLabel")}</p>
+              <MarkdownText text={content.modelAnswer} />
+            </div>
+          )}
+          <PlayActions>
+            <PlayPrimary onClick={onComplete}>{t("comp.continue")}</PlayPrimary>
+          </PlayActions>
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** The old rewrite-the-passage check. Never a dead end: after one attempt, Continue is offered whatever the score. */
+function RewriteCheck({
   activityId,
   content,
   draft,
@@ -124,6 +272,11 @@ export function ComprehensionActivity({
             />
             {error && <p className="text-small font-bold text-rose-700" role="alert">{error}</p>}
             <PlayActions>
+              {evaluations.length > 0 && (
+                <button type="button" onClick={onComplete} className={cn(playLink, "justify-center text-muted-foreground sm:mr-3")}>
+                  {t("comp.continueAnyway")}
+                </button>
+              )}
               <button type="button" onClick={() => setShowOriginal(true)} className={cn(playLink, "justify-center sm:mr-3")}>
                 {t("session.reReadOriginal")}
               </button>
@@ -206,6 +359,11 @@ export function ComprehensionActivity({
 
           <div className="flex items-center justify-end gap-3">
             {error && <span className="text-caption text-destructive">{error}</span>}
+            {evaluations.length > 0 && (
+              <Button variant="ghost" size="sm" onClick={onComplete}>
+                {t("comp.continueAnyway")}
+              </Button>
+            )}
             <Button
               variant="primary"
               size="sm"
