@@ -138,3 +138,10 @@ export const coursesApi = {
   startTopics: (input: { courseId: string; topicIds: string[]; level?: CourseLevel; durationMinutes?: number; startCheck?: StartCheckAnswers }) =>
     rpc<{ workspaceId: string; sessionId: string }>("course.startTopics", "mutation", input),
 };
+
+/** Syllabus match of the subject's own material (server `course.syllabusMatch` / `course.resolveSyllabusMatch`). */
+export const syllabusMatchApi = {
+  get: (workspaceId: string) => rpc<import("../syllabus-match").SyllabusMatch>("course.syllabusMatch", "query", { workspaceId }),
+  resolve: (input: { workspaceId: string; action: "confirm" | "change" | "dismiss"; courseId?: string; level?: CourseLevel | null; from?: "subject" | "upload" }) =>
+    rpc<{ courseId: string | null; level: string | null; status: string }>("course.resolveSyllabusMatch", "mutation", input),
+};

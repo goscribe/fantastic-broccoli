@@ -181,6 +181,48 @@ export function StudySection({ days }: { days: MetricDays }) {
                 </table>
                 <p className="border-t border-border px-3 py-2 text-[11px] text-muted-foreground">{data.definitions.detected}</p>
               </Card>
+              {data.matchedBoards && (
+                <Card title="Own subjects: board from the syllabus match" note={`share of ${data.ownStudents.current.toLocaleString()} students on own subjects`}>
+                  {data.matchedBoards.length === 0 ? (
+                    <p className="px-3 py-3 text-sm text-muted-foreground">No matched own subjects in this period yet.</p>
+                  ) : (
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="border-b border-border">
+                          <th className={TH}>Board</th>
+                          <th className={`${TH} text-right`}>Confirmed</th>
+                          <th className={`${TH} text-right`}>Suggested</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-border">
+                        {data.matchedBoards.map((b) => (
+                          <tr key={b.key}>
+                            <td className={TD}>
+                              <button type="button" className="font-medium hover:text-accent" onClick={() => users.open({ list: "studyMatchedBoard", key: b.key, title: `Own subjects matched to ${b.label}` })}>
+                                {b.label}
+                              </button>
+                            </td>
+                            {(["confirmed", "suggested"] as const).map((basis) => (
+                              <td key={basis} className={`${TD} text-right`}>
+                                <button
+                                  type="button"
+                                  className="hover:text-accent"
+                                  onClick={() => users.open({ list: "studyMatchedBoard", key: `${b.key}:${basis}`, title: `Own subjects matched to ${b.label} (${basis})` })}
+                                >
+                                  {b[basis].current.toLocaleString()}
+                                </button>
+                                <span className="ml-1 text-muted-foreground">{pctText(b[basis].pctCurrent)}</span>
+                                <p className="text-[11px] text-faint">{pctText(b[basis].pctPrevious)} before</p>
+                              </td>
+                            ))}
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                  {data.definitions.matched && <p className="border-t border-border px-3 py-2 text-[11px] text-muted-foreground">{data.definitions.matched}</p>}
+                </Card>
+              )}
             </div>
           </div>
 
