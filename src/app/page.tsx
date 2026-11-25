@@ -115,6 +115,7 @@ function NewHome() {
       <FirstRun
         firstName={user?.name?.trim().split(/\s+/)[0] || undefined}
         fallbackWorkspaceId={subjects[0]?.id}
+        autoStart={subjects.length === 0}
         onSkip={
           subjects.length > 0
             ? () => {
@@ -310,6 +311,7 @@ function LegacyHome() {
       <FirstRun
         firstName={user?.name?.trim().split(/\s+/)[0] || undefined}
         fallbackWorkspaceId={allWorkspaces[0]?.id}
+        autoStart={!hasWorkspaces}
         onSkip={
           hasWorkspaces
             ? () => {

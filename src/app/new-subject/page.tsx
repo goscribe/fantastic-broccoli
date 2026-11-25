@@ -8,7 +8,7 @@ function NewSubject() {
   const router = useRouter();
   // `?paste=1`: an upload elsewhere didn't finish and the student chose "Paste text instead".
   const paste = useSearchParams().get("paste") === "1";
-  return <FirstRun context="new_subject" initialMode={paste ? "paste" : "course"} onSkip={() => router.push("/")} />;
+  return <FirstRun context="new_subject" initialMode={paste ? "paste" : undefined} onSkip={() => router.push("/")} />;
 }
 
 export default function NewSubjectPage() {

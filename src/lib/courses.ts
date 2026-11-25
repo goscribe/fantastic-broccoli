@@ -169,3 +169,50 @@ export function courseBadge(subjectTitle: string, courseTitle: string, level: st
   if (level && !fold(subjectTitle).split(" ").includes(level.toLowerCase())) return `${level} course`;
   return "Course";
 }
+
+// ---------- the first screen: likely courses, and where a course starts ----------
+
+/**
+ * The topic a course's Quick 5 starts on when the student only tapped the
+ * course: the first one everyone on it studies (not HL-only, BC-only, higher
+ * tier or second-year content, and not behind a plan). Syllabus order, so it
+ * is the topic a class starts the year with.
+ */
+export function firstTopic(course: Pick<Course, "units">): { unit: CatalogUnit; topic: CatalogTopic } | null {
+  let fallback: { unit: CatalogUnit; topic: CatalogTopic } | null = null;
+  for (const unit of course.units) {
+    for (const topic of unit.topics) {
+      if (topic.locked) continue;
+      fallback ??= { unit, topic };
+      if (!topic.hlOnly && !topic.bcOnly && !topic.higherTierOnly && !topic.advanced) return { unit, topic };
+    }
+  }
+  return fallback;
+}
+
+/**
+ * The few courses offered as tiles on "What are you studying?": the courses
+ * named in `lead` first (what the app already knows about this student), then
+ * the boards in the student's order, one course per subject from each (AP
+ * Calculus AB, not AB and BC), so six tiles cover six subjects. Boards later
+ * in the order only fill what the first ones leave.
+ */
+export function likelyCourses(courses: CourseSummary[], order: CatalogBoard[] = BOARD_ORDER, limit = 6, lead: string[] = []): CourseSummary[] {
+  const out: CourseSummary[] = [];
+  const add = (c: CourseSummary | undefined) => {
+    if (c && out.length < limit && !out.includes(c)) out.push(c);
+  };
+  for (const id of lead) add(courses.find((c) => c.id === id));
+  const groups = groupCourses(courses, order);
+  for (const group of groups) {
+    const subjects = new Set(out.filter((c) => c.board === group.board).map((c) => c.subject));
+    for (const c of group.courses) {
+      if (subjects.has(c.subject)) continue;
+      subjects.add(c.subject);
+      add(c);
+    }
+  }
+  // A small catalog: second courses of a subject fill the rest.
+  for (const group of groups) for (const c of group.courses) add(c);
+  return out;
+}
