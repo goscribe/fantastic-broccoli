@@ -7,6 +7,7 @@
  * the tab closes still arrive.
  */
 import { apiUrl } from "./api/config";
+import type { SubjectFamily } from "./subject-family";
 import type { WallReason, WallVariant } from "./wall";
 
 export type FunnelEvent =
@@ -61,7 +62,9 @@ export type FunnelEvent =
   /** "Skip" on the start check (the answers themselves are stored with the session). */
   | "start_check.skipped"
   /** The syllabus-match confirm step was shown (`band`, `from`, `courseId`); the server records confirmed / changed / dismissed itself. */
-  | "syllabus_match.shown";
+  | "syllabus_match.shown"
+  /** The calculator opened (`family`: the subject's family, so usage can be read by subject). */
+  | "calculator.opened";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
@@ -112,6 +115,8 @@ export interface FunnelProps {
   backgrounded?: boolean;
   /** syllabus_match.shown: the match's confidence band (which confirm step). */
   band?: "high" | "medium" | "low";
+  /** calculator.opened: the subject's family (server SUBJECT_FAMILIES). */
+  family?: SubjectFamily;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

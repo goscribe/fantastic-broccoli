@@ -91,6 +91,9 @@ import "@/lib/i18n/first-run";
 import "@/lib/i18n/today";
 import { ChangeCourseLink } from "@/components/onboarding/change-course";
 import { track } from "@/lib/funnel";
+import { CalculatorTool } from "@/components/calculator/calculator-tool";
+import { isNonCalculator, sessionCalculatorContext } from "@/lib/calculator/access";
+import { resolveSubjectFamily } from "@/lib/subject-family";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
 import { getItemNav, useCurrentItemIndex } from "@/lib/current-item";
@@ -322,6 +325,12 @@ export default function SessionDetailPage() {
     [activities, activeActivityId],
   );
   const activeItemIndex = useCurrentItemIndex(activeActivity?.id);
+  // The calculator: in the top bar for subjects that use one, off on a non-calculator paper.
+  const subjectFamily = resolveSubjectFamily(workspace?.subjectFamily, workspace?.title);
+  const nonCalculator = useMemo(
+    () => isNonCalculator(sessionCalculatorContext({ activities, active: activeActivity, itemIndex: activeItemIndex, paperFocus: session?.paperFocus })),
+    [activities, activeActivity, activeItemIndex, session?.paperFocus],
+  );
 
   // Mirror the active activity into the URL so a refresh or shared link
   // reopens the same section. history.replaceState avoids a navigation.
@@ -1063,7 +1072,8 @@ export default function SessionDetailPage() {
   // (still building, or the build failed): same X, same column, no legacy chrome.
   if (newUi) {
     return (
-      <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
+      // The calculator rises from the bottom on a phone; this padding is the room it takes, so the question and the bottom bar stay above it. (Docked on a desktop, <body> makes the room: globals.css.)
+      <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background pb-[var(--calc-sheet,0px)]">
         <div className="relative flex min-w-0 flex-1 flex-col">
           {/* The top bar sits in the same column as the content under it (same gutters, same max width), so the step bar and the question share their edges. */}
           <div className="px-4 pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-10 sm:pt-4">
@@ -1085,6 +1095,9 @@ export default function SessionDetailPage() {
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
                 {planReady && activeActivity && (
                   <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} intro={activeActivity.type === "worksheet" && bubble !== "showing"} />
+                )}
+                {planReady && activeActivity && (
+                  <CalculatorTool family={subjectFamily} blocked={nonCalculator} workspaceId={workspaceId} scope={contentColumn} />
                 )}
                 {planReady && !copilotOpen && (
                   <CopilotTrigger compact onClick={openCopilotByTap} />

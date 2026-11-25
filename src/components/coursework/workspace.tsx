@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import { ChevronDown, ChevronLeft, ChevronRight, Maximize2, Minimize2, Minus, MoreHorizontal, Plus } from "lucide-react";
+import { CalculatorTool } from "@/components/calculator/calculator-tool";
 import { ScribeEditor, type EditorDoc, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
 import { awaitRead, courseworkApi, importFile, isConflict, UPLOAD_ACCEPT, type CourseworkDocument, type DraftDetail, type DraftSummary, type ImportFailure } from "@/lib/api/coursework";
 import { SubjectArt } from "@/components/learn/subject-tile";
@@ -91,6 +92,8 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const wide = useWide();
   const online = useOnline();
   const editor = useRef<ScribeEditorHandle>(null);
+  /** Where the calculator's "Insert" looks for the draft's text. */
+  const docScope = useRef<HTMLDivElement>(null);
   /** `/diagram` is the notes server's: offered here only where that is deployed. */
   const diagrams = useMyNotesAvailable();
   const fileInput = useRef<HTMLInputElement>(null);
@@ -572,7 +575,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
   const toolBtn = "grid size-11 shrink-0 place-items-center rounded-[10px] text-muted-foreground hover:bg-muted hover:text-foreground disabled:opacity-35";
 
   return (
-    <main className="cw-scope mx-auto w-full max-w-[1320px] px-4 pb-12 pt-3 sm:px-6 sm:pt-4" style={familyVars(family) as CSSProperties}>
+    <main className="cw-scope mx-auto w-full max-w-[1320px] px-4 pb-[calc(3rem+var(--calc-sheet,0px))] pt-3 sm:px-6 sm:pt-4" style={familyVars(family) as CSSProperties}>
       {/* One thin row: back, what this is, which draft, and the rest behind "More". The subject's colour is only the small chip. */}
       <div className="flex min-h-12 items-center gap-2 sm:gap-3">
         <Link href="/coursework" aria-label={t("cw.back")} title={t("cw.back")} className="-ml-2 grid size-11 shrink-0 place-items-center rounded-[12px] text-muted-foreground hover:bg-muted hover:text-foreground">
@@ -773,7 +776,7 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
             </div>
           )}
           {draft?.kind === "text" && (
-          <div>
+          <div ref={docScope}>
           <ScribeEditor
             key={draft.id}
             handleRef={editor}
@@ -791,11 +794,14 @@ export function CourseworkWorkspace({ documentId }: { documentId: string }) {
               schedule(d);
             }}
             toolbarEnd={
-              marks.length > 0 ? (
-                <span className={cn("whitespace-nowrap text-small font-bold tabular-nums", ws.state === "over" ? "text-foreground" : "text-muted-foreground")} title={[saveLabel, ws.detail].filter(Boolean).join(" · ")}>
-                  {ws.count}
-                </span>
-              ) : undefined
+              <>
+                <CalculatorTool look="text" family={family} scope={docScope} />
+                {marks.length > 0 && (
+                  <span className={cn("whitespace-nowrap text-small font-bold tabular-nums", ws.state === "over" ? "text-foreground" : "text-muted-foreground")} title={[saveLabel, ws.detail].filter(Boolean).join(" · ")}>
+                    {ws.count}
+                  </span>
+                )}
+              </>
             }
             header={
               <div className="pt-5">
