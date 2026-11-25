@@ -36,6 +36,7 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/habits";
 import "@/lib/i18n/voice";
+import { VoiceAnswerButton } from "@/components/session/voice-scribe";
 import "@/lib/i18n/written-work";
 import { cn } from "@/lib/utils";
 import { ItemDots, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
@@ -341,9 +342,11 @@ function WorksheetQuestions({
         {step.intro && (
           <div>
             <div
+              data-dictation-stem
               className={cn(
                 newUi ? "text-read text-foreground" : "text-ui text-foreground",
-                introLong && !introOpen[stepIndex] && "line-clamp-3",
+                // Clamped only when long, and never so short that the givens hide behind "Show more".
+                introLong && !introOpen[stepIndex] && "line-clamp-6",
               )}
             >
               <MarkdownText text={step.intro} />
@@ -490,6 +493,9 @@ function WorksheetQuestions({
                       ))}
                     </div>
                   ) : checked && isSkipped ? null : (
+                    // The mic sits right beside the box it writes into.
+                    <div className="flex items-start gap-2">
+                    <div className={cn("min-w-0 flex-1", newUi && part.type === "numeric" && "sm:max-w-[280px]")}>
                     <RichAnswerField
                       textareaRef={i === partIndex ? firstInput : undefined}
                       value={value}
@@ -537,6 +543,9 @@ function WorksheetQuestions({
                             )
                       }
                     />
+                    </div>
+                    {newUi && !isMarked && !checked && <VoiceAnswerButton compact className="mt-3 size-12" />}
+                    </div>
                   )}
 
                   {/* Help a stuck student can ask for: a nudge, then the first step. Free. */}
