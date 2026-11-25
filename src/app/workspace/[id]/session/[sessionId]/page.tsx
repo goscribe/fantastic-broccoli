@@ -1,5 +1,6 @@
 "use client";
 
+import { SyllabusMatchCard } from "@/components/courses/syllabus-match-card";
 import { BuildStage } from "@/components/session/build-stage";
 import { WaitConfidenceCard, useWaitConfidence, type WaitConfidenceState } from "@/components/session/wait-confidence";
 import { useNewUi } from "@/lib/new-ui";
@@ -1916,6 +1917,9 @@ function GeneratingPlanCard({
 
   // Waiting on uploaded notes to be read (no plan yet): say what happens next, and that leaving is fine.
   const readingUploads = currentStage === "gathering" && hasCount && (progress.total ?? 0) > 0 && progress.planned.length === 0;
+  // Kept once seen: the syllabus-match card stays up after the uploads are read.
+  const [fromUploads, setFromUploads] = useState(false);
+  if (readingUploads && !fromUploads) setFromUploads(true);
 
   if (newUi) {
     return (
@@ -1953,6 +1957,8 @@ function GeneratingPlanCard({
         />
         {/* A Quick 5 the first screen started without asking: the way back to the choice. */}
         {quickStart && <ChangeCourseLink workspaceId={workspaceId} sessionId={sessionId} />}
+        {/* Uploaded notes matched to a syllabus while the session is written: one tap to confirm the course (never blocks the session). */}
+        {fromUploads && !confidence?.open && <SyllabusMatchCard workspaceId={workspaceId} from="upload" watch className="w-full" />}
         {confidence?.open ? (
           <WaitConfidenceCard state={confidence} />
         ) : (
