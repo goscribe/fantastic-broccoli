@@ -119,6 +119,8 @@ export interface ApiStudySession {
   confidenceBefore?: number | null;
   /** Catalog topics the session is on: "<courseId>:<topicId>[,<topicId>…]". */
   courseTopic?: string | null;
+  /** Start check: the paper the session practises (a server paper id, e.g. "ib-math-p1"); null = mix. */
+  paperFocus?: string | null;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -790,6 +792,7 @@ export function mapSession(s: ApiStudySession): StudySession {
     mistakesPractice: s.mistakesPractice ?? false,
     confidenceBefore: typeof s.confidenceBefore === "number" ? s.confidenceBefore : undefined,
     courseTopic: s.courseTopic ?? undefined,
+    paperFocus: s.paperFocus ?? undefined,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),

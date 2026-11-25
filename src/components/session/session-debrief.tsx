@@ -2,7 +2,7 @@
 
 import { useNewUi } from "@/lib/new-ui";
 import { MathText } from "@/components/ui/markdown-text";
-import { useEffect, useState, type ReactNode } from "react";
+import { useEffect, useState, type CSSProperties, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
@@ -54,7 +54,7 @@ import { noteHref } from "@/lib/notes";
 import { track, type DebriefNextKind } from "@/lib/funnel";
 import "@/lib/i18n/purpose";
 import "@/lib/i18n/start-check";
-import { confidenceCat, confidenceFace, confidenceResult, type ConfidenceFace } from "@/lib/start-check";
+import { confidenceCat, confidenceFace, confidenceResult, type ConfidenceFace, type ConfidenceVerdict } from "@/lib/start-check";
 import { difficultyResults, quick5SaidGot } from "@/lib/quick5-confidence";
 import "@/lib/i18n/quick5-confidence";
 import type { ApiSessionDebrief, ApiSessionStats } from "@/lib/api/study-session";
@@ -294,7 +294,7 @@ function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: 
 function SaidGot({ face, label, value, max = 10, strong = false }: { face: ConfidenceFace; label: string; value: number; max?: number; strong?: boolean }) {
   return (
     <span className="flex items-center gap-2">
-      <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-11 w-auto" />
+      <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-[52px] w-auto" />
       <span className="flex flex-col">
         <span className="text-caption font-bold leading-4 text-muted-foreground">{label}</span>
         <span className={cn("text-[22px] font-extrabold leading-6 tabular-nums", strong ? "text-foreground" : "text-muted-foreground")}>
@@ -318,6 +318,49 @@ function Quick5ExamLine({ exam, fallback }: { exam: { right: number; total: numb
       <span className="font-extrabold text-foreground">{t("quick5Conf.examLevel").replace("{r}", String(exam.right)).replace("{n}", String(exam.total))}</span>{" "}
       {t(exam.right < exam.total ? "quick5Conf.examLevelMissed" : "quick5Conf.examLevelAll")}
     </p>
+  );
+}
+
+/**
+ * "You said 3/10 → You got 7/10" and what that means: the one comparison only
+ * the debrief can make. A Quick 5 puts its own score on the right ("3/5",
+ * with the cat for the same result out of ten) and its exam-level line below.
+ */
+export function SaidGotRow({
+  said,
+  got,
+  of = 10,
+  gotFace = confidenceFace(got),
+  verdict,
+  spoken,
+  children,
+  className,
+  style,
+}: {
+  said: number;
+  got: number;
+  /** What `got` is out of, when it is not ten. */
+  of?: number;
+  gotFace?: ConfidenceFace;
+  verdict: ConfidenceVerdict;
+  /** The sentence a screen reader hears; "You said a/10, you got b/10" by default. */
+  spoken?: string;
+  /** The line under the cats; the verdict by default. */
+  children?: ReactNode;
+  className?: string;
+  style?: CSSProperties;
+}) {
+  const { t } = useI18n();
+  return (
+    <div className={className} style={style} data-confidence-result={verdict}>
+      <p className="sr-only">{spoken ?? t("finish.saidGot").replace("{a}", String(said)).replace("{b}", String(got))}</p>
+      <div className="flex items-center gap-3" aria-hidden>
+        <SaidGot face={confidenceFace(said)} label={t("finish.said")} value={said} />
+        <ArrowRight className="size-5 shrink-0 text-faint" />
+        <SaidGot face={gotFace} label={t("finish.got")} value={got} max={of} strong />
+      </div>
+      {children ?? <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${verdict}`)}</p>}
+    </div>
   );
 }
 
@@ -712,26 +755,21 @@ export function SessionDebrief({
 
         {/* What they said beside what they got: the one comparison only this screen can make. */}
         {quick ? (
-          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={quick.verdict}>
-            <p className="sr-only">{t("quick5Conf.saidGot").replace("{a}", String(quick.said)).replace("{b}", String(quick.got)).replace("{n}", String(quick.of))}</p>
-            <div className="flex items-center gap-3" aria-hidden>
-              <SaidGot face={confidenceFace(quick.said)} label={t("finish.said")} value={quick.said} />
-              <ArrowRight className="size-5 shrink-0 text-faint" />
-              <SaidGot face={confidenceFace(said?.got ?? quick.said)} label={t("finish.got")} value={quick.got} max={quick.of} strong />
-            </div>
+          <SaidGotRow
+            said={quick.said}
+            got={quick.got}
+            of={quick.of}
+            gotFace={confidenceFace(said?.got ?? quick.said)}
+            verdict={quick.verdict}
+            spoken={t("quick5Conf.saidGot").replace("{a}", String(quick.said)).replace("{b}", String(quick.got)).replace("{n}", String(quick.of))}
+            className="life-rise mt-5 px-1"
+            style={{ ["--i" as string]: 2 }}
+          >
             {/* Missed an exam-level one: they were meant to be hard, not a verdict on the student. */}
             <Quick5ExamLine exam={exam} fallback={t(`finish.verdict.${quick.verdict}`)} />
-          </div>
+          </SaidGotRow>
         ) : said ? (
-          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={said.verdict}>
-            <p className="sr-only">{t("finish.saidGot").replace("{a}", String(said.said)).replace("{b}", String(said.got))}</p>
-            <div className="flex items-center gap-3" aria-hidden>
-              <SaidGot face={confidenceFace(said.said)} label={t("finish.said")} value={said.said} />
-              <ArrowRight className="size-5 shrink-0 text-faint" />
-              <SaidGot face={confidenceFace(said.got)} label={t("finish.got")} value={said.got} strong />
-            </div>
-            <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${said.verdict}`)}</p>
-          </div>
+          <SaidGotRow said={said.said} got={said.got} verdict={said.verdict} className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} />
         ) : exam ? (
           <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }}>
             <Quick5ExamLine exam={exam} />

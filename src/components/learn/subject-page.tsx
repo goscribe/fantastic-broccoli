@@ -18,6 +18,7 @@ import { useNewNote, useOwnNotes } from "@/components/my-notes/use-my-notes";
 import { PlanTodayCard } from "@/components/planner/plan-today-card";
 import { PLAN_KEY, useStartTask } from "@/components/planner/plan-task";
 import { useStartCourseTopic } from "@/components/courses/use-start-topic";
+import { SyllabusMatchCard } from "@/components/courses/syllabus-match-card";
 import { Ring } from "@/components/design/charts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { LoadError } from "@/components/ui/load-error";
@@ -113,6 +114,8 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
   const [expanded, setExpanded] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [uploading, setUploading] = useState(false);
+  // Just uploaded here: the syllabus match lands once the file is read, so the card keeps looking for it.
+  const [uploadedAt, setUploadedAt] = useState<number | null>(null);
   const [busy, setBusy] = useState<string | null>(null);
   const [paperOpen, setPaperOpen] = useState(false);
   const { t } = useI18n();
@@ -362,6 +365,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
     try {
       const fileIds = await uploadFiles(workspaceId, list);
       analyzeFiles(workspaceId, fileIds).catch(() => {});
+      setUploadedAt(Date.now());
       emitTreeChanged();
       toast.success(`Added ${list.length} file${list.length === 1 ? "" : "s"}. Scribe sorts them into your topics once it has read them.`);
     } catch (e) {
@@ -464,6 +468,11 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
             </div>
           )}
         </form>
+
+        {/* Own material matched to a syllabus: one light step to make the subject course-backed (never blocks studying). */}
+        {workspace && course.state === "none" && (
+          <SyllabusMatchCard key={`match-${workspaceId}-${uploadedAt ?? 0}`} workspaceId={workspaceId} from={uploadedAt ? "upload" : "subject"} watch={!!uploadedAt} className="-mt-2" />
+        )}
 
         {reviewLine("lg:hidden")}
 

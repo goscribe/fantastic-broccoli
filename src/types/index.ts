@@ -56,6 +56,8 @@ export interface StudySession {
   confidenceBefore?: number;
   /** Catalog topics the session is on: "<courseId>:<topicId>[,<topicId>…]". */
   courseTopic?: string;
+  /** The paper chosen on the start check (a server paper id, e.g. "ib-math-p1"). */
+  paperFocus?: string;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;

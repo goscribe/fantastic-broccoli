@@ -8,7 +8,9 @@ import { ChevronLeft, MoreHorizontal } from "lucide-react";
 import { ScribeEditor, type ScribeEditorHandle } from "@/components/editor/scribe-editor";
 import { isDiagramLimit, myNotesApi, myNotesAvailable, MyNotesError, type DiagramFigure, type OwnNote } from "@/lib/api/my-notes";
 import { DEFAULT_NOTE_TITLE, docHighlights, ownNoteHref } from "@/lib/my-notes";
+import { CalculatorTool } from "@/components/calculator/calculator-tool";
 import { track } from "@/lib/funnel";
+import { resolveSubjectFamily } from "@/lib/subject-family";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
@@ -43,6 +45,8 @@ export function NoteEditor({ workspaceId, noteId }: { workspaceId: string; noteI
   const [confirming, setConfirming] = useState(false);
   const [busy, setBusy] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  /** Where the calculator's "Insert" looks for the note's text. */
+  const page = useRef<HTMLDivElement>(null);
   const save = useNotePersistence(noteId, note?.version ?? null);
 
   const fetchNote = useCallback(() => {
@@ -155,7 +159,7 @@ export function NoteEditor({ workspaceId, noteId }: { workspaceId: string; noteI
 
   const item = "flex min-h-11 w-full items-center rounded-lg px-3 text-left text-ui font-bold hover:bg-muted";
   return (
-    <div className="mx-auto w-full max-w-[800px] flex-1 px-4 pb-12 sm:px-6" data-own-note={note.id}>
+    <div ref={page} className="mx-auto w-full max-w-[800px] flex-1 px-4 pb-[calc(3rem+var(--calc-sheet,0px))] sm:px-6" data-own-note={note.id}>
       {/* The thin row: back, title, saved state, menu. No band, no card. */}
       <div className="flex min-h-12 items-center gap-1 pt-1">
         <Link href={subjectHref} className="-ml-2 inline-flex h-11 min-w-0 max-w-[40%] shrink-0 items-center gap-0.5 rounded-xl pl-1 pr-2 text-small font-bold text-muted-foreground hover:bg-muted hover:text-foreground" aria-label={`Back to ${note.workspaceTitle || "the subject"}`}>
@@ -173,6 +177,7 @@ export function NoteEditor({ workspaceId, noteId }: { workspaceId: string; noteI
           }}
           placeholder={DEFAULT_NOTE_TITLE}
           aria-label="Note title"
+          data-calculator-ignore
           className="h-11 min-w-0 flex-1 rounded-lg bg-transparent px-1 text-[17px] font-extrabold text-foreground placeholder:text-faint focus:outline-none"
         />
         <span className="shrink-0 whitespace-nowrap text-caption font-semibold text-muted-foreground" role="status" aria-live="polite">
@@ -237,11 +242,14 @@ export function NoteEditor({ workspaceId, noteId }: { workspaceId: string; noteI
          * Highlights.
          */
         toolbarEnd={
-          highlights.length > 0 ? (
-            <button type="button" onClick={() => setListOpen(true)} className="h-11 whitespace-nowrap rounded-[10px] px-2.5 text-small font-bold text-muted-foreground hover:bg-muted hover:text-foreground">
-              Highlights <span className="tabular-nums text-faint">{highlights.length}</span>
-            </button>
-          ) : undefined
+          <>
+            {highlights.length > 0 && (
+              <button type="button" onClick={() => setListOpen(true)} className="h-11 whitespace-nowrap rounded-[10px] px-2.5 text-small font-bold text-muted-foreground hover:bg-muted hover:text-foreground">
+                Highlights <span className="tabular-nums text-faint">{highlights.length}</span>
+              </button>
+            )}
+            <CalculatorTool look="text" family={resolveSubjectFamily(null, note.workspaceTitle)} workspaceId={note.workspaceId || workspaceId} scope={page} />
+          </>
         }
       />
 

@@ -754,7 +754,8 @@ export function CopilotTrigger({
         type="button"
         onClick={onClick}
         aria-label={t("misc.askScribe")}
-        className="fixed right-0 top-1/2 z-40 flex -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border border-r-0 border-border bg-card px-2 py-3 shadow-md hover:bg-muted max-sm:hidden"
+        // Sits against the docked calculator when there is one, not under it.
+        className="fixed right-[var(--calc-dock,0px)] top-1/2 z-40 flex -translate-y-1/2 flex-col items-center gap-1.5 rounded-l-2xl border border-r-0 border-border bg-card px-2 py-3 shadow-md hover:bg-muted max-sm:hidden"
       >
         <Mascot pose="wave" className="cat-wiggle h-9" />
         <PanelRightOpen className="h-4 w-4 text-muted-foreground" />

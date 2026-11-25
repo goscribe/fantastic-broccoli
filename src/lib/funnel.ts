@@ -7,6 +7,7 @@
  * the tab closes still arrive.
  */
 import { apiUrl } from "./api/config";
+import type { SubjectFamily } from "./subject-family";
 import type { WallReason, WallVariant } from "./wall";
 
 export type FunnelEvent =
@@ -59,13 +60,17 @@ export type FunnelEvent =
   /** "Try again" tapped on an upload that didn't finish. */
   | "upload.retried"
   /** "Skip" on the start check (the answers themselves are stored with the session). */
-  | "start_check.skipped";
+  | "start_check.skipped"
+  /** The syllabus-match confirm step was shown (`band`, `from`, `courseId`); the server records confirmed / changed / dismissed itself. */
+  | "syllabus_match.shown"
+  /** The calculator opened (`family`: the subject's family, so usage can be read by subject). */
+  | "calculator.opened";
 
 /** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
 export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
 
 /** Where a notes event happened. */
-export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run";
+export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run" | "upload";
 
 /**
  * What was tapped in home's banner (the server's TODAY_ACTIONS). The one
@@ -108,6 +113,10 @@ export interface FunnelProps {
   attempts?: number;
   /** upload.failed: the page went to the background during the upload. */
   backgrounded?: boolean;
+  /** syllabus_match.shown: the match's confidence band (which confirm step). */
+  band?: "high" | "medium" | "low";
+  /** calculator.opened: the subject's family (server SUBJECT_FAMILIES). */
+  family?: SubjectFamily;
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";

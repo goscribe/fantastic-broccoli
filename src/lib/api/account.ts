@@ -57,6 +57,10 @@ export interface PlanCaps {
   /** When the current trial converts to a paid subscription, if trialing. */
   trialEndsAt: Date | string | null;
   completedSessions: number;
+  /** The plan the user pays for, with its price in dollars (the paid-conversion value). Newer servers only. */
+  paidPlan?: { id: string; price: number; kind: "pass" | "recurring" } | null;
+  /** Set while the user holds an exam pass: when it ends (it never renews). */
+  passEndsAt?: Date | string | null;
 }
 
 /** Fired on `window` when the learner finishes a study session (debrief shown). */
@@ -151,10 +155,10 @@ export interface PlanOption {
   isActive: boolean;
   /** Billing interval ("month", "year"); null for a pay-once plan. Undefined when the server does not send it. Labels only (plan-display.ts). */
   interval?: string | null;
-  /** "pass" for a pay-once pass, when the server sends it. Labels only. */
-  kind?: string | null;
-  /** When a pass's access ends, when the server sends it. Labels only. */
-  accessUntil?: string | Date | null;
+  /** `pass`: paid once, access until `accessUntil`, never renews. */
+  kind: "pass" | "recurring";
+  /** When a pass's access ends (ISO); null for a monthly plan. */
+  accessUntil: string | null;
   /** Coursework reviews a day (null = unlimited, 0 = not included); undefined on servers without the grader. Labels only. */
   courseworkReviewsPerDay?: number | null;
 }
@@ -175,11 +179,17 @@ export async function fetchPlanOptions(): Promise<PlanOption[]> {
         (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
       isActive: plan.isActive,
       interval: extra.interval,
-      kind: extra.kind,
-      accessUntil: extra.accessUntil,
+      ...passFields(extra),
       courseworkReviewsPerDay: extra.courseworkReviewsPerDay,
     };
   });
+}
+
+function passFields(plan: { kind?: string | null; accessUntil?: string | Date | null; interval?: string | null }) {
+  const accessUntil = plan.accessUntil ? new Date(plan.accessUntil).toISOString() : null;
+  const kind: PlanOption["kind"] =
+    plan.kind === "pass" || (!plan.kind && accessUntil && !plan.interval) ? "pass" : "recurring";
+  return { kind, accessUntil };
 }
 
 /** Redirects to the hosted checkout (Stripe or Airwallex; the server picks) for the chosen paid plan. */
@@ -199,6 +209,8 @@ export interface CurrentSubscription {
   currentPeriodEnd: Date | string;
   /** Set when the subscription is scheduled to end at the period end. */
   cancelAt: Date | string | null;
+  /** A one-off exam pass: ends at `currentPeriodEnd`, nothing to cancel or resume. */
+  isPass?: boolean;
 }
 
 export function fetchCurrentSubscription(): Promise<CurrentSubscription | null> {

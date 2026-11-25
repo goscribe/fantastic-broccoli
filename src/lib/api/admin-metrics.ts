@@ -199,7 +199,7 @@ export interface ShareCount {
 type CurPrev = { current: number; previous: number };
 
 export interface StudyMix extends WindowOut {
-  definitions: Record<"students" | "subjects" | "sessions" | "activities" | "type" | "board" | "detected" | "family", string>;
+  definitions: Record<"students" | "subjects" | "sessions" | "activities" | "type" | "board" | "detected" | "family", string> & { matched?: string };
   subjectTypes: Array<{ key: string; label: string; definition: string }>;
   total: Record<"students" | "subjects" | "sessions" | "activities", CurPrev & { change: MetricChange }>;
   types: Array<{
@@ -223,6 +223,8 @@ export interface StudyMix extends WindowOut {
   }>;
   ownStudents: CurPrev;
   detected: Array<{ key: string; label: string; students: ShareCount; activities: CurPrev }>;
+  /** Own subjects by the board of their syllabus match, confirmed vs suggested (absent on an older server). */
+  matchedBoards?: Array<{ key: string; label: string; confirmed: ShareCount; suggested: ShareCount; activities: CurPrev }>;
   topCourses: Array<{
     courseId: string;
     title: string;
@@ -303,6 +305,7 @@ export type MetricUserList =
   | "studyCourse"
   | "studyBoard"
   | "studyDetected"
+  | "studyMatchedBoard"
   | "studyFamily"
   | "firstScore";
 
