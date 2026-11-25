@@ -80,7 +80,7 @@ import { Mascot } from "@/components/rewards/mascot";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
-import { VoiceScribe, VoiceScribeTrigger, type VoiceScribeHandle } from "@/components/session/voice-scribe";
+import { VoiceAnswerContext, VoiceScribe, VoiceScribeTrigger, type VoiceScribeHandle } from "@/components/session/voice-scribe";
 import { SessionPrecheck } from "@/components/session/precheck";
 import { FirstReadingLead, SessionPrimer, useSessionPrimer } from "@/components/session/session-primer";
 import { proficiencyApi } from "@/lib/api/proficiency";
@@ -387,7 +387,9 @@ export default function SessionDetailPage() {
   // Talk to write: one microphone for the whole player; tapping it again stops and writes.
   const voice = useRef<VoiceScribeHandle>(null);
   const [voiceOpen, setVoiceOpen] = useState(false);
-  const tapVoice = () => voice.current?.toggle();
+  const tapVoice = (anchor?: HTMLElement | null) => voice.current?.toggle(anchor);
+  // "Answer out loud" beside each answer uses the same microphone.
+  const voiceAnswer = useMemo(() => ({ toggle: (anchor?: HTMLElement | null) => voice.current?.toggle(anchor), active: voiceOpen }), [voiceOpen]);
   const secondsOn = (activityId: string) => {
     const start = openedAt.current.get(activityId);
     if (!start) return undefined;
@@ -1073,6 +1075,7 @@ export default function SessionDetailPage() {
   if (newUi) {
     return (
       // The calculator rises from the bottom on a phone; this padding is the room it takes, so the question and the bottom bar stay above it. (Docked on a desktop, <body> makes the room: globals.css.)
+      <VoiceAnswerContext.Provider value={planReady ? voiceAnswer : null}>
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background pb-[var(--calc-sheet,0px)]">
         <div className="relative flex min-w-0 flex-1 flex-col">
           {/* The top bar sits in the same column as the content under it (same gutters, same max width), so the step bar and the question share their edges. */}
@@ -1094,7 +1097,7 @@ export default function SessionDetailPage() {
                 )}
                 {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
                 {planReady && activeActivity && (
-                  <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} intro={activeActivity.type === "worksheet" && bubble !== "showing"} />
+                  <VoiceScribeTrigger active={voiceOpen} onClick={() => tapVoice()} intro={activeActivity.type === "worksheet" && bubble !== "showing"} />
                 )}
                 {planReady && activeActivity && (
                   <CalculatorTool family={subjectFamily} blocked={nonCalculator} workspaceId={workspaceId} scope={contentColumn} />
@@ -1313,6 +1316,7 @@ export default function SessionDetailPage() {
           />
         )}
       </div>
+      </VoiceAnswerContext.Provider>
     );
   }
 
