@@ -15,6 +15,7 @@ import type { ApiWarmupQuestion } from "@/lib/api/study-session";
  * (the X / notes top bar and the scrolling column), with fixtures and no network:
  *   ?state=quiz        mid-build, the quick check on question 1 (default)
  *   ?state=skipped     mid-build, no quick check (as after Skip, with no warm-up questions yet)
+ *   ?state=nomatch     the server returned no topics (nothing matches the session) and no warm-up yet
  *   ?state=warmup      mid-build, the warm-up questions that follow a Skip
  *   ?state=done        everything written ("Finishing up"); answer the check to see its results
  *   ?state=confidence  mid-build, the "How confident are you" question instead
@@ -142,7 +143,7 @@ const CONFIDENCE: WaitConfidenceState = {
 function Inner() {
   const state = useSearchParams().get("state") ?? "quiz";
   const build = BUILD[state === "done" ? "done" : "mid"];
-  const api = state === "skipped" ? API.none : state === "warmup" ? API.warmup : API.check;
+  const api = state === "skipped" || state === "nomatch" ? API.none : state === "warmup" ? API.warmup : API.check;
   return (
     // The session page's own frame (page.tsx, new UI): top bar, then the scrolling column.
     <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">

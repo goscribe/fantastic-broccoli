@@ -1942,6 +1942,7 @@ function GeneratingPlanCard({
     return (
       <SessionBuildWait
         workspaceId={workspaceId}
+        sessionId={sessionId}
         focus={title}
         confidence={confidence}
         build={{
@@ -2068,7 +2069,7 @@ function GeneratingPlanCard({
               })}
             </ul>
           )}
-          <SessionPrecheck workspaceId={workspaceId} focus={title} />
+          <SessionPrecheck workspaceId={workspaceId} sessionId={sessionId} focus={title} />
         </div>
       </div>
     </div>

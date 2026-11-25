@@ -13,6 +13,7 @@ import {
 } from "@/lib/api/proficiency";
 import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
 import { HERO_KEY, HERO_OPTION } from "@/components/session/quiz-row";
+import { precheckShown, precheckView } from "@/lib/precheck-view";
 import { studySessionApi, type ApiWarmupQuestion } from "@/lib/api/study-session";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { MarkdownText } from "@/components/ui/markdown-text";
@@ -122,7 +123,7 @@ export function LevelBadge({ level, className }: { level: ProficiencyLevel; clas
 
 /** Where the quick check (and the warm-up after it) reads and marks questions; /design previews pass fixtures. */
 export interface QuizApi {
-  precheck: (workspaceId: string, focus?: string) => Promise<PrecheckTopic[]>;
+  precheck: (workspaceId: string, focus?: string, sessionId?: string) => Promise<PrecheckTopic[]>;
   answer: (input: { workspaceId: string; artifactId: string; index: number; selectedIndex: number }) => Promise<BankAnswerResult>;
   warmup: (workspaceId: string) => Promise<ApiWarmupQuestion[]>;
 }
@@ -162,18 +163,23 @@ function isTyping(target: EventTarget | null): boolean {
  * question-bank questions per topic, starting in the middle of each topic's
  * difficulty ladder and stepping up or down on the answer. Answers are
  * marked server-side and update the topic rating that the session plan is
- * shaped around. Falls back to the plain warm-up quiz when the bank has no
- * topics yet (or after the check is skipped).
+ * shaped around. Falls back to the plain warm-up quiz when the server
+ * returns no topics (an empty bank, or nothing matching the session's
+ * planned topics or title) or after the check is skipped; see
+ * lib/precheck-view.ts.
  */
 export function SessionPrecheck({
   workspaceId,
   focus,
+  sessionId,
   hero = false,
   api = LIVE_QUIZ_API,
   onShown,
 }: {
   workspaceId: string;
   focus?: string;
+  /** The session being built: the check asks about its planned topics (`focus` is the fallback). */
+  sessionId?: string;
   hero?: boolean;
   api?: QuizApi;
   /** Whether a question, the results or the warm-up is on screen (the wait screen then shrinks its build header). */
@@ -191,8 +197,8 @@ export function SessionPrecheck({
   const [burst, setBurst] = useState(0);
   const nextRef = useRef<HTMLButtonElement>(null);
   const [warmupShown, setWarmupShown] = useState(false);
-  const checking = topics !== null && topics.length > 0 && !skipped;
-  const shown = checking || (topics !== null && warmupShown);
+  const view = precheckView(topics, skipped);
+  const shown = precheckShown(view, warmupShown);
   useEffect(() => {
     onShown?.(shown);
   }, [shown, onShown]);
@@ -200,7 +206,7 @@ export function SessionPrecheck({
   useEffect(() => {
     let cancelled = false;
     api
-      .precheck(workspaceId, focus)
+      .precheck(workspaceId, focus, sessionId)
       .then((rows) => {
         if (cancelled) return;
         const usable = rows.filter((r) => r.ladder.length > 0);
@@ -211,7 +217,7 @@ export function SessionPrecheck({
     return () => {
       cancelled = true;
     };
-  }, [workspaceId, focus, api]);
+  }, [workspaceId, focus, sessionId, api]);
 
   const item: PrecheckItem | undefined = useMemo(
     () => (topics && step ? topics[step.topicIndex]?.ladder[step.rung] : undefined),
@@ -287,8 +293,8 @@ export function SessionPrecheck({
     return () => window.removeEventListener("keydown", onKey);
   }, [item, skipped, picked, result, answer, next]);
 
-  if (topics === null) return null;
-  if (topics.length === 0 || skipped) return <WarmupQuiz workspaceId={workspaceId} hero={hero} load={api.warmup} onShown={setWarmupShown} />;
+  if (view === "loading" || topics === null) return null;
+  if (view === "warmup") return <WarmupQuiz workspaceId={workspaceId} hero={hero} load={api.warmup} onShown={setWarmupShown} />;
 
   const wrap = hero ? HERO : SECTION;
   const levelOf = (topic: PrecheckTopic): ProficiencyLevel => levels[topic.topic]?.level ?? topic.level;
