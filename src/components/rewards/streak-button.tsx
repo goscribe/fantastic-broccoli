@@ -1,14 +1,17 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
-import { Check, Flame, Snowflake, Sparkles, Store } from "lucide-react";
+import { Flame, Snowflake, Sparkles } from "lucide-react";
 import { Mascot } from "@/components/rewards/mascot";
 import { useRewards, useStreak, type StreakSummary } from "@/lib/rewards";
 import { toast } from "@/lib/toast";
 import { useI18n, type Locale } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
+import "@/lib/i18n/purpose";
+import { freezeSaveLine } from "@/lib/api/streak";
 
 const MILESTONES = [3, 7, 14, 30, 60, 100, 365];
 
@@ -44,10 +47,10 @@ export function StreakWeek({ streak }: { streak: StreakSummary }) {
             <span
               className={cn(
                 "grid size-8 place-items-center rounded-full",
-                state === "done" && "bg-gradient-to-b from-[#ffb020] to-[#f4602e] text-white",
-                state === "frozen" && "bg-sky-100 text-sky-600 ring-1 ring-sky-300",
+                state === "done" && "bg-[#f0a645] text-[#3a2420]",
+                state === "frozen" && "bg-muted text-muted-foreground ring-1 ring-border-strong",
                 state === "missed" && "bg-muted text-faint",
-                state === "today" && "border-2 border-dashed border-[#f59e0b] text-[#d97706]",
+                state === "today" && "border-2 border-dashed border-[#f0a645] text-[#b26a0c]",
               )}
             >
               {state === "done" ? (
@@ -112,6 +115,21 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
     toast.success(`${t("rewards.streakDays").replace("{n}", String(streak.current))}!`);
   }, [streak, t]);
 
+  // A freeze Scribe applied by itself: one calm line, once per save, on the next visit.
+  useEffect(() => {
+    const save = streak?.freezeSave;
+    const line = freezeSaveLine(save, t);
+    if (!save || !line) return;
+    const key = `scribe.freezeSave.${save.at}`;
+    try {
+      if (window.localStorage.getItem(key)) return;
+      window.localStorage.setItem(key, "1");
+    } catch {
+      return;
+    }
+    toast(line, { duration: 8000 });
+  }, [streak?.freezeSave, t]);
+
   useEffect(() => {
     if (!open) return;
     const onDown = (e: MouseEvent) => {
@@ -148,14 +166,22 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
         className={cn(
           "flex items-center gap-1 font-bold tabular-nums transition-colors",
           variant === "new" ? "h-10 rounded-xl border px-2.5 text-[14px] sm:px-3" : "rounded-full border px-2 py-1 text-[12px]",
-          lit
-            ? "border-[#fdba74] bg-[#fff4e6] text-[#c2410c] hover:bg-[#ffedd5]"
-            : "border-border bg-white text-muted-foreground hover:bg-muted dark:bg-card",
+          variant === "new"
+            ? "border-border bg-white text-foreground hover:bg-muted"
+            : lit
+              ? "border-[#fdba74] bg-[#fff4e6] text-[#c2410c] hover:bg-[#ffedd5]"
+              : "border-border bg-white text-muted-foreground hover:bg-muted dark:bg-card",
         )}
       >
+        {/* The flame is always orange in the new UI; filled once there is a streak, brighter when today counts. */}
         <Flame
-          className={cn(variant === "new" ? "size-[18px]" : "size-3.5", lit ? "text-[#f97316]" : "text-faint")}
-          fill={lit ? "currentColor" : "none"}
+          className={cn(
+            variant === "new" ? "size-[19px]" : "size-3.5",
+            variant === "new" ? "text-[var(--flame)]" : lit ? "text-[#f97316]" : "text-faint",
+            variant === "new" && lit && "life-pop",
+          )}
+          fill={lit || (variant === "new" && days > 0) ? "currentColor" : "none"}
+          fillOpacity={variant === "new" && !lit ? 0.35 : 1}
           strokeWidth={lit ? 1.6 : 2}
         />
         {days}
@@ -175,7 +201,6 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
                 {t("rewards.streakDays").replace("{n}", String(days))}
               </p>
               <p className={cn("mt-1 text-[13px] font-medium leading-snug", lit ? "text-muted-foreground" : "text-[#c2410c]")}>
-                {lit && <Check className="mr-1 inline size-3.5 align-[-2px] text-success" strokeWidth={3} />}
                 {status}
               </p>
               {streak.longest > days && (
@@ -211,13 +236,31 @@ export function StreakButton({ variant = "new" }: { variant?: "new" | "legacy" }
           <Link
             href="/shop"
             onClick={() => setOpen(false)}
-            className="mt-3 flex h-11 w-full items-center justify-center gap-2 rounded-xl bg-accent text-[14px] font-semibold text-accent-foreground hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
+            className={buttonClass({ className: "mt-3 w-full gap-2" })}
           >
-            <Store className="size-4" />
             {t("rewards.openShop")}
           </Link>
         </div>
       )}
     </div>
+  );
+}
+
+/** Header points: a sparkle and the balance, one tap to the shop. Hidden until rewards load. */
+export function PointsPill() {
+  const { t } = useI18n();
+  const { data: rewards } = useRewards();
+  if (!rewards) return null;
+  const label = t("rewards.ptsValue").replace("{n}", rewards.balance.toLocaleString());
+  return (
+    <Link
+      href="/shop"
+      aria-label={label}
+      title={label}
+      className="flex h-10 items-center gap-1 rounded-xl border border-border bg-white px-2.5 text-[14px] font-bold tabular-nums text-foreground transition-colors hover:bg-muted sm:px-3"
+    >
+      <Sparkles className="size-[18px] text-accent" fill="currentColor" strokeWidth={1.6} />
+      {rewards.balance.toLocaleString()}
+    </Link>
   );
 }

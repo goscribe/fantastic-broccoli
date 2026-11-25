@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Water as a transport medium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:30.411Z",
+  "cards": [
+    {
+      "id": "1h1reoa",
+      "kind": "concept",
+      "front": "Why is a water molecule polar?",
+      "back": "Oxygen attracts the shared electrons more strongly than hydrogen, so the oxygen end is slightly negative ($\\delta-$) and the hydrogen ends are slightly positive ($\\delta+$). This uneven charge makes water **polar**.",
+      "hint": "Think about how the shared electrons sit in a covalent bond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gpsguw",
+      "kind": "term",
+      "front": "What is a **hydrogen bond**?",
+      "back": "A **hydrogen bond** is a weak attraction between a slightly positive hydrogen on one molecule and a slightly negative atom on a neighbouring molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jda3i6",
+      "kind": "term",
+      "front": "What is **cohesion** in water?",
+      "back": "**Cohesion** is the sticking together of water molecules, caused by hydrogen bonds, so plasma moves as one unbroken column.",
+      "hint": "Compare with how the molecules of any liquid cling to each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xznlpx",
+      "kind": "concept",
+      "front": "Why is water a liquid at body temperature?",
+      "back": "Many hydrogen bonds hold water molecules close together, so water stays liquid and plasma can flow through vessels.",
+      "hint": "Consider what would happen if the molecules were held less tightly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l6ybsa",
+      "kind": "concept",
+      "front": "Why does water dissolve ions and polar molecules well?",
+      "back": "Water is polar, so its molecules are attracted to charged particles. They cluster around ions and keep them apart, making water a good **solvent**.",
+      "hint": "Think about which kinds of particle a polar molecule is attracted to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1361565",
+      "kind": "concept",
+      "front": "Why are lipids carried in plasma inside particles that have proteins on the outside?",
+      "back": "Lipids do not dissolve well in water, so they are packaged in particles with proteins on the outside, which let them travel in the watery plasma.",
+      "hint": "Think about how a lipid behaves when placed in water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pint4h",
+      "kind": "mistake",
+      "front": "Why is it wrong to think water carries every substance equally well?",
+      "back": "How easily a substance dissolves depends on whether it is polar or charged. Water dissolves ions and polar molecules readily, but lipids dissolve poorly and oxygen only slightly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1man98d",
+      "kind": "term",
+      "front": "What is the **specific heat capacity** of a substance?",
+      "back": "The energy needed to raise the temperature of $1\\,\\text{kg}$ of it by $1\\,^\\circ\\text{C}$.",
+      "hint": "Think about energy, a fixed mass, and a temperature rise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rrwwvx",
+      "kind": "concept",
+      "front": "Why does water have a high specific heat capacity?",
+      "back": "Breaking hydrogen bonds takes energy, so water absorbs a lot of energy for each degree its temperature rises.",
+      "hint": "Consider the energy needed to loosen the attractions between molecules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t2l1vz",
+      "kind": "process",
+      "front": "What happens, step by step, when sweat cools the blood near the skin?",
+      "back": "1. Sweat evaporates from the skin. 2. Evaporation removes a large amount of heat, because water has a high **latent heat of vaporisation**. 3. The blood just beneath the surface is cooled.",
+      "hint": "Start with what sweat does on the surface of the skin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vj9dff",
+      "kind": "term",
+      "front": "What is the **latent heat of vaporisation**?",
+      "back": "The energy needed to change $1\\,\\text{kg}$ of a liquid into a gas without any change in its temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "010q0hy",
+      "kind": "term",
+      "front": "What is **hydrolysis**?",
+      "back": "A reaction in which a water molecule is used to break a bond between parts of a molecule, for example when large molecules are digested.",
+      "hint": "Think about water as a reactant rather than a solvent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q83f6k",
+      "kind": "concept",
+      "front": "Why does the same plasma stream help organs avoid building up harmful products?",
+      "back": "Plasma flows through the organs and carries waste products away, so harmful products do not accumulate in the tissues.",
+      "hint": "Think about where the plasma goes after it leaves each organ.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "Types of chemical reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:44.693Z",
+  "cards": [
+    {
+      "id": "02l6bt9",
+      "kind": "concept",
+      "front": "Name the three reaction types in this topic and the change that defines each one.",
+      "back": "**Precipitation** forms an insoluble solid. **Acid-base** transfers a proton from an acid to a base. **Redox** changes oxidation numbers through electron transfer.",
+      "hint": "Each type is defined by one specific change, not by the substances present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nwi3bz",
+      "kind": "concept",
+      "front": "How do you tell whether a reaction is acid-base?",
+      "back": "Find the proton donor and acceptor. An **acid** gives a proton to a **base**, even when no water is formed.",
+      "hint": "Water is not always a product of an acid-base reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hpo6rm",
+      "kind": "concept",
+      "front": "What is the key evidence that a reaction is redox?",
+      "back": "At least one **oxidation number** rises and another falls. A rise is oxidation, and a fall is reduction.",
+      "hint": "Compare oxidation numbers on both sides of the equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c3zg51",
+      "kind": "process",
+      "front": "What steps predict whether a precipitate forms when two aqueous solutions are mixed?",
+      "back": "1) Swap the ions between the reactants. 2) Write charge-balanced formulas for the possible products. 3) Use **solubility rules** to assign states. A precipitate forms only if one product is insoluble.",
+      "hint": "Balance the ionic charges before you check solubility.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "127zcds",
+      "kind": "formula",
+      "front": "Write the balanced equation for aqueous silver nitrate reacting with aqueous sodium chloride.",
+      "back": "$\\mathrm{AgNO_3(aq)+NaCl(aq)\\rightarrow AgCl(s)+NaNO_3(aq)}$. The **silver chloride** is the solid; the sodium nitrate stays aqueous.",
+      "hint": "Check the state label on each product.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l24xta",
+      "kind": "concept",
+      "front": "What do the solubility rules say about most carbonates?",
+      "back": "Most carbonates are **insoluble**, except those of Group 1 ions and ammonium.",
+      "hint": "Group 1 and ammonium salts are the usual exceptions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c6dqzq",
+      "kind": "term",
+      "front": "What oxidation number does a monatomic ion have, and what does an uncombined element have?",
+      "back": "A monatomic ion has an oxidation number equal to its **charge**. An uncombined element has an oxidation number of **zero**.",
+      "hint": "Consider an element that has not bonded with anything else.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09ed4lf",
+      "kind": "example",
+      "front": "In $\\mathrm{Zn(s)+Cu^{2+}(aq)\\rightarrow Zn^{2+}(aq)+Cu(s)}$, what happens to zinc and copper?",
+      "back": "Zinc rises from 0 to +2, so it is **oxidized**. Copper falls from +2 to 0, so it is **reduced**.",
+      "hint": "Track each element's oxidation number from left to right.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b796ly",
+      "kind": "example",
+      "front": "In $\\mathrm{HCl(aq)+NH_3(aq)\\rightarrow NH_4^+(aq)+Cl^-(aq)}$, which species is the proton donor and which is the acceptor?",
+      "back": "**HCl** is the proton donor, and **NH3** is the proton acceptor. This is acid-base even though water is not a product.",
+      "hint": "Look for which reactant gives away H+ and which takes it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pi5xt1",
+      "kind": "mistake",
+      "front": "Mistake: two aqueous solutions are mixed, so a precipitate must form. Why is this wrong?",
+      "back": "Mixing aqueous solutions does not guarantee a solid. A precipitate forms only when an **insoluble** product is made.",
+      "hint": "Check the state and solubility of each possible product.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05728x4",
+      "kind": "mistake",
+      "front": "Mistake: the ionic partners swap, so the reaction must be redox. Why is this wrong?",
+      "back": "A change in ionic partners alone does not establish **redox**. You must check that oxidation numbers change on both sides.",
+      "hint": "Swapping partners and electron transfer are different things.",
+      "sectionId": "s3"
+    }
+  ]
+}

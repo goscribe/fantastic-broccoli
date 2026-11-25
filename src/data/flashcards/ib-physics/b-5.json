@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "b-5",
+  "topicCode": "B.5",
+  "topicName": "Current and circuits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:33.165Z",
+  "cards": [
+    {
+      "id": "1pblgl9",
+      "kind": "concept",
+      "front": "What is electric current, and what is its unit?",
+      "back": "**Electric current** is the rate at which charge passes a point, $I=\\frac{Q}{t}$, measured in amperes (A). A current of 1 A means 1 C passes each second.",
+      "hint": "Think of charge flowing past one point every second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jzppbh",
+      "kind": "concept",
+      "front": "What does Ohm's law state, and how is resistance defined?",
+      "back": "Current is proportional to potential difference when physical conditions stay constant, so $V=IR$. **Resistance** is $R=\\frac{V}{I}$, measured in ohms.",
+      "hint": "Which condition must stay constant, such as temperature?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z41xwy",
+      "kind": "concept",
+      "front": "How do potential difference and current behave in series and in parallel?",
+      "back": "In **series** the same current passes through each component and the potential differences add. In **parallel** each branch has the same potential difference and the branch currents add.",
+      "hint": "Compare a single path with separate branches.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1uzf8vv",
+      "kind": "term",
+      "front": "What is potential difference?",
+      "back": "**Potential difference** is the energy transferred per unit charge between two points, $V=\\frac{E}{Q}$, measured in volts. 1 V means 1 J per coulomb.",
+      "hint": "Energy per unit charge, not charge per second.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ua4xko",
+      "kind": "formula",
+      "front": "How can the electrical power in a resistor be calculated?",
+      "back": "$P=IV$, and for a resistor $P=I^2R=\\frac{V^2}{R}$. **Electrical power** is energy transferred each second, measured in watts (W).",
+      "hint": "Substitute $V=IR$ into $P=IV$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wq9t9u",
+      "kind": "formula",
+      "front": "How does the resistance of a uniform wire depend on its length, area and material?",
+      "back": "$R=\\frac{\\rho L}{A}$, where $\\rho$ is the **resistivity** in $\\Omega\\,\\mathrm{m}$, $L$ is length and $A$ is cross-sectional area. Longer wires resist more; thicker wires resist less.",
+      "hint": "Length goes on top and area on the bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r0tm1g",
+      "kind": "example",
+      "front": "A 6 Ω and a 3 Ω resistor are in parallel, and this pair is in series with a 2 Ω resistor across a 12 V supply. Find the total resistance and supply current.",
+      "back": "Total resistance is 4 Ω and supply current is 3 A. The parallel pair gives 2 Ω, so 2 + 2 = 4 Ω, and $I=\\frac{12}{4}=3\\,\\mathrm{A}$.",
+      "hint": "Combine the parallel pair first, then add the series resistor.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sopvla",
+      "kind": "mistake",
+      "front": "Is current used up as it passes through a resistor?",
+      "back": "No. **Current** is not used up. Charge continues around a complete circuit, so the same current flows through each series component.",
+      "hint": "Charge is conserved around a loop.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oyjog2",
+      "kind": "process",
+      "front": "Where do you connect an ammeter and a voltmeter when measuring a component?",
+      "back": "The **ammeter** goes in series with the component to measure its current. The **voltmeter** goes in parallel across the component to measure its potential difference.",
+      "hint": "One meter joins the path, the other joins the two ends.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1587x7b",
+      "kind": "mistake",
+      "front": "Does a crossing of two wires on a circuit diagram mean they are connected?",
+      "back": "Not necessarily. A **junction** must be shown to make the paths electrically connected. A crossing alone does not show a connection.",
+      "hint": "Look for a junction dot or the lack of one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dak0qg",
+      "kind": "concept",
+      "front": "Why is a cell's terminal potential difference lower than its emf?",
+      "back": "Because of its **internal resistance** $r$. When current flows, energy transfers inside the cell, so $V=\\mathcal{E}-Ir$.",
+      "hint": "Some energy is lost inside the cell itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08g15bc",
+      "kind": "formula",
+      "front": "What is the output voltage across $R_2$ in a potential divider made from $R_1$ and $R_2$ in series?",
+      "back": "$V_{\\mathrm{out}}=V_{\\mathrm{in}}\\frac{R_2}{R_1+R_2}$. This assumes nothing connected across $R_2$ draws current.",
+      "hint": "The voltage divides in proportion to resistance.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1atw2v9",
+      "kind": "concept",
+      "front": "What do Kirchhoff's two laws state?",
+      "back": "At a junction, the currents in equal the currents out, conserving charge. Around a closed loop, the sum of potential rises equals the sum of potential drops, conserving energy per unit charge.",
+      "hint": "One law is about junctions, the other about loops.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1hhr6tu",
+      "kind": "mistake",
+      "front": "Why is a filament lamp not an ohmic component?",
+      "back": "Its **temperature** rises as current rises, so its resistance changes. It does not have constant resistance, so it does not obey $V=IR$ as a straight-line relation.",
+      "hint": "What happens to a filament when it heats up?",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-12",
+  "topicCode": "4.12",
+  "topicName": "Designing data collection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:55.858Z",
+  "cards": [
+    {
+      "id": "1qase1w",
+      "kind": "concept",
+      "front": "Why does a fair random sample need a sampling frame?",
+      "back": "A **sampling frame** is a complete list of the population, so chance can select every member fairly. Without a full list, some members have no chance of being chosen.",
+      "hint": "Think about what the random choice is picking from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11ejwz9",
+      "kind": "concept",
+      "front": "Does taking a bigger sample remove bias?",
+      "back": "No. **Bias** is a consistent error caused by the method, so a larger sample only reduces random variation and gives a more precise but still wrong answer.",
+      "hint": "Bias pushes results one way; sample size affects random variation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0eaogyj",
+      "kind": "concept",
+      "front": "What is stratified sampling, and when is it most useful?",
+      "back": "Divide the population into **strata** that share a feature, then sample randomly from each in proportion to its size. It works best when the strata differ on the variable studied.",
+      "hint": "Think about subgroups that might behave differently.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0c6zc3x",
+      "kind": "term",
+      "front": "What does simple random sampling guarantee?",
+      "back": "**Simple random sampling** means every possible sample of the required size is equally likely to be chosen.",
+      "hint": "Focus on the chance of each possible sample.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e1qdld",
+      "kind": "formula",
+      "front": "In systematic sampling, how is the interval $k$ found?",
+      "back": "$k=\\frac{N}{n}$, where $N$ is the population size and $n$ is the sample size. Choose a random start, then take every $k$th member.",
+      "hint": "Divide the population by the sample size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eis9i7",
+      "kind": "example",
+      "front": "How would you take a systematic sample of 30 people from a list of 600?",
+      "back": "Calculate $k=\\frac{600}{30}=20$. Choose a random starting person among the first 20, then select every 20th person after that.",
+      "hint": "Start by finding the interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1iw9gps",
+      "kind": "example",
+      "front": "A school has 480 Year 12 and 320 Year 13 students. How many of a stratified sample of 50 should be from Year 12?",
+      "back": "**30** students, since $\\frac{480}{800}\\times50=30$. The remaining 20 come from Year 13.",
+      "hint": "Find the total population first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y32d98",
+      "kind": "process",
+      "front": "What are the four stages of planning a data collection, in order?",
+      "back": "State the question the data must answer; identify the population and variables; choose a sampling method and sample size; decide how responses will be recorded and checked.",
+      "hint": "Start with the question, end with recording.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lx578m",
+      "kind": "concept",
+      "front": "How does quota sampling choose its members?",
+      "back": "The interviewer fills fixed numbers for each group with whoever is available, so the selection is **non-random** and the chooser's preferences can shape the sample.",
+      "hint": "Who decides who gets included?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n546lq",
+      "kind": "mistake",
+      "front": "Why is surveying only students at the school gate at 8 am a problem?",
+      "back": "It causes **sampling bias**: students who arrive late are never chosen, so the sample does not represent all students.",
+      "hint": "Who could be missed by that time and place?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pjp026",
+      "kind": "concept",
+      "front": "How can non-response distort survey results?",
+      "back": "**Non-response** occurs when chosen people do not reply. If only strongly opinionated people answer, the results overstate extreme views.",
+      "hint": "Consider who is most likely to reply.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1n7p6cw",
+      "kind": "mistake",
+      "front": "Why is 'Don't you agree the canteen is poor?' a weak survey question?",
+      "back": "It is a **leading question**: its wording suggests the answer wanted. Neutral wording avoids this bias.",
+      "hint": "Look at what the wording suggests.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1nuprr6",
+      "kind": "process",
+      "front": "What is the purpose of a pilot study?",
+      "back": "A **pilot study** is a small trial run that reveals unclear questions or impractical steps before the full investigation begins.",
+      "hint": "Think about testing before the main study.",
+      "sectionId": "s6"
+    }
+  ]
+}

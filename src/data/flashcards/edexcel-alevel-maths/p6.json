@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p6",
+  "topicCode": "P6",
+  "topicName": "Exponentials and logarithms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:36.798Z",
+  "cards": [
+    {
+      "id": "0gvepoi",
+      "kind": "concept",
+      "front": "What does $\\log_a b$ mean, and how does it relate to $a^c=b$?",
+      "back": "$\\log_a b$ is the **power** of $a$ that gives $b$. So $\\log_a b=c$ and $a^c=b$ say the same thing, which means logarithms undo powers.",
+      "hint": "Compare with how division reverses multiplication.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jg46qr",
+      "kind": "formula",
+      "front": "What are the three laws of logarithms, in symbols?",
+      "back": "$\\log_a x+\\log_a y=\\log_a(xy)$, $\\log_a x-\\log_a y=\\log_a\\frac{x}{y}$ and $k\\log_a x=\\log_a(x^k)$, for $x,y>0$. Each comes from a law of indices.",
+      "hint": "Each one matches a law of indices you already know.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p6dg54",
+      "kind": "process",
+      "front": "What are the steps to solve $2^x=7$ when the unknown is in the power?",
+      "back": "Take logarithms of both sides, then use the power law to bring $x$ down: $x\\ln2=\\ln7$, so $x=\\frac{\\ln7}{\\ln2}\\approx2.81$.",
+      "hint": "Start by applying the same operation to both sides.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "15r5i7a",
+      "kind": "term",
+      "front": "What is an exponential function?",
+      "back": "A function where the variable is in the **power**, such as $f(x)=a^x$, with base $a>0$ and $a\\ne1$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uz50oz",
+      "kind": "concept",
+      "front": "What makes the curve $y=e^x$ special?",
+      "back": "Its **gradient** at any point equals the value of $y$ at that point.",
+      "hint": "Think about what you could compare at a point on the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17fhdfd",
+      "kind": "formula",
+      "front": "In $y=Ae^{kx}$, what does the sign of $k$ tell you?",
+      "back": "If $k>0$ the curve shows **exponential growth**; if $k<0$ it shows **exponential decay**. The curve crosses the $y$-axis at $(0,A)$.",
+      "hint": "Think about what happens to $e^{kx}$ as $x$ increases.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gm0ruq",
+      "kind": "term",
+      "front": "What is an asymptote of a curve?",
+      "back": "A line the curve approaches without ever reaching, as $x$ or $y$ becomes large. For $y=Ae^{kx}$ the **x-axis** is one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lgla74",
+      "kind": "example",
+      "front": "Evaluate $27^{-2/3}$.",
+      "back": "$\\frac{1}{9}$. Take the cube root first to get $3$, square it to get $9$, then take the reciprocal.",
+      "hint": "Deal with the negative sign first, then the fractional power.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vjlsi1",
+      "kind": "concept",
+      "front": "How is the graph of $y=\\ln x$ related to the graph of $y=e^x$?",
+      "back": "It is the **reflection** of $y=e^x$ in the line $y=x$, because the two functions undo each other.",
+      "hint": "Think about swapping inputs and outputs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ac8y40",
+      "kind": "mistake",
+      "front": "Why is $\\ln(-2)$ undefined?",
+      "back": "Logarithms need positive inputs. $\\ln x$ asks which power of $e$ gives $x$, and every power of $e$ is **positive**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03wjnhx",
+      "kind": "mistake",
+      "front": "Why is $\\log_a(x+y)$ not equal to $\\log_a x+\\log_a y$?",
+      "back": "The **addition** law applies to a product: $\\log_a x+\\log_a y=\\log_a(xy)$. A sum inside the bracket cannot be split up this way.",
+      "hint": "Look at which operation sits inside the logarithm.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ql17el",
+      "kind": "example",
+      "front": "Write $2\\log_3 6-\\log_3 4$ as a single logarithm and simplify.",
+      "back": "$\\log_3 9=2$. The power law gives $\\log_3 36$, then the subtraction law gives $\\log_3\\frac{36}{4}=\\log_3 9$, so the value is $2$.",
+      "hint": "Start by using the power law on the first term.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sdrhdo",
+      "kind": "example",
+      "front": "Solve $3^{2x}=40$, giving $x$ to 3 significant figures.",
+      "back": "$x\\approx1.68$. Take natural logs to get $2x\\ln3=\\ln40$, then $x=\\frac{\\ln40}{2\\ln3}$.",
+      "hint": "Which function undoes the power?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0dhvu7v",
+      "kind": "mistake",
+      "front": "Why must the value $u\\le0$ be rejected when solving $e^{2x}-5e^x+6=0$ with $u=e^x$?",
+      "back": "Because $e^x$ is always **positive**, so $u=e^x$ can never be zero or negative.",
+      "sectionId": "s6"
+    }
+  ]
+}

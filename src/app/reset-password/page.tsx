@@ -57,8 +57,8 @@ export default function ResetPasswordPage() {
       <AuthFigure
         src={
           done
-            ? "/design/cat2-trophy.png"
-            : "/design/cat2-think.png"
+            ? "/design/cat3-trophy.webp"
+            : "/design/cat3-think.webp"
         }
       />
 
@@ -77,8 +77,13 @@ export default function ResetPasswordPage() {
         </p>
       ) : (
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-1.5">
+            <label htmlFor="new-password" className="text-[13px] font-medium text-foreground">
+              {t("misc.newPassword")}
+            </label>
           <div className="relative">
             <Input
+              id="new-password"
               type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -101,7 +106,13 @@ export default function ResetPasswordPage() {
               )}
             </button>
           </div>
+          </div>
+          <div className="space-y-1.5">
+            <label htmlFor="confirm-password" className="text-[13px] font-medium text-foreground">
+              {t("misc.confirmNewPassword")}
+            </label>
           <Input
+            id="confirm-password"
             type={showPassword ? "text" : "password"}
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
@@ -109,6 +120,7 @@ export default function ResetPasswordPage() {
             required
             minLength={8}
           />
+          </div>
           {error && (
             <p className="text-sm text-destructive">
               {error.startsWith("misc.") ? t(error) : error}
@@ -118,7 +130,7 @@ export default function ResetPasswordPage() {
             {busy ? t("common.loading") : t("misc.resetPassword")}
           </Button>
           <p className="text-center text-sm text-muted-foreground">
-            <Link href="/login" className="text-accent hover:underline">
+            <Link href="/login" className="font-medium text-foreground hover:underline">
               {t("misc.backToLogin")}
             </Link>
           </p>

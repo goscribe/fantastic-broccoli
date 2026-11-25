@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Ideal gas law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:34.010Z",
+  "cards": [
+    {
+      "id": "17n2na5",
+      "kind": "term",
+      "front": "What is the ideal gas law, and which four gas properties does it connect?",
+      "back": "The **ideal gas law** is $PV=nRT$. It connects pressure, volume, amount in moles, and kelvin temperature of a gas.",
+      "hint": "Four properties linked by one constant.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m4x5kz",
+      "kind": "mistake",
+      "front": "Can you substitute a Celsius temperature directly into PV=nRT?",
+      "back": "No. Convert to **kelvin** first using $T(\\mathrm{K})=T(°\\mathrm{C})+273.15$, so 25.0 °C becomes 298.15 K.",
+      "hint": "Which scale starts at absolute zero?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ip4qf7",
+      "kind": "concept",
+      "front": "Why must the value of R match your pressure and volume units?",
+      "back": "The **gas constant** R depends on the units you choose. Use $R=0.08206\\,\\mathrm{L\\,atm\\,mol^{-1}\\,K^{-1}}$ for atm and liters, or 8.314 for kPa and liters.",
+      "hint": "Units must cancel correctly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e5po17",
+      "kind": "formula",
+      "front": "What does each symbol in PV=nRT mean?",
+      "back": "$P$ is pressure, $V$ is volume, $n$ is the amount in moles, $R$ is the **gas constant**, and $T$ is absolute temperature in kelvin.",
+      "hint": "Temperature must be absolute.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0umqj37",
+      "kind": "formula",
+      "front": "How do you rearrange PV=nRT to find the amount of gas?",
+      "back": "$n=\\frac{PV}{RT}$. This gives moles of gas, not the mass of the sample.",
+      "hint": "Isolate n on one side of the equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w27gw7",
+      "kind": "example",
+      "front": "A gas occupies 2.00 L at 1.50 atm and 25.0 °C. How many moles of gas are present?",
+      "back": "**0.123 mol**. Convert 25.0 °C to 298.15 K, then use $n=\\frac{PV}{RT}$ with $R=0.08206$.",
+      "hint": "Start with the temperature conversion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y5hpe5",
+      "kind": "example",
+      "front": "How many kilopascals is 0.750 atm?",
+      "back": "**76.0 kPa**, using $1\\,\\mathrm{atm}=101.325\\,\\mathrm{kPa}$.",
+      "hint": "Multiply by a conversion factor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01prxt8",
+      "kind": "process",
+      "front": "What steps should you follow to solve an ideal gas law problem?",
+      "back": "1) Identify the unknown. 2) Rearrange the equation. 3) Convert Celsius to kelvin and match R to your units. 4) Substitute with units and check the answer is reasonable.",
+      "hint": "Start by naming what you need.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zltima",
+      "kind": "term",
+      "front": "What does Boyle’s law state, and what must stay constant?",
+      "back": "For a fixed amount of gas at **constant temperature**, $P_1V_1=P_2V_2$. Pressure and volume change in opposite directions.",
+      "hint": "Keep temperature and moles fixed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02w9q02",
+      "kind": "term",
+      "front": "What does Charles’s law state?",
+      "back": "For a fixed amount of gas at **constant pressure**, $\\frac{V_1}{T_1}=\\frac{V_2}{T_2}$. Volume rises as kelvin temperature rises.",
+      "hint": "Use kelvin, not Celsius.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mx7322",
+      "kind": "formula",
+      "front": "Which equation applies when pressure, volume, and temperature all change but the amount of gas stays fixed?",
+      "back": "The **combined gas law**: $\\frac{P_1V_1}{T_1}=\\frac{P_2V_2}{T_2}$, with temperature in kelvin.",
+      "hint": "It combines Boyle’s and Charles’s laws.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hysvo8",
+      "kind": "mistake",
+      "front": "A gas’s volume increases, so its pressure must fall. Is that always true?",
+      "back": "No. **Boyle’s law** needs constant temperature and amount of gas. If these change, a larger volume does not always mean lower pressure.",
+      "hint": "Check what is held constant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oxr7z8",
+      "kind": "concept",
+      "front": "How does Boyle’s law follow from the ideal gas law?",
+      "back": "For fixed moles at constant temperature, $nRT$ stays constant. So $PV$ stays constant, giving $P_1V_1=P_2V_2$.",
+      "hint": "Which terms in PV=nRT are constant?",
+      "sectionId": "s4"
+    }
+  ]
+}

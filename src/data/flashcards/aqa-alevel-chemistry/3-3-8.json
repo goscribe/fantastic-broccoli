@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-8",
+  "topicCode": "3.3.8",
+  "topicName": "Aldehydes and ketones",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:50.035Z",
+  "cards": [
+    {
+      "id": "1o57s1e",
+      "kind": "concept",
+      "front": "Why does a nucleophile attack the carbon atom of a $\\mathrm{C=O}$ group rather than the oxygen?",
+      "back": "The $\\mathrm{C=O}$ bond is **polar**: oxygen pulls electrons away, leaving the carbon $\\delta+$, so it attracts the lone pair of a nucleophile.",
+      "hint": "Think about which atom in the double bond is electron-poor.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jbqt04",
+      "kind": "concept",
+      "front": "Why can an aldehyde be oxidised but a ketone cannot?",
+      "back": "An aldehyde's carbonyl carbon carries a **hydrogen** atom, so it can be converted into a carboxylic acid. A ketone has no such hydrogen.",
+      "hint": "Compare what is bonded to the carbonyl carbon in each type.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "040jk88",
+      "kind": "process",
+      "front": "What are the steps when cyanide ions add to ethanal, followed by dilute acid?",
+      "back": "1) $\\mathrm{CN^-}$ lone pair attacks the $\\delta+$ carbon. 2) The $\\mathrm{C=O}$ bond breaks and electrons move onto oxygen, giving $\\mathrm{O^-}$. 3) $\\mathrm{O^-}$ takes $\\mathrm{H^+}$, forming 2-hydroxypropanenitrile.",
+      "hint": "Start with the lone pair on the nucleophile and follow the electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kbv6qq",
+      "kind": "term",
+      "front": "What is a carbonyl group?",
+      "back": "A **carbonyl group** is a carbon atom joined to an oxygen atom by a double bond, written $\\mathrm{C=O}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0usioy5",
+      "kind": "term",
+      "front": "What is an aldehyde, in terms of its carbonyl carbon?",
+      "back": "An **aldehyde** is a compound whose carbonyl carbon is bonded to at least one hydrogen atom, so the group sits at the end of the chain.",
+      "hint": "Compare with where the carbonyl group sits in a ketone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tupopo",
+      "kind": "example",
+      "front": "What type of alcohol does an aldehyde form when reduced by $\\mathrm{NaBH_4}$ in aqueous solution?",
+      "back": "A **primary alcohol**. For example, ethanal gives ethanol, $\\mathrm{CH_3CH_2OH}$.",
+      "hint": "Count the carbon groups bonded to the carbon that carries the OH group.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nq3ix2",
+      "kind": "formula",
+      "front": "In the equation $\\mathrm{CH_3COCH_3(l) + 2[H] \\rightarrow CH_3CH(OH)CH_3(l)}$, what does $\\mathrm{[H]}$ represent?",
+      "back": "**Hydrogen supplied by the reducing agent**, not a free hydrogen molecule. Two $\\mathrm{[H]}$ are needed to convert the carbonyl group into an alcohol.",
+      "hint": "Think about where the hydrogen comes from in the reaction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1luq7sf",
+      "kind": "mistake",
+      "front": "A student says Fehling's solution gives a silver mirror with an aldehyde. What is wrong with this?",
+      "back": "The **silver mirror** comes from Tollens' reagent. Fehling's solution gives a **red precipitate** of copper(I) oxide with an aldehyde.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iqflfe",
+      "kind": "example",
+      "front": "What do you observe when acidified potassium dichromate(VI) is warmed with an aldehyde?",
+      "back": "The solution turns from **orange to green**, because the aldehyde is oxidised and the dichromate is reduced. A ketone leaves it orange.",
+      "hint": "Consider what happens to the oxidising agent during the reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p7mkir",
+      "kind": "term",
+      "front": "What is reduction, in terms of electrons?",
+      "back": "**Reduction** is the gain of electrons by a species.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11kg02f",
+      "kind": "concept",
+      "front": "Why is the product of ethanal and cyanide a racemic mixture?",
+      "back": "The carbonyl group is **planar**, so the nucleophile attacks from either face with equal chance, giving equal amounts of two enantiomers.",
+      "hint": "Think about the shape of the carbonyl group before the nucleophile attacks.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17uhr3e",
+      "kind": "example",
+      "front": "What is the name of the product when butanone is reduced by $\\mathrm{NaBH_4}$ in aqueous solution?",
+      "back": "**Butan-2-ol**, a secondary alcohol. Ketones always give secondary alcohols on reduction.",
+      "sectionId": "s5"
+    }
+  ]
+}

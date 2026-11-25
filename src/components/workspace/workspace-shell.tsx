@@ -16,6 +16,8 @@ import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageShell } from "@/components/ui/page-header";
+import { useNewUi } from "@/lib/new-ui";
 import { WorkspaceMembersDialog } from "@/components/workspace/workspace-members-dialog";
 
 interface WorkspaceShellProps {
@@ -36,6 +38,18 @@ export function WorkspaceShell({
   const pathname = usePathname();
   const { t } = useI18n();
   const [membersOpen, setMembersOpen] = useState(false);
+  const newUi = useNewUi();
+
+  // The app today: these pages (an item opened from search, the subject chat)
+  // sit in the same frame as every other page. The tab bar below belongs to
+  // the old workspace; its tabs now only redirect to the subject page.
+  if (newUi && (workspace || loading)) {
+    return flush ? (
+      <main className="flex w-full min-w-0 flex-1 flex-col">{children}</main>
+    ) : (
+      <PageShell>{children}</PageShell>
+    );
+  }
 
   if (!workspace && loading) {
     return (
@@ -104,7 +118,7 @@ export function WorkspaceShell({
   return (
     // overflow-x-clip (not -hidden) so this doesn't become the sticky tab bar's scroll container
     <div className="flex min-w-0 flex-1 flex-col overflow-x-clip">
-      <div className="sticky top-[calc(3.5rem+env(safe-area-inset-top))] z-30 border-b border-border bg-card">
+      <div className="sticky top-[calc(var(--app-top,3.5rem)+env(safe-area-inset-top))] z-30 border-b border-border bg-card">
         <div className="w-full px-2 sm:px-8">
           <nav
             className="flex items-center gap-0.5 -mb-px overflow-x-auto overscroll-x-contain [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"

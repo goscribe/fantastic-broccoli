@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "8-1",
+  "topicCode": "8.1",
+  "topicName": "Internal structure and density",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:57.610Z",
+  "cards": [
+    {
+      "id": "1cnvlvo",
+      "kind": "concept",
+      "front": "What is density, and how do you calculate it?",
+      "back": "**Density** is the mass per unit volume, $\\rho=\\frac{m}{V}$. It tells you how much mass fits into a given volume.",
+      "hint": "Think of mass divided by the space it takes up.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vmmfey",
+      "kind": "concept",
+      "front": "How are particles arranged and moving in solids, liquids and gases?",
+      "back": "Solids: close together in fixed positions, vibrating in place. Liquids: close together but able to slide past one another. Gases: far apart and moving freely. Liquids and gases are both **fluids**.",
+      "hint": "Compare how close the particles are and whether they can slide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1satvuv",
+      "kind": "formula",
+      "front": "What do the symbols in $\\rho=\\frac{m}{V}$ stand for, and what is the SI unit of density?",
+      "back": "$\\rho$ is density, $m$ is mass in kilograms, and $V$ is volume in cubic meters. The SI unit of density is $\\mathrm{kg/m^3}$.",
+      "hint": "Check the unit of each letter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m9bbab",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a heavier object is always denser?",
+      "back": "**Density** is not the same as mass. A large block of a low-density material can have more mass than a small block of a dense one, because density is mass per unit volume.",
+      "hint": "Density depends on both mass and volume.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hcm0yi",
+      "kind": "process",
+      "front": "What steps should you follow to find the density of an object from measured dimensions and mass?",
+      "back": "1) Convert all units to SI. 2) Find the volume, for example $V=0.20\\times0.10\\times0.050$. 3) Use $\\rho=\\frac{m}{V}$. 4) Give the answer in $\\mathrm{kg/m^3}$ unless told otherwise.",
+      "hint": "Check units before you calculate.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jpiv9h",
+      "kind": "example",
+      "front": "A metal block has mass 7.9 kg and volume $1.0\\times10^{-3}\\ \\mathrm{m^3}$. What is its density?",
+      "back": "$\\rho=\\frac{7.9}{1.0\\times10^{-3}}=7900\\ \\mathrm{kg/m^3}$, which is $7.9\\times10^{3}\\ \\mathrm{kg/m^3}$.",
+      "hint": "Divide the mass by the volume.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s86b3s",
+      "kind": "mistake",
+      "front": "What is the most common error in density calculations?",
+      "back": "**Unit slips**: using volume in liters or cubic centimeters without converting to $\\mathrm{m^3}$. Convert first, since $1\\ \\mathrm{L}=10^{-3}\\ \\mathrm{m^3}$.",
+      "hint": "Check the unit of every given value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06gs51o",
+      "kind": "formula",
+      "front": "How can you rearrange the density equation to find volume or mass?",
+      "back": "$V=\\frac{m}{\\rho}$ for volume and $m=\\rho V$ for mass. Choose the form that solves for the unknown.",
+      "hint": "Treat density like a multiplier or divider.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "069qo7d",
+      "kind": "example",
+      "front": "Find the mass of $2.0\\times10^{-3}\\ \\mathrm{m^3}$ of aluminum, which has density $2700\\ \\mathrm{kg/m^3}$.",
+      "back": "$m=\\rho V=(2700)(2.0\\times10^{-3})=5.4\\ \\mathrm{kg}$.",
+      "hint": "Rearrange the formula to solve for mass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "031pdla",
+      "kind": "term",
+      "front": "What does compressible mean?",
+      "back": "**Compressible** means the volume can be noticeably reduced by an increase in pressure. Gases are compressible, while liquids and solids barely are because their particles already nearly touch.",
+      "hint": "Think about squeezing particles closer together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jqernt",
+      "kind": "concept",
+      "front": "Why does a gas have a much lower density than a solid of the same substance?",
+      "back": "Gas particles are far apart, so a given volume holds few particles and little mass. Solid particles nearly touch, so the same volume holds far more mass, giving a higher density.",
+      "hint": "Think about particle spacing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v7gyvz",
+      "kind": "term",
+      "front": "What are fluids?",
+      "back": "**Fluids** are substances that can flow and take the shape of their container. Liquids and gases are both fluids.",
+      "hint": "Think about what flows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pj6jxs",
+      "kind": "concept",
+      "front": "Why does ice float on liquid water?",
+      "back": "Ice has a density of about $920\\ \\mathrm{kg/m^3}$, less than the $1000\\ \\mathrm{kg/m^3}$ of liquid water. A uniform object floats in a fluid that is denser than itself.",
+      "hint": "Compare the two densities.",
+      "sectionId": "s5"
+    }
+  ]
+}

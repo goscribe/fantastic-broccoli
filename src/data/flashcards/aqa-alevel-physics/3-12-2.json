@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-12-2",
+  "topicCode": "3.12.2",
+  "topicName": "Wave-particle duality (option)",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:33.829Z",
+  "cards": [
+    {
+      "id": "0l4zu6y",
+      "kind": "concept",
+      "front": "Why does diffraction count as evidence that particles behave like waves?",
+      "back": "Only waves spread out after passing through a narrow gap, so a beam of particles that diffracts must have **wave** behaviour. Pebbles passing through the same gap keep straight paths.",
+      "hint": "Compare waves entering a harbour with pebbles thrown through the same gap.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hvwyi6",
+      "kind": "process",
+      "front": "What does an electron diffraction experiment show, from the gun to the screen?",
+      "back": "Electrons leave a heated cathode, are accelerated through a high potential difference in a vacuum, pass through thin graphite, then land on a fluorescent screen that shows **concentric rings**.",
+      "hint": "Follow the beam from where the electrons start to where they land.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wiijqw",
+      "kind": "formula",
+      "front": "What is the de Broglie equation, and what does each symbol mean?",
+      "back": "$\\lambda = \\frac{h}{mv}$, where $\\lambda$ is wavelength in $\\mathrm{m}$, $h$ the Planck constant in $\\mathrm{J\\,s}$, $m$ mass in $\\mathrm{kg}$ and $v$ speed in $\\mathrm{m\\,s^{-1}}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bqlpxf",
+      "kind": "term",
+      "front": "What is the de Broglie wavelength of a particle?",
+      "back": "The **de Broglie wavelength** is the wavelength $\\lambda = \\frac{h}{p}$ linked to a particle of momentum $p$. More momentum gives a shorter wavelength.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15tb0vm",
+      "kind": "example",
+      "front": "What is the de Broglie wavelength of an electron moving at $2.0\\times10^{6}\\,\\mathrm{m\\,s^{-1}}$?",
+      "back": "About $3.6\\times10^{-10}\\,\\mathrm{m}$, found from $\\lambda = \\frac{6.63\\times10^{-34}}{(9.11\\times10^{-31})(2.0\\times10^{6})}$.",
+      "hint": "Start by working out the denominator $mv$ using $m = 9.11\\times10^{-31}\\,\\mathrm{kg}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w9g8s7",
+      "kind": "example",
+      "front": "Why does a 0.15 kg ball moving at $20\\,\\mathrm{m\\,s^{-1}}$ never show visible diffraction?",
+      "back": "Its momentum is $3.0\\,\\mathrm{kg\\,m\\,s^{-1}}$, so its wavelength is about $2.2\\times10^{-34}\\,\\mathrm{m}$. No gap is that small, so no spreading is seen.",
+      "hint": "Compare its wavelength with the size of a gap that would cause spreading.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p3cysm",
+      "kind": "concept",
+      "front": "How does raising the accelerating potential difference change the rings on the screen?",
+      "back": "Faster electrons have more momentum and a shorter wavelength, so they diffract less and the **rings shrink** towards the centre.",
+      "hint": "Think about what a higher potential difference does to each electron's speed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05b7af8",
+      "kind": "formula",
+      "front": "Which equation links the kinetic energy of an accelerated electron to the potential difference $V$?",
+      "back": "$\\frac{1}{2}mv^2 = eV$, where $m$ is electron mass in $\\mathrm{kg}$, $v$ speed in $\\mathrm{m\\,s^{-1}}$, $e$ the charge magnitude in $\\mathrm{C}$ and $V$ in $\\mathrm{V}$. Speed grows with the square root of $V$.",
+      "hint": "The work done on the electron becomes its kinetic energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r8iqiz",
+      "kind": "mistake",
+      "front": "A student says a faster electron has a longer de Broglie wavelength. What is wrong with this?",
+      "back": "Wavelength falls as momentum rises, since $\\lambda = \\frac{h}{p}$. A faster electron has a **shorter** wavelength and diffracts less.",
+      "hint": "Look at how $\\lambda$ depends on $p$ in the equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k7im80",
+      "kind": "process",
+      "front": "What are the steps to find a de Broglie wavelength from a given speed?",
+      "back": "Write $\\lambda = \\frac{h}{mv}$, substitute $h$, $m$ and $v$ with units, evaluate the denominator as momentum, divide, then check the answer is in metres.",
+      "hint": "Begin with the symbol equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x7n1fl",
+      "kind": "concept",
+      "front": "Why do electron microscopes reveal much finer detail than light microscopes?",
+      "back": "A microscope cannot resolve detail much smaller than its radiation's **wavelength**. Fast electrons have far shorter wavelengths than visible light, so they reveal finer detail.",
+      "hint": "Consider what limits the smallest detail a microscope can show.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ase272",
+      "kind": "term",
+      "front": "What is wave-particle duality?",
+      "back": "**Wave-particle duality** is the behaviour of matter and radiation that shows both wave properties, such as diffraction, and particle properties, such as landing at single points.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v6hxf7",
+      "kind": "formula",
+      "front": "Which equation gives the energy of a photon, with each symbol explained?",
+      "back": "$E = hf$, where $E$ is energy in $\\mathrm{J}$, $h$ the Planck constant in $\\mathrm{J\\,s}$ and $f$ the frequency in $\\mathrm{Hz}$. Photon momentum is $p = \\frac{h}{\\lambda}$.",
+      "hint": "Think about which quantity the Planck constant links to frequency.",
+      "sectionId": "s5"
+    }
+  ]
+}

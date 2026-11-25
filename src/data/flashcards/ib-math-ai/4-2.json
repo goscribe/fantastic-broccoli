@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Presenting data",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:49.437Z",
+  "cards": [
+    {
+      "id": "0l4mr9a",
+      "kind": "concept",
+      "front": "Why does the type of data decide which graph you should draw?",
+      "back": "Each **data type** suits different displays: categorical data suit bar charts, while continuous data suit histograms, box plots or cumulative frequency graphs. The wrong graph can hide the pattern.",
+      "hint": "Ask whether the data are named groups or measured values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1it0a36",
+      "kind": "concept",
+      "front": "How does a histogram differ from a bar chart?",
+      "back": "A **histogram** shows continuous data in class intervals of equal width, and its bars touch. A bar chart shows categories or discrete values, with separate bars of equal width.",
+      "hint": "Think about whether the horizontal axis is one continuous scale.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f2h7td",
+      "kind": "concept",
+      "front": "What five values does a box plot show?",
+      "back": "The **minimum, lower quartile, median, upper quartile and maximum**. The box runs from $Q_1$ to $Q_3$ and holds the middle half of the data.",
+      "hint": "It is a five-value summary drawn on a number line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "164qujc",
+      "kind": "term",
+      "front": "What is a quartile?",
+      "back": "One of **three values** that split ordered data into four equal parts. $Q_1$ has a quarter of the values below it, and $Q_3$ has three quarters below it.",
+      "hint": "Three cut-points make four equal parts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "039fbym",
+      "kind": "term",
+      "front": "What does the interquartile range measure?",
+      "back": "The **spread of the middle half** of the data, calculated as $Q_3-Q_1$.",
+      "hint": "It is the width of the box in a box plot.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0quwoa9",
+      "kind": "formula",
+      "front": "When is a data value an outlier?",
+      "back": "A value is an **outlier** if it is more than $1.5\\times(Q_3-Q_1)$ above $Q_3$ or below $Q_1$. Outliers are drawn as separate crosses.",
+      "hint": "Work out the interquartile range first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a2eoy6",
+      "kind": "process",
+      "front": "What should you show before stating that a value is an outlier?",
+      "back": "Calculate the **interquartile range**, multiply it by 1.5, then find the upper and lower limits. Only then state which values lie beyond those limits.",
+      "hint": "The tip in the note says to show the limits you calculated.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12gxmiv",
+      "kind": "example",
+      "front": "Quartiles are $Q_1=12$ and $Q_3=20$. Is a value of 38 an outlier?",
+      "back": "**Yes.** The interquartile range is 8, so $1.5\\times8=12$. The upper limit is $20+12=32$, and $38>32$.",
+      "hint": "Find the upper limit before comparing.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0iz0rkv",
+      "kind": "term",
+      "front": "What is cumulative frequency?",
+      "back": "The **running total** of frequencies up to the upper end of each class interval. It is plotted against the upper boundaries and joined with a smooth curve.",
+      "hint": "Add the frequencies up as you go along the classes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1chfr6h",
+      "kind": "process",
+      "front": "How do you estimate quartiles from a cumulative frequency graph of n values?",
+      "back": "Find $\\frac{n}{4}$, $\\frac{n}{2}$ and $\\frac{3n}{4}$ on the vertical axis. Read across to the curve, then read down to the horizontal axis to get $Q_1$, the median and $Q_3$.",
+      "hint": "Start by working out n.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jqshl8",
+      "kind": "mistake",
+      "front": "A truncated axis is drawn on a bar chart. Why can this mislead a reader?",
+      "back": "The axis starts **above zero**, so bar lengths are no longer proportional to the values. Small differences therefore look large. Check the start of the scale first.",
+      "hint": "Look at where the scale begins.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0l013oc",
+      "kind": "mistake",
+      "front": "Besides a truncated axis, what other features can distort a graph?",
+      "back": "Unequal scale intervals, three-dimensional or picture effects whose area grows faster than the value, missing titles or units, and a time window that hides the trend. The **data themselves** do not change.",
+      "hint": "Think about how the graph looks rather than the numbers.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Sketching functions and their derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:09.542Z",
+  "cards": [
+    {
+      "id": "0fud5xf",
+      "kind": "concept",
+      "front": "What does the sign of a function's first derivative tell you about its graph?",
+      "back": "A positive first derivative means the function **rises** as the input increases. A negative first derivative means it **falls**. The sign of the derivative sets the direction.",
+      "hint": "Think about slope as you move right along the graph.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17qkcvc",
+      "kind": "concept",
+      "front": "What does a positive second derivative tell you about a function's graph?",
+      "back": "The function is **concave up**, because its tangent slopes are increasing. A negative second derivative means it is concave down, with slopes decreasing.",
+      "hint": "Ask whether the slopes are getting bigger or smaller.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05drvbq",
+      "kind": "process",
+      "front": "What are the steps for checking whether a proposed graph matches a derivative graph?",
+      "back": "First, horizontal tangents must match **zeros of the derivative**. Second, rising and falling intervals must match positive and negative derivative values. Third, steepness must match the derivative's distance from zero.",
+      "hint": "There are three checks, and they go from zeros to signs to size.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1brxsaj",
+      "kind": "term",
+      "front": "What is a stationary point?",
+      "back": "A **stationary point** is a point where the derivative exists and equals zero, so the tangent is horizontal.",
+      "hint": "Horizontal tangent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1uwhwqy",
+      "kind": "term",
+      "front": "What is an inflection point?",
+      "back": "An **inflection point** is a point on the graph where the concavity changes, switching between concave up and concave down.",
+      "hint": "Look for a change in bending direction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r9cmn3",
+      "kind": "mistake",
+      "front": "A student says a concave-up graph must be rising. Why is this wrong?",
+      "back": "Concavity describes whether **slopes are increasing**, not whether the slopes are positive. A concave-up graph can still be falling if its negative slopes are becoming less negative.",
+      "hint": "Separate the sign of the slope from how the slope changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19gohwc",
+      "kind": "mistake",
+      "front": "Does $f''(a)=0$ prove that $a$ is an inflection point?",
+      "back": "No. An inflection point needs concavity to **actually change** on either side of $a$. A zero second derivative alone does not show that change.",
+      "hint": "What must happen on both sides of the point?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dxex42",
+      "kind": "mistake",
+      "front": "Is every point where the first derivative is zero a peak or valley?",
+      "back": "No. You must check the derivative's **sign on both sides**. A zero derivative only gives a turn if the sign changes, so do not assume every zero produces a turn.",
+      "hint": "Check what happens to the sign on each side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nkamkp",
+      "kind": "process",
+      "front": "How do you draw a derivative graph from a smooth function graph?",
+      "back": "Plot **zero derivative values** at horizontal tangents. Put the derivative above the axis where the function rises and below where it falls. Use steepness to set its distance from the axis.",
+      "hint": "Start with horizontal tangents, then add signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gxd7pf",
+      "kind": "concept",
+      "front": "What happens to the derivative at a corner on the function's graph?",
+      "back": "The **derivative is undefined** at a corner, because there is no single tangent slope there.",
+      "hint": "A corner has no one clear tangent line.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mdp6f6",
+      "kind": "example",
+      "front": "In the worked example with $f'(x)=3x^2-3$, where are the horizontal tangents?",
+      "back": "The horizontal tangents are at **$x=-1$ and $x=1$**, found by solving $3x^2-3=0$. The derivative is positive outside these points and negative between them.",
+      "hint": "Set the derivative equal to zero and solve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lvr0tu",
+      "kind": "example",
+      "front": "For $f'(x)=3x^2-3$ with $f(0)=0$, what function does the worked example give?",
+      "back": "The function is **$f(x)=x^3-3x$**. Integrating gives $x^3-3x+C$, and $f(0)=0$ forces $C=0$. It has a peak at $(-1,2)$ and a valley at $(1,-2)$.",
+      "hint": "Integrate the derivative, then use the starting point to find the constant.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wjzk12",
+      "kind": "term",
+      "front": "What is a derivative pair?",
+      "back": "A **derivative pair** is a function and a graph showing its slope at each differentiable input. The two must agree wherever the derivative exists.",
+      "hint": "Think about a function and the graph of its slopes.",
+      "sectionId": "s4"
+    }
+  ]
+}

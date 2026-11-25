@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Sketching slope fields",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:26.506Z",
+  "cards": [
+    {
+      "id": "18bp5hq",
+      "kind": "term",
+      "front": "What is a slope field?",
+      "back": "A **slope field** is a grid of short line segments, each showing the slope a solution curve would have at that point.",
+      "hint": "Think of a grid of tiny direction marks.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vflnbs",
+      "kind": "formula",
+      "front": "In $\\frac{dy}{dx}=f(x,y)$, what does $f(x,y)$ give you at a point $(x,y)$?",
+      "back": "The **slope** of the segment at that point. It is the value of $\\frac{dy}{dx}$ there, and slopes here have no units.",
+      "hint": "Substitute the point's coordinates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17w6tfw",
+      "kind": "process",
+      "front": "What are the steps to sketch a slope field for $\\frac{dy}{dx}=f(x,y)$?",
+      "back": "1) Choose grid points. 2) Substitute each point's coordinates into $f(x,y)$ to get the **local slope**. 3) Draw a short segment with that tilt at each point, all the same length.",
+      "hint": "Calculate before you draw.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i8iw1z",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x+y$, what are the slopes at $(0,0)$, $(1,0)$, and $(0,1)$?",
+      "back": "**0**, **1**, and **1**. Each comes from adding the point's two coordinates.",
+      "hint": "Add x and y at each point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02bmvhm",
+      "kind": "concept",
+      "front": "What does a slope of $-\\frac{1}{2}$ look like as a segment?",
+      "back": "It **falls** from left to right, dropping half as much vertically as it moves horizontally. A larger absolute slope means a steeper segment.",
+      "hint": "Use rise over run.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tit8sm",
+      "kind": "concept",
+      "front": "Why can't a vertical segment represent a slope in a slope field?",
+      "back": "A **vertical segment** has zero horizontal change, so rise over run is undefined. It does not represent any finite $\\frac{dy}{dx}$.",
+      "hint": "What happens when the run is zero?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i2iqb7",
+      "kind": "mistake",
+      "front": "Should you join neighboring segments into one smooth curve when sketching a slope field?",
+      "back": "No. **Each segment** shows only the local direction at its own point, so joining them misrepresents the field.",
+      "hint": "Each mark is a single point's direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12rp2b6",
+      "kind": "concept",
+      "front": "For $\\frac{dy}{dx}=x$, what do segments in a vertical column have in common?",
+      "back": "The same **tilt**. Every point in a column has the same x-coordinate, so the slope equals that x-value for all of them.",
+      "hint": "Which coordinate stays fixed in a column?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g1ti5n",
+      "kind": "term",
+      "front": "What is a zero-slope set?",
+      "back": "The **zero-slope set** is every point where the right side of the differential equation equals zero. Its segments are **horizontal**.",
+      "hint": "Set the right side equal to 0.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1saj5ep",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x+y$, where are the segments horizontal?",
+      "back": "Along the line $y=-x$, where $x+y=0$. The slope is zero at every point on that line.",
+      "hint": "Solve x + y = 0.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x87z6z",
+      "kind": "mistake",
+      "front": "A segment in your field looks out of place. What should you do?",
+      "back": "**Recalculate its slope** by substitution, then compare it with points that should share its tilt. Patterns check your work but do not replace substitution.",
+      "hint": "Patterns check; substitution decides.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18z2k0g",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=2x-y$, what is the slope at $(1,2)$, and what does the segment look like?",
+      "back": "**0**, since $2(1)-2=0$. The segment is **horizontal**.",
+      "hint": "Substitute x = 1 and y = 2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j6sl2e",
+      "kind": "concept",
+      "front": "Compare the segments with slopes $-3$ and $-\\frac{1}{2}$.",
+      "back": "Both **fall** from left to right. The slope $-3$ segment is steeper because its absolute value is greater.",
+      "hint": "Compare absolute values.",
+      "sectionId": "s3"
+    }
+  ]
+}

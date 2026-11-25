@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Glycolysis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:57.075Z",
+  "cards": [
+    {
+      "id": "1kncmxk",
+      "kind": "term",
+      "front": "What is glycolysis?",
+      "back": "**Glycolysis** is the pathway that splits one six-carbon glucose molecule into two three-carbon pyruvate molecules. It does not need oxygen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xipa4v",
+      "kind": "process",
+      "front": "What are the main stages of glycolysis, in order?",
+      "back": "1) Glucose is phosphorylated twice using two ATP, forming hexose bisphosphate. 2) This splits into two triose phosphate. 3) Each triose phosphate is oxidised, reducing NAD. 4) Substrate-level phosphorylation makes four ATP and pyruvate forms.",
+      "hint": "Start with what happens to the glucose before anything splits."
+    },
+    {
+      "id": "0pkyqu5",
+      "kind": "concept",
+      "front": "Why can glycolysis happen in a cell that has no mitochondria?",
+      "back": "Its enzymes are dissolved in the cytoplasm rather than attached to an organelle, and glycolysis does not use oxygen. Glucose does not need to enter a mitochondrion.",
+      "hint": "Think about where the enzymes are located.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zcgqzf",
+      "kind": "term",
+      "front": "What is ATP?",
+      "back": "**ATP** is a molecule that transfers usable energy to processes within cells. It gives up a phosphate group and becomes ADP.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10gicl7",
+      "kind": "term",
+      "front": "What is phosphorylation?",
+      "back": "**Phosphorylation** is the addition of a phosphate group to a molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "087wjn1",
+      "kind": "concept",
+      "front": "Why is glucose phosphorylated at the start of glycolysis?",
+      "back": "Glucose is stable and does not split easily. Adding phosphate groups makes the sugar more reactive, so later steps need less energy to start.",
+      "hint": "Think about how stable glucose is before it is changed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p08rw7",
+      "kind": "term",
+      "front": "What is substrate-level phosphorylation?",
+      "back": "**Substrate-level phosphorylation** is making ATP by directly transferring a phosphate group from a substrate molecule to ADP.",
+      "hint": "Contrast it with ATP made using a chain of carriers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1459sdv",
+      "kind": "mistake",
+      "front": "Why is four ATP the wrong answer for the net ATP gain from one glucose in glycolysis?",
+      "back": "Four is the gross yield. You must subtract the two ATP used at the start, so the net gain is 2 ATP per glucose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19dag3d",
+      "kind": "term",
+      "front": "What is reduced NAD?",
+      "back": "**Reduced NAD** is a carrier that has accepted hydrogen from triose phosphate. It carries that hydrogen on to later stages of respiration.",
+      "hint": "Think about what NAD does to the hydrogen removed during oxidation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xr4jck",
+      "kind": "term",
+      "front": "What is pyruvate?",
+      "back": "**Pyruvate** is the three-carbon product of glycolysis. If oxygen is available, it moves into a mitochondrion for further breakdown.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d5ck7f",
+      "kind": "term",
+      "front": "What are mitochondria?",
+      "back": "**Mitochondria** are organelles where aerobic respiration releases energy for cellular activities.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "152b8gb",
+      "kind": "example",
+      "front": "How many net ATP molecules are gained when 6 glucose molecules undergo glycolysis?",
+      "back": "$12$ net ATP, because each glucose gives $4-2=2$ ATP and $6\\times2=12$.",
+      "hint": "Work out the net gain for one glucose first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r3q01y",
+      "kind": "concept",
+      "front": "Why must the cell use another route to regenerate NAD when oxygen is absent?",
+      "back": "Glycolysis needs a steady supply of **NAD**. Without oxygen the later stages cannot regenerate it, so the cell must regenerate NAD by a different route.",
+      "hint": "Think about what the later stages do with reduced NAD.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0z3cyj5",
+      "kind": "mistake",
+      "front": "Why is it wrong to say glycolysis is the whole of respiration?",
+      "back": "Glycolysis is only the first stage of respiration. On its own it makes only a small net gain of ATP, and the later stages are needed for more energy.",
+      "sectionId": "s1"
+    }
+  ]
+}

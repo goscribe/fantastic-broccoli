@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "Conservation of angular momentum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:00.292Z",
+  "cards": [
+    {
+      "id": "1c020mk",
+      "kind": "term",
+      "front": "What is the law of conservation of angular momentum?",
+      "back": "The total angular momentum of a system stays **constant** when the net external torque on it is zero. So $L_i = L_f$.",
+      "hint": "Think about a spinning top on a smooth table.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "131a8q2",
+      "kind": "formula",
+      "front": "For one rotating object with no net external torque, how are its rotational inertia and angular speed related before and after a change?",
+      "back": "$I_i\\omega_i = I_f\\omega_f$. The product of **I** and $\\omega$ stays the same, so when $I$ falls, $\\omega$ rises.",
+      "hint": "Write $L_i = L_f$ first, then substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "084lavf",
+      "kind": "process",
+      "front": "What are the steps for solving a conservation of angular momentum problem?",
+      "back": "1) Confirm the **net external torque** is zero. 2) Write $L_i = L_f$. 3) Substitute $I\\omega$ for each state. 4) Solve, then check the direction of the change.",
+      "hint": "Check the external torque before writing any equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bse6hw",
+      "kind": "formula",
+      "front": "What is the formula for the angular momentum of a rotating object, and what are its units?",
+      "back": "$L = I\\omega$, where $I$ is rotational inertia in kg m^2 and $\\omega$ is angular speed in rad/s. Angular momentum is measured in kg m^2/s.",
+      "hint": "Rotational inertia and angular speed multiply together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11egxpc",
+      "kind": "term",
+      "front": "What is an external torque?",
+      "back": "A **torque** produced by a force from outside the system. Only external torques can change the system's total angular momentum.",
+      "hint": "Forces between parts of the system do not count.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h84277",
+      "kind": "mistake",
+      "front": "Does conservation of angular momentum mean each part of a system keeps its own spin?",
+      "back": "No. Conservation applies to the **total** of the system. One part can gain angular momentum while another loses the same amount.",
+      "hint": "Consider the whole system, not one piece.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s6q0of",
+      "kind": "example",
+      "front": "A skater has $I = 3.0\\ \\mathrm{kg\\,m^2}$ and spins at 2.0 rad/s. She pulls in her arms so $I$ becomes $1.2\\ \\mathrm{kg\\,m^2}$. What is her new angular speed?",
+      "back": "5.0 rad/s. Her initial $L = (3.0)(2.0) = 6.0$ kg m^2/s, so $\\omega_f = 6.0/1.2 = 5.0$ rad/s.",
+      "hint": "Find the initial L first, then divide by the new I.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hitiwb",
+      "kind": "mistake",
+      "front": "When a skater pulls her arms in and spins faster, is kinetic energy conserved too?",
+      "back": "No. Angular momentum is conserved, but **kinetic energy** is not. Her muscles do work pulling the arms in, so her kinetic energy rises from 6.0 J to 15 J.",
+      "hint": "Check the kinetic energy before and after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06eql80",
+      "kind": "concept",
+      "front": "When two rotating objects stick together, why is the total angular momentum conserved?",
+      "back": "The forces between the two objects are **internal**, so they cannot change the total angular momentum of the pair.",
+      "hint": "Think about what internal forces can and cannot do.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fmi0c0",
+      "kind": "example",
+      "front": "Disk 1 ($I = 2.0\\ \\mathrm{kg\\,m^2}$, 6.0 rad/s) sticks to disk 2 ($I = 1.0\\ \\mathrm{kg\\,m^2}$, at rest) on the same axis. What is the common angular speed?",
+      "back": "4.0 rad/s. Initially $L = (2.0)(6.0) = 12$ kg m^2/s, and $(3.0)\\omega_f = 12$.",
+      "hint": "Add the angular momenta before the objects join.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d7ot77",
+      "kind": "example",
+      "front": "On a turning stool, $I = 2.5\\ \\mathrm{kg\\,m^2}$ and spin is 4.0 rad/s. Pulling weights in drops $I$ to $1.0\\ \\mathrm{kg\\,m^2}$. What is the new $\\omega$?",
+      "back": "10 rad/s. $(2.5)(4.0) = (1.0)\\omega_f$, so $\\omega_f = 10$ rad/s.",
+      "hint": "Set the initial and final angular momenta equal.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h9g4xc",
+      "kind": "process",
+      "front": "How does a diver change her spin during a dive, and why?",
+      "back": "She tucks into a ball to lower her **rotational inertia** and spin faster. She extends her body to raise $I$ and slow the spin.",
+      "hint": "Use $L = I\\omega$ with L fixed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "114wjx1",
+      "kind": "concept",
+      "front": "Why does a planet on an elliptical orbit move faster when it is closer to its star?",
+      "back": "Gravity points toward the star, so it produces **no torque** about the star. The planet's angular momentum about the star stays constant.",
+      "hint": "Ask what torque gravity produces about the star.",
+      "sectionId": "s5"
+    }
+  ]
+}

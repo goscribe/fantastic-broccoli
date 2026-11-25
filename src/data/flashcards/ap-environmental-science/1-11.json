@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-11",
+  "topicCode": "1.11",
+  "topicName": "Food chains and food webs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:21.397Z",
+  "cards": [
+    {
+      "id": "0myo9io",
+      "kind": "term",
+      "front": "What is a food chain?",
+      "back": "A **food chain** is a single line of feeding links showing who eats whom, with arrows pointing in the direction of energy transfer. It starts with a producer and ends with a consumer that nothing else eats.",
+      "hint": "Picture one feeding path, such as grass to grasshopper to frog.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0anp9pp",
+      "kind": "concept",
+      "front": "How does a food web differ from a food chain, and why is it more realistic?",
+      "back": "A **food web** joins many overlapping food chains, so one organism can have several food sources. Real organisms rarely eat only one thing, so a web shows an ecosystem more accurately.",
+      "hint": "Think about how many things a frog eats.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lwegxu",
+      "kind": "concept",
+      "front": "Why can a change in one population affect organisms it never eats or is never eaten by?",
+      "back": "Species are linked through feeding connections. A change in one population alters the species that eat it or are eaten by it, and those changes spread on to other linked species.",
+      "hint": "Follow the arrows one step at a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is an organism's feeding position within a pathway of energy transfer. Producers sit at the first level, grasshoppers at the second and frogs at the third in a meadow example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dnozr5",
+      "kind": "process",
+      "front": "What are the steps for building a food web from a list of organisms?",
+      "back": "First place the producers at the bottom. Then place organisms that eat producers in the next row up. Add each higher consumer above what it eats, and draw an arrow from each food to the organism that eats it.",
+      "hint": "Start with the organisms that make their own food.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vji3lh",
+      "kind": "mistake",
+      "front": "Which way should a food web arrow point?",
+      "back": "Arrows point from the **food** to the organism that eats it, showing where energy moves. Pointing them from the eater to the food reverses the energy flow.",
+      "hint": "Think about where the energy goes after it is eaten.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ryywyh",
+      "kind": "example",
+      "front": "In the chain grass, grasshopper, frog, snake, which organism is the secondary consumer?",
+      "back": "The **frog** is the secondary consumer. It sits at the third trophic level, eating the grasshopper, which is a primary consumer.",
+      "hint": "Count the trophic levels from the producer.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "101nb8n",
+      "kind": "example",
+      "front": "Write as a food chain: a hawk eats a snake, the snake eats a frog, the frog eats a grasshopper, and the grasshopper eats grass.",
+      "back": "Grass → grasshopper → frog → snake → hawk. Each arrow points from the food to the organism that eats it.",
+      "hint": "Start with the producer that nothing in the list is eaten by.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11ey071",
+      "kind": "mistake",
+      "front": "Does removing a predator always help its prey in the long run?",
+      "back": "No. **The prey may increase, overuse its own food supply, and then decline.** Removing a predator can therefore cause later problems for the prey.",
+      "hint": "Consider what the prey population eats.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bo4cin",
+      "kind": "concept",
+      "front": "Why does a web with many feeding paths cope better with change than a simple chain?",
+      "back": "If one food source declines, consumers can switch to another. A simple chain offers no alternative, so a loss breaks the path.",
+      "hint": "Compare the options open to a consumer in each structure.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ofv944",
+      "kind": "concept",
+      "front": "Which consumer is most exposed when one of its food sources declines?",
+      "back": "A consumer with only **one food source** is the most exposed. It has no alternative food to switch to, and a loss at the base can also affect all consumers above it.",
+      "hint": "Think about the number of options it has.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0chlmlv",
+      "kind": "concept",
+      "front": "Why can an omnivore appear at more than one trophic level in the same web?",
+      "back": "An omnivore eats both producers and consumers, so it occupies more than one feeding position. Its place depends on which food it is eating.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0m1fxhr",
+      "kind": "process",
+      "front": "What is the method for predicting the effects of a change in a food web?",
+      "back": "Trace each arrow one step at a time. Note which populations lose food and which lose predators, then follow those effects on to the next populations.",
+      "hint": "Start from the population that changed.",
+      "sectionId": "s5"
+    }
+  ]
+}

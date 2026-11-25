@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Introduction to air pollution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:33.170Z",
+  "cards": [
+    {
+      "id": "11vrwf4",
+      "kind": "concept",
+      "front": "Why is ground-level ozone called a secondary pollutant rather than a primary one?",
+      "back": "Vehicles and other sources do not emit it directly. It **forms in the air** when nitrogen oxides and volatile organic compounds react, often with help from sunlight.",
+      "hint": "Think about whether vehicles release ozone directly, and what they release instead.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uz26uu",
+      "kind": "term",
+      "front": "What is a primary pollutant?",
+      "back": "A **primary pollutant** is released directly into the air from a source, such as carbon monoxide from an engine.",
+      "hint": "Think about the pollutant's form at the moment it leaves a tailpipe or smokestack.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k73ez4",
+      "kind": "concept",
+      "front": "How does carbon monoxide reduce the oxygen that reaches body tissues?",
+      "back": "It **binds to hemoglobin** in red blood cells, so less oxygen is carried to the tissues.",
+      "hint": "Think about the normal job of red blood cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0stnbbx",
+      "kind": "term",
+      "front": "What makes a gas or particle in the air count as an air pollutant?",
+      "back": "It is present at a **level that can harm** living organisms or materials.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k9fi7v",
+      "kind": "term",
+      "front": "What is particulate matter?",
+      "back": "A mixture of **tiny solid particles and liquid droplets** suspended in air.",
+      "hint": "Think about what a dusty haze is made of.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v0shfz",
+      "kind": "concept",
+      "front": "How are nitrogen oxides formed?",
+      "back": "They form when fuel burns at **high temperature**, as in vehicle engines and power plants.",
+      "hint": "Compare this with incomplete burning of fuel, which produces carbon monoxide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gt333u",
+      "kind": "mistake",
+      "front": "Why is ground-level ozone harmful when ozone high in the atmosphere is protective?",
+      "back": "Ozone high in the atmosphere **shields Earth** from ultraviolet light, but ground-level ozone is a harmful secondary pollutant that damages health and plants.",
+      "hint": "Consider where in the atmosphere the ozone is located.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o1zkjb",
+      "kind": "term",
+      "front": "What is acid deposition?",
+      "back": "The fall of **acidic compounds** from the air to Earth's surface as rain, snow, fog or dry particles.",
+      "hint": "Think about which pollutants form acids once they are in the air.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08y9i06",
+      "kind": "concept",
+      "front": "How does ground-level ozone reduce crop yields?",
+      "back": "It **damages leaf tissue**, which lowers crop yields and weakens trees.",
+      "hint": "Think about what leaves do for a plant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uo5u7k",
+      "kind": "concept",
+      "front": "Which groups are most at risk from air pollution?",
+      "back": "**Children, older adults**, and people with asthma or heart disease. Long exposure also raises the risk of chronic illness.",
+      "hint": "Think about bodies that are still developing or already under strain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cvay50",
+      "kind": "mistake",
+      "front": "Why is naming only burning coal an incomplete source for sulfur dioxide?",
+      "back": "Sulfur dioxide comes from coal and oil that **contain sulfur**, so the sulfur-containing fuel is the specific source to name.",
+      "hint": "Compare how precisely the source of carbon monoxide is described.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p3bzzu",
+      "kind": "concept",
+      "front": "What health harm does lead cause?",
+      "back": "It **harms the nervous system**, especially in young children.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m4y8bc",
+      "kind": "concept",
+      "front": "How does particulate matter affect visibility and surfaces?",
+      "back": "It **reduces visibility** and creates haze, and settled particles can coat leaves and soil.",
+      "sectionId": "s5"
+    }
+  ]
+}

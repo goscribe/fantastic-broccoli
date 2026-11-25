@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-9",
+  "topicCode": "6.9",
+  "topicName": "B cells and T cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:44.946Z",
+  "cards": [
+    {
+      "id": "1eha426",
+      "kind": "concept",
+      "front": "What happens when an antigen enters the body and meets many different lymphocytes?",
+      "back": "Only the lymphocyte with a matching receptor binds the antigen and is selected. It then divides to form a clone of identical cells, a process called **clonal selection**.",
+      "hint": "Think about what each lymphocyte's receptor is able to recognise.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05sghk6",
+      "kind": "concept",
+      "front": "Why can a selected B cell not respond to its antigen on its own?",
+      "back": "It also needs chemical signals from a **helper T cell** before it divides. Binding its antigen is only part of what it requires.",
+      "hint": "Think about what the B cell needs beyond its own receptor binding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mvmbup",
+      "kind": "concept",
+      "front": "How does a T cell receptor differ from a B cell receptor in the way it recognises antigen?",
+      "back": "A **B cell** receptor binds antigen directly. A **T cell** receptor binds only an antigen displayed on the surface of another cell.",
+      "hint": "Compare where each receptor meets the antigen.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cax9re",
+      "kind": "term",
+      "front": "What is clonal expansion?",
+      "back": "Clonal expansion is the repeated division of a selected lymphocyte by **mitosis**, producing many genetically identical cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eulfc2",
+      "kind": "process",
+      "front": "What are the steps a B cell goes through after its receptor binds its antigen?",
+      "back": "1) It receives signals from a helper T cell. 2) It divides repeatedly by mitosis in clonal expansion. 3) Most cells differentiate into **plasma cells** that secrete antibodies. 4) Some become **memory cells**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tlmxic",
+      "kind": "term",
+      "front": "What is a **memory cell**?",
+      "back": "A **memory cell** is a long-lived lymphocyte left after an infection. It responds quickly if the same antigen returns, so the second response is faster and stronger.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t0ftfz",
+      "kind": "mistake",
+      "front": "A student writes that helper T cells kill pathogens and make antibodies. What is wrong with this?",
+      "back": "Helper T cells do neither. They release **cytokines**, which are chemical signals that activate other cells such as B cells, cytotoxic T cells and phagocytes.",
+      "hint": "Look at what the helper T cell releases once it is activated.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18p2hjd",
+      "kind": "process",
+      "front": "What are the steps by which a cytotoxic T cell destroys a virus-infected body cell?",
+      "back": "1) Its receptor binds a matching antigen on the infected cell. 2) Cytokines from helper T cells activate it, and it divides by clonal expansion. 3) It releases **perforin**, which forms pores in the infected cell membrane. 4) The infected cell dies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04y4wxi",
+      "kind": "term",
+      "front": "What does perforin do, and which cell releases it?",
+      "back": "**Perforin** is a protein released by cytotoxic T cells. It forms pores in the membrane of a target cell, so the cell dies.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j48ghg",
+      "kind": "concept",
+      "front": "Why are antibodies unable to remove a virus that is hidden inside body cells?",
+      "back": "Antibodies act outside cells, in blood and tissue fluid, so they cannot reach the virus inside. **Cytotoxic T cells** can destroy the infected cell itself.",
+      "hint": "Think about where antibodies circulate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0myjr5n",
+      "kind": "concept",
+      "front": "Why are healthy cells near an infected cell usually left unharmed by a cytotoxic T cell?",
+      "back": "The cytotoxic T cell only kills cells that display the **matching antigen**. Healthy neighbouring cells do not display it, so they are not targeted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02jf8tb",
+      "kind": "mistake",
+      "front": "When comparing B cells and T cells, why is an answer that describes only B cells insufficient?",
+      "back": "You must state both cell types for each feature being compared. Writing only about B cells earns no comparison mark.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p5xjr1",
+      "kind": "term",
+      "front": "What is an antigen-presenting cell and what does it do?",
+      "back": "An **antigen-presenting cell**, such as a macrophage, displays antigens from a digested pathogen on its surface membrane, which activates T cells.",
+      "hint": "Think about where the pathogen is broken down.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sllx9e",
+      "kind": "concept",
+      "front": "How do B cells and T cells work together in a single infection?",
+      "back": "The **helper T cell** releases cytokines that activate B cells and cytotoxic T cells. Memory cells of both types then give faster protection on a second exposure.",
+      "hint": "Think about what links B cells to cytotoxic T cells.",
+      "sectionId": "s5"
+    }
+  ]
+}

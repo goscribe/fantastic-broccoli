@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "6-3",
+  "topicCode": "6.3",
+  "topicName": "Climate change: mitigation and adaptation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:38.740Z",
+  "cards": [
+    {
+      "id": "0pcqxqg",
+      "kind": "concept",
+      "front": "How do mitigation and climate adaptation differ in what they tackle?",
+      "back": "**Mitigation** tackles the cause by cutting emissions or removing carbon dioxide from the air. **Climate adaptation** accepts that change will happen and reduces the harm it causes.",
+      "hint": "Think of fixing a leak versus bailing out the water.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03hnan7",
+      "kind": "concept",
+      "front": "Why does a balanced plan need both mitigation and adaptation?",
+      "back": "**Mitigation** takes time to work, and some change is already under way. **Adaptation** protects people in the meantime, but it does not stop warming, so both are needed.",
+      "hint": "Consider what each one can and cannot do alone."
+    },
+    {
+      "id": "11vyxbk",
+      "kind": "process",
+      "front": "How does a carbon tax reduce emissions?",
+      "back": "Steps: a **carbon tax** charges a price for each tonne of carbon dioxide emitted. Emitting becomes more expensive, so firms and households have a reason to use less energy or switch to cleaner sources.",
+      "hint": "Follow the money from the emitter to the choice made.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ygrqcx",
+      "kind": "term",
+      "front": "What is renewable energy?",
+      "back": "Energy from sources that are **replenished naturally** on short time scales, such as sunlight, wind and flowing water.",
+      "hint": "Think of sources that refill themselves quickly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o6p7i9",
+      "kind": "term",
+      "front": "What is energy efficiency?",
+      "back": "Using **less energy** to provide the same useful service, such as the same heating from a building or the same travel from a vehicle.",
+      "hint": "Same result, less input.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00w0p09",
+      "kind": "term",
+      "front": "What is carbon capture and storage?",
+      "back": "The **collection** of carbon dioxide from emission sources and its storage, usually underground.",
+      "hint": "Two steps: collect, then store.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kbolo0",
+      "kind": "formula",
+      "front": "What is the formula for percentage change in emissions, and what does each part mean?",
+      "back": "Percentage change = $\\frac{\\text{change in value}}{\\text{initial value}} \\times 100\\%$, where the change is final minus initial, in Mt of carbon dioxide, and the initial value is the starting amount.",
+      "hint": "Start with the change, then divide by the starting value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gekh0h",
+      "kind": "example",
+      "front": "Emissions fall from 80 Mt to 68 Mt. What is the percentage change?",
+      "back": "Change = $68-80=-12\\,\\mathrm{Mt}$, so percentage change = $\\frac{-12}{80}\\times100\\%=-15\\%$. This is a **15% fall**.",
+      "hint": "Find the change first, then divide by the starting value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qw0dn1",
+      "kind": "mistake",
+      "front": "Emissions fell after a carbon tax was introduced, so the tax must have caused the fall. Why is this reasoning flawed?",
+      "back": "**Other changes** may also have reduced emissions, so a fall after a policy does not prove the policy caused it.",
+      "hint": "Could something else have changed at the same time?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1frd9dr",
+      "kind": "mistake",
+      "front": "A wind farm is low-carbon, so it has no environmental impact. Is this correct?",
+      "back": "**No.** Low-carbon does not mean no impact; large dams and wind farms can still affect habitats.",
+      "hint": "Low emissions and zero impact are different things.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e3gqrk",
+      "kind": "term",
+      "front": "What is managed retreat?",
+      "back": "The **planned movement** of people and buildings away from areas at high risk of climate hazards.",
+      "hint": "Think of relocating before a disaster, not after.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a5q3ko",
+      "kind": "concept",
+      "front": "Why does time lag matter when judging a climate response?",
+      "back": "**Time lag** matters because forests take years to grow, while sea walls can protect land quickly. Each response has a different speed of benefit.",
+      "hint": "Compare how long each response takes to work.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0pxd0gf",
+      "kind": "concept",
+      "front": "Why does fairness matter when judging responses to climate change?",
+      "back": "Countries that **emitted least** are often the most exposed to climate change and have the fewest resources to adapt.",
+      "hint": "Think about who caused the problem and who suffers most.",
+      "sectionId": "s5"
+    }
+  ]
+}

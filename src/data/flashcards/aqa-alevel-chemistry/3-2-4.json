@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-2-4",
+  "topicCode": "3.2.4",
+  "topicName": "Period 3 elements and oxides",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:12.583Z",
+  "cards": [
+    {
+      "id": "1kn2gxz",
+      "kind": "concept",
+      "front": "Why are sodium oxide and magnesium oxide basic, while sulfur dioxide and phosphorus(V) oxide are acidic?",
+      "back": "Metal oxides are **basic** and non-metal oxides are **acidic**. Basic oxides neutralise acids to form a salt and water, because the oxide ion accepts protons.",
+      "hint": "Think about whether the element gives electrons to oxygen or shares them with it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16k9b3w",
+      "kind": "concept",
+      "front": "What determines the melting point of a Period 3 oxide?",
+      "back": "The **bonding and structure**. Giant ionic and giant covalent oxides melt very high, while simple molecular oxides melt low because only weak London forces need overcoming.",
+      "hint": "Compare how much energy is needed to break strong bonds with weak forces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p6biw5",
+      "kind": "concept",
+      "front": "How can you predict the pH of a Period 3 oxide dissolved in water?",
+      "back": "Write the oxide plus water equation, then decide whether **hydroxide ions** (alkaline) or **hydrogen ions** (acidic) form. Sodium oxide gives pH 13 to 14; phosphorus(V) oxide gives pH 0 to 2.",
+      "hint": "Start by writing the equation with water as a reactant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02kic1f",
+      "kind": "concept",
+      "front": "Why do molten ionic oxides conduct electricity, but simple molecular oxides never do?",
+      "back": "Molten ionic oxides have **free-moving ions** that carry charge. Simple molecular oxides have no charged particles that can move.",
+      "hint": "Think about what carries the charge in each type of oxide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v4jg3u",
+      "kind": "process",
+      "front": "What happens to the electrons when a Period 3 element burns in oxygen?",
+      "back": "**Metal** atoms lose electrons to oxygen, forming ionic oxides. **Non-metal** atoms share electrons with oxygen. All of these reactions are oxidation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05jb1t9",
+      "kind": "mistake",
+      "front": "What is wrong with the answer sodium oxide for the product when sodium reacts with water?",
+      "back": "Sodium does not form an oxide here. The products are **sodium hydroxide** and hydrogen: $\\mathrm{2Na(s)+2H_2O(l)\\rightarrow 2NaOH(aq)+H_2(g)}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s6h3mz",
+      "kind": "concept",
+      "front": "Why do sodium and magnesium react with water, while aluminium, silicon, phosphorus and sulfur do not?",
+      "back": "Only metals that lose electrons very easily react with water. Sodium reacts vigorously with cold water and magnesium only slowly.",
+      "hint": "Think about how readily each element gives up electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zax1vm",
+      "kind": "term",
+      "front": "What is a giant covalent lattice?",
+      "back": "A **continuous network of atoms** joined by strong covalent bonds, as found in silicon dioxide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13cc14j",
+      "kind": "term",
+      "front": "What does amphoteric mean for an oxide?",
+      "back": "An **amphoteric** oxide reacts with both acids and bases to form salts. Aluminium oxide is an example.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r3u4lg",
+      "kind": "example",
+      "front": "What is the concentration of sodium hydroxide formed when 0.0100 mol of sodium oxide dissolves to make 250 cm3 of solution?",
+      "back": "$0.0800\\,\\mathrm{mol\\,dm^{-3}}$. The ratio is 1:2, so 0.0200 mol NaOH forms; 250 cm3 is 0.250 dm3, and $c=\\frac{n}{V}$.",
+      "hint": "Start with the mole ratio in the equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16wlm4a",
+      "kind": "mistake",
+      "front": "Why is silicon dioxide classed as an acidic oxide even though it does not dissolve in water?",
+      "back": "Acidic means it **reacts with bases**, not that it dissolves. It reacts with hot concentrated sodium hydroxide to form a salt and water.",
+      "hint": "Think about what the test for an acidic oxide actually is.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ji52sh",
+      "kind": "concept",
+      "front": "Why does magnesium oxide have a higher melting point than sodium oxide?",
+      "back": "Magnesium ions carry **greater charges** than sodium ions, so the ionic attraction in MgO is stronger and more energy is needed to melt it.",
+      "hint": "Compare the charges on the ions in each oxide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ggkn0g",
+      "kind": "term",
+      "front": "What are London forces?",
+      "back": "**Weak attractions between molecules** caused by temporary dipoles. They strengthen as the number of electrons increases.",
+      "sectionId": "s3"
+    }
+  ]
+}

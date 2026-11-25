@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-11",
+  "topicCode": "8.11",
+  "topicName": "Washer method about the x- or y-axis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:39.763Z",
+  "cards": [
+    {
+      "id": "047tqbc",
+      "kind": "formula",
+      "front": "What is the washer integral for rotation about the x-axis, and what do R and r mean?",
+      "back": "$V=\\pi\\int_a^b (R^2-r^2)\\,dx$, where $R$ is the **outer radius** and $r$ is the **inner radius**, both measured from the x-axis, with $a$ and $b$ as x-endpoints.",
+      "hint": "Each thin slice adds one washer's area.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0djwczm",
+      "kind": "concept",
+      "front": "When rotating about the x-axis, why do we take vertical slices and integrate in x?",
+      "back": "A **vertical slice** is perpendicular to the x-axis, so its radii reach the x-axis at each x. The upper function gives $R(x)$ and the lower gives $r(x)$ when both lie above the axis.",
+      "hint": "Think about which way the slice faces the axis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02ihf9v",
+      "kind": "process",
+      "front": "How do you choose the radii when rotating a region about the y-axis?",
+      "back": "Use **horizontal slices**: rewrite the boundaries as x in terms of y. The right boundary gives $R(y)$, the left boundary gives $r(y)$, and you integrate in $y$ between the bottom and top endpoints.",
+      "hint": "Start by writing each boundary as x = something in y.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hhg914",
+      "kind": "mistake",
+      "front": "Why is $\\pi(R-r)^2$ wrong as a washer area?",
+      "back": "**Do not square** $R-r$. The washer area is $\\pi(R^2-r^2)$, so you subtract the squared radii, not the squared difference.",
+      "hint": "Compare the two expressions term by term.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z4f0zm",
+      "kind": "term",
+      "front": "What is a washer in a solid of revolution?",
+      "back": "A **washer** is a circular cross section with a circular hole, formed by revolving a thin slice around an axis.",
+      "hint": "Think of a flat ring shape.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u1mum0",
+      "kind": "term",
+      "front": "What is the outer radius of a washer?",
+      "back": "The **outer radius** is the distance from the axis of rotation to the farther edge of the slice.",
+      "hint": "It is the bigger of the two radii.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w6wyzb",
+      "kind": "term",
+      "front": "What is the inner radius of a washer?",
+      "back": "The **inner radius** is the distance from the axis of rotation to the nearer edge of the slice.",
+      "hint": "It is the smaller of the two radii.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wg6fcf",
+      "kind": "concept",
+      "front": "Why is the washer area the difference of two circle areas?",
+      "back": "A washer is an outer circle with an inner circle removed, so **subtracting** the inner area from the outer area leaves the ring: $\\pi R^2-\\pi r^2=\\pi(R^2-r^2)$.",
+      "hint": "Picture a disc with a hole cut out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hczcd3",
+      "kind": "formula",
+      "front": "What is the washer integral for rotation about the y-axis?",
+      "back": "$V=\\pi\\int_c^d (R^2-r^2)\\,dy$, where $R(y)$ and $r(y)$ are x-values measured from the y-axis, and $c$ and $d$ are the bottom and top endpoints.",
+      "hint": "Radii are distances to the y-axis, but you integrate in y.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01vbr3k",
+      "kind": "concept",
+      "front": "What must the radius functions use compared with the integral's variable?",
+      "back": "They must use the **same variable** as the integral. For $dx$ the radii are functions of x, and for $dy$ they are functions of y.",
+      "hint": "Check the variable before you integrate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "038d4os",
+      "kind": "example",
+      "front": "Set up the x-axis volume for the region between $y=x$ and $y=x^2$ from $x=0$ to $x=1$.",
+      "back": "$V=\\pi\\int_0^1 (x^2-x^4)\\,dx$, because $R(x)=x$ and $r(x)=x^2$ on this interval.",
+      "hint": "Which curve is higher on this interval?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g3g7sw",
+      "kind": "example",
+      "front": "Find the volume about the x-axis for the region between $y=x$ and $y=x^2$ from $x=0$ to $x=1$.",
+      "back": "$V=\\frac{2\\pi}{15}$ cubic units. Integrate $\\pi\\left[\\frac{x^3}{3}-\\frac{x^5}{5}\\right]_0^1=\\pi\\left(\\frac13-\\frac15\\right)$.",
+      "hint": "Integrate $x^2-x^4$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ue82yu",
+      "kind": "example",
+      "front": "Find the volume about the y-axis for the region between $x=\\sqrt y$ and $x=y$, for $0\\leq y\\leq 1$.",
+      "back": "$V=\\frac{\\pi}{6}$ cubic units, from $\\pi\\int_0^1 (y-y^2)\\,dy$, since $R(y)=\\sqrt y$ and $r(y)=y$.",
+      "hint": "Since $\\sqrt y \\geq y$ here, the outer radius is $\\sqrt y$.",
+      "sectionId": "s3"
+    }
+  ]
+}

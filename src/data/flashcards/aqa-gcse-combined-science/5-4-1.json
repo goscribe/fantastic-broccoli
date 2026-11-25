@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-4-1",
+  "topicCode": "5.4.1",
+  "topicName": "Reactivity of metals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:44.389Z",
+  "cards": [
+    {
+      "id": "0tsyytn",
+      "kind": "concept",
+      "front": "What does a metal's position in the reactivity series tell you about how it reacts?",
+      "back": "Metals higher up are **more reactive** and react more readily. A higher metal can displace a lower metal from its compound, so the position predicts the reaction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jxx98q",
+      "kind": "process",
+      "front": "What happens when a more reactive metal is added to a solution of a less reactive metal's compound?",
+      "back": "A **displacement reaction** occurs. The more reactive metal replaces the less reactive metal, which is left behind as the element.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qrt92k",
+      "kind": "concept",
+      "front": "Which metals can carbon extract from their oxides, and why are others different?",
+      "back": "Carbon can extract metals **below carbon** in the reactivity series, such as iron. Metals above carbon, like aluminium, hold onto oxygen more strongly and need a different method.",
+      "hint": "Think about how strongly each metal holds onto oxygen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07ej1af",
+      "kind": "term",
+      "front": "What does it mean to reduce a metal oxide?",
+      "back": "To **remove oxygen** from the metal oxide, leaving the metal behind.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j7vb00",
+      "kind": "term",
+      "front": "What is oxidation in the reactions described in this topic?",
+      "back": "The **gain of oxygen** by a substance, such as a metal forming a metal oxide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08fyw5y",
+      "kind": "example",
+      "front": "What is the word equation for magnesium burning in oxygen?",
+      "back": "magnesium + oxygen → **magnesium oxide**",
+      "sectionId": "s1"
+    },
+    {
+      "id": "160lijn",
+      "kind": "mistake",
+      "front": "Why might a metal such as aluminium look unreactive even though it is reactive?",
+      "back": "Its **thin oxide coating** protects the metal underneath, stopping further reaction under ordinary conditions.",
+      "hint": "Think about what sits on the surface of the metal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ulgcn0",
+      "kind": "concept",
+      "front": "How does magnesium's reaction with steam differ from its reaction with cold water?",
+      "back": "It reacts **faster with steam**, forming a metal oxide and hydrogen. With cold water it reacts slowly, forming a metal hydroxide and hydrogen.",
+      "hint": "Check the state of the water in each case.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18at9ee",
+      "kind": "process",
+      "front": "What products form when a metal above hydrogen reacts with a dilute acid?",
+      "back": "A **salt** and hydrogen. For example, magnesium and hydrochloric acid give magnesium chloride and hydrogen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w07bym",
+      "kind": "mistake",
+      "front": "Why does copper not react with dilute hydrochloric acid?",
+      "back": "Copper is **below hydrogen** in the reactivity series, so it cannot react with the dilute acid to release hydrogen.",
+      "hint": "Locate copper against the reference points listed in the series.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12g7tg4",
+      "kind": "mistake",
+      "front": "Why can't copper displace iron from a solution of iron sulfate?",
+      "back": "Copper is **less reactive** than iron, so it cannot displace iron. Only a more reactive metal can displace a less reactive one.",
+      "hint": "Compare the positions of the two metals in the series.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03p8ylq",
+      "kind": "example",
+      "front": "What are the products when iron is added to copper sulfate solution?",
+      "back": "**Iron sulfate** and copper. Iron displaces copper because iron is more reactive.",
+      "hint": "Work out which metal is higher in the series first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15iel3g",
+      "kind": "term",
+      "front": "What is a salt in the context of metals reacting with acids?",
+      "back": "A compound formed when the **hydrogen in an acid** is replaced by a metal.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "024h6nu",
+      "kind": "concept",
+      "front": "Why can gold sometimes be found as the metal itself rather than in a compound?",
+      "back": "Gold is **very unreactive** and does not readily react with oxygen, so it is not usually combined with other elements in ores.",
+      "hint": "Think about how gold behaves compared with the metals above it.",
+      "sectionId": "s4"
+    }
+  ]
+}

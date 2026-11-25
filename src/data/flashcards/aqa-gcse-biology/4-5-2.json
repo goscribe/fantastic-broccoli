@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-5-2",
+  "topicCode": "4.5.2",
+  "topicName": "The human nervous system",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:42.561Z",
+  "cards": [
+    {
+      "id": "12vsszi",
+      "kind": "concept",
+      "front": "How does a reflex action protect the body from harm?",
+      "back": "It gives a **rapid, automatic** response to a stimulus, so the body acts before a conscious decision is made. Touching a hot object triggers the hand to withdraw, limiting injury.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "166zahj",
+      "kind": "process",
+      "front": "What is the order of steps in a reflex arc?",
+      "back": "A **receptor** detects the stimulus, then a **sensory neurone** carries impulses to the central nervous system, often via a relay neurone in the spinal cord, then a **motor neurone** carries them to an effector, which contracts.",
+      "hint": "Start where the change is first detected.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tay2tp",
+      "kind": "concept",
+      "front": "Why must sensory, relay and motor neurones work together rather than do the same job?",
+      "back": "Each carries impulses in a different direction or place: **sensory** towards the central nervous system, **relay** within it, and **motor** away to an effector. Together they pass information along a pathway to a response.",
+      "hint": "Consider the direction each type of impulse travels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04185w3",
+      "kind": "term",
+      "front": "What is a stimulus?",
+      "back": "A **detectable change** inside or outside the body.",
+      "hint": "Think about what a receptor responds to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yu37vb",
+      "kind": "term",
+      "front": "What is a receptor?",
+      "back": "A **cell** or group of cells that detects a stimulus, a change in the internal or external environment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19w1u8x",
+      "kind": "term",
+      "front": "What is an effector?",
+      "back": "A **muscle** or **gland** that produces a response.",
+      "hint": "Think about what carries out the response.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ljluz3",
+      "kind": "term",
+      "front": "What makes up the central nervous system?",
+      "back": "The **brain** and **spinal cord**, which receive information and coordinate responses.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f2my3m",
+      "kind": "term",
+      "front": "What does a sensory neurone do?",
+      "back": "It carries electrical impulses from a receptor **towards** the central nervous system.",
+      "hint": "Think about the direction of travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a9vtm4",
+      "kind": "term",
+      "front": "What does a motor neurone carry?",
+      "back": "Electrical impulses **away** from the central nervous system to an effector.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vhcqd3",
+      "kind": "term",
+      "front": "What is a relay neurone and where is it found?",
+      "back": "A **relay neurone** passes impulses between neurones within the central nervous system, linking a sensory neurone to a motor neurone in a simple reflex.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07f33ka",
+      "kind": "concept",
+      "front": "How does a signal pass from one neurone to the next?",
+      "back": "**Chemicals** carry the signal across the small gap at the junction. Impulses do not jump directly between cells.",
+      "hint": "Consider what must cross a small gap.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rupo72",
+      "kind": "mistake",
+      "front": "What is wrong with thinking a reflex needs a conscious decision first?",
+      "back": "It is wrong: a reflex is **automatic**, so the response happens first. The brain only becomes aware of the stimulus afterwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d7e3dr",
+      "kind": "mistake",
+      "front": "What is wrong with describing a nerve as a single neurone?",
+      "back": "A **nerve** is not one neurone. It contains **bundles of neurone fibres**.",
+      "hint": "Think about how many cells a nerve contains.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Measures of central tendency and spread",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:35.700Z",
+  "cards": [
+    {
+      "id": "0vp7azw",
+      "kind": "formula",
+      "front": "What is the formula for the mean of a data set?",
+      "back": "$\\bar{x}=\\frac{\\sum x}{n}$: the **total** of the values divided by the number of values. Here $n$ is how many values there are.",
+      "hint": "Think of sharing the total equally among the values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ycz0er",
+      "kind": "concept",
+      "front": "Why can the median describe a typical value better than the mean when one value is very large?",
+      "back": "The **mean** uses every value, so one very large value pulls it upwards. The **median** depends only on the middle position, so it changes little.",
+      "hint": "Ask which measure depends on every single value.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v5vomf",
+      "kind": "concept",
+      "front": "What does standard deviation measure, and why do we take a square root at the end?",
+      "back": "**Standard deviation** measures the typical distance of values from the mean, using every value. Squaring removes negative signs, and the square root returns the answer to the original units.",
+      "hint": "Follow the steps: distances, squares, average, root.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q9vz79",
+      "kind": "process",
+      "front": "What are the steps to find the median of ordered data?",
+      "back": "First put the data in **order**. Then pick the middle value if $n$ is odd, or take the mean of the two middle values if $n$ is even.",
+      "hint": "The order matters before you look for the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r5ijtb",
+      "kind": "example",
+      "front": "Values 1, 2, 3 and 4 have frequencies 2, 5, 6 and 2. Find the mean, median and mode.",
+      "back": "Mean $\\approx 2.53$ (since $\\sum fx=38$ and $n=15$), median $=3$, mode $=3$. The median is the 8th value, found using running totals 2, 7, 13, 15.",
+      "hint": "Use $\\sum fx$ for the mean and running totals for the median.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qpxv7q",
+      "kind": "term",
+      "front": "What is the range of a data set?",
+      "back": "The **range** is the greatest value minus the least value. It uses only two values, so one extreme value can distort it.",
+      "hint": "Only two values are involved.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lywue3",
+      "kind": "process",
+      "front": "How do you find the interquartile range from ordered data?",
+      "back": "Find $Q_1$ as the median of the lower half and $Q_3$ as the median of the upper half. Then $\\mathrm{IQR}=Q_3-Q_1$, the spread of the **middle half**.",
+      "hint": "Split the data into halves first, then find medians of each half.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17gvc5l",
+      "kind": "mistake",
+      "front": "A student has an even number of values and takes just one of the two middle values as the median. What is wrong?",
+      "back": "With an **even** number of values the median is the mean of the two middle values. Picking one of them ignores half of the middle pair.",
+      "hint": "Count how many values sit in the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09wda8q",
+      "kind": "formula",
+      "front": "What is the formula for standard deviation using frequencies?",
+      "back": "$\\sigma=\\sqrt{\\frac{\\sum f(x-\\bar{x})^2}{n}}$, where $f$ is the frequency of each value $x$ and $n=\\sum f$. The variance $\\sigma^2$ is the term under the root.",
+      "hint": "Each squared distance is weighted by its frequency.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09nlxu4",
+      "kind": "example",
+      "front": "Find the standard deviation of 2, 4, 4, 4, 5, 5, 7, 9.",
+      "back": "The mean is 5 and the squared distances total 32. Variance $=\\frac{32}{8}=4$, so $\\sigma=\\sqrt{4}=2$.",
+      "hint": "Find the mean first, then the squared distances.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wq5k2o",
+      "kind": "concept",
+      "front": "If every value rises by a constant $k$, what happens to the mean, median, range, IQR and standard deviation?",
+      "back": "The **mean** and **median** rise by $k$. The range, IQR and $\\sigma$ stay the same, because adding a constant does not change spread.",
+      "hint": "Shifting all values does not stretch them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d3y5ak",
+      "kind": "process",
+      "front": "How do you test whether a value is an outlier?",
+      "back": "Calculate $\\mathrm{IQR}=Q_3-Q_1$. A value is an **outlier** if it is more than $1.5\\times\\mathrm{IQR}$ above $Q_3$ or below $Q_1$.",
+      "hint": "Build the boundaries from the quartiles.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17ttqa5",
+      "kind": "mistake",
+      "front": "A student deletes a value because it is an outlier. Why might this be wrong?",
+      "back": "An outlier is **not automatically an error**. Check why the value is extreme before removing it, since it may be genuine data.",
+      "hint": "Being unusual is not the same as being wrong.",
+      "sectionId": "s5"
+    }
+  ]
+}

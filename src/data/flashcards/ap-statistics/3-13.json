@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-13",
+  "topicCode": "3.13",
+  "topicName": "Carrying out a two-proportion test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:24.907Z",
+  "cards": [
+    {
+      "id": "0tklaug",
+      "kind": "term",
+      "front": "What is a p-value in a two-proportion test?",
+      "back": "The **probability**, assuming $H_0$ is true, of a difference at least as extreme as the one observed, in the direction of $H_a$. A small p-value is evidence against $H_0$.",
+      "hint": "Assume the null hypothesis is true first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qt73xz",
+      "kind": "formula",
+      "front": "What is the z statistic for a two-proportion test, and what is the combined proportion?",
+      "back": "$z = \\frac{\\hat{p}_1 - \\hat{p}_2}{\\sqrt{\\hat{p}_c(1-\\hat{p}_c)\\left(\\frac{1}{n_1}+\\frac{1}{n_2}\\right)}}$, where $\\hat{p}_c = \\frac{x_1+x_2}{n_1+n_2}$ is the **combined proportion** of successes in both samples. z has no units.",
+      "hint": "The numerator is the observed gap; the denominator is the standard error.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ol9g7g",
+      "kind": "process",
+      "front": "What are the steps for making a decision and conclusion in a two-proportion test?",
+      "back": "Compare the **p-value** with $\\alpha$. If the p-value is less than $\\alpha$, reject $H_0$; otherwise fail to reject $H_0$. Then state what this means in context about $H_a$.",
+      "hint": "Three parts, in this order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xwvldk",
+      "kind": "concept",
+      "front": "Why does the standard error use the combined proportion?",
+      "back": "Because $H_0$ says both populations share one **proportion**, so all the data together estimate that one value. This gives a more stable standard error than using two separate proportions.",
+      "hint": "Think about what the null hypothesis claims.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ls1xz8",
+      "kind": "concept",
+      "front": "What does the test statistic measure?",
+      "back": "A **distance**: how many standard errors the sample gap $\\hat{p}_1 - \\hat{p}_2$ is from the null value of 0.",
+      "hint": "Think of it as a standardized score.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "145az4c",
+      "kind": "concept",
+      "front": "If sample sizes grow but the gap between proportions stays the same, what happens to z?",
+      "back": "z gets **larger**, because bigger samples shrink the standard error, so the same gap is more surprising.",
+      "hint": "Look at the n terms in the denominator.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iorhwh",
+      "kind": "example",
+      "front": "Campus 1: 84 of 200 students ride the bus. Campus 2: 66 of 220 do. What is z?",
+      "back": "$z \\approx 2.56$. Here $\\hat{p}_1 = 0.42$, $\\hat{p}_2 = 0.30$, $\\hat{p}_c \\approx 0.3571$, and the standard error is about 0.04681.",
+      "hint": "Keep extra decimals until the final step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "195z4xn",
+      "kind": "example",
+      "front": "For z ≈ 2.56 with a two-sided alternative, what is the p-value?",
+      "back": "About **0.010**. Each tail has area about 0.005, and the two-sided test doubles one tail.",
+      "hint": "Two-sided means double one tail.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x97r7k",
+      "kind": "process",
+      "front": "Which tail of the normal curve do you use for the p-value?",
+      "back": "For $H_a: p_1 - p_2 > 0$, use the area to the **right** of z. For $H_a: p_1 - p_2 < 0$, use the area to the **left**. For $\\neq 0$, double the area in one tail.",
+      "hint": "The alternative hypothesis decides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s8r4q3",
+      "kind": "example",
+      "front": "The campus p-value is 0.010 and alpha is 0.05. What is the conclusion in context?",
+      "back": "Reject $H_0$. There is **convincing evidence** that the true proportions of bus riders differ between the two campuses.",
+      "hint": "Compare first, then state the decision.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "080l9c3",
+      "kind": "example",
+      "front": "How do you interpret a p-value of 0.010 in the bus-rider test?",
+      "back": "If the true proportions of bus riders were equal at the two campuses, there would be about a **1.0%** chance of sample proportions at least this far apart.",
+      "hint": "Start with the assumption that the proportions are equal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "113i502",
+      "kind": "mistake",
+      "front": "Is the p-value the probability that the null hypothesis is true?",
+      "back": "No. The p-value is a **probability computed assuming $H_0$ is true**. It asks how surprising the data would be under that assumption.",
+      "hint": "Which way does the condition point?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sp71r7",
+      "kind": "mistake",
+      "front": "If we fail to reject H0, have we proved the two proportions are equal?",
+      "back": "No. It means the data do not give **convincing evidence** of a difference. That is not the same as proof that the proportions are equal.",
+      "hint": "Compare convincing evidence with proof.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rvyzl2",
+      "kind": "example",
+      "front": "In sample 1, 45 of 90 are successes. In sample 2, 30 of 110 are successes. For a two-sided test, what is z and the p-value?",
+      "back": "$z \\approx 3.30$, with $\\hat{p}_c = 0.375$ and a standard error of about 0.0688. The two-sided p-value is about **0.001**.",
+      "hint": "Use the combined proportion for the standard error."
+    }
+  ]
+}

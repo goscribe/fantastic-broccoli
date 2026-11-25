@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Perspectives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:29.617Z",
+  "cards": [
+    {
+      "id": "1142e7i",
+      "kind": "concept",
+      "front": "Why can two people look at the same evidence about clearing a forest and still disagree?",
+      "back": "They hold different **environmental value systems**, sets of beliefs and assumptions that guide how each judges the issue. Evidence is weighed through these beliefs, so conclusions differ.",
+      "hint": "Think about what each person values, such as jobs and food or habitat and beauty.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00ddql2",
+      "kind": "concept",
+      "front": "How do ecocentric and anthropocentric perspectives differ on the value of nature?",
+      "back": "**Ecocentric** views give nature intrinsic value, worth in itself. **Anthropocentric** views give it instrumental value, worth for what it provides to people.",
+      "hint": "Compare worth in itself with worth to people."
+    },
+    {
+      "id": "1m9te7g",
+      "kind": "concept",
+      "front": "What shapes a person's environmental value system over a lifetime?",
+      "back": "Values develop over time, not from nowhere. The main influence is **culture**, shared beliefs and traditions passed between generations, alongside religion, education, personal experience, economic circumstances and media.",
+      "hint": "Think about where beliefs come from before adulthood.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lrtpmf",
+      "kind": "term",
+      "front": "What is an environmental value system?",
+      "back": "A **framework** of beliefs and assumptions about the natural world and our place in it, used to evaluate environmental issues.",
+      "hint": "It guides judgement and decisions about what to protect or change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b6xk0g",
+      "kind": "term",
+      "front": "What is intrinsic value?",
+      "back": "The **worth** something has in itself, regardless of how useful it is to humans.",
+      "hint": "Contrast with worth that depends on being useful.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12h2tkf",
+      "kind": "term",
+      "front": "What is instrumental value?",
+      "back": "The **worth** of something as a means of meeting human needs or achieving human goals, such as timber, clean water or farmland.",
+      "hint": "Think of worth as a tool for people.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bxmvbi",
+      "kind": "term",
+      "front": "What is a technocentric perspective?",
+      "back": "A view that **human ingenuity**, technology and management can solve environmental problems while development and economic growth continue.",
+      "hint": "It adds a strong belief in science and engineering.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xqe4z6",
+      "kind": "concept",
+      "front": "Why do technocentric supporters tend to favour engineered solutions?",
+      "back": "They believe **science and technology** and clever management can solve environmental problems, so they are optimistic that growth can continue. Flood defences and filters are typical examples.",
+      "hint": "Consider what they expect cleverness and inventions to achieve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05sq4pl",
+      "kind": "mistake",
+      "front": "Is someone's environmental value system fixed for life?",
+      "back": "No. A **value system** develops over a lifetime and can change when new evidence or experience arrives, so it is not fixed.",
+      "hint": "Think about how experiences can change a person's views.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xzix67",
+      "kind": "concept",
+      "front": "How do ecocentric and technocentric views differ in their response to falling fish stocks?",
+      "back": "**Ecocentric** views put ecosystem health first, for example by banning fishing in large areas. **Technocentric** views use fish farms and monitoring so fishing can continue.",
+      "hint": "Ask what each view wants to keep and what it would accept.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ttovju",
+      "kind": "mistake",
+      "front": "Why is asking which environmental perspective is correct the wrong question?",
+      "back": "Value systems are not simply right or wrong. Ask what each perspective values, what solution it would accept, and how well it is supported by evidence and fair to others.",
+      "hint": "Focus on values and solutions, not on a single winner.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r9umsp",
+      "kind": "concept",
+      "front": "Why do most people not hold one environmental perspective in a pure form?",
+      "back": "Most people **blend** perspectives, and the blend can shift with the issue. A fisher who values income may also feel real respect for the sea.",
+      "hint": "Think of someone who depends on a resource but also cares for it.",
+      "sectionId": "s5"
+    }
+  ]
+}

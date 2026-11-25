@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Correlation and regression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:49.812Z",
+  "cards": [
+    {
+      "id": "1ot9mf3",
+      "kind": "term",
+      "front": "What does Pearson's product-moment correlation coefficient $r$ measure, and what values can it take?",
+      "back": "**Pearson's r** measures the strength and direction of linear correlation. It lies between $-1$ and $+1$: the sign gives direction and the size, ignoring sign, gives strength.",
+      "hint": "Think about the sign and the size of the number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0au2jq9",
+      "kind": "concept",
+      "front": "What does the regression line $y=ax+b$ do, and which point must it always pass through?",
+      "back": "It is the **least squares** line used to predict $y$ from $x$, making the sum of squared vertical distances as small as possible. It always passes through the **mean point** $(\\bar{x},\\bar{y})$.",
+      "hint": "Think about the squared vertical distances the calculator minimises.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qw688u",
+      "kind": "concept",
+      "front": "Why are predictions inside the range of the data more reliable than predictions outside it?",
+      "back": "**Interpolation** predicts inside the data range and is reliable. **Extrapolation** predicts outside it, where the pattern may not continue, so it is less reliable.",
+      "hint": "Ask whether the same pattern is likely to continue.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fzvgnk",
+      "kind": "process",
+      "front": "What should you do first when you are given paired data for two variables?",
+      "back": "Plot a **scatter diagram** before any calculation. Put the independent variable on the horizontal axis and the dependent variable on the vertical axis, with labelled axes and units.",
+      "hint": "Start with a picture, not a number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c86tnr",
+      "kind": "term",
+      "front": "What is bivariate data?",
+      "back": "**Bivariate data** is a set of paired values, with two variables recorded for each individual or item.",
+      "hint": "Bi means two.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nt91af",
+      "kind": "concept",
+      "front": "How can you judge the direction and strength of correlation from a scatter diagram?",
+      "back": "Points sloping up from left to right show **positive correlation**; points sloping down show negative correlation. Tight clusters near a straight line show strong correlation; loose scatter shows weak correlation.",
+      "hint": "Look at the overall slope and how tightly the points follow it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h9a23z",
+      "kind": "term",
+      "front": "What is an outlier, and what should you check before keeping it?",
+      "back": "An **outlier** is a data point lying unusually far from the pattern of the other points. Check whether it is an error before deciding to keep it.",
+      "hint": "Think about a point that stands apart from the rest.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mw0wgi",
+      "kind": "concept",
+      "front": "How would you describe $r$ near $+0.9$ and $r$ near $0$?",
+      "back": "$r$ near $+0.9$ is **strong positive correlation**. $r$ near $0$ means **little or no linear correlation**.",
+      "hint": "Use the rough guide to interpreting r.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14gj8bk",
+      "kind": "mistake",
+      "front": "A student says that because $r$ is near 0, the two variables are unrelated. What is wrong with this?",
+      "back": "**Wrong**: $r$ measures only linear correlation. A curved pattern can give $r$ near 0 even when the variables are closely related.",
+      "hint": "Consider what kind of pattern $r$ actually detects.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10xxjyj",
+      "kind": "formula",
+      "front": "In the regression line $y=ax+b$, what do the gradient $a$ and the intercept $b$ mean?",
+      "back": "$a$ is the average change in $y$ for each increase of 1 in $x$. $b$ is the predicted value of $y$ when $x=0$.",
+      "hint": "One is a rate of change, the other is a starting value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g3t2z1",
+      "kind": "example",
+      "front": "Using $y=4.25x+42.25$ from the revision data, predict the score for 6 hours and say whether the prediction is reliable.",
+      "back": "$y=4.25\\times6+42.25=67.75$, about 67.8 marks. It is reliable because 6 hours lies inside the data range of 1 to 8 hours, so this is interpolation.",
+      "hint": "Check whether 6 lies inside the range 1 to 8.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "079y3bc",
+      "kind": "example",
+      "front": "Using $y=4.25x+42.25$, why is the predicted score for 14 hours unreliable?",
+      "back": "14 hours lies outside the data range of 1 to 8, so this is **extrapolation**. The result 101.75 exceeds the maximum mark of 100, so it cannot be right.",
+      "hint": "Compare 14 with the range of the data.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bobhe7",
+      "kind": "mistake",
+      "front": "A student says strong correlation proves that one variable causes the other. Why is this wrong?",
+      "back": "**Correlation does not prove causation**. A third factor may influence both variables, so the link need not be causal.",
+      "hint": "Think about what a third factor could do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "134zi7e",
+      "kind": "mistake",
+      "front": "Can you rearrange the regression line $y=ax+b$ to estimate $x$ from a given $y$?",
+      "back": "**No**: the line was built to predict $y$ from $x$, so it should not be rearranged to estimate $x$.",
+      "hint": "Which variable was the line designed to predict?",
+      "sectionId": "s5"
+    }
+  ]
+}

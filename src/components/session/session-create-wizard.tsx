@@ -7,15 +7,9 @@ import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import { cn } from "@/lib/utils";
 import { SessionDepth, ExamBoard } from "@/types";
-import {
-  Sparkles,
-  Clock,
-  Brain,
-  BookOpen,
-  ArrowRight,
-  ArrowLeft,
-  Loader2,
-} from "lucide-react";
+import { Sparkles, ArrowRight, ArrowLeft, Loader2 } from "lucide-react";
+import { StudyLengthSlider } from "@/components/session/study-length-slider";
+import { depthForMinutes } from "@/lib/study-length";
 import { inputClass, textareaClass } from "@/components/ui/input";
 
 interface SessionConfig {
@@ -54,27 +48,6 @@ const subjectSuggestions = [
   "session.subjPsychology",
 ];
 
-const depthOptions: { value: SessionDepth; label: string; description: string; icon: React.ElementType }[] = [
-  {
-    value: "light",
-    label: "session.depthLight",
-    description: "session.depthLightDesc",
-    icon: BookOpen,
-  },
-  {
-    value: "moderate",
-    label: "session.depthModerate",
-    description: "session.depthModerateDesc",
-    icon: Clock,
-  },
-  {
-    value: "deep",
-    label: "session.depthDeep",
-    description: "session.depthDeepDesc",
-    icon: Brain,
-  },
-];
-
 const examBoards: { value: ExamBoard; label: string }[] = [
   { value: "IB", label: "IB" },
   { value: "AP", label: "AP" },
@@ -83,8 +56,6 @@ const examBoards: { value: ExamBoard; label: string }[] = [
   { value: "SAT", label: "SAT" },
   { value: "OTHER", label: "session.other" },
 ];
-
-const durationOptions = [15, 30, 45, 60, 90, 120];
 
 function defaultSessionTitle(suffix: string): string {
   const now = new Date();
@@ -240,65 +211,13 @@ export function SessionCreateWizard({
         </p>
       </div>
 
-      <div className="space-y-2">
-        <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-          {t("session.studyDepth")}
-        </label>
-        {depthOptions.map((opt) => {
-          const Icon = opt.icon;
-          return (
-            <button
-              key={opt.value}
-              type="button"
-              onClick={() => setConfig({ ...config, depth: opt.value })}
-              className={cn(
-                "w-full flex items-center gap-3 p-3 rounded-lg border text-left",
-                config.depth === opt.value
-                  ? "border-accent bg-accent/5"
-                  : "border-border hover:border-accent/20",
-              )}
-            >
-              <Icon
-                className={cn(
-                  "h-5 w-5 flex-shrink-0",
-                  config.depth === opt.value
-                    ? "text-accent"
-                    : "text-muted-foreground",
-                )}
-              />
-              <div>
-                <span className="text-sm font-medium">{t(opt.label)}</span>
-                <p className="text-xs text-muted-foreground mt-0.5">
-                  {t(opt.description)}
-                </p>
-              </div>
-            </button>
-          );
-        })}
-      </div>
-
-      <div>
-        <label className="text-xs font-medium text-muted-foreground block mb-1.5">
-          {t("session.sessionDuration")}
-        </label>
-        <div className="flex flex-wrap gap-2">
-          {durationOptions.map((mins) => (
-            <button
-              key={mins}
-              type="button"
-              onClick={() => setConfig({ ...config, durationMinutes: mins })}
-              className={cn(
-                "px-3 py-1.5 rounded-lg text-sm border tabular-nums",
-                config.durationMinutes === mins
-                  ? "border-accent bg-accent/10 text-accent font-medium"
-                  : "border-border hover:border-accent/30 text-muted-foreground",
-              )}
-            >
-              {mins < 60 ? `${mins}m` : `${mins / 60}h`}
-            </button>
-          ))}
-        </div>
-      </div>
+      <StudyLengthSlider
+        value={config.durationMinutes}
+        onChange={(mins) =>
+          setConfig({ ...config, durationMinutes: mins, depth: depthForMinutes(mins) })
+        }
+        className="pt-1"
+      />
     </div>,
   ];
 

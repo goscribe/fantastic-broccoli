@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a2-4",
+  "topicCode": "A2.4",
+  "topicName": "Network security",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:57.743Z",
+  "cards": [
+    {
+      "id": "1xjw11e",
+      "kind": "concept",
+      "front": "Why do networks combine several security measures rather than relying on one tool?",
+      "back": "Security comes from **layers**, each covering a different weakness, so if one layer fails another can still limit the damage. No single measure removes the risk completely.",
+      "hint": "Think about what happens when one layer fails.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hkiqkz",
+      "kind": "concept",
+      "front": "How does encryption protect data that an attacker intercepts?",
+      "back": "It scrambles readable **plaintext** into unreadable **ciphertext** using an algorithm and a key. Without the matching key, the intercepted data is of little use.",
+      "hint": "What does the interceptor not have?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1682x6o",
+      "kind": "concept",
+      "front": "Why is a password alone a weak way to prove identity?",
+      "back": "A password can be guessed, stolen or reused. **Multi-factor authentication** adds different kinds of evidence, so a stolen password alone does not grant access.",
+      "hint": "Count the kinds of evidence, not the number of items.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0uweb43",
+      "kind": "term",
+      "front": "What is malware?",
+      "back": "**Malware** is software designed to harm a system or steal data without the owner's permission. Viruses, worms and ransomware are types of malware.",
+      "hint": "Think about the purpose behind the software.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0q42q83",
+      "kind": "mistake",
+      "front": "Is phishing a virus that antivirus software can stop?",
+      "back": "No. Phishing is a **deception** that relies on a person making a mistake, so antivirus software alone cannot stop it. Staff training helps reduce it.",
+      "hint": "Who is being attacked: the software or the person?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "036kqp6",
+      "kind": "term",
+      "front": "What is a denial-of-service attack?",
+      "back": "An attack that makes a system **unavailable** by flooding it with requests so genuine users cannot reach it. If the requests come from many devices, it is called distributed.",
+      "hint": "What is the attacker trying to stop, not steal?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rihq9k",
+      "kind": "concept",
+      "front": "Why is unprotected wireless traffic easier to intercept than data on a cable?",
+      "back": "Radio signals **spread through the air**, so anyone in range can capture them more easily than data travelling along a cable.",
+      "hint": "Consider where the signal can travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ybpa7t",
+      "kind": "term",
+      "front": "What is unauthorised access?",
+      "back": "The use of a **system, account or data** by someone who has not been given permission. It often happens through weak or stolen passwords.",
+      "hint": "Focus on the word permission.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05vwuda",
+      "kind": "term",
+      "front": "What does a firewall do with each packet?",
+      "back": "It **allows or blocks** each packet entering or leaving a network according to a set of rules, which may use addresses or protocols.",
+      "hint": "Think of it as a gate with rules.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0488vhq",
+      "kind": "mistake",
+      "front": "Does a firewall encrypt data or remove malware that is already inside?",
+      "back": "No. A firewall only **controls traffic**. It does not encrypt data, check who a user is, or remove malware that is already on the network.",
+      "hint": "A firewall controls what passes, nothing more.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0juvk3d",
+      "kind": "example",
+      "front": "Using a shift cipher with key 3, what is the ciphertext for the word CAT?",
+      "back": "**FDW**. Each letter is shifted 3 places forward: C becomes F, A becomes D and T becomes W. Shifting back by 3 decrypts it.",
+      "hint": "Move each letter forward by the key.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1s3zjlv",
+      "kind": "concept",
+      "front": "How do symmetric and asymmetric encryption differ in the keys they use?",
+      "back": "**Symmetric** encryption uses the same key to encrypt and decrypt, so both sides must share it safely. **Asymmetric** uses a public key to encrypt and a different private key to decrypt.",
+      "hint": "Count how many keys are involved.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mhtd4i",
+      "kind": "process",
+      "front": "Name the three groups of evidence used in multi-factor authentication.",
+      "back": "**Something you know** (such as a password or PIN), **something you have** (such as a phone or security token) and **something you are** (such as a fingerprint or face scan).",
+      "hint": "Each group is about a different kind of proof.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0usxip3",
+      "kind": "term",
+      "front": "What is a backup and why is it kept?",
+      "back": "A **separate copy** of data, kept so that it can be restored after loss or damage. It is one of several measures that protect network data.",
+      "hint": "Think about recovery after something goes wrong.",
+      "sectionId": "s5"
+    }
+  ]
+}

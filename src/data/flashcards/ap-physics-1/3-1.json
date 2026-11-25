@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Translational kinetic energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:33.605Z",
+  "cards": [
+    {
+      "id": "0lc0y2l",
+      "kind": "formula",
+      "front": "What is the equation for translational kinetic energy, and what does each symbol mean?",
+      "back": "$K=\\frac{1}{2}mv^2$, where $K$ is kinetic energy in **joules**, $m$ is mass in kilograms, and $v$ is speed in meters per second.",
+      "hint": "Name each symbol and its SI unit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rm2abg",
+      "kind": "concept",
+      "front": "Why does doubling an object's speed affect its kinetic energy more than doubling its mass?",
+      "back": "Because **speed is squared**, doubling speed multiplies $K$ by 4. Mass enters only once, so doubling mass only doubles $K$.",
+      "hint": "Look at the power on each variable.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bki65l",
+      "kind": "term",
+      "front": "What is translational kinetic energy?",
+      "back": "The **energy an object has** because its center of mass moves through space. It is given by $K=\\frac{1}{2}mv^2$.",
+      "hint": "Think about motion, not position.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ztnp9",
+      "kind": "process",
+      "front": "What are the steps for calculating kinetic energy from mass and speed?",
+      "back": "1) Convert to SI units (km/h ÷ 3.6, g ÷ 1000). 2) Square the speed. 3) Multiply by the mass and by one half, one operation per line.",
+      "hint": "Start with units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nuggyl",
+      "kind": "example",
+      "front": "Find the kinetic energy of a 1500 kg car moving at 72 km/h.",
+      "back": "**$3.0\\times10^5$ J**. Convert 72 km/h to 20 m/s, then $K=\\frac{1}{2}(1500)(20)^2=3.0\\times10^5$ J.",
+      "hint": "Convert the speed to m/s first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03tpuk4",
+      "kind": "mistake",
+      "front": "A student squares the whole product mv instead of just v. Why is this wrong?",
+      "back": "Only the **speed** is squared in $K=\\frac{1}{2}mv^2$. Squaring the whole product $mv$ changes the mass term too, giving the wrong answer.",
+      "hint": "Which symbol gets the power?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11ta5oq",
+      "kind": "mistake",
+      "front": "Does doubling the speed double the kinetic energy?",
+      "back": "**No**. It multiplies kinetic energy by 4, because $K$ is proportional to $v^2$.",
+      "hint": "Check the power on v.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v6szgb",
+      "kind": "concept",
+      "front": "Can kinetic energy be negative, and does direction matter?",
+      "back": "**No**, $K$ is never negative because mass and $v^2$ are never negative. Direction does not matter, so opposite velocities at the same speed give equal $K$.",
+      "hint": "Think about what is squared.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uqnz55",
+      "kind": "formula",
+      "front": "What is the formula for the change in kinetic energy?",
+      "back": "$\\Delta K = K_f - K_i$, where $K_f$ is final and $K_i$ is initial kinetic energy. Calculate each value first, then subtract.",
+      "hint": "Final minus initial.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kqk5io",
+      "kind": "term",
+      "front": "What is a joule?",
+      "back": "The **SI unit of energy**, equal to one newton-meter, or $1\\ \\mathrm{kg\\,m^2/s^2}$.",
+      "hint": "Relate it to the units of $K=\\frac{1}{2}mv^2$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cyxtzk",
+      "kind": "example",
+      "front": "A 2.0 kg object moves at 5.0 m/s. What is its kinetic energy?",
+      "back": "**25 J**. $K=\\frac{1}{2}(2.0)(5.0)^2=25$ J.",
+      "hint": "Square the speed first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d2cxba",
+      "kind": "example",
+      "front": "An 800 kg car travels at 54 km/h. Find its kinetic energy.",
+      "back": "**$9.0\\times10^4$ J**. 54 km/h ÷ 3.6 = 15 m/s, so $K=\\frac{1}{2}(800)(15)^2=9.0\\times10^4$ J.",
+      "hint": "Convert the speed before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bk6a54",
+      "kind": "concept",
+      "front": "If an object's mass triples and its speed halves, what happens to its kinetic energy?",
+      "back": "It becomes **three quarters** of the original. Tripling mass gives ×3, and halving speed gives ×1/4, so the total factor is ×3/4.",
+      "hint": "Multiply the two factors.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "040tzlp",
+      "kind": "concept",
+      "front": "Does the choice of reference affect kinetic energy?",
+      "back": "**Yes**. Speed is measured relative to a chosen reference, usually the ground, and a different reference can give a different $K$.",
+      "hint": "Relative to what is the speed measured?",
+      "sectionId": "s5"
+    }
+  ]
+}

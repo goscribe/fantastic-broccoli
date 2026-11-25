@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-11",
+  "topicCode": "8.11",
+  "topicName": "Animal models in research",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:22.099Z",
+  "cards": [
+    {
+      "id": "0800r0j",
+      "kind": "concept",
+      "front": "Why do researchers use animal models to study the brain instead of only studying people?",
+      "back": "Some experiments, such as damaging a healthy brain or altering genes, are **unethical** in people. Mammals share neurones, synapses and main brain regions with us, so findings can suggest how a human brain works.",
+      "hint": "Think about what researchers are allowed to do to people.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xfq4ly",
+      "kind": "concept",
+      "front": "How does switching off a gene in a mouse help researchers study a human brain disorder?",
+      "back": "Researchers alter or switch off one **gene** and look for changes in brain structure or behaviour. If the mouse shows symptoms like the human disorder, it becomes a **model** of that disorder for studying its development and testing treatments.",
+      "hint": "Start with what the mouse's genome is like compared with ours.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jcdp7s",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a drug that works in an animal model will work in humans?",
+      "back": "The animal result is only a **sign that the drug is worth testing further**. It is not proof of effect in humans, because species can differ in how drugs are absorbed, broken down or act.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b07yci",
+      "kind": "term",
+      "front": "What is an animal model?",
+      "back": "An **animal model** is a non-human species whose biology is similar enough to ours that findings may apply to a human condition or process.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o5tlec",
+      "kind": "term",
+      "front": "What is a gene?",
+      "back": "A **gene** is a sequence of DNA that influences a characteristic.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02qa9ms",
+      "kind": "term",
+      "front": "What is a genome?",
+      "back": "A **genome** is the complete genetic material of an organism or virus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13emtdh",
+      "kind": "concept",
+      "front": "Why were squid used to show how nerve impulses are generated and conducted?",
+      "back": "Squid have very large **axons**, so researchers could place electrodes inside and record impulses directly. The same principles apply to human neurones.",
+      "hint": "Think about the physical room an electrode needs inside an axon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gm704i",
+      "kind": "concept",
+      "front": "How did rat studies of the hippocampus link brain structure to function?",
+      "back": "Rats with **hippocampal damage** struggled to learn a maze layout. People with damage to this region also have difficulty forming new memories, so the region is needed for memory.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ks9qo7",
+      "kind": "process",
+      "front": "What are the stages of testing a possible treatment on an animal model before human trials?",
+      "back": "1) Give the drug to an animal with a similar condition. 2) Measure its movement or behaviour. 3) Examine the brain afterwards. These tests check whether the drug reaches the brain and causes harm, and help choose a safe dose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k410zq",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a mouse with a gene change is an exact copy of a human disorder?",
+      "back": "The mouse only models **some features** of the disorder. A gene change does not reproduce the human condition exactly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e18sic",
+      "kind": "concept",
+      "front": "Why can closely related animals in identical lab conditions be a limitation?",
+      "back": "They show **less variety** than people, so results may not reflect the range of responses seen across human populations.",
+      "hint": "Compare the animals with a group of people.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uh78tt",
+      "kind": "concept",
+      "front": "Why can animal models not fully represent some human brain functions?",
+      "back": "Human brains are **larger and more complex** than those of the animals used, so some functions cannot be modelled.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11ge74e",
+      "kind": "concept",
+      "front": "Which ethical concern about animal models encourages scientists to limit how many animals they use?",
+      "back": "**Suffering** caused to the animals, which encourages scientists to limit the number of animals used in studies.",
+      "sectionId": "s5"
+    }
+  ]
+}

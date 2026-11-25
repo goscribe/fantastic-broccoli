@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-3",
+  "topicCode": "4.3",
+  "topicName": "Niche and adaptation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:37.949Z",
+  "cards": [
+    {
+      "id": "1ayd59u",
+      "kind": "term",
+      "front": "What is an ecological niche?",
+      "back": "An **ecological niche** is the conditions a species tolerates, the resources it uses and its interactions with other species, such as food, nesting sites, activity times and predators.",
+      "hint": "Think beyond the place a species lives in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vjxzt2",
+      "kind": "process",
+      "front": "What are the steps by which a helpful inherited feature becomes more common in a population?",
+      "back": "Individuals with the helpful inherited feature tend to survive and leave more offspring, so they pass it on. Over generations the feature becomes more common through **natural selection**.",
+      "hint": "Start with which individuals are most likely to survive.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lw99s4",
+      "kind": "concept",
+      "front": "What are the three types of adaptation, and what does each involve?",
+      "back": "**Anatomical** adaptations are structural features of the body. **Physiological** adaptations are processes inside the body. **Behavioural** adaptations are actions an organism performs.",
+      "hint": "Think about whether a feature is a structure, a process or an action.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited characteristic that improves survival or reproduction in a particular environment.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09duzxa",
+      "kind": "mistake",
+      "front": "Why is a niche not the same as a habitat?",
+      "back": "A **habitat** is the place where a species lives, whereas a niche describes the way of life in that place, including its resources and interactions.",
+      "hint": "Compare a street address with a person's job and daily routine.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02lgfim",
+      "kind": "mistake",
+      "front": "Why does a skill learned by practice not count as a behavioural adaptation?",
+      "back": "Only **inherited** behaviour counts as an adaptation, so a learned skill is not one, even if it helps survival.",
+      "hint": "Think about how the behaviour was passed on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0laz6j0",
+      "kind": "process",
+      "front": "What three parts should a full answer about an adaptation contain?",
+      "back": "Name the **feature**, say what the feature does, then link this to survival or reproduction in that environment. Naming a feature without its advantage gains few marks.",
+      "hint": "Think of a sentence structure you could follow in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w8zlh9",
+      "kind": "example",
+      "front": "How do the rolled leaves of marram grass help it on sand dunes?",
+      "back": "The rolled leaves trap moist air around the plant, which **reduces water loss**, helping the grass survive dry conditions.",
+      "hint": "Think about what happens to water at the leaf surface.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vfihve",
+      "kind": "example",
+      "front": "Which type of adaptation is a lizard basking in the sun to warm up?",
+      "back": "A **behavioural adaptation**, because basking is an action the lizard performs rather than a body structure or internal process.",
+      "hint": "Ask whether the lizard is doing something or has something.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "042s73a",
+      "kind": "concept",
+      "front": "Why can a thick coat that helps a mammal in a cold climate reduce its survival in a warm one?",
+      "back": "The coat keeps too much heat in, so the mammal may **overheat**, which can reduce its survival or reproduction. Adaptations are specific to their environment.",
+      "hint": "Think about how heat moves away from the body in each climate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dpncq2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say individuals adapt by changing during their lifetime?",
+      "back": "A population adapts over **generations**, when helpful inherited traits become more common. Individuals do not change to suit their needs; useful variation already exists and natural selection favours it.",
+      "hint": "Think about who passes traits on and over what time span.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14har8a",
+      "kind": "concept",
+      "front": "Why are species with little variation most at risk when their environment changes quickly?",
+      "back": "With little **variation**, few individuals have traits suited to the new conditions, so natural selection has little to act on. The population may fall in size and face extinction.",
+      "hint": "Think about what natural selection needs in order to work.",
+      "sectionId": "s5"
+    }
+  ]
+}

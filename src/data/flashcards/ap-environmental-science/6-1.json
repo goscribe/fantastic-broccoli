@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "Renewable and nonrenewable resources",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:22.964Z",
+  "cards": [
+    {
+      "id": "0757jfd",
+      "kind": "concept",
+      "front": "What is the key difference between a renewable and a nonrenewable energy resource?",
+      "back": "A **renewable** resource is replenished by natural processes fast enough that it is not used up on a human time scale. A **nonrenewable** resource forms so slowly that people use it far faster than nature replaces it.",
+      "hint": "Think about how quickly the supply comes back after people use it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ki97ap",
+      "kind": "concept",
+      "front": "Why do neighboring countries often build very different power systems?",
+      "back": "Each country builds on what lies **beneath or around** it, such as dams on rivers or solar panels in sunny areas. Local resources are often the cheapest and most reliable option.",
+      "hint": "Think about what each country has nearby.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fjnezq",
+      "kind": "term",
+      "front": "What is intermittency in energy sources?",
+      "back": "**Intermittency** is the variation in a source's output that depends on weather or time of day. Wind and sunlight are common examples.",
+      "hint": "Think about what makes a source's output change over a day or season.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pgsriu",
+      "kind": "term",
+      "front": "What is geothermal energy?",
+      "back": "**Geothermal energy** is heat from within Earth, used to generate electricity or heat buildings.",
+      "hint": "Think about where the heat is located.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f8qopp",
+      "kind": "term",
+      "front": "What is biomass as an energy resource?",
+      "back": "**Biomass** is organic material from recently living organisms, such as plants and wood, that can be burned or converted into fuel.",
+      "hint": "Think about material that was alive recently.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z7t3br",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a renewable resource is always available?",
+      "back": "Renewable does **not** mean available everywhere or all the time. Sunlight fades at night and wind speeds vary, so output changes.",
+      "hint": "Consider which conditions a source's output depends on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x7cdjq",
+      "kind": "concept",
+      "front": "When is burning wood for energy truly renewable?",
+      "back": "Wood is renewable only if **new trees grow as fast as old ones are cut**. If people harvest faster, the supply shrinks and the resource stops behaving as renewable.",
+      "hint": "Compare the rate of tree growth with the rate of harvesting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d4oxdb",
+      "kind": "term",
+      "front": "What is a fossil fuel?",
+      "back": "A **fossil fuel** is a hydrocarbon-rich fuel formed over millions of years from buried remains of ancient organisms. Coal, oil, and natural gas are the main examples.",
+      "hint": "Think about what the fuel was made from and how long it took.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ykkf5i",
+      "kind": "concept",
+      "front": "Why does extracting a fuel cost more as easy deposits are used up?",
+      "back": "The remaining supply is **harder to reach**, so extraction needs more effort and money. Higher prices make alternatives more attractive.",
+      "hint": "Think about what is left after the easiest deposits are gone.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ycblo8",
+      "kind": "example",
+      "front": "Why might a region with many fast-flowing rivers choose hydroelectric power?",
+      "back": "Flowing water is a **local renewable resource** the region already has. Using it reduces the need to import fuel and lowers fuel costs.",
+      "hint": "Compare a local resource with fuel that must be imported.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0q3ae39",
+      "kind": "term",
+      "front": "What are reserves in energy planning?",
+      "back": "**Reserves** are the known amounts of a resource that can be extracted at a profit with current technology. Large reserves make a fuel cheaper and easier to rely on.",
+      "hint": "Think about what makes extraction worthwhile today.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mfjt88",
+      "kind": "term",
+      "front": "What is energy security?",
+      "back": "**Energy security** is a nation's ability to obtain a reliable supply of energy at an affordable price.",
+      "hint": "Consider what a country that imports most of its fuel is exposed to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00rxfft",
+      "kind": "process",
+      "front": "How can planners handle the intermittency of renewable sources?",
+      "back": "Planners **store energy**, **link several sources** together, or keep a **backup supply**. A balanced mix of these lowers risk.",
+      "hint": "Think about ways to cover gaps when output drops.",
+      "sectionId": "s5"
+    }
+  ]
+}

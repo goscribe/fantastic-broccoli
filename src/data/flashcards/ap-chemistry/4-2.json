@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Net ionic equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:33.925Z",
+  "cards": [
+    {
+      "id": "1abjtab",
+      "kind": "process",
+      "front": "What are the three steps to go from a molecular equation to a net ionic equation?",
+      "back": "1) Balance the molecular equation with physical states. 2) Split dissolved strong electrolytes into ions to get the **complete ionic equation**. 3) Cancel the **spectator ions** to get the net ionic equation.",
+      "hint": "Three steps, in order."
+    },
+    {
+      "id": "0avvjgp",
+      "kind": "concept",
+      "front": "How can you tell whether mixing two aqueous solutions will form a precipitate?",
+      "back": "Write the possible products, then use solubility rules. If one product is an **insoluble** solid, a precipitate forms. If both stay aqueous, no precipitate forms.",
+      "hint": "Check the products, not only the reactants.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "094n6b6",
+      "kind": "concept",
+      "front": "Why does a net ionic equation show only the species that really react?",
+      "back": "It removes the **spectator ions**, which appear unchanged on both sides, so only the ions that form the precipitate or change remain.",
+      "hint": "What is left after unchanged ions cancel?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f1tvyv",
+      "kind": "term",
+      "front": "What does a molecular equation show?",
+      "back": "Reactants and products as whole formulas, with coefficients and **physical states** such as (aq), (s), (l), and (g).",
+      "hint": "Look for the state symbols.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ll8sh9",
+      "kind": "term",
+      "front": "What is a precipitate?",
+      "back": "An **insoluble** solid that forms when two aqueous solutions react with each other.",
+      "hint": "Think about what settles out of solution.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16eucjc",
+      "kind": "term",
+      "front": "What is solubility?",
+      "back": "How much a substance **dissolves** in a given solvent under stated conditions. For this topic, it tells you whether a substance dissolves appreciably in water.",
+      "hint": "Solubility rules predict it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0uhbo6k",
+      "kind": "concept",
+      "front": "What does a complete ionic equation show that a molecular equation does not?",
+      "back": "It shows dissolved strong electrolytes as separate **ions**, while solids, liquids, gases, and weak electrolytes stay as whole formulas.",
+      "hint": "Think about what splits into ions in water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tge2ko",
+      "kind": "term",
+      "front": "What are spectator ions?",
+      "back": "Ions that appear **unchanged** on both sides of a complete ionic equation and take no part in the reaction.",
+      "hint": "Think about what does not react.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18oy1bl",
+      "kind": "example",
+      "front": "For $\\mathrm{AgNO_3}(aq)+\\mathrm{NaCl}(aq)\\rightarrow\\mathrm{AgCl}(s)+\\mathrm{NaNO_3}(aq)$, what is the net ionic equation?",
+      "back": "$\\mathrm{Ag^+}(aq)+\\mathrm{Cl^-}(aq)\\rightarrow\\mathrm{AgCl}(s)$, because Na+ and NO3- are **spectators**.",
+      "hint": "Cancel ions that appear on both sides.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lb65o5",
+      "kind": "mistake",
+      "front": "A student says any exchange of ions always forms a precipitate. What is wrong with this?",
+      "back": "An exchange does not guarantee a **precipitate**. If both possible products are soluble and stay aqueous, no solid forms.",
+      "hint": "Check each possible product's solubility.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "030quuh",
+      "kind": "concept",
+      "front": "What does it mean if every ion cancels in a complete ionic equation?",
+      "back": "There is **no** net ionic reaction under the stated conditions.",
+      "hint": "Nothing is left that changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c7ixfd",
+      "kind": "concept",
+      "front": "Why can only identical species be cancelled when writing a net ionic equation?",
+      "back": "Cancelled species must have the same **formula, charge, and physical state** on both sides, so the ion is truly unchanged.",
+      "hint": "Compare each side carefully.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-5",
+  "topicCode": "8.5",
+  "topicName": "Community ecology",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:10.412Z",
+  "cards": [
+    {
+      "id": "1vrmewr",
+      "kind": "concept",
+      "front": "Why can a rare species still have a big effect on its community?",
+      "back": "A **keystone species** has a large effect on community structure relative to its abundance, so its activities can influence many other species even when it is uncommon.",
+      "hint": "Think about what the species does, not how many there are.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eo7229",
+      "kind": "concept",
+      "front": "How do you work out which effect an interaction has on the species involved?",
+      "back": "Name the effect on **each** species. A benefit to one species alone does not tell commensalism from parasitism, because parasitism also harms the host.",
+      "hint": "Check what happens to both partners.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dtc9vk",
+      "kind": "concept",
+      "front": "Does succession always lead to the same final community?",
+      "back": "No. Succession has no **guaranteed sequence** and does not end in one permanent community. Which species arrive depends on local conditions, available species, and later disturbances.",
+      "hint": "Consider what can change the path.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01ib5n7",
+      "kind": "term",
+      "front": "What is mutualism?",
+      "back": "**Mutualism** is an interaction in which both species benefit. A flowering plant gains pollination while its pollinator gains food.",
+      "hint": "Both partners win.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0eoojls",
+      "kind": "term",
+      "front": "What is commensalism?",
+      "back": "**Commensalism** is an interaction in which one species benefits and the other is not significantly affected.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yojkgr",
+      "kind": "term",
+      "front": "What is parasitism?",
+      "back": "**Parasitism** is an interaction in which a parasite benefits by taking resources from a living host, which is harmed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "029yydn",
+      "kind": "term",
+      "front": "What is competition?",
+      "back": "**Competition** occurs when organisms use a limited shared resource, which reduces their access to it. It can occur between species or between members of one species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04kci7j",
+      "kind": "concept",
+      "front": "Why can two competing species sometimes live in the same area?",
+      "back": "They can **coexist** when they use different resources or use shared resources in different ways. If their needs overlap strongly, one may exclude the other from a particular area.",
+      "hint": "Compare how each species uses resources.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tdxg39",
+      "kind": "mistake",
+      "front": "Is a keystone species always the most abundant species in its community?",
+      "back": "No. A keystone species is not necessarily the most abundant; its defining feature is its **unusually large influence** relative to its abundance.",
+      "hint": "Abundance and influence are different things.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03cjias",
+      "kind": "process",
+      "front": "What happens in a community after a keystone predator is removed?",
+      "back": "Its prey may increase. The growing prey population may then reduce other species through competition or consumption, which can change the whole community.",
+      "hint": "Follow the chain of effects step by step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l35u30",
+      "kind": "term",
+      "front": "What is a trophic cascade?",
+      "back": "A **trophic cascade** is a chain of indirect effects across feeding relationships, following a change at one level.",
+      "hint": "Think about feeding levels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uvtz9s",
+      "kind": "term",
+      "front": "What is primary succession and where does it begin?",
+      "back": "**Primary succession** begins in an area where soil is absent, such as newly exposed rock. Early colonists help form soil by adding organic matter as they grow and decay.",
+      "hint": "Think about what the ground is like at the very start.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jrnjr9",
+      "kind": "term",
+      "front": "What is secondary succession and how does it differ from primary succession?",
+      "back": "**Secondary succession** begins after a disturbance in an area where soil remains. Surviving organisms and seeds may help the community reestablish.",
+      "hint": "Compare whether soil is still present.",
+      "sectionId": "s4"
+    }
+  ]
+}

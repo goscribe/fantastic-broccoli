@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Equations with technology",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:13.460Z",
+  "cards": [
+    {
+      "id": "0nkbuta",
+      "kind": "process",
+      "front": "How do you solve $f(x)=g(x)$ using a graphing calculator?",
+      "back": "Graph $y=f(x)$ and $y=g(x)$, adjust the **viewing window** so every crossing is visible, then use the intersection tool at each crossing. Read the $x$-coordinates as the solutions.",
+      "hint": "Think about where the two graphs meet.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02zr3jz",
+      "kind": "mistake",
+      "front": "A solver gives you one answer to an equation. Does that mean it is the only solution?",
+      "back": "**No**. A solver started from one guess often returns only one solution. Other solutions may exist, so check the graph for more crossings.",
+      "hint": "Consider where the solver started searching.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1hp3wyt",
+      "kind": "concept",
+      "front": "Why must you interpret the numbers a solver gives you?",
+      "back": "A solver returns **numbers, not meaning**. You decide which solutions fit the problem, rejecting impossible ones such as a negative length, and give each answer with its unit.",
+      "hint": "Ask whether each answer makes sense in the real situation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jaox0g",
+      "kind": "term",
+      "front": "What is a **numerical solution**?",
+      "back": "A **numerical solution** is an approximate value of an unknown, found by repeated calculation rather than exact algebra. It is normally stated to 3 significant figures.",
+      "hint": "Think about how technology finds it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nxp4lt",
+      "kind": "term",
+      "front": "What is a **root** of an equation $f(x)=0$?",
+      "back": "A **root** is a value of $x$ at which $f(x)$ equals zero. On a graph it appears as an $x$-intercept.",
+      "hint": "Where does the graph cross the horizontal axis?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12n9kch",
+      "kind": "example",
+      "front": "Use a solver to find $x$ and $y$ for $2x+3y=12$ and $x-y=1$.",
+      "back": "**$x=3$** and **$y=2$**. Check: $2(3)+3(2)=12$ and $3-2=1$.",
+      "hint": "Enter the coefficients of each equation in turn.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1s3njj0",
+      "kind": "example",
+      "front": "A garden is 3 m longer than it is wide, with area 40 m². The solver gives widths of $-8$ and $5$. Which width is valid?",
+      "back": "**5 m** is valid; reject $-8$ because a width cannot be negative. The garden is 5 m wide and 8 m long.",
+      "hint": "Which solution can a physical length take?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18ounft",
+      "kind": "process",
+      "front": "Name two ways to check a numerical solution from technology.",
+      "back": "**Substitute** the answer into the original equation and compare both sides. You can also **compare** it with a quick sketch or estimate, or check that it suits the context and unit.",
+      "hint": "Think about checking against the equation and against the situation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jj80b6",
+      "kind": "term",
+      "front": "What are **simultaneous equations**?",
+      "back": "**Simultaneous equations** are two or more equations in the same unknowns that must all be true at the same time.",
+      "hint": "Think about what must hold together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ojsa5g",
+      "kind": "term",
+      "front": "What is a **viewing window** on a graphing screen?",
+      "back": "The **viewing window** is the range of $x$-values and $y$-values displayed. If it is poorly chosen, an intersection may stay hidden.",
+      "hint": "Think about what part of the graph you can see.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lr6uz6",
+      "kind": "concept",
+      "front": "Why might a single guess miss some roots of a cubic?",
+      "back": "A cubic can have up to **three** real roots, and a single guess often finds only one of them. A polynomial solver can return all of them.",
+      "hint": "How many real roots can a cubic have?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s127on",
+      "kind": "mistake",
+      "front": "When solving $2^x=5x$ from a graph, which coordinate of an intersection point is the solution?",
+      "back": "The **$x$-coordinate** is the solution. The $y$-coordinate is not a solution of the equation.",
+      "hint": "Match the coordinate to the unknown.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tw4wr9",
+      "kind": "example",
+      "front": "Solve $2^x=5x$ by graphing, correct to 3 significant figures.",
+      "back": "$x\\approx0.235$ or $x\\approx4.49$. Graph $y=2^x$ and $y=5x$ with $x$ from $-1$ to $6$, then use the intersection tool at each crossing.",
+      "hint": "Graph both sides and find the crossing points.",
+      "sectionId": "s2"
+    }
+  ]
+}

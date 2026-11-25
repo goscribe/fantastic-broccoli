@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-5-1-5",
+  "topicCode": "3.5.1.5",
+  "topicName": "Potential dividers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:41.096Z",
+  "cards": [
+    {
+      "id": "0okm9mx",
+      "kind": "concept",
+      "front": "What does a potential divider do to a supply p.d.?",
+      "back": "It shares the **supply p.d.** between two resistors in series, so the output is a chosen fraction of $V_\\mathrm{in}$.",
+      "hint": "Think about what the same current does across two resistors in series.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1su2jo1",
+      "kind": "formula",
+      "front": "What is the formula for the output p.d. across $R_2$ in a potential divider?",
+      "back": "$V_\\mathrm{out}=\\frac{R_2}{R_1+R_2}\\times V_\\mathrm{in}$, where $V_\\mathrm{in}$ is in $\\text{V}$ and the resistances can be in $\\text{k}\\Omega$ because the units cancel.",
+      "hint": "Start from the current through both resistors.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1luz40i",
+      "kind": "term",
+      "front": "What is a thermistor?",
+      "back": "A **thermistor** is a resistor whose resistance changes strongly with temperature. The common type falls in resistance as temperature rises.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1onshj1",
+      "kind": "example",
+      "front": "A 12 V supply is across $6.0\\,\\text{k}\\Omega$ ($R_1$) and $3.0\\,\\text{k}\\Omega$ ($R_2$) in series, with the output across $R_2$. What is $V_\\mathrm{out}$?",
+      "back": "$V_\\mathrm{out}=4.0\\,\\text{V}$, since $\\frac{3.0}{6.0+3.0}\\times12\\,\\text{V}=\\frac{1}{3}\\times12\\,\\text{V}$.",
+      "hint": "Find the share of the total resistance that lies across $R_2$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t0jboh",
+      "kind": "mistake",
+      "front": "A student says $V_\\mathrm{out}$ can be larger than $V_\\mathrm{in}$ if $R_2$ is larger than $R_1$. What is wrong?",
+      "back": "The fraction $\\frac{R_2}{R_1+R_2}$ is always less than one, because $R_1$ is always part of the total. So the output is always smaller than the input.",
+      "hint": "Compare $R_2$ with the total resistance, not with $R_1$ alone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qcm53c",
+      "kind": "concept",
+      "front": "What range of values can the output of a potential divider take?",
+      "back": "It always lies between **zero** and $V_\\mathrm{in}$. Equal resistors give half the input, a large $R_2$ gives nearly $V_\\mathrm{in}$, and a small $R_2$ gives nearly zero.",
+      "hint": "Consider what happens when $R_2$ is very large and very small.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rcjzix",
+      "kind": "concept",
+      "front": "What happens to $V_\\mathrm{out}$ when a load is connected across the output?",
+      "back": "It falls. The load sits in parallel with $R_2$, which lowers the combined resistance across the output.",
+      "hint": "Think about what connecting components in parallel does to resistance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h3g4d9",
+      "kind": "mistake",
+      "front": "Why is the simple ratio formula wrong once a load is connected across the output?",
+      "back": "The formula assumes the output draws almost no current. A load draws current, so the resistance across the output drops and the p.d. falls.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10qufpq",
+      "kind": "example",
+      "front": "Fixed $10\\,\\text{k}\\Omega$ in series with a thermistor at $2.0\\,\\text{k}\\Omega$, across 5.0 V. Output across the thermistor. What is $V_\\mathrm{out}$?",
+      "back": "$V_\\mathrm{out}=0.83\\,\\text{V}$, since $\\frac{2.0}{10+2.0}\\times5.0\\,\\text{V}$. At 20 °C the output is 2.5 V.",
+      "hint": "Use the same ratio formula with the thermistor as $R_2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n0jz0e",
+      "kind": "concept",
+      "front": "How does swapping the thermistor and the fixed resistor change the temperature effect on $V_\\mathrm{out}$?",
+      "back": "The effect reverses. With the output across the fixed resistor, $V_\\mathrm{out}$ rises as the temperature rises.",
+      "hint": "Ask which resistor the output is now across.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dxsuxz",
+      "kind": "term",
+      "front": "What is a light-dependent resistor (LDR)?",
+      "back": "An **LDR** is a component whose resistance decreases as the intensity of light falling on it increases. It has high resistance in the dark.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17dwjgi",
+      "kind": "concept",
+      "front": "Why does $V_\\mathrm{out}$ rise in the dark when an LDR is the lower resistor with the output across it?",
+      "back": "In the dark the LDR has high resistance, so it takes a larger share of the supply p.d. and the output is high.",
+      "hint": "Compare the LDR's resistance in the dark with its resistance in bright light.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fml3s3",
+      "kind": "process",
+      "front": "What are the three steps for explaining how a sensor in a potential divider changes the output?",
+      "back": "First the sensor's resistance changes. Then its share of the supply p.d. changes. So the output $V_\\mathrm{out}$ changes.",
+      "hint": "Start with what the sensor itself does when its surroundings change.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "The unit circle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:27.784Z",
+  "cards": [
+    {
+      "id": "0kgw6rq",
+      "kind": "concept",
+      "front": "What are the coordinates of the point P where an angle θ's arm meets the unit circle?",
+      "back": "$(\\cos\\theta,\\sin\\theta)$. **Cosine** is the x-coordinate of P and **sine** is the y-coordinate. Because the circle has radius 1, both values stay between −1 and 1.",
+      "hint": "Think about which coordinate gives which ratio.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w1ow8p",
+      "kind": "formula",
+      "front": "What identity links sine and cosine for every angle, and why does it hold?",
+      "back": "$\\cos^2\\theta+\\sin^2\\theta=1$. Every point P lies on the unit circle, whose equation is $x^2+y^2=1$, so its coordinates always satisfy this.",
+      "hint": "Use the equation of the unit circle.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zr8d3y",
+      "kind": "process",
+      "front": "How do you find the exact value of a trig ratio for an angle beyond 90°?",
+      "back": "1) Find the **reference angle**, the acute angle between the arm and the x-axis. 2) Take the exact value for that angle from the table. 3) Give it the sign for the quadrant.",
+      "hint": "Start by finding the reference angle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14icjo1",
+      "kind": "term",
+      "front": "What is the unit circle?",
+      "back": "The **unit circle** is the circle of radius 1 centred at the origin. Its equation is $x^2+y^2=1$.",
+      "hint": "Think about the radius and the centre.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y93eqd",
+      "kind": "concept",
+      "front": "Which way do positive and negative angles turn from the positive x-axis?",
+      "back": "A **positive** angle turns anticlockwise. A **negative** angle turns clockwise.",
+      "hint": "Angles are measured from the positive x-axis.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "181wj0o",
+      "kind": "term",
+      "front": "What is a radian?",
+      "back": "A **radian** is the angle at the centre of a circle that subtends an arc equal in length to the radius. $180^{\\circ}=\\pi$ radians.",
+      "hint": "Compare the arc length with the radius.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m2k579",
+      "kind": "mistake",
+      "front": "Why must you check your calculator mode before a trigonometry question?",
+      "back": "Degrees and radians give **different** answers for the same number, so a wrong mode gives a wrong answer.",
+      "hint": "Consider what the same number means in each mode.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13xlyj9",
+      "kind": "formula",
+      "front": "How is tangent defined in terms of sine and cosine, and where is it undefined?",
+      "back": "$\\tan\\theta=\\frac{\\sin\\theta}{\\cos\\theta}$. It is **undefined** wherever $\\cos\\theta=0$, such as $90^{\\circ}$ and $270^{\\circ}$.",
+      "hint": "What happens when you divide by zero?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l7b16z",
+      "kind": "mistake",
+      "front": "A student writes $\\tan90^{\\circ}=0$. What is wrong?",
+      "back": "$\\tan90^{\\circ}$ is **undefined**, not 0 and not infinity. At $90^{\\circ}$ the point is $(0,1)$, so $\\cos90^{\\circ}=0$ and division by zero is impossible.",
+      "hint": "Look at the coordinates of the point at 90°.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1786pt3",
+      "kind": "example",
+      "front": "A point P on the unit circle is in the second quadrant with x-coordinate $-\\frac{3}{5}$. Find $\\sin\\theta$ and $\\tan\\theta$.",
+      "back": "$\\sin\\theta=\\frac{4}{5}$ and $\\tan\\theta=-\\frac{4}{3}$. Using $x^2+y^2=1$ gives $y^2=\\frac{16}{25}$, and y is positive in the second quadrant.",
+      "hint": "Substitute into $x^2+y^2=1$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1is8rrv",
+      "kind": "formula",
+      "front": "What are the exact values of $\\sin30^{\\circ}$ and $\\cos30^{\\circ}$?",
+      "back": "$\\sin30^{\\circ}=\\frac{1}{2}$ and $\\cos30^{\\circ}=\\frac{\\sqrt{3}}{2}$. They come from the 30°-60°-90° triangle scaled so its hypotenuse is 1.",
+      "hint": "Think about the 30-60-90 triangle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wq7jg5",
+      "kind": "concept",
+      "front": "Which of sine, cosine and tangent are positive in the second quadrant?",
+      "back": "Only **sine** is positive in the second quadrant. Cosine and tangent are negative there.",
+      "hint": "Think about the signs of x and y in each quadrant.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dlj2ui",
+      "kind": "example",
+      "front": "Find the exact value of $\\sin210^{\\circ}$.",
+      "back": "$-\\frac{1}{2}$. $210^{\\circ}$ is in the third quadrant with reference angle $30^{\\circ}$, and sine is negative there.",
+      "hint": "Find the reference angle first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l0hq8r",
+      "kind": "example",
+      "front": "Find the exact value of $\\cos\\frac{5\\pi}{6}$.",
+      "back": "$-\\frac{\\sqrt{3}}{2}$. $\\frac{5\\pi}{6}=150^{\\circ}$ is in the second quadrant with reference angle $30^{\\circ}$, and cosine is negative there.",
+      "hint": "Which quadrant is $\\frac{5\\pi}{6}$ in?",
+      "sectionId": "s5"
+    }
+  ]
+}

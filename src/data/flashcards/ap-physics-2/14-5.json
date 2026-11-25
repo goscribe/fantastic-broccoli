@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-5",
+  "topicCode": "14.5",
+  "topicName": "The Doppler effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:44.329Z",
+  "cards": [
+    {
+      "id": "1pmpxf5",
+      "kind": "concept",
+      "front": "Why does an ambulance siren sound higher as it approaches and lower after it passes you?",
+      "back": "**Relative motion** changes the frequency the observer measures. The siren itself keeps emitting the same tone.",
+      "hint": "Think about what the observer measures, not what the source emits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08lbaey",
+      "kind": "concept",
+      "front": "When is the observed frequency higher than the source frequency, and when is it lower?",
+      "back": "It is **higher** when the source-observer distance is shrinking and **lower** when it is growing. If the distance stays constant, it is unchanged.",
+      "hint": "Ask whether the separation is getting smaller or larger.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07scoit",
+      "kind": "formula",
+      "front": "Which formula gives the observed frequency for a moving source and a stationary observer?",
+      "back": "$f_\\mathrm{obs}=f_\\mathrm{s}\\frac{v}{v\\mp v_\\mathrm{s}}$, where $f_\\mathrm{s}$ is the source frequency, $v$ the wave speed, and $v_\\mathrm{s}$ the source speed. Use minus when approaching and plus when receding.",
+      "hint": "The sign depends on whether the source is coming closer or moving away.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06qpbe1",
+      "kind": "concept",
+      "front": "Why are wave fronts squeezed together ahead of a moving source?",
+      "back": "The source moves forward between emitting crests, so each new crest starts closer to the last. The **wave speed** is fixed by the medium, so the wavelength gets shorter ahead.",
+      "hint": "Think about where the source is when each crest is emitted.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lyd34o",
+      "kind": "term",
+      "front": "What is the Doppler effect?",
+      "back": "The **Doppler effect** is the change in the frequency an observer measures when the source and the observer are in relative motion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1miox31",
+      "kind": "term",
+      "front": "What is a wave front?",
+      "back": "A **wave front** is a line or surface joining points of a wave that are in the same phase, such as neighboring crests.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10q2msk",
+      "kind": "process",
+      "front": "What steps predict whether the observed frequency goes up or down?",
+      "back": "1) Decide whether the source-observer separation is shrinking or growing. 2) If shrinking, the observed frequency is higher; if growing, it is lower. 3) Compare with the source frequency.",
+      "hint": "Start with the separation, not the frequency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b4al61",
+      "kind": "mistake",
+      "front": "A student says the siren's emitted frequency rises as it approaches you. What is wrong with this?",
+      "back": "The source does **not** change the frequency it emits. Only the frequency measured by the observer shifts.",
+      "hint": "Which frequency is the question about?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17wub7g",
+      "kind": "mistake",
+      "front": "A student says that walking toward a stationary source means you meet crests less often. Is this right?",
+      "back": "No. Walking toward a source, you meet crests **more** often, so the observed frequency is higher.",
+      "hint": "Consider whether the distance is shrinking.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kwf37w",
+      "kind": "example",
+      "front": "A 720 Hz siren moves at 30 m/s toward a stationary observer. The speed of sound is 340 m/s. What frequency is observed?",
+      "back": "About **790 Hz**, from $720\\,\\mathrm{Hz}\\times\\frac{340}{340-30}\\approx790\\,\\mathrm{Hz}$. This is higher than 720 Hz.",
+      "hint": "Use the minus sign because the source is approaching.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04vqzy2",
+      "kind": "example",
+      "front": "A 500 Hz source moves at 20 m/s directly away from a stationary observer. The speed of sound is 340 m/s. What frequency is observed?",
+      "back": "About **470 Hz**, from $500\\,\\mathrm{Hz}\\times\\frac{340}{340+20}\\approx470\\,\\mathrm{Hz}$. This is lower than 500 Hz.",
+      "hint": "A receding source uses the plus sign.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15w32gq",
+      "kind": "concept",
+      "front": "Why does the Doppler shift of light depend only on relative motion?",
+      "back": "**Light needs no medium**, so only the relative motion of source and observer matters. At everyday speeds the shift is tiny because $c$ is so large.",
+      "hint": "Consider what, if anything, the light wave must travel through.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lj16mo",
+      "kind": "term",
+      "front": "What is a redshift?",
+      "back": "A **redshift** is a decrease in the observed frequency of light from a source moving away, shifting its color toward the red end.",
+      "sectionId": "s5"
+    }
+  ]
+}

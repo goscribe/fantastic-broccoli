@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "p10",
+  "topicCode": "P10",
+  "topicName": "Vectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:39.877Z",
+  "cards": [
+    {
+      "id": "058thxq",
+      "kind": "concept",
+      "front": "What is the difference between a vector and a scalar?",
+      "back": "A **vector** has both magnitude and direction, while a **scalar** has magnitude only, such as a length, a mass or a number.",
+      "hint": "Compare a 3 km walk north with a 3 km walk east.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0subhmj",
+      "kind": "process",
+      "front": "How do you find the sum $\\mathbf{a}+\\mathbf{b}$ when both vectors are given in component form?",
+      "back": "Add the **matching components** one by one: $\\begin{pmatrix}2\\\\5\\end{pmatrix}+\\begin{pmatrix}4\\\\-1\\end{pmatrix}=\\begin{pmatrix}6\\\\4\\end{pmatrix}$. The same rule works in three dimensions.",
+      "hint": "Think about which parts of the two vectors you combine together.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "143r0wx",
+      "kind": "formula",
+      "front": "What is the formula for the magnitude $|\\mathbf{a}|$ when $\\mathbf{a}=x\\mathbf{i}+y\\mathbf{j}+z\\mathbf{k}$?",
+      "back": "$|\\mathbf{a}|=\\sqrt{x^2+y^2+z^2}$, the **length** of the vector. It comes from applying Pythagoras twice, once in 2D and then extended to 3D.",
+      "hint": "Start from the 2D version of Pythagoras and add one more term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bl1jit",
+      "kind": "concept",
+      "front": "What happens to a vector when you multiply it by a scalar $\\lambda$?",
+      "back": "Every component is multiplied by $\\lambda$. The result is **parallel** to the original vector, and a negative $\\lambda$ reverses its direction.",
+      "hint": "Consider how $2\\mathbf{a}$ compares with $\\mathbf{a}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00djytl",
+      "kind": "example",
+      "front": "Given $\\mathbf{a}=\\begin{pmatrix}2\\\\-1\\\\3\\end{pmatrix}$ and $\\mathbf{b}=\\begin{pmatrix}-1\\\\4\\\\2\\end{pmatrix}$, find $2\\mathbf{a}-3\\mathbf{b}$.",
+      "back": "$2\\mathbf{a}-3\\mathbf{b}=\\begin{pmatrix}7\\\\-14\\\\0\\end{pmatrix}$, found from $2\\mathbf{a}=\\begin{pmatrix}4\\\\-2\\\\6\\end{pmatrix}$ and $3\\mathbf{b}=\\begin{pmatrix}-3\\\\12\\\\6\\end{pmatrix}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c7jvt4",
+      "kind": "mistake",
+      "front": "Why is the calculator value $-45^{\\circ}$ wrong for $-3\\mathbf{i}+3\\mathbf{j}$?",
+      "back": "A calculator $\\tan^{-1}$ only gives angles between $-90^{\\circ}$ and $90^{\\circ}$. The vector is in the second quadrant, so its angle from the positive $x$-axis is $135^{\\circ}$.",
+      "hint": "Sketch the vector first and check which quadrant it is in.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01ci4og",
+      "kind": "term",
+      "front": "What is a unit vector?",
+      "back": "A **unit vector** has magnitude 1. The unit vector in the direction of $\\mathbf{a}$ is $\\frac{\\mathbf{a}}{|\\mathbf{a}|}$, found by dividing $\\mathbf{a}$ by its magnitude.",
+      "hint": "Think about what happens when you divide a length by itself.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pk8nbq",
+      "kind": "example",
+      "front": "Find the magnitude of $5\\mathbf{i}+12\\mathbf{j}$ and its angle from the positive $x$-axis to 1 decimal place.",
+      "back": "The magnitude is 13. The angle is $67.4^{\\circ}$, since $\\tan\\theta=\\frac{12}{5}$ and both components are positive, so no adjustment is needed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0czdhaj",
+      "kind": "concept",
+      "front": "How do you find $\\overrightarrow{AB}$ from the position vectors $\\mathbf{a}$ and $\\mathbf{b}$?",
+      "back": "$\\overrightarrow{AB}=\\mathbf{b}-\\mathbf{a}$. The journey goes back along $\\mathbf{a}$ to the origin, then out along $\\mathbf{b}$, so it is **finish minus start**.",
+      "hint": "Think about the route from A to B that passes through the origin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0antpbw",
+      "kind": "mistake",
+      "front": "Why is writing $\\mathbf{a}-\\mathbf{b}$ for $\\overrightarrow{AB}$ wrong?",
+      "back": "$\\mathbf{a}-\\mathbf{b}$ equals $\\overrightarrow{BA}$, which points the **opposite** way. $\\overrightarrow{AB}$ must be finish minus start, so it is $\\mathbf{b}-\\mathbf{a}$.",
+      "hint": "Check which point is the start and which is the finish of the journey.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zyp5du",
+      "kind": "example",
+      "front": "Points $A$ and $B$ have position vectors $\\begin{pmatrix}2\\\\-1\\\\4\\end{pmatrix}$ and $\\begin{pmatrix}5\\\\3\\\\4\\end{pmatrix}$. What is the distance $AB$?",
+      "back": "$AB=5$ units. First $\\overrightarrow{AB}=\\begin{pmatrix}3\\\\4\\\\0\\end{pmatrix}$, then $\\sqrt{3^2+4^2+0^2}=\\sqrt{25}=5$.",
+      "hint": "Find the vector $\\overrightarrow{AB}$ before working out a length.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m9njxi",
+      "kind": "process",
+      "front": "What steps show that three points $A$, $B$ and $C$ are collinear?",
+      "back": "Find $\\overrightarrow{AB}$ and $\\overrightarrow{BC}$, then show one is a **scalar multiple** of the other. Since they share $B$, the points lie on one straight line.",
+      "hint": "Compare the two vectors you can work out from the three points.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0iosc2y",
+      "kind": "concept",
+      "front": "In vector terms, when is quadrilateral $ABCD$ a parallelogram?",
+      "back": "When $\\overrightarrow{AB}=\\overrightarrow{DC}$, so one pair of opposite sides is equal and in the same direction.",
+      "hint": "Compare the vectors along two opposite sides.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "050ayo2",
+      "kind": "concept",
+      "front": "Why does showing two vectors are parallel alone not prove that points are collinear?",
+      "back": "The vectors also need to share a **common point**, such as $B$. Without a shared point, the two lines could be parallel but separate.",
+      "hint": "Think about where the two vectors start.",
+      "sectionId": "s5"
+    }
+  ]
+}

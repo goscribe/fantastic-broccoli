@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-15",
+  "topicCode": "1.15",
+  "topicName": "Limits at infinity and horizontal asymptotes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:44.694Z",
+  "cards": [
+    {
+      "id": "07ih2cf",
+      "kind": "term",
+      "front": "What is a horizontal asymptote?",
+      "back": "A **horizontal asymptote** is a line $y=L$ that a function approaches as $x$ grows without bound in one direction. It describes behavior far to the left or right of the graph.",
+      "hint": "Think about the ends of the graph, not the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0luzqoe",
+      "kind": "concept",
+      "front": "How can you find the end limits of a rational function by comparing its degrees?",
+      "back": "Compare the **degrees** of the numerator and denominator. A larger denominator degree gives limit $0$, equal degrees give a ratio of leading coefficients, and a larger numerator degree gives no horizontal asymptote.",
+      "hint": "Look only at the highest powers on top and bottom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ngrwup",
+      "kind": "concept",
+      "front": "Why does the leading term control a polynomial's values when $|x|$ is large?",
+      "back": "The **leading term** dominates because the other terms become small by comparison as $|x|$ grows. So the highest power decides the end behavior.",
+      "hint": "Compare $x^3$ with $x$ when $x$ is huge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hv1okp",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to\\infty}\\frac{3x^2-2x+1}{x^2+4}$.",
+      "back": "**3**. Divide top and bottom by $x^2$. The $1/x$ and $1/x^2$ terms go to $0$, leaving $\\frac{3}{1}=3$.",
+      "hint": "Divide every term by the highest power of $x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iq9i2i",
+      "kind": "mistake",
+      "front": "True or false: a graph can never cross its horizontal asymptote.",
+      "back": "**False**. A graph can cross its horizontal asymptote. The asymptote only describes what happens far to the left or right.",
+      "hint": "Think about what the asymptote is describing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zqethm",
+      "kind": "mistake",
+      "front": "Does a nonconstant polynomial have a horizontal asymptote?",
+      "back": "**No**. Its values grow without bound at the ends instead of approaching a finite number, so no finite limit exists.",
+      "hint": "A horizontal asymptote needs a finite limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w3ht1r",
+      "kind": "example",
+      "front": "State both end limits of $-2x^3+5x-1$.",
+      "back": "As $x\\to\\infty$ the limit is $-\\infty$. As $x\\to-\\infty$ the limit is $+\\infty$. The leading term $-2x^3$ has an odd power, so the two ends have opposite signs.",
+      "hint": "Check the sign of the leading term at each end separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o3c0bu",
+      "kind": "term",
+      "front": "What is the degree of a nonzero polynomial?",
+      "back": "The **highest exponent** that has a nonzero coefficient in the polynomial.",
+      "hint": "Ignore terms whose coefficients are zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jpw01v",
+      "kind": "process",
+      "front": "How do you check whether a function has different horizontal asymptotes on each side?",
+      "back": "**Check both ends** separately, since behavior can differ for positive and negative $x$. For $g(x)=\\frac{x}{\\sqrt{x^2+1}}$, the asymptotes are $y=1$ on the right and $y=-1$ on the left.",
+      "hint": "Treat $x\\to\\infty$ and $x\\to-\\infty$ as two separate questions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15s9o59",
+      "kind": "mistake",
+      "front": "Does $2^x$ have a horizontal asymptote as $x\\to\\infty$?",
+      "back": "**No**. $2^x$ grows without bound as $x\\to\\infty$, so it has no finite limit there. It does approach $0$ as $x\\to-\\infty$.",
+      "hint": "A horizontal asymptote needs a finite limit at that end.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nimume",
+      "kind": "formula",
+      "front": "What is the end limit of a rational function whose numerator and denominator have equal degrees?",
+      "back": "$\\lim = \\frac{a}{b}$, the **ratio of leading coefficients**, where $a$ is the numerator's leading coefficient and $b$ is the denominator's. This ratio is the horizontal asymptote.",
+      "hint": "Divide the two leading coefficients.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b8y4ez",
+      "kind": "example",
+      "front": "Find $\\lim_{x\\to-\\infty}\\frac{x+3}{x^2+1}$.",
+      "back": "**0**. The denominator has a higher degree than the numerator, so the function approaches $0$ at both ends. The horizontal asymptote is $y=0$.",
+      "hint": "Which polynomial has the larger degree?",
+      "sectionId": "s3"
+    }
+  ]
+}

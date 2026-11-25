@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-16",
+  "topicCode": "4.16",
+  "topicName": "Confidence intervals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:02.873Z",
+  "cards": [
+    {
+      "id": "1kdn0ai",
+      "kind": "concept",
+      "front": "What is a confidence interval, and what form does it take?",
+      "back": "A **range** built from sample data, written $\\bar{x}\\pm E$ and centred on the sample mean. $E$ is the margin of error, so the interval is the estimate plus or minus a margin.",
+      "hint": "Think of a point estimate with a margin on each side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e2bqz1",
+      "kind": "concept",
+      "front": "What does 95% confidence mean for one interval?",
+      "back": "The **method** succeeds 95% of the time: about 95% of intervals built from repeated samples would contain $\\mu$. Any single interval either contains $\\mu$ or it does not.",
+      "hint": "Imagine repeating the sampling many times.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1iuybn3",
+      "kind": "concept",
+      "front": "How do sample size and confidence level change the width of an interval?",
+      "back": "A larger $n$ gives a **narrower** interval, and a higher confidence level gives a **wider** one. Both act through the margin of error.",
+      "hint": "Look at what the standard error depends on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nfviby",
+      "kind": "formula",
+      "front": "What is the confidence interval for a mean when $\\sigma$ is unknown?",
+      "back": "$\\bar{x}\\pm t\\frac{s_{n-1}}{\\sqrt{n}}$, where $t$ has $n-1$ degrees of freedom. If $\\sigma$ is known, use $z$ and $\\sigma$ in place of $t$ and $s_{n-1}$.",
+      "hint": "What replaces the population standard deviation?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hperzm",
+      "kind": "formula",
+      "front": "What is the approximate confidence interval for a proportion $p$?",
+      "back": "$\\hat{p}\\pm z\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$, with $z=1.96$ for 95% confidence. First check that $n\\hat{p}$ and $n(1-\\hat{p})$ are both at least 10.",
+      "hint": "The square root term is the standard error of the proportion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kghk84",
+      "kind": "example",
+      "front": "A sample of 25 batteries has mean 52.0 hours and $s_{n-1}=6.0$. Using $t\\approx2.064$, what is the 95% interval for the population mean?",
+      "back": "$49.5<\\mu<54.5$ hours. The standard error is $6.0/\\sqrt{25}=1.2$, so $E\\approx2.48$, and the interval is $52.0\\pm2.48$.",
+      "hint": "Find the standard error first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p3eolm",
+      "kind": "example",
+      "front": "In a poll, 132 of 200 people cycle to work. What is the approximate 95% interval for the true proportion $p$?",
+      "back": "$0.594<p<0.726$. Here $\\hat{p}=0.66$, the standard error is about 0.0335, and the margin is about 0.0657.",
+      "hint": "Start with the sample proportion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "103uqoy",
+      "kind": "mistake",
+      "front": "Is it correct to say a 95% confidence interval contains 95% of the data values?",
+      "back": "No. A **confidence interval** is a statement about the population mean, not the individual data values. The 95% refers to how often the method captures the mean.",
+      "hint": "What is the interval estimating?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qjta5y",
+      "kind": "mistake",
+      "front": "Is it correct to say there is a 95% probability that the population mean lies between 49.5 and 54.5?",
+      "back": "No. The population mean is a fixed value, so the interval either contains it or not. Say you are 95% **confident** that it lies in the interval instead.",
+      "hint": "Is the population mean random?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lsrco5",
+      "kind": "mistake",
+      "front": "Why is the sample mean not the same as the population mean?",
+      "back": "Samples from the same population usually give **different** sample means, so $\\bar{x}$ is only a point estimate of $\\mu$. One sample alone does not show how far it may lie from $\\mu$.",
+      "hint": "Imagine taking a different sample of 40.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kkgcje",
+      "kind": "process",
+      "front": "What are the steps to build a confidence interval for a mean from sample data?",
+      "back": "1) Find the standard error $\\frac{s_{n-1}}{\\sqrt{n}}$. 2) Find the critical value $t$ with $n-1$ degrees of freedom. 3) Multiply them to get $E$. 4) Give the interval $\\bar{x}\\pm E$.",
+      "hint": "Four steps, ending with the interval.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16lrc8b",
+      "kind": "concept",
+      "front": "Why do proportion polls need larger samples when $\\hat{p}$ is near 0.5?",
+      "back": "The standard error $\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$ is **largest** when $\\hat{p}$ is near 0.5, so the interval is wider unless $n$ is larger.",
+      "hint": "Where is $\\hat{p}(1-\\hat{p})$ biggest?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uxxg2p",
+      "kind": "concept",
+      "front": "Why does a t-interval need a larger multiplier than a z-interval at the same confidence level?",
+      "back": "Using $s_{n-1}$ in place of $\\sigma$ adds **extra uncertainty**. The t-distribution has heavier tails, so $t$ is bigger, and as $n$ grows, $t$ approaches $z$.",
+      "hint": "Think about the heavier tails of the distribution.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06g297w",
+      "kind": "term",
+      "front": "What is the margin of error?",
+      "back": "The **margin of error** $E$ is half the width of a confidence interval. It is added to and subtracted from the point estimate.",
+      "hint": "It is the critical value multiplied by the standard error."
+    }
+  ]
+}

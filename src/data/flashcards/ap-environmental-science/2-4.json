@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Ecological tolerance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:33.326Z",
+  "cards": [
+    {
+      "id": "1kio3bd",
+      "kind": "term",
+      "front": "What is ecological tolerance?",
+      "back": "**Ecological tolerance** is the range of values of an environmental factor, such as temperature, within which a species can survive. Tolerance is measured one factor at a time.",
+      "hint": "Think about a trout and the cold water it needs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03942yv",
+      "kind": "concept",
+      "front": "Along a gradient such as temperature, where does a species perform best?",
+      "back": "It performs best in the **optimum range**, near the middle of the gradient, where it grows and reproduces most. Performance drops toward both ends, first into zones of stress and then beyond the limits of tolerance.",
+      "hint": "Picture performance plotted against temperature.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pr03r3",
+      "kind": "concept",
+      "front": "Why can a species be excluded from a place even when most conditions there suit it?",
+      "back": "One condition that lies outside the species' tolerance limits is a **limiting factor**. It prevents survival there, even if every other condition is suitable.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1m0b6qc",
+      "kind": "term",
+      "front": "What is a zone of stress?",
+      "back": "The **zone of stress** is the part of a tolerance gradient outside the optimum. Organisms can survive there, but their growth and reproduction decline.",
+      "hint": "Compare it with the optimum range and the limits of tolerance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gosx0l",
+      "kind": "mistake",
+      "front": "What mistake is made when a species in its zone of stress is treated as dead?",
+      "back": "**Mistake:** assuming it cannot survive. Individuals in a zone of stress are still alive, but they grow and reproduce less.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zigaqs",
+      "kind": "term",
+      "front": "What is an adaptation in this topic?",
+      "back": "An **adaptation** is an inherited trait that increases survival or reproductive success in a particular environment. It spreads through a population over many generations.",
+      "hint": "Think about how traits pass from parents to offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14pfl3a",
+      "kind": "concept",
+      "front": "How do behavior and body processes differ from adaptation as responses to changing conditions?",
+      "back": "Behavior and body processes help one individual within its lifetime, while **adaptation** changes a whole population over many generations. No response can take an organism beyond its limits of tolerance.",
+      "hint": "Consider how long each kind of response takes to work.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fzm1m1",
+      "kind": "term",
+      "front": "What is a generalist species?",
+      "back": "A **generalist species** has broad tolerance limits and varied resource use, so it can live in many environments.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09x3hwu",
+      "kind": "term",
+      "front": "What is a specialist species?",
+      "back": "A **specialist species** has narrow tolerance limits or specific resource needs, so it can live in only a few environments. The giant panda is one example.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06bqsgu",
+      "kind": "concept",
+      "front": "Why are specialist species more vulnerable when conditions change?",
+      "back": "They have narrow tolerance limits and little room to adjust, so a small shift can push a factor past their limits. Generalists can cope with a wider range of conditions.",
+      "hint": "Think about how much change a narrow range can absorb.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zotgo6",
+      "kind": "example",
+      "front": "A fish has limits of $6$ and $28\\,^\\circ\\text{C}$, optimum $14$ to $22\\,^\\circ\\text{C}$. How is it affected at $10\\,^\\circ\\text{C}$?",
+      "back": "It is in a **zone of stress**. $10\\,^\\circ\\text{C}$ is above its lower limit of $6\\,^\\circ\\text{C}$ but below the optimum, so it survives with reduced growth and reproduction.",
+      "hint": "Locate 10 °C relative to the limits and the optimum first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0u67il4",
+      "kind": "example",
+      "front": "How does the same fish fare at $31\\,^\\circ\\text{C}$?",
+      "back": "It **cannot survive**. $31\\,^\\circ\\text{C}$ is above its upper limit of $28\\,^\\circ\\text{C}$, so it lies beyond its limits of tolerance.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x1kdxo",
+      "kind": "concept",
+      "front": "Why might warming force a species to move toward the poles or higher up slopes?",
+      "back": "Warming can push places near a species' warm edge beyond its **upper temperature limit**. It then survives only where conditions still fall within its limits, and species that cannot move may disappear locally.",
+      "hint": "Think about where the warm edge of its range sits.",
+      "sectionId": "s5"
+    }
+  ]
+}

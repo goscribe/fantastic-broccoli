@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useIsMobile } from "@/lib/use-mobile";
@@ -16,6 +17,7 @@ import { toastError } from "@/lib/toast";
 import { calendarDisconnectNotice, calendarReturnNotice } from "@/lib/calendar-messages";
 import { cn } from "@/lib/utils";
 import { PlannerChat } from "@/components/planner/planner-chat";
+import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import { inputClass } from "@/components/ui/input";
 
 const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -26,7 +28,6 @@ const addDays = (ymd: string, n: number) => {
   d.setUTCDate(d.getUTCDate() + n);
   return d.toISOString().slice(0, 10);
 };
-const daysUntil = (iso: string | Date) => Math.max(0, Math.ceil((new Date(iso).getTime() - Date.now()) / 86400000));
 const toMin = (s: string) => {
   const [h, m] = s.split(":").map(Number);
   return h * 60 + m;
@@ -47,8 +48,10 @@ export function WeekTimetable() {
     if (!r) return;
     const notice = calendarReturnNotice(r);
     if (notice) toast[notice.tone === "success" ? "success" : "error"](notice.text);
-    router.replace(r === "connected" ? "/?setup=1" : "/planner");
+    // Connected: straight on to "When are you free to study?", here in the planner.
+    router.replace(r === "connected" ? "/planner?tab=timetable&setup=1" : "/planner?tab=timetable");
   }, [params, router]);
+  const [setupOpen, setSetupOpen] = useState(params.get("setup") === "1" || params.get("calendar") === "connected");
   const today = new Date().toISOString().slice(0, 10);
   const mobile = useIsMobile();
   const [mDay, setMDay] = useState<number | null>(null);
@@ -84,7 +87,7 @@ export function WeekTimetable() {
                 .catch((err) => toastError(err, "Couldn't replan"))
                 .finally(() => setReplanning(false));
             }}
-            className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-accent px-3.5 text-[13.5px] font-semibold text-white hover:brightness-95 disabled:opacity-60"
+            className={buttonClass({ size: "sm", className: "gap-1.5" })}
           >
             <Sparkles className={cn("size-4", replanning && "animate-pulse")} /> {replanning ? "Planning…" : "Replan"}
           </button>
@@ -145,7 +148,7 @@ export function WeekTimetable() {
         <div className="flex flex-wrap items-center gap-4 text-[12.5px] text-faint">
           <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-[3px] bg-accent" /> Scribe sessions</span>
           <span className="inline-flex items-center gap-1.5"><span className="size-2.5 rounded-[3px] bg-muted" /> Busy, from your calendar</span>
-          <span>{data?.summary || "Blocks are planned around your calendar, exam date and what's left in each session."}</span>
+          <span>{data?.summary || "Blocks are planned around your calendar and what's left in each session."}</span>
         </div>
       </div>
 
@@ -178,7 +181,7 @@ export function WeekTimetable() {
               Disconnect
             </button>
           ) : (
-            <a href={`${apiUrl}/calendar/google/connect`} className="h-8 shrink-0 rounded-lg bg-accent px-3 text-[12.5px] font-semibold leading-8 text-white">Connect</a>
+            <a href={`${apiUrl}/calendar/google/connect`} className={buttonClass({ variant: "secondary", size: "sm", className: "shrink-0" })}>Connect</a>
           ))}
         </div>
 
@@ -198,9 +201,7 @@ export function WeekTimetable() {
             <div className="mt-3 flex flex-col gap-2">{[0, 1, 2, 3].map((i) => <Skeleton key={i} className="h-4" />)}</div>
           ) : (
             <dl className="mt-3 grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 text-[13.5px]">
-              <dt className="text-faint">Daily goal</dt><dd className="text-right font-semibold">{plan.dailyGoalMin} min</dd>
-              <dt className="text-faint">Exam</dt>
-              <dd className="truncate text-right font-semibold">{plan.examTitle ? `${plan.examTitle}${plan.examDate ? ` · ${daysUntil(plan.examDate)} days` : ""}` : "—"}</dd>
+              <dt className="text-faint">Minutes a day</dt><dd className="text-right font-semibold">{plan.dailyGoalMin} min</dd>
               <dt className="text-faint">Lessons left</dt><dd className="text-right font-semibold">{data ? `${data.lessonsLeft} of ${data.lessonsTotal}` : "—"}</dd>
               <dt className="text-faint">Study window</dt><dd className="text-right font-semibold">{plan.windowStart} – {plan.windowEnd}</dd>
             </dl>
@@ -209,21 +210,36 @@ export function WeekTimetable() {
         </div>
 
         {data?.nudge && (
-          <div className="rounded-2xl border p-[18px]" style={{ borderColor: "#f6d9a8", background: "#fff8ec" }}>
-            <div className="text-[15px] font-bold" style={{ color: "#b4530a" }}>{DAY[(new Date(data.nudge.date + "T00:00:00Z").getUTCDay() + 6) % 7]} has no slot</div>
-            <div className="mt-1 text-[13px]" style={{ color: "#8a4a12" }}>
+          <div className="life-card p-[18px]">
+            <div className="text-[15px] font-bold">{DAY[(new Date(data.nudge.date + "T00:00:00Z").getUTCDay() + 6) % 7]} has no slot</div>
+            <div className="mt-1 text-[13px] text-muted-foreground">
               {data.dueCards > 0 ? `A ${data.nudge.minutes}-min review keeps your streak.` : `Nothing fits your ${plan?.windowStart}–${plan?.windowEnd} window that day — widen it or make it a rest day.`}
             </div>
-            <button type="button" onClick={() => (data.dueCards > 0 ? router.push("/flashcards/review") : setEditing(true))} className="mt-3 h-10 w-full rounded-xl bg-accent text-[14px] font-semibold text-white">
+            <button type="button" onClick={() => (data.dueCards > 0 ? router.push("/flashcards/review") : setEditing(true))} className={buttonClass({ className: "mt-3 w-full" })}>
               {data.dueCards > 0 ? "Review now" : "Edit plan"}
             </button>
           </div>
         )}
 
         {data && data.unscheduled > 0 && (
-          <div className="text-[12.5px] text-faint">{data.unscheduled} more activities than fit this week — raise the daily goal or widen the window. <Link href="/" className="font-semibold text-accent">Back to Learn</Link></div>
+          <div className="text-[12.5px] text-faint">{data.unscheduled} more activities than fit this week — add minutes a day or widen the window. <Link href="/" className="font-semibold text-accent">Back to Learn</Link></div>
         )}
       </div>
+
+      {setupOpen && plan && (
+        <PlanSetupWizard
+          plan={plan}
+          onClose={() => {
+            setSetupOpen(false);
+            router.replace("/planner?tab=timetable");
+          }}
+          onSaved={() => {
+            setSetupOpen(false);
+            router.replace("/planner?tab=timetable");
+            void qc.invalidateQueries({ queryKey: ["planner"] });
+          }}
+        />
+      )}
 
       {editing && plan && (
         <EditPlanDialog plan={plan} onClose={() => setEditing(false)} onSaved={() => { setEditing(false); void qc.invalidateQueries({ queryKey: ["planner"] }); }} />
@@ -234,8 +250,6 @@ export function WeekTimetable() {
 
 function EditPlanDialog({ plan, onClose, onSaved }: { plan: StudyPlan; onClose: () => void; onSaved: () => void }) {
   const [goal, setGoal] = useState(plan.dailyGoalMin);
-  const [examTitle, setExamTitle] = useState(plan.examTitle ?? "");
-  const [examDate, setExamDate] = useState(plan.examDate ? new Date(plan.examDate).toISOString().slice(0, 10) : "");
   const [start, setStart] = useState(plan.windowStart);
   const [end, setEnd] = useState(plan.windowEnd);
   const [weekdays, setWeekdays] = useState<number[]>(plan.weekdays);
@@ -257,8 +271,6 @@ function EditPlanDialog({ plan, onClose, onSaved }: { plan: StudyPlan; onClose: 
           try {
             await updateStudyPlan({
               dailyGoalMin: goal,
-              examTitle: examTitle.trim() || null,
-              examDate: examDate ? new Date(examDate + "T12:00:00Z").toISOString() : null,
               windowStart: start,
               windowEnd: end,
               weekdays,
@@ -273,7 +285,7 @@ function EditPlanDialog({ plan, onClose, onSaved }: { plan: StudyPlan; onClose: 
         }}
       >
         <div className="text-[18px] font-bold">Edit plan</div>
-        <label className="mt-4 block text-[12.5px] font-semibold text-faint">Daily goal · {goal} min</label>
+        <label className="mt-4 block text-[12.5px] font-semibold text-faint">Minutes a day · {goal} min</label>
         <input type="range" min={5} max={120} step={5} value={goal} onChange={(e) => setGoal(Number(e.target.value))} className="mt-1 w-full accent-[var(--accent)]" />
         <div className="mt-4 grid grid-cols-2 gap-3">
           <div>
@@ -294,19 +306,9 @@ function EditPlanDialog({ plan, onClose, onSaved }: { plan: StudyPlan; onClose: 
             );
           })}
         </div>
-        <div className="mt-4 grid grid-cols-[1fr_150px] gap-3">
-          <div>
-            <label className="block text-[12.5px] font-semibold text-faint">Exam (optional)</label>
-            <input value={examTitle} onChange={(e) => setExamTitle(e.target.value)} placeholder="Bio Paper 1" className={cn(field, "mt-1")} />
-          </div>
-          <div>
-            <label className="block text-[12.5px] font-semibold text-faint">Date</label>
-            <input type="date" value={examDate} onChange={(e) => setExamDate(e.target.value)} className={cn(field, "mt-1")} />
-          </div>
-        </div>
         <div className="mt-6 flex justify-end gap-2">
           <button type="button" onClick={onClose} className="h-10 rounded-xl px-4 text-[14px] font-semibold hover:bg-muted">Cancel</button>
-          <button type="submit" disabled={saving} className="h-10 rounded-xl bg-accent px-5 text-[14px] font-semibold text-white disabled:opacity-60">{saving ? "Saving…" : "Save plan"}</button>
+          <button type="submit" disabled={saving} className={buttonClass()}>{saving ? "Saving…" : "Save plan"}</button>
         </div>
       </form>
     </div>

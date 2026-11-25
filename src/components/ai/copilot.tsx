@@ -1,7 +1,8 @@
 "use client";
 
 import { Mascot } from "@/components/rewards/mascot";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, useCallback, type RefObject } from "react";
+import { BUBBLE_GAP, bubbleRoom } from "@/lib/copilot-bubble";
 import { useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { useNewUi } from "@/lib/new-ui";
@@ -134,6 +135,8 @@ export function Copilot({
   page,
   initialPrompt,
   draft,
+  ask,
+  sheet = false,
   variant = "panel",
 }: {
   open: boolean;
@@ -146,6 +149,14 @@ export function Copilot({
    * "Ask Copilot about what you got wrong" on the end-of-session screen.
    */
   draft?: { text: string; id: number };
+  /**
+   * A Hint / Why? tap on the question card: sent once per `id`, as `intent`
+   * with no typed text; `label` is what the chat shows for it, `pinned` the
+   * question it is about (shown at the top of the panel).
+   */
+  ask?: { intent: "hint" | "why"; id: number; label: string; pinned?: string; prepare?: () => Promise<void> };
+  /** Phones: a half-sheet over the bottom of the screen, so the question stays in view. */
+  sheet?: boolean;
   onClose: () => void;
   context?: string;
   workspaceId: string;
@@ -255,7 +266,7 @@ export function Copilot({
   }, [messages]);
 
   const send = useCallback(
-    async (text: string) => {
+    async (text: string, intent?: "hint" | "why") => {
       if (!text.trim()) return;
       // Sending while an answer is still coming in interrupts it.
       inFlight.current?.abort();
@@ -299,8 +310,7 @@ export function Copilot({
         streamedRef = () => streamed;
         let toolStatus = "";
         const paintStream = () => {
-          const textSoFar =
-            streamed + (toolStatus ? `\n\n*${toolStatus}…*` : "");
+          const textSoFar = streamed;
           setMessages((prev) =>
             prev.map((m) =>
               m.id === assistantId
@@ -312,6 +322,7 @@ export function Copilot({
                         id: streamPartId,
                         text: textSoFar,
                         done: false,
+                        status: toolStatus || undefined,
                       },
                     ],
                   }
@@ -323,7 +334,9 @@ export function Copilot({
           {
             workspaceId,
             conversationId,
-            message: text,
+            // A Hint / Why? tap sends its intent; the server words the question.
+            message: intent ? undefined : text,
+            intent,
             documentContent: context,
             availableWidgets,
             activity,
@@ -436,6 +449,15 @@ export function Copilot({
     void send(initialPrompt);
   }, [initialPrompt, chatsLoading, hydrating, busy, send]);
 
+  // A Hint / Why? tap: once per id, after any history has loaded.
+  const askedId = useRef<number | null>(null);
+  useEffect(() => {
+    if (!ask || !open || askedId.current === ask.id || chatsLoading || hydrating) return;
+    askedId.current = ask.id;
+    const prepared = ask.prepare ? ask.prepare().catch(() => {}) : Promise.resolve();
+    void prepared.then(() => send(ask.label, ask.intent));
+  }, [ask, open, chatsLoading, hydrating, send]);
+
   const chatMessages = messages.filter(
     (m) => (m.chatId ?? "pending") === (activeChat ?? "pending"),
   );
@@ -463,8 +485,12 @@ export function Copilot({
         "flex flex-col bg-card border-border min-h-0",
         variant === "page"
           ? "relative mx-auto h-full w-full max-w-3xl flex-1"
-          : "max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]",
+          : sheet
+            ? // Phones: the bottom half only, so the question above stays readable.
+              "max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-50 max-sm:h-[52dvh] max-sm:w-full max-sm:rounded-t-[22px] max-sm:border-t max-sm:shadow-[0_-18px_40px_-20px_rgba(0,0,0,0.35)] sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]"
+            : "max-sm:fixed max-sm:inset-0 max-sm:z-50 max-sm:w-full sm:relative sm:self-stretch sm:shrink-0 sm:border-l sm:w-[var(--copilot-width)] sm:min-w-[380px]",
       )}
+      data-copilot={sheet ? "sheet" : "panel"}
       style={variant === "page" ? undefined : ({ "--copilot-width": width ? `${width}px` : newUi ? "380px" : "40vw" } as React.CSSProperties)}
     >
       {/* Resize handle */}
@@ -523,6 +549,8 @@ export function Copilot({
         </button>
       </div>
 
+      {ask?.pinned && <PinnedQuestion text={ask.pinned} />}
+
       {/* Messages */}
       <div ref={scrollRef} className={cn("flex-1 overflow-y-auto px-4 py-4 space-y-4", variant === "page" && "px-0 py-6")}>
         {chatMessages.length === 0 && hydrating && (
@@ -561,7 +589,7 @@ export function Copilot({
                   key={s}
                   type="button"
                   onClick={() => send(s)}
-                  className="block w-full text-left text-xs px-3.5 py-2.5 rounded-xl border border-border bg-muted/40 text-muted-foreground hover:text-foreground hover:border-border-strong"
+                  className="block w-full text-left text-xs px-4 py-2.5 rounded-full bg-muted text-muted-foreground hover:text-foreground hover:bg-border"
                 >
                   {s}
                 </button>
@@ -613,9 +641,18 @@ export function Copilot({
                   )
                 ) : (
                   <div key={part.id} className="text-sm leading-relaxed px-1 py-1">
-                    <MarkdownText text={part.text} />
-                    {!part.done && (
-                      <span className="inline-block w-1.5 h-3.5 ml-0.5 bg-accent align-middle animate-pulse-dot" />
+                    {part.text && (
+                      // While streaming, the caret sits at the end of the last line (chat-caret, globals.css).
+                      <MarkdownText text={part.text} className={cn("block space-y-2.5", !part.done && !part.status && "chat-caret")} />
+                    )}
+                    {!part.done && part.status && (
+                      <p className={cn("flex items-center gap-2 text-[13px] font-semibold text-muted-foreground", part.text && "mt-2")} role="status">
+                        <span className="size-1.5 shrink-0 rounded-full bg-accent animate-pulse-dot" aria-hidden />
+                        <span className="animate-shimmer">{part.status}…</span>
+                      </p>
+                    )}
+                    {!part.done && !part.text && !part.status && (
+                      <span className="inline-block h-3.5 w-1.5 animate-pulse-dot rounded-[1px] bg-accent align-middle" aria-hidden />
                     )}
                   </div>
                 ),
@@ -681,7 +718,17 @@ export function Copilot({
  * would cover the right edge of the content, so it is hidden there and the
  * player's top bar shows the `compact` button instead.
  */
-export function CopilotTrigger({ onClick, compact = false }: { onClick: () => void; compact?: boolean }) {
+export function CopilotTrigger({
+  onClick,
+  compact = false,
+  bubble,
+}: {
+  onClick: () => void;
+  compact?: boolean;
+  /** New UI edge tab only: the "Stuck? Tap me" bubble, when the page wants it shown. */
+  bubble?: { onDismiss: () => void; avoid: RefObject<HTMLElement | null> };
+}) {
+  const tabRef = useRef<HTMLButtonElement>(null);
   const { t } = useI18n();
   const newUi = useNewUi();
   if (compact) {
@@ -692,7 +739,7 @@ export function CopilotTrigger({ onClick, compact = false }: { onClick: () => vo
         onClick={onClick}
         aria-label={t("misc.askScribe")}
         title={t("misc.askScribe")}
-        className="grid size-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-accent-soft hover:bg-muted sm:hidden"
+        className="grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-accent-soft hover:bg-muted sm:hidden"
       >
         <Mascot pose="wave" className="mt-1.5 h-8" />
       </button>
@@ -700,7 +747,10 @@ export function CopilotTrigger({ onClick, compact = false }: { onClick: () => vo
   }
   if (newUi) {
     return (
+      <>
+      {bubble && <CopilotBubble tabRef={tabRef} avoid={bubble.avoid} onOpen={onClick} onDismiss={bubble.onDismiss} />}
       <button
+        ref={tabRef}
         type="button"
         onClick={onClick}
         aria-label={t("misc.askScribe")}
@@ -709,6 +759,7 @@ export function CopilotTrigger({ onClick, compact = false }: { onClick: () => vo
         <Mascot pose="wave" className="cat-wiggle h-9" />
         <PanelRightOpen className="h-4 w-4 text-muted-foreground" />
       </button>
+      </>
     );
   }
   return (
@@ -719,6 +770,107 @@ export function CopilotTrigger({ onClick, compact = false }: { onClick: () => vo
     >
       <Sparkles className="h-4 w-4" />
       {t("misc.askScribe")}
+    </button>
+  );
+}
+
+/** Where the cat's face sits on the edge tab: border + py-3 + half the h-9 cat. */
+const TAB_CAT_CENTER = 1 + 12 + 18;
+
+/**
+ * A speech bubble from the cat on the edge tab: tapping it opens Copilot, the ×
+ * dismisses it. It only renders when it fits in the gutter between the content
+ * column and the tab (wrapping to two lines in a narrow one); otherwise it stays
+ * away rather than cover the question.
+ */
+function CopilotBubble({
+  tabRef,
+  avoid,
+  onOpen,
+  onDismiss,
+}: {
+  tabRef: RefObject<HTMLButtonElement | null>;
+  avoid: RefObject<HTMLElement | null>;
+  onOpen: () => void;
+  onDismiss: () => void;
+}) {
+  const { t } = useI18n();
+  const [pos, setPos] = useState<{ right: number; top: number; maxWidth: number } | null>(null);
+
+  useLayoutEffect(() => {
+    const place = () => {
+      const tab = tabRef.current?.getBoundingClientRect();
+      const column = avoid.current?.getBoundingClientRect();
+      // The tab is display:none on phones: no tab, no bubble.
+      if (!tab || !tab.width || !column) return setPos(null);
+      const room = bubbleRoom(column.right, tab.left);
+      if (room === null) return setPos(null);
+      setPos({ right: window.innerWidth - tab.left + BUBBLE_GAP, top: tab.top + TAB_CAT_CENTER, maxWidth: room });
+    };
+    place();
+    window.addEventListener("resize", place);
+    return () => window.removeEventListener("resize", place);
+  }, [tabRef, avoid]);
+
+  if (!pos) return null;
+  return (
+    <div
+      data-copilot-bubble
+      style={{ right: pos.right, top: pos.top, maxWidth: pos.maxWidth }}
+      className="animate-bubble-in fixed z-40 flex -translate-y-1/2 items-center rounded-2xl border border-border bg-card shadow-[0_14px_34px_-18px_rgba(0,0,0,0.35)] max-sm:hidden"
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        className="rounded-l-2xl py-2.5 pl-4 pr-1 text-left text-[14px] font-bold leading-tight text-foreground hover:text-foreground/80"
+      >
+        {t("misc.copilotBubble")}
+      </button>
+      <button
+        type="button"
+        onClick={onDismiss}
+        aria-label={t("misc.copilotBubbleDismiss")}
+        className="mr-1 grid size-8 shrink-0 place-items-center rounded-full text-faint hover:bg-muted hover:text-foreground"
+      >
+        <X className="size-3.5" />
+      </button>
+      {/* The tail, toward the cat. */}
+      <span
+        aria-hidden
+        className="absolute -right-[6px] top-1/2 size-3 -translate-y-1/2 rotate-45 border-r border-t border-border bg-card"
+      />
+    </div>
+  );
+}
+
+/**
+ * The question a Hint / Why? is about, pinned above the chat. The clamp is on
+ * the inner text (padding on an element with line-clamp shows a sliver of
+ * the next line); tapping it shows the whole question.
+ */
+function PinnedQuestion({ text }: { text: string }) {
+  const [open, setOpen] = useState(false);
+  // "Question 3 · A parcel classifier…": the label in bold, the question after it.
+  const m = text.match(/^(Question\s+\S+)\s*[·:]\s*([\s\S]*)$/);
+  return (
+    <button
+      type="button"
+      onClick={() => setOpen((o) => !o)}
+      aria-expanded={open}
+      className="shrink-0 border-b border-border bg-muted/40 px-4 py-2.5 text-left transition-colors hover:bg-muted/70"
+      data-pinned
+    >
+      <span className={cn("block text-[12.5px] leading-[1.45] text-muted-foreground", !open && "line-clamp-2")}>
+        {m ? (
+          <>
+            <span className="font-bold text-foreground">{m[1]}</span>
+            <span className="mx-1.5" aria-hidden>·</span>
+            {m[2]}
+          </>
+        ) : (
+          text
+        )}
+      </span>
     </button>
   );
 }

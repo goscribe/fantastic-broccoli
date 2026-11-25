@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-4",
+  "topicCode": "8.4",
+  "topicName": "Synapses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:20.052Z",
+  "cards": [
+    {
+      "id": "0paqg02",
+      "kind": "concept",
+      "front": "Why must a chemical carry the signal across a synapse instead of the action potential itself?",
+      "back": "An action potential cannot jump the **synaptic cleft**, the narrow gap between two cells, so a neurotransmitter carries the message across.",
+      "hint": "Think about where an action potential exists: in the membrane of a single neurone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hqfq2k",
+      "kind": "process",
+      "front": "What are the steps by which an action potential at the synaptic knob releases neurotransmitter?",
+      "back": "1) The action potential opens voltage-gated $\\text{Ca}^{2+}$ channels in the presynaptic membrane. 2) $\\text{Ca}^{2+}$ diffuse into the knob. 3) Vesicles move to the membrane and fuse with it. 4) Contents are released by **exocytosis**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0evxwub",
+      "kind": "concept",
+      "front": "How does neurotransmitter binding start a new impulse in the postsynaptic neurone?",
+      "back": "It binds to **receptor proteins** that form part of sodium ion channels, opening them. $\\text{Na}^{+}$ diffuse in and depolarise the membrane; if threshold is reached, an action potential starts.",
+      "hint": "Think about which ions move, and which way, when a channel opens.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09pnyco",
+      "kind": "term",
+      "front": "What is the synaptic cleft?",
+      "back": "The **synaptic cleft** is the narrow fluid-filled gap between the presynaptic and postsynaptic membranes at a synapse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hj7rt1",
+      "kind": "term",
+      "front": "What is a neurotransmitter?",
+      "back": "A **neurotransmitter** is a chemical released at a synapse that binds to receptors on the receiving cell. Acetylcholine is one example.",
+      "hint": "Think about the substance stored inside the vesicles in the presynaptic knob.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1101h93",
+      "kind": "term",
+      "front": "What is a receptor protein at a synapse?",
+      "back": "A **receptor protein** is a protein in the postsynaptic membrane with a binding site complementary to one specific neurotransmitter.",
+      "hint": "Think about why a key only fits one lock.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "142op47",
+      "kind": "term",
+      "front": "What does the enzyme acetylcholinesterase do in the synaptic cleft?",
+      "back": "It **hydrolyses** acetylcholine into choline and ethanoic acid, so the signal stops quickly and each impulse gives a short, precise signal.",
+      "hint": "Think about what must happen to a neurotransmitter once it has bound.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r9ftb8",
+      "kind": "process",
+      "front": "What happens to the products of acetylcholine breakdown after they are formed in the cleft?",
+      "back": "They are taken back into the presynaptic knob, where ATP is used to make acetylcholine again.",
+      "hint": "Think about which cell the breakdown products return to.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14pzw22",
+      "kind": "concept",
+      "front": "Why must neurotransmitter be removed from the synaptic cleft after it has acted?",
+      "back": "If it stayed, receptors would stay occupied and sodium channels would stay open, so the postsynaptic neurone would keep firing and the signal could not be controlled.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b39bcu",
+      "kind": "concept",
+      "front": "Why can a synapse only pass signals in one direction?",
+      "back": "Vesicles of neurotransmitter occur only in the presynaptic knob, and receptor proteins only in the postsynaptic membrane, so the signal cannot pass back.",
+      "hint": "Compare where the chemical is stored with where it is detected.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xxcibg",
+      "kind": "term",
+      "front": "What is summation at a synapse?",
+      "back": "**Summation** is the adding together of neurotransmitter effects from several impulses in quick succession, bringing the postsynaptic membrane to threshold when one impulse alone might not.",
+      "hint": "Think about what happens if a single signal is too weak to reach threshold.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vob1nv",
+      "kind": "concept",
+      "front": "What does an inhibitory synapse do to the postsynaptic membrane?",
+      "back": "It makes the membrane **more negative**, so an action potential becomes less likely.",
+      "hint": "Compare this with what happens when the membrane depolarises.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nrnxzz",
+      "kind": "concept",
+      "front": "Why does a synaptic knob contain many mitochondria?",
+      "back": "They supply **ATP** to move vesicles to the membrane and to make neurotransmitter again from its breakdown products.",
+      "hint": "Think about the energy-demanding jobs done inside the knob.",
+      "sectionId": "s2"
+    }
+  ]
+}

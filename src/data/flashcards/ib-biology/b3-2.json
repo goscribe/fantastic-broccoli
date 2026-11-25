@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b3-2",
+  "topicCode": "B3.2",
+  "topicName": "Transport",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:47.811Z",
+  "cards": [
+    {
+      "id": "0n3h6fq",
+      "kind": "concept",
+      "front": "What pulls water up a plant's xylem without a pump?",
+      "back": "**Transpiration pull**: evaporation from the leaves creates tension, and cohesion between water molecules passes that pull down the continuous water column to the roots.",
+      "hint": "Think about where water is lost from the plant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dwfya8",
+      "kind": "process",
+      "front": "How does tissue fluid form at the arterial end of a capillary?",
+      "back": "**Hydrostatic pressure** forces water and small dissolved substances through gaps in the capillary wall. Blood cells and most plasma proteins stay inside, and the filtered liquid becomes tissue fluid.",
+      "hint": "Think about what the pressure does to the capillary contents.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a698sg",
+      "kind": "concept",
+      "front": "Why are artery walls thick and elastic while vein walls are thin?",
+      "back": "**Arteries** carry blood at high pressure, so thick muscle and elastic tissue withstand it. **Veins** carry low-pressure blood, so thin walls and wide lumens reduce resistance to flow.",
+      "hint": "Compare the pressure each vessel carries.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "143d1wd",
+      "kind": "concept",
+      "front": "What makes capillary walls suited to exchange?",
+      "back": "Their walls are **one endothelial cell thick**, giving a short distance for substances to cross. Narrow lumens bring red blood cells close to the wall.",
+      "hint": "Think about the distance substances must travel.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0irkm68",
+      "kind": "term",
+      "front": "What is transpiration?",
+      "back": "**Transpiration** is the loss of water vapour from a plant's leaves, as water evaporates from moist cell walls and diffuses out through stomata.",
+      "hint": "Where do the stomata sit?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f4f5p1",
+      "kind": "concept",
+      "front": "What role does cohesion play in transpiration pull?",
+      "back": "**Cohesion** between water molecules keeps the xylem water column continuous, so the tension created at the leaves is transmitted down to the roots.",
+      "hint": "Think about how water molecules stick together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u53uzo",
+      "kind": "term",
+      "front": "What are xylem vessels made of, and what is their key feature?",
+      "back": "**Dead cells** joined end to end. Their hollow interiors and missing end walls form a continuous route for water and minerals, and lignin strengthens the walls.",
+      "hint": "Think about what the cells are at maturity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d2jxrr",
+      "kind": "term",
+      "front": "What are sieve plates in phloem?",
+      "back": "**Perforated end walls** of sieve elements that allow sap to pass between the living cells.",
+      "hint": "Think about the end walls of sieve elements.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bz54qi",
+      "kind": "concept",
+      "front": "What is the job of a companion cell?",
+      "back": "**Companion cells** support sieve elements and supply the energy needed to load and unload sugars.",
+      "hint": "Think about what the sieve elements cannot do alone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dety8m",
+      "kind": "concept",
+      "front": "What happens to tissue fluid that is not reabsorbed into the capillary?",
+      "back": "It enters **lymphatic vessels** and eventually returns to the bloodstream, which helps prevent fluid building up in tissues.",
+      "hint": "Think about the drainage route.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xrhngf",
+      "kind": "concept",
+      "front": "Why does water move back into the capillary towards its venous end?",
+      "back": "**Plasma proteins** retained in the blood lower its water potential, so water moves in from the tissue fluid, which has a higher water potential.",
+      "hint": "Water moves from higher to lower water potential.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0djmcol",
+      "kind": "mistake",
+      "front": "Do arteries always carry oxygen-rich blood?",
+      "back": "**No.** Vessel names describe blood flow relative to the heart: arteries carry blood away from the heart, whatever its oxygen content.",
+      "hint": "Check what the name is describing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hovfks",
+      "kind": "mistake",
+      "front": "Does phloem always move sugars downwards?",
+      "back": "**No.** Phloem flow can be upwards or downwards. Its direction depends on the positions of sources and sinks.",
+      "hint": "Think about where sugar is made and where it is used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uisl5d",
+      "kind": "concept",
+      "front": "Which transport tissue contains living cells, xylem or phloem?",
+      "back": "**Phloem sieve tubes** contain living sieve elements. **Xylem vessels** are dead cells at maturity.",
+      "hint": "Check the cell status in the comparison table.",
+      "sectionId": "s4"
+    }
+  ]
+}

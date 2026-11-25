@@ -52,15 +52,4 @@ export const proficiencyApi = {
     index: number;
     selectedIndex: number;
   }) => rpc<BankAnswerResult>("proficiency.answerPrecheck", "mutation", input),
-  reviewPreference: (workspaceId: string) =>
-    rpc<{ longTerm: boolean; dueItems: number }>(
-      "proficiency.reviewPreference",
-      "query",
-      { workspaceId },
-    ),
-  setReviewPreference: (workspaceId: string, longTerm: boolean) =>
-    rpc<{ longTerm: boolean }>("proficiency.setReviewPreference", "mutation", {
-      workspaceId,
-      longTerm,
-    }),
 };

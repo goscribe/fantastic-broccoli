@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-10",
+  "topicCode": "8.10",
+  "topicName": "Disc method about other axes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:38.992Z",
+  "cards": [
+    {
+      "id": "03kvede",
+      "kind": "concept",
+      "front": "When a region spins around a shifted axis, what changes in the disc method compared with a coordinate axis?",
+      "back": "The area formula $\\pi r^2$ stays the same. What changes is how you find the **radius**, which is the distance from the axis, not the curve's coordinate.",
+      "hint": "Think about what changes, not what stays the same.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qygw6u",
+      "kind": "formula",
+      "front": "What is the volume formula for rotating around a horizontal line $y=k$ using vertical slices?",
+      "back": "$V=\\pi\\int_a^b[f(x)-k]^2\\,dx$, where $a$ and $b$ are the left and right ends of the region. Squaring removes the need for an absolute value.",
+      "hint": "Vertical slices use dx, and the radius is measured from y = k.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rk0444",
+      "kind": "formula",
+      "front": "What is the volume formula for rotating around a vertical line $x=h$ using horizontal slices?",
+      "back": "$V=\\pi\\int_c^d[g(y)-h]^2\\,dy$, where $x=g(y)$ is the curve and $c$ and $d$ are the bottom and top of the region.",
+      "hint": "Horizontal slices use dy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18vfzdd",
+      "kind": "term",
+      "front": "What is the disc method?",
+      "back": "A way to find a solid's volume by adding the areas of **circular cross sections** taken perpendicular to the rotation axis.",
+      "hint": "Picture stacking thin coins.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05xh52n",
+      "kind": "term",
+      "front": "What is the axis of rotation?",
+      "back": "The **fixed line** that a region turns around to form a solid. Each disc's center lies on this line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0toygqs",
+      "kind": "mistake",
+      "front": "A student rotates a region around y = k but uses the curve's y-value f(x) as the radius. What is wrong?",
+      "back": "The radius must be measured from the **axis**, so it should be $|f(x)-k|$. The curve's own coordinate is only the radius when the axis is the x-axis.",
+      "hint": "Where does the radius start?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "183rl8j",
+      "kind": "mistake",
+      "front": "A student rotates a region around the vertical line x = 4 but integrates with respect to x. What is wrong?",
+      "back": "A vertical axis needs horizontal slices, so integrate with respect to **y** using $dy$. Use dx only with horizontal axes.",
+      "hint": "Which way do the slices run?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "149wj9a",
+      "kind": "process",
+      "front": "What steps find a disc volume around a shifted axis?",
+      "back": "Identify the axis and outer curve, find their perpendicular distance at a typical slice, check the slice reaches the axis, square the radius, then integrate over the correct bounds.",
+      "hint": "Start by naming the axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03424iw",
+      "kind": "example",
+      "front": "Rotate the region bounded by y = x + 1, y = 3, and x = 0 around y = 3. What is the volume?",
+      "back": "$\\frac{8\\pi}{3}$ cubic units. The right end is $x=2$, the radius is $2-x$, and $V=\\pi\\int_0^2(2-x)^2\\,dx$.",
+      "hint": "Find where the curve meets y = 3 first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wc1lik",
+      "kind": "example",
+      "front": "Set up the volume for the region between x = y^2 and x = 4, for 0 ≤ y ≤ 2, rotated around x = 4.",
+      "back": "$V=\\pi\\int_0^2(4-y^2)^2\\,dy$. With horizontal slices the radius is $4-y^2$.",
+      "hint": "Use horizontal slices because the axis is vertical.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tts7pi",
+      "kind": "concept",
+      "front": "When does rotating a region around a shifted axis form rings instead of discs?",
+      "back": "When the region does not reach the axis along a slice, the slice leaves an empty centre and forms a **ring**, not a solid disc.",
+      "hint": "Look for a gap between the axis and the region.",
+      "sectionId": "s4"
+    }
+  ]
+}

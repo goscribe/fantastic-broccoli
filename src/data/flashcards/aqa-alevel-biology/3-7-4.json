@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-7-4",
+  "topicCode": "3.7.4",
+  "topicName": "Populations in ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:42.182Z",
+  "cards": [
+    {
+      "id": "0qfhz32",
+      "kind": "concept",
+      "front": "What four processes change the size of a population?",
+      "back": "**Births** and immigration increase population size, while **deaths** and emigration decrease it.",
+      "hint": "Think about what can add individuals to a population and what can remove them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "194cojk",
+      "kind": "concept",
+      "front": "Why does a population growth curve level off?",
+      "back": "Resources become limiting, so births and immigration roughly balance deaths and emigration, and the population settles near the **carrying capacity**.",
+      "hint": "Think about what happens as more individuals compete for food and space.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n3j4s0",
+      "kind": "term",
+      "front": "What is competition between organisms?",
+      "back": "**Competition** occurs when organisms need the same limited resource, which can reduce their survival or breeding success.",
+      "hint": "Consider what limits how many organisms can use one resource.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03rmz4e",
+      "kind": "term",
+      "front": "What is the difference between abiotic and biotic factors?",
+      "back": "**Abiotic** factors are non-living conditions such as temperature, light and water. **Biotic** factors involve living organisms, such as food, pathogens and predators.",
+      "hint": "Ask yourself whether the factor is alive.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05xedii",
+      "kind": "term",
+      "front": "What is a population?",
+      "back": "A **population** is all the organisms of one species living in the same area at the same time that can interbreed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0syo3bx",
+      "kind": "concept",
+      "front": "How does an increase in predator numbers affect prey populations?",
+      "back": "More predators can reduce prey numbers. Scarce prey then lowers **predator** numbers, though the changes do not form regular cycles.",
+      "hint": "Follow the effect on one population, then the other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1svmtw7",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume predators cause every fall in prey numbers?",
+      "back": "Other causes, such as **food shortages** and disease, can also reduce prey numbers, so check for them before blaming predators.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1miexqo",
+      "kind": "example",
+      "front": "What is the average growth rate of a population that is 100 at week 4 and 180 at week 6?",
+      "back": "$\\frac{80}{2}=40$ individuals per week. The change is $180-100=80$ over $6-4=2$ weeks.",
+      "hint": "Work out the change in population first, then the time taken.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17jaxla",
+      "kind": "formula",
+      "front": "What is the formula for average growth rate, and what are its units?",
+      "back": "$\\text{average growth rate}=\\frac{\\text{change in population size}}{\\text{time taken}}$, in individuals per unit of time, such as individuals per week.",
+      "hint": "The units come from the time measurement you divide by.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q28w2z",
+      "kind": "mistake",
+      "front": "Why does a flat part of a growth curve not mean births have stopped?",
+      "back": "Population size is approximately stable because births roughly balance deaths. Births and deaths still happen; they just cancel out.",
+      "hint": "Consider what a stable population size requires.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03cjtj5",
+      "kind": "term",
+      "front": "How does primary succession differ from secondary succession?",
+      "back": "**Primary** succession starts where there is no soil, such as new rock. **Secondary** succession starts after disturbance where soil remains, so it is often faster.",
+      "hint": "Focus on what is already present at the start.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ah7d4g",
+      "kind": "process",
+      "front": "What happens in the early stages of primary succession on newly exposed rock?",
+      "back": "**Pioneer organisms** survive harsh conditions and help create soil. As soil develops, larger plants establish and provide food and shelter for more animal species.",
+      "hint": "Start with the first organisms to arrive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y9tcdg",
+      "kind": "mistake",
+      "front": "Why can't succession be predicted as one fixed sequence everywhere?",
+      "back": "The species present depend on **local conditions**, climate and further disturbance, so the sequence varies from place to place.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0837v0v",
+      "kind": "term",
+      "front": "What is the difference between conservation and management?",
+      "back": "**Conservation** protects species, habitats and the processes that support them. **Management** uses planned actions, such as controlling invasive species, to maintain or restore an ecosystem.",
+      "hint": "One is about protecting, the other about planned actions.",
+      "sectionId": "s5"
+    }
+  ]
+}

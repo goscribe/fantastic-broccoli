@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-8-1",
+  "topicCode": "5.8.1",
+  "topicName": "Purity, formulations and chromatography",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:51.646Z",
+  "cards": [
+    {
+      "id": "04f4c20",
+      "kind": "term",
+      "front": "In chemistry, what is a pure substance?",
+      "back": "A **pure substance** contains only one element or one compound. Everyday 'pure' (natural or safe) does not mean this.",
+      "hint": "Count how many different kinds of particle are present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bc1uug",
+      "kind": "concept",
+      "front": "How does the melting behaviour of a pure substance differ from that of a mixture?",
+      "back": "A pure substance melts at a **characteristic temperature** at a given pressure. A mixture usually melts over a **range of temperatures**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fu3z0o",
+      "kind": "concept",
+      "front": "Why do dissolved substances end up in different places on chromatography paper?",
+      "back": "Each substance has a different balance of **attraction to the solvent and to the paper**, so each travels a different distance.",
+      "hint": "Think about what the solvent is pulling against as it rises.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vwge3r",
+      "kind": "term",
+      "front": "What is a formulation?",
+      "back": "A **formulation** is a mixture whose components are present in carefully measured amounts to give a useful product.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k06enm",
+      "kind": "concept",
+      "front": "Why can changing the proportions in a formulation change its properties?",
+      "back": "The **amounts of each component** control the result, so the same ingredients in different proportions can behave differently.",
+      "hint": "Compare a product made with more of one ingredient to one made with less.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0li8c9k",
+      "kind": "process",
+      "front": "What are the steps to run paper chromatography?",
+      "back": "1) Put a sample spot on a **pencil baseline** near the bottom of the paper. 2) Stand the paper in solvent, keeping the baseline above the solvent level. 3) Mark the **solvent front** before the paper dries.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fh75s4",
+      "kind": "mistake",
+      "front": "Why must the baseline on chromatography paper be drawn in pencil rather than ink?",
+      "back": "Ink could **dissolve in the solvent** and produce extra spots, which would confuse the result.",
+      "hint": "Think about what happens to the marks when the solvent reaches them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q6zh29",
+      "kind": "term",
+      "front": "What is the solvent front?",
+      "back": "The **solvent front** is the furthest point the solvent reaches on the chromatography paper. It is marked before the paper dries.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zb8v6q",
+      "kind": "formula",
+      "front": "What is the equation for an Rf value, and what are its units?",
+      "back": "$R_f=\\frac{\\text{distance travelled by spot}}{\\text{distance travelled by solvent front}}$. Both distances are measured from the **baseline**, and the Rf value has **no unit**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "064j2vk",
+      "kind": "example",
+      "front": "A spot travels 3 cm from the baseline and the solvent front travels 6 cm. What is the Rf value?",
+      "back": "$R_f=\\frac{3\\,\\mathrm{cm}}{6\\,\\mathrm{cm}}=0.5$. The Rf value has no unit.",
+      "hint": "Divide the spot's distance by the solvent front's distance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cifxvr",
+      "kind": "concept",
+      "front": "What does a chromatogram with several spots tell you about the sample?",
+      "back": "One spot suggests one dissolved substance. **Several spots** show the sample is a mixture.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r55i0i",
+      "kind": "mistake",
+      "front": "Why is matching the height of two spots not enough to prove they are the same substance?",
+      "back": "Spots at the same height **may** be the same substance, but different substances can travel the same distance, so matching positions do not prove identity.",
+      "hint": "Consider what determines how far a spot travels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eb1e6m",
+      "kind": "concept",
+      "front": "Why must Rf values only be compared when obtained under the same conditions?",
+      "back": "Rf values **depend on the solvent and conditions**, so results from different conditions cannot be fairly compared.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kq1sm6",
+      "kind": "mistake",
+      "front": "Why might a substance in a sample not show up as a spot on a chromatogram?",
+      "back": "If it is **insoluble in the chosen solvent**, it will not travel up the paper, so it leaves no spot.",
+      "hint": "Think about whether the substance can dissolve in the solvent used.",
+      "sectionId": "s3"
+    }
+  ]
+}

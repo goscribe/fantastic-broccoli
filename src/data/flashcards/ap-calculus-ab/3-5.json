@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Choosing a differentiation procedure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:11.488Z",
+  "cards": [
+    {
+      "id": "0jvrmuo",
+      "kind": "process",
+      "front": "What should you do before choosing a differentiation rule for an expression?",
+      "back": "**Identify the outermost operation** first: sum, product, quotient, or composite. Then check whether each part needs another rule.",
+      "hint": "Look at the whole expression before its parts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jpeffr",
+      "kind": "concept",
+      "front": "Why does $(x^2+1)^3$ need the chain rule?",
+      "back": "Cubing is the **outer function** and $x^2+1$ is the inside expression. The chain rule differentiates the outer part, then multiplies by the inside derivative, giving $3(x^2+1)^2(2x)$.",
+      "hint": "Name the outer operation and the inside expression.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "154www7",
+      "kind": "concept",
+      "front": "When should you use implicit differentiation?",
+      "back": "When $x$ and $y$ appear together in an equation. Differentiate both sides with respect to $x$, treating $y$ as a function of $x$, so $y^2$ becomes $2y\\frac{dy}{dx}$.",
+      "hint": "Look for x and y in the same equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07lm1bi",
+      "kind": "term",
+      "front": "What is the sum rule?",
+      "back": "The **derivative of a sum or difference** equals the sum or difference of the derivatives of its terms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03e2vid",
+      "kind": "formula",
+      "front": "What is the product rule for the derivative of $uv$?",
+      "back": "$(uv)'=u'v+uv'$, where $u'$ and $v'$ are the derivatives of the two factors $u$ and $v$.",
+      "hint": "Differentiate one factor at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s7lsug",
+      "kind": "mistake",
+      "front": "A student writes the derivative of $x^2\\sin(3x)$ as $2x\\cdot 3\\cos(3x)$. What is wrong?",
+      "back": "The **derivative of a product is not the product of the derivatives**. Use $u'v+uv'$, keeping the unchanged factor beside each derivative.",
+      "hint": "Think about which two factors the product rule combines.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10dcdjc",
+      "kind": "term",
+      "front": "What is a composite function?",
+      "back": "A **composite function** applies one function to the output of another, such as cubing applied to $x^2+1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1su8apr",
+      "kind": "term",
+      "front": "How does the chain rule differentiate a composite function?",
+      "back": "**Multiply** the outer derivative by the inner derivative.",
+      "hint": "Differentiate the outside, then deal with the inside.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v07nyh",
+      "kind": "example",
+      "front": "Differentiate $\\sin(3x)$.",
+      "back": "$3\\cos(3x)$. The outer function is sine, and the inside derivative $3$ multiplies it.",
+      "hint": "Find the outer and inside parts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cuyk0r",
+      "kind": "process",
+      "front": "In what order do you apply rules to $x^2\\sin(3x)$?",
+      "back": "Start with the **product rule** for the whole product, then use the chain rule on the composite factor $\\sin(3x)$.",
+      "hint": "Find the rule that governs the whole expression first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g60zkt",
+      "kind": "example",
+      "front": "Find $f'(x)$ for $f(x)=x^2\\sin(3x)$.",
+      "back": "$f'(x)=2x\\sin(3x)+3x^2\\cos(3x)$. Use the product rule with $u=x^2$ and $v=\\sin(3x)$, then the chain rule on $v$.",
+      "hint": "Set $u=x^2$ and $v=\\sin(3x)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a60sxh",
+      "kind": "term",
+      "front": "What is an inverse function?",
+      "back": "An **inverse function** reverses the input-output relationship of a one-to-one function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r9jknm",
+      "kind": "concept",
+      "front": "When might direct differentiation be quicker than the inverse-function derivative relationship?",
+      "back": "When the formula is **easy to simplify or rewrite**. Explain your choice using the form of the given relationship.",
+      "hint": "Look at how the formula is written.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05njt3v",
+      "kind": "concept",
+      "front": "For $f(x)=\\frac{x^2+1}{x-1}$, which differentiation rule should you choose first, and why?",
+      "back": "The **quotient rule**, because the outermost operation is division of one variable expression by another.",
+      "hint": "Ask what the outermost operation in the expression is.",
+      "sectionId": "s1"
+    }
+  ]
+}

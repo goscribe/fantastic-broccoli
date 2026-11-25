@@ -1,5 +1,6 @@
 "use client";
 
+import { ItemDots, PlayActions, PlayDone, PlayPrimary, playField, playQuiet } from "@/components/session/play-ui";
 import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { VocabRecallContent } from "@/types";
@@ -105,6 +106,85 @@ export function VocabRecallActivity({
     }
   };
 
+  if (newUi && done) {
+    return (
+      <PlayDone
+        title={`${t("session.allPrefix")} ${total} ${t("session.termsRecalled")}`}
+        sub={
+          attempts === total
+            ? t("session.perfectRecall")
+            : `${t("session.took")} ${attempts} ${t("session.attemptsAcross")} ${round} ${round > 1 ? t("session.roundsNoun") : t("session.roundNoun")} ${t("session.trickyResurface")}`
+        }
+        action={
+          <>
+            {t("session.continue")} <ArrowRight className="ml-1.5 size-4" />
+          </>
+        }
+        onAction={onComplete}
+      />
+    );
+  }
+
+  if (newUi) {
+    return (
+      <div className="space-y-4">
+        <div className="flex min-h-6 items-center justify-between gap-4">
+          <p data-scroll-line className="text-small font-semibold tabular-nums text-muted-foreground" aria-live="polite">
+            {t("session.defineFromMemory")}
+            {round > 1 && ` · ${t("session.round")} ${round}`}
+            {` · ${learned.size} / ${total} ${t("session.learnt")}`}
+          </p>
+          <ItemDots current={termIndex} states={content.terms.map((_, i) => (learned.has(i) ? "right" : missed.includes(i) ? "wrong" : "todo"))} />
+        </div>
+
+        <p key={`t-${termIndex}-${round}`} data-scroll-line className="life-rise text-[26px] font-extrabold leading-[1.2] tracking-tight sm:text-[30px]">
+          <MathText text={term.term} />
+        </p>
+
+        {revealed ? (
+          <div>
+            <p className="mb-1 text-caption font-extrabold text-muted-foreground">{t("finish.yourAnswer")}</p>
+            <p className="whitespace-pre-wrap text-read text-foreground/80">{answer}</p>
+          </div>
+        ) : (
+          <textarea
+            value={answer}
+            onChange={(e) => setAnswer(e.target.value)}
+            placeholder={t("session.definitionPlaceholder")}
+            aria-label={t("session.definitionPlaceholder")}
+            rows={3}
+            className={playField}
+          />
+        )}
+
+        {!revealed ? (
+          <PlayActions>
+            <PlayPrimary onClick={() => setRevealed(true)} disabled={!answer.trim()}>
+              {t("session.checkMyAnswer")}
+            </PlayPrimary>
+          </PlayActions>
+        ) : (
+          // The model answer sits on the page under yours, marked by a bar of the accent; you mark yourself with two pills.
+          <div className="life-rise space-y-5">
+            <div className="border-l-[3px] border-accent pl-4">
+              <p className="mb-1 text-caption font-extrabold text-accent-dim">{t("session.modelDefinition")}</p>
+              <p className="text-read font-semibold text-foreground">
+                <MathText text={term.definition} />
+              </p>
+            </div>
+            <p className="text-small font-semibold text-muted-foreground">{t("session.compareHint")}</p>
+            <PlayActions>
+              <button type="button" onClick={() => mark(false)} className={playQuiet}>
+                {t("session.missedIt")}
+              </button>
+              <PlayPrimary onClick={() => mark(true)}>{t("session.gotIt")}</PlayPrimary>
+            </PlayActions>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   if (done) {
     return (
       <div className="py-8 text-center">
@@ -112,7 +192,7 @@ export function VocabRecallActivity({
         <p className="text-lg font-bold tracking-tight">
           {t("session.allPrefix")} {total} {t("session.termsRecalled")}
         </p>
-        <p className="text-sm text-muted-foreground mt-1 mb-6">
+        <p className="text-ui text-muted-foreground mt-1 mb-6">
           {attempts === total
             ? t("session.perfectRecall")
             : `${t("session.took")} ${attempts} ${t("session.attemptsAcross")} ${round} ${round > 1 ? t("session.roundsNoun") : t("session.roundNoun")} ${t("session.trickyResurface")}`}
@@ -129,17 +209,17 @@ export function VocabRecallActivity({
     <div>
       <ConfettiBurst burst={burst} />
       <div className="flex items-center justify-between mb-5">
-        <p className={newUi ? "text-[15px] font-semibold text-muted-foreground" : "text-sm font-semibold"}>
+        <p className={newUi ? "text-ui font-semibold text-muted-foreground" : "text-ui font-semibold"}>
           {t("session.defineFromMemory")}
         </p>
         <div className="flex items-center gap-3">
           {round > 1 && (
-            <span className="flex items-center gap-1 text-xs font-semibold text-accent">
+            <span className="flex items-center gap-1 text-caption font-semibold text-accent">
               <RotateCcw className="h-3 w-3" />
               {t("session.round")} {round}
             </span>
           )}
-          <span className="text-xs text-muted-foreground tabular-nums">
+          <span className="text-caption text-muted-foreground tabular-nums">
             {learned.size} / {total} {t("session.learnt")}
           </span>
         </div>
@@ -171,15 +251,15 @@ export function VocabRecallActivity({
       ) : (
         <div className="mt-4 space-y-4">
           <div className={newUi ? "rounded-2xl bg-accent-soft p-5" : "rounded-xl bg-accent-soft border border-accent/20 p-4"}>
-            <p className={newUi ? "mb-1.5 text-[12px] font-semibold text-accent-dim" : "text-xs font-semibold text-accent mb-1.5"}>
+            <p className={newUi ? "mb-1.5 text-caption font-semibold text-accent-dim" : "text-caption font-semibold text-accent mb-1.5"}>
               {t("session.modelDefinition")}
             </p>
-            <p className={newUi ? "text-[16px] leading-relaxed text-foreground" : "text-sm text-foreground"}>
+            <p className={newUi ? "text-read text-foreground" : "text-ui text-foreground"}>
               <MathText text={term.definition} />
             </p>
           </div>
           <div className="flex items-center justify-between">
-            <p className="text-xs text-muted-foreground">
+            <p className="text-caption text-muted-foreground">
               {t("session.compareHint")}
             </p>
             <div className="flex gap-2">

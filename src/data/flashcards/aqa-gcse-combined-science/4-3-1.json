@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-3-1",
+  "topicCode": "4.3.1",
+  "topicName": "Communicable diseases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:19.652Z",
+  "cards": [
+    {
+      "id": "0pm1bac",
+      "kind": "term",
+      "front": "What is a communicable disease?",
+      "back": "An illness caused by a **pathogen** that can spread between organisms. The pathogen must be transmissible for the disease to count.",
+      "hint": "Think about what causes the illness and whether it can move between hosts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z1u0iu",
+      "kind": "concept",
+      "front": "How do viruses cause illness inside the body?",
+      "back": "They enter living cells and use them to make more viruses. The infected cells are damaged or destroyed, which causes **symptoms** and lets the infection spread.",
+      "hint": "Think about what happens to the host cell once the virus is inside it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a8wl7b",
+      "kind": "concept",
+      "front": "Why does knowing the transmission route of a pathogen matter?",
+      "back": "It determines which **prevention measures** will work, because each route needs a different approach.",
+      "hint": "Think about where the pathogen comes from and how it reaches a new host.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0a6gawh",
+      "kind": "term",
+      "front": "What is a pathogen?",
+      "back": "A **microorganism** that causes infectious disease. Bacteria, viruses, fungi and protists are all examples.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zaxofh",
+      "kind": "concept",
+      "front": "How do some pathogenic bacteria cause symptoms?",
+      "back": "They reproduce inside the body and release **toxins**, which damage tissues. Salmonella, for example, causes fever, stomach cramps and diarrhoea.",
+      "hint": "Compare this with how viruses harm cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13fyqm9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say mosquitoes cause malaria?",
+      "back": "Mosquitoes do not cause malaria themselves. They **carry** the protist from one human to another, acting as a vector.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04vkpxi",
+      "kind": "term",
+      "front": "What is a vector?",
+      "back": "An organism that **carries a pathogen** from one host to another. Mosquitoes are vectors for malaria.",
+      "hint": "Think about what the organism does, not what disease it has.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1aqrgu4",
+      "kind": "mistake",
+      "front": "Why does mucus alone not fully protect the airways?",
+      "back": "Mucus traps pathogens but does not **destroy** every one of them. Cilia move the trapped material towards the throat so it can be removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ckxl4m",
+      "kind": "process",
+      "front": "In what order do the body's defences act against pathogens?",
+      "back": "Skin blocks entry, mucus traps pathogens in the airways, and stomach acid kills swallowed ones. White blood cells then fight any pathogens that get in.",
+      "hint": "Start from the outside of the body and work inwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yx9je1",
+      "kind": "concept",
+      "front": "How do antibodies help white blood cells fight pathogens?",
+      "back": "Antibodies **bind to specific pathogens**, which helps the body destroy them.",
+      "hint": "Think about how specific the response is to each pathogen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19783ou",
+      "kind": "concept",
+      "front": "What do white blood cells produce to counter bacterial toxins?",
+      "back": "**Antitoxins**, which neutralise the toxins released by bacteria so they cause less harm.",
+      "hint": "Think about what the toxins do, not how the bacteria make them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "185pb51",
+      "kind": "concept",
+      "front": "What role does the skin play in defending the body?",
+      "back": "It forms a **barrier** that blocks most pathogens from entering the body.",
+      "hint": "Think about the first line of defence.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17m7lep",
+      "kind": "example",
+      "front": "How does measles spread from one person to another?",
+      "back": "In **droplets** released when an infected person coughs or sneezes.",
+      "hint": "Think about how the infected person releases the pathogen.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Mass spectroscopy of elements",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:05.920Z",
+  "cards": [
+    {
+      "id": "10mvbk5",
+      "kind": "term",
+      "front": "What does a mass spectrometer separate ions by, and what does the detector measure?",
+      "back": "Ions are separated by **mass-to-charge ratio**, $m/z$ (ion mass divided by charge number). The detector measures the abundance of ions at each $m/z$.",
+      "hint": "Think about the horizontal axis of the result.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1botcss",
+      "kind": "concept",
+      "front": "Why do ions of different isotopes of one element produce separate peaks?",
+      "back": "**Isotopes** have the same proton number but different neutron numbers, so their ions have different masses. For ions of the same charge, different masses give separate peaks.",
+      "hint": "What changes between isotopes of the same element?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gzb2hl",
+      "kind": "formula",
+      "front": "How do you calculate the average atomic mass of an element from its isotope masses and percentage abundances?",
+      "back": "Divide each percentage by 100 to get a fraction, multiply each isotope mass by its **fraction**, then add the products. Result: average atomic mass in u.",
+      "hint": "Convert percentages before multiplying.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hv32hk",
+      "kind": "example",
+      "front": "A hypothetical element has isotopes of 10.0 u (20% abundance) and 11.0 u (80% abundance). What is its average atomic mass?",
+      "back": "**10.8 u**. Working: $10.0(0.20)+11.0(0.80)=2.0+8.8=10.8$ u.",
+      "hint": "Write each abundance as a fraction first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11k9395",
+      "kind": "process",
+      "front": "What are the steps to interpret a mass spectrum for isotope masses and average atomic mass?",
+      "back": "1) Read the peak positions for approximate isotope masses (singly charged ions). 2) Read each peak's abundance. 3) Calculate the **weighted mean** of the isotope masses.",
+      "hint": "Start with the horizontal axis, then the vertical axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1atwfom",
+      "kind": "concept",
+      "front": "Where does the average atomic mass lie compared with the isotope masses?",
+      "back": "It lies **between** the isotope masses, closer to the more abundant isotope. This is a useful check, but it does not replace the weighted sum.",
+      "hint": "Think about which peak is taller.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dpj8nl",
+      "kind": "mistake",
+      "front": "A student says the taller peak must be the heavier isotope. Why is this wrong?",
+      "back": "Peak height shows **abundance** (more ions), not mass. Read mass from the horizontal axis and abundance from the vertical axis.",
+      "hint": "Which axis shows mass?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18mn0wu",
+      "kind": "mistake",
+      "front": "Why must you check the charge of an ion before assigning an isotope to a peak?",
+      "back": "A doubly charged ion has a lower $m/z$ than a singly charged ion of the same isotope, so the peak position can mislead. Check $z$ first.",
+      "hint": "Compare $m/z$ values for z=1 and z=2.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rl4g8z",
+      "kind": "mistake",
+      "front": "Can you use mass numbers as exact isotope masses in an average atomic mass calculation?",
+      "back": "No. **Mass numbers** only give an estimate. Use measured isotope masses when they are provided, since they are not exactly whole numbers.",
+      "hint": "Are measured isotope masses whole numbers?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i8m19t",
+      "kind": "term",
+      "front": "What does a mass spectrum show on each axis?",
+      "back": "A **mass spectrum** plots mass-to-charge ratio, $m/z$, on the horizontal axis and relative abundance on the vertical axis.",
+      "hint": "Horizontal first, then vertical.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ngnzy4",
+      "kind": "term",
+      "front": "What is relative abundance in a mass spectrum?",
+      "back": "**Relative abundance** is the share of the detected ions that belong to one isotope, given as a fraction or percentage. A taller peak has more ions.",
+      "hint": "Think about what the vertical axis measures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c87gj0",
+      "kind": "concept",
+      "front": "For singly charged ions, what does the position of a peak tell you?",
+      "back": "Because $z=1$, the **peak position** reflects the ion mass directly, giving an approximate isotope mass.",
+      "hint": "What does z equal for singly charged ions?",
+      "sectionId": "s1"
+    }
+  ]
+}

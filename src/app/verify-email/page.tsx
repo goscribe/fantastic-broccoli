@@ -59,10 +59,10 @@ export default function VerifyEmailPage() {
       <AuthFigure
         src={
           status === "success"
-            ? "/design/cat2-trophy.png"
+            ? "/design/cat3-trophy.webp"
             : status === "error"
-              ? "/design/cat2-sleep.png"
-              : "/design/cat2-think.png"
+              ? "/design/cat3-sleep.webp"
+              : "/design/cat3-think.webp"
         }
       />
 

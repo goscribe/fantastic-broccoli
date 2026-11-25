@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Systems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:22.685Z",
+  "cards": [
+    {
+      "id": "18to5p4",
+      "kind": "term",
+      "front": "What is a system in Environmental Systems and Societies?",
+      "back": "A **system** is a set of interacting parts with a boundary, linked by flows of energy and matter. Ponds, farms, cities and the whole Earth can all be treated as systems.",
+      "hint": "Think about what links the parts together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y45mw9",
+      "kind": "concept",
+      "front": "How do open, closed and isolated systems differ?",
+      "back": "An **open** system exchanges both energy and matter. A **closed** system exchanges energy but not matter. An **isolated** system exchanges neither. Nearly every ecosystem is open.",
+      "hint": "Look at what crosses the boundary.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0c55clz",
+      "kind": "concept",
+      "front": "What does steady-state equilibrium mean for a storage?",
+      "back": "A storage stays roughly the same size when **inputs equal outputs**, while the flows continue. A bath with the tap running and the plug out is an example.",
+      "hint": "What happens to the water level when inflow matches outflow?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0s6uzlw",
+      "kind": "term",
+      "front": "What is a storage, and what is a flow?",
+      "back": "A **storage** is a place where energy or matter is held, such as soil water. A **flow** is movement of energy or matter between storages or across the boundary, shown as an arrow.",
+      "hint": "Storages are boxes; flows are arrows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17i9s1m",
+      "kind": "process",
+      "front": "What steps should you follow when drawing a systems diagram?",
+      "back": "1) Draw the **boundary**. 2) Draw storages as boxes. 3) Draw flows as arrows, with inputs and outputs crossing the boundary. 4) Label every box and arrow, pointing each in the direction of flow.",
+      "hint": "Start with the edge of the system.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "057jh3p",
+      "kind": "term",
+      "front": "What is the difference between a transfer and a transformation?",
+      "back": "A **transfer** moves energy or matter without changing it, like water running from soil into a stream. A **transformation** changes its form or state, like photosynthesis turning light energy into chemical energy.",
+      "hint": "Ask whether the material itself changes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rbdmfo",
+      "kind": "example",
+      "front": "Is grass tissue passing into a rabbit a transfer or a transformation? What about digesting it into new body tissue?",
+      "back": "Grass passing into the rabbit is a **transfer**. Digesting it into new body tissue, with some heat released, is a **transformation**.",
+      "hint": "Compare the moving step with the changing step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lurd39",
+      "kind": "concept",
+      "front": "What does the first law of thermodynamics say?",
+      "back": "Energy cannot be **created or destroyed**; it can only change form. When a plant takes in light, the total energy stays the same even as some becomes chemical energy and some heat.",
+      "hint": "Think about conservation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x8zde9",
+      "kind": "concept",
+      "front": "Why does an ecosystem need a constant input of energy from the Sun?",
+      "back": "In each energy transformation, some energy becomes **heat** that is less useful for doing work, and this heat leaves the ecosystem. Energy must be continually replaced.",
+      "hint": "Consider what happens to energy at each transformation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kv5bas",
+      "kind": "mistake",
+      "front": "A student writes that energy is used up as it passes through an ecosystem. What is wrong?",
+      "back": "Energy is not **used up**. It spreads out as heat that is difficult to use again. The total energy is conserved, but its usefulness falls.",
+      "hint": "Where does the energy go?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f75sh6",
+      "kind": "concept",
+      "front": "How does negative feedback help a system stay stable?",
+      "back": "A change triggers effects that **oppose** it, pushing the system back towards its previous state. A higher pond level increases outflow, which lowers the level again.",
+      "hint": "What happens when the level rises?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0vx9wrp",
+      "kind": "formula",
+      "front": "How do you calculate the change in the amount stored in a system?",
+      "back": "$\\text{change in storage} = \\text{total inputs} - \\text{total outputs}$. Units are usually $\\mathrm{m^{3}}$ for water. A positive result means the storage is gaining.",
+      "hint": "Work out the inputs and outputs separately first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jto2ak",
+      "kind": "example",
+      "front": "A pond gains 40 m³ of rain and 160 m³ from a stream, and loses 55 m³ by evaporation and 125 m³ through an outlet in a week. What is the change in stored water?",
+      "back": "**+20 m³**. Inputs are $200\\,\\mathrm{m^{3}}$ and outputs are $180\\,\\mathrm{m^{3}}$, so the pond gains water and is not in steady state.",
+      "hint": "Add the inputs, then add the outputs.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rtuzjr",
+      "kind": "concept",
+      "front": "What is positive feedback, and why can it be dangerous?",
+      "back": "A change triggers effects that **reinforce** it. Melting ice exposes dark water, which absorbs more heat and melts more ice. Past a tipping point, returning to the old state can be very difficult.",
+      "hint": "Compare with negative feedback.",
+      "sectionId": "s5"
+    }
+  ]
+}

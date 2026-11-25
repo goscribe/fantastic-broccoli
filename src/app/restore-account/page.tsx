@@ -49,10 +49,10 @@ export default function RestoreAccountPage() {
       <AuthFigure
         src={
           status === "success"
-            ? "/design/cat2-trophy.png"
+            ? "/design/cat3-trophy.webp"
             : status === "error"
-              ? "/design/cat2-sleep.png"
-              : "/design/cat2-think.png"
+              ? "/design/cat3-sleep.webp"
+              : "/design/cat3-think.webp"
         }
       />
 
@@ -76,7 +76,7 @@ export default function RestoreAccountPage() {
       {status === "error" && (
         <div className="flex flex-col items-center gap-4">
           <Link href="/login">
-            <Button variant="outline" size="sm">
+            <Button>
               {t("misc.signIn")}
             </Button>
           </Link>

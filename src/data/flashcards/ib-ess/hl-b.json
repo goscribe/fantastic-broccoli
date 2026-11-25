@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "hl-b",
+  "topicCode": "HL.b",
+  "topicName": "Environmental economics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:50.866Z",
+  "cards": [
+    {
+      "id": "09b4kzq",
+      "kind": "term",
+      "front": "What is an externality?",
+      "back": "An **externality** is a cost or benefit of an economic activity that falls on people who are neither the buyers nor the sellers. Air pollution is a negative example.",
+      "hint": "Think about who pays, or benefits, without taking part in the trade.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mev35z",
+      "kind": "concept",
+      "front": "Why does a market with a negative externality make too much of a good?",
+      "back": "The **producer** ignores the external cost, so the price is lower than the social cost. A low price raises demand and output, so society gets more than is best for it.",
+      "hint": "Ask which costs the market price actually includes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06fpxz4",
+      "kind": "concept",
+      "front": "How does a pollution tax correct a negative externality?",
+      "back": "A **pollution tax** charges the producer for each unit of pollution. When the tax equals the external cost, the producer pays the full social cost, so the externality is internalised.",
+      "hint": "Compare the tax with the harm caused per unit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06ydlgp",
+      "kind": "formula",
+      "front": "How is social cost worked out from private cost and external cost?",
+      "back": "$\\mathrm{social\\,cost}=\\mathrm{private\\,cost}+\\mathrm{external\\,cost}$. All three are measured in currency units (cu). Private cost is what the producer pays; external cost is the harm borne by others.",
+      "hint": "Add the cost the producer pays to the harm others carry.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tmgrs4",
+      "kind": "term",
+      "front": "What does it mean to internalise an externality?",
+      "back": "Making the **producer** or consumer pay the external cost, so that the cost enters the price of the good.",
+      "hint": "Think about bringing an outside cost inside the price.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pm5hu1",
+      "kind": "term",
+      "front": "How does cap-and-trade limit pollution?",
+      "back": "The government sets a **cap** on total pollution and issues permits that firms can buy and sell. The cap fixes the quantity, and the market sets the price of a permit.",
+      "hint": "Which part is fixed by government, and which part varies?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n8z57h",
+      "kind": "concept",
+      "front": "When is regulation a better choice than a price-based tool?",
+      "back": "Regulation suits **severe or irreversible** harm, because a clear ban is safer than a price. Taxes and permits suit cases where firms differ widely in how cheaply they can cut pollution.",
+      "hint": "Consider how much risk the harm carries.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dh1rn9",
+      "kind": "formula",
+      "front": "What is the total tax a producer pays for a month, and what does each part mean?",
+      "back": "Total tax = tax per tonne $\\times$ tonnes made. Tax per tonne is in $\\mathrm{cu\\,tonne^{-1}}$ and tonnes made is in tonne, so the total is in cu.",
+      "hint": "Multiply the rate by the quantity produced.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p6gsbq",
+      "kind": "example",
+      "front": "A paper mill causes 4 cu of harm per tonne and makes 500 tonnes in a month. What total tax internalises the harm?",
+      "back": "**2000 cu** for the month. The tax is 4 cu per tonne, so 4 × 500 = 2000 cu.",
+      "hint": "Use the total tax formula with the harm per tonne.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1oi4kem",
+      "kind": "process",
+      "front": "What are the steps to set a tax that internalises an external cost?",
+      "back": "1) Find the **external cost per tonne**. 2) Set the tax per tonne equal to it. 3) Multiply the tax by tonnes made. 4) Give the answer in cu for the period.",
+      "hint": "Start with the harm, not the price.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "042ut7w",
+      "kind": "mistake",
+      "front": "A student says a tax fixes how much pollution is released. Why is this wrong?",
+      "back": "A **tax** fixes the price of pollution, not the amount released. A cap fixes the amount and lets the permit price vary.",
+      "hint": "Check which tool sets the price and which sets the quantity.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05kb2a2",
+      "kind": "mistake",
+      "front": "A student says a subsidy punishes polluters. What is wrong with this?",
+      "back": "A **subsidy** rewards good behaviour, such as a grant for solar panels, which lowers the price of a clean option. It does not punish bad behaviour.",
+      "hint": "Think about whether a subsidy adds a cost or removes one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17j56k2",
+      "kind": "concept",
+      "front": "What is one strength and one weakness of economic tools for sustainability?",
+      "back": "Strength: they give firms a **continuing reason** to cut pollution and raise public money. Weakness: natural capital is hard to value, so a wrongly set tax may change little.",
+      "hint": "Give both sides, then say when the tool works best.",
+      "sectionId": "s5"
+    }
+  ]
+}

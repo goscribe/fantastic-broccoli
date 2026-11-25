@@ -5,16 +5,19 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import {
   ArrowLeft,
+  BarChart3,
   CreditCard,
   DollarSign,
   FileText,
   Flame,
+  Gift,
   LayoutDashboard,
   Library,
+  MessageSquareText,
   ScrollText,
   Sparkles,
-  MessageSquareText,
   Star,
+  Trophy,
   Users,
 } from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
@@ -24,15 +27,18 @@ import { cn } from "@/lib/utils";
 
 const NAV = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
+  { href: "/admin/metrics", label: "Metrics", icon: BarChart3 },
   { href: "/admin/workspaces", label: "Workspaces", icon: Library },
   { href: "/admin/users", label: "Users", icon: Users },
   { href: "/admin/quality", label: "Quality", icon: Sparkles },
+  { href: "/admin/benchmark", label: "Benchmark", icon: Trophy },
   { href: "/admin/frustration", label: "Frustration", icon: Flame },
   { href: "/admin/ratings", label: "Ratings", icon: Star },
   { href: "/admin/feedback", label: "Feedback", icon: MessageSquareText },
   { href: "/admin/logs", label: "Activity logs", icon: ScrollText },
   { href: "/admin/invoices", label: "Invoices", icon: FileText },
   { href: "/admin/plans", label: "Plans", icon: CreditCard },
+  { href: "/admin/grants", label: "Free access", icon: Gift },
   { href: "/admin/costs", label: "Costs", icon: DollarSign },
 ];
 

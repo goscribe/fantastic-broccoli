@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-11",
+  "topicCode": "3.3.11",
+  "topicName": "Amines",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:46.960Z",
+  "cards": [
+    {
+      "id": "1yn9bjo",
+      "kind": "concept",
+      "front": "Why do amines act as bases?",
+      "back": "Because the **lone pair** on nitrogen can form a bond to a hydrogen ion, $\\mathrm{H^+}$, so an amine is a Brønsted–Lowry base that accepts a proton.",
+      "hint": "Think about what nitrogen's outer electrons can donate to an incoming proton.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xphmlg",
+      "kind": "process",
+      "front": "How is ethylamine made from bromoethane in the laboratory?",
+      "back": "Heat bromoethane with **excess ammonia** dissolved in ethanol in a sealed tube. Ammonia acts as a nucleophile and replaces the bromine, which is **nucleophilic substitution**.",
+      "hint": "Consider which species supplies the lone pair, and why the tube must be sealed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15sjm82",
+      "kind": "concept",
+      "front": "Why is phenylamine a weaker base than ethylamine?",
+      "back": "In phenylamine the **lone pair** on nitrogen is delocalised into the benzene ring, so it is less available to accept a proton. In ethylamine an alkyl group pushes electron density onto nitrogen instead.",
+      "hint": "Compare what happens to the nitrogen lone pair in each molecule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rc5j6t",
+      "kind": "term",
+      "front": "What is a primary amine?",
+      "back": "A **primary amine** is an amine in which the nitrogen atom is bonded to one carbon group and two hydrogen atoms, for example $\\mathrm{CH_3CH_2NH_2}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "169lnw5",
+      "kind": "term",
+      "front": "What is a nucleophile?",
+      "back": "A **nucleophile** is a species that donates a lone pair of electrons to form a new covalent bond.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0htmg71",
+      "kind": "mistake",
+      "front": "Why is 'amines have more electrons' not a valid reason for differences in base strength?",
+      "back": "Base strength depends on how **available** the lone pair on nitrogen is to accept a proton, not on the total number of electrons in the molecule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gwo2nn",
+      "kind": "process",
+      "front": "Which two methods reduce a nitrile to a primary amine?",
+      "back": "Use $\\mathrm{LiAlH_4}$ in dry ether, then dilute acid, or use **hydrogen gas** with a nickel catalyst. Both give a primary amine with the same number of carbon atoms.",
+      "hint": "Think about what the triple bond of the C≡N group becomes after it is reduced.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o8yq36",
+      "kind": "example",
+      "front": "How many [H] units are needed to reduce nitrobenzene to phenylamine?",
+      "back": "**6**: $\\mathrm{C_6H_5NO_2 + 6[H] \\rightarrow C_6H_5NH_2 + 2H_2O}$, where two oxygen atoms leave as water.",
+      "hint": "Count the oxygen atoms that must leave the nitrobenzene molecule.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0aiflqe",
+      "kind": "mistake",
+      "front": "How do you classify an amine, and why is this different from alcohols?",
+      "back": "Amines are classed by the number of **carbon groups bonded to nitrogen**. Alcohols are classed by the carbon atom that carries the hydroxyl group.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w0quwe",
+      "kind": "mistake",
+      "front": "Why does using only a small amount of ammonia give a mixture of amines?",
+      "back": "The amine formed is also a **nucleophile**, so it can attack more halogenoalkane and form secondary and tertiary amines. Excess ammonia reduces this.",
+      "hint": "Ask what the product itself can do once it has formed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1awyb4a",
+      "kind": "term",
+      "front": "What is a quaternary ammonium salt?",
+      "back": "A **quaternary ammonium salt** is an ionic compound containing a positively charged nitrogen atom bonded to four alkyl groups.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1uq9shc",
+      "kind": "concept",
+      "front": "What salt forms when ethylamine reacts with hydrochloric acid?",
+      "back": "**Ethylammonium chloride**, $\\mathrm{CH_3CH_2NH_3^+Cl^-}$, forms because the amine accepts a proton from the acid.",
+      "hint": "Think about the proton-accepting behaviour of the lone pair.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vs0n7p",
+      "kind": "example",
+      "front": "What organic product forms when ethylamine reacts with ethanoyl chloride?",
+      "back": "**N-ethylethanamide**, an amide, forms together with $\\mathrm{HCl}$: $\\mathrm{CH_3COCl + CH_3CH_2NH_2 \\rightarrow CH_3CONHCH_2CH_3 + HCl}$.",
+      "hint": "Amines also react as nucleophiles with acyl chlorides.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0e2x2y5",
+      "kind": "formula",
+      "front": "What does the equilibrium $\\mathrm{CH_3NH_2(aq) + H_2O(l) \\rightleftharpoons CH_3NH_3^+(aq) + OH^-(aq)}$ show about methylamine?",
+      "back": "The equilibrium lies well to the left, so methylamine is a **weak base**. The $\\mathrm{OH^-}$ ions made make the solution alkaline.",
+      "hint": "Look at which side of the equilibrium arrow is favoured.",
+      "sectionId": "s2"
+    }
+  ]
+}

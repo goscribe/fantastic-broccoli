@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-6-1",
+  "topicCode": "4.6.1",
+  "topicName": "Reproduction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:48.893Z",
+  "cards": [
+    {
+      "id": "17haq9n",
+      "kind": "concept",
+      "front": "Why must human gametes contain only 23 chromosomes rather than 46?",
+      "back": "Gametes carry **half** the chromosome number, so fertilisation (two gametes joining) restores 46 and the number does not double each generation.",
+      "hint": "Think about the chromosome count after two gametes join.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13fqkfz",
+      "kind": "example",
+      "front": "Both parents have genotype Bb, where B is dominant to b. What is the probability their child shows the recessive phenotype?",
+      "back": "$\\frac{1}{4}$, which is $25\\%$. Of the four boxes (BB, Bb, Bb, bb), only **bb** shows the recessive phenotype.",
+      "hint": "Work out which genotype produces the recessive phenotype before counting boxes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13r40ow",
+      "kind": "term",
+      "front": "What is a dominant allele?",
+      "back": "An allele that affects the **phenotype** when at least one copy is present.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j9kmlj",
+      "kind": "term",
+      "front": "What is asexual reproduction?",
+      "back": "Reproduction by **one parent** without gametes joining. Cells divide by mitosis, so offspring are genetically identical unless a mutation occurs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o2z7gt",
+      "kind": "mistake",
+      "front": "Why is it wrong to say asexual reproduction involves no cell division?",
+      "back": "Asexual reproduction does use **mitosis**. It only means that gametes do not join.",
+      "hint": "Compare which process is absent in asexual reproduction with the one that is present.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11oqng0",
+      "kind": "process",
+      "front": "What happens to chromosomes during meiosis, in order?",
+      "back": "The chromosomes are **copied**, then the cell divides twice, producing four gametes each with 23 chromosomes.",
+      "hint": "Start with what happens before the division.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o5tlec",
+      "kind": "term",
+      "front": "What is a gene?",
+      "back": "A **small section of DNA** on a chromosome that codes for a particular sequence of amino acids, which forms a specific protein.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eea8j8",
+      "kind": "term",
+      "front": "What is the genome?",
+      "back": "The **entire genetic material** of an organism.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "A **different form** of a gene. A person inherits one allele from each parent for many genes.",
+      "hint": "Think about how alleles relate to a single gene.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1femqev",
+      "kind": "mistake",
+      "front": "Why does dominant not mean more common?",
+      "back": "**Dominant** describes how an allele affects the phenotype when paired with another allele. It says nothing about how common the allele is.",
+      "hint": "Consider what dominance is describing: an effect, or a frequency?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ep2tde",
+      "kind": "process",
+      "front": "How do you build a Punnett square for a single-gene cross?",
+      "back": "Put one parent's **gametes** across the top and the other's down the side, then fill each box with the combined alleles.",
+      "hint": "Start by listing what alleles each parent's gametes can carry.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jes1he",
+      "kind": "mistake",
+      "front": "Why might a small family not match the predicted Punnett square ratio?",
+      "back": "Punnett squares give **probabilities**, not guaranteed results, so small families can differ from the predicted proportions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gdyw8m",
+      "kind": "concept",
+      "front": "Which gamete determines a baby's chromosomal sex, and why?",
+      "back": "The **sperm**, because the egg always carries X while a sperm carries either X or Y.",
+      "hint": "Compare what the egg carries with what the sperm can carry.",
+      "sectionId": "s5"
+    }
+  ]
+}

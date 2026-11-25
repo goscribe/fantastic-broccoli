@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/seo";
-import { ArtStage, CtaBand } from "@/components/graphics/marketing-art";
-import { GlowField } from "@/components/graphics/landing-art";
-import { testimonials } from "../data";
+import { absoluteUrl, landingOgImages } from "@/lib/seo";
+import { CtaBand, PageHero, PageSection } from "@/components/graphics/marketing-art";
 
 export const metadata: Metadata = {
   title: "About",
@@ -12,108 +10,45 @@ export const metadata: Metadata = {
   openGraph: {
     url: absoluteUrl("/landing/about"),
     title: "About Scribe",
+    images: landingOgImages,
   },
 };
 
 export default function AboutPage() {
-  const [featured, ...restQuotes] = testimonials;
-
   return (
     <>
-      <section className="relative overflow-hidden py-16 md:py-24">
-        <GlowField />
-        <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.1fr_0.9fr]">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-              The pre-scribed learning tool
-            </h1>
-            <p className="mt-5 text-lg text-muted-foreground text-pretty">
-              Scribe exists because re-reading is a trap. Highlighting a PDF feels
-              like work and doesn’t stick. We built a session that takes the
-              materials you already have and turns them into the activities that
-              actually move memory: recall, explanation, and marked practice.
-            </p>
-            <p className="mt-4 text-muted-foreground text-pretty">
-              Not a generic chatbot. Not a question bank from someone else’s
-              course. Your slides, your figures, your past papers — organised into
-              one study session you can finish.
-            </p>
+      <PageSection>
+        <PageHero
+          pose="trophy"
+          title="The pre-scribed learning tool"
+          lede="Scribe exists because re-reading is a trap. Highlighting a PDF feels like work and doesn’t stick. We built a session that takes the materials you already have and turns them into the activities that actually move memory: recall, explanation, and marked practice."
+        >
+          <p className="mt-4 max-w-xl text-read text-muted-foreground text-pretty">
+            Not a generic chatbot. Not a question bank from someone else’s course. Your slides, your figures, your past papers — organised into one study session you can finish.
+          </p>
+        </PageHero>
+      </PageSection>
+      <PageSection rule className="grid gap-8 sm:grid-cols-3 sm:gap-10">
+        {[
+          {
+            title: "Retention first",
+            body: "Every activity is there to make you retrieve something — not to summarise it again in nicer prose.",
+          },
+          {
+            title: "Your materials",
+            body: "Questions and readings are generated from what you upload, with citations back to the page they came from.",
+          },
+          {
+            title: "One sitting",
+            body: "A session is one sitting, not a dashboard of five products. Open it, work through it, done.",
+          },
+        ].map((item) => (
+          <div key={item.title}>
+            <h2 className="text-[19px] font-extrabold">{item.title}</h2>
+            <p className="mt-2 text-ui text-muted-foreground">{item.body}</p>
           </div>
-          <ArtStage
-            src="/design/props/trophy.png"
-            tint="rose"
-            side="right"
-            size="md"
-          />
-        </div>
-      </section>
-      <section className="border-y border-border bg-card/40 py-16">
-        <div className="mx-auto grid max-w-6xl gap-10 px-6 sm:grid-cols-3">
-          {[
-            {
-              title: "Retention first",
-              body: "Every activity is there to make you retrieve something — not to summarise it again in nicer prose.",
-            },
-            {
-              title: "Your materials",
-              body: "Questions and readings are generated from what you upload, with citations back to the page they came from.",
-            },
-            {
-              title: "One sitting",
-              body: "A session is one sitting, not a dashboard of five products. Open it, work through it, done.",
-            },
-          ].map((item) => (
-            <div key={item.title}>
-              <h2 className="text-base font-semibold">{item.title}</h2>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {item.body}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="py-16 md:py-20">
-        <div className="mx-auto max-w-6xl px-6">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            What studying with Scribe feels like
-          </h2>
-          <div className="mt-10 grid gap-5 lg:grid-cols-[1.15fr_0.85fr]">
-            <ArtStage
-              src="/design/props/pencil.png"
-              tint="sky"
-              side="right"
-              size="md"
-              className="p-6 sm:p-8"
-            >
-              <blockquote className="relative z-10 max-w-md">
-                <p className="text-base leading-relaxed text-pretty sm:text-lg">
-                  “{featured.quote}”
-                </p>
-                <footer className="mt-5">
-                  <p className="text-sm font-semibold">{featured.name}</p>
-                  <p className="text-[12px] text-muted-foreground">
-                    {featured.role}
-                  </p>
-                </footer>
-              </blockquote>
-            </ArtStage>
-            <ul className="grid gap-5">
-              {restQuotes.map((t) => (
-                <li
-                  key={t.name}
-                  className="rounded-2xl border border-border bg-card p-5"
-                >
-                  <p className="text-sm leading-relaxed text-pretty">
-                    “{t.quote}”
-                  </p>
-                  <p className="mt-3 text-sm font-semibold">{t.name}</p>
-                  <p className="text-[12px] text-muted-foreground">{t.role}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
+        ))}
+      </PageSection>
       <CtaBand />
     </>
   );

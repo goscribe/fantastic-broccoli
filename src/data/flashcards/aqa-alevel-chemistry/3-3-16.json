@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-3-16",
+  "topicCode": "3.3.16",
+  "topicName": "Chromatography",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:45.539Z",
+  "cards": [
+    {
+      "id": "0ftadek",
+      "kind": "concept",
+      "front": "Why do the components of a mixture separate during chromatography?",
+      "back": "Each component moves between the **stationary phase** and the **mobile phase**. Components held more strongly by the stationary phase spend more time fixed and move more slowly, so they separate.",
+      "hint": "Consider how much time each component spends in each phase.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qlhbns",
+      "kind": "formula",
+      "front": "What is the formula for the Rf value, and what does each symbol mean?",
+      "back": "$R_\\mathrm{f}=\\frac{d_\\mathrm{spot}}{d_\\mathrm{front}}$, where $d_\\mathrm{spot}$ is the distance moved by the spot and $d_\\mathrm{front}$ is the distance moved by the solvent front. Both are measured from the origin. The **Rf value has no units** and lies between 0 and 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04bshlp",
+      "kind": "process",
+      "front": "What are the steps for running a thin-layer chromatography plate, in order?",
+      "back": "Draw a pencil origin line and add a spot of sample. Stand the plate in a covered beaker with the solvent below the line. Remove it and mark the **solvent front** at once. Dry the plate and make the spots visible, for example with UV light.",
+      "hint": "Start with what goes onto the plate before it goes in the beaker.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e0i2bc",
+      "kind": "example",
+      "front": "A spot is 3.4 cm up a TLC plate. The origin is 1.0 cm and the solvent front is 7.4 cm, both measured from the bottom edge. What is the Rf value?",
+      "back": "$R_\\mathrm{f}\\approx0.38$, with no units. The distances from the origin are $d_\\mathrm{spot}=2.4\\,\\text{cm}$ and $d_\\mathrm{front}=6.4\\,\\text{cm}$, and $\\frac{2.4}{6.4}=0.375$.",
+      "hint": "Subtract the origin distance from each measurement first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w5kbjx",
+      "kind": "mistake",
+      "front": "Why must the origin line on a TLC plate be drawn in pencil rather than ink?",
+      "back": "Ink would dissolve in the solvent and run up the plate with the sample, spoiling the results. Pencil does not dissolve, so it stays in place.",
+      "hint": "Think about what the solvent does when it reaches the line.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "097y9tr",
+      "kind": "term",
+      "front": "What is adsorption in thin-layer chromatography?",
+      "back": "**Adsorption** is the attachment of molecules to the surface of a solid by weak attractions such as hydrogen bonds or van der Waals forces. Strongly adsorbed components travel a short distance up the plate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fzt0xb",
+      "kind": "mistake",
+      "front": "Why is measuring Rf distances from the bottom edge of the plate wrong?",
+      "back": "Both distances must be measured from the **origin line**, where the spot started. Measuring from the bottom edge adds an extra strip to each distance and gives an incorrect Rf value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ba7bb1",
+      "kind": "concept",
+      "front": "How do thin-layer and gas chromatography differ in the samples they suit and the results they give?",
+      "back": "TLC suits mixtures that dissolve in a solvent and gives spots with Rf values. GC suits volatile mixtures that can be vaporised and gives peaks with retention times.",
+      "hint": "Think about whether the sample is dissolved or turned into a gas.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1brwnne",
+      "kind": "process",
+      "front": "What happens to a sample from injection to detection in gas chromatography?",
+      "back": "The sample is injected into a heated oven and vaporised. An unreactive carrier gas sweeps it along a column, where components separate by their interaction with the stationary phase. A detector records each component as a peak.",
+      "hint": "Start from the moment the sample enters the machine.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v2n3sj",
+      "kind": "concept",
+      "front": "What is retention time in gas chromatography, and why do components differ in it?",
+      "back": "**Retention time** is the time taken for a component to travel from injection to the detector. Components that interact more strongly with the liquid stationary phase leave the column later, so they have longer retention times.",
+      "hint": "Compare how strongly each component is held in the column.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bzsbzh",
+      "kind": "term",
+      "front": "What does GC-MS do that gas chromatography alone cannot?",
+      "back": "In **GC-MS**, gas chromatography separates the components and a mass spectrometer identifies each one as it leaves the column. A peak alone does not say what the component is.",
+      "hint": "Consider what a peak tells you and what it does not.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1frldr8",
+      "kind": "example",
+      "front": "A gas chromatogram has three peaks with areas 12, 30 and 18 units, and the detector responds equally. What percentage is the largest component?",
+      "back": "50%. The total area is 60 units, and $\\frac{30}{60}\\times100=50\\%$.",
+      "hint": "Find the total peak area first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0blld4w",
+      "kind": "mistake",
+      "front": "Why does one spot or one peak not prove that a sample is pure?",
+      "back": "Two different compounds can share the same Rf value or retention time, so they give a single spot or peak. A second test, such as a different solvent or GC-MS, is needed to confirm purity.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1982n7f",
+      "kind": "concept",
+      "front": "How does column chromatography separate a mixture into pure portions?",
+      "back": "A glass tube is packed with a solid such as silica, and solvent runs down it carrying the mixture. Weakly adsorbed components emerge first and are collected separately, so a pure product can be isolated.",
+      "hint": "Think about which components are held least strongly by the solid.",
+      "sectionId": "s5"
+    }
+  ]
+}

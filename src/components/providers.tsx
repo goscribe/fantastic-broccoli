@@ -13,10 +13,39 @@ import { toastError } from "@/lib/toast";
 import { captureAttribution } from "@/lib/attribution";
 import { reportSignupConversionFromUrl } from "@/lib/gtag";
 import { captureInstallPrompt } from "@/lib/push-client";
+import { useNewUi } from "@/lib/new-ui";
+import { StudyLengthHost } from "@/components/session/study-length-host";
+import { StartCheckHost } from "@/components/session/start-check-host";
+import "@/app/design/design.css";
 
+/**
+ * Toasts. The app is light by design, so they are too (the old toaster
+ * followed the OS dark setting and showed a dark maroon error over a white
+ * page). One quiet white card in the app's own tokens for every kind of
+ * message; the icon carries the meaning, not a tinted background. They sit
+ * below the top bar so they never cover the search field. The legacy
+ * `?ui=old` screens keep their themed toaster.
+ */
 function ThemedToaster() {
   const { theme } = useTheme();
-  return <Toaster richColors closeButton position="top-center" theme={theme} />;
+  const newUi = useNewUi();
+  if (!newUi) return <Toaster richColors closeButton position="top-center" theme={theme} />;
+  return (
+    <Toaster
+      closeButton
+      position="top-center"
+      theme="light"
+      offset={{ top: 76 }}
+      mobileOffset={{ top: 72 }}
+      toastOptions={{
+        classNames: {
+          toast: "scribe-toast",
+          title: "scribe-toast__title",
+          description: "scribe-toast__description",
+        },
+      }}
+    />
+  );
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
@@ -51,6 +80,8 @@ export function Providers({ children }: { children: React.ReactNode }) {
         <QueryClientProvider client={queryClient}>
           {children}
           <ThemedToaster />
+          <StudyLengthHost />
+          <StartCheckHost />
         </QueryClientProvider>
       </I18nProvider>
     </ThemeProvider>

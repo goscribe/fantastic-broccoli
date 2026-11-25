@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-11",
+  "topicCode": "6.11",
+  "topicName": "Hydrogen fuel cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:40.627Z",
+  "cards": [
+    {
+      "id": "0unut20",
+      "kind": "process",
+      "front": "How does a hydrogen fuel cell produce an electric current, step by step?",
+      "back": "At the anode, each hydrogen molecule splits into hydrogen ions and electrons. The ions cross the membrane, while the electrons travel through an external wire as current. At the cathode they form water with oxygen.",
+      "hint": "Start where hydrogen enters and follow the particle that cannot cross the membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gl829r",
+      "kind": "formula",
+      "front": "Which balanced equation gives the overall reaction in a hydrogen fuel cell, including state symbols?",
+      "back": "$\\mathrm{2H_2(g) + O_2(g) \\to 2H_2O(l)}$: two hydrogen molecules react with one oxygen molecule to form two liquid water molecules. (g) means gas and (l) means liquid.",
+      "hint": "Add the anode and cathode equations and cancel the hydrogen ions and electrons.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n3wf2q",
+      "kind": "mistake",
+      "front": "Why does a hydrogen fuel cell not automatically cut carbon emissions overall?",
+      "back": "Hydrogen must be made, and most comes from natural gas, which releases carbon dioxide. Emissions stay low only if the hydrogen is made by **electrolysis** using renewable electricity.",
+      "hint": "Think about where the hydrogen comes from before it reaches the vehicle.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kjbbyf",
+      "kind": "term",
+      "front": "What is a fuel cell?",
+      "back": "A **fuel cell** is an electrochemical device that continuously converts the chemical energy of a fuel and an oxidizer into electricity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0j87yrc",
+      "kind": "concept",
+      "front": "Why does a fuel cell keep producing electricity when a battery runs flat?",
+      "back": "A fuel cell converts fuel energy directly and keeps working as long as fuel and oxygen are supplied. A battery stores a fixed amount of chemical energy.",
+      "hint": "Think about what limits how long each device can run.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zrk4cp",
+      "kind": "term",
+      "front": "What is an **electrolyte** in a hydrogen fuel cell?",
+      "back": "An **electrolyte** is a material that conducts ions but blocks electrons, so the electrons must travel through the external circuit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ezpitv",
+      "kind": "term",
+      "front": "Where does oxygen enter a hydrogen fuel cell, and what forms there?",
+      "back": "Oxygen enters at the **cathode**, where it meets hydrogen ions and electrons to form water.",
+      "hint": "Compare with the electrode where hydrogen enters.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14io1c3",
+      "kind": "concept",
+      "front": "Why do hydrogen fuel cells have higher efficiency than combustion engines?",
+      "back": "They do not burn fuel, so more of its energy becomes useful electricity instead of being lost as heat.",
+      "hint": "Think about what happens to energy in a combustion engine.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0087914",
+      "kind": "term",
+      "front": "What is electrolysis?",
+      "back": "**Electrolysis** uses electrical energy to drive a chemical reaction, such as splitting water into hydrogen and oxygen.",
+      "hint": "Think about what supplies the energy for the reaction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tvjmu1",
+      "kind": "concept",
+      "front": "Why is hydrogen called an energy carrier rather than an energy source?",
+      "back": "Hydrogen is rarely found free in nature, so it must be made using energy captured elsewhere. It moves that energy rather than providing it.",
+      "hint": "Think about whether hydrogen is found ready to use in nature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xjvs8h",
+      "kind": "concept",
+      "front": "What storage problem does hydrogen's low **energy density** by volume cause?",
+      "back": "A hydrogen tank holds less energy than a gasoline tank of the same size, so hydrogen must be compressed or cooled in strong, heavy, costly tanks.",
+      "hint": "Compare with a car's fuel tank.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ufzge3",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a hydrogen fuel cell works by burning hydrogen?",
+      "back": "Burning releases energy mostly as heat and a flame. A fuel cell controls the reaction so most energy becomes electricity, with only some heat.",
+      "hint": "Compare how a flame and a wire carry away the energy.",
+      "sectionId": "s3"
+    }
+  ]
+}

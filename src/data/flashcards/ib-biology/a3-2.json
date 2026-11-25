@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a3-2",
+  "topicCode": "A3.2",
+  "topicName": "Classification and cladistics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:44.396Z",
+  "cards": [
+    {
+      "id": "11dj6m2",
+      "kind": "concept",
+      "front": "What does a cladogram show, and what does each node represent?",
+      "back": "A **cladogram** is a branching diagram showing a hypothesis about evolutionary relationships. Each **node** is a common ancestor of the groups that follow it from that branch point.",
+      "hint": "Think about what the branch points stand for.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cojx02",
+      "kind": "concept",
+      "front": "How do you decide which two groups in a cladogram are most closely related?",
+      "back": "Trace their branches backwards until they meet. The meeting point is their **most recent common ancestor**. Groups whose branches meet at a more recent node are more closely related.",
+      "hint": "Follow the branches backwards, not the spacing of the tip labels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0io6wrx",
+      "kind": "mistake",
+      "front": "Does a tip drawn further to the right show a more evolved organism?",
+      "back": "No. Tip position and **branch length** in a simple cladogram do not show greater evolutionary progress or elapsed time. Read the shared nodes instead.",
+      "hint": "Check what the drawing actually encodes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1otoax3",
+      "kind": "term",
+      "front": "What is a taxon?",
+      "back": "A **taxon** is a named group of organisms, at any rank in a classification hierarchy.",
+      "hint": "Think of any named group of organisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19v2109",
+      "kind": "concept",
+      "front": "How do taxa form a hierarchy?",
+      "back": "Taxa are nested, so broad groups contain smaller ones. An organism belongs to one taxon at each rank, so its genus lies within its family and its family within its order.",
+      "hint": "Consider how a genus fits inside a family.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qd1g9u",
+      "kind": "process",
+      "front": "List the main taxonomic ranks from broadest to narrowest.",
+      "back": "**Domain**, kingdom, phylum, class, order, family, genus, species.",
+      "hint": "Eight ranks, starting with the broadest.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13oqxd0",
+      "kind": "term",
+      "front": "What is a clade?",
+      "back": "A **clade** is a common ancestor together with all its descendants shown in the diagram.",
+      "hint": "It is defined by one ancestor and everything descended from it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01qjwuc",
+      "kind": "concept",
+      "front": "What kinds of evidence do scientists use to infer the branches of a cladogram?",
+      "back": "Evidence such as **shared inherited features** and similarities in DNA sequences. A shared feature is especially useful when it arose in a common ancestor and was passed to its descendants.",
+      "hint": "Think about what is inherited.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01pbqma",
+      "kind": "concept",
+      "front": "Is a cladogram a fixed, final answer about evolution?",
+      "back": "No. A cladogram is a **hypothesis**, so it may change when new evidence becomes available.",
+      "hint": "Consider what new evidence could do to the diagram.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ljt0ny",
+      "kind": "term",
+      "front": "What are sister groups?",
+      "back": "Two groups whose branches split from the same **node**.",
+      "hint": "Look at where the two branches start.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04wsa5d",
+      "kind": "concept",
+      "front": "Does rotating branches around a node change which groups are related?",
+      "back": "No. Rotation changes where the tips appear on the page, but not which groups share each **node**. Moving tip labels without their branches would change the meaning.",
+      "hint": "Think about what a node records.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04px7ny",
+      "kind": "term",
+      "front": "What does branch length show in an unscaled cladogram, and what does it need before it can show time?",
+      "back": "Unscaled **branch length** does not show elapsed time or the amount of evolutionary change. A labelled scale is needed before distances can make claims about time.",
+      "hint": "Check whether the diagram has a labelled scale.",
+      "sectionId": "s4"
+    }
+  ]
+}

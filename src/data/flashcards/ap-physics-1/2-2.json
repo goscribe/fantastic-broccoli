@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Forces and free-body diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:21.869Z",
+  "cards": [
+    {
+      "id": "16o4w3q",
+      "kind": "term",
+      "front": "What is a force?",
+      "back": "A **force** is a push or pull that one object exerts on another. It is a vector, measured in newtons.",
+      "hint": "Think about pushing a shopping cart.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iwr86i",
+      "kind": "concept",
+      "front": "What does the net force on an object tell you about its motion?",
+      "back": "The **net force**, the vector sum of all forces, sets the acceleration. If the net force is zero, the velocity does not change.",
+      "hint": "Add the forces along each direction, with a positive direction chosen first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19ktn28",
+      "kind": "process",
+      "front": "What are the steps for drawing a free-body diagram?",
+      "back": "Draw the one chosen object as a dot or box. Add a labeled arrow starting on it for each force, including gravity, pointing in that force's direction.",
+      "hint": "Only forces acting on the chosen object belong on the diagram.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08ajt5r",
+      "kind": "term",
+      "front": "What is the normal force?",
+      "back": "The **normal force** is the contact force a surface exerts on an object. It acts perpendicular to the surface and away from it.",
+      "hint": "Set a book on a desk and think about the push from the desk.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1seiw5u",
+      "kind": "term",
+      "front": "What is friction?",
+      "back": "**Friction** is a contact force parallel to touching surfaces that opposes sliding, or attempted sliding, between them.",
+      "hint": "Slide a book along a desk and feel the drag.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vmz0ys",
+      "kind": "term",
+      "front": "What is tension?",
+      "back": "**Tension** is the pulling force a rope, string or cable exerts on an object. It is directed along the rope, away from the object.",
+      "hint": "Think about a rope pulling a crate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1duwo07",
+      "kind": "formula",
+      "front": "What is the formula for weight near Earth's surface, and what does each symbol mean?",
+      "back": "$F_g=mg$, where $F_g$ is weight in newtons, $m$ is mass in kilograms, and $g$ is 9.8 m/s^2. Weight points straight down toward Earth's center.",
+      "hint": "Weight is a force, so its unit is the newton.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x4so6x",
+      "kind": "mistake",
+      "front": "A student says a 5 kg object has the same weight on the Moon as on Earth. What is wrong?",
+      "back": "Weight depends on the local gravitational pull, so it changes from place to place. Mass stays the same everywhere, so the 5 kg mass is unchanged.",
+      "hint": "Mass and weight are different quantities.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0phzsgq",
+      "kind": "mistake",
+      "front": "Why is it wrong to draw a force the object exerts on another object in its free-body diagram?",
+      "back": "Only forces acting on the chosen object affect its motion. Forces it exerts on other things belong to those other objects, so do not draw them.",
+      "hint": "Ask who is pushing on whom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rukn1x",
+      "kind": "example",
+      "front": "Find the weight of a 6.0 kg object near Earth's surface.",
+      "back": "$F_g=mg=(6.0)(9.8)=58.8$ N, about 59 N, directed straight down.",
+      "hint": "Use $g$ = 9.8 m/s^2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z1khl2",
+      "kind": "example",
+      "front": "A sled is pushed east with 50 N while 15 N of friction acts west. What is the net force, and which way does it point?",
+      "back": "Taking east as positive, $50-15=35$ N. The net force is 35 N directed east, so the sled accelerates east.",
+      "hint": "Choose a positive direction first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wrr0yg",
+      "kind": "concept",
+      "front": "Why do the weight and normal force on a crate on a level floor cancel?",
+      "back": "They are balanced vertical forces that are equal in size and opposite in direction, so they add to zero. Only the unbalanced horizontal forces change the motion.",
+      "hint": "Check the vertical forces separately from the horizontal ones.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jplfqv",
+      "kind": "mistake",
+      "front": "A student claims a force can exist with no source object. Is this correct?",
+      "back": "No. **Every force needs a source object**. If you cannot name what exerts it, it is not a force.",
+      "hint": "Ask what is pushing or pulling.",
+      "sectionId": "s1"
+    }
+  ]
+}

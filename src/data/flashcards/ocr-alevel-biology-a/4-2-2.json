@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "4-2-2",
+  "topicCode": "4.2.2",
+  "topicName": "Classification and evolution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:24.258Z",
+  "cards": [
+    {
+      "id": "0xvu42e",
+      "kind": "concept",
+      "front": "Why can two organisms look alike yet not be closely related?",
+      "back": "Unrelated groups can evolve **similar features independently**, called convergent evolution, when they face similar selection pressures. Dolphins and sharks both have streamlined bodies without being close relatives.",
+      "hint": "Think about what similar conditions can do to unrelated groups.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sn5s72",
+      "kind": "process",
+      "front": "What are the steps by which natural selection changes a population?",
+      "back": "1) **Mutation** creates a new allele at random. 2) Individuals carrying alleles that aid survival or reproduction are favoured by selection pressures. 3) They leave more offspring, so those alleles become more common.",
+      "hint": "Start with where new alleles come from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0e1zgoz",
+      "kind": "concept",
+      "front": "Why is reproductive isolation essential for a new species to form?",
+      "back": "**Reproductive isolation** stops two populations interbreeding, so their alleles no longer mix. Their allele frequencies can then diverge until they are separate species.",
+      "hint": "Consider what gene flow between two populations would do.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1trwkn6",
+      "kind": "term",
+      "front": "What is the taxonomic hierarchy?",
+      "back": "A series of **ranks** from largest to smallest, each nested within the one above. The ranks are domain, kingdom, phylum, class, order, family, genus and species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gxzuop",
+      "kind": "term",
+      "front": "What is a binomial name made of?",
+      "back": "Two Latin words: the **genus** name first, then the species name, as in Homo sapiens.",
+      "hint": "Think about how a species is written in print.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hmga4s",
+      "kind": "term",
+      "front": "Which three domains of life are recognised?",
+      "back": "**Archaea**, Bacteria and Eukarya.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0czwvgp",
+      "kind": "term",
+      "front": "What does morphology study, and what can it be used on?",
+      "back": "**Morphology** is the study of the form and structure of organisms. It works on both fossils and living species.",
+      "hint": "Compare it with what a DNA test would measure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10xl562",
+      "kind": "mistake",
+      "front": "A student says DNA evidence proves relationships with certainty. What is wrong with this?",
+      "back": "DNA is more **objective** and gives a lot of data, but it still has limits, such as needing DNA samples. Say it is more objective, not that it is always right.",
+      "hint": "Compare its strengths with its limitations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17k9nl2",
+      "kind": "process",
+      "front": "How do you read a phylogenetic tree to judge how closely two groups are related?",
+      "back": "Read from the **tips** towards the root. Find the node that joins the two groups, then judge how recent it is. A recent node means a closer relationship.",
+      "hint": "Start at the ends of the branches, where the groups are shown.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gifpfk",
+      "kind": "mistake",
+      "front": "A student says two tips printed next to each other on a tree must be closely related. Why is this wrong?",
+      "back": "The **order of tips** does not show relatedness. Rotating branches at a node changes the picture but not the relationships. Judge relatedness by where groups join.",
+      "hint": "Where on the tree should you look instead?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vz6awu",
+      "kind": "concept",
+      "front": "Why is a phylogenetic tree best treated as a proposal rather than a fixed fact?",
+      "back": "A tree shows **proposed** relationships. New evidence can change where branches are placed.",
+      "hint": "Think about what could make a scientist redraw the tree.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09malp0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that individuals evolve?",
+      "back": "**Populations** evolve, because allele frequencies change across generations. An individual's alleles do not change over its lifetime.",
+      "hint": "Think about what is measured across generations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a1ubc7",
+      "kind": "process",
+      "front": "What are the steps of allopatric speciation?",
+      "back": "1) **Geographical isolation** separates a population. 2) The two populations face different selection pressures. 3) Their allele frequencies diverge. 4) They become reproductively isolated.",
+      "hint": "Start with what physically separates the population.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lbm81s",
+      "kind": "concept",
+      "front": "How does sympatric speciation differ from allopatric speciation?",
+      "back": "**Sympatric** speciation happens without geographical separation. Isolation arises from things like different breeding seasons, courtship behaviour or, in plants, a change in chromosome number.",
+      "hint": "Think about whether the populations are apart or in the same place.",
+      "sectionId": "s5"
+    }
+  ]
+}

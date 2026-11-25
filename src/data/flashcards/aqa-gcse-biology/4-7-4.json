@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-7-4",
+  "topicCode": "4.7.4",
+  "topicName": "Trophic levels",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:53.752Z",
+  "cards": [
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is an organism's feeding position in a food chain. Producers form the first trophic level.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i0r1s2",
+      "kind": "concept",
+      "front": "Why does biomass usually decrease at each higher trophic level?",
+      "back": "Not all eaten material becomes new biomass. Some is lost as **waste** and faeces, and respiration uses material, leaving less to build the next level.",
+      "hint": "Think about what happens to food after an animal takes it in.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qkbuyw",
+      "kind": "formula",
+      "front": "What is the formula for transfer efficiency, and what does the answer show?",
+      "back": "$\\text{efficiency}=\\frac{\\text{biomass at higher level}}{\\text{biomass at lower level}}\\times100\\text{\\%}$. It is the **percentage** of biomass passed to the next level.",
+      "hint": "Which level's biomass goes on the top line?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04om7kl",
+      "kind": "term",
+      "front": "What is a producer?",
+      "back": "A **producer** is an organism that makes its own food, usually by photosynthesis using light energy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16q4txt",
+      "kind": "term",
+      "front": "What is a primary consumer?",
+      "back": "A **primary consumer** is an organism that eats producers and occupies the second trophic level.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ry9fv9",
+      "kind": "concept",
+      "front": "Why is dry mass used when measuring biomass?",
+      "back": "**Dry mass** excludes water, whose amount varies between organisms, so biomass values can be compared fairly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l7tnwu",
+      "kind": "term",
+      "front": "What is a pyramid of biomass?",
+      "back": "A **pyramid of biomass** is a diagram of stacked bars showing the biomass at each trophic level, with producers at the bottom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v2kyjz",
+      "kind": "process",
+      "front": "What are the steps to draw a pyramid of biomass?",
+      "back": "1) Put producers at the bottom and stack levels in feeding order. 2) Use one consistent width scale for all bars. 3) Keep bar heights equal, centre the bars and label them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u7u7s4",
+      "kind": "example",
+      "front": "Producer biomass is 800 g m^-2 and primary consumer biomass is 80 g m^-2. What is the transfer efficiency?",
+      "back": "**10%**. Working: $\\frac{80}{800}\\times100\\text{\\%}=10\\text{\\%}$.",
+      "hint": "Divide the higher level's biomass by the lower level's biomass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mjn3ck",
+      "kind": "mistake",
+      "front": "A student says food-chain arrows point from the consumer to the food. Why is this wrong?",
+      "back": "Arrows point from food to feeder. They show the direction in which **biomass** passes along the chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "11dwxkf",
+      "kind": "mistake",
+      "front": "Why is it wrong to say biomass is lost as heat during respiration?",
+      "back": "Respiration does release heat, but the material itself leaves the organism as **carbon dioxide and water**, not as heat.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ko7xh5",
+      "kind": "mistake",
+      "front": "Why can't transfer efficiency be calculated from the first and last levels of a longer chain?",
+      "back": "The calculation only compares two adjacent trophic levels. Using non-adjacent levels does not give the transfer efficiency between levels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "115dk02",
+      "kind": "concept",
+      "front": "What must be true of the two biomass values used in a transfer efficiency calculation?",
+      "back": "They must use the **same units** and cover **comparable areas**, so the percentage is meaningful.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "115nvsf",
+      "kind": "concept",
+      "front": "Why must every bar in a pyramid of biomass be the same height?",
+      "back": "Only the **width** of each bar represents biomass, so equal heights keep width as the only changing measure.",
+      "sectionId": "s2"
+    }
+  ]
+}

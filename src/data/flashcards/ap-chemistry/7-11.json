@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "7-11",
+  "topicCode": "7.11",
+  "topicName": "Introduction to solubility equilibria",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:08.924Z",
+  "cards": [
+    {
+      "id": "0snlgcd",
+      "kind": "concept",
+      "front": "What does solubility equilibrium mean for a slightly soluble salt in a closed system?",
+      "back": "**Equal rates**: ions leave the solid and rejoin it at the same rate, so ion concentrations stay constant while both processes keep going.",
+      "hint": "Think about what stays constant and what keeps happening.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "067e186",
+      "kind": "formula",
+      "front": "Write the Ksp expression for AgCl(s) in equilibrium with Ag+(aq) and Cl-(aq).",
+      "back": "$K_{sp}=[Ag^+][Cl^-]$. The **solid is left out** of the expression, and coefficients of 1 give no exponents.",
+      "hint": "Leave out the solid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u1g466",
+      "kind": "mistake",
+      "front": "Does a larger Ksp always mean greater molar solubility?",
+      "back": "**No**. The comparison only holds for salts with the same dissolution stoichiometry. Different ion ratios link Ksp to molar solubility in different ways.",
+      "hint": "Compare how many ions each salt produces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yg5dnh",
+      "kind": "term",
+      "front": "What is a slightly soluble salt?",
+      "back": "A **slightly soluble salt** dissolves only to a limited extent in water and can leave undissolved solid behind.",
+      "hint": "Focus on the limited extent.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jxdc6s",
+      "kind": "process",
+      "front": "What are the steps for writing a Ksp expression from a salt's dissolution?",
+      "back": "1) Write the balanced dissolution equation. 2) Multiply the equilibrium ion concentrations, raising each to its coefficient. 3) Leave out the solid.",
+      "hint": "Start with the balanced equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ey13tl",
+      "kind": "example",
+      "front": "A saturated CaF2 solution has [Ca2+] = 2.0 × 10^-4 and [F-] = 4.0 × 10^-4 mol/L. What is Ksp?",
+      "back": "$K_{sp}=3.2 \\times 10^{-11}$. Use $K_{sp}=[Ca^{2+}][F^-]^2$, squaring the fluoride concentration because of its coefficient of 2.",
+      "hint": "Which ion gets the exponent?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1p055a0",
+      "kind": "term",
+      "front": "What is the solubility product constant?",
+      "back": "The **solubility product constant**, Ksp, is the equilibrium constant for a solid salt dissolving into its aqueous ions.",
+      "hint": "It is an equilibrium constant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00zxlmj",
+      "kind": "term",
+      "front": "What is molar solubility?",
+      "back": "**Molar solubility** is the amount of a substance that dissolves per liter of saturated solution at a given temperature.",
+      "hint": "Think per liter.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cigadu",
+      "kind": "term",
+      "front": "What is dissolution stoichiometry?",
+      "back": "The **ion ratio** specified by a balanced salt-dissolution equation, such as two fluoride ions for each calcium ion in CaF2.",
+      "hint": "Read the coefficients of the balanced equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1txym6l",
+      "kind": "formula",
+      "front": "For a one-to-two salt with no other ion sources and molar solubility s, what is Ksp in terms of s?",
+      "back": "$K_{sp}=4s^3$. The cation is s and each of the two anions is 2s, so $K_{sp}=s(2s)^2$.",
+      "hint": "Each anion concentration is 2s.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16olzmv",
+      "kind": "formula",
+      "front": "For a one-to-one salt with molar solubility s, what is Ksp in terms of s?",
+      "back": "$K_{sp}=s^2$. Both ions have concentration s at equilibrium.",
+      "hint": "Both ion concentrations equal s.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0voq7ve",
+      "kind": "mistake",
+      "front": "If you add more solid to a saturated solution, do the equilibrium ion concentrations go up?",
+      "back": "**No**. A saturated solution already holds the equilibrium maximum dissolved amount, so extra solid leaves the ion concentrations unchanged.",
+      "hint": "What is already at its maximum?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ciu6g7",
+      "kind": "example",
+      "front": "A saturated AgCl solution has [Ag+] = [Cl-] = 1.0 × 10^-5 mol/L. What is Ksp?",
+      "back": "$K_{sp}=1.0 \\times 10^{-10}$. Multiply $[Ag^+][Cl^-]=(1.0 \\times 10^{-5})^2$.",
+      "hint": "Multiply the two ion concentrations.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-6",
+  "topicCode": "3.1.6",
+  "topicName": "Equilibria and Kc",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:11.365Z",
+  "cards": [
+    {
+      "id": "03b4xh2",
+      "kind": "term",
+      "front": "What is dynamic equilibrium in a closed system?",
+      "back": "**Dynamic equilibrium** is when the forward and reverse reactions continue at equal rates, so the concentrations of all species stay constant. The reactions have not stopped; the mixture only looks unchanged.",
+      "hint": "Think about what the mixture looks like compared with what the reactions are doing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ea8ovh",
+      "kind": "concept",
+      "front": "What does Le Chatelier's principle predict when a system at equilibrium is disturbed?",
+      "back": "The equilibrium **shifts** in the direction that opposes the change, moving the position of equilibrium until the forward and reverse rates match again. It gives only the direction, not the size of the shift.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0piumb1",
+      "kind": "concept",
+      "front": "Why is $K_\\mathrm{c}$ needed when Le Chatelier's principle only gives the direction of a shift?",
+      "back": "$K_\\mathrm{c}$ gives a **number** showing how far a reaction goes, using equilibrium concentrations raised to the powers of their coefficients. Its value is fixed at a given temperature.",
+      "hint": "Consider what a direction tells you that a number would add.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xt1tlu",
+      "kind": "formula",
+      "front": "What do the square brackets in $K_\\mathrm{c}$ mean, and what units do they carry?",
+      "back": "Square brackets show the **equilibrium concentration** of a species, in $\\mathrm{mol\\,dm^{-3}}$, measured at one temperature.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0swct3c",
+      "kind": "term",
+      "front": "What is a closed system in the context of equilibrium?",
+      "back": "A **closed system** is one where no substances can enter or leave, although energy can still be transferred.",
+      "hint": "Think about what the sealed gas container prevents.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "024e1m8",
+      "kind": "process",
+      "front": "What are the steps to calculate $K_\\mathrm{c}$ from equilibrium amounts given in moles?",
+      "back": "1) Divide each amount by the volume in $\\mathrm{dm^3}$ to get **concentrations**. 2) Write the $K_\\mathrm{c}$ expression. 3) Substitute only equilibrium concentrations and evaluate.",
+      "hint": "Start with the units the expression needs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "070tvaj",
+      "kind": "example",
+      "front": "At equilibrium, $0.080\\,\\mathrm{mol}$ $\\mathrm{N_2O_4}$ and $0.24\\,\\mathrm{mol}$ $\\mathrm{NO_2}$ fill $2.0\\,\\mathrm{dm^3}$. What is $K_\\mathrm{c}$?",
+      "back": "$K_\\mathrm{c}=0.36\\,\\mathrm{mol\\,dm^{-3}}$, from $\\frac{(0.12)^2}{0.040}$ using concentrations of $0.040$ and $0.12\\,\\mathrm{mol\\,dm^{-3}}$ for $\\mathrm{N_2O_4(g)\\rightleftharpoons 2NO_2(g)}$.",
+      "hint": "Convert both amounts to concentrations before writing the expression.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03xvo67",
+      "kind": "mistake",
+      "front": "Why is it wrong to put initial amounts in moles into the $K_\\mathrm{c}$ expression?",
+      "back": "The expression uses only **equilibrium concentrations**. Initial amounts or moles give the wrong value unless the volume cancels out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1le9pf4",
+      "kind": "mistake",
+      "front": "A student says a small $K_\\mathrm{c}$ means the reaction is slow. What is wrong with this?",
+      "back": "$K_\\mathrm{c}$ describes the **position** of equilibrium, meaning how much product is present, not the rate. Rate describes how fast equilibrium is reached.",
+      "hint": "Compare what $K_\\mathrm{c}$ measures with what rate measures.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17roe4i",
+      "kind": "concept",
+      "front": "How does $K_\\mathrm{c}$ change when an exothermic equilibrium is heated, and why?",
+      "back": "$K_\\mathrm{c}$ **falls**. The equilibrium shifts left, favouring the endothermic reverse reaction, so product concentrations fall.",
+      "hint": "Which direction does heating favour in an exothermic reaction?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05qj31g",
+      "kind": "concept",
+      "front": "Which changes shift the position of equilibrium but leave $K_\\mathrm{c}$ unchanged?",
+      "back": "Changes in **concentration** and **pressure** shift the position but do not change $K_\\mathrm{c}$. Only temperature changes its value.",
+      "hint": "Think about which single change alters the energy of the reaction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14tyqpf",
+      "kind": "concept",
+      "front": "Why does adding a catalyst leave the position of equilibrium unchanged?",
+      "back": "A catalyst speeds up the forward and reverse reactions **equally**, so the rates stay matched. Equilibrium is only reached sooner.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qekipd",
+      "kind": "example",
+      "front": "Why does raising the pressure shift the Haber equilibrium $\\mathrm{N_2(g)+3H_2(g)\\rightleftharpoons 2NH_3(g)}$ to the right?",
+      "back": "Four moles of gas on the left become two on the right. The shift to fewer gas moles opposes the pressure rise.",
+      "hint": "Count the moles of gas on each side of the equation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1id7v97",
+      "kind": "concept",
+      "front": "Why does industry use a moderate temperature for the Haber process rather than a low one?",
+      "back": "A low temperature gives a higher yield but the rate is too slow. A moderate temperature with a catalyst gives an acceptable yield in a reasonable time.",
+      "hint": "Consider both the yield and how quickly equilibrium is reached.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-1-2",
+  "topicCode": "5.1.2",
+  "topicName": "The periodic table",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:45.504Z",
+  "cards": [
+    {
+      "id": "1ry4tlp",
+      "kind": "concept",
+      "front": "What determines the order of elements in the periodic table, and what is atomic number?",
+      "back": "Elements are arranged by increasing **atomic number**, the number of protons in an atom's nucleus. Atomic number, not atomic mass, determines an element's position.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c84ajt",
+      "kind": "concept",
+      "front": "Why do elements in the same group have similar chemical properties?",
+      "back": "They have the same number of **outer-shell electrons**, and these electrons influence how an element reacts.",
+      "hint": "Think about what stays the same down a column.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ddvnkt",
+      "kind": "concept",
+      "front": "Where are most metals and most non-metals found in the periodic table?",
+      "back": "Most **metals** lie on the left-hand side and in the centre; most **non-metals** lie towards the right-hand side.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ej9slj",
+      "kind": "term",
+      "front": "What is a chemical symbol?",
+      "back": "The **one- or two-letter abbreviation** used to represent an element. The first letter is always a capital and any second letter is lower case.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0n5ic2m",
+      "kind": "example",
+      "front": "What are the chemical symbol and atomic number of sodium?",
+      "back": "The symbol is $\\text{Na}$ and the atomic number is $11$.",
+      "hint": "Find sodium's name in the table and read across its entry.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jccg86",
+      "kind": "mistake",
+      "front": "A student writes the symbol for sodium as $\\text{NA}$. What is wrong with this?",
+      "back": "The **second letter must be lower case**, so the correct symbol is $\\text{Na}$. Only the first letter is a capital.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "171f2gl",
+      "kind": "term",
+      "front": "What is the difference between a group and a period?",
+      "back": "A **group** is a vertical column whose elements have the same number of outer-shell electrons; a **period** is a horizontal row whose elements have the same number of occupied electron shells.",
+      "hint": "Consider which direction each one runs across the table.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02uft9x",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that elements in the same period have similar chemical properties?",
+      "back": "Similar chemical properties belong to **groups**, not periods. Across a period the outer-shell electron numbers change, so properties differ.",
+      "hint": "Consider which of the two patterns produces similar properties.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i69woc",
+      "kind": "term",
+      "front": "What are metals?",
+      "back": "Elements that generally **conduct heat and electricity well** and can often be bent into shape. Many are also shiny.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16aymgq",
+      "kind": "term",
+      "front": "What are non-metals?",
+      "back": "Elements that generally **conduct heat and electricity poorly**. They often have lower melting points than metals, though there are exceptions.",
+      "hint": "Compare with the properties of metals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09n9drx",
+      "kind": "mistake",
+      "front": "Why is hydrogen not a metal, even though it sits above Group 1?",
+      "back": "Hydrogen is a **non-metal** despite its position above Group 1. Position is a useful starting point, but it is the exception here.",
+      "hint": "Think about where the reactive metals in Group 1 are found.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0au07ku",
+      "kind": "concept",
+      "front": "How do Group 1 metals such as lithium and sodium react with water?",
+      "back": "They form a **metal hydroxide** and **hydrogen**. Group 1 contains reactive metals.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09t6vmn",
+      "kind": "concept",
+      "front": "How do Group 7 elements such as chlorine and bromine react with metals?",
+      "back": "They form **salts**. Group 7 contains reactive non-metals, also called halogens.",
+      "hint": "Consider what type of element Group 7 contains.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fk8edh",
+      "kind": "concept",
+      "front": "Why are the Group 0 gases such as helium and neon so unreactive?",
+      "back": "Their **outer electron shells are full**, so they have very little tendency to react.",
+      "hint": "Compare with the reason elements in the same group behave alike.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "3-1-1",
+  "topicCode": "3.1.1",
+  "topicName": "Exchange surfaces",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:02.295Z",
+  "cards": [
+    {
+      "id": "17y3iyd",
+      "kind": "concept",
+      "front": "Why does the surface area to volume ratio fall as an organism gets bigger?",
+      "back": "Its **volume** grows faster than its surface area. Demand for oxygen rises with volume, but supply depends on surface area, so the ratio falls.",
+      "hint": "Think about how a cube's outer area and its contents change as the side length grows.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "154kwfr",
+      "kind": "concept",
+      "front": "What four features do efficient exchange surfaces share?",
+      "back": "A large surface area, a thin barrier, a good blood supply, and ventilation. Each one helps keep diffusion fast and the concentration gradient steep.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1e27i1x",
+      "kind": "concept",
+      "front": "Why do large animals need specialised exchange surfaces when single-celled organisms do not?",
+      "back": "Large animals have a small surface area to volume ratio and cells deep inside are far from the surface, so diffusion is too slow. A single cell has short diffusion distances.",
+      "hint": "Compare the diffusion distance to the innermost cells in each type of organism.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17x5o6j",
+      "kind": "term",
+      "front": "What is an exchange surface?",
+      "back": "A **boundary** across which substances enter or leave an organism, such as the cell surface membrane or the lungs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dkoql1",
+      "kind": "term",
+      "front": "What is the surface area to volume ratio?",
+      "back": "A comparison of a shape's **outer area** with the space it contains, found by dividing surface area by volume.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tgjszd",
+      "kind": "formula",
+      "front": "What is the formula for the surface area of a cube with side length $l$?",
+      "back": "Surface area $=6\\times l^2$, where $l$ is the side length in $\\mathrm{cm}$. The answer is in $\\mathrm{cm^2}$.",
+      "hint": "Count how many square faces a cube has.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02am6mx",
+      "kind": "example",
+      "front": "A cube-shaped organism has sides of 4.0 cm. What is its surface area to volume ratio?",
+      "back": "**1.5:1**. Surface area is $96\\,\\mathrm{cm^2}$ and volume is $64\\,\\mathrm{cm^3}$, so $96\\div64=1.5$.",
+      "hint": "Work out each measurement separately before dividing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06j7e7w",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a larger organism has a better exchange surface because it has more surface area in total?",
+      "back": "Its surface area to volume ratio is **smaller**, because volume grows faster than surface area. Total area is not what decides exchange efficiency.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ir0avk",
+      "kind": "process",
+      "front": "How does oxygen get from the air to the cells of a large animal?",
+      "back": "Oxygen diffuses across a specialised exchange surface such as the lungs. Blood then carries it between that surface and the cells.",
+      "hint": "Trace the route from outside air to cells deep in the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rd4syx",
+      "kind": "concept",
+      "front": "Why does a thin barrier make gas exchange faster?",
+      "back": "A thin barrier keeps the **diffusion distance** short, so gases cross more quickly.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1qjbzjm",
+      "kind": "concept",
+      "front": "How does ventilation keep diffusion fast at an exchange surface?",
+      "back": "It moves fresh air or water over the surface, keeping the outside concentration high so the **concentration gradient** stays steep.",
+      "hint": "Think about what would happen to the gas concentration at the surface if nothing moved it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1aiedsd",
+      "kind": "term",
+      "front": "What are alveoli in the lungs?",
+      "back": "**Alveoli** are tiny air sacs where gas exchange takes place. Their walls are one cell thick, and capillaries surround each one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19kjgi9",
+      "kind": "term",
+      "front": "What is the diffusion distance?",
+      "back": "The **distance** particles must travel to move from one side of an exchange surface to where they are needed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07tpui6",
+      "kind": "term",
+      "front": "What is diffusion in gas exchange?",
+      "back": "The **net movement** of particles down a concentration gradient. It is fast over short distances and slow over long ones.",
+      "sectionId": "s1"
+    }
+  ]
+}

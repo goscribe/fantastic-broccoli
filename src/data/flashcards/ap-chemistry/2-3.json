@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Structure of ionic solids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:18.647Z",
+  "cards": [
+    {
+      "id": "013v301",
+      "kind": "concept",
+      "front": "What is an ionic lattice?",
+      "back": "A **repeating three-dimensional arrangement** of cations and anions, where each ion has nearby ions of opposite charge. The attractions extend through the whole solid, so there are no separate molecules.",
+      "hint": "Ask whether the solid contains separate molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i8qx9z",
+      "kind": "concept",
+      "front": "Why do ionic solids generally have high melting points?",
+      "back": "**Electrostatic attraction** between many oppositely charged ions must be overcome so the ions can move past one another. The attractions act throughout the lattice, so melting takes a lot of energy.",
+      "hint": "Think about how many attractions must be broken.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xgtan9",
+      "kind": "concept",
+      "front": "Why can a molten ionic compound conduct electricity when the solid cannot?",
+      "back": "In the solid, ions are fixed in lattice positions and cannot flow. In the melt, the lattice breaks apart enough for **mobile ions** to carry charge toward opposite electrodes.",
+      "hint": "Compare whether the ions are free to move.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04hgdnm",
+      "kind": "term",
+      "front": "What is coordination number?",
+      "back": "The **number of nearest neighbors** around an ion in a crystal. It depends on the lattice structure and need not match the compound's formula ratio. In solid sodium chloride, each ion has six nearest neighbors.",
+      "hint": "Count the closest ions, not the formula ratio.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rted8k",
+      "kind": "concept",
+      "front": "What does lattice energy describe?",
+      "back": "The **energy change** linked to forming an ionic lattice from gaseous ions or separating it back into gaseous ions. Stronger attractions generally come from larger charges and smaller distances.",
+      "hint": "Think about forming versus separating the lattice.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sa45v0",
+      "kind": "process",
+      "front": "Explain, step by step, why an ionic crystal is brittle.",
+      "back": "1) Enough **stress** shifts one layer of ions relative to another. 2) Like-charged ions become nearest neighbors across the shifted layers. 3) Their **repulsion** splits the crystal along a plane, so it fractures instead of bending.",
+      "hint": "Three steps: shift, like charges meet, repulsion splits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0goaq2p",
+      "kind": "term",
+      "front": "What is an electrolyte?",
+      "back": "A **substance that produces mobile ions** when it is dissolved in water or melted. Such a substance can carry an electric current.",
+      "hint": "Think about what lets a solution conduct.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fjky5p",
+      "kind": "term",
+      "front": "What is repulsion in the context of ionic solids?",
+      "back": "The **force that pushes particles with like electric charges apart**. It is the opposite of electrostatic attraction.",
+      "hint": "Consider what happens to two positive ions near each other.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qzviwk",
+      "kind": "term",
+      "front": "What is stress in the context of a solid?",
+      "back": "**Force applied to a material**, measured relative to the area over which the force acts.",
+      "hint": "Think of force spread over an area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g0sytx",
+      "kind": "mistake",
+      "front": "A student says a high melting point means each cation has one very strong bond to one anion. What is wrong?",
+      "back": "**Attractions act in many directions** across the lattice, not as single bonds between pairs of ions. The high melting point reflects many attractions that must be overcome together.",
+      "hint": "Think about how many neighbors each ion has.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ouexbs",
+      "kind": "mistake",
+      "front": "A student says that melting turns the ions into neutral atoms. Is this correct?",
+      "back": "No. Melting does not neutralize the ions. The particles **remain charged** and can carry current in the melt.",
+      "hint": "Think about what melting actually changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vb001h",
+      "kind": "mistake",
+      "front": "A student says electrons are the moving charge carriers in a molten ionic compound. Is this correct?",
+      "back": "No. The **mobile ions** carry the current in a melt. Electrons are not the moving charge carriers here.",
+      "hint": "Ask which particles actually move through the melt.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v7latm",
+      "kind": "concept",
+      "front": "Why does an insoluble ionic solid placed in water not form a conducting solution?",
+      "back": "It does not dissolve, so **no ions are released** into the water to carry charge. A conducting solution needs mobile ions.",
+      "hint": "Dissolving is what releases ions.",
+      "sectionId": "s4"
+    }
+  ]
+}

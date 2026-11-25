@@ -1,11 +1,12 @@
 "use client";
+import { buttonClass } from "@/components/ui/button";
 import { useRef, useState } from "react";
 import { useIsMobile } from "@/lib/use-mobile";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarDays, Loader2, Settings2, Upload, X } from "lucide-react";
+import { Loader2, Settings2, Upload, X } from "lucide-react";
 import { PlanSetupWizard } from "@/components/learn/plan-setup-wizard";
 import {
   fetchPlannerMessages,
@@ -16,7 +17,7 @@ import {
   type PlannerSlot,
 } from "@/lib/api/planner";
 import { analyzeFiles, detectSections, uploadFiles } from "@/lib/api/materials";
-import { createStudySession } from "@/lib/api/study";
+import { createStudySession, createStudySessionQuietly } from "@/lib/api/study";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { accentForId } from "@/lib/accent-palette";
@@ -80,7 +81,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
       const { sections } = await detectSections(workspaceId, fileIds).catch(() => ({ sections: [] }));
       if (sections.length >= 2) {
         for (const sec of sections) {
-          await createStudySession({
+          await createStudySessionQuietly({
             workspaceId,
             title: sec.title,
             depth: "moderate",
@@ -195,7 +196,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
             <div className="text-[14px] font-semibold">Connect Google Calendar</div>
             <div className="text-[12.5px] text-muted-foreground">Study times get planned around your lessons, sport and everything else on your calendar.</div>
           </div>
-          <Link href="/planner?connect=1" className="inline-flex h-9 shrink-0 items-center rounded-xl bg-accent px-3.5 text-[13px] font-semibold text-white hover:bg-accent-dim">
+          <Link href="/planner?connect=1" className={buttonClass({ variant: "secondary", size: "sm", className: "shrink-0" })}>
             Connect
           </Link>
         </div>
@@ -204,9 +205,9 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
       {data && (
         <>
         {lastNote && (notes?.unread ?? 0) > 0 && (
-          <Link href="/planner" className="mt-3 flex items-start gap-2.5 rounded-xl border border-[#f6d9a8] bg-[#fff8ec] px-3.5 py-2.5 text-[13px] text-[#5b3a12] hover:brightness-[0.98]">
-            <Image src="/design/cat2-think.png" alt="" width={28} height={28} className="size-7 shrink-0 object-contain" />
-            <span className="min-w-0"><b className="text-[#b4530a]">Note from your planner · </b>{lastNote.content}</span>
+          <Link href="/planner" className="mt-3 flex items-start gap-2.5 rounded-xl border border-border bg-white px-3.5 py-2.5 text-[13px] text-foreground hover:border-border-strong">
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} className="size-7 shrink-0 object-contain" />
+            <span className="min-w-0"><b>Note from your planner · </b>{lastNote.content}</span>
           </Link>
         )}
         {mobile && (
@@ -339,7 +340,7 @@ export function WeekStrip({ subjects }: { subjects: Subject[] }) {
 
       {data && data.days.every((d) => d.slots.length === 0) && (
         <p className="mt-2 flex items-center gap-1.5 text-[12.5px] text-faint">
-          <CalendarDays className="size-3.5" /> Tell me when you&apos;re free and add a subject — the week fills itself in.
+          Tell me when you&apos;re free and add a subject — the week fills itself in.
         </p>
       )}
 

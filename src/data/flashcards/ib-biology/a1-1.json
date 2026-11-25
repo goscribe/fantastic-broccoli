@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a1-1",
+  "topicCode": "A1.1",
+  "topicName": "Water",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:51.193Z",
+  "cards": [
+    {
+      "id": "00xdzep",
+      "kind": "concept",
+      "front": "Why is a water molecule described as polar, even though it is neutral overall?",
+      "back": "Oxygen attracts the shared electrons more strongly than hydrogen, so oxygen carries a **slight negative charge** and each hydrogen a slight positive charge. Because the molecule is bent, these partial charges stay separate.",
+      "hint": "Think about how the electrons are shared, not whether there are full charges.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1eudjeu",
+      "kind": "concept",
+      "front": "What causes water molecules to stick to each other, and what effect does this have?",
+      "back": "**Hydrogen bonds** form between the slightly positive hydrogen of one molecule and the slightly negative oxygen of another. This **cohesion** gives water a high surface tension.",
+      "hint": "Consider which parts of neighbouring molecules attract each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ec1whk",
+      "kind": "concept",
+      "front": "Why does water resist changes in temperature, and why does this help organisms?",
+      "back": "Water has a high **specific heat capacity**. Some energy is used to break hydrogen bonds instead of raising the temperature, so water buffers temperature changes in organisms and aquatic habitats.",
+      "hint": "Ask where the added energy goes besides temperature rise.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n10k6i",
+      "kind": "term",
+      "front": "What is latent heat of vaporisation?",
+      "back": "The **energy** needed to turn a unit mass of liquid into vapour without changing its temperature. It is high in water because a large energy input is needed to separate the molecules.",
+      "hint": "Focus on what changes state, not the temperature.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18soski",
+      "kind": "process",
+      "front": "How does evaporation of sweat cool the body?",
+      "back": "Sweat absorbs energy from the skin as it evaporates. The energy needed to turn liquid water into vapour is taken from the skin, so the body cools. Evaporation from leaves cools plants in the same way.",
+      "hint": "Follow the energy from the skin to the sweat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08hmf64",
+      "kind": "concept",
+      "front": "Which substances does water dissolve well, and why?",
+      "back": "Water dissolves **ionic and polar** substances. Its partial charges attract ions and charged regions, and water molecules surround these particles so they disperse through the liquid.",
+      "hint": "Link the partial charges to the particles they attract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "189luss",
+      "kind": "mistake",
+      "front": "A student says water dissolves every substance because it is a solvent. What is wrong with this?",
+      "back": "Water is a solvent for many ionic and polar substances, but **not all**. Many non-polar substances do not dissolve in water. State which kinds of particles water dissolves well.",
+      "hint": "Check which kinds of particles the note says water attracts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u7yy6w",
+      "kind": "term",
+      "front": "What is a reactant, and how does water act as one?",
+      "back": "A **reactant** is a substance used up in a chemical reaction. Water is a reactant in hydrolysis, where it helps split larger molecules into smaller ones, and in photosynthesis, where it supplies electrons and hydrogen.",
+      "hint": "Think of water being used up, not just present.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1shtla4",
+      "kind": "concept",
+      "front": "Why does ice float on liquid water, and why is this important for aquatic life?",
+      "back": "Hydrogen bonds hold water molecules in a more open arrangement when it freezes, so ice has a lower **density** than liquid water. The floating surface layer insulates the water below, where organisms can survive.",
+      "hint": "Describe the arrangement of molecules before linking it to density.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dnelco",
+      "kind": "term",
+      "front": "What does it mean for a material to be transparent?",
+      "back": "A **transparent** material allows light to pass through it. Liquid water is transparent to much visible light, so light can enter lakes and seas and allow aquatic producers to photosynthesise below the surface.",
+      "hint": "Think about what light does when it meets water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nlnvqi",
+      "kind": "mistake",
+      "front": "A student says hydrogen bonds hold the atoms within a water molecule together. Why is this wrong?",
+      "back": "**Covalent bonds** hold the atoms within each molecule together through shared electron pairs. Hydrogen bonds are weaker attractions between different water molecules.",
+      "hint": "Ask which bond type is inside a molecule and which is between molecules.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0geh4cu",
+      "kind": "mistake",
+      "front": "A student says water has an uneven charge because it is made of ions. What is the error?",
+      "back": "Water is not made of charged ions. Its uneven charge comes from **unequal sharing** of electrons between oxygen and hydrogen, giving partial charges.",
+      "hint": "Consider how electrons are shared in covalent bonds.",
+      "sectionId": "s1"
+    }
+  ]
+}

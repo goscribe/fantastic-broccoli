@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-9",
+  "topicCode": "10.9",
+  "topicName": "Absolute and conditional convergence",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:15.990Z",
+  "cards": [
+    {
+      "id": "1cndca7",
+      "kind": "term",
+      "front": "What does it mean for a series $\\sum a_n$ to converge absolutely?",
+      "back": "A series converges **absolutely** when $\\sum|a_n|$ converges. Taking absolute values removes all cancellation, so this is a strong condition.",
+      "hint": "Look at the series made of every term's size, with all signs removed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vzs1dc",
+      "kind": "concept",
+      "front": "Does absolute convergence guarantee that a series converges?",
+      "back": "**Yes**. If $\\sum|a_n|$ converges, then $\\sum a_n$ converges too. The reverse is not true, so a series can converge without converging absolutely.",
+      "hint": "Ask what happens to the signs when you go from $\\sum a_n$ to $\\sum|a_n|$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "039tldo",
+      "kind": "process",
+      "front": "What are the steps for classifying a series $\\sum a_n$?",
+      "back": "1) Test $\\sum|a_n|$; if it converges, the series is **absolutely convergent**. 2) If not, test $\\sum a_n$ itself; if it converges, it is **conditionally convergent**. 3) If it diverges, the series is **divergent**.",
+      "hint": "Always start with the absolute values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0twf96s",
+      "kind": "term",
+      "front": "What does it mean for a series $\\sum a_n$ to converge conditionally?",
+      "back": "A series converges **conditionally** when $\\sum a_n$ converges but $\\sum|a_n|$ diverges. The signs must do the work.",
+      "hint": "The series converges, but only because of its signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "138jph2",
+      "kind": "concept",
+      "front": "Why does the alternating harmonic series $\\sum\\frac{(-1)^{n+1}}{n}$ converge even though its absolute values diverge?",
+      "back": "The **alternating signs** hold the partial sums in check, so the series converges. Its absolute values form $\\sum\\frac{1}{n}$, which diverges.",
+      "hint": "Compare the growth of the absolute values with the effect of the signs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wkpxzu",
+      "kind": "formula",
+      "front": "For which values of $p$ does the p-series $\\sum\\frac{1}{n^p}$ converge?",
+      "back": "It converges when $p>1$ and diverges when $p\\le 1$. Here $n$ is the term index and $p$ is a constant.",
+      "hint": "Check the boundary case $p=1$ separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d8j4ky",
+      "kind": "concept",
+      "front": "Why must you take absolute values before using direct comparison, limit comparison, or the ratio test?",
+      "back": "Those tests need **positive terms**. Taking absolute values makes every term positive, so the tests can be applied.",
+      "hint": "Think about what these tests assume about the terms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00bg3jj",
+      "kind": "example",
+      "front": "Does $\\sum_{n=1}^{\\infty}\\frac{\\cos n}{n^2}$ converge absolutely?",
+      "back": "**Yes**. Since $\\left|\\frac{\\cos n}{n^2}\\right|\\le\\frac{1}{n^2}$ and $\\sum\\frac{1}{n^2}$ converges (p = 2), direct comparison shows $\\sum\\left|\\frac{\\cos n}{n^2}\\right|$ converges.",
+      "hint": "Bound $|\\cos n|$ first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u2voqw",
+      "kind": "example",
+      "front": "Classify $\\sum_{n=1}^{\\infty}\\frac{(-1)^n}{\\sqrt n}$ as absolutely convergent, conditionally convergent, or divergent.",
+      "back": "**Conditionally convergent**. The absolute values $\\sum\\frac{1}{n^{1/2}}$ diverge (p = 1/2), but the alternating series test shows the series converges.",
+      "hint": "Find the p value of the absolute values first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yw0wps",
+      "kind": "mistake",
+      "front": "If $\\sum|a_n|$ diverges, can you conclude that $\\sum a_n$ diverges?",
+      "back": "**No**. The original series may still converge conditionally, so you must test $\\sum a_n$ itself.",
+      "hint": "Divergence of absolute values does not settle the question.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zatzo0",
+      "kind": "mistake",
+      "front": "Is $\\sum(-1)^n\\frac{n}{n+1}$ conditionally convergent?",
+      "back": "**No**. Its terms do not approach 0, so the series diverges. Conditional convergence requires the series itself to converge.",
+      "hint": "Check the limit of the terms first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mmo8uv",
+      "kind": "concept",
+      "front": "Why does it matter whether a series converges absolutely or conditionally when you rearrange its terms?",
+      "back": "Rearranging an **absolutely convergent** series never changes its sum. Rearranging a conditionally convergent series can change its sum or make it diverge.",
+      "hint": "Think about what absolute convergence protects.",
+      "sectionId": "s5"
+    }
+  ]
+}

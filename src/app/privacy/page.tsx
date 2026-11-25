@@ -52,8 +52,11 @@ export default function PrivacyPage() {
           <strong>What we read.</strong> Events on your primary calendar for
           the week shown in the Planner and for the next three weeks: each
           event&apos;s title, start and end time, status, and whether it is
-          marked busy or free. We do not request descriptions, guests,
-          locations, or attachments.
+          marked busy or free. To find your exams, the Planner also reads the
+          events of the next 366 days: each event&apos;s id, title, start and
+          end time, status, and whether it is part of a repeating series. When
+          you choose an event to add as an exam, we read that event again. We
+          do not request descriptions, guests, locations, or attachments.
         </p>
         <p>
           <strong>How we use it.</strong> Event times keep study blocks out of
@@ -63,10 +66,24 @@ export default function PrivacyPage() {
           note and a notification that quote the event title.
         </p>
         <p>
+          <strong>Exam import.</strong> When you open the Planner (at most once
+          every three hours) or ask it to import, event titles are checked
+          against rules for school assessments such as tests, mocks, orals and
+          coursework deadlines, and matched to your subjects. Clear ones are
+          added to your exams, linked to their event; unclear ones are offered
+          for you to add or ignore. Events that are not exams are read and not
+          kept.
+        </p>
+        <p>
           <strong>AI processing.</strong> To arrange your week, and when you
           chat with the Planner, the titles and times of that week&apos;s
           events are sent to the AI model provider that generates the plan or
-          the reply.
+          the reply. When the exam-import rules cannot tell whether an event
+          is an exam, its title alone (without its date, time, or anything
+          else about it) is sent to a third-party AI model provider, which
+          classifies it as an exam or not. We keep only that answer, in memory
+          for up to a day, under a fingerprint of the title rather than the
+          title itself.
         </p>
         <p>
           <strong>What we store.</strong> Your Google account email and the
@@ -75,7 +92,13 @@ export default function PrivacyPage() {
           things made from it: the generated week plan (which can mention
           events by name), a record of which events have already been handled
           (date and title), the prep blocks, and the notes and notifications
-          described above.
+          described above. For each exam imported from your calendar we keep
+          the exam (its title, which comes from the event, and its date and
+          time), the event&apos;s id, and the event&apos;s title, date and
+          times as they were when imported, so the exam can follow the event
+          if it moves. When you remove an imported exam or say an event is not
+          a test, we keep only that event&apos;s id, so it is not added again.
+          We also keep the time of the last import.
         </p>
         <p>
           <strong>Disconnecting.</strong> When you disconnect in the Planner we
@@ -87,15 +110,38 @@ export default function PrivacyPage() {
           page so you can remove access there. We also delete the cached week
           plans and the record of handled events, delete the notes and
           notifications created from your events, and rename the prep blocks
-          to &quot;Prep session&quot; while keeping their time.
+          to &quot;Prep session&quot; while keeping their time. For imported
+          exams we remove the link to the event, its id and the recorded event
+          title and times, and delete the ids of events you removed.
         </p>
         <p>
-          <strong>What disconnecting does not remove.</strong> Your chat
+          <strong>What disconnecting does not remove.</strong> Exams you
+          imported from your calendar stay in your Planner with their titles
+          until you delete them; disconnecting only removes their link to the
+          calendar event. Your chat
           history with the Planner, which can mention events, and prep blocks
           or notes created from your calendar before we began labelling them
           as calendar-made, which we cannot tell apart from ones you made
           yourself. You can remove any block in the Planner, and deleting your
           account removes all of it.
+        </p>
+        <p>
+          <strong>Calendar files and timetables.</strong> You can also import
+          exams from an .ics calendar file or an uploaded timetable (PDF, Word,
+          Excel, CSV, text, or a photo) without connecting Google. An .ics file
+          is read in your browser, and only its events&apos; ids, titles, dates
+          and times are sent to Scribe. A timetable is uploaded to our storage
+          and its text is read (a photo or scan goes through the same text
+          recognition we use for study materials); that text is sent to a
+          third-party AI model provider to pick out the exam rows, and if that
+          is unavailable we list the dated lines for you to check. Events from
+          an .ics file go through the same checks and AI title classification
+          as calendar events; timetable rows that are clear and dated are
+          added, and the rest are offered for you to check. The uploaded file is deleted from our storage as soon as it
+          has been read, whether or not any exams were found, and it never
+          becomes one of your subject materials. We keep the same things as
+          for calendar imports: the exams you add, and the ids of entries you
+          removed.
         </p>
         <p>
           <strong>Human access.</strong> Calendar data and information derived

@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-5-4",
+  "topicCode": "4.5.4",
+  "topicName": "Plant hormones",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:44.200Z",
+  "cards": [
+    {
+      "id": "0myv5vw",
+      "kind": "concept",
+      "front": "How does unequal auxin make a shoot bend?",
+      "back": "Cells on the side with more **auxin** elongate faster, so the shoot bends towards the side that grows more slowly.",
+      "hint": "Compare how fast the cells on each side of the shoot grow.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0j0rl59",
+      "kind": "concept",
+      "front": "Why does a shoot bend towards light arriving from one side?",
+      "back": "**More auxin** collects on the shaded side, so cells there elongate faster and the shoot bends towards the light.",
+      "hint": "Think about which side of the shoot is shaded.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09emeqs",
+      "kind": "concept",
+      "front": "Why does a shoot grown sideways bend upwards?",
+      "back": "**Auxin** collects on the lower side and stimulates elongation there, so the shoot bends upwards, away from gravity.",
+      "hint": "Think about which side of the shoot grows faster.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18ogcqx",
+      "kind": "concept",
+      "front": "Why does a root bend in the opposite direction to a shoot when unequal auxin is present?",
+      "back": "A concentration that stimulates shoot growth **inhibits** root growth, so the lower side of a root grows more slowly and the root bends downwards.",
+      "hint": "Compare how the same hormone affects shoots and roots.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dl7v8u",
+      "kind": "term",
+      "front": "What are auxins?",
+      "back": "**Plant hormones** made mainly in growing tips. They move to other parts of the plant and affect cell growth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y5m7pn",
+      "kind": "term",
+      "front": "What is a tropism?",
+      "back": "A **directional growth response** to a stimulus such as light or gravity. Growth towards the stimulus is positive; growth away is negative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i4l222",
+      "kind": "mistake",
+      "front": "What does a tropism actually change in a plant?",
+      "back": "It changes the **direction of growth** of a plant part. A tropism does not move an existing part of the plant from place to place.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wtd5nw",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that auxin pulls a shoot towards light?",
+      "back": "Auxin does not pull the shoot. **Faster growth** on the shaded side makes the shoot bend towards the light.",
+      "hint": "Focus on what the cells on the shaded side are doing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1g3hsg6",
+      "kind": "term",
+      "front": "What is rooting powder and what does it contain?",
+      "back": "A product containing **auxins** that encourages roots to develop on plant cuttings.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y6r9n2",
+      "kind": "concept",
+      "front": "Why are auxins used as selective weedkillers?",
+      "back": "They disrupt growth in many **broad-leaved weeds** while grasses are largely unaffected.",
+      "hint": "Compare how broad-leaved weeds and grasses respond to the hormone.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lcu116",
+      "kind": "term",
+      "front": "What are gibberellins used for?",
+      "back": "They can **end seed dormancy** and promote germination, and can also encourage flowering or increase fruit size in some plants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jzqgof",
+      "kind": "term",
+      "front": "What is ethene and what does it control?",
+      "back": "A **gaseous plant hormone** that controls fruit ripening. Growers expose harvested fruit to it so it ripens when needed.",
+      "hint": "Think about how this hormone reaches the fruit.",
+      "sectionId": "s4"
+    }
+  ]
+}

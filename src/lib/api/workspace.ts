@@ -1,5 +1,6 @@
 import { api } from "./trpc-client";
 import type { Folder, Material, MaterialType, Workspace } from "@/types";
+import { isSubjectFamily } from "@/lib/subject-family";
 
 /** Data layer for workspaces, folders, and materials (goscribe/server). */
 
@@ -23,6 +24,10 @@ interface TreeWorkspaceRow {
   icon: string | null;
   color: string | null;
   coverUrl?: string | null;
+  /** Not sent by a server older than the subject-family release. */
+  subjectFamily?: string | null;
+  /** The catalog course the subject follows (null: none). Not sent by an older server. */
+  courseId?: string | null;
   updatedAt: Date | string;
   uploads: UploadRow[];
   owner?: MemberUserRow | null;
@@ -102,6 +107,8 @@ function mapWorkspace(row: TreeWorkspaceRow): Workspace {
     icon: row.icon ?? "book",
     color: row.color ?? "green",
     coverUrl: row.coverUrl ?? undefined,
+    subjectFamily: isSubjectFamily(row.subjectFamily) ? row.subjectFamily : undefined,
+    courseId: row.courseId,
     folderId: row.folderId ?? undefined,
     sessions: [],
     materials: (row.uploads ?? []).map((u) => mapUploadToMaterial(u, row.id)),

@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-7-2",
+  "topicCode": "4.7.2",
+  "topicName": "Organisation of an ecosystem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:34.160Z",
+  "cards": [
+    {
+      "id": "0r61elc",
+      "kind": "concept",
+      "front": "How do producers supply energy to the rest of a food chain?",
+      "back": "**Producers** make their own food by photosynthesis, using light energy to make glucose. Consumers gain this energy by eating them.",
+      "hint": "Think about where the first energy in a chain comes from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08y99yy",
+      "kind": "concept",
+      "front": "Why is less energy available at each successive step along a food chain?",
+      "back": "Organisms release energy to their surroundings during respiration, often as heat. Some energy also stays in waste or parts that are not eaten, so less is passed on.",
+      "hint": "Think about what happens to energy during respiration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1im8azy",
+      "kind": "concept",
+      "front": "Why can a food web suggest a population change but not predict its exact size?",
+      "back": "A food web shows possible feeding routes, but other food sources and conditions also affect populations, so the size of the effect is not fixed.",
+      "hint": "Consider what a food web leaves out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lsxpu6",
+      "kind": "term",
+      "front": "What does a food chain show?",
+      "back": "A **food chain** shows one feeding route, including the direction of energy transfer between organisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18o13qn",
+      "kind": "term",
+      "front": "What is the difference between a predator and its prey?",
+      "back": "A **predator** eats another animal. Its **prey** is the animal it eats.",
+      "hint": "Think about which animal does the eating.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "195d6hc",
+      "kind": "term",
+      "front": "What do decomposers feed on?",
+      "back": "**Decomposers**, such as bacteria and fungi, feed on dead organisms and waste, breaking this material down.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kx5nez",
+      "kind": "term",
+      "front": "What is a consumer?",
+      "back": "A **consumer** obtains food by eating other organisms. Herbivores eat producers, and carnivores eat other consumers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17jm30k",
+      "kind": "mistake",
+      "front": "A student draws arrows in a food chain pointing towards the organism being eaten. Why is this wrong?",
+      "back": "An arrow points towards the organism receiving energy, which is the feeder. It shows the direction of energy transfer, not the animal being eaten.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ie12v2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say decomposers return energy to producers?",
+      "back": "Decomposers return mineral ions to the environment. Energy is released as heat during respiration and does not cycle back to producers.",
+      "hint": "Compare what decomposers release with how energy behaves.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00twnw6",
+      "kind": "formula",
+      "front": "How do you calculate the change in a population between two counts?",
+      "back": "$\\text{change} = \\text{later count} - \\text{earlier count}$. The answer is in organisms. A positive result is an increase; a negative result is a decrease.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kscebq",
+      "kind": "example",
+      "front": "A field has 80 rabbits in spring and 65 rabbits in autumn. What is the change in the rabbit population?",
+      "back": "$65-80=-15$, so the rabbit population decreased by 15 rabbits.",
+      "hint": "Subtract the earlier count from the later count.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bwjfid",
+      "kind": "mistake",
+      "front": "Why does a fall in fox numbers after a fall in rabbits not prove that fewer rabbits caused it?",
+      "back": "Counts can show a pattern without proving its cause. Foxes may eat other prey, and other conditions may affect their numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ke95q7",
+      "kind": "process",
+      "front": "What are the steps to identify a change in a population from two counts?",
+      "back": "1) Compare counts for the same population at two times. 2) Subtract the earlier count from the later count. 3) State the size and direction of the change.",
+      "sectionId": "s4"
+    }
+  ]
+}

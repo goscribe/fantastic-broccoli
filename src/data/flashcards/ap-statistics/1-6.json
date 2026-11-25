@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-6",
+  "topicCode": "1.6",
+  "topicName": "Describing a distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:02.122Z",
+  "cards": [
+    {
+      "id": "0iecnnv",
+      "kind": "concept",
+      "front": "What four features should a complete description of a distribution cover?",
+      "back": "**Shape**, outliers, center, and spread. The memory aid SOCS helps, and each feature should be written as a sentence about the variable.",
+      "hint": "Recall the four-letter memory aid from the note.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05ev731",
+      "kind": "formula",
+      "front": "How is the interquartile range (IQR) calculated, and what does it measure?",
+      "back": "$\\mathrm{IQR}=Q_3-Q_1$, which gives the width of the **middle half** of the data.",
+      "hint": "Think about which two quartiles mark the edges of the middle half.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u3hril",
+      "kind": "process",
+      "front": "How do you use the 1.5 IQR rule to decide whether a value is an outlier?",
+      "back": "Find the **fences**: lower $Q_1-1.5(\\mathrm{IQR})$ and upper $Q_3+1.5(\\mathrm{IQR})$. A value beyond a fence is an outlier, but a value exactly on a fence is not flagged.",
+      "hint": "Compare each value with both cutoffs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12qxubg",
+      "kind": "term",
+      "front": "What is the center of a distribution?",
+      "back": "A single value that represents a **typical observation**, usually measured by the mean or the median.",
+      "hint": "Think of what a typical value would be.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1177ucl",
+      "kind": "term",
+      "front": "What is spread?",
+      "back": "The extent to which values **vary** from one another, measured by the range, the IQR, or the standard deviation. Wide spread means scattered values; narrow spread means bunched values.",
+      "hint": "Ask how far the values are from one another.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10x4zy9",
+      "kind": "concept",
+      "front": "Why do center and spread need units?",
+      "back": "Without units they mean little: a center of 15 is unclear until you add minutes, inches, or dollars.",
+      "hint": "Consider what 15 could mean.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07r1k95",
+      "kind": "term",
+      "front": "What is an outlier?",
+      "back": "An observation that is **far from the overall pattern** of the other values. Always report outliers and try to explain them.",
+      "hint": "Think about values that stand apart from the rest.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0woktw8",
+      "kind": "mistake",
+      "front": "Should you delete an outlier from a data set as soon as you find one?",
+      "back": "**No**. An outlier is not automatically a mistake, and deleting real data changes the story. Keep it unless you can show it is an error.",
+      "hint": "Ask whether the value could be real.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "102rqwd",
+      "kind": "mistake",
+      "front": "Is a value an outlier just because it looks far away on the graph?",
+      "back": "No. Judging by eye is **subjective**. Apply the rule, then name the value and the fence it passes.",
+      "hint": "Which tool gives a consistent answer?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d7e4y2",
+      "kind": "process",
+      "front": "How do you find Q1 and Q3 from an ordered data set?",
+      "back": "Q1 is the **median of the lower half** and Q3 is the median of the upper half. With an odd count, leave the median out of both halves.",
+      "hint": "Split the ordered data into two halves first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18s5bko",
+      "kind": "example",
+      "front": "Q1 = 34 minutes and Q3 = 50 minutes. What are the lower and upper fences?",
+      "back": "IQR = 16 and $1.5\\times16=24$. The lower fence is **10 minutes** and the upper fence is **74 minutes**.",
+      "hint": "Find the IQR first, then multiply by 1.5.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14xrzvg",
+      "kind": "example",
+      "front": "Homework times have Q1 = 30, Q3 = 55, and run from 10 to 150 minutes. Is 150 minutes an outlier?",
+      "back": "Yes. The IQR is 25, so the upper fence is $55+1.5(25)=92.5$ minutes. The value **150 minutes** lies beyond it.",
+      "hint": "Compare 150 with the upper fence.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rchxs1",
+      "kind": "concept",
+      "front": "Why must a description refer to the context of the data?",
+      "back": "Each sentence should name the variable and its units, such as homework time, so a reader understands the data **without seeing the graph**.",
+      "hint": "Imagine reading the description with no graph.",
+      "sectionId": "s5"
+    }
+  ]
+}

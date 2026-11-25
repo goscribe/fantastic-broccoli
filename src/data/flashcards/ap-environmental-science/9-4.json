@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "9-4",
+  "topicCode": "9.4",
+  "topicName": "Rising greenhouse gases",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:11.908Z",
+  "cards": [
+    {
+      "id": "00rfg3p",
+      "kind": "concept",
+      "front": "How do rising greenhouse gas levels make Earth's surface warmer?",
+      "back": "Greenhouse gases absorb some **infrared radiation** from the surface and re-emit it in all directions, including back down. More gas sends more energy back, so the surface and lower atmosphere warm until outgoing energy matches incoming energy at a higher temperature.",
+      "hint": "Think about where the energy comes from and where it goes next.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l288dh",
+      "kind": "concept",
+      "front": "Which human activity is the largest source of added carbon dioxide?",
+      "back": "Burning **fossil fuels** such as coal, oil, and natural gas for electricity, transport, and heating. These fuels hold carbon buried for millions of years, and burning releases it as carbon dioxide.",
+      "hint": "Compare it with deforestation and cement production, which the note calls smaller sources.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qv3xhd",
+      "kind": "concept",
+      "front": "What has happened to atmospheric carbon dioxide since the industrial era began?",
+      "back": "It rose from roughly $280\\,\\text{ppm}$ before the industrial era to above $400\\,\\text{ppm}$ today. It stayed fairly steady for thousands of years before climbing.",
+      "hint": "Think about what air trapped in polar ice can reveal about the past.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bd041s",
+      "kind": "term",
+      "front": "What is infrared radiation in the context of greenhouse gases?",
+      "back": "**Infrared radiation** is electromagnetic energy with wavelengths longer than visible light, emitted by all warm objects. Earth's surface gives it off after absorbing sunlight.",
+      "hint": "Compare its wavelength with the light you can see.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qxo7vp",
+      "kind": "mistake",
+      "front": "What is the mistake in saying that burning fuel creates new carbon?",
+      "back": "Burning does not create carbon. It **moves carbon** from underground storage, where it sat for millions of years, into the air as carbon dioxide.",
+      "hint": "Think about where the carbon was before the fuel burned.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0syrsb7",
+      "kind": "term",
+      "front": "What does anthropogenic mean?",
+      "back": "**Anthropogenic** describes emissions or changes that result from human activity rather than from natural processes.",
+      "hint": "Look at the root \"anthro\", which relates to people.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1r3upnn",
+      "kind": "term",
+      "front": "What is the enhanced greenhouse effect?",
+      "back": "The **enhanced greenhouse effect** is the extra warming caused by human additions of greenhouse gases to the atmosphere.",
+      "hint": "Compare it with the natural greenhouse effect.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0owhu2b",
+      "kind": "term",
+      "front": "What does global warming potential measure?",
+      "back": "A gas's **heat-trapping effect** over a set period, relative to the same mass of carbon dioxide. Methane and nitrous oxide score higher than carbon dioxide, so they trap more heat per kilogram.",
+      "hint": "Think about what the comparison is measured against.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18zqr6q",
+      "kind": "concept",
+      "front": "What are the main human sources of methane and nitrous oxide?",
+      "back": "Methane comes from livestock, rice paddies, landfills, and gas leaks. Nitrous oxide comes from **fertilizers**, manure, and some industry.",
+      "hint": "Think about farming, waste, and industry.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18532vw",
+      "kind": "formula",
+      "front": "How do you calculate the percent increase in a gas concentration?",
+      "back": "Percent increase $=\\frac{\\text{final} - \\text{initial}}{\\text{initial}} \\times 100$. Divide by the **starting value**, not the final one, and keep the unit in your working.",
+      "hint": "Start by finding the change between the two readings.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1euwcba",
+      "kind": "example",
+      "front": "A station records 340 ppm in 1980 and 420 ppm in 2020. What is the average yearly rise in carbon dioxide?",
+      "back": "$2.0\\,\\mathrm{ppm/year}$. The change is $80\\,\\mathrm{ppm}$ over $40$ years, so $\\frac{80}{40}=2.0$.",
+      "hint": "Find the total change first, then the number of years.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "048m54e",
+      "kind": "concept",
+      "front": "Why does a rising line in a monitoring record alone not prove a human cause?",
+      "back": "A trend that matches fuel use, land clearing, and farming supports a human cause, but the line by itself does not prove it. **Several independent lines of evidence** together make the case.",
+      "hint": "Consider what other kinds of evidence would strengthen the link.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-11",
+  "topicCode": "1.11",
+  "topicName": "Random sampling",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:59.253Z",
+  "cards": [
+    {
+      "id": "0w5mda9",
+      "kind": "concept",
+      "front": "What makes a sample random, and why does that matter?",
+      "back": "A **chance process** decides who is selected, not personal choice, so no one can steer the sample toward certain individuals, even without meaning to.",
+      "hint": "Think of drawing names from a hat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "004z8rb",
+      "kind": "term",
+      "front": "What is a simple random sample (SRS) of size $n$?",
+      "back": "An SRS is a sample in which **every possible group of $n$ individuals is equally likely** to be chosen, so every individual also has the same chance of selection.",
+      "hint": "Focus on groups, not just single individuals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0rpnc68",
+      "kind": "concept",
+      "front": "What is the key difference between random sampling and convenience or voluntary response sampling?",
+      "back": "Random methods use a **chance process** to pick individuals. Convenience and voluntary response samples let **choice** decide who is included, so they often differ from the rest of the population.",
+      "hint": "Ask who decides who is in the sample.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tpazu3",
+      "kind": "term",
+      "front": "What is a sampling frame?",
+      "back": "The **list of individuals in the population** from which the sample is drawn.",
+      "hint": "It comes before any random selection happens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10hckd7",
+      "kind": "process",
+      "front": "What are the steps to select a simple random sample?",
+      "back": "1) Label each individual with a unique number. 2) Generate random numbers with a table, calculator, or software. 3) Ignore out-of-range or repeated numbers. 4) Select labeled individuals until you have $n$.",
+      "hint": "Four steps, in this order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "008urvw",
+      "kind": "example",
+      "front": "A club has 30 members labeled 01 to 30. Random digits: 71 05 38 92 14 27 05 63 30 18. Which 4 members form the SRS?",
+      "back": "Members **05, 14, 27, and 30**. Skip 71, 38, 92, and 63 because they are out of range, and skip the repeated 05.",
+      "hint": "Read the digits in pairs from the left.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fmvoej",
+      "kind": "mistake",
+      "front": "Does a random sample always match the population exactly?",
+      "back": "No. **Random selection removes bias, not chance variation**, so an unusual sample can still occur by chance.",
+      "hint": "Random is not the same as perfect.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s7wbvf",
+      "kind": "term",
+      "front": "What is bias in sampling?",
+      "back": "A **systematic tendency** of a sampling method to over- or underrepresent part of the population.",
+      "hint": "Think about a method that consistently leans one way.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fay5a3",
+      "kind": "term",
+      "front": "How is a stratified random sample built?",
+      "back": "Divide the population into **strata** of similar individuals, then take a **separate SRS from each stratum**.",
+      "hint": "Strata are groups of similar individuals.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dyxm0n",
+      "kind": "concept",
+      "front": "How does a cluster sample differ from a stratified random sample?",
+      "back": "In a cluster sample, you randomly choose **whole clusters** that each resemble the population and survey everyone in them. In a stratified sample, you take an SRS within each stratum.",
+      "hint": "Which method surveys entire groups?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "186mkww",
+      "kind": "term",
+      "front": "How is a systematic random sample chosen?",
+      "back": "Pick a **random starting point** on the list, then select every $k$th individual after it.",
+      "hint": "The random part is only the starting point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dw8d4b",
+      "kind": "mistake",
+      "front": "Is a poll of students in a hallway a random sample?",
+      "back": "No. It is a **convenience sample**, made of the easiest-to-reach people, because choice rather than chance decides who is included.",
+      "hint": "Ask how the people were picked.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1auy2c1",
+      "kind": "example",
+      "front": "A school has four grade levels. The principal takes an SRS of 25 students from each grade. What sampling method is this?",
+      "back": "A **stratified random sample**, with the four grade levels as the strata.",
+      "hint": "Look for groups that are sampled separately.",
+      "sectionId": "s4"
+    }
+  ]
+}

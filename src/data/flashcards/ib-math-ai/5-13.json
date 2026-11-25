@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-13",
+  "topicCode": "5.13",
+  "topicName": "Kinematics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:16.905Z",
+  "cards": [
+    {
+      "id": "1kpsvhh",
+      "kind": "concept",
+      "front": "What does velocity tell you about an object's position over time?",
+      "back": "**Velocity** is the rate of change of position: $v(t)=x'(t)=\\frac{dx}{dt}$. Its sign gives the direction of motion along the line.",
+      "hint": "Think about what the derivative of position measures.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qk6k1z",
+      "kind": "concept",
+      "front": "How is acceleration linked to position?",
+      "back": "**Acceleration** is the derivative of velocity, so $a(t)=x''(t)=\\frac{d^2x}{dt^2}$. Each derivative moves one step along the chain from $x$ to $v$ to $a$.",
+      "hint": "Differentiate twice.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qzyetl",
+      "kind": "process",
+      "front": "How can the signs of velocity and acceleration tell you whether an object is speeding up or slowing down?",
+      "back": "It is **speeding up** when $v$ and $a$ have the same sign, and **slowing down** when they have opposite signs. Speed is $|v|$.",
+      "hint": "Compare the two signs at the same instant.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05nd2rd",
+      "kind": "term",
+      "front": "What is displacement?",
+      "back": "**Displacement** is final position minus initial position, including its sign. Over an interval it equals $\\int v\\,dt$.",
+      "hint": "Final minus initial.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06uiy5j",
+      "kind": "term",
+      "front": "How is total distance different from displacement?",
+      "back": "**Total distance** adds the size of every movement and is never negative, equal to $\\int|v|\\,dt$. Displacement can be negative.",
+      "hint": "Consider movement backwards.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0un4wlw",
+      "kind": "formula",
+      "front": "Write the integrals that recover velocity and position from acceleration and velocity.",
+      "back": "$v(t)=\\int a(t)\\,dt$ and $x(t)=\\int v(t)\\,dt$. Each adds a **constant of integration** $C$, found from a known value such as $v(0)$ or $x(0)$.",
+      "hint": "Each step needs one extra piece of information.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0agkaj0",
+      "kind": "example",
+      "front": "For $x(t)=t^3-6t^2+9t$, what is the acceleration at $t=2$?",
+      "back": "$a(2)=0\\,\\mathrm{m\\,s^{-2}}$, since $a(t)=6t-12$. Differentiate $x$ twice, then substitute.",
+      "hint": "Differentiate $x$ twice.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ga0x9f",
+      "kind": "example",
+      "front": "For $x(t)=t^3-6t^2+9t$, at which times is the particle at rest?",
+      "back": "At $t=1\\,\\mathrm{s}$ and $t=3\\,\\mathrm{s}$, where $v(t)=3(t-1)(t-3)=0$.",
+      "hint": "Set velocity equal to zero and factorise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wmz6ow",
+      "kind": "mistake",
+      "front": "Does a negative acceleration always mean an object is slowing down?",
+      "back": "**No**. Slowing down needs velocity and acceleration of opposite sign. With a negative velocity, a negative acceleration makes the speed increase.",
+      "hint": "Check the sign of velocity as well.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vuesb7",
+      "kind": "mistake",
+      "front": "Why is using $\\int v\\,dt$ wrong for total distance when velocity changes sign?",
+      "back": "Positive and negative areas cancel, giving displacement. Split the interval at turning points and use $\\int|v|\\,dt$ instead.",
+      "hint": "What happens to areas below the axis?",
+      "sectionId": "s6"
+    },
+    {
+      "id": "05nhc4p",
+      "kind": "concept",
+      "front": "What do the gradient and the area under a $v$–$t$ graph represent?",
+      "back": "The **gradient** gives acceleration, and the **area** gives displacement. Area below the axis counts as negative.",
+      "hint": "Gradient is a derivative; area is an integral.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1e4xwvn",
+      "kind": "process",
+      "front": "What steps find total distance from a velocity function?",
+      "back": "1) Find where $v=0$ and check its sign. 2) Split the interval at those times. 3) Add the size of each part's displacement, $|\\int v\\,dt|$.",
+      "hint": "Start by finding turning points.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0u09rvm",
+      "kind": "example",
+      "front": "A particle has $v(t)=3t^2-12t+9$ for $0\\leq t\\leq4$, with $x(0)=0$. What is its total distance?",
+      "back": "**12 m**. Displacement is 4 m, but the particle turns at $t=1$ and $t=3$, so it travels $|4-0|+|0-4|+|4-0|=12\\,\\mathrm{m}$.",
+      "hint": "Find the turning points first.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ecu1nt",
+      "kind": "example",
+      "front": "Given $a(t)=6t-12$ and $v(0)=9$, what is $v(t)$?",
+      "back": "$v(t)=3t^2-12t+9$. Integrating gives $3t^2-12t+C$, and $v(0)=9$ gives $C=9$.",
+      "hint": "Use $v(0)$ to find the constant.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-2-3",
+  "topicCode": "6.2.3",
+  "topicName": "Domestic electricity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:09.121Z",
+  "cards": [
+    {
+      "id": "1cyyplb",
+      "kind": "term",
+      "front": "What is alternating current (a.c.)?",
+      "back": "**Alternating current** repeatedly changes direction. UK mains electricity supplies a.c. at $50\\,\\text{Hz}$.",
+      "hint": "Compare it with a current that never reverses, such as one from a battery.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1el75af",
+      "kind": "concept",
+      "front": "What is the job of the live wire in a UK three-pin plug, and what colour is it?",
+      "back": "The **live wire** (brown) carries the alternating voltage from the supply to the appliance.",
+      "hint": "Compare it with the neutral wire, which completes the loop.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1aeqhts",
+      "kind": "process",
+      "front": "What happens step by step when a live wire touches an earthed metal case?",
+      "back": "Current flows through the **earth wire**, creating a large fault current. The fuse melts and breaks the circuit, reducing the risk of shock.",
+      "hint": "Start with the path the current takes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "104l2yt",
+      "kind": "concept",
+      "front": "How does direct current (d.c.) flow?",
+      "back": "**Direct current** flows in one direction only. Cells and batteries supply it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gb56wh",
+      "kind": "mistake",
+      "front": "A student says $50\\,\\text{Hz}$ means the current changes direction 50 times a second. What is wrong?",
+      "back": "Wrong: $50\\,\\text{Hz}$ means **50 complete cycles** each second. Each cycle flows one way and then the other.",
+      "hint": "Think about what one full cycle includes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dt12nv",
+      "kind": "concept",
+      "front": "What is the role of the neutral wire in a UK plug, and what colour is it?",
+      "back": "The **neutral wire** (blue) completes the circuit between the appliance and the mains supply.",
+      "hint": "Think about the return path of the current.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lbu1js",
+      "kind": "concept",
+      "front": "What is the earth wire's role in a plug?",
+      "back": "The **earth wire** (green and yellow) provides a safety connection to earth and normally carries no current.",
+      "hint": "Think about what happens when a fault occurs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qyap76",
+      "kind": "concept",
+      "front": "In an opened UK plug viewed from inside, where is the live pin?",
+      "back": "The **live pin** is on the right. The neutral pin is on the left, and the earth pin is at the top.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fll344",
+      "kind": "term",
+      "front": "How does a fuse protect an appliance?",
+      "back": "A **fuse** contains a thin wire that melts when current becomes too large, breaking the live supply. It sits in the live side of the plug.",
+      "hint": "Think about what happens to the component when current is too high.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0d1alh3",
+      "kind": "mistake",
+      "front": "Why is a fuse with a very high rating not always the safer choice?",
+      "back": "It may not disconnect a dangerous current soon enough. A rating that is too low may melt during normal use.",
+      "hint": "Consider both ends of the range the rating must sit within.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wk1vnc",
+      "kind": "concept",
+      "front": "What does the cable grip do in a plug?",
+      "back": "The **cable grip** holds the outer cable, so a pull does not loosen the wire connections.",
+      "hint": "Think about what a pull on the cable would do to the connections.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cnjxzv",
+      "kind": "concept",
+      "front": "Why do some appliances with double insulation not need an earth wire?",
+      "back": "Their design keeps users from touching parts that could become live, even if one insulating layer fails.",
+      "hint": "Think about what the second layer provides.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g3ekxx",
+      "kind": "mistake",
+      "front": "Is fitting an earth wire enough to make a live metal case safe?",
+      "back": "Wrong: earthing does not replace insulation. The live wire must still be covered and kept separate from the case.",
+      "hint": "Consider what the earth wire does and does not stop.",
+      "sectionId": "s3"
+    }
+  ]
+}

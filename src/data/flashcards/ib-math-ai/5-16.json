@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-16",
+  "topicCode": "5.16",
+  "topicName": "Euler's method",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:32.375Z",
+  "cards": [
+    {
+      "id": "0rrzwmu",
+      "kind": "concept",
+      "front": "What is the basic idea behind Euler's method for estimating a solution?",
+      "back": "It moves from a known starting point along **tangent lines** in small steps. The slope at the current point sets the direction of each move.",
+      "hint": "Think of steering a boat by checking your heading after each short step.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qydw11",
+      "kind": "formula",
+      "front": "What are the two update rules in Euler's method for $\\frac{dy}{dx}=f(x,y)$?",
+      "back": "$x_{n+1}=x_n+h$ and $y_{n+1}=y_n+h\\,f(x_n,y_n)$. The second adds the slope times the step size to the old $y$, which is the rise along the tangent.",
+      "hint": "The rise is slope multiplied by run.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rubrnn",
+      "kind": "concept",
+      "front": "Why do smaller step sizes usually give more accurate estimates?",
+      "back": "Each tangent line is followed for a shorter distance, so it stays **closer to the curve**. The error made at each step is then smaller.",
+      "hint": "Consider how far the tangent travels before the next check.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i4cod6",
+      "kind": "process",
+      "front": "What do you do in each step of Euler's method?",
+      "back": "1) Use the old $x_n$ and $y_n$ to find the slope $f(x_n,y_n)$. 2) Compute $y_{n+1}=y_n+h\\,f(x_n,y_n)$. 3) Set $x_{n+1}=x_n+h$. 4) Repeat from the new point.",
+      "hint": "Always find the slope before updating anything.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ayvbdt",
+      "kind": "mistake",
+      "front": "A student uses $x_{n+1}$ and $y_{n+1}$ to find the slope in a step. What is wrong?",
+      "back": "The slope must use the **old** values $x_n$ and $y_n$, because the tangent line starts from the current point.",
+      "hint": "Which point is the tangent line drawn from?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1te5sce",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x+y$ with $y(0)=1$ and $h=0.1$, what is $y_1$ at $x=0.1$?",
+      "back": "$y_1=1.1$. The slope at $(0,1)$ is $0+1=1$, so $y_1=1+0.1(1)=1.1$.",
+      "hint": "Find the slope at the starting point first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08j2olz",
+      "kind": "example",
+      "front": "Using Euler's method with $h=0.1$ for $\\frac{dy}{dx}=x+y$, $y(0)=1$, estimate $y(0.3)$.",
+      "back": "$y(0.3)\\approx1.362$. The values run $1.1$, then $1.22$, then $1.362$, with slopes $1$, $1.2$ and $1.42$.",
+      "hint": "Do three steps and keep extra decimal places.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "066eajc",
+      "kind": "concept",
+      "front": "Why is the estimate 1.362 for $y(0.3)$ slightly low compared with the exact value 1.400?",
+      "back": "The **exact curve bends upwards**. A tangent line lies below an upward-bending curve, so each step falls short.",
+      "hint": "Compare the position of a tangent with the curve's bend.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lonj1l",
+      "kind": "mistake",
+      "front": "A student says Euler's estimates are always too low. What is the error in this claim?",
+      "back": "Only curves that bend **upwards** give low estimates. For a curve that bends downwards, the tangent lies above the curve, so the estimates are too high.",
+      "hint": "Think about where the tangent sits relative to the curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zmztli",
+      "kind": "term",
+      "front": "What is the step size $h$?",
+      "back": "The **step size** $h$ is the fixed increase in $x$ between consecutive points in Euler's method.",
+      "hint": "It is the horizontal width of each move.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14umhg3",
+      "kind": "term",
+      "front": "What is the error of an estimate?",
+      "back": "The **error** is the exact value minus the estimate. It measures how far the estimate is from the true value.",
+      "hint": "Exact value first, then subtract the estimate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17uaqip",
+      "kind": "formula",
+      "front": "How many steps are needed to go from $x=0$ to $x=1$ with step size $h$?",
+      "back": "$\\frac{1}{h}$ steps. For example, $h=0.25$ needs $4$ steps, since the interval length is divided by the **step size**.",
+      "hint": "Count how many moves of width h fit across the interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o9dsuk",
+      "kind": "concept",
+      "front": "What happens to the error and the number of steps when the step size is halved?",
+      "back": "The **error roughly halves**, but the number of steps needed to reach the same $x$ doubles. Better accuracy costs more calculation.",
+      "hint": "Accuracy and work both change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1brvd37",
+      "kind": "example",
+      "front": "For $\\frac{dy}{dx}=x-y$ with $y(0)=2$ and $h=0.5$, estimate $y(1)$.",
+      "back": "$y(1)\\approx0.75$. Step 1 gives $y=1$ at $x=0.5$; the slope there is $0.5-1=-0.5$, so $y=1+0.5(-0.5)=0.75$ at $x=1$.",
+      "hint": "Two steps are needed to reach x = 1.",
+      "sectionId": "s2"
+    }
+  ]
+}

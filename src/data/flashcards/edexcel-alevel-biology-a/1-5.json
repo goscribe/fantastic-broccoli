@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "Atherosclerosis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:41.606Z",
+  "cards": [
+    {
+      "id": "07wdvq6",
+      "kind": "term",
+      "front": "What is atherosclerosis?",
+      "back": "The **build-up of atheromas** (fatty deposits) in artery walls. It narrows the lumen and stiffens the wall.",
+      "hint": "Think about what builds up inside the artery over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b9ahrv",
+      "kind": "concept",
+      "front": "Why does a narrowed artery reduce the oxygen supply to the tissues beyond it?",
+      "back": "A narrower **lumen** offers more resistance, so less blood passes each minute. Tissues beyond the narrowing receive less oxygen and glucose.",
+      "hint": "Compare a wide pipe with a narrow one carrying the same pump pressure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1grzhqs",
+      "kind": "process",
+      "front": "How can a ruptured atheroma lead to a clot that blocks an artery?",
+      "back": "The atheroma surface cracks, exposing tissue beneath the **endothelium** to blood. Platelets stick to it, forming a clot (**thrombosis**) that can seal the narrow lumen.",
+      "hint": "Start from what happens to the surface of the atheroma first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qha5kj",
+      "kind": "process",
+      "front": "What happens first when the endothelium is damaged?",
+      "back": "The damaged area becomes inflamed and **white blood cells** move into the artery wall. This is the first stage of atherosclerosis.",
+      "hint": "Think about how the body responds to injury.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qjby9x",
+      "kind": "process",
+      "front": "How does a fatty streak grow into an atheroma?",
+      "back": "White cells take in cholesterol to form a fatty streak under the endothelium. Muscle cells and fibrous tissue gather around it, and over years it becomes an atheroma, sometimes with calcium salts.",
+      "hint": "Follow the order of events, starting with the white cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0edg7d0",
+      "kind": "term",
+      "front": "What is an atheroma?",
+      "back": "A **deposit** in an artery wall made of cholesterol, dead cells and fibrous tissue, sometimes with calcium salts. It is also called a plaque.",
+      "hint": "Think about where the deposit sits in the vessel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nq4lvz",
+      "kind": "concept",
+      "front": "Why can atherosclerosis go unnoticed for many years?",
+      "back": "It usually develops **without symptoms**. People often notice it only once blood flow has been badly reduced.",
+      "hint": "Consider when the narrowing becomes large enough to cause a problem.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q0ht7s",
+      "kind": "term",
+      "front": "What is the lumen of a blood vessel?",
+      "back": "The **hollow central space** through which blood flows.",
+      "hint": "It is the space inside the vessel, not the wall.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wpewfh",
+      "kind": "concept",
+      "front": "Why does a stiff artery wall cause blood pressure to rise?",
+      "back": "A stiff wall cannot stretch and recoil as the heart pumps, so pressure in the artery rises. This raised pressure can damage the endothelium further.",
+      "hint": "Compare an elastic tube with a rigid pipe when a pump pushes fluid through.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v17ll2",
+      "kind": "term",
+      "front": "What is thrombosis?",
+      "back": "The **formation of a blood clot** inside a blood vessel, which can block blood flow.",
+      "hint": "Platelets play a key role in this process.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d28501",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an atheroma usually blocks an artery completely?",
+      "back": "Atheromas narrow arteries **gradually**. Complete blockage is usually caused by a clot that forms on a ruptured atheroma.",
+      "hint": "Think about how fast the narrowing builds up compared with a sudden event.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16x5myz",
+      "kind": "term",
+      "front": "What is cardiovascular disease?",
+      "back": "Any **disease of the heart or blood vessels**, including coronary heart disease and stroke.",
+      "hint": "Think about which organs and vessels the circulation serves.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bjx13x",
+      "kind": "term",
+      "front": "What is coronary heart disease?",
+      "back": "A condition in which the **coronary arteries are narrowed** by atherosclerosis, reducing the blood supply to the heart muscle. It may cause chest pain during exertion.",
+      "hint": "Think about which organ the coronary arteries supply.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fzr8pw",
+      "kind": "concept",
+      "front": "How does a clot in a coronary artery cause a myocardial infarction?",
+      "back": "The clot **completely blocks** the coronary artery, so the heart muscle beyond it loses its oxygen supply and dies.",
+      "hint": "Consider what heart muscle needs in order to keep contracting.",
+      "sectionId": "s5"
+    }
+  ]
+}

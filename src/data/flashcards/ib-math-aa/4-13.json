@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-13",
+  "topicCode": "4.13",
+  "topicName": "Bayes' theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:50.224Z",
+  "cards": [
+    {
+      "id": "0gkes5f",
+      "kind": "formula",
+      "front": "What formula updates a probability after new evidence B arrives?",
+      "back": "**Bayes' theorem**: $P(A\\mid B)=\\frac{P(B\\mid A)\\,P(A)}{P(B)}$. The numerator is one route to the evidence, and the denominator is every route.",
+      "hint": "Start from P(A|B) = P(A and B)/P(B).",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vlt4i2",
+      "kind": "concept",
+      "front": "Why does the denominator P(B) in Bayes' theorem add more than one term?",
+      "back": "**Total probability**: evidence B can arise after A or after A', so $P(B)=P(B\\mid A)\\,P(A)+P(B\\mid A')\\,P(A')$ adds every route to B.",
+      "hint": "Which causes could have produced the evidence?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o0srma",
+      "kind": "mistake",
+      "front": "Can you swap P(pos given C) with P(C given pos) when reading a test's accuracy?",
+      "back": "**No**. $P(\\text{pos}\\mid C)$ and $P(C\\mid\\text{pos})$ answer different questions and are often very different. Mixing them up is the common error.",
+      "hint": "Check which event is the one being given.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ql7f7e",
+      "kind": "term",
+      "front": "What is a prior probability?",
+      "back": "The **prior probability** is the probability of an event held before new evidence is observed, such as $P(A)$.",
+      "hint": "Think 'before the evidence'.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p1sw9d",
+      "kind": "term",
+      "front": "What is a posterior probability?",
+      "back": "The **posterior probability** is the conditional probability of an event after new evidence is observed, such as $P(A\\mid B)$.",
+      "hint": "Think 'after the evidence'.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g676sz",
+      "kind": "formula",
+      "front": "State the law of total probability for an event A and its complement A'.",
+      "back": "$P(B)=P(B\\mid A)\\,P(A)+P(B\\mid A')\\,P(A')$. **Each term** is the chance of reaching B by one route.",
+      "hint": "Each term is one path to the evidence.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ukayiu",
+      "kind": "process",
+      "front": "What are the steps for solving a Bayes' problem with a tree diagram?",
+      "back": "Draw **causes** as first branches with priors, then **evidence** as second branches with conditionals. Multiply along paths, add the paths ending in the evidence, then divide the path through the cause of interest by that total.",
+      "hint": "Five steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11urw1e",
+      "kind": "example",
+      "front": "Machine A makes 60% of items, 2% defective. Machine B makes 40%, 5% defective. Given a defective item, what is P(A | defective)?",
+      "back": "**0.375**. Numerator $0.02\\times0.6=0.012$, total $P(\\text{defective})=0.032$, so $0.012/0.032=0.375$. This is below 0.6 because B is more often faulty.",
+      "hint": "Find the total defect rate first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1l8kyhp",
+      "kind": "example",
+      "front": "A condition affects 1% of people. A test is positive for 95% of those with it and 5% of those without. What is P(condition | positive)?",
+      "back": "**≈ 0.161**. Joint paths: $0.01\\times0.95=0.0095$ and $0.99\\times0.05=0.0495$. Total positive $0.059$, so $0.0095/0.059\\approx0.161$.",
+      "hint": "Add the two positive paths first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vlqoq8",
+      "kind": "concept",
+      "front": "Why can the posterior be only about 0.161 for a test that detects 95% of cases?",
+      "back": "The **prior** is small (1%), so healthy people are numerous, and their **false positives** outnumber the true positives. The posterior depends on both the prior and how often healthy people test positive.",
+      "hint": "Compare the sizes of the two groups.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0h6yy1x",
+      "kind": "example",
+      "front": "After one positive test gives a posterior of 0.161, what is the posterior after a second independent positive result?",
+      "back": "About **0.785**: $\\frac{0.161\\times0.95}{0.161\\times0.95+0.839\\times0.05}$. The old posterior becomes the new prior; this assumes the tests are independent given the true condition.",
+      "hint": "Use 0.161 as the new prior.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0o15eys",
+      "kind": "mistake",
+      "front": "A student uses only $P(B\\mid A)\\,P(A)$ as the denominator in Bayes' theorem. What is wrong?",
+      "back": "**The denominator must include every route** to B, so add $P(B\\mid A')\\,P(A')$ too. The numerator is only one route, so it cannot also be the total.",
+      "hint": "Count every path that leads to B.",
+      "sectionId": "s3"
+    }
+  ]
+}

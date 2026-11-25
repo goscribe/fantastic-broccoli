@@ -1,0 +1,100 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Constant, sum, difference and constant multiple rules",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:44.402Z",
+  "cards": [
+    {
+      "id": "08k3683",
+      "kind": "concept",
+      "front": "What is the derivative of a constant function, and why?",
+      "back": "**Zero**. A constant function has a horizontal graph, so its slope is zero everywhere.",
+      "hint": "Think about the slope of a flat line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "10lb5n1",
+      "kind": "concept",
+      "front": "How do you differentiate a sum of functions such as $f(x)=g(x)+h(x)$?",
+      "back": "**Differentiate each term separately and add**: $f'(x)=g'(x)+h'(x)$. This works for more than two terms too.",
+      "hint": "Each term gets its own derivative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cu1vdu",
+      "kind": "formula",
+      "front": "What does the constant multiple rule say about $f(x)=c g(x)$, where $c$ is a constant?",
+      "back": "$f'(x)=c g'(x)$. The constant factor **stays in front** of the derivative.",
+      "hint": "Pull the constant outside before differentiating.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0e6j889",
+      "kind": "term",
+      "front": "What is the constant rule?",
+      "back": "**The derivative of a constant function is zero**: if $f(x)=c$, then $f'(x)=0$.",
+      "hint": "Constant means it never changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tnd6iy",
+      "kind": "term",
+      "front": "What is the difference rule?",
+      "back": "**The derivative of a difference equals the difference of the derivatives**: if $f(x)=g(x)-h(x)$, then $f'(x)=g'(x)-h'(x)$.",
+      "hint": "Compare it with the sum rule.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "184jn9d",
+      "kind": "mistake",
+      "front": "Why is it wrong to differentiate $f(x)=g(x)-h(x)$ as $g'(x)+h'(x)$?",
+      "back": "**It changes the sign**. The correct derivative is $g'(x)-h'(x)$; the minus sign stays with the second derivative.",
+      "hint": "Do not turn subtraction into addition.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xu9pda",
+      "kind": "mistake",
+      "front": "For $f(x)=x+7$, does the constant 7 change the derivative?",
+      "back": "**No**. The derivative of 7 is 0, so $f'(x)=1$. Differentiate the constant term as zero and keep the rest.",
+      "hint": "What is the derivative of a number on its own?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qg326o",
+      "kind": "example",
+      "front": "Find $f'(x)$ if $f(x)=x+2x+5$.",
+      "back": "$f'(x)=3$. The derivatives are $1+2+0$. Simplifying first to $3x+5$ gives the same answer.",
+      "hint": "Differentiate each term, then add.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d68kl0",
+      "kind": "example",
+      "front": "Find $f'(x)$ if $f(x)=8-x$.",
+      "back": "$f'(x)=-1$, since $f'(x)=0-1$.",
+      "hint": "Keep the minus sign on the derivative of $x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vpbhl0",
+      "kind": "process",
+      "front": "What are the steps to differentiate $f(x)=4x-3(2x+1)+7$?",
+      "back": "1) Differentiate the parts: $(4x)'=4$, $(2x+1)'=2$, $(7)'=0$. 2) Keep the factor and sign: $4-3(2)+0$. 3) Simplify to get $-2$.",
+      "hint": "Work part by part, then combine.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1fwzwu4",
+      "kind": "example",
+      "front": "Find $f'(x)$ if $f(x)=4x-3(2x+1)+7$.",
+      "back": "$f'(x)=-2$, since $4-6+0=-2$.",
+      "hint": "Apply the constant factor 3 to the derivative of $2x+1$.",
+      "sectionId": "s4"
+    }
+  ]
+}

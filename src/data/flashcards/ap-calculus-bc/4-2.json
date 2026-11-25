@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Straight-line motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:12.340Z",
+  "cards": [
+    {
+      "id": "1xs79hs",
+      "kind": "formula",
+      "front": "What is velocity in terms of position, and what does it measure?",
+      "back": "$v(t)=x'(t)=\\frac{dx}{dt}$: **velocity** is the derivative of position with respect to time. It measures the instantaneous change in position.",
+      "hint": "Think about how position changes at one instant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ip8obk",
+      "kind": "concept",
+      "front": "How can you tell whether an object is at rest, and which way it moves?",
+      "back": "It is **at rest** when $v(t)=0$. It moves in the positive direction where $v(t)>0$ and in the negative direction where $v(t)<0$.",
+      "hint": "Look at the sign of velocity.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ckwdal",
+      "kind": "concept",
+      "front": "When does an object speed up?",
+      "back": "When velocity and acceleration have the **same sign**. If their signs differ, the object slows down.",
+      "hint": "Compare the signs of v and a.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q9svk2",
+      "kind": "term",
+      "front": "What is displacement, and how does it differ from distance traveled?",
+      "back": "**Displacement** is final position minus initial position, $x(t_2)-x(t_1)$, and it keeps its sign. Distance traveled does not include direction.",
+      "hint": "Does the direction of movement matter?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "137r3mo",
+      "kind": "mistake",
+      "front": "Does a negative position mean an object is moving backward?",
+      "back": "**No**. Position gives location relative to the origin. Velocity gives direction.",
+      "hint": "Position and velocity answer different questions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17gp38x",
+      "kind": "mistake",
+      "front": "Does negative acceleration always mean an object is slowing down?",
+      "back": "**No**. An object moving in the negative direction can speed up while acceleration is negative. Compare the signs of velocity and acceleration.",
+      "hint": "Check the sign of velocity too.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qylomm",
+      "kind": "mistake",
+      "front": "Does every zero of velocity mark a change in direction?",
+      "back": "**No**. Velocity can have the same sign on both sides of a zero, so the direction does not change there. Check the signs on each side.",
+      "hint": "Test the sign of velocity just before and after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pwit0x",
+      "kind": "formula",
+      "front": "What is acceleration in terms of velocity and position, and what units does it use?",
+      "back": "$a(t)=v'(t)=x''(t)$: **acceleration** is the derivative of velocity. With position in meters and time in seconds, it uses $\\mathrm{m/s^2}$.",
+      "hint": "Differentiate velocity once more.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ak3ow6",
+      "kind": "process",
+      "front": "What are the steps to find rest times and direction of motion over a time interval?",
+      "back": "1) Solve $v(t)=0$ to find rest times. 2) Check the sign of $v(t)$ between those times. Positive means the positive direction and negative means the negative direction.",
+      "hint": "Start by solving for where velocity is zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "115zuyf",
+      "kind": "example",
+      "front": "For $0\\leq t\\leq4$, $x(t)=t^2-4t+3$ meters. When does the object rest, and which way does it move before and after?",
+      "back": "It rests at $t=2$ seconds. It moves in the negative direction before $t=2$ and in the positive direction after, since $v(t)=2t-4$.",
+      "hint": "Differentiate, then solve $v(t)=0$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gl3eie",
+      "kind": "example",
+      "front": "For $x(t)=t^2-4t+3$ meters, find $v(1)$ and $a(1)$.",
+      "back": "$v(1)=-2\\,\\mathrm{m/s}$ and $a(1)=2\\,\\mathrm{m/s^2}$, since $v(t)=2t-4$ and $a(t)=2$.",
+      "hint": "Differentiate twice, then substitute $t=1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0z1gzlg",
+      "kind": "concept",
+      "front": "What does a horizontal tangent on a position graph tell you?",
+      "back": "The object is **at rest** at that instant, so velocity is zero. A rising position graph means positive velocity, and a falling one means negative velocity.",
+      "hint": "Relate the slope of the tangent to velocity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rcrsxo",
+      "kind": "concept",
+      "front": "What does the height of an acceleration graph show?",
+      "back": "The **sign of acceleration**, not the direction of motion. Compare it with velocity to decide whether speed increases or decreases.",
+      "hint": "Acceleration and direction are different things.",
+      "sectionId": "s4"
+    }
+  ]
+}

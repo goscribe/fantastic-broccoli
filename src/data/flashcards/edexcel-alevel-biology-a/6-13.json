@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-13",
+  "topicCode": "6.13",
+  "topicName": "The evolutionary race with pathogens",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:43.398Z",
+  "cards": [
+    {
+      "id": "10mr3ea",
+      "kind": "concept",
+      "front": "Which process turns random pathogen mutations into lasting change in a population?",
+      "back": "**Natural selection**: variants that survive and reproduce best pass their alleles on, so those alleles become more common over generations.",
+      "hint": "Mutation supplies the variation; what decides which variants spread?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "102iw8v",
+      "kind": "process",
+      "front": "What are the steps by which antibiotic resistance spreads through a bacterial population?",
+      "back": "A random **mutation** gives one cell resistance. The antibiotic kills susceptible bacteria, the resistant cell survives and reproduces, and the resistance allele becomes more common over generations.",
+      "hint": "Start with what happens before any antibiotic is used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o72b91",
+      "kind": "concept",
+      "front": "How does antigenic variation let a pathogen infect the same person again?",
+      "back": "A mutation changes the pathogen's **antigens**, so existing memory cells may no longer recognise it and the immune response is slower.",
+      "hint": "Think about what memory cells are built to recognise.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "009ko3g",
+      "kind": "term",
+      "front": "What is a strain of a pathogen?",
+      "back": "A **strain** is a genetically distinct variant of a pathogen species, often with different antigens.",
+      "hint": "Influenza provides a useful example.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19ttmji",
+      "kind": "term",
+      "front": "What is evolution in terms of a population?",
+      "back": "**Evolution** is a change in allele frequency in a population across generations.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ruddda",
+      "kind": "term",
+      "front": "What is a mutation?",
+      "back": "A **mutation** is a random change in a pathogen's genetic material. Most have no effect or are harmful, and a few give an advantage.",
+      "hint": "Think about what can go wrong when genetic material is copied.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vpfqbl",
+      "kind": "formula",
+      "front": "What equation gives the percentage of resistant bacteria in a population?",
+      "back": "Percentage resistant = $\\frac{\\text{resistant bacteria}}{\\text{total bacteria}}\\times100$, where both counts are numbers of bacteria and the result is a percentage (%).",
+      "hint": "Divide the part you want by the whole, then convert to a percentage.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0l6t4a0",
+      "kind": "example",
+      "front": "A culture has 10 000 bacteria, 100 of them resistant. An antibiotic kills all susceptible ones. What is the percentage resistant afterwards?",
+      "back": "**$100\\%$**: before treatment it was $1.0\\%$, but only the 100 resistant bacteria survive, so $\\frac{100}{100}\\times100=100\\%$.",
+      "hint": "Work out the new total first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w4jmfo",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an antibiotic causes resistance mutations?",
+      "back": "The antibiotic does not cause the mutation. Resistance arises by **chance**, and the antibiotic selects the bacteria that already carry it.",
+      "hint": "Think about when the mutation happens compared with when the drug is given.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12pvn8x",
+      "kind": "concept",
+      "front": "How can resistance genes spread between bacteria?",
+      "back": "They pass between bacteria on **plasmids**, which are small rings of DNA.",
+      "hint": "Consider DNA that is not in the main chromosome.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n7ik0l",
+      "kind": "mistake",
+      "front": "Why is stopping an antibiotic course early a problem?",
+      "back": "It leaves some bacteria alive, and these may be resistant, so they survive and spread the resistance.",
+      "hint": "Think about which bacteria are left when treatment stops early.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ub21ee",
+      "kind": "concept",
+      "front": "How are seasonal influenza vaccines kept effective over time?",
+      "back": "They are reviewed regularly and **updated** to match the strains expected to circulate.",
+      "hint": "Think about why last year's strain may differ from this year's.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bnn9lz",
+      "kind": "concept",
+      "front": "Why are new vaccines also needed for newly emerging pathogens?",
+      "back": "The population has never met these pathogens, so no memory cells exist for them, and developing a vaccine takes time.",
+      "hint": "Think about what memory cells need in order to exist.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wh0qhi",
+      "kind": "concept",
+      "front": "Which measures slow the evolutionary race between pathogens and medicine?",
+      "back": "Use antibiotics only when needed, complete courses, vaccinate widely, update vaccines and practise good hygiene. Fewer infections mean fewer chances for useful mutations to spread.",
+      "hint": "Think about reducing both selection pressure and spread.",
+      "sectionId": "s6"
+    }
+  ]
+}

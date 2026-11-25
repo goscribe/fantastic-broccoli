@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-6-3",
+  "topicCode": "3.6.3",
+  "topicName": "Skeletal muscle contraction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:44.947Z",
+  "cards": [
+    {
+      "id": "0vbqh4w",
+      "kind": "term",
+      "front": "What is the sliding filament model?",
+      "back": "The **sliding filament model** explains contraction as actin sliding past myosin, shortening sarcomeres without either filament getting shorter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jvka1u",
+      "kind": "process",
+      "front": "What happens first, after an electrical impulse reaches a contracting muscle fibre, to release calcium?",
+      "back": "The impulse travels along the **sarcolemma** and down the transverse tubules, causing the **sarcoplasmic reticulum** to release $\\text{Ca}^{2+}$ ions.",
+      "hint": "Trace the impulse from the cell surface into the fibre's interior.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j1ji8k",
+      "kind": "concept",
+      "front": "Why are slow fibres suited to sustained activity such as maintaining posture?",
+      "back": "They have many mitochondria, a rich blood supply and much **myoglobin** storing oxygen, which supports aerobic respiration and resists fatigue.",
+      "hint": "Think about how each fibre type keeps supplied with energy over a long time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i1ab4y",
+      "kind": "term",
+      "front": "What is a sarcomere?",
+      "back": "A **sarcomere** is the repeating unit of a myofibril, lying between two adjacent Z lines.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a36t8x",
+      "kind": "term",
+      "front": "What is the role of troponin in muscle contraction?",
+      "back": "**Troponin** binds $\\text{Ca}^{2+}$ ions and changes shape, so tropomyosin moves aside and exposes myosin-binding sites on actin.",
+      "hint": "Think about the protein that sits on the thin filament near the binding sites.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qnxq73",
+      "kind": "process",
+      "front": "What are the steps of the cross-bridge cycle as a myosin head pulls actin?",
+      "back": "The head attaches to actin, forming a **cross-bridge**; it changes angle to pull actin towards the centre, then releases, returns to its starting position and can reattach.",
+      "hint": "Start from the moment the head meets an exposed binding site.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s8dekp",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that myosin filaments shrink during contraction?",
+      "back": "Filaments do not shrink; they slide past each other, increasing overlap. The length of the myosin filaments stays unchanged.",
+      "hint": "Think about what the two filaments are doing relative to each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hepi4l",
+      "kind": "concept",
+      "front": "What is the difference between ATP binding and ATP hydrolysis in a myosin head?",
+      "back": "**ATP binding** makes myosin detach from actin, while **ATP hydrolysis** energises the head so it can return to its starting position and reattach.",
+      "hint": "Consider what each step does to the attachment between myosin and actin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dyxrbr",
+      "kind": "term",
+      "front": "What is the role of phosphocreatine during contraction?",
+      "back": "**Phosphocreatine** rapidly regenerates ATP by transferring a phosphate group to ADP, but its limited supply only sustains contraction for a short time.",
+      "hint": "Compare how quickly it supplies ATP with how much is stored.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wnwptm",
+      "kind": "mistake",
+      "front": "Why is it wrong to think fast fibres rely exclusively on anaerobic respiration?",
+      "back": "Fast fibres can also respire aerobically. They generate ATP rapidly through anaerobic respiration, but this is not their only pathway.",
+      "hint": "Think about what happens to fast fibres during sustained activity, not just short bursts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zyio96",
+      "kind": "term",
+      "front": "What are muscle fibres?",
+      "back": "**Muscle fibres** are long, multinucleate skeletal muscle cells containing many parallel myofibrils.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p5v2m8",
+      "kind": "concept",
+      "front": "Why does skeletal muscle look striped under a microscope?",
+      "back": "The orderly arrangement of **actin** and myosin filaments gives the striped appearance; regions where they overlap look darker.",
+      "hint": "Consider how the thick and thin filaments are positioned along each myofibril.",
+      "sectionId": "s1"
+    }
+  ]
+}

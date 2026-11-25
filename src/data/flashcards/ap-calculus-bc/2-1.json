@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Average and instantaneous rates of change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:56.217Z",
+  "cards": [
+    {
+      "id": "1h4athg",
+      "kind": "formula",
+      "front": "What is the formula for the average rate of change of f from x=a to x=b?",
+      "back": "$\\frac{f(b)-f(a)}{b-a}$, where $a\\ne b$. This is the **average rate**: the output change divided by the input change, in output units per input unit.",
+      "hint": "Divide the full change in output by the full change in input.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "137pz3n",
+      "kind": "formula",
+      "front": "How is the instantaneous rate of change of f at x=a written as a limit?",
+      "back": "$\\lim_{h\\to0}\\frac{f(a+h)-f(a)}{h}$, if the limit exists. This is the **instantaneous rate**, which is also the slope of the tangent line at $x=a$.",
+      "hint": "Let the interval width h shrink toward zero, but never equal zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f6yg7z",
+      "kind": "concept",
+      "front": "How does a secant line's slope lead to an instantaneous rate?",
+      "back": "Move one endpoint closer to the other. The **secant line** changes, and its slope may approach a value that describes change at just one time.",
+      "hint": "Think about what happens as the two points get closer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15yvf4f",
+      "kind": "term",
+      "front": "What is a secant line?",
+      "back": "A **secant line** is a line through two distinct points on a graph. Its slope equals the average rate of change between those points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "153dihg",
+      "kind": "process",
+      "front": "What are the steps to find an instantaneous rate at x=a using a limit?",
+      "back": "1) Write $\\frac{f(a+h)-f(a)}{h}$. 2) Simplify for $h\\ne0$ so that the **h cancels**. 3) Take the limit as $h\\to0$.",
+      "hint": "Cancel h before taking the limit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rac4yx",
+      "kind": "example",
+      "front": "For $x(t)=t^2+2t$ meters, what is the average velocity from t=1 to t=3 seconds?",
+      "back": "**6 m/s**. The positions are $x(1)=3$ and $x(3)=15$, so $\\frac{15-3}{3-1}=6$.",
+      "hint": "Find both positions first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j7x7hl",
+      "kind": "example",
+      "front": "For $x(t)=t^2+2t$ meters, what is the instantaneous velocity at t=1 second?",
+      "back": "**4 m/s**. The difference quotient simplifies to $4+h$ for $h\\ne0$, and its limit as $h\\to0$ is 4.",
+      "hint": "Simplify $\\frac{(1+h)^2+2(1+h)-3}{h}$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1i5bebd",
+      "kind": "example",
+      "front": "For $x(t)=t^2+2t$, what average velocity does the interval from t=1 to t=1.1 seconds give?",
+      "back": "**4.1 m/s**. Since $x(1.1)=3.41$ and $x(1)=3$, the average is $\\frac{0.41}{0.1}=4.1$. Shorter intervals from 1 second give averages closer to 4 m/s.",
+      "hint": "Find x(1.1) and x(1), then divide by the time change.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0bnyk23",
+      "kind": "mistake",
+      "front": "A student calculates average rate as $\\frac{f(b)-f(a)}{b}$. What is wrong?",
+      "back": "The **denominator** must be the full input change $b-a$, not $b$ alone. The correct form is $\\frac{f(b)-f(a)}{b-a}$.",
+      "hint": "Check how much the input actually changed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aqoiyp",
+      "kind": "concept",
+      "front": "What do the signs of a secant line's slope tell you?",
+      "back": "A **positive** slope means the output increased across the interval. A negative slope means it decreased. A zero slope means the endpoint outputs match, though the function may have changed between them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03vsuj0",
+      "kind": "example",
+      "front": "A reservoir's water level has an instantaneous rate of -2 cm per hour at noon. What does this mean?",
+      "back": "At noon the level is **falling** at 2 centimeters per hour. It does not mean the level drops 2 centimeters during every hour.",
+      "hint": "Separate the instant from the whole hour.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tw44r9",
+      "kind": "concept",
+      "front": "Why can't one average rate describe every moment within an interval?",
+      "back": "An average gives one value for the whole interval, so it **hides** variation inside it. An instantaneous rate describes change at one chosen point, not total change across a trip.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1axir8k",
+      "kind": "mistake",
+      "front": "Why can't you substitute h=0 directly into the difference quotient?",
+      "back": "Dividing by zero is undefined, so $h\\ne0$ is required. The **limit** asks what the quotient approaches as nonzero h gets closer to zero.",
+      "hint": "What happens to the denominator?",
+      "sectionId": "s5"
+    }
+  ]
+}

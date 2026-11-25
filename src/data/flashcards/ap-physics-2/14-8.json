@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-8",
+  "topicCode": "14.8",
+  "topicName": "Double slits and diffraction gratings",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:52.095Z",
+  "cards": [
+    {
+      "id": "0j9d27n",
+      "kind": "concept",
+      "front": "Why does light through two closely spaced slits make a pattern of bright and dark bands on a screen?",
+      "back": "**Interference**: light from the two slits overlaps. Crests meeting crests add to make a bright fringe, and crests meeting troughs cancel to make a dark fringe.",
+      "hint": "Think about what happens when two overlapping waves meet.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xi3oeh",
+      "kind": "formula",
+      "front": "Which equation gives the angles of the bright fringes for a double slit or diffraction grating?",
+      "back": "$d\\sin\\theta=m\\lambda$. Here $d$ is slit spacing (m), $\\theta$ is the angle from the central line, $m$ is the **order** (a whole number), and $\\lambda$ is the wavelength (m).",
+      "hint": "Think about when crests from the two slits arrive together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vzvui8",
+      "kind": "formula",
+      "front": "On a distant screen, how far is a bright fringe from the center?",
+      "back": "$x\\approx\\frac{m\\lambda L}{d}$. Here $x$ is the distance from the center (m), $m$ is the order, $\\lambda$ is the wavelength (m), $L$ is the slits-to-screen distance (m), and $d$ is the slit spacing (m).",
+      "hint": "Combine $\\sin\\theta\\approx\\frac{x}{L}$ with $d\\sin\\theta=m\\lambda$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1r82yre",
+      "kind": "term",
+      "front": "What is a coherent source?",
+      "back": "A source whose waves keep a **fixed timing relationship** with another source's waves, so the interference pattern stays steady.",
+      "hint": "Both slits are lit by the same source.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "159ryzv",
+      "kind": "concept",
+      "front": "What path difference produces a dark fringe?",
+      "back": "An **odd number of half wavelengths**. A crest meets a trough, the waves cancel (destructive interference), and the spot is dark.",
+      "hint": "Crest against trough.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0515ti4",
+      "kind": "term",
+      "front": "What is the order of a bright fringe?",
+      "back": "The whole number $m$ that counts fringes outward from the central bright fringe, which has $m=0$.",
+      "hint": "Count outward from the center.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e3nrb8",
+      "kind": "example",
+      "front": "Light of wavelength 600 nm passes through two slits 0.30 mm apart. The screen is 2.0 m away. How far from the center is the first bright fringe?",
+      "back": "About **4.0 mm**. Using $x=\\frac{(1)(6.0\\times10^{-7})(2.0)}{3.0\\times10^{-4}}=4.0\\times10^{-3}\\,\\mathrm{m}$.",
+      "hint": "Convert every length to meters before you substitute.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "093m9i3",
+      "kind": "process",
+      "front": "What steps do you follow to find a bright fringe position from $x\\approx\\frac{m\\lambda L}{d}$?",
+      "back": "1) Convert wavelength, slit spacing and screen distance to meters. 2) Substitute these and the order $m$ into the equation. 3) Calculate $x$ and give it in mm if helpful.",
+      "hint": "A missed unit conversion changes the answer by a large factor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u8fqhd",
+      "kind": "concept",
+      "front": "How does changing the wavelength or slit spacing change the fringe spacing?",
+      "back": "Fringe spacing is about $\\frac{\\lambda L}{d}$. A **longer wavelength** spreads fringes farther apart, and a **larger slit spacing** crowds them closer together.",
+      "hint": "Check which quantity sits in the denominator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0cvntv8",
+      "kind": "mistake",
+      "front": "A student says moving the slits closer together squeezes the fringes closer together. Is this right?",
+      "back": "No. Smaller $d$ **spreads the fringes farther apart**, because $d$ is in the denominator of $\\frac{\\lambda L}{d}$.",
+      "hint": "Look at where $d$ sits in the spacing formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r13e4z",
+      "kind": "concept",
+      "front": "What is a diffraction grating and what pattern does it make?",
+      "back": "A surface with many equally spaced slits. It makes **narrow, sharp bright spots** at angles where $d\\sin\\theta=m\\lambda$, with wide dark gaps between them.",
+      "hint": "Many slits instead of two.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hpq1ui",
+      "kind": "concept",
+      "front": "Why do more slits make each bright spot narrower?",
+      "back": "Off the bright angle, waves from slits far apart **cancel more completely** when there are more slits, so the bright spot becomes sharper.",
+      "hint": "Think about waves from slits far apart moving slightly off the bright angle.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-4-6",
+  "topicCode": "3.4.6",
+  "topicName": "Biodiversity within a community",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:25.958Z",
+  "cards": [
+    {
+      "id": "0raf9nh",
+      "kind": "concept",
+      "front": "Why is species richness alone not enough to describe biodiversity in a community?",
+      "back": "Richness ignores how individuals are spread between species. A community with **evenly distributed** numbers is more diverse than one where a single species greatly outnumbers the rest.",
+      "hint": "Think about the count of each species, not just how many species there are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1keq1so",
+      "kind": "formula",
+      "front": "What does $N$ stand for in the index of diversity formula $d=\\frac{N(N-1)}{\\sum n(n-1)}$?",
+      "back": "**N** is the total number of individuals of all species. Each $n$ is the count for one species, and a higher $d$ means greater diversity in the samples compared.",
+      "hint": "Consider which counts are added up in the bottom line of the formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "034cv5w",
+      "kind": "concept",
+      "front": "How can limited light change the animals a habitat supports?",
+      "back": "Fewer **plant species** may grow where light is limited. This can change the animals the habitat supports, since many animals depend on those plants.",
+      "hint": "Follow the effect from plants to the animals that rely on them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ufd1zv",
+      "kind": "term",
+      "front": "What is a community in ecology?",
+      "back": "A **community** consists of populations of different species living and interacting in the same area.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d7tn69",
+      "kind": "term",
+      "front": "What is species richness?",
+      "back": "**Species richness** is the number of different species recorded in an area or sample.",
+      "hint": "Compare it with abundance, which counts individuals of one species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "032iv1o",
+      "kind": "term",
+      "front": "What is the abundance of a species?",
+      "back": "**Abundance** is the number of individuals of that species in an area.",
+      "hint": "Think about how many of one kind are present, not how many kinds there are.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yulhpz",
+      "kind": "term",
+      "front": "What is a quadrat used for in sampling?",
+      "back": "A **quadrat** is a frame marking a defined area in which organisms can be counted.",
+      "hint": "Think of the tool placed on the ground during field sampling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0dz3u13",
+      "kind": "term",
+      "front": "What is a transect used to show in a habitat?",
+      "back": "A **transect** is a line along which organisms are recorded, showing how communities change across an area. It does not replace random sampling.",
+      "hint": "Picture a line running across the habitat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03rmz4e",
+      "kind": "concept",
+      "front": "What is the difference between abiotic and biotic factors?",
+      "back": "**Abiotic factors** are non-living conditions such as light and soil pH. **Biotic factors** are effects that living organisms have on others, such as competition and predation.",
+      "hint": "Sort the factors by whether the cause is a living organism.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wtvvh8",
+      "kind": "process",
+      "front": "What are the steps for estimating richness and abundance in a plant habitat using quadrats?",
+      "back": "Place quadrats at **randomly selected positions**, identify each species, count its individuals in every quadrat, then combine the records to estimate richness and compare abundance.",
+      "hint": "Start with where the quadrats go.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00nyab2",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume one factor explains every difference between two habitats?",
+      "back": "**Several factors often act together**, and sampling conditions can also affect the recorded results, so one cause is rarely enough to explain the differences.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bf09yb",
+      "kind": "mistake",
+      "front": "Why must sampling effort be the same when comparing the richness of two habitats?",
+      "back": "A larger sample may look richer simply because **more organisms were counted**. Use the same sampling effort, method and area so the comparison is fair.",
+      "hint": "Think about what changes when you sample more of the habitat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qi22p0",
+      "kind": "example",
+      "front": "Community A has counts of 4, 3 and 2 (N = 9). What is its index of diversity?",
+      "back": "$d=72/20=3.6$. The denominator is $\\sum n(n-1)=4(3)+3(2)+2(1)=20$, and $N(N-1)=9(8)=72$.",
+      "hint": "Work out N(N-1) first, then the sum across species.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lsa946",
+      "kind": "example",
+      "front": "What is the index of diversity for community B, with counts of 7, 1 and 1?",
+      "back": "$d=72/42\\approx1.71$. B has a lower index than A (3.6) because one species dominates the sample.",
+      "hint": "A species with only one individual contributes nothing to the sum.",
+      "sectionId": "s4"
+    }
+  ]
+}

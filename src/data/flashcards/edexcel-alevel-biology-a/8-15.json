@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-15",
+  "topicCode": "8.15",
+  "topicName": "Drugs and synaptic transmission",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:26.200Z",
+  "cards": [
+    {
+      "id": "0bcjqoh",
+      "kind": "concept",
+      "front": "Why can a small dose of a drug change behaviour so much?",
+      "back": "Each drug alters a single **step** in synaptic transmission. That one change can have a large effect on the whole signal.",
+      "hint": "Think about how many steps a signal passes through at a synapse.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s9oyjc",
+      "kind": "concept",
+      "front": "What is the difference between an agonist and an antagonist?",
+      "back": "An **agonist** binds to a receptor and triggers the same response as the natural neurotransmitter. An **antagonist** binds to the receptor but triggers no response, so the neurotransmitter cannot bind.",
+      "hint": "Consider what happens to the receiving cell after the drug binds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0khagot",
+      "kind": "example",
+      "front": "How does cocaine act as a stimulant?",
+      "back": "It **blocks reuptake** of dopamine, so dopamine stays in the gap and keeps stimulating the receiving cell, raising nervous system activity.",
+      "hint": "Think about how dopamine is normally removed from the gap.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r5bn6e",
+      "kind": "term",
+      "front": "What is a synapse?",
+      "back": "A **synapse** is a junction through which a neurone communicates with another cell. The two cells do not touch, so a chemical crosses the gap.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hj7rt1",
+      "kind": "term",
+      "front": "What is a neurotransmitter?",
+      "back": "A **neurotransmitter** is a chemical released at a synapse. It diffuses across the gap and binds to receptors on the receiving cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qgrjrv",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an antagonist stops the neurotransmitter being released?",
+      "back": "An antagonist does not affect **release**. It occupies the receptor, so the neurotransmitter cannot have an effect there.",
+      "hint": "Compare where the drug acts with where the neurotransmitter is made and released.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p0p4ey",
+      "kind": "example",
+      "front": "What does curare do at muscle cells, and what is the result?",
+      "back": "Curare is an **antagonist** that blocks acetylcholine receptors on muscle cells. Acetylcholine cannot bind, so the muscle cannot respond and the person is paralysed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yrzq6m",
+      "kind": "example",
+      "front": "Which neurotransmitter does nicotine mimic, and what does it do at its receptors?",
+      "back": "Nicotine mimics **acetylcholine**. It binds to receptors that normally bind acetylcholine and triggers impulses in the receiving cell.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l3obql",
+      "kind": "term",
+      "front": "What is reuptake?",
+      "back": "**Reuptake** is the transport of neurotransmitter from the synaptic gap back into the neurone that released it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rewjpo",
+      "kind": "term",
+      "front": "What does acetylcholinesterase do in the synaptic gap?",
+      "back": "It is an **enzyme** that breaks down acetylcholine, ending its action on the receptor.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12arf5z",
+      "kind": "example",
+      "front": "How do nerve agents affect acetylcholine in the synapse?",
+      "back": "They **inhibit acetylcholinesterase**, so acetylcholine is not broken down and keeps acting on the receptor.",
+      "hint": "Think about what normally removes acetylcholine from the gap.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ce6lkh",
+      "kind": "concept",
+      "front": "What is the difference between a stimulant and a depressant?",
+      "back": "A **stimulant** increases nervous system activity, so signals pass more readily across synapses. A **depressant** decreases it, making the receiving cell less likely to produce an impulse."
+    },
+    {
+      "id": "0deej0c",
+      "kind": "concept",
+      "front": "Why does a person need a larger dose to get the same effect after regular use?",
+      "back": "This is **tolerance**. The receiving cell responds less strongly, either because it has fewer receptors or because its receptors respond less.",
+      "hint": "Think about what changes in the receiving cell with repeated use.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12jwlkv",
+      "kind": "example",
+      "front": "What does alcohol do to GABA, and why does this slow the nervous system?",
+      "back": "Alcohol **increases the effect of GABA** at its receptors. GABA is an inhibitory neurotransmitter, so the receiving cell becomes less likely to produce an impulse.",
+      "hint": "Consider whether GABA makes an impulse more or less likely.",
+      "sectionId": "s5"
+    }
+  ]
+}

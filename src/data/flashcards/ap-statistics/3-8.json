@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "3-8",
+  "topicCode": "3.8",
+  "topicName": "Errors in tests",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:18.456Z",
+  "cards": [
+    {
+      "id": "1kdtj1o",
+      "kind": "term",
+      "front": "What is a Type I error?",
+      "back": "Rejecting a **true** null hypothesis: a false alarm, where the sample suggests a difference that does not really exist. Its probability equals $\\alpha$.",
+      "hint": "Think of it as a false positive.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "114xrab",
+      "kind": "term",
+      "front": "What is a Type II error?",
+      "back": "Failing to reject a **false** null hypothesis: a missed detection, where a real difference exists but the sample does not reveal it. Its probability is $\\beta$.",
+      "hint": "Think of it as a false negative.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rw9qeo",
+      "kind": "concept",
+      "front": "Why can't we make both Type I and Type II errors rare at the same time?",
+      "back": "With a fixed sample size the two risks pull against each other. Lowering $\\alpha$ makes rejection harder, which **raises** $\\beta$ and lowers power.",
+      "hint": "Think about what happens when rejecting becomes harder.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f9boo0",
+      "kind": "formula",
+      "front": "How is the power of a test related to $\\beta$?",
+      "back": "Power is the chance of **rejecting** a false null hypothesis, and power $=1-\\beta$. If $\\beta=0.20$, the power is $0.80$.",
+      "hint": "Power and beta add up to one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dide27",
+      "kind": "mistake",
+      "front": "Does $\\alpha = 0.05$ mean there is a 5% chance the null hypothesis is true?",
+      "back": "No. $\\alpha$ is the probability of **rejecting** the null hypothesis when it is true, not the chance that the null hypothesis is true.",
+      "hint": "Ask what $\\alpha$ is conditional on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "130pnyq",
+      "kind": "mistake",
+      "front": "Why should you write 'fail to reject' rather than 'accept' the null hypothesis?",
+      "back": "A Type II error means the test found **no convincing evidence**, not that no effect exists. So 'accept' wrongly suggests the null hypothesis has been proven.",
+      "hint": "What does a non-significant result actually show?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b4c1ku",
+      "kind": "concept",
+      "front": "Which three changes reduce $\\beta$ and raise power?",
+      "back": "A **larger sample size** leaves $\\alpha$ unchanged. A **larger $\\alpha$** lowers $\\beta$ but raises the Type I risk. A true value **farther from the null value** lowers $\\beta$.",
+      "hint": "One is about data, one about the cutoff, one about the truth.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r16plz",
+      "kind": "mistake",
+      "front": "Does a larger sample size lower the chance of a Type I error?",
+      "back": "No. A larger sample lowers $\\beta$ and raises power, but $\\alpha$ stays the same, so the Type I risk is unchanged.",
+      "hint": "Which probability does the sample size control?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lvfv63",
+      "kind": "example",
+      "front": "For $H_0: p=0.10$ versus $H_a: p>0.10$, where $p$ is the proportion of defective loaves, what is a Type I error in context?",
+      "back": "Concluding that the proportion of defective loaves exceeds 0.10 when the true proportion really is 0.10.",
+      "hint": "Name the parameter, the truth, and the conclusion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bp7the",
+      "kind": "example",
+      "front": "In the drug test $H_0: p=0.70$ versus $H_a: p>0.70$, what is the consequence of a Type II error?",
+      "back": "Patients **miss a drug** that would have cured more people, because the test shows no convincing improvement while the true proportion is above 0.70.",
+      "hint": "Consider who loses out when a real improvement is missed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xrbd9h",
+      "kind": "concept",
+      "front": "Why is neither error always the worse one?",
+      "back": "The cost of each error depends on the harm it causes. For unsafe syringes a Type II error ships an unsafe batch, so a researcher may accept a larger $\\alpha$ to lower $\\beta$.",
+      "hint": "Compare the harm in each setting.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0x99a4f",
+      "kind": "example",
+      "front": "In a test of whether a bridge is safe to carry traffic, which error is more serious, and why?",
+      "back": "A **Type II error** is more serious: it leaves an unsafe bridge open, risking injury or loss of life. A Type I error only closes a safe bridge, which costs money and causes inconvenience.",
+      "hint": "Weigh the harm to people against the cost of closure.",
+      "sectionId": "s5"
+    }
+  ]
+}

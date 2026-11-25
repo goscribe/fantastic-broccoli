@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Applications of trigonometry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:25.103Z",
+  "cards": [
+    {
+      "id": "0qcmhbn",
+      "kind": "process",
+      "front": "What are the four steps for turning a trigonometry word problem into a solution?",
+      "back": "**Sketch** the situation and mark the given values with units. Decide whether the triangle has a right angle, choose the ratio, sine rule or cosine rule, then solve and check the answer is reasonable.",
+      "hint": "Start with a diagram, not an equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0otp46k",
+      "kind": "concept",
+      "front": "Which line are angles of elevation and depression measured from?",
+      "back": "They are measured from the **horizontal** line. Elevation looks up to an object and depression looks down; the depression from A to B equals the elevation from B to A because they are alternate angles.",
+      "hint": "Think about parallel horizontal lines.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00zomu9",
+      "kind": "term",
+      "front": "What is a bearing?",
+      "back": "A **bearing** is an angle measured clockwise from north, written with three figures from $000^{\\circ}$ to $360^{\\circ}$.",
+      "hint": "North is 000°.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h1ksux",
+      "kind": "formula",
+      "front": "A tower's top is seen at an elevation of 32° from 40 m away on level ground. How is its height h found?",
+      "back": "$\\tan32^{\\circ}=\\frac{h}{40}$, so $h=40\\tan32^{\\circ}\\approx25.0\\,\\mathrm{m}$. Here $h$ is the opposite side and 40 m is the adjacent side.",
+      "hint": "Which sides does tan link?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qelxrh",
+      "kind": "example",
+      "front": "A ship sails 5 km on a bearing of 090° then 12 km on a bearing of 180°. How far is it from the start?",
+      "back": "13 km. The turn is $90^{\\circ}$, so $\\sqrt{5^2+12^2}=\\sqrt{169}=13$ km.",
+      "hint": "Is the turn a right angle?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rtjt9q",
+      "kind": "concept",
+      "front": "When the turn in a bearings path is not 90°, which rule do you use?",
+      "back": "The **cosine rule** for two sides with the included angle, after finding the angle inside the path from the back bearing. The sine rule is for a side with its opposite angle.",
+      "hint": "Which angle sits between the two legs?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1w9k26g",
+      "kind": "process",
+      "front": "How do you find the back bearing of a direction?",
+      "back": "**Add or subtract 180°** to get the bearing of the reverse direction, then write it with three figures.",
+      "hint": "The reverse direction is opposite.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x52nfq",
+      "kind": "example",
+      "front": "A boat sails 8 km on a bearing of 040° then 10 km on a bearing of 110°. How far is it from the start, to 1 d.p.?",
+      "back": "About 14.8 km. The back bearing is $220^{\\circ}$, the angle inside the path is $110^{\\circ}$, and $d^2=8^2+10^2-2(8)(10)\\cos110^{\\circ}$ gives $d\\approx14.8$.",
+      "hint": "Find the angle inside the path first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07niqt2",
+      "kind": "process",
+      "front": "How do you find a tower's height when the distance to its base is unknown?",
+      "back": "Take angles from two points on one straight line towards the base. Write $h$ as a tan equation from each point using the distance to the base, then **equate** the two and solve.",
+      "hint": "Draw one tall triangle with both points.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02tzjzv",
+      "kind": "mistake",
+      "front": "A student measures an angle of elevation from the vertical. What is wrong?",
+      "back": "Elevation and depression are **never measured from the vertical**. Always measure from the horizontal line.",
+      "hint": "Which line is level?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02plpsj",
+      "kind": "mistake",
+      "front": "Why should you keep extra digits during a multi-step trigonometry calculation?",
+      "back": "**Early rounding** can change the third significant figure. Keep extra digits and round only the final answer.",
+      "hint": "Round at the very end.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1racpzk",
+      "kind": "mistake",
+      "front": "What is wrong with writing a bearing of 45°?",
+      "back": "Bearings must have **three figures**, so write $045^{\\circ}$. Every bearing must also lie between $000^{\\circ}$ and $360^{\\circ}$.",
+      "hint": "Count the digits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1654qfk",
+      "kind": "term",
+      "front": "What is a mathematical model?",
+      "back": "A **simplified description** of a real situation using diagrams, equations or functions. In these problems the model is a triangle with the known lengths and angles marked.",
+      "hint": "Simplified does not mean exact.",
+      "sectionId": "s1"
+    }
+  ]
+}

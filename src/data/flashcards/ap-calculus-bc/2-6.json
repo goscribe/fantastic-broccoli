@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Constant, sum, difference and constant multiple rules",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:57.518Z",
+  "cards": [
+    {
+      "id": "1e89win",
+      "kind": "formula",
+      "front": "What is the derivative of a constant function $f(x)=c$?",
+      "back": "**Zero**: $f'(x)=0$. A constant function has a horizontal graph, so its slope is zero everywhere.",
+      "hint": "Think about the slope of a horizontal line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m9ayp3",
+      "kind": "formula",
+      "front": "How does the sum rule differentiate $f(x)=g(x)+h(x)$?",
+      "back": "$f'(x)=g'(x)+h'(x)$. Each added function is differentiated **separately**, then the results are added.",
+      "hint": "Work term by term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bzkczl",
+      "kind": "formula",
+      "front": "What does the constant multiple rule say about $f(x)=cg(x)$?",
+      "back": "$f'(x)=cg'(x)$. The **constant factor** stays in front, and only the function is differentiated.",
+      "hint": "What happens to the constant?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tnd6iy",
+      "kind": "term",
+      "front": "What is the difference rule?",
+      "back": "If $f(x)=g(x)-h(x)$, then $f'(x)=g'(x)-h'(x)$. Subtracted functions are differentiated separately and the **minus sign** stays.",
+      "hint": "Does the sign between the terms change?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hmv9tv",
+      "kind": "concept",
+      "front": "Why does the constant $7$ in $f(x)=x+7$ not change the derivative?",
+      "back": "The derivative of $7$ is **zero**, so $f'(x)=1+0=1$. Only the $x$ term contributes.",
+      "hint": "What is the derivative of any constant?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qepcl0",
+      "kind": "mistake",
+      "front": "A student differentiates $f(x)=g(x)-h(x)$ as $g'(x)+h'(x)$. What is wrong?",
+      "back": "The **minus sign** must stay. The derivative of $g-h$ is $g'-h'$, not $g'+h'$.",
+      "hint": "Check the sign between the two terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xdl0dk",
+      "kind": "example",
+      "front": "Find $f'(x)$ for $f(x)=x+2x+5$.",
+      "back": "$f'(x)=3$. The term derivatives are $1+2+0$. Simplifying to $3x+5$ first gives the same answer.",
+      "hint": "Differentiate each term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06ma8ng",
+      "kind": "example",
+      "front": "Find $f'(x)$ for $f(x)=8-x$.",
+      "back": "$f'(x)=-1$. The derivative is $0-1$, since $8$ has derivative zero and $x$ has derivative $1$.",
+      "hint": "Differentiate each term separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vpbhl0",
+      "kind": "process",
+      "front": "What are the steps to differentiate $f(x)=4x-3(2x+1)+7$?",
+      "back": "1) Differentiate each part: $4$, $2$, $0$. 2) Keep the constant factor and minus sign: $4-3(2)+0$. 3) Simplify: $f'(x)=-2$.",
+      "hint": "Differentiate, keep the factors, then simplify.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02zu06c",
+      "kind": "example",
+      "front": "Find $f'(x)$ for $f(x)=2(3x+1)-5x+6$.",
+      "back": "$f'(x)=1$. Compute $2(3+0)-5+0=6-5=1$.",
+      "hint": "Keep the factor 2 outside the group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vwdg55",
+      "kind": "concept",
+      "front": "Why keep the parentheses in $f(x)=5x-(2x+3)$ until after differentiating?",
+      "back": "It makes the subtraction easier to track. The grouped derivative is $2$, so $f'(x)=5-2=3$.",
+      "hint": "Think about where the minus sign applies.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0av02lv",
+      "kind": "term",
+      "front": "What is a constant function?",
+      "back": "A **constant function** gives the same output for every input in its domain.",
+      "sectionId": "s1"
+    }
+  ]
+}

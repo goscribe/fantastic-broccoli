@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Succession",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:11.235Z",
+  "cards": [
+    {
+      "id": "1h07pqb",
+      "kind": "concept",
+      "front": "How does each stage of succession change the place where it lives?",
+      "back": "Plants add dead material to the soil, shade the ground and hold water. These changes suit new species and often suit the earlier ones less well.",
+      "hint": "Think about what plants leave behind and what they do to the ground around them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wj3e98",
+      "kind": "concept",
+      "front": "How do pioneer species prepare bare rock for other species?",
+      "back": "**Pioneer species** such as lichens and mosses slowly break down the rock surface. Their remains add organic matter, so a thin soil forms that holds water and nutrients.",
+      "hint": "Think about what happens to organisms once they stop living.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j4lpao",
+      "kind": "term",
+      "front": "What is the difference between primary and secondary succession?",
+      "back": "**Primary succession** starts on a bare surface with no soil. **Secondary succession** starts where soil remains after a disturbance such as fire or farming, so it is much faster.",
+      "hint": "Compare the starting surface in each case.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fhuh8q",
+      "kind": "process",
+      "front": "What is the order of stages in succession on bare rock in a temperate region?",
+      "back": "Bare rock with no soil, then pioneer lichens and mosses, then grasses and small herbs, then shrubs and young trees, then tall trees forming woodland.",
+      "hint": "Follow how the soil develops and deepens at each step.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "107jvqg",
+      "kind": "concept",
+      "front": "Why do shade-tolerant species replace light-demanding species in later stages?",
+      "back": "Taller plants shade the ground, so light-demanding species decline and shade-tolerant species take over.",
+      "hint": "Think about what happens when taller plants grow above shorter ones.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cuu7be",
+      "kind": "mistake",
+      "front": "A student says succession is one species replacing another in a single step. What is wrong?",
+      "back": "Many species arrive over a long period, and each stage changes the conditions for the next. Succession is gradual, not a single swap.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19uwc24",
+      "kind": "mistake",
+      "front": "A student says secondary succession is simply the second stage of a succession. What is wrong?",
+      "back": "Secondary succession is succession that begins where soil remains after a disturbance. It is not a later stage of a succession.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q36jwh",
+      "kind": "term",
+      "front": "What is species diversity?",
+      "back": "**Species diversity** is the number of different species in a community together with the abundance of each.",
+      "hint": "Think of the two things you would count in a community.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wzlczj",
+      "kind": "concept",
+      "front": "Why is species diversity low at the start of succession?",
+      "back": "Few species can tolerate harsh bare ground. As soil forms and conditions become less harsh, more species arrive and new habitats appear, so diversity rises.",
+      "hint": "Compare how harsh bare ground is with conditions at later stages.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0oc4nqo",
+      "kind": "term",
+      "front": "What is a climax community?",
+      "back": "A **climax community** is the stable final stage of succession, where the community changes very little. Its make-up depends mainly on climate and soil, such as oak woodland in lowland Britain.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0m6mqx7",
+      "kind": "concept",
+      "front": "How can grazing or mowing keep a community at an earlier stage of succession?",
+      "back": "They remove larger plants, so succession stays at an earlier stage. This is why grassland and heathland in Britain are often held early.",
+      "hint": "Think about what happens to taller plants that are eaten or cut.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1y4wt1w",
+      "kind": "mistake",
+      "front": "A student says species diversity always peaks at the climax community. What is wrong?",
+      "back": "In some woodlands, a few dominant trees cast deep shade that excludes light-demanding plants. Diversity at the climax may then be slightly lower than at an earlier stage.",
+      "hint": "Compare diversity at the climax with diversity at an earlier stage of succession.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0yw3s5o",
+      "kind": "example",
+      "front": "Why does an abandoned field have more plant species after ten years than bare rock exposed for the same time?",
+      "back": "The field already has soil, seeds, roots and nutrients, so plants regrow quickly through secondary succession. Bare rock must first form soil, which is very slow.",
+      "hint": "Compare what is present at the start of each site.",
+      "sectionId": "s4"
+    }
+  ]
+}

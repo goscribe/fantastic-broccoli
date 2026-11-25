@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "3-6",
+  "topicCode": "3.6",
+  "topicName": "Higher-order derivatives",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:11.398Z",
+  "cards": [
+    {
+      "id": "0j8k442",
+      "kind": "concept",
+      "front": "What does the second derivative $f''(x)$ tell you about a function?",
+      "back": "It is the **derivative** of $f'(x)$, so it measures how the rate of change itself is changing. Find it by differentiating $f'(x)$ again.",
+      "hint": "Differentiate the first derivative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09mz36a",
+      "kind": "concept",
+      "front": "What does it mean when $f''(x)>0$ on a graph?",
+      "back": "The graph is **concave up**: slopes increase as $x$ increases. When $f''(x)<0$, the graph is **concave down**, so slopes decrease.",
+      "hint": "Ask whether slopes are getting bigger or smaller.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bermfc",
+      "kind": "formula",
+      "front": "How are position, velocity and acceleration related, and what are their units?",
+      "back": "$v(t)=x'(t)$ in $\\mathrm{m/s}$ and $a(t)=v'(t)=x''(t)$ in $\\mathrm{m/s^2}$, where $x(t)$ is **position** in meters and $t$ is time in seconds.",
+      "hint": "Each derivative is taken with respect to time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v1rcvg",
+      "kind": "mistake",
+      "front": "Is $f''(x)$ the same as $[f'(x)]^2$?",
+      "back": "**No**. $f''(x)$ is the derivative of $f'(x)$, found by differentiating again. The superscript 2 describes the order of differentiation, not a square.",
+      "hint": "Look at what the superscript means here.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0viplqt",
+      "kind": "process",
+      "front": "What are the steps for finding the third derivative of a function?",
+      "back": "Differentiate $f(x)$ to get $f'(x)$, differentiate that to get $f''(x)$, then differentiate once more for $f'''(x)$. Label each result by its **order**.",
+      "hint": "Treat each result as a new function.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sit07v",
+      "kind": "example",
+      "front": "Find $f'''(x)$ for $f(x)=2x^4-3x^2+5$.",
+      "back": "$f'''(x)=48x$. Along the way, $f'(x)=8x^3-6x$ and $f''(x)=24x^2-6$.",
+      "hint": "Differentiate three times, one step at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1b6aoom",
+      "kind": "term",
+      "front": "What is a polynomial, and what happens to its derivatives?",
+      "back": "A **polynomial** is a sum of terms with constant coefficients and nonnegative integer powers of the variable. Its derivatives eventually become zero, and then all later derivatives are zero too.",
+      "hint": "Think about the power dropping each time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a76ymz",
+      "kind": "concept",
+      "front": "Why might the product rule be needed more than once for $g(x)=xe^x$?",
+      "back": "The product rule applies whenever **both** factors still depend on $x$. It gives $g'(x)=e^x+xe^x$, and applying it again gives $g''(x)=2e^x+xe^x$.",
+      "hint": "Check whether both factors still contain x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yd959h",
+      "kind": "example",
+      "front": "Find $h''(x)$ for $h(x)=\\sin(2x)$.",
+      "back": "$h''(x)=-4\\sin(2x)$. The first derivative is $h'(x)=2\\cos(2x)$, and the **inner derivative** factor 2 appears at each step.",
+      "hint": "Use the chain rule on the inner function $2x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xnyqmn",
+      "kind": "mistake",
+      "front": "If acceleration is positive, does the object necessarily move forward?",
+      "back": "**No**. Positive acceleration means velocity is increasing, even when the object is moving backward.",
+      "hint": "Separate velocity from acceleration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00nqf5i",
+      "kind": "term",
+      "front": "What is a higher-order derivative?",
+      "back": "A **higher-order derivative** is found by differentiating a function more than once, such as $f'''(x)$ for the third derivative.",
+      "hint": "Count how many times you differentiate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dbcnuk",
+      "kind": "example",
+      "front": "If $x''(t)=3\\,\\mathrm{m/s^2}$, with $x$ in meters and $t$ in seconds, what does this mean?",
+      "back": "Velocity is increasing by $3\\,\\mathrm{m/s}$ each second at that time. This does not by itself mean the object is moving forward.",
+      "hint": "Read the units carefully.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16tngnd",
+      "kind": "concept",
+      "front": "Does $f''(x)=0$ at a point guarantee that concavity changes there?",
+      "back": "**No**. $f''(x)=0$ alone does not establish a change in concavity. The sign of $f''(x)$ must actually change.",
+      "hint": "Consider whether the sign actually changes.",
+      "sectionId": "s4"
+    }
+  ]
+}

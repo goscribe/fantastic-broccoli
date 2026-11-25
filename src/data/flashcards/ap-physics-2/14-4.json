@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "14-4",
+  "topicCode": "14.4",
+  "topicName": "Electromagnetic waves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:42.645Z",
+  "cards": [
+    {
+      "id": "1psux8k",
+      "kind": "concept",
+      "front": "Why can sunlight reach Earth across empty space, while sound cannot?",
+      "back": "**Electromagnetic waves** need no medium, because their oscillating electric and magnetic fields carry the disturbance. Sound is a mechanical wave and needs particles to pass it along.",
+      "hint": "Think about what each wave needs in order to oscillate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cxg4vz",
+      "kind": "concept",
+      "front": "How does an electromagnetic wave keep moving through a vacuum?",
+      "back": "A **changing electric field** produces a changing magnetic field, which in turn produces a changing electric field. Each field regenerates the other, so no particles are needed.",
+      "hint": "Consider what the wave needs in order to pass the disturbance along.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ze6cro",
+      "kind": "formula",
+      "front": "What relationship links the speed of light in a vacuum, frequency, and wavelength for electromagnetic waves?",
+      "back": "$c=f\\lambda$, where $c$ is the **speed of light** ($3.00\\times10^{8}\\,\\mathrm{m/s}$), $f$ is frequency in hertz (Hz), and $\\lambda$ is wavelength in meters (m). Because $c$ is fixed, a longer wavelength means a lower frequency.",
+      "hint": "Wave speed equals frequency times wavelength.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xjdml0",
+      "kind": "term",
+      "front": "What is the electromagnetic spectrum?",
+      "back": "The **electromagnetic spectrum** is the full range of electromagnetic waves, arranged by wavelength from long radio waves to short gamma rays.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ncwhfp",
+      "kind": "process",
+      "front": "List the main types of electromagnetic waves from longest wavelength to shortest.",
+      "back": "Radio waves, microwaves, infrared, visible light, ultraviolet, X-rays, gamma rays. Frequency increases along this list, so gamma rays have the highest frequency.",
+      "hint": "Radio waves sit at one end of the list, gamma rays at the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k3pc67",
+      "kind": "example",
+      "front": "A radio station transmits at $1.00\\times10^{8}\\,\\mathrm{Hz}$. What is the wavelength of its waves in a vacuum?",
+      "back": "$\\lambda=\\frac{c}{f}=\\frac{3.00\\times10^{8}\\,\\mathrm{m/s}}{1.00\\times10^{8}\\,\\mathrm{Hz}}=3.00\\,\\mathrm{m}$.",
+      "hint": "Rearrange $c=f\\lambda$ to make $\\lambda$ the subject.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1cq6lsr",
+      "kind": "example",
+      "front": "An electromagnetic wave in a vacuum has frequency $6.0\\times10^{14}\\,\\mathrm{Hz}$. What is its wavelength, and is it visible?",
+      "back": "$\\lambda=5.0\\times10^{-7}\\,\\mathrm{m}$, or 500 nm. This lies within the **visible** band of about 400 nm to 700 nm, so it is visible light.",
+      "hint": "Convert meters to nanometers, where 1 nm is $10^{-9}\\,\\mathrm{m}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bc072m",
+      "kind": "mistake",
+      "front": "Is sound an electromagnetic wave because it travels through air?",
+      "back": "**No**. Sound is a mechanical wave, so it needs particles of a medium and cannot cross empty space. Electromagnetic waves need no medium at all.",
+      "hint": "What does sound need in order to travel?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0597boo",
+      "kind": "mistake",
+      "front": "Light slows down slightly in air, so does it need air to travel?",
+      "back": "**No**. Light slows slightly in air, but it does not need air to travel. It crosses a vacuum at the full speed $c$.",
+      "hint": "Compare its speed in air with its speed in a vacuum.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01b6vgp",
+      "kind": "concept",
+      "front": "What does it mean for an electromagnetic wave to be transverse?",
+      "back": "The **electric and magnetic fields** oscillate perpendicular to the direction the wave travels. All electromagnetic waves are transverse.",
+      "hint": "Think about the direction of the oscillation compared with the direction of travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1919sdq",
+      "kind": "concept",
+      "front": "How do mechanical and electromagnetic waves differ in what they need and what oscillates?",
+      "back": "Mechanical waves need a medium, and their **particles** oscillate; they may be transverse or longitudinal. Electromagnetic waves need no medium, their **electric and magnetic fields** oscillate, and they are always transverse.",
+      "hint": "Compare the need for a medium, what moves, and the wave type.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13qhsxb",
+      "kind": "term",
+      "front": "What is a mechanical wave?",
+      "back": "A **mechanical wave** transfers energy through a material medium by the motion of the medium's particles, such as sound or water waves.",
+      "sectionId": "s1"
+    }
+  ]
+}

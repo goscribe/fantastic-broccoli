@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Conservation of energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:30.245Z",
+  "cards": [
+    {
+      "id": "0juswdn",
+      "kind": "concept",
+      "front": "What does the law of conservation of energy say about a closed system?",
+      "back": "The **total** energy of a closed system stays constant. Energy can change form or move between objects, but it is never created or destroyed.",
+      "hint": "Think about the roller coaster: its energy keeps changing form.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17swurk",
+      "kind": "formula",
+      "front": "When only gravity and spring forces act, how are mechanical energies at two moments related?",
+      "back": "$K_i+U_i=K_f+U_f$, so the **mechanical energy** $K+U$ stays constant. $K$ is kinetic energy in joules and $U$ is potential energy in joules.",
+      "hint": "Mechanical energy is the sum of kinetic and potential energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h2z91v",
+      "kind": "concept",
+      "front": "Where does mechanical energy go when friction acts on a sliding box?",
+      "back": "Friction transfers it into **thermal energy** of the box and the floor. The total energy, including thermal energy, is still conserved.",
+      "hint": "The box and floor warm slightly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08l2re0",
+      "kind": "term",
+      "front": "What is a closed system?",
+      "back": "A **closed system** is one where no net work is done by outside forces and no energy crosses its boundary. It must include every object that exchanges energy.",
+      "hint": "Nothing should cross the boundary.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jy4inf",
+      "kind": "process",
+      "front": "What are the steps for solving a conservation of energy problem?",
+      "back": "1) Choose the system and two states. 2) Set a reference level for potential energy. 3) Write total energy in each state. 4) Equate them, adding thermal energy if produced. 5) Solve and check units.",
+      "hint": "Start by choosing the system and the two states.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12qw3fr",
+      "kind": "mistake",
+      "front": "A student says friction destroys energy on a sliding block. What is wrong?",
+      "back": "Friction does not destroy energy. It **transfers** mechanical energy to thermal energy, so the total stays the same.",
+      "hint": "Include thermal energy in the system.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18ixbgx",
+      "kind": "example",
+      "front": "A 2.0 kg block starts from rest at 1.8 m on a frictionless ramp. What is its speed at the bottom? Use $g=9.8\\,\\mathrm{m/s^2}$.",
+      "back": "About **5.9 m/s**. Setting $mgh=\\frac{1}{2}mv^2$ gives $v=\\sqrt{2gh}$, and the mass cancels.",
+      "hint": "Take the bottom as $h=0$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0wbo8jg",
+      "kind": "concept",
+      "front": "Why does the mass cancel in the frictionless ramp problem?",
+      "back": "Both sides of $mgh=\\frac{1}{2}mv^2$ contain $m$, so it **cancels**. Only the change in height matters, so a heavier block reaches the same speed.",
+      "hint": "Look at each term in the energy equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04ugrrg",
+      "kind": "formula",
+      "front": "With friction, how is the energy balance written?",
+      "back": "$K_i+U_i=K_f+U_f+E_{th}$, where $E_{th}$ is the **thermal energy** produced. It equals the mechanical energy that friction removes.",
+      "hint": "Add one term on the right side.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rdl3bq",
+      "kind": "example",
+      "front": "A 2.0 kg block starts from rest at 1.8 m and reaches the bottom at 4.0 m/s. How much thermal energy is produced? Use $g=9.8\\,\\mathrm{m/s^2}$.",
+      "back": "About **19 J**. Initial energy is $mgh=35.3\\,\\mathrm{J}$, final kinetic energy is $16\\,\\mathrm{J}$, and the difference is $19.3\\,\\mathrm{J}$.",
+      "hint": "Find initial energy, then final kinetic energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bwv79o",
+      "kind": "example",
+      "front": "A ball falls from rest through 5.0 m with no air resistance. What is its speed just before landing? Use $g=9.8\\,\\mathrm{m/s^2}$.",
+      "back": "About **9.9 m/s**. From $mgh=\\frac{1}{2}mv^2$, $v=\\sqrt{2gh}=\\sqrt{98}$.",
+      "hint": "Potential energy at the top becomes kinetic energy at the bottom.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q8iqgp",
+      "kind": "process",
+      "front": "How do energy transfers go as a frictionless pendulum swings from its highest point to its lowest point?",
+      "back": "Potential energy is maximum and kinetic energy is zero at the top. Potential energy converts to kinetic energy on the way down, which is greatest at the bottom. The total stays constant.",
+      "hint": "Track where the energy is stored at each point.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gtn9ob",
+      "kind": "mistake",
+      "front": "Why must you choose the reference level before writing an energy equation?",
+      "back": "The reference level sets where $U=0$. Placing zero at the lowest point removes terms and **reduces mistakes**.",
+      "hint": "Think about which terms become zero.",
+      "sectionId": "s2"
+    }
+  ]
+}

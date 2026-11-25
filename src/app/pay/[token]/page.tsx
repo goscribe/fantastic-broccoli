@@ -3,7 +3,7 @@
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { BookOpenCheck, Check, Lock, RotateCcw, ShieldCheck, Sparkles, CalendarDays } from "lucide-react";
+import { Check } from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { Mascot } from "@/components/rewards/mascot";
 import { Button } from "@/components/ui/button";
@@ -11,6 +11,8 @@ import { Input } from "@/components/ui/input";
 import { fetchPayLink, openPayLinkCheckout, type PayLinkView } from "@/lib/api/pay-link";
 import { useI18n } from "@/lib/i18n";
 import { fill, formatPassDate, passTitle } from "@/lib/pass";
+import { planDisplayName } from "@/lib/plan-display";
+import { sessionsPerMonth } from "@/lib/wall";
 import "@/lib/i18n/billing";
 
 /** Re-reads (ms) after returning from checkout while the payment is confirmed. */
@@ -25,10 +27,7 @@ function Shell({ children }: { children: React.ReactNode }) {
         <Link href="/landing" aria-label="Scribe home">
           <ScribeLogo />
         </Link>
-        <span className="inline-flex items-center gap-1 text-[12px] font-semibold text-muted-foreground">
-          <Lock className="size-3.5" />
-          {t("pay.secureBadge")}
-        </span>
+        <span className="text-[12px] font-bold text-muted-foreground">{t("pay.secureBadge")}</span>
       </header>
       <main className="mx-auto w-full max-w-xl px-4 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-6 sm:px-6 sm:pt-10">{children}</main>
     </div>
@@ -37,11 +36,24 @@ function Shell({ children }: { children: React.ReactNode }) {
 
 function Notice({ pose, title, body }: { pose: "sleep" | "think" | "trophy" | "cheer"; title: string; body: string }) {
   return (
-    <div className="text-center">
+    <div className="pt-6 text-center" role="status">
       <Mascot pose={pose} outfit={null} className="mx-auto h-[100px]" />
-      <h1 className="mt-4 text-2xl font-bold tracking-tight">{title}</h1>
-      <p className="mx-auto mt-1.5 max-w-sm text-sm text-muted-foreground">{body}</p>
+      <h1 className="mt-4 text-[26px] font-extrabold leading-tight tracking-tight">{title}</h1>
+      <p className="mx-auto mt-2 max-w-sm text-[15px] text-muted-foreground">{body}</p>
     </div>
+  );
+}
+
+function Ticks({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-3 space-y-2 text-[15px]">
+      {items.map((item) => (
+        <li key={item} className="flex items-start gap-2">
+          <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" strokeWidth={2.6} />
+          {item}
+        </li>
+      ))}
+    </ul>
   );
 }
 
@@ -51,12 +63,14 @@ function PayForm({ token, view }: { token: string; view: PayLinkView }) {
   const [error, setError] = useState<string | null>(null);
   const [opening, setOpening] = useState(false);
   const { plan } = view;
+  const pass = plan.kind === "pass";
   const price = `$${plan.price}`;
   const title = passTitle({ id: plan.id, name: plan.name, kind: plan.kind, accessUntil: plan.accessUntil });
   const until = plan.accessUntil ? formatPassDate(plan.accessUntil, locale) : null;
   const summary = title
     ? fill(t(title.key === "bill.passGraduation" ? "pay.summaryGraduation" : "pay.summaryExams"), { price, year: title.year })
-    : fill(t("pay.summaryMonthly"), { price });
+    : `${planDisplayName(plan.name)} · ${fill(t("pay.summaryMonthly"), { price })}`;
+  const sessions = sessionsPerMonth(plan.monthlyTokens);
 
   const pay = async () => {
     if (!EMAIL.test(email.trim())) {
@@ -78,92 +92,68 @@ function PayForm({ token, view }: { token: string; view: PayLinkView }) {
     <>
       <div className="text-center">
         <Mascot pose="book" outfit={null} className="mx-auto h-[84px]" />
-        <h1 className="mt-3 text-[26px] font-bold leading-tight tracking-tight sm:text-3xl">
+        <h1 className="mt-3 text-[26px] font-extrabold leading-tight tracking-tight sm:text-[30px]">
           {view.firstName ? fill(t("pay.askingNamed"), { name: view.firstName }) : t("pay.asking")}
         </h1>
-        <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3.5 py-1.5 text-[15px] font-semibold text-accent">{summary}</p>
+        <p className="mt-2 text-[17px] font-bold text-foreground">{summary}</p>
       </div>
 
-      <section className="mt-6 rounded-2xl border border-border bg-card p-5">
-        <h2 className="text-[15px] font-semibold">{t("pay.whatTitle")}</h2>
-        <ul className="mt-3 space-y-2.5 text-[14px] text-muted-foreground">
-          <li className="flex items-start gap-2.5">
-            <BookOpenCheck className="mt-0.5 size-4 shrink-0 text-accent" />
-            {t("pay.what1")}
-          </li>
-          <li className="flex items-start gap-2.5">
-            <RotateCcw className="mt-0.5 size-4 shrink-0 text-accent" />
-            {t("pay.what2")}
-          </li>
-          <li className="flex items-start gap-2.5">
-            <CalendarDays className="mt-0.5 size-4 shrink-0 text-accent" />
-            {t("pay.what3")}
-          </li>
-        </ul>
+      <section className="mt-6 border-t border-border pt-5">
+        <h2 className="text-[15px] font-extrabold">{t("pay.whatTitle")}</h2>
+        <Ticks items={[t("pay.what1"), t("pay.what2"), t("pay.what3")]} />
       </section>
 
-      <section className="mt-4 rounded-2xl border border-accent/30 bg-card p-5">
+      <section className="life-card mt-6 p-5">
         <div className="flex items-baseline justify-between gap-3">
-          <h2 className="text-[15px] font-semibold">{t("pay.includesTitle")}</h2>
-          <p className="text-2xl font-bold tracking-tight">
+          <h2 className="text-[15px] font-extrabold">{t("pay.includesTitle")}</h2>
+          <p className="text-[24px] font-extrabold leading-none tracking-tight tabular-nums">
             {price}
-            <span className="ml-1 text-sm font-normal text-faint">{plan.kind === "pass" ? t("set.once") : t("set.perMonth")}</span>
+            <span className="ml-1 text-[13px] font-semibold tracking-normal text-muted-foreground">{pass ? t("set.once") : t("bill.perMonth")}</span>
           </p>
         </div>
-        <ul className="mt-3 space-y-2 text-[14px]">
-          <li className="flex items-start gap-2.5">
-            <Check className="mt-0.5 size-4 shrink-0 text-accent" />
-            {until ? fill(t("pay.includesUntil"), { date: until }) : t("pay.includesUnlimited")}
-          </li>
-          <li className="flex items-start gap-2.5">
-            <Sparkles className="mt-0.5 size-4 shrink-0 text-accent" />
-            {fill(t("pay.includesTokens"), { n: plan.monthlyTokens.toLocaleString() })}
-          </li>
-          <li className="flex items-start gap-2.5">
-            <Check className="mt-0.5 size-4 shrink-0 text-accent" />
-            {plan.kind === "pass" ? fill(t("pay.includesOnce"), { price }) : fill(t("pay.includesMonthly"), { price })}
-          </li>
-        </ul>
-        <p className="mt-3 rounded-xl bg-muted/60 px-3 py-2 text-[12.5px] text-muted-foreground">
-          {fill(t("pay.refund"), { days: view.refundDays })}
-        </p>
-      </section>
+        <Ticks
+          items={[
+            until ? fill(t("pay.includesUntil"), { date: until }) : t("pay.includesUnlimited"),
+            ...(sessions ? [fill(t("pay.includesTokens"), { n: plan.monthlyTokens.toLocaleString(), sessions })] : []),
+            pass ? fill(t("pay.includesOnce"), { price }) : fill(t("pay.includesMonthly"), { price }),
+          ]}
+        />
+        {/* One-click refunds are for passes; a monthly plan is cancelled in Settings instead. */}
+        {pass && <p className="mt-3 text-[13px] text-muted-foreground">{fill(t("pay.refund"), { days: view.refundDays })}</p>}
 
-      <section className="mt-4 rounded-2xl border border-border bg-card p-5">
-        {view.payable ? (
-          <>
-            <label className="block">
-              <span className="text-[13px] font-semibold">{t("pay.emailLabel")}</span>
-              <Input
-                className="mt-1.5"
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && void pay()}
-                aria-invalid={!!error}
-              />
-            </label>
-            {error && (
-              <p className="mt-2 text-[13px] text-rose" role="alert">
-                {error}
-              </p>
-            )}
-            <Button size="lg" className="mt-4 w-full text-[15px]" disabled={opening} onClick={pay}>
-              {opening ? t("pay.opening") : fill(t("pay.button"), { price })}
-            </Button>
-            <p className="mt-2 text-center text-[12px] text-faint">{t("pay.noAccount")}</p>
-          </>
-        ) : (
-          <p className="text-center text-[14px] text-muted-foreground">{t("pay.unpayable")}</p>
-        )}
-        <p className="mt-3 flex items-center justify-center gap-1.5 text-[12px] text-muted-foreground">
-          <ShieldCheck className="size-3.5 text-success" />
-          {t("pay.secure")}
-        </p>
+        <div className="mt-5 border-t border-border pt-5">
+          {view.payable ? (
+            <>
+              <label className="block">
+                <span className="text-[13px] font-bold">{t("pay.emailLabel")}</span>
+                <Input
+                  className="mt-1.5"
+                  type="email"
+                  inputMode="email"
+                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && void pay()}
+                  aria-invalid={!!error}
+                />
+              </label>
+              {error && (
+                <p className="mt-2 text-[13px] text-rose-600" role="alert">
+                  {error}
+                </p>
+              )}
+              <Button size="lg" className="mt-4 w-full" disabled={opening} onClick={pay}>
+                {opening ? t("pay.opening") : fill(t("pay.button"), { price })}
+              </Button>
+              <p className="mt-2 text-center text-[12px] text-muted-foreground">{t("pay.noAccount")}</p>
+            </>
+          ) : (
+            <p className="text-center text-[15px] text-muted-foreground">{t("pay.unpayable")}</p>
+          )}
+          <p className="mt-3 text-center text-[12px] text-muted-foreground">{t("pay.secure")}</p>
+        </div>
       </section>
-      <p className="mt-4 text-center text-[12px] text-faint">
+      <p className="mt-4 text-center text-[12px] text-muted-foreground">
         {fill(t("pay.expires"), { date: formatPassDate(view.expiresAt, locale) })}
       </p>
     </>
@@ -200,7 +190,7 @@ export default function PayPage({
   return (
     <Shell>
       {isLoading ? (
-        <div className="space-y-4">
+        <div className="space-y-4" aria-busy="true">
           <div className="mx-auto h-8 w-2/3 animate-pulse rounded-full bg-muted" />
           <div className="h-56 animate-pulse rounded-2xl bg-muted" />
         </div>

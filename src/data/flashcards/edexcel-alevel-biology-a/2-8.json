@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Genes and polypeptides",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:13.577Z",
+  "cards": [
+    {
+      "id": "13421xu",
+      "kind": "concept",
+      "front": "How does the base order in a gene affect what a protein can do?",
+      "back": "The **base order** sets the amino acid order in a polypeptide. That order decides how the chain folds into a 3D shape, and the shape decides the protein's job, such as whether it can act as an enzyme.",
+      "hint": "Follow the information from the gene to the finished chain, one stage at a time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wtdp6z",
+      "kind": "term",
+      "front": "What is a gene mutation?",
+      "back": "A **gene mutation** is a change in the base sequence of a gene. It may arise when DNA is copied or after damage.",
+      "hint": "Think about what actually changes, and where.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1jdaemz",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume that every gene mutation harms the organism?",
+      "back": "Many mutations leave the polypeptide unchanged or make no difference to the organism. Mutation does not always mean harm, so each case has to be judged by its effect on the protein.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "175bvdi",
+      "kind": "concept",
+      "front": "What does the rule 'one gene, one polypeptide' mean for a protein like haemoglobin?",
+      "back": "Each gene usually codes for one **polypeptide**, not one whole protein. Haemoglobin has four polypeptides, made from genes for two different types of chain.",
+      "hint": "Ask whether a protein is always a single chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1leuj37",
+      "kind": "term",
+      "front": "What is the genetic code?",
+      "back": "The **genetic code** is the set of relationships between mRNA codons and the amino acids they specify, or the stop signals.",
+      "hint": "Think about how codons link to amino acids.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lrjh0y",
+      "kind": "process",
+      "front": "What are the steps from a gene to a working protein?",
+      "back": "1) An mRNA copy of the gene is made. 2) Its bases are read in codons of three. 3) Each codon adds a particular amino acid to the chain. 4) The chain folds into a 3D shape, which gives the protein its function.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n167c9",
+      "kind": "term",
+      "front": "Name the three basic kinds of gene mutation.",
+      "back": "**Substitution** (one base replaced by a different base), **insertion** (one or more extra bases added) and **deletion** (one or more bases lost).",
+      "hint": "Think about what can happen to a single base.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03kor50",
+      "kind": "example",
+      "front": "In the codon $\\text{GAA}$, which codes for glutamic acid, what does changing the second base so the codon reads $\\text{GUA}$ do?",
+      "back": "Valine replaces glutamic acid, so this is a **missense mutation**. The polypeptide differs at one position.",
+      "hint": "Compare the amino acid specified by the new codon with the original.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nly71d",
+      "kind": "term",
+      "front": "What happens to a polypeptide when a substitution creates a stop codon?",
+      "back": "This is a **nonsense mutation**. The chain ends early, so the polypeptide is shorter, because the stop codon adds no amino acid.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o42wtt",
+      "kind": "term",
+      "front": "What is a frameshift mutation?",
+      "back": "A **frameshift mutation** is an insertion or deletion of a number of bases not divisible by three. It changes every later codon.",
+      "hint": "Consider how the cell groups bases when it reads them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "03vs2nn",
+      "kind": "mistake",
+      "front": "Why is losing three bases not a frameshift?",
+      "back": "Losing three bases removes one amino acid. The codons after the change stay in the same groups of three, so the rest of the polypeptide is unchanged.",
+      "hint": "Think about whether the grouping of later codons moves.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1pd43ou",
+      "kind": "concept",
+      "front": "Why does deleting one base usually have a greater effect than substituting one base?",
+      "back": "Codons are read in fixed groups of three, so deleting one base shifts every later codon and changes many amino acids. A substitution changes at most one codon.",
+      "hint": "Compare how many codons each change can affect.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07y319g",
+      "kind": "process",
+      "front": "Trace the steps by which a gene mutation causes sickle cell disease.",
+      "back": "1) A substitution occurs in the gene for a haemoglobin polypeptide. 2) Glutamic acid is replaced by valine. 3) The changed haemoglobin forms fibres in low oxygen. 4) The fibres distort the red blood cells.",
+      "hint": "Start with the base change and follow it through to the cell.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1ahz4j1",
+      "kind": "concept",
+      "front": "Why does a three-base deletion cause cystic fibrosis?",
+      "back": "The deletion removes one amino acid from a membrane protein that transports chloride ions. The protein folds incorrectly and does not work normally.",
+      "hint": "Link the missing amino acid to the protein's shape.",
+      "sectionId": "s6"
+    }
+  ]
+}

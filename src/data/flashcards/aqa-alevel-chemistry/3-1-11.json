@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-11",
+  "topicCode": "3.1.11",
+  "topicName": "Electrode potentials and cells",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:23.100Z",
+  "cards": [
+    {
+      "id": "0o48s15",
+      "kind": "concept",
+      "front": "Why are the two half-reactions of a cell kept in separate containers?",
+      "back": "This forces the electrons to travel through an external wire, and that flow is an **electric current**. If the reaction happened in one container, the electrons would transfer directly and no current would flow.",
+      "hint": "Think about where the electrons would go if both changes happened in one beaker.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aw0g37",
+      "kind": "term",
+      "front": "What is the standard electrode potential, $E^{\\ominus}$, of a half-cell?",
+      "back": "Its **voltage measured against the standard hydrogen electrode** under standard conditions. A more positive value means the species is more easily reduced.",
+      "hint": "It is measured relative to a reference, so think about what the reference is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tym3gw",
+      "kind": "formula",
+      "front": "How is the EMF of a cell calculated from its two standard electrode potentials?",
+      "back": "$E^{\\ominus}_\\mathrm{cell}=E^{\\ominus}_\\mathrm{positive}-E^{\\ominus}_\\mathrm{negative}$, where the positive electrode is the half-cell with the **more positive** $E^{\\ominus}$. Both values and the answer are in volts.",
+      "hint": "Which of the two half-cells has the larger value?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15ezra2",
+      "kind": "term",
+      "front": "What is a redox reaction?",
+      "back": "A reaction in which **oxidation and reduction** occur together through electron transfer. Zinc reacting with copper(II) ions is one example.",
+      "hint": "Think about what the zinc atoms and the copper ions do to electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "093t8yr",
+      "kind": "concept",
+      "front": "What is the job of a salt bridge in an electrochemical cell?",
+      "back": "It **completes the electrical circuit** by letting ions move between the two solutions to balance charge, while stopping the solutions from mixing.",
+      "hint": "Think about what would build up in each half-cell if nothing connected them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ex65jd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that electrons flow through the salt bridge?",
+      "back": "Electrons flow only through the **external wire**. Inside the solutions and the salt bridge, ions carry the charge.",
+      "hint": "Compare what moves in the wire with what moves in the solutions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bmcjr5",
+      "kind": "term",
+      "front": "What is the standard hydrogen electrode used for?",
+      "back": "It is the **reference electrode** against which all standard electrode potentials are measured. It is defined as exactly 0.00 V, using hydrogen at 100 kPa over platinum in $1.00\\,\\mathrm{mol\\,dm^{-3}}$ acid at 298 K.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h319ux",
+      "kind": "process",
+      "front": "What is the correct layout for writing a cell in shorthand notation?",
+      "back": "Put the **negative electrode** on the left and the positive electrode on the right. A single line marks a phase boundary, and a double line marks the salt bridge. Read it from left to right.",
+      "hint": "Think about which side of the cell oxidation takes place on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hn00tg",
+      "kind": "example",
+      "front": "What is the EMF of a zinc–copper cell, using $\\mathrm{Zn^{2+}/Zn}$ at $-0.76\\,\\mathrm{V}$ and $\\mathrm{Cu^{2+}/Cu}$ at $+0.34\\,\\mathrm{V}$?",
+      "back": "**$+1.10\\,\\mathrm{V}$**. Copper is the positive electrode, so $E^{\\ominus}_\\mathrm{cell}=(+0.34)-(-0.76)=+1.10\\,\\mathrm{V}$.",
+      "hint": "Start by identifying which electrode is the positive one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1we5dx4",
+      "kind": "example",
+      "front": "What is $E^{\\ominus}_\\mathrm{cell}$ for chlorine oxidising bromide ions, given $+1.36\\,\\mathrm{V}$ for chlorine and $+1.07\\,\\mathrm{V}$ for bromine?",
+      "back": "**$+0.29\\,\\mathrm{V}$**. The positive value means the reaction is **feasible**, so chlorine can oxidise bromide ions.",
+      "hint": "Chlorine has the more positive potential, so which species is reduced?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13kbyfc",
+      "kind": "mistake",
+      "front": "What mistake do students make when combining half-equations that need different numbers of electrons?",
+      "back": "They multiply the $E^{\\ominus}$ value by the coefficient. Changing the coefficients in an equation leaves **$E^{\\ominus}$ unchanged**, so use the original value.",
+      "hint": "Think about what changes when you double an equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uoiqjx",
+      "kind": "concept",
+      "front": "Why might a reaction with a positive $E^{\\ominus}_\\mathrm{cell}$ still not be seen to happen?",
+      "back": "A positive EMF only shows the reaction is **feasible**. The reaction may be very slow, and non-standard conditions can change the outcome.",
+      "hint": "Being possible and being visible are not the same thing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vd758o",
+      "kind": "concept",
+      "front": "How does a fuel cell differ from a non-rechargeable cell?",
+      "back": "A fuel cell is **continuously supplied** with a fuel and oxygen, so it gives a voltage while the supply lasts. A non-rechargeable cell stops once its reactants are used up.",
+      "hint": "Think about what keeps the reactants coming in.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1rvlu26",
+      "kind": "process",
+      "front": "What happens at each electrode in a hydrogen fuel cell with an acidic electrolyte?",
+      "back": "At the negative electrode, $\\mathrm{H_2(g)\\rightarrow 2H^+(aq)+2e^-}$ (oxidation). At the positive electrode, $\\mathrm{\\frac{1}{2}O_2(g)+2H^+(aq)+2e^-\\rightarrow H_2O(l)}$ (reduction). The only product is **water**.",
+      "hint": "Consider which electrode the hydrogen fuel reacts at.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "1-9",
+  "topicCode": "1.9",
+  "topicName": "Comparing distributions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:59.196Z",
+  "cards": [
+    {
+      "id": "1883j1l",
+      "kind": "concept",
+      "front": "What three features should every comparison of two distributions describe for both groups?",
+      "back": "**Center**, **spread**, and **shape**, with any outliers mentioned separately. Center is a typical value, spread is how much values vary, and shape is the overall pattern.",
+      "hint": "Think of the three words the note uses to describe any distribution.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bt3pfs",
+      "kind": "concept",
+      "front": "Why are the median and IQR often better choices than the mean and standard deviation?",
+      "back": "They are **resistant** statistics, so outliers change them very little. The mean and standard deviation use every value, so one extreme value can pull them far away.",
+      "hint": "Ask how much one extreme value moves each statistic.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o09a2t",
+      "kind": "concept",
+      "front": "What makes a comparison of two distributions complete rather than just two separate lists of facts?",
+      "back": "It **names both groups** in the same sentence, uses comparison words such as greater than or whereas, and gives values with units. It also refers to the context.",
+      "hint": "Think about what links the two groups together in each sentence.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d9nui8",
+      "kind": "term",
+      "front": "What is a resistant statistic?",
+      "back": "A **resistant statistic** is a numerical summary that changes very little when outliers are added or removed. The median and IQR are resistant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0240pu6",
+      "kind": "term",
+      "front": "What are side-by-side boxplots?",
+      "back": "**Side-by-side boxplots** are boxplots for several groups drawn on one numerical axis, so their center, spread, and shape can be compared directly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hqh40h",
+      "kind": "formula",
+      "front": "How is the interquartile range (IQR) calculated from the quartiles?",
+      "back": "IQR = $Q_3 - Q_1$, where $Q_3$ is the **third quartile** and $Q_1$ is the **first quartile**. It is the distance from the first quartile to the third quartile.",
+      "hint": "Subtract the smaller quartile from the larger one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03jc8u7",
+      "kind": "process",
+      "front": "In what order should you work through the features when writing a comparison?",
+      "back": "**Center**, then spread, then shape. Choose the statistics that fit the shapes first, then write sentences in that same order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07t774n",
+      "kind": "mistake",
+      "front": "A student says two groups are the same because their means match. What is wrong with this?",
+      "back": "Comparing centers alone is **incomplete**. Two groups can share the same center but differ greatly in spread, so you must compare spread too.",
+      "hint": "What else could differ even when the centers match?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19gah2p",
+      "kind": "mistake",
+      "front": "Is writing 'Group A has a median of 74 and Group B has a median of 70' a complete comparison?",
+      "back": "**No.** Giving two medians without saying which is larger is incomplete. Add a comparison word and the context.",
+      "hint": "Which group is higher, and what does that mean here?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0w8yxtz",
+      "kind": "example",
+      "front": "Bus riders have a median commute of 28 minutes and bike riders have a median of 20 minutes. How do the centers compare?",
+      "back": "Bus riders typically take **longer**, with a median 8 minutes more than bike riders (28 minutes versus 20 minutes).",
+      "hint": "Subtract the smaller median from the larger one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1thkvfz",
+      "kind": "example",
+      "front": "A group has a first quartile of 34 minutes and a third quartile of 52 minutes. What is the IQR?",
+      "back": "**18 minutes**, since $52-34=18$. The IQR is the third quartile minus the first quartile.",
+      "hint": "Use the formula IQR = third quartile minus first quartile.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0om8geo",
+      "kind": "concept",
+      "front": "Why must every group in side-by-side boxplots use the same scale?",
+      "back": "A **shared scale** lets you compare the groups directly. Different scales can make similar groups look different.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "040rvmz",
+      "kind": "mistake",
+      "front": "Why can a histogram of counts mislead when comparing groups of different sizes?",
+      "back": "A **larger group** makes every bar look taller, even when the shapes match. Use relative frequencies, which are percentages of each group, to compare fairly.",
+      "hint": "What changes when a group has more individuals?",
+      "sectionId": "s5"
+    }
+  ]
+}

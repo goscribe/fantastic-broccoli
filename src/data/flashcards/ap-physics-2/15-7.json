@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-7",
+  "topicCode": "15.7",
+  "topicName": "Fission, fusion and nuclear decay",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:48.116Z",
+  "cards": [
+    {
+      "id": "0rqwk2h",
+      "kind": "concept",
+      "front": "Why do both fission and fusion release energy?",
+      "back": "Both produce nuclei with more **binding energy per nucleon** than the starting nuclei. Fission splits heavy nuclei and fusion joins light ones, and both move toward medium-sized nuclei.",
+      "hint": "Think about where binding energy per nucleon is highest.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ux6mkk",
+      "kind": "formula",
+      "front": "Which equation gives the energy released in a fission or fusion reaction, and what do its symbols mean?",
+      "back": "$E=(m_\\mathrm{reactants}-m_\\mathrm{products})c^2$. $E$ is the energy released, the mass difference is the **mass lost**, and $c$ is the speed of light.",
+      "hint": "The mass that disappears becomes energy.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19n7xm4",
+      "kind": "process",
+      "front": "What rules must every nuclear decay follow?",
+      "back": "The parent emits a particle or photon. The **mass number** and **atomic number** stay constant, so the totals before and after match. The products share the released energy.",
+      "hint": "Count nucleons and protons before and after the decay.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "084a1ah",
+      "kind": "term",
+      "front": "What is binding energy?",
+      "back": "The **binding energy** of a nucleus is the energy needed to separate it completely into its free nucleons. It is not energy the nucleus stores and releases on its own.",
+      "hint": "Think about what it takes to pull nucleons apart.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i5y7ef",
+      "kind": "term",
+      "front": "What is the mass defect of a nucleus?",
+      "back": "The **mass defect** is how much less the nucleus's mass is than the total mass of its separate nucleons. The missing mass matches the binding energy.",
+      "hint": "Compare the nucleus with its separate nucleons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lt56k7",
+      "kind": "mistake",
+      "front": "A student says a nucleus's binding energy is energy it can release by itself. What is wrong with that?",
+      "back": "**Binding energy** is the energy needed to pull the nucleons apart. It is not energy the nucleus can release on its own.",
+      "hint": "Which direction does the energy flow?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d9dakv",
+      "kind": "term",
+      "front": "What is fission?",
+      "back": "**Fission** is when a heavy nucleus, such as uranium-235, absorbs a neutron and splits into two medium-sized nuclei, releasing a few free neutrons.",
+      "hint": "Think about a heavy nucleus breaking apart.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09ya6eb",
+      "kind": "term",
+      "front": "What is a chain reaction?",
+      "back": "A **chain reaction** is a self-sustaining sequence of fissions in which neutrons released by each fission trigger further fissions. A reactor keeps it steady by absorbing some neutrons.",
+      "hint": "What do the released neutrons do next?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1va6tr7",
+      "kind": "concept",
+      "front": "Why does fusion need extremely high temperatures?",
+      "back": "Nuclei carry positive charge, so they **repel** each other. High temperature gives colliding nuclei enough kinetic energy to get close enough for the strong force to act.",
+      "hint": "Think about charge and how fast the nuclei must move.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vp7qfu",
+      "kind": "example",
+      "front": "Deuterium (2.01410 u) and tritium (3.01605 u) fuse into helium-4 (4.00260 u) and a neutron (1.00866 u). How much energy is released?",
+      "back": "About **17.6 MeV**. Mass lost is 0.01889 u, and 0.01889 × 931 MeV ≈ 17.6 MeV.",
+      "hint": "Find total reactant mass minus total product mass first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m4kk36",
+      "kind": "mistake",
+      "front": "A student gets a negative value for the mass lost in a reaction. What went wrong?",
+      "back": "The reactants and products were **swapped**. Mass lost is reactant mass minus product mass, so it must come out positive.",
+      "hint": "Check which side of the equation you subtracted.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m1ug22",
+      "kind": "example",
+      "front": "Radium-226 emits a helium-4 nucleus. What are the mass number and atomic number of the daughter nucleus?",
+      "back": "Mass number **222** and atomic number **86**. Mass number is 226 − 4 = 222 and atomic number is 88 − 2 = 86.",
+      "hint": "Subtract the helium's A and Z from the parent's.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0en6kmq",
+      "kind": "term",
+      "front": "What is nuclear decay?",
+      "back": "**Nuclear decay** is the spontaneous change of an unstable nucleus into a different nucleus, with emission of a particle or photon. The original nucleus is the parent and the one left behind is the daughter.",
+      "hint": "Who is the parent and who is the daughter?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0jn1v4f",
+      "kind": "formula",
+      "front": "In the notation $^{A}_{Z}\\mathrm{X}$, what do $A$ and $Z$ stand for?",
+      "back": "$A$ is the **mass number**, the total number of protons and neutrons. $Z$ is the **atomic number**, the number of protons, which sets the charge.",
+      "hint": "One counts all nucleons, the other counts only protons.",
+      "sectionId": "s5"
+    }
+  ]
+}

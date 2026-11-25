@@ -1,7 +1,16 @@
 "use client";
 
-import { BuildBar } from "@/components/session/build-bar";
+import { BuildStage } from "@/components/session/build-stage";
 import { useNewUi } from "@/lib/new-ui";
+import { initialCopilotOpen, rememberCopilotOpen } from "@/lib/copilot-pref";
+import {
+  BUBBLE_AFTER_WRONG_MS,
+  BUBBLE_IDLE_MS,
+  BUBBLE_VISIBLE_MS,
+  bubbleAllowed,
+  countCopilotOpen,
+  dismissBubble,
+} from "@/lib/copilot-bubble";
 import { useState, useMemo, useEffect, useRef, useCallback } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -48,13 +57,14 @@ import { ClozeActivity } from "@/components/session/cloze-activity";
 import { ExplainAloudActivity } from "@/components/session/explain-aloud-activity";
 import { InteractiveActivity } from "@/components/session/interactive-activity";
 import { WorksheetActivity } from "@/components/session/worksheet-activity";
-import { SessionDebrief } from "@/components/session/session-debrief";
+import { SessionDebrief, SessionUnfinished } from "@/components/session/session-debrief";
 import { localizePracticeSession, mistakesApi } from "@/lib/api/mistakes";
 import "@/lib/i18n/mistakes";
 import {
   ActivityRewardCard,
   REWARD_MS,
-  SessionProgressHeader,
+  SessionStepBar,
+  SessionStepLabel,
   remainingMinutes,
   type ActivityReward,
 } from "@/components/session/session-progress";
@@ -63,19 +73,27 @@ import { refreshProgress, STREAK_KEY, useStreak, type StreakSummary } from "@/li
 import { MathText } from "@/components/ui/markdown-text";
 import { ContentRepairProvider } from "@/components/content/content-repair";
 import { Button } from "@/components/ui/button";
+import { Mascot } from "@/components/rewards/mascot";
 import { Card, Surface } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Copilot, CopilotTrigger } from "@/components/ai/copilot";
+import { VoiceScribe, VoiceScribeTrigger, type VoiceScribeHandle } from "@/components/session/voice-scribe";
 import { SessionPrecheck } from "@/components/session/precheck";
+import { FirstReadingLead, SessionPrimer, useSessionPrimer } from "@/components/session/session-primer";
 import { proficiencyApi } from "@/lib/api/proficiency";
 import Image from "next/image";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/first-run";
+import "@/lib/i18n/today";
+import { ChangeCourseLink } from "@/components/onboarding/change-course";
 import { track } from "@/lib/funnel";
 import { ACTIVITY_TYPE_LABELS } from "@/components/session/activity-item";
 import { cn, formatDuration, formatRelativeDate } from "@/lib/utils";
-import { useCurrentItemIndex } from "@/lib/current-item";
+import { getItemNav, useCurrentItemIndex } from "@/lib/current-item";
+import { footerBackStep, footerNextStep, sessionFinished, showSessionFooter } from "@/lib/session-footer";
+import { flushActivityDraft } from "@/lib/use-activity-draft";
+import "@/lib/i18n/purpose";
 import {
   ArrowLeft,
   ArrowRight,
@@ -85,6 +103,7 @@ import {
   Clock,
   Loader2,
   MessageSquare,
+  MoreHorizontal,
   RefreshCw,
   SkipForward,
   Trash2,
@@ -122,6 +141,17 @@ const phaseOf = (t: SessionActivity["type"]) =>
       ? "Practice"
       : "Recall";
 
+/** Activities where a student answers something: where "Stuck?" makes sense. */
+const QUESTION_TYPES = new Set(["mcq", "vocab_recall", "cloze", "comprehension_check"]);
+
+function safeLocalStorage(): Storage | null {
+  try {
+    return window.localStorage;
+  } catch {
+    return null;
+  }
+}
+
 export default function SessionDetailPage() {
   const { t } = useI18n();
   const newUi = useNewUi();
@@ -139,7 +169,7 @@ export default function SessionDetailPage() {
     queryKey: ["workspace", workspaceId],
     queryFn: () => fetchWorkspace(workspaceId),
   });
-  const { data: session, isLoading } = useQuery({
+  const { data: session, isLoading, isError: sessionError, refetch: refetchSession } = useQuery({
     queryKey: ["study-session", sessionId],
     queryFn: () => fetchStudySession(sessionId),
     // "Practice my mistakes" is built server-side with English titles.
@@ -185,10 +215,14 @@ export default function SessionDetailPage() {
   });
   // No study features until the plan actually exists.
   const planReady = !!session && !generating && !planFailed;
+  // Rated their confidence low or middling at the start: the notes (or a recap) come before the questions.
+  const primer = useSessionPrimer(planFailed ? undefined : session);
 
   // Deep links (e.g. reminder emails) can point at a specific activity.
   const searchParams = useSearchParams();
   const linkedActivityId = searchParams.get("activity");
+  // `?view=summary` (a mistake's "From: <session>") opens the end screen.
+  const linkedSummary = searchParams.get("view") === "summary";
   // undefined = not chosen yet (default to first unfinished); null = plan done (debrief)
   const [chosenActivityId, setChosenActivityId] = useState<
     string | null | undefined
@@ -196,7 +230,9 @@ export default function SessionDetailPage() {
   const activeActivityId =
     chosenActivityId !== undefined
       ? chosenActivityId
-      : ((linkedActivityId &&
+      : linkedSummary
+        ? null
+        : ((linkedActivityId &&
           session?.activities.find((a) => a.id === linkedActivityId)?.id) ||
         (session?.activities.find((a) => a.status === "in_progress")?.id ??
           session?.activities.find((a) => a.status === "pending")?.id ??
@@ -204,18 +240,30 @@ export default function SessionDetailPage() {
   const setActiveActivityId = setChosenActivityId;
 
   const [showComments, setShowComments] = useState(false);
-  // Copilot defaults open on desktop; on mobile it covers the screen, so start closed.
-  const [copilotOpen, setCopilotOpen] = useState(
+  // Copilot starts closed (the question keeps the full column); a student who
+  // docks it open keeps it open next time. See copilot-pref.ts.
+  const [copilotOpen, setCopilotOpenState] = useState(
     () =>
-      typeof window === "undefined" ||
-      window.matchMedia("(min-width: 640px)").matches,
+      typeof window !== "undefined" &&
+      initialCopilotOpen(window.localStorage, window.matchMedia("(min-width: 640px)").matches),
   );
+  /** The student's own open/close: remembered. */
+  const setCopilotOpen = useCallback((open: boolean) => {
+    setCopilotOpenState(open);
+    rememberCopilotOpen(window.localStorage, open);
+  }, []);
   // One-tap prompts (end-of-session "Ask Copilot about what you got wrong")
   // open the panel with the text already in the input.
   const [copilotDraft, setCopilotDraft] = useState<{ text: string; id: number }>();
+  // The question card's Hint / Why?: Copilot about this question, as a half-sheet on phones.
+  const [copilotAsk, setCopilotAsk] = useState<{ intent: "hint" | "why"; id: number; label: string; pinned?: string; prepare?: () => Promise<void> }>();
+  const [footerMenu, setFooterMenu] = useState(false);
+  const askSeq = useRef(0);
   const askCopilot = useCallback((text: string) => {
     setCopilotDraft({ text, id: Date.now() });
-    setCopilotOpen(true);
+    setCopilotAsk(undefined);
+    // A one-off prompt opens the panel without changing the remembered choice.
+    setCopilotOpenState(true);
   }, []);
   const [newComment, setNewComment] = useState("");
   const [localNotes, setLocalNotes] = useState<SessionNote[]>([]);
@@ -288,6 +336,44 @@ export default function SessionDetailPage() {
       openedAt.current.set(activeActivity.id, Date.now());
     }
   }, [activeActivity]);
+  // "Stuck? Tap me" on the collapsed Copilot tab: once per visit, on a question,
+  // after a quiet spell or right after a wrong answer. See copilot-bubble.ts.
+  const [bubble, setBubble] = useState<"idle" | "showing" | "done">("idle");
+  const bubbleTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const onQuestion = !!activeActivity && QUESTION_TYPES.has(activeActivity.type);
+  const bubbleCanWait = newUi && planReady && onQuestion && !copilotOpen && !showComments;
+  const offerBubble = useCallback((delay: number) => {
+    clearTimeout(bubbleTimer.current);
+    bubbleTimer.current = setTimeout(() => {
+      setBubble((b) => (b === "idle" && bubbleAllowed(safeLocalStorage()) ? "showing" : b));
+    }, delay);
+  }, []);
+  useEffect(() => {
+    if (bubble !== "idle" || !bubbleCanWait) return;
+    offerBubble(BUBBLE_IDLE_MS);
+    return () => clearTimeout(bubbleTimer.current);
+  }, [bubble, bubbleCanWait, activeActivity?.id, offerBubble]);
+  const bubbleOnWrong = () => {
+    if (bubble === "idle" && bubbleCanWait) offerBubble(BUBBLE_AFTER_WRONG_MS);
+  };
+  // It has had its one showing: leaving the question or opening Copilot or the notes ends it (and so does time, below).
+  if (bubble === "showing" && !bubbleCanWait) setBubble("done");
+  useEffect(() => {
+    if (bubble !== "showing") return;
+    const id = setTimeout(() => setBubble("done"), BUBBLE_VISIBLE_MS);
+    return () => clearTimeout(id);
+  }, [bubble]);
+  /** The student's own tap on the tab, the top-bar button or the bubble. */
+  const openCopilotByTap = () => {
+    countCopilotOpen(safeLocalStorage());
+    setBubble("done");
+    setCopilotOpen(true);
+  };
+  const contentColumn = useRef<HTMLDivElement>(null);
+  // Talk to write: one microphone for the whole player; tapping it again stops and writes.
+  const voice = useRef<VoiceScribeHandle>(null);
+  const [voiceOpen, setVoiceOpen] = useState(false);
+  const tapVoice = () => voice.current?.toggle();
   const secondsOn = (activityId: string) => {
     const start = openedAt.current.get(activityId);
     if (!start) return undefined;
@@ -495,17 +581,23 @@ export default function SessionDetailPage() {
       );
     }
     return (
-      <div className="flex-1 flex items-center justify-center">
+      <div className="flex flex-1 items-center justify-center px-6">
         <div className="text-center">
-          <p className="text-muted-foreground">{t("session.notFound")}</p>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => router.push(`/workspace/${workspaceId}`)}
-            className="mt-2"
-          >
-            {t("session.goBack")}
-          </Button>
+          <p className="text-[15px] text-muted-foreground">{t(sessionError ? "today.sessionLoadError" : "session.notFound")}</p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {sessionError && (
+              <Button size="lg" onClick={() => void refetchSession()}>
+                {t("today.retry")}
+              </Button>
+            )}
+            <Button
+              variant={sessionError ? "ghost" : "primary"}
+              size="lg"
+              onClick={() => router.push(`/workspace/${workspaceId}`)}
+            >
+              {t("session.goBack")}
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -635,6 +727,44 @@ export default function SessionDetailPage() {
     0,
   );
 
+  /** Hint / Why? on a question: Copilot opens on it, with the question pinned at the top. */
+  const askAbout = (activity: SessionActivity, index: number, intent: "hint" | "why") => {
+    const q = activity.type === "mcq" ? (activity.content as McqContent).questions[index] : undefined;
+    const n = String(index + 1);
+    setCopilotDraft(undefined);
+    askSeq.current += 1;
+    setCopilotAsk({
+      intent,
+      id: askSeq.current,
+      label: t(intent === "hint" ? "purpose.hintFor" : "purpose.whyFor").replace("{n}", n),
+      pinned: q ? `${t("purpose.pinned").replace("{n}", n)} · ${q.question.replace(/\s+/g, " ").trim()}` : undefined,
+      // "Why?" needs the server to see the answer just given (it withholds answers to unanswered questions).
+      prepare: () => flushActivityDraft(activity.id),
+    });
+    setCopilotOpenState(true);
+  };
+
+  // The bottom bar: one-activity sessions have none; elsewhere Next/Back act on the question first.
+  const footerVisible = showSessionFooter(activities.length);
+  const footerNext = () => {
+    if (!activeActivity) return;
+    setFooterMenu(false);
+    const nav = getItemNav(activeActivity.id);
+    const step = footerNextStep({ canItemNext: !!nav?.canNext(), activeIndex, activityCount: activities.length });
+    track("session.footer_next", {}, workspaceId);
+    if (step === "item") nav!.next();
+    else if (step !== "none") goToIndex(activeIndex + 1);
+  };
+  const footerBack = () => {
+    if (!activeActivity) return;
+    setFooterMenu(false);
+    const nav = getItemNav(activeActivity.id);
+    const step = footerBackStep({ canItemBack: !!nav?.canBack(), activeIndex });
+    if (step === "item") nav!.back();
+    else if (step === "activity") goToIndex(activeIndex - 1);
+  };
+  const finished = sessionFinished(activities);
+
   const renderActivity = (activity: SessionActivity) => {
     switch (activity.type) {
       case "reading":
@@ -642,6 +772,9 @@ export default function SessionDetailPage() {
           <ReadingActivity
             content={activity.content as ReadingContent}
             activityId={activity.id}
+            // The first screen of a session is never bullet points only: its figure and explanation lead.
+            visualFirst={activity.id === activities[0]?.id}
+            lead={activity.id === activities[0]?.id ? <FirstReadingLead session={session} content={activity.content as ReadingContent} /> : undefined}
             initialHighlights={activity.highlights}
             onComplete={() => goToNext()}
             onHighlightsChange={(hs) =>
@@ -670,6 +803,7 @@ export default function SessionDetailPage() {
               const question = (activity.content as McqContent).questions[
                 questionIndex
               ];
+              if (question && selectedIndex !== question.correctIndex) bubbleOnWrong();
               if (question?.sourceFlashcardId) {
                 recordFlashcardAttempt({
                   flashcardId: question.sourceFlashcardId,
@@ -693,6 +827,9 @@ export default function SessionDetailPage() {
             }}
             onComplete={() => goToNext()}
             onAllAnswered={() => markFinished(activity)}
+            onHint={(i) => askAbout(activity, i, "hint")}
+            onWhy={(i) => askAbout(activity, i, "why")}
+            hideBack={footerVisible}
           />
         );
       case "flashcard_review":
@@ -723,6 +860,7 @@ export default function SessionDetailPage() {
             draft={activity.draft}
             content={activity.content as VocabRecallContent}
             onTermResult={(index, correct, answer) => {
+              if (!correct) bubbleOnWrong();
               const term = (activity.content as VocabRecallContent).terms[
                 index
               ];
@@ -788,8 +926,13 @@ export default function SessionDetailPage() {
   const copilotPane = (
       <Copilot
         open={planReady && copilotOpen}
-        onClose={() => setCopilotOpen(false)}
+        onClose={() => {
+          setCopilotOpen(false);
+          setCopilotAsk(undefined);
+        }}
         draft={copilotDraft}
+        ask={copilotAsk}
+        sheet={!!copilotAsk}
         workspaceId={workspaceId}
         studySessionId={sessionId}
         activity={
@@ -911,53 +1054,70 @@ export default function SessionDetailPage() {
     </>
   );
 
-  if (newUi && !planFailed && !generating) {
+  // The new player shell also carries the two states before there is a plan
+  // (still building, or the build failed): same X, same column, no legacy chrome.
+  if (newUi) {
     return (
       <div className="flex h-dvh min-h-0 flex-1 overflow-hidden bg-background">
         <div className="relative flex min-w-0 flex-1 flex-col">
-          <div className="flex items-center gap-4 px-5 pt-5 sm:gap-5 sm:px-10">
-            <button
-              type="button"
-              onClick={() => router.push(`/workspace/${workspaceId}`)}
-              aria-label={t("session.backToWorkspace")}
-              className="grid size-9 shrink-0 place-items-center rounded-xl text-faint hover:bg-muted hover:text-foreground"
-            >
-              <X className="size-[22px]" />
-            </button>
-            <SessionProgressHeader
-              activities={activities}
-              activeIndex={activeIndex}
-              onSelect={goToIndex}
-            />
-            {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
-            {planReady && !copilotOpen && (
-              <CopilotTrigger compact onClick={() => setCopilotOpen(true)} />
-            )}
-            <button
-              type="button"
-              onClick={() => setShowComments(!showComments)}
-              aria-label={t("session.sessionNotes")}
-              className="relative grid size-9 shrink-0 place-items-center rounded-xl text-muted-foreground hover:bg-muted hover:text-foreground"
-            >
-              <MessageSquare className="size-4" />
-              {panelCount > 0 && (
-                <span className="absolute -right-0.5 -top-0.5 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
-                  {panelCount}
-                </span>
+          {/* The top bar sits in the same column as the content under it (same gutters, same max width), so the step bar and the question share their edges. */}
+          <div className="px-4 pt-[max(0.5rem,env(safe-area-inset-top))] sm:px-10 sm:pt-4">
+            <div className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => router.push(`/workspace/${workspaceId}`)}
+                  aria-label={t("session.backToWorkspace")}
+                  className="-ml-3 grid size-11 shrink-0 place-items-center rounded-full text-faint hover:bg-muted hover:text-foreground"
+                >
+                  <X className="size-[22px]" />
+                </button>
+                {planReady ? (
+                  <SessionStepLabel activities={activities} activeIndex={activeIndex} className="flex-1" />
+                ) : (
+                  <span className="flex-1" />
+                )}
+                {/* Phones: Copilot lives in the top bar; the edge tab would sit over the content's right edge. */}
+                {planReady && activeActivity && (
+                  <VoiceScribeTrigger active={voiceOpen} onClick={tapVoice} intro={activeActivity.type === "worksheet" && bubble !== "showing"} />
+                )}
+                {planReady && !copilotOpen && (
+                  <CopilotTrigger compact onClick={openCopilotByTap} />
+                )}
+                <button
+                  type="button"
+                  onClick={() => setShowComments(!showComments)}
+                  aria-label={t("session.sessionNotes")}
+                  className="relative -mr-3 grid size-11 shrink-0 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
+                >
+                  <MessageSquare className="size-4" />
+                  {panelCount > 0 && (
+                    <span className="absolute right-1 top-1 grid size-3.5 place-items-center rounded-full bg-accent text-[9px] font-bold text-accent-foreground">
+                      {panelCount}
+                    </span>
+                  )}
+                </button>
+              </div>
+              {/* One activity (a Quick 5) has its own question bar; a one-segment step bar above it said the same thing twice. */}
+              {planReady && activities.length > 1 && (
+                <SessionStepBar activities={activities} activeIndex={activeIndex} onSelect={goToIndex} />
               )}
-            </button>
+            </div>
           </div>
 
           <div
-            key={activeActivity?.id ?? "debrief"}
+            key={!planReady ? "building" : (activeActivity?.id ?? "debrief")}
             className={cn(
-              "min-h-0 flex-1 overflow-y-auto px-5 pb-28 pt-6 sm:px-10",
+              // Room for the bottom bar and the phone's home indicator, so the last answer is never under them.
+              "min-h-0 flex-1 overflow-y-auto overscroll-y-contain px-4 pb-[calc(7rem+env(safe-area-inset-bottom))] pt-4 sm:px-10 sm:pt-6",
+              // Phones: the Hint / Why? half-sheet covers the bottom half; the answers under it stay reachable.
+              planReady && copilotOpen && copilotAsk && "max-sm:pb-[calc(52dvh+1.5rem)]",
               navDirection === "back" ? "animate-slide-in-left" : "animate-slide-in-right",
             )}
           >
-            <div className="mx-auto w-full max-w-3xl">
+            <div ref={contentColumn} className={cn("mx-auto w-full", activeActivity ? "max-w-3xl" : "max-w-2xl")}>
               {showExtendPrompt && (
-                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-2xl border border-accent/30 bg-accent-soft/60 px-5 py-4 animate-fade-up">
+                <div className="mb-5 flex flex-wrap items-center gap-3 rounded-[22px] bg-muted px-5 py-4 animate-fade-up">
                   <div className="min-w-56 flex-1">
                     <p className="text-sm font-semibold">{t("session.extendTitle")}</p>
                     <p className="mt-0.5 text-xs text-muted-foreground">
@@ -981,16 +1141,53 @@ export default function SessionDetailPage() {
                   </div>
                 </div>
               )}
-              {activeActivity ? (
-                <>
-                  <div className="flex flex-wrap items-center justify-between gap-3">
-                    <span className="inline-flex items-center rounded-lg bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent-dim">
-                      {[t(ACTIVITY_TYPE_LABELS[activeActivity.type] ?? "session.typeActivity"), t(`session.phase${phaseOf(activeActivity.type)}`)].filter((v, i, arr) => arr.indexOf(v) === i).join(" · ")}
-                    </span>
+              {planFailed ? (
+                <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-6 text-center animate-fade-up sm:pt-12" role="alert">
+                  <Mascot pose="think" className="h-[112px]" />
+                  <h1 className="mt-5 text-[24px] font-extrabold leading-tight">{t("session.planFailedTitle")}</h1>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{planError ?? t("session.planFailedBody")}</p>
+                  <div className="mt-6 flex w-full flex-col gap-2.5 sm:w-auto sm:flex-row">
+                    <Button size="lg" disabled={retryPlan.isPending || deleteSession.isPending} onClick={() => retryPlan.mutate()}>
+                      {t("session.retryGeneration")}
+                    </Button>
+                    <Button size="lg" variant="secondary" disabled={retryPlan.isPending || deleteSession.isPending} onClick={() => deleteSession.mutate()}>
+                      {t("session.deleteSession")}
+                    </Button>
                   </div>
-                  <h1 className="mb-[18px] mt-3 text-[23px] font-bold leading-[1.3]">
-                    <MathText text={activeActivity.title} />
-                  </h1>
+                  <button type="button" onClick={() => router.push(`/workspace/${workspaceId}`)} className="mt-4 text-[14px] font-bold text-muted-foreground hover:text-foreground">
+                    {t("session.backToWorkspace")}
+                  </button>
+                </div>
+              ) : primer.state === "open" ? (
+                // Shown while the questions are still being written too: the wait is spent on the notes.
+                <SessionPrimer plan={primer.plan} notes={primer.notes} material={primer.material} confidence={primer.confidence} title={session.title} generating={generating} onStart={primer.dismiss} />
+              ) : generating ? (
+                <GeneratingPlanCard
+                  title={session.title}
+                  workspaceId={workspaceId}
+                  sessionId={sessionId}
+                  initial={session.generationProgress}
+                  quickStart={session.quickStart}
+                />
+              ) : primer.state === "loading" ? (
+                // Deciding whether the notes come first: hold the first question back for a moment rather than flash it.
+                <div className="mx-auto w-full max-w-[720px]" aria-busy="true">
+                  <div className="h-7 w-2/3 animate-pulse rounded-full bg-muted" />
+                  <div className="mt-6 h-[220px] animate-pulse rounded-[var(--r-card,20px)] bg-muted" />
+                </div>
+              ) : activeActivity ? (
+                <>
+                  {/* One label: the activity's title (steps are in the bar above). A one-activity session's card says "Question 1 of 5" itself. */}
+                  {activities.length > 1 ? (
+                    <h1 className="mb-4 text-[20px] font-bold leading-[1.3] sm:mb-[18px] sm:text-[23px]">
+                      <MathText text={activeActivity.title} />
+                    </h1>
+                  ) : session.mistakesPractice ? (
+                    // A mistakes round says which subjects are in it ("Practice my mistakes · Biology, Chemistry").
+                    <h1 className="mb-3 text-[13.5px] font-bold text-muted-foreground">{session.title}</h1>
+                  ) : (
+                    <h1 className="sr-only">{activeActivity.title}</h1>
+                  )}
                   <ContentRepairProvider
                     scope={{
                       workspaceId,
@@ -1001,46 +1198,68 @@ export default function SessionDetailPage() {
                     {renderActivity(activeActivity)}
                   </ContentRepairProvider>
                 </>
+              ) : !finished ? (
+                <SessionUnfinished activities={activities} onResume={(id) => goToIndex(activities.findIndex((a) => a.id === id))} onLeave={() => router.push(`/workspace/${workspaceId}`)} />
               ) : (
-                <SessionDebrief sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief activities={activities} confidenceBefore={session.confidenceBefore} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
 
-          {activeActivity && (
-            <div className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 border-t border-border bg-card/95 px-5 py-3 backdrop-blur sm:px-10">
+          {activeActivity && footerVisible && primer.state === "closed" && (
+            <div className="absolute inset-x-0 bottom-0 z-20 border-t border-border bg-card/95 px-4 pb-[max(0.5rem,env(safe-area-inset-bottom))] pt-2 backdrop-blur sm:px-10 sm:py-2.5">
+            {/* Quiet text buttons, in the content's own column. Back and Next move question by question; skipping a whole activity is in the menu. */}
+            <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-2 sm:gap-3">
               <button
                 type="button"
-                disabled={activeIndex === 0}
-                onClick={() => goToIndex(activeIndex - 1)}
-                className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted disabled:opacity-40"
+                disabled={footerBackStep({ canItemBack: !!getItemNav(activeActivity.id)?.canBack(), activeIndex }) === "none"}
+                onClick={footerBack}
+                aria-label={t("session.back")}
+                className="-ml-3 inline-flex h-11 min-w-11 items-center justify-center gap-1.5 rounded-full px-3 text-[14px] font-bold hover:bg-muted disabled:opacity-40 sm:-ml-4 sm:px-4"
               >
                 <ArrowLeft className="size-4" />
-                {t("session.back")}
+                <span className="max-[380px]:sr-only">{t("session.back")}</span>
               </button>
-              <div className="flex gap-2">
+              <div className="relative flex items-center gap-1">
                 <button
                   type="button"
-                  onClick={() => goToNext(true)}
-                  className="inline-flex h-10 items-center gap-1.5 rounded-xl px-4 text-[13.5px] font-semibold text-muted-foreground hover:bg-muted"
+                  onClick={() => setFooterMenu((v) => !v)}
+                  aria-label={t("purpose.more")}
+                  aria-expanded={footerMenu}
+                  className="grid size-11 place-items-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
-                  <SkipForward className="size-4" />
-                  {t("session.skip")}
+                  <MoreHorizontal className="size-5" />
                 </button>
+                {footerMenu && (
+                  <div role="menu" className="absolute bottom-full right-0 mb-2 w-56 rounded-2xl border border-border bg-card p-1.5 shadow-[0_16px_40px_-18px_rgba(0,0,0,0.35)]">
+                    <button
+                      type="button"
+                      role="menuitem"
+                      onClick={() => {
+                        setFooterMenu(false);
+                        goToNext(true);
+                      }}
+                      className="flex h-11 w-full items-center rounded-xl px-3 text-left text-[14px] font-bold hover:bg-muted"
+                    >
+                      {t("purpose.skipActivity")}
+                    </button>
+                  </div>
+                )}
                 <button
                   type="button"
-                  onClick={() => goToIndex(activeIndex + 1)}
-                  className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border px-4 text-[13.5px] font-semibold hover:bg-muted"
+                  onClick={footerNext}
+                  className="-mr-4 inline-flex h-11 items-center gap-1.5 rounded-full px-4 text-[14px] font-bold hover:bg-muted"
                 >
                   {t("session.next")}
                   <ArrowRight className="size-4" />
                 </button>
               </div>
             </div>
+            </div>
           )}
 
           {activeReward && (
-            <div className="pointer-events-none absolute inset-x-0 bottom-[76px] z-30 flex justify-center px-4">
+            <div className="pointer-events-none absolute inset-x-0 bottom-[calc(76px+env(safe-area-inset-bottom))] z-30 flex justify-center px-4">
               <ActivityRewardCard
                 reward={activeReward}
                 onNext={() =>
@@ -1052,7 +1271,23 @@ export default function SessionDetailPage() {
         </div>
         {copilotPane}
         {commentsPanel}
-        {!copilotOpen && <CopilotTrigger onClick={() => setCopilotOpen(true)} />}
+        <VoiceScribe ref={voice} scope={contentColumn} onOpenChange={setVoiceOpen} />
+        {planReady && !copilotOpen && (
+          <CopilotTrigger
+            onClick={openCopilotByTap}
+            bubble={
+              bubble === "showing"
+                ? {
+                    avoid: contentColumn,
+                    onDismiss: () => {
+                      dismissBubble(safeLocalStorage());
+                      setBubble("done");
+                    },
+                  }
+                : undefined
+            }
+          />
+        )}
       </div>
     );
   }
@@ -1289,6 +1524,8 @@ export default function SessionDetailPage() {
                   {renderActivity(activeActivity)}
                 </ContentRepairProvider>
               </div>
+            ) : !finished ? (
+              <SessionUnfinished activities={activities} onResume={(id) => goToIndex(activities.findIndex((a) => a.id === id))} onLeave={() => router.push(`/workspace/${workspaceId}`)} />
             ) : (
               <SessionDebrief
                 sessionId={sessionId}
@@ -1666,22 +1903,31 @@ function GeneratingPlanCard({
 
   if (newUi) {
     return (
-      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 px-4 pb-12 pt-6 animate-fade-up">
-        <BuildBar
+      <div className="mx-auto flex w-full max-w-[640px] flex-col items-center gap-5 pb-12 pt-2 animate-fade-up">
+        <BuildStage
           title={title}
           pct={percent / 100}
           label={detail ?? t(GENERATION_STAGES[progress.stageIndex].label)}
-          steps={GENERATION_STAGES.length}
-          index={progress.stageIndex}
+          stageIndex={progress.stageIndex}
+          stageCount={GENERATION_STAGES.length}
+          planned={progress.planned}
+          finished={progress.finished}
+          writing={progress.stageIndex >= 2}
+          hint={
+            stalled
+              ? t("session.takingLonger")
+              : quickStart
+                ? // A Quick 5 is ready in about a minute: it opens here by itself, there is nothing to email.
+                  t("firstRun.busyHint")
+                : t("session.generatingHint")
+          }
         />
-        <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
-        <p className="text-center text-[13px] text-faint">
-          {stalled
-            ? t("session.takingLonger")
-            : quickStart
-              ? t("firstRun.emailWhenReady")
-              : t("session.generatingHint")}
-        </p>
+        {/* A Quick 5 the first screen started without asking: the way back to the choice. */}
+        {quickStart && <ChangeCourseLink workspaceId={workspaceId} sessionId={sessionId} />}
+        {/* The quick check / warm-up on a card that matches the build panel; hidden while it has nothing to show. */}
+        <div className="w-full rounded-[var(--r-panel,24px)] border border-border bg-card p-5 empty:hidden sm:p-7">
+          <SessionPrecheck workspaceId={workspaceId} focus={title} hero />
+        </div>
       </div>
     );
   }

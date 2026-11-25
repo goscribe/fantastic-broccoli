@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "5-18",
+  "topicCode": "5.18",
+  "topicName": "Second-order differential equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:27.630Z",
+  "cards": [
+    {
+      "id": "04ofisq",
+      "kind": "concept",
+      "front": "Why can a second-order equation like $\\frac{d^2x}{dt^2}=-4x$ be turned into a pair of first-order equations?",
+      "back": "Let $y=\\frac{dx}{dt}$, so $\\frac{dx}{dt}=y$ and $\\frac{dy}{dt}=\\frac{d^2x}{dt^2}$. This gives a **coupled system** in $x$ and $y$ that the methods for pairs of equations can handle.",
+      "hint": "Define the new variable first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18a5z97",
+      "kind": "concept",
+      "front": "In the phase plane, what does the closed loop for $\\frac{d^2x}{dt^2}=-4x$ show about the mass?",
+      "back": "It **oscillates** for ever with constant amplitude. The loop is traced clockwise, since the point moves right when $y>0$ and left when $y<0$.",
+      "hint": "Think about the sign of y.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "196z4g9",
+      "kind": "concept",
+      "front": "What do the real and imaginary parts of an eigenvalue tell you about a linear system's motion?",
+      "back": "The **real part** sets growth or decay. The **imaginary part** sets **oscillation**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09qwodz",
+      "kind": "term",
+      "front": "What is a second-order differential equation?",
+      "back": "A **second-order differential equation** is one whose highest derivative is a **second derivative**, such as $\\frac{d^2x}{dt^2}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00ucfnc",
+      "kind": "term",
+      "front": "What is Euler's method?",
+      "back": "A **numerical method** that approximates a solution by repeated steps of fixed size $h$, using the rates at the start of each step.",
+      "hint": "Think about the step size h.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04dzr8w",
+      "kind": "process",
+      "front": "What are the three update rules for Euler's method applied to a coupled system?",
+      "back": "$t_{n+1}=t_n+h$, $x_{n+1}=x_n+h\\,y_n$ and $y_{n+1}=y_n+h\\times\\frac{dy}{dt}$ evaluated at $(x_n,y_n)$. All values come from the start of the step.",
+      "hint": "Time goes up by h first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a3lhcp",
+      "kind": "mistake",
+      "front": "A student uses the new $x_{n+1}$ when updating $y$ in Euler's method. What is wrong?",
+      "back": "**Both** updates must use values from the start of the step. Using $x_{n+1}$ in the $y$ update breaks the method.",
+      "hint": "Check which values each update uses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ohong2",
+      "kind": "example",
+      "front": "Using Euler's method with $h=0.1$, $x(0)=1$ and $y(0)=0$ for $\\frac{d^2x}{dt^2}=-4x$, estimate $x$ at $t=0.3$.",
+      "back": "$x\\approx0.88\\,\\mathrm{m}$ and $y\\approx-1.18\\,\\mathrm{m\\,s^{-1}}$. This takes three steps, each using values from the start of the step.",
+      "hint": "Write the system with dx/dt = y first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "199lgya",
+      "kind": "formula",
+      "front": "What quadratic gives the eigenvalues of $\\frac{dx}{dt}=ax+by$ and $\\frac{dy}{dt}=cx+dy$?",
+      "back": "$\\lambda^2-(a+d)\\lambda+(ad-bc)=0$. Here $\\lambda$ is an **eigenvalue**, and $a$, $b$, $c$, $d$ are the coefficients of the system.",
+      "hint": "Those are the coefficients in the two equations.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "03wpvtm",
+      "kind": "formula",
+      "front": "What is the quick eigenvalue equation for $\\frac{d^2x}{dt^2}+B\\frac{dx}{dt}+Cx=0$?",
+      "back": "$\\lambda^2+B\\lambda+C=0$. It saves forming the system when only the eigenvalues are needed.",
+      "hint": "Use a=0, b=1, c=-C and d=-B in the general form.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fwpua0",
+      "kind": "example",
+      "front": "Write $\\frac{d^2x}{dt^2}+3\\frac{dx}{dt}+2x=0$ as a coupled system, using $y=\\frac{dx}{dt}$.",
+      "back": "$\\frac{dx}{dt}=y$ and $\\frac{dy}{dt}=-2x-3y$.",
+      "hint": "Rearrange the original equation for the second derivative first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v7wce7",
+      "kind": "mistake",
+      "front": "A student says damping adds a positive multiple of $y$ to $\\frac{dy}{dt}$. Why is this wrong?",
+      "back": "Damping acts **against** the velocity, so it adds a **negative** multiple of $y$ to $\\frac{dy}{dt}$.",
+      "hint": "Which way does friction push?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jl5swb",
+      "kind": "concept",
+      "front": "How do eigenvalues $-1\\pm2\\mathrm{i}$ differ in motion from eigenvalues $-1$ and $-2$?",
+      "back": "$-1\\pm2\\mathrm{i}$ gives a **stable spiral**, oscillating with shrinking amplitude. $-1$ and $-2$ give a **stable node**, returning to rest without oscillating.",
+      "hint": "Look for the imaginary part.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08hos6r",
+      "kind": "mistake",
+      "front": "Why does an Euler approximation of an undamped oscillator drift outwards in the phase plane?",
+      "back": "Each step uses rates from the start, so points land slightly outside the true loop and the errors build up. A smaller $h$ slows the drift but never removes it.",
+      "hint": "Consider what happens to errors over many steps.",
+      "sectionId": "s5"
+    }
+  ]
+}

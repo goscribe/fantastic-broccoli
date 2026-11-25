@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "6-8",
+  "topicCode": "6.8",
+  "topicName": "Antiderivatives and indefinite integrals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:21.885Z",
+  "cards": [
+    {
+      "id": "1iord86",
+      "kind": "term",
+      "front": "What is an antiderivative of $f(x)$?",
+      "back": "A **function** $F(x)$ whose derivative is $f(x)$, so $F'(x)=f(x)$ on the interval considered.",
+      "hint": "Think of undoing differentiation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0uur4gf",
+      "kind": "concept",
+      "front": "Why does an indefinite integral need the constant $C$?",
+      "back": "Because **every** constant added to an antiderivative has derivative zero, so there is a whole family of antiderivatives, not just one.",
+      "hint": "What is the derivative of 7?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08oebgi",
+      "kind": "formula",
+      "front": "What is the power rule for integration, and when does it fail?",
+      "back": "For $n\\ne-1$, $\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$: add one to the exponent, then divide by the new exponent. It fails at $n=-1$.",
+      "hint": "Which exponent would make the divisor zero?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k6u795",
+      "kind": "term",
+      "front": "What does an indefinite integral $\\int f(x)\\,dx$ represent?",
+      "back": "The **family** of all antiderivatives of $f(x)$, written $F(x)+C$. Unlike a definite integral, it has no bounds and no single numerical value.",
+      "hint": "Compare it with a definite integral.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0osftcj",
+      "kind": "example",
+      "front": "Find $\\int(6x^2-4)\\,dx$.",
+      "back": "$2x^3-4x+C$. Integrate term by term: $6x^2$ becomes $2x^3$, and $-4$ becomes $-4x$.",
+      "hint": "Apply the power rule to each term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dy3gp0",
+      "kind": "mistake",
+      "front": "Why can't you use the power rule to integrate $\\frac{1}{x}$?",
+      "back": "It would mean dividing by $n+1=0$. The correct result is $\\int\\frac{1}{x}\\,dx=\\ln|x|+C$ on an interval that does not cross zero.",
+      "hint": "Rewrite $\\frac{1}{x}$ as a power of $x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xml9ei",
+      "kind": "formula",
+      "front": "What is $\\int\\frac{1}{x}\\,dx$, and why the absolute value?",
+      "back": "$\\ln|x|+C$ for $x\\ne0$. The **absolute value** makes the derivative correct for both positive and negative $x$.",
+      "hint": "Check by differentiating $\\ln|x|$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v3knh0",
+      "kind": "formula",
+      "front": "What is $\\int e^x\\,dx$?",
+      "back": "$e^x+C$. The exponential rule: $e^x$ is its own antiderivative, plus the constant.",
+      "hint": "Differentiate $e^x$ to check.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1egifui",
+      "kind": "mistake",
+      "front": "What is $\\int\\sin x\\,dx$? Watch the sign.",
+      "back": "$-\\cos x+C$. Keep the **negative sign**, because differentiating $-\\cos x$ gives $\\sin x$. Writing $\\cos x+C$ is wrong.",
+      "hint": "Differentiate your answer to check it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hhhmba",
+      "kind": "process",
+      "front": "How do you check an indefinite integral?",
+      "back": "Differentiate your proposed answer and compare it with the original integrand; they must match. The derivative of $C$ is zero, so any constant works.",
+      "hint": "Differentiate, then compare.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h9mwvh",
+      "kind": "example",
+      "front": "Find $\\int(3x^2+2\\cos x)\\,dx$.",
+      "back": "$x^3+2\\sin x+C$. Integrate each term, use one constant, then differentiate to confirm you get $3x^2+2\\cos x$.",
+      "hint": "Handle the cosine term separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0uivo6f",
+      "kind": "process",
+      "front": "How do you use an initial condition like $F(0)=4$ to find $C$?",
+      "back": "Substitute the given input into $F(x)+C$, then solve for $C$. This selects one member of the family of antiderivatives.",
+      "hint": "Substitute the input, then solve for $C$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o8gzxo",
+      "kind": "example",
+      "front": "If $F'(x)=2x$ and $F(1)=5$, find $F(x)$.",
+      "back": "$F(x)=x^2+4$. Integrating gives $x^2+C$, and $F(1)=1+C=5$ gives $C=4$.",
+      "hint": "Use $F(1)=5$ to find $C$.",
+      "sectionId": "s4"
+    }
+  ]
+}

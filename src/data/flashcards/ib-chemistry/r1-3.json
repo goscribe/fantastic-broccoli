@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "r1-3",
+  "topicCode": "R1.3",
+  "topicName": "Energy from fuels",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:24.866Z",
+  "cards": [
+    {
+      "id": "0oekh58",
+      "kind": "concept",
+      "front": "Why does combustion release energy overall, even though some bonds must be broken first?",
+      "back": "More energy is released when **new bonds form** than is needed to break the bonds in the reactants. This makes combustion exothermic.",
+      "hint": "Compare bonds broken with bonds formed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1chlucq",
+      "kind": "term",
+      "front": "What is specific energy?",
+      "back": "The **energy released per unit mass** of fuel burned, usually in MJ per kg. It lets fuels be compared using the same mass.",
+      "hint": "Think about what is held constant when comparing fuels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0tygy2a",
+      "kind": "formula",
+      "front": "Which equation links energy released to the mass of fuel burned?",
+      "back": "$E=m\\times e$, where $E$ is energy released (MJ), $m$ is mass burned (kg) and $e$ is specific energy (MJ kg$^{-1}$).",
+      "hint": "Multiply two quantities together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rx5dl4",
+      "kind": "term",
+      "front": "What is complete combustion?",
+      "back": "A reaction with **sufficient oxygen** that produces fully oxidised products. For a fuel containing carbon and hydrogen, these are carbon dioxide and water.",
+      "hint": "What does the fuel need to get enough of?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xt52l4",
+      "kind": "formula",
+      "front": "What is the balanced equation for the complete combustion of methane?",
+      "back": "$\\mathrm{CH_4+2O_2\\rightarrow CO_2+2H_2O}$. Methane reacts with oxygen to give carbon dioxide and water.",
+      "hint": "Count the carbon, hydrogen and oxygen atoms on each side.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1yzf7mz",
+      "kind": "mistake",
+      "front": "A reaction needs a spark to start, so is it endothermic?",
+      "back": "No. The **spark only starts** combustion. The ongoing reaction releases energy overall, so it is exothermic.",
+      "hint": "Separate the starting step from the overall energy change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ynmbxr",
+      "kind": "concept",
+      "front": "Hydrogen releases the most energy per kilogram. Why is it not automatically the best fuel?",
+      "back": "Hydrogen has a **low density**, so storage volume and conditions matter. Specific energy alone does not show how easily a fuel can be stored, transported or used.",
+      "hint": "Think about storage, not just energy per kilogram.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dn5ghe",
+      "kind": "mistake",
+      "front": "Is it enough to compare fuels using energy per kilogram alone?",
+      "back": "Not always. You must name the **basis of comparison**, because energy per kilogram differs from energy per litre.",
+      "hint": "Check what quantity each value is measured per.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0v35icu",
+      "kind": "process",
+      "front": "What are the steps for calculating energy released by burning a fuel?",
+      "back": "1) Write $E=m\\times e$. 2) Substitute the mass and specific energy with units. 3) Calculate $E$. Keeping units shows that the kilograms cancel.",
+      "hint": "Start with the equation, then substitute.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17np8g5",
+      "kind": "example",
+      "front": "How much energy is released by burning 0.20 kg of ethanol, which has a specific energy of 27 MJ kg$^{-1}$?",
+      "back": "About **5.4 MJ**, from $E=0.20\\ \\mathrm{kg}\\times27\\ \\mathrm{MJ\\,kg^{-1}}=5.4\\ \\mathrm{MJ}$.",
+      "hint": "Use $E=m\\times e$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tkfzuw",
+      "kind": "example",
+      "front": "How much energy is released by burning 0.40 kg of methane, which has a specific energy of 50 MJ kg$^{-1}$?",
+      "back": "**20 MJ**, from $E=0.40\\ \\mathrm{kg}\\times50\\ \\mathrm{MJ\\,kg^{-1}}=20\\ \\mathrm{MJ}$.",
+      "hint": "Multiply mass by specific energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a8cb6q",
+      "kind": "term",
+      "front": "What is incomplete combustion and what harmful products can it produce?",
+      "back": "Combustion where **oxygen is insufficient** to oxidise the fuel fully. It can produce toxic carbon monoxide and soot instead of only carbon dioxide and water.",
+      "hint": "Think about what happens when oxygen runs short.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zmo0gz",
+      "kind": "mistake",
+      "front": "Is hydrogen a zero-emission fuel?",
+      "back": "No. It produces **no carbon dioxide** when burned, but its production may cause emissions. Burning it in air can also produce nitrogen oxides.",
+      "hint": "Consider where the hydrogen comes from and what else burning can make.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jv3sfu",
+      "kind": "concept",
+      "front": "Why should fuels be judged beyond their exhaust gases?",
+      "back": "Their impact depends on **production, storage and use**. Ethanol's impact depends on how it is made, since growing crops uses land and resources.",
+      "hint": "Think about the whole life of the fuel.",
+      "sectionId": "s4"
+    }
+  ]
+}

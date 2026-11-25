@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Star, X } from "lucide-react";
 import { ratingApi } from "@/lib/api/rating";
@@ -74,7 +75,7 @@ export function MonthlyRatingPrompt() {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 w-[19rem] rounded-2xl border border-border bg-card p-4 shadow-lg">
+    <div className="fixed bottom-4 right-4 z-50 w-[19rem] in-[.new-ui]:max-md:bottom-[calc(4.75rem+env(safe-area-inset-bottom))] rounded-2xl border border-border bg-card p-4 shadow-lg">
       {submitted ? (
         <p className="text-sm font-medium text-foreground">
           {t("rating.thanks")}
@@ -136,7 +137,7 @@ export function MonthlyRatingPrompt() {
               <button
                 type="button"
                 onClick={() => void finish()}
-                className="w-full rounded-lg bg-accent px-3 py-1.5 text-sm font-medium text-accent-foreground hover:bg-accent/90"
+                className={buttonClass({ size: "sm", className: "w-full" })}
               >
                 {t("rating.send")}
               </button>

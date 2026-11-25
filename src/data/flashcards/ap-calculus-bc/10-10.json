@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-10",
+  "topicCode": "10.10",
+  "topicName": "Alternating series error bound",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:19.472Z",
+  "cards": [
+    {
+      "id": "0sf1jck",
+      "kind": "concept",
+      "front": "What does the alternating series error bound tell you about the error in a partial sum?",
+      "back": "The **error** is at most the size of the first omitted term, so $|S-S_n|\\le a_{n+1}$. You can limit the error without knowing the true sum $S$.",
+      "hint": "Think about the term right after the last one you added.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pzxa0t",
+      "kind": "process",
+      "front": "What three conditions must an alternating series meet before you use the error bound?",
+      "back": "The terms **alternate** in sign, the sizes $a_n$ **decrease**, and the sizes $a_n$ **approach zero**. These conditions also make the series converge.",
+      "hint": "Check the signs first, then the sizes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h67efd",
+      "kind": "formula",
+      "front": "What does each symbol mean in $|S-S_n|\\le a_{n+1}$?",
+      "back": "$S$ is the true sum of the whole series, $S_n$ is the **partial sum** of the first $n$ terms, and $a_{n+1}$ is the size of the first omitted term, which is positive.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0837dld",
+      "kind": "term",
+      "front": "What is a partial sum $S_n$?",
+      "back": "The **partial sum** $S_n$ is the sum of the first $n$ terms of a series. It is used as an estimate of the whole sum.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fdn9g7",
+      "kind": "term",
+      "front": "What is the error in a partial sum?",
+      "back": "The **error** is $S-S_n$, the true sum minus the partial sum. We usually care about its size, $|S-S_n|$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0u2x7wk",
+      "kind": "mistake",
+      "front": "A student bounds the error using $a_n$, the last term added. What is wrong?",
+      "back": "The bound uses **$a_{n+1}$**, the first omitted term. The last term added, $a_n$, is the wrong size to use.",
+      "hint": "Count which term is left out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12wr0ws",
+      "kind": "example",
+      "front": "Use $S_3$ to estimate $\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}}{n^2}$. What is the error bound and the interval containing the sum?",
+      "back": "The error is at most $\\frac{1}{16}=0.0625$. With $S_3=\\frac{31}{36}\\approx0.8611$, the sum lies in $0.799\\le S\\le0.924$.",
+      "hint": "The first omitted term is the fourth.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zurjk2",
+      "kind": "concept",
+      "front": "Why does the true sum lie between two consecutive partial sums?",
+      "back": "Consecutive partial sums fall on **opposite sides** of $S$. Each added term pushes the partial sum across the true sum by a smaller amount.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e4mj0k",
+      "kind": "concept",
+      "front": "When is $S_n$ an overestimate, and when is it an underestimate?",
+      "back": "If the first omitted term is **negative**, $S_n$ is an overestimate. If the first omitted term is **positive**, $S_n$ is an underestimate.",
+      "hint": "Look at the sign of the first omitted term.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ngu909",
+      "kind": "process",
+      "front": "How do you find how many terms guarantee an error no larger than a given amount?",
+      "back": "Require the **first omitted term** $a_{n+1}$ to be at most the allowed error. Then solve that inequality for $n$.",
+      "hint": "Write the bound as an inequality first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tfaud1",
+      "kind": "example",
+      "front": "How many terms of $\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}}{n^2}$ guarantee an error of at most 0.001?",
+      "back": "**31** terms. You need $\\frac{1}{(n+1)^2}\\le0.001$, so $n+1\\ge32$ and $n\\ge31$.",
+      "hint": "Compare $31^2$ and $32^2$ with 1000.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gd9xf0",
+      "kind": "mistake",
+      "front": "A student says the bound gives the exact error, so the actual error must equal $a_{n+1}$. What is wrong?",
+      "back": "The bound is a **guarantee** of an upper limit, not a prediction of the exact error. The actual error may be smaller.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uehl8t",
+      "kind": "concept",
+      "front": "Why does the error bound hold for an alternating series?",
+      "back": "The leftover tail $T$ satisfies $0\\le T\\le a_{n+1}$. Grouping its terms in two different ways shows this, so the error is at most $a_{n+1}$.",
+      "hint": "Group the tail terms in pairs, two different ways.",
+      "sectionId": "s5"
+    }
+  ]
+}

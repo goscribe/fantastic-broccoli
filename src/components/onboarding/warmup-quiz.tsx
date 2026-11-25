@@ -81,8 +81,12 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
   }, []);
 
   if (questions.length === 0) {
+    // On the wait screen (hero) nothing is shown until a question exists: the
+    // screen above already says what is being made, and a block of skeletons
+    // under its progress bar was a second loader.
+    if (hero) return null;
     return (
-      <div className={hero ? HERO : SECTION}>
+      <div className={SECTION}>
         <p className="text-sm font-semibold">Warm-up quiz incoming…</p>
         <p className="mt-1 text-xs text-muted-foreground">
           Writing a few quick questions from your materials so you can practice
@@ -109,7 +113,7 @@ export function WarmupQuiz({ workspaceId, hero = false }: { workspaceId: string;
   return (
     <div className={hero ? HERO : SECTION}>
       <div className="flex items-center justify-between">
-        <p className={cn("text-[11px] font-semibold text-accent", !hero && "uppercase tracking-wide")}>
+        <p className={hero ? "text-small font-bold text-muted-foreground" : "text-[11px] font-semibold uppercase tracking-wide text-accent"}>
           Warm-up while you wait
         </p>
         <p className="text-[11px] text-muted-foreground">

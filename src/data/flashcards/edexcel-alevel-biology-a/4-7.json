@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "Plant cell ultrastructure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:51.701Z",
+  "cards": [
+    {
+      "id": "0mjgxe7",
+      "kind": "concept",
+      "front": "Why does a plant cell not burst when water enters it?",
+      "back": "The **cell wall** resists expansion and pushes back against the turgor pressure, so the cell becomes turgid but does not burst. Its cellulose is strong in tension.",
+      "hint": "Think about what the outward pressure of the cell contents is pushing against.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wl1h4v",
+      "kind": "concept",
+      "front": "What is the main function of a chloroplast?",
+      "back": "**Photosynthesis**: using light energy to make sugars from carbon dioxide and water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vthp1e",
+      "kind": "concept",
+      "front": "What do the genes in a cell's nucleus carry instructions for?",
+      "back": "Making **proteins**. The nucleus holds DNA packaged as chromosomes, and mRNA leaves through nuclear pores to direct protein production.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1yql4h4",
+      "kind": "term",
+      "front": "What is an organelle?",
+      "back": "A **structure** inside a cell that carries out a specific function, usually surrounded by a membrane.",
+      "hint": "Think of the cell as a small body with specialised parts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16s0zzo",
+      "kind": "term",
+      "front": "What is the main component of a plant cell wall?",
+      "back": "**Cellulose**, an unbranched beta-glucose polysaccharide whose chains are bundled together into microfibrils.",
+      "hint": "Think about the polymer that gives plants their structure.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1z0r87t",
+      "kind": "process",
+      "front": "What happens to the vacuole and turgor when a plant loses water?",
+      "back": "The **vacuole** shrinks, so **turgor** falls, the cells become less firm and the plant wilts.",
+      "hint": "Think about what happens to the vacuole when water enters it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ensq1g",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that every plant cell contains chloroplasts?",
+      "back": "Chloroplasts are **often** present but not in every cell. Root cells receive no light, so they have none.",
+      "hint": "Think about which parts of a plant get no light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01g2zrr",
+      "kind": "term",
+      "front": "What is a thylakoid membrane?",
+      "back": "A **membrane** inside a chloroplast, arranged in stacked sacs called grana, that contains chlorophyll and other pigments for absorbing light.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16p5lru",
+      "kind": "term",
+      "front": "What is the stroma of a chloroplast?",
+      "back": "The **fluid** around the grana that contains the enzymes for building sugars.",
+      "hint": "Compare it with the membrane-bound thylakoid region.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0l4fmy0",
+      "kind": "term",
+      "front": "What does the vacuole store?",
+      "back": "**Cell sap**: a solution of sugars, mineral ions, pigments and waste products, held inside the tonoplast.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b55ncb",
+      "kind": "term",
+      "front": "What is turgor?",
+      "back": "The **outward pressure** of the cell contents against the cell wall, which makes a plant cell firm.",
+      "hint": "Think about what the vacuole does when water enters it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w3gvr1",
+      "kind": "term",
+      "front": "What is the nucleolus?",
+      "back": "A **dense region** inside the nucleus where ribosomal RNA is made and ribosomes begin to be assembled.",
+      "hint": "Think about the internal structure of the nucleus, beyond its envelope.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12nyvgm",
+      "kind": "term",
+      "front": "What do plasmodesmata allow between neighbouring plant cells?",
+      "back": "**Cytoplasm** to pass between cells through channels in the walls, so they can exchange substances.",
+      "hint": "Think about where neighbouring cell walls meet.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fcog04",
+      "kind": "concept",
+      "front": "Which features do plant cells have that animal cells lack?",
+      "back": "A **cell wall**, a permanent vacuole, and (often) chloroplasts. Both cell types have a nucleus."
+    }
+  ]
+}

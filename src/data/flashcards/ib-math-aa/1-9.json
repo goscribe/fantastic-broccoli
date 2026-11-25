@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "1-9",
+  "topicCode": "1.9",
+  "topicName": "The binomial theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:47.120Z",
+  "cards": [
+    {
+      "id": "0voq0qc",
+      "kind": "concept",
+      "front": "What does the binomial theorem let you do that Pascal's triangle cannot do easily?",
+      "back": "It gives any coefficient in $(a+b)^n$ directly, so you do not need to build every row of the triangle. The formula is $(a+b)^n=\\sum_{r=0}^{n}\\binom{n}{r}a^{n-r}b^{r}$, which is **practical for large n** such as $n=30$.",
+      "hint": "Think about large values of n.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o2jm2g",
+      "kind": "term",
+      "front": "What is a binomial coefficient, and how is it written?",
+      "back": "The **binomial coefficient** $\\binom{n}{r}$, read as \"n choose r\", equals $\\frac{n!}{r!\\,(n-r)!}$. It is the coefficient of $a^{n-r}b^r$ in $(a+b)^n$.",
+      "hint": "It is built from factorials.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1y1c4qr",
+      "kind": "formula",
+      "front": "What is the general term $T_{r+1}$ in the expansion of $(a+b)^n$, and what does each symbol mean?",
+      "back": "$T_{r+1}=\\binom{n}{r}a^{n-r}b^{r}$. Here $n$ is the power, $r$ runs from 0 to $n$, and the $(r+1)$th term contains $b^r$. The two powers always add to $n$.",
+      "hint": "Terms are counted from r = 0.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rrwt4k",
+      "kind": "process",
+      "front": "What are the steps to find a particular term, such as the coefficient of $x^3$ in $(3x-2)^5$?",
+      "back": "**Write the general term** with $a$ and $b$ substituted. Combine the powers of $x$ and set that power equal to the one you need. Solve for $r$, then evaluate the coefficient including signs. For $(3x-2)^5$, $r=2$ gives $1080$.",
+      "hint": "Start by substituting a and b.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16lddtj",
+      "kind": "mistake",
+      "front": "When expanding $(2x+3)^4$, why is writing the term $2x^3$ wrong for the first power?",
+      "back": "You must raise the **whole term** $2x$ to the power, so $(2x)^3=8x^3$. Treat each term as one unit, including its number and sign.",
+      "hint": "Apply the power to the whole bracket term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j1btap",
+      "kind": "mistake",
+      "front": "In $(x-2)^3$, what is the common error with the negative sign?",
+      "back": "Forgetting that the sign belongs inside the power. Take $b=-2$, so odd powers of $b$ are **negative** and the sign must be kept when raising to a power.",
+      "hint": "Take b to include its sign.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06oop2u",
+      "kind": "example",
+      "front": "Expand $(2x+3)^4$ in descending powers of $x$.",
+      "back": "$(2x+3)^4=16x^4+96x^3+216x^2+216x+81$. Use coefficients 1, 4, 6, 4, 1 with $a=2x$ and $b=3$.",
+      "hint": "Coefficients for n = 4 are 1, 4, 6, 4, 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bosq16",
+      "kind": "process",
+      "front": "How can you check an expansion quickly after you have written it?",
+      "back": "Set $x=1$. The sum of the terms must equal the value of the original bracket. For $(2x+3)^4$ at $x=1$ the total is $5^4=625$, which matches $16+96+216+216+81$.",
+      "hint": "Substitute a simple value for x.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0arl4xu",
+      "kind": "concept",
+      "front": "Why are binomial coefficients counts of ways?",
+      "back": "Each term comes from taking either $a$ or $b$ from every bracket. The $b^r$ term arises when $b$ is taken from exactly $r$ brackets, and there are $\\binom{n}{r}$ ways to choose those brackets.",
+      "hint": "Think about choosing brackets.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o3xf3b",
+      "kind": "example",
+      "front": "Find the possible values of $k$ if the coefficient of $x^2$ in $(1+kx)^6$ is 60.",
+      "back": "$k=2$ or $k=-2$. The coefficient is $\\binom{6}{2}k^2=15k^2$, so $15k^2=60$ gives $k^2=4$.",
+      "hint": "Use r = 2 in the general term.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xmeqsj",
+      "kind": "concept",
+      "front": "When can the first few terms of an expansion give a good approximation?",
+      "back": "When $x$ is small, higher powers of $x$ are tiny, so the first few terms approximate the whole expansion. For $(1.02)^5$, the first three terms give $1.104$.",
+      "hint": "Consider powers of a small number.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lgxxai",
+      "kind": "example",
+      "front": "Calculate $\\binom{7}{3}$.",
+      "back": "$\\binom{7}{3}=35$. Use $\\frac{7\\times6\\times5}{3\\times2\\times1}=35$.",
+      "hint": "Cancel the factorials.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1if483s",
+      "kind": "term",
+      "front": "What is Pascal's triangle?",
+      "back": "A **triangular array** with 1 at each edge, in which every other entry is the sum of the two entries above it. Its rows give the coefficients of $(a+b)^n$.",
+      "hint": "Each row starts and ends with 1.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0w8j0l6",
+      "kind": "concept",
+      "front": "What does setting $a=b=1$ tell you about the binomial coefficients?",
+      "back": "The coefficients add to $2^n$, so $\\binom{n}{0}+\\binom{n}{1}+\\dots+\\binom{n}{n}=2^n$. This is a useful check on your work.",
+      "hint": "Substitute 1 for both a and b.",
+      "sectionId": "s5"
+    }
+  ]
+}

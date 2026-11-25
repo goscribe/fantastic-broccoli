@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-7-4",
+  "topicCode": "3.7.4",
+  "topicName": "Capacitance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:56.728Z",
+  "cards": [
+    {
+      "id": "0kgc8pw",
+      "kind": "term",
+      "front": "What is capacitance?",
+      "back": "Capacitance is the **charge stored per unit potential difference** across a capacitor, given by $C=\\frac{Q}{V}$ and measured in farads, $\\mathrm{F}$.",
+      "hint": "Consider the ratio of two quantities you can measure across the plates.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xxjyiz",
+      "kind": "concept",
+      "front": "Which factors of a parallel-plate capacitor change its capacitance, and in which direction?",
+      "back": "Capacitance **rises** with plate area $A$ and **falls** as plate separation $d$ increases, since closer plates hold charge more easily.",
+      "hint": "Think about how big the plates are and how far apart they sit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jvfk4w",
+      "kind": "formula",
+      "front": "Which expression gives the energy stored in a capacitor in terms of $C$ and $V$?",
+      "back": "$E=\\frac{1}{2}CV^2$, where $E$ is energy in $\\mathrm{J}$, $C$ is capacitance in $\\mathrm{F}$ and $V$ is potential difference in $\\mathrm{V}$.",
+      "hint": "Consider what a graph of Q against V tells you about the energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0jbxcp9",
+      "kind": "mistake",
+      "front": "Why is $E=QV$ wrong for the energy stored in a capacitor?",
+      "back": "The correct energy is $E=\\frac{1}{2}QV$. The **potential difference rises from zero** as charge is added, so the average is half the final value.",
+      "hint": "Think about how V changes while charge builds up on the plates.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kxk4bs",
+      "kind": "example",
+      "front": "What is the capacitance of two plates of area $0.020\\,\\mathrm{m^2}$ separated by $0.50\\,\\mathrm{mm}$ in air?",
+      "back": "$C\\approx3.5\\times10^{-10}\\,\\mathrm{F}$, or $0.35\\,\\mathrm{nF}$, using $C=\\frac{\\varepsilon_0A}{d}$ with $\\varepsilon_r\\approx1$.",
+      "hint": "Air has a relative permittivity close to 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17np91z",
+      "kind": "example",
+      "front": "How much energy is stored in a $470\\,\\mu\\mathrm{F}$ capacitor charged to $12\\,\\mathrm{V}$?",
+      "back": "$E\\approx3.4\\times10^{-2}\\,\\mathrm{J}$, from $E=\\frac{1}{2}CV^2$.",
+      "hint": "Convert the capacitance to farads before substituting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ij2ku1",
+      "kind": "concept",
+      "front": "How does the current change over time as a capacitor discharges through a resistor?",
+      "back": "It starts at its **maximum**, when the potential difference is largest, then falls exponentially towards zero as the capacitor empties.",
+      "hint": "Think about what drives the current and how that driver changes as charge leaves.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qysvj0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the current rises while a capacitor charges through a resistor?",
+      "back": "The current starts at its **maximum** and falls towards zero as the capacitor charges. It does not rise.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "173hc7n",
+      "kind": "term",
+      "front": "What is the time constant of a capacitor circuit?",
+      "back": "The **time constant**, $RC$, is the time for the charge on a discharging capacitor to fall to $\\frac{1}{e}$ of its initial value. A larger $R$ or $C$ makes the change slower.",
+      "hint": "Think about how quickly charge can leave the capacitor through the resistor.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y8ndpb",
+      "kind": "formula",
+      "front": "Which equation gives the charge on a discharging capacitor at time $t$?",
+      "back": "$Q=Q_0e^{-t/RC}$, where $Q_0$ is the initial charge, $t$ is time in $\\mathrm{s}$ and $RC$ is the time constant in $\\mathrm{s}$.",
+      "hint": "Think about the form of exponential decay.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06b43ny",
+      "kind": "example",
+      "front": "What is the potential difference after $8.0\\,\\mathrm{s}$ for a $100\\,\\mu\\mathrm{F}$ capacitor discharging from $12\\,\\mathrm{V}$ through $50\\,\\mathrm{k\\Omega}$?",
+      "back": "$V\\approx2.4\\,\\mathrm{V}$. The time constant is $RC=5.0\\,\\mathrm{s}$, so $V=12\\,e^{-8.0/5.0}$.",
+      "hint": "Consider the circuit's timescale before applying the decay equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1e3y3ae",
+      "kind": "process",
+      "front": "How does a capacitor smooth the output of a rectified supply?",
+      "back": "It **charges** as the supply rises towards a peak, then **discharges** through the load between peaks, so the potential difference across the load varies less.",
+      "hint": "Think about what the supply is doing between its peaks.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0pf9hpa",
+      "kind": "concept",
+      "front": "Why can a capacitor keep a memory chip running briefly if the main supply drops?",
+      "back": "It stores energy while the supply is on and releases it over time, so the chip keeps working for a short while.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0n0ypfb",
+      "kind": "concept",
+      "front": "What is the role of a dielectric between the plates of a capacitor?",
+      "back": "A dielectric is an **insulating material** that increases the capacitance. The permittivity of the dielectric sets how much it increases it.",
+      "sectionId": "s2"
+    }
+  ]
+}

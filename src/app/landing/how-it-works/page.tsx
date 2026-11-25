@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { absoluteUrl } from "@/lib/seo";
-import { ArtStage, CtaBand, FeatureSplit } from "@/components/graphics/marketing-art";
-import { GlowField } from "@/components/graphics/landing-art";
+import { absoluteUrl, landingOgImages } from "@/lib/seo";
+import { CtaBand, FeatureSplit, PageHero, PageSection } from "@/components/graphics/marketing-art";
+import { Cat } from "@/components/design/landing-mocks";
 import { homeScenes, howItWorks } from "../data";
 
 export const metadata: Metadata = {
@@ -12,59 +12,36 @@ export const metadata: Metadata = {
   openGraph: {
     url: absoluteUrl("/landing/how-it-works"),
     title: "How Scribe works",
+    images: landingOgImages,
   },
 };
 
 export default function HowItWorksPage() {
   return (
     <>
-      <section className="relative overflow-hidden py-16 md:py-20">
-        <GlowField />
-        <div className="relative mx-auto max-w-6xl px-6">
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-            How it works
-          </h1>
-          <p className="mt-4 max-w-xl text-lg text-muted-foreground text-pretty">
-            Three steps from a messy pile of notes to a session you can actually
-            finish. No extra tabs, no generic question bank.
-          </p>
-          <ol className="mt-12 grid gap-8 sm:grid-cols-3 sm:gap-6">
-            {howItWorks.map((step) => (
-              <li key={step.num}>
-                <ArtStage
-                  src={step.art}
-                  tint={step.tint}
-                  side={step.side}
-                  size="md"
-                />
-                <span className="mt-5 flex h-8 w-8 items-center justify-center rounded-full bg-accent-soft text-sm font-bold text-accent">
-                  {step.num}
-                </span>
-                <h2 className="mt-3 text-base font-semibold">{step.title}</h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
-                  {step.description}
-                </p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <PageSection>
+        <PageHero title="How it works" lede="Three steps from a messy pile of notes to a session you can actually finish. No extra tabs, no generic question bank." />
+        <ol className="mt-10 grid gap-3 sm:gap-4 md:grid-cols-3">
+          {howItWorks.map((step) => (
+            <li key={step.num} className="life-card flex gap-4 p-5 md:block md:p-7">
+              <Cat pose={step.pose} className="h-[72px] shrink-0 md:h-[96px]" />
+              <div className="min-w-0 md:mt-5">
+                <div className="text-small font-extrabold text-muted-foreground">Step {step.num}</div>
+                <h2 className="mt-1 text-[19px] font-extrabold leading-tight">{step.title}</h2>
+                <p className="mt-2 text-ui text-muted-foreground">{step.description}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </PageSection>
 
-      {homeScenes.map((scene, i) => (
-        <section
-          key={scene.title}
-          className={`py-16 md:py-24 ${i % 2 === 0 ? "border-y border-border bg-card/40" : ""}`}
-        >
-          <div className="mx-auto max-w-6xl px-6">
-            <FeatureSplit scene={scene} />
-          </div>
-        </section>
+      {homeScenes.map((scene) => (
+        <PageSection key={scene.title} rule>
+          <FeatureSplit scene={scene} />
+        </PageSection>
       ))}
 
-      <CtaBand
-        title="Try it with a real lecture"
-        subtitle="Upload a PDF and get a full session in minutes — free to start."
-      />
+      <CtaBand title="Try it with a real lecture" subtitle="Upload a PDF and get a full session in minutes — free to start." />
     </>
   );
 }

@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-10-6",
+  "topicCode": "3.10.6",
+  "topicName": "Radionuclide imaging and therapy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:21.548Z",
+  "cards": [
+    {
+      "id": "1qp4a1n",
+      "kind": "concept",
+      "front": "How does a radioactive tracer scan show how an organ is working, rather than just its structure?",
+      "back": "The **tracer** is a compound that collects in the chosen organ, so its radiation shows where and how strongly the organ takes it up. An ordinary X-ray only shows structure.",
+      "hint": "Compare what an ordinary X-ray shows with what a tracer shows.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yr31oi",
+      "kind": "concept",
+      "front": "How does a PET scanner find where an annihilation happened without using a collimator?",
+      "back": "Two photons arriving at opposite detectors at almost the same instant are recorded as one **coincidence**. The annihilation lies on the line joining those detectors, and many such lines cross at the tracer.",
+      "hint": "Think about what two detectors record together and what that tells you about direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "145975m",
+      "kind": "concept",
+      "front": "Why does ionising radiation kill cancer cells more readily than most healthy cells?",
+      "back": "Ionising radiation removes electrons from atoms, forming **ions**, which damages DNA. Cancer cells divide often, so they are more vulnerable than most healthy cells.",
+      "hint": "Think about how often each type of cell divides.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p7ca8y",
+      "kind": "term",
+      "front": "What is a radionuclide?",
+      "back": "A **radionuclide** is a nuclide with an unstable nucleus that decays by emitting radiation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c8g2by",
+      "kind": "formula",
+      "front": "What does $E=mc^2$ give for each annihilation photon, and what are its units?",
+      "back": "Each photon has energy $E=mc^2$, where $m$ is the electron mass in $\\text{kg}$ and $c$ is the speed of light in $\\text{m\\,s}^{-1}$. $E$ is in $\\text{J}$.",
+      "hint": "Consider how much of the total energy each of the two photons receives.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ziubpe",
+      "kind": "example",
+      "front": "Calculate the energy of one annihilation photon for an electron mass of $9.11\\times10^{-31}\\,\\text{kg}$ and $c=3.00\\times10^{8}\\,\\text{m\\,s}^{-1}$.",
+      "back": "About $0.51\\,\\text{MeV}$, or $8.20\\times10^{-14}\\,\\text{J}$. Substitute into $E=mc^2$, then divide by $1.60\\times10^{-19}$ to convert to electronvolts.",
+      "hint": "Start with $E=mc^2$ and square the speed first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uww4i6",
+      "kind": "process",
+      "front": "What are the four steps by which a gamma camera turns detected photons into an image?",
+      "back": "A **collimator** selects photons travelling along its holes. A **scintillator crystal** turns each photon into a flash of light, photomultiplier tubes make electrical pulses from the flashes, and a computer locates each photon to build the image.",
+      "hint": "Follow one photon from the patient to the computer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1vsgje3",
+      "kind": "term",
+      "front": "What is a collimator in a gamma camera?",
+      "back": "A **collimator** is a lead plate with narrow parallel holes that passes only photons travelling along the holes to the detector.",
+      "hint": "Think about what the holes do to the direction of photons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0udvenh",
+      "kind": "mistake",
+      "front": "Why is a tracer with a very long half-life a poor choice for a diagnostic scan?",
+      "back": "The patient stays radioactive for longer and receives a larger dose. A half-life of hours is better, because the activity falls quickly while still allowing the scan to be completed.",
+      "hint": "Consider what happens to the activity inside the patient over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zz1uba",
+      "kind": "concept",
+      "front": "Why does moving further from a point source reduce the dose to a member of staff?",
+      "back": "Intensity from a point source falls as $\\frac{1}{d^2}$, where $d$ is the distance. Doubling the distance therefore cuts the intensity to a quarter.",
+      "hint": "Look at how the formula depends on distance.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "06n2x8z",
+      "kind": "concept",
+      "front": "How do beams from several directions protect healthy tissue during radiotherapy?",
+      "back": "The beams cross at the **tumour**, so the tumour receives the full dose. Each healthy path receives only a fraction of the dose, so healthy tissue is spared.",
+      "hint": "Think about where the beams overlap.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "111u5fy",
+      "kind": "term",
+      "front": "What is a dosimeter and who wears one?",
+      "back": "A **dosimeter** is a device worn by staff that records the radiation dose they have received.",
+      "hint": "Think about how staff check their exposure over time.",
+      "sectionId": "s6"
+    }
+  ]
+}

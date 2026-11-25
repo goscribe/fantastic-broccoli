@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "c-4",
+  "topicCode": "C.4",
+  "topicName": "Standing waves and resonance",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:39.182Z",
+  "cards": [
+    {
+      "id": "12ew3hv",
+      "kind": "term",
+      "front": "What is a standing wave, and how does it form?",
+      "back": "A **standing wave** is a stationary pattern formed when waves of the same frequency travel in opposite directions and interfere. The medium keeps oscillating, but the pattern stays in place.",
+      "hint": "Think about an incoming wave overlapping its reflection.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zdpvhw",
+      "kind": "concept",
+      "front": "What is the difference between a node and an antinode in a standing wave?",
+      "back": "A **node** has zero oscillation because the waves always cancel there. An **antinode** has maximum oscillation because the waves reinforce there.",
+      "hint": "Compare cancellation with reinforcement.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fr7c19",
+      "kind": "formula",
+      "front": "For a string fixed at both ends, what is the fundamental frequency in terms of wave speed and length?",
+      "back": "$f_1=\\frac{v}{2L}$, where $v$ is the wave speed in m/s and $L$ is the string length in m. The result is in **hertz**. Harmonics are $f_n=nf_1$.",
+      "hint": "The fundamental fits exactly one half-wavelength between the ends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j8ql1m",
+      "kind": "concept",
+      "front": "Why must both fixed ends of a string be displacement nodes?",
+      "back": "Both fixed ends must be **displacement nodes**, so only patterns with a whole number of half-wavelengths between the ends can persist.",
+      "hint": "Count half-wavelengths between the fixed ends.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1gkfbsb",
+      "kind": "mistake",
+      "front": "A student says an open pipe end is a displacement node. What is wrong?",
+      "back": "An open end is approximately a **displacement antinode**, not a node. A closed end is the displacement node.",
+      "hint": "Check which end the air particles can move freely at.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iniu0s",
+      "kind": "formula",
+      "front": "Which resonant frequencies does an ideal pipe closed at one end produce?",
+      "back": "$f=\\frac{nv}{4L}$, with $n=1,3,5,\\ldots$. Only **odd-numbered** harmonics occur.",
+      "hint": "The closed end forces a node, so the pattern is a quarter-wavelength.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uf1voh",
+      "kind": "mistake",
+      "front": "A student says a pipe closed at one end has all whole-number harmonics, like an open-open pipe. What is wrong?",
+      "back": "A pipe closed at one end has only **odd-numbered** harmonics ($n=1,3,5$). An ideal open-open pipe has all whole-number harmonics.",
+      "hint": "Compare the allowed values of $n$ for each pipe type.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v0ak9n",
+      "kind": "term",
+      "front": "What is end correction in an open pipe?",
+      "back": "**End correction** accounts for the displacement antinode lying slightly beyond the open end. The ideal pipe formulae ignore this small shift.",
+      "hint": "Think about where the antinode really sits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mtvukr",
+      "kind": "concept",
+      "front": "What happens when a periodic driving frequency matches an allowed natural frequency?",
+      "back": "**Resonance** occurs. Energy is transferred effectively, so the amplitude grows. Energy losses limit the amplitude in real systems.",
+      "hint": "Matching frequencies means energy builds up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b9peab",
+      "kind": "example",
+      "front": "A pipe 0.85 m long is closed at one end, and sound travels at 340 m/s. What are its first two resonant frequencies?",
+      "back": "**100 Hz** and **300 Hz**. First: $f_1=\\frac{340}{4(0.85)}=100\\,\\mathrm{Hz}$. Second uses $n=3$: $f_3=\\frac{3(340)}{4(0.85)}=300\\,\\mathrm{Hz}$.",
+      "hint": "A closed-end pipe uses $n=1,3,5$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13er6ne",
+      "kind": "example",
+      "front": "A string fixed at both ends is 0.80 m long, and waves travel along it at 160 m/s. What are its fundamental and third-harmonic frequencies?",
+      "back": "**100 Hz** fundamental and **300 Hz** third harmonic. $f_1=\\frac{160}{2(0.80)}=100\\,\\mathrm{Hz}$, and $f_3=3f_1=300\\,\\mathrm{Hz}$.",
+      "hint": "Harmonics are whole-number multiples of $f_1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0sikyps",
+      "kind": "concept",
+      "front": "How does increasing string tension change its resonant frequencies, and why?",
+      "back": "It **raises** them. Higher tension increases wave speed $v$, and $f_n=\\frac{nv}{2L}$ is proportional to $v$.",
+      "hint": "Look at which variable in the formula changes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1q2xcov",
+      "kind": "process",
+      "front": "What steps should you follow to find the resonant frequencies of a pipe?",
+      "back": "1. Identify the end conditions. 2. Choose $f=\\frac{nv}{2L}$ for open-open, or $f=\\frac{nv}{4L}$ for closed at one end. 3. Substitute the allowed values of $n$ and calculate.",
+      "hint": "Start by deciding what each end is.",
+      "sectionId": "s3"
+    }
+  ]
+}

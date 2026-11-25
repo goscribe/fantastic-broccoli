@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Nerve impulses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:07.847Z",
+  "cards": [
+    {
+      "id": "1ahlrsj",
+      "kind": "concept",
+      "front": "Why is the inside of a resting neurone negative compared with the outside?",
+      "back": "The **sodium–potassium pump** uses ATP to move 3 Na⁺ out for every 2 K⁺ in, and the membrane is partially permeable: K⁺ leaks out through open channels far more easily than Na⁺ leaks in.",
+      "hint": "Consider the energy cost of the pump and which ion leaks through the membrane more easily.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b59ryj",
+      "kind": "process",
+      "front": "What sequence of events takes the membrane from threshold to a full action potential?",
+      "back": "At about $-55\\,\\mathrm{mV}$, many **voltage-gated sodium channels** open and Na⁺ enters. This depolarises the membrane further, opening more channels by positive feedback, so the potential rises rapidly to about $+40\\,\\mathrm{mV}$.",
+      "hint": "Start from the moment the first few sodium channels open after the stimulus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wqpo76",
+      "kind": "concept",
+      "front": "What happens to the size of an action potential when the stimulus is made stronger?",
+      "back": "The size stays the same. This is the **all-or-nothing principle**: a stronger stimulus produces more impulses per second, not larger ones.",
+      "hint": "Compare what changes in the stimulus with what changes in each impulse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kbi9xq",
+      "kind": "term",
+      "front": "What is the membrane potential?",
+      "back": "The **membrane potential** is the difference in electrical potential between the inside and outside of a cell, measured in millivolts ($\\mathrm{mV}$).",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bq7tji",
+      "kind": "term",
+      "front": "How is threshold defined in a neurone?",
+      "back": "**Threshold** is the membrane potential, about $-55\\,\\mathrm{mV}$, at which enough voltage-gated sodium channels open to trigger an action potential.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09uefpa",
+      "kind": "process",
+      "front": "What are the four phases of an action potential, in order?",
+      "back": "**Depolarisation**, then **repolarisation**, then **hyperpolarisation**, then recovery, when the pump and leak channels restore the resting potential and ion balance.",
+      "hint": "Start from the moment sodium channels open.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05wj8he",
+      "kind": "concept",
+      "front": "Why does the potential dip below the resting potential at the end of an action potential?",
+      "back": "Potassium channels close slowly after repolarisation. Extra K⁺ ions leave the cell, so the inside becomes more negative than the resting potential, which is **hyperpolarisation**.",
+      "hint": "Think about how quickly each type of channel closes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ijvaxk",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the sodium–potassium pump causes repolarisation?",
+      "back": "Repolarisation is caused by K⁺ leaving through open channels. The pump does not do this; it works afterwards to restore the ion balance.",
+      "hint": "Which ion movement brings the potential back towards its resting value?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1a5e4b7",
+      "kind": "example",
+      "front": "A recording shows a resting potential of $-70\\,\\mathrm{mV}$ and a peak of $+40\\,\\mathrm{mV}$. What is the change in membrane potential during depolarisation?",
+      "back": "$+40-(-70)=+110\\,\\mathrm{mV}$. The membrane potential changes by $+110\\,\\mathrm{mV}$.",
+      "hint": "Use the formula for a change: final value minus initial value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lvqe9r",
+      "kind": "concept",
+      "front": "Why can an action potential only travel forwards along an axon?",
+      "back": "The membrane behind the impulse is in its **refractory period**, so its sodium channels cannot open. It cannot depolarise, so the impulse spreads only into membrane that is ready to respond.",
+      "hint": "Think about what the membrane just behind the impulse is able to do straight afterwards.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ubab6x",
+      "kind": "term",
+      "front": "What is saltatory conduction?",
+      "back": "**Saltatory conduction** is the jumping of an impulse from one node of Ranvier to the next along a myelinated axon.",
+      "hint": "Think about where the axon membrane is exposed in a myelinated axon.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05l5xge",
+      "kind": "concept",
+      "front": "Why are impulses faster along a myelinated axon than an unmyelinated one?",
+      "back": "Myelin insulates the membrane, so action potentials form only at the nodes of Ranvier. Local currents carry depolarisation from node to node, which is faster than depolarising the whole membrane.",
+      "hint": "Compare where action potentials form in each type of axon.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c6lksl",
+      "kind": "concept",
+      "front": "Which other factors change how fast an impulse travels, and why?",
+      "back": "A wider axon offers less resistance to local currents, so impulses travel faster. A higher temperature speeds up diffusion and channel opening, until proteins begin to denature.",
+      "hint": "Think about resistance to local currents, and about what heat does to proteins.",
+      "sectionId": "s5"
+    }
+  ]
+}

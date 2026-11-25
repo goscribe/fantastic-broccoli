@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Newton's second law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:26.955Z",
+  "cards": [
+    {
+      "id": "1dsmlgc",
+      "kind": "concept",
+      "front": "What does Newton's second law say about an object's acceleration?",
+      "back": "Acceleration is **directly proportional** to the net force and **inversely proportional** to mass, and it points in the direction of the net force.",
+      "hint": "Think about what a bigger push and a heavier cart each do.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qjy8zo",
+      "kind": "formula",
+      "front": "What equation links net force, mass and acceleration, and what are its units?",
+      "back": "$F_{\\mathrm{net}}=ma$, where $F_{\\mathrm{net}}$ is the **net force** in newtons, $m$ is mass in kg, and $a$ is acceleration in $\\mathrm{m/s^2}$.",
+      "hint": "Rearrange it to get $a$ on its own.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t7ou79",
+      "kind": "concept",
+      "front": "Which force sets an object's acceleration when several forces act on it?",
+      "back": "The **net force**, the vector sum of all forces. Individual forces do not set the acceleration alone.",
+      "hint": "Add the forces with signs along one chosen direction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fjzpv2",
+      "kind": "term",
+      "front": "What is a newton?",
+      "back": "The **SI unit** of force. One newton gives a 1 kg mass an acceleration of $1\\ \\mathrm{m/s^2}$, so $1\\ \\mathrm{N}=1\\ \\mathrm{kg\\,m/s^2}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1oho399",
+      "kind": "process",
+      "front": "What are the steps to find an object's acceleration from the forces on it?",
+      "back": "Choose a positive direction. Add the forces with signs to get the **net force**. Divide by the mass in kg. Give the answer in $\\mathrm{m/s^2}$ with a direction.",
+      "hint": "Find the net force before you divide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07plqbw",
+      "kind": "example",
+      "front": "A 4.0 kg cart is pulled right with 12 N, and friction of 4.0 N acts left. What is its acceleration?",
+      "back": "**2.0 m/s² to the right**, since $F_{\\mathrm{net}}=12-4.0=8.0\\ \\mathrm{N}$ and $a=\\frac{8.0}{4.0}$.",
+      "hint": "Work out the net force first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ul7a12",
+      "kind": "mistake",
+      "front": "Why is dividing a single applied force by the mass often wrong?",
+      "back": "It ignores the other forces. Divide the **net force**, not one force, unless that force is the only one acting.",
+      "hint": "List every force on the object first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qdk0jd",
+      "kind": "mistake",
+      "front": "A ball is thrown upward. Does its acceleration point up because it is moving up?",
+      "back": "No. Acceleration follows the **net force**. After release only gravity acts, so the acceleration points downward while the velocity still points up.",
+      "hint": "Separate velocity from acceleration.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ag3dg1",
+      "kind": "concept",
+      "front": "What happens to acceleration when force doubles with mass fixed, and when mass doubles with force fixed?",
+      "back": "Doubling the force **doubles** the acceleration. Doubling the mass **halves** the acceleration.",
+      "hint": "Proportional versus inverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0aaovas",
+      "kind": "concept",
+      "front": "What does a graph of acceleration against net force look like, and what gives its slope?",
+      "back": "A **straight line through the origin**. Its slope is $\\frac{1}{m}$, so a larger mass gives a shallower line.",
+      "hint": "Compare two masses on the same axes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1f4k2os",
+      "kind": "formula",
+      "front": "What is the weight of an object, and what do its symbols mean?",
+      "back": "$mg$, where $m$ is mass in kg and $g=9.8\\ \\mathrm{m/s^2}$. Weight acts **downward**.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "056jknj",
+      "kind": "example",
+      "front": "A 3.0 kg block hangs from a string and accelerates upward at 2.0 m/s². What is the tension?",
+      "back": "About **35 N**. Taking up as positive, $T-mg=ma$, so $T=29.4+6.0=35.4\\ \\mathrm{N}$.",
+      "hint": "Include the weight in the net-force equation.",
+      "sectionId": "s5"
+    }
+  ]
+}

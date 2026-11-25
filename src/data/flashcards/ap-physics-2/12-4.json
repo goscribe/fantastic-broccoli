@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "12-4",
+  "topicCode": "12.4",
+  "topicName": "Electromagnetic induction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:31.493Z",
+  "cards": [
+    {
+      "id": "0d4s0r6",
+      "kind": "concept",
+      "front": "A magnet is pushed into a coil and a meter needle jumps. Why does the coil produce a current, since there is no battery?",
+      "back": "A **changing** magnetic field through the loop induces an emf, and in a closed circuit that emf drives an induced current. The change matters, not the field strength alone.",
+      "hint": "Think about what the moving magnet does to the field inside the coil.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03xbshi",
+      "kind": "formula",
+      "front": "What is Faraday's law for a coil of N turns, and what does each symbol mean?",
+      "back": "$\\varepsilon = -N\\frac{\\Delta\\Phi_B}{\\Delta t}$: the average emf in volts, with N turns and the change in flux $\\Delta\\Phi_B$ (in $\\mathrm{Wb}$) over time $\\Delta t$ (in s). A faster flux change gives a larger emf.",
+      "hint": "Flux change divided by time, multiplied by the number of turns.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0lpky8i",
+      "kind": "concept",
+      "front": "What does Lenz's law tell you about the direction of an induced current?",
+      "back": "The induced current flows in the direction that makes its own magnetic field **oppose the change** in flux that caused it. This is the meaning of the minus sign in Faraday's law.",
+      "hint": "Ask what the induced field is trying to stop from happening.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x7cs6g",
+      "kind": "term",
+      "front": "What is magnetic flux through a flat loop in a uniform field?",
+      "back": "**Magnetic flux** $\\Phi_B = BA\\cos\\theta$ measures how much field passes through the loop's area. It is measured in webers, where $1\\,\\mathrm{Wb}=1\\,\\mathrm{T\\,m^2}$.",
+      "hint": "Theta is measured from the perpendicular to the loop.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yidpv9",
+      "kind": "process",
+      "front": "What are the steps to find the direction of an induced current in a loop?",
+      "back": "1) Find the direction of the original field. 2) Decide if its flux is increasing or decreasing. 3) Choose the induced field: opposite if increasing, the same if decreasing. 4) Use the right-hand rule to find the current.",
+      "hint": "The induced field depends on whether flux is rising or falling.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rqfa0u",
+      "kind": "mistake",
+      "front": "A student says the induced field in a loop always points opposite to the original field. Why is this wrong?",
+      "back": "The induced field opposes the **change** in flux, not the field itself. If the flux is decreasing, the induced field points the same way as the original field to resist the loss.",
+      "hint": "Ask whether the flux is going up or going down.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16ag5d5",
+      "kind": "mistake",
+      "front": "A strong magnet is held still inside a coil connected to a meter. Does a current flow, and why?",
+      "back": "**No current flows.** The flux is constant, so there is no change and no induced emf. A strong field alone does not produce a current.",
+      "hint": "What is changing in this situation?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o0aqef",
+      "kind": "formula",
+      "front": "What is the motional emf of a rod of length $\\ell$ moving at speed $v$ perpendicular to a field $B$?",
+      "back": "$\\varepsilon = B\\ell v$, in volts when B is in T, $\\ell$ in m and v in m/s. The rod's motion changes the loop's area, so the flux changes.",
+      "hint": "Multiply the three quantities together.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1cr6gc2",
+      "kind": "concept",
+      "front": "When you calculate emf from Faraday's law, which flux values do you use?",
+      "back": "Use the **change** in flux, final minus initial, with $\\Delta\\Phi_B$ in the formula. Never use the flux at one single moment.",
+      "hint": "The law is about how flux changes over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nz8tmz",
+      "kind": "example",
+      "front": "A 50-turn coil has area 0.020 m$^2$. A field along its perpendicular rises from 0.20 T to 0.60 T in 0.50 s. What is the magnitude of the average emf?",
+      "back": "**0.80 V.** The flux changes from 0.0040 to 0.012 T m$^2$, so $\\Delta\\Phi_B=0.0080\\,\\mathrm{T\\,m^2}$, and $50\\times 0.0080/0.50=0.80\\,\\mathrm{V}$.",
+      "hint": "Find the flux at each field value first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03dn3cm",
+      "kind": "example",
+      "front": "A 0.40 m rod slides at 3.0 m/s perpendicular to a 0.25 T field. The circuit resistance is 0.60 $\\Omega$. What are the emf and current?",
+      "back": "**Emf 0.30 V and current 0.50 A.** The emf is $(0.25)(0.40)(3.0)=0.30\\,\\mathrm{V}$, and $I=0.30/0.60=0.50\\,\\mathrm{A}$.",
+      "hint": "Use the motional emf first, then Ohm's law.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mhef3h",
+      "kind": "term",
+      "front": "What is an induced emf?",
+      "back": "An **induced emf** is the emf, in volts, produced around a conducting loop by a changing magnetic field through the loop.",
+      "hint": "It comes from change, not from a battery.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1phgavd",
+      "kind": "concept",
+      "front": "Name three ways to increase the induced emf in a coil.",
+      "back": "Use a **stronger field**, move the magnet or loop **faster** so the flux changes more quickly, or add **more turns** to the coil. Changing the area or angle faster also helps.",
+      "hint": "Think about the factors in Faraday's law.",
+      "sectionId": "s5"
+    }
+  ]
+}

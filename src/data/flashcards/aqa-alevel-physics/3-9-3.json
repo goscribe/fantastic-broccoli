@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-9-3",
+  "topicCode": "3.9.3",
+  "topicName": "Cosmology",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:08.069Z",
+  "cards": [
+    {
+      "id": "1salcbv",
+      "kind": "formula",
+      "front": "What does Hubble's law say, and what do $v$, $H_0$ and $d$ mean?",
+      "back": "$v=H_0d$: the **recession speed** $v$ of a galaxy is directly proportional to its distance $d$ from us. $H_0$ is the **Hubble constant**, the gradient of a speed against distance graph.",
+      "hint": "Think about what a graph of speed against distance looks like.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f420jg",
+      "kind": "concept",
+      "front": "What causes the redshift of light from distant galaxies?",
+      "back": "A galaxy moving **away** from us stretches the light it emits to **longer wavelengths**. The faster it recedes, the bigger the shift.",
+      "hint": "Recall how an ambulance siren sounds as it passes you.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16rkstj",
+      "kind": "concept",
+      "front": "Why does running the expansion backwards give the same age for every galaxy?",
+      "back": "Using $t=\\frac{d}{v}$ and $v=H_0d$ gives $t=\\frac{1}{H_0}$. The **distance cancels**, so every galaxy gives the same time, the age of the universe on the simplest model.",
+      "hint": "Start from the time a galaxy needs to travel distance $d$ at speed $v$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iyt546",
+      "kind": "formula",
+      "front": "What relates redshift $z$ to recession speed $v$, and what does each symbol mean?",
+      "back": "$z=\\frac{\\Delta\\lambda}{\\lambda}\\approx\\frac{v}{c}$: $\\Delta\\lambda$ is the change in wavelength, $\\lambda$ the emitted wavelength, $v$ the recession speed and $c$ the speed of light. It holds when $v$ is much less than $c$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bbq5k5",
+      "kind": "example",
+      "front": "A galaxy emits light of wavelength $500\\,\\text{nm}$ and it is received at $510\\,\\text{nm}$. What is the galaxy's recession speed?",
+      "back": "$\\Delta\\lambda=10\\,\\text{nm}$, so $z=\\frac{10}{500}=0.020$. Then $v=zc=0.020\\times3.00\\times10^{8}\\,\\text{m s}^{-1}=6.0\\times10^{6}\\,\\text{m s}^{-1}$.",
+      "hint": "Find the redshift before you try to find the speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sn0hjd",
+      "kind": "example",
+      "front": "A galaxy recedes at $6.0\\times10^{3}\\,\\text{km s}^{-1}$. With $H_0=70\\,\\text{km s}^{-1}\\,\\text{Mpc}^{-1}$, how far away is it?",
+      "back": "Rearrange to $d=\\frac{v}{H_0}=\\frac{6.0\\times10^{3}}{70}\\approx85.7\\,\\text{Mpc}$. The galaxy is about **$86\\,\\text{Mpc}$** away.",
+      "hint": "Rearrange Hubble's law before substituting numbers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12460n4",
+      "kind": "example",
+      "front": "Using $H_0=70\\,\\text{km s}^{-1}\\,\\text{Mpc}^{-1}$, what is the age of the universe in years?",
+      "back": "Convert $H_0$ to $2.27\\times10^{-18}\\,\\text{s}^{-1}$. Then $t=\\frac{1}{H_0}\\approx4.41\\times10^{17}\\,\\text{s}$, which is about **$1.4\\times10^{10}$ years**.",
+      "hint": "Convert the units of $H_0$ into $\\text{s}^{-1}$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "024b2f6",
+      "kind": "term",
+      "front": "What does the Big Bang theory state about the early universe?",
+      "back": "The universe began in a very **hot, dense state** and has been expanding and cooling ever since.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "161dzh2",
+      "kind": "mistake",
+      "front": "Why is it wrong to picture the Big Bang as an explosion at one point in space?",
+      "back": "Space itself expands, so every galaxy recedes from every other galaxy. There is **no centre** to the expansion.",
+      "hint": "Consider what is actually moving apart in the expansion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mgtrs0",
+      "kind": "term",
+      "front": "What is the cosmic microwave background?",
+      "back": "**Microwave radiation** reaching Earth almost equally from all directions. It matches a black body at about $2.7\\,\\text{K}$ and is early radiation stretched to longer wavelengths.",
+      "hint": "Think about what the hot early universe would have left behind as it stretched.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11gx4yf",
+      "kind": "concept",
+      "front": "Which evidence suggests that dark matter exists?",
+      "back": "Stars at the edges of spiral galaxies orbit **faster than the visible mass predicts**. Extra gravitational attraction from unseen matter is needed to hold them in orbit.",
+      "hint": "Compare the orbital speeds you would expect from the visible mass with what is observed.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0wo146i",
+      "kind": "concept",
+      "front": "How does the density of the universe decide its future?",
+      "back": "Compared with the **critical density**, a below-critical universe is open and expands forever. An equal-density universe is flat and slows towards zero. An above-critical universe is closed, halts and collapses.",
+      "hint": "Gravity has to overcome the expansion, so compare mass with the threshold.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0l9t0un",
+      "kind": "formula",
+      "front": "What is the formula for critical density, and what does each symbol mean?",
+      "back": "$\\rho_0=\\frac{3H_0^2}{8\\pi G}$: $H_0$ is the Hubble constant and $G$ is the gravitational constant. A larger Hubble constant gives a larger critical density.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16vpies",
+      "kind": "mistake",
+      "front": "Why must dark matter and dark energy not be confused?",
+      "back": "**Dark matter** adds gravitational attraction that holds galaxies together. **Dark energy** drives the acceleration of the expansion of the universe.",
+      "hint": "Think about which one pulls matter together and which one drives the expansion.",
+      "sectionId": "s6"
+    }
+  ]
+}

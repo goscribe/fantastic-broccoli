@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-6-1",
+  "topicCode": "4.6.1",
+  "topicName": "Reproduction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:35.044Z",
+  "cards": [
+    {
+      "id": "01e69c9",
+      "kind": "concept",
+      "front": "Why do offspring from sexual reproduction differ genetically from their parents?",
+      "back": "Two parents each contribute a **gamete**, and these join at fertilisation, combining genetic information from both parents.",
+      "hint": "Count how many parents supply genetic information to each offspring.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0h698ml",
+      "kind": "concept",
+      "front": "Why must meiosis halve chromosome number before fertilisation?",
+      "back": "Gametes with **23 chromosomes** join to give 46 again. Without halving, the number would double at every generation.",
+      "hint": "Picture what two full sets of chromosomes would produce if they joined.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1osc4sx",
+      "kind": "example",
+      "front": "In a $Bb \\times Bb$ cross with $B$ dominant, what is the probability of the recessive phenotype?",
+      "back": "**25%** ($\\frac{1}{4}$). Only $bb$ shows the recessive phenotype, out of four equally likely genotypes: $BB$, $Bb$, $Bb$, $bb$.",
+      "hint": "Draw a Punnett square combining each parent's gametes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "A **version of a gene**. An individual inherits one allele for each gene from each parent.",
+      "hint": "Think about where the alleles for one gene come from.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iroj6z",
+      "kind": "term",
+      "front": "What is a phenotype?",
+      "back": "The **observable characteristic** of an organism, which can depend on its genotype and its environment.",
+      "hint": "Think about what you could observe directly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0owxyxu",
+      "kind": "term",
+      "front": "What is a genotype?",
+      "back": "The **combination of alleles** an organism carries for a gene, such as $BB$, $Bb$ or $bb$.",
+      "hint": "Consider what the organism inherited, not what it looks like.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g4fv9o",
+      "kind": "term",
+      "front": "What does a dominant allele do to the phenotype?",
+      "back": "It **affects the phenotype** when at least one copy is present, so $BB$ and $Bb$ both show the dominant characteristic.",
+      "hint": "Compare the outcome for heterozygous and homozygous genotypes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e58kh8",
+      "kind": "term",
+      "front": "When does a recessive allele affect the phenotype?",
+      "back": "Only when **no dominant allele** is present, so the genotype must be $bb$.",
+      "hint": "Compare this with the rule for dominant alleles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o52b62",
+      "kind": "mistake",
+      "front": "Why does a 25% probability not mean exactly one in four children will show the recessive phenotype?",
+      "back": "Probability describes the **expected pattern** over many crosses. Each child's outcome is independent, so small families can differ.",
+      "hint": "Think about how a few coin tosses can differ from the expected half heads.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o73tyw",
+      "kind": "process",
+      "front": "What are the main stages of meiosis, in order?",
+      "back": "The chromosomes are **copied once**, then the cell **divides twice**, producing four genetically different haploid gametes.",
+      "hint": "Count the copying step and the division steps in sequence.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fns658",
+      "kind": "concept",
+      "front": "Which sperm chromosome leads to an XY embryo?",
+      "back": "A **Y-bearing sperm**. An egg always carries an X chromosome, so the sperm decides the combination.",
+      "hint": "Consider which chromosome the egg always contributes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "04mh237",
+      "kind": "mistake",
+      "front": "Why does having earlier children not change the chance of a later child's sex?",
+      "back": "Each fertilisation has an **approximately equal chance** of XX or XY, because X- and Y-bearing sperm are produced in similar numbers.",
+      "hint": "Think about whether each fertilisation is a fresh, independent event.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1gorp6s",
+      "kind": "mistake",
+      "front": "What is wrong with thinking asexual reproduction means cells do not divide?",
+      "back": "Asexual offspring come from **mitosis**, so cells do divide. Asexual reproduction simply means gametes do not join.",
+      "hint": "Recall which type of cell division ordinary body cells use.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oiw2cz",
+      "kind": "term",
+      "front": "What does diploid mean?",
+      "back": "Having **two sets of chromosomes**, one from each parent. Most human body cells have 46 chromosomes in 23 pairs.",
+      "sectionId": "s2"
+    }
+  ]
+}

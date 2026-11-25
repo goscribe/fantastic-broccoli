@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "a1-2",
+  "topicCode": "A1.2",
+  "topicName": "Nucleic acids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:46.252Z",
+  "cards": [
+    {
+      "id": "0o1t2i7",
+      "kind": "concept",
+      "front": "What are the three components of a nucleotide, and which part carries the genetic information?",
+      "back": "A nucleotide has a **phosphate group**, a five-carbon sugar and a nitrogen-containing base. The order of the **bases** carries the information; the sugars and phosphates form the repeating backbone.",
+      "hint": "Think about which part changes from one nucleotide to the next.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fgl9da",
+      "kind": "concept",
+      "front": "Why does the base sequence of DNA matter so much?",
+      "back": "The **order of bases** stores genetic information. Because A pairs with T and C pairs with G, the sequence on one strand determines the other, so each strand can act as a **template** when DNA is copied.",
+      "hint": "Consider what happens when DNA is copied before cell division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nk1ztn",
+      "kind": "concept",
+      "front": "How do DNA and RNA differ in their roles inside the cell?",
+      "back": "**DNA** stores genetic information in its base sequence. **RNA** helps use that information: mRNA carries a gene's copy to ribosomes, tRNA brings amino acids, and rRNA forms part of ribosomes.",
+      "hint": "Think about storage versus use of information.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18xva5f",
+      "kind": "term",
+      "front": "What is a phosphodiester bond?",
+      "back": "A **phosphodiester bond** links the 3′ carbon of one sugar to the 5′ phosphate of the next nucleotide. It forms by condensation, releasing water, and joins nucleotides within one chain.",
+      "hint": "It is a bond within a single strand, not between strands.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aj5vjl",
+      "kind": "process",
+      "front": "What happens, in order, when a polynucleotide chain is formed?",
+      "back": "1. A condensation reaction occurs between nucleotides. 2. The 3′ carbon of one sugar links to the 5′ phosphate of the next. 3. Water is released. 4. Repeated links create a sugar–phosphate backbone with bases projecting from it.",
+      "hint": "Start with the reaction type.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qoqgt2",
+      "kind": "mistake",
+      "front": "A student says hydrogen bonds join nucleotides together within one DNA strand. What is wrong with this?",
+      "back": "**Phosphodiester bonds** join nucleotides within one chain. **Hydrogen bonds** hold complementary bases together across DNA's two strands.",
+      "hint": "Ask which bond type links bases and which links the backbone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "174bo2i",
+      "kind": "term",
+      "front": "What does antiparallel mean for the two strands of DNA?",
+      "back": "**Antiparallel** means the strands run in opposite directions: one runs 5′ to 3′ and the other runs 3′ to 5′.",
+      "hint": "Compare the direction of each strand.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hdv8r3",
+      "kind": "concept",
+      "front": "How many hydrogen bonds form between A and T, and between C and G?",
+      "back": "A–T pairs form **two** hydrogen bonds. C–G pairs form **three** hydrogen bonds.",
+      "hint": "Count the bonds for each pair.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xj39qf",
+      "kind": "concept",
+      "front": "What makes deoxyribose different from ribose?",
+      "back": "Deoxyribose has a **hydrogen atom** on the 2′ carbon where ribose has a **hydroxyl group**.",
+      "hint": "Focus on the 2′ carbon of each sugar.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0382ads",
+      "kind": "term",
+      "front": "Which base replaces thymine in RNA, and what does it pair with?",
+      "back": "**Uracil** replaces thymine in RNA and pairs with adenine.",
+      "hint": "Think about the four bases used in RNA.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pkej3r",
+      "kind": "concept",
+      "front": "What determines the direction of a polynucleotide chain?",
+      "back": "The two ends differ: one has a free **phosphate** at the 5′ end, the other a free **hydroxyl group** at the 3′ end. New nucleotides are added at the 3′ end.",
+      "hint": "Compare the two ends of the chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cfqg0q",
+      "kind": "term",
+      "front": "What shape does DNA usually take, and how are its parts arranged?",
+      "back": "A **double helix**: two polynucleotide strands coiled together, with sugar–phosphate backbones on the outside and bases facing inwards.",
+      "hint": "Think of a twisted ladder.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02hndzs",
+      "kind": "term",
+      "front": "What is the role of transfer RNA during protein synthesis?",
+      "back": "**Transfer RNA** brings amino acids to the ribosome for protein synthesis.",
+      "hint": "Compare it with messenger RNA's role.",
+      "sectionId": "s4"
+    }
+  ]
+}

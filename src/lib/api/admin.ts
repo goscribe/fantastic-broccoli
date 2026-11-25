@@ -49,6 +49,58 @@ export interface AdminUserRef {
   email: string | null;
 }
 
+/** A provider subscription of the user's own that still charges them. */
+export interface BilledPlan {
+  planName: string;
+  status: string;
+  currentPeriodEnd: string | Date;
+  cancelAt: string | Date | null;
+}
+
+/** A person found by `admin.searchUsersForGrant`. */
+export interface GrantCandidate {
+  id: string;
+  name: string | null;
+  email: string | null;
+  joinedAt: string | Date;
+  /** Their plan apart from the grant: their own plan's name, or "Free". */
+  plan: string;
+  /** Already has the free top tier. */
+  granted: boolean;
+  stillBilled: BilledPlan | null;
+}
+
+/** One person who has the free top tier now. */
+export interface PlanGrant {
+  userId: string;
+  name: string | null;
+  email: string | null;
+  /** The account is scheduled for deletion. */
+  accountDeleted: boolean;
+  planName: string;
+  grantedAt: string | Date;
+  grantedBy: AdminUserRef | null;
+  note: string | null;
+  stillBilled: BilledPlan | null;
+}
+
+export interface GrantResult {
+  userId: string;
+  /** False when they already had it. */
+  changed: boolean;
+  planName: string;
+  stillBilled: BilledPlan | null;
+  /** Set when the user still pays for a plan of their own (it is left running). */
+  warning: string | null;
+}
+
+export interface RevokeResult {
+  userId: string;
+  changed: boolean;
+  /** What they are on without the grant ("Free" with none). */
+  planNow: string;
+}
+
 export interface SystemStats {
   totalUsers: number;
   totalWorkspaces: number;
@@ -724,6 +776,55 @@ export interface Trends {
   metrics: TrendMetric[];
 }
 
+// ── Scribe benchmark (admin.benchmark / admin.runBenchmark) ─────────────
+// Mirrors goscribe/server src/lib/benchmark.ts and GenerationEvalReportService.benchmark.
+
+export interface BenchmarkModelLine {
+  /** Null = the production models. */
+  model: string | null;
+  label: string;
+  attempted: number;
+  assessed: number;
+  failed: number;
+  /** Of `failed`: generations that ran out of time. Absent on an older server. */
+  tooSlow?: number;
+  /** Ranking score: overall over every attempted material, a failure counting as 0. Absent on an older server. */
+  score?: number | null;
+  /** Overall over the materials that finished only. */
+  overall: number | null;
+  materialFit: number | null;
+  quality: number | null;
+  mediumFit: number | null;
+  laptopFit: number | null;
+  phoneFit: number | null;
+  passRate: number | null;
+  avgSeconds: number | null;
+  avgCostUsd: number | null;
+  totalCostUsd: number | null;
+  avgTokens: number | null;
+}
+
+export interface BenchmarkCell {
+  status: string;
+  overall: number | null;
+  summary: string | null;
+  error: string | null;
+  seconds: number | null;
+  costUsd: number | null;
+}
+
+export interface BenchmarkOverview {
+  running: boolean;
+  pool: Array<{ key: string; title: string; kind: string; subject: string }>;
+  runs: Array<{ runId: string; finishedAt: string | null; rows: number; models: Array<string | null> }>;
+  runId: string | null;
+  report: {
+    models: BenchmarkModelLine[];
+    materials: Array<{ key: string; title: string; kind: string; cells: Record<string, BenchmarkCell> }>;
+    skippedMaterials: number;
+  } | null;
+}
+
 // ── Generation assessment (admin.generationEvalSummary) ────────────────
 
 export interface GenerationEvalRun {
@@ -994,6 +1095,13 @@ export const adminApi = {
   runGenerationEval: () =>
     rpc<{ started: boolean }>("admin.runGenerationEval", "mutation", undefined),
 
+  benchmark: (runId?: string) =>
+    rpc<BenchmarkOverview>("admin.benchmark", "query", runId ? { runId } : undefined),
+
+  /** Models: OpenRouter ids, or "production" for the current models. */
+  runBenchmark: (input: { models: string[]; materialKeys?: string[] }) =>
+    rpc<{ started: boolean }>("admin.runBenchmark", "mutation", input),
+
   qualitySummary: (sinceDays: number) =>
     rpc<QualitySummary>("admin.qualitySummary", "query", { sinceDays }),
 
@@ -1028,4 +1136,20 @@ export const adminApi = {
 
   runContentQa: (input: { windowHours?: number }) =>
     rpc<ContentQaRun>("admin.runContentQa", "mutation", input),
+
+  /* Free top tier ("free unlimited"): goscribe/server routers/admin-grants.ts. */
+
+  /** People by email or name, System Admins included, with what they are on now. */
+  searchUsersForGrant: (search: string) =>
+    rpc<{ users: GrantCandidate[] }>("admin.searchUsersForGrant", "query", { search }),
+
+  /** Everyone who has the free top tier now. */
+  listPlanGrants: () => rpc<{ grants: PlanGrant[] }>("admin.listPlanGrants", "query", undefined),
+
+  /** Only the user's id is sent; the server looks them up and records the signed-in admin. */
+  grantTopTier: (input: { userId: string; note?: string }) =>
+    rpc<GrantResult>("admin.grantTopTier", "mutation", input),
+
+  revokeTopTier: (input: { userId: string; note?: string }) =>
+    rpc<RevokeResult>("admin.revokeTopTier", "mutation", input),
 };

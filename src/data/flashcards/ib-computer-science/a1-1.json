@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a1-1",
+  "topicCode": "A1.1",
+  "topicName": "Computer hardware and operation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:49.466Z",
+  "cards": [
+    {
+      "id": "0c4fkyu",
+      "kind": "process",
+      "front": "What are the three stages of the fetch–decode–execute cycle, in order?",
+      "back": "**Fetch**: copy the instruction at the program counter's address from memory and move the counter on. **Decode**: the control unit works out the operation and the data it needs. **Execute**: the ALU or another part carries out the operation and stores the result.",
+      "hint": "Start with what happens to the instruction first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "16w3f4m",
+      "kind": "concept",
+      "front": "Why does a document you typed but did not save get lost if the power fails?",
+      "back": "It exists only in **RAM**, which is **volatile**, so its contents disappear when power is removed. Saving it moves a copy to secondary storage, which keeps data without power.",
+      "hint": "Think about which memory type loses its contents without power.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kwxw5t",
+      "kind": "concept",
+      "front": "What are the jobs of the control unit and the ALU inside the CPU?",
+      "back": "The **control unit** directs the flow of data and signals the other parts when to act. The **ALU** performs arithmetic operations and logical comparisons.",
+      "hint": "Name each part together with its job.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "131iddi",
+      "kind": "term",
+      "front": "What is the central processing unit (CPU)?",
+      "back": "The **CPU** is the component that carries out program instructions, reading them from main memory.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ux6iqo",
+      "kind": "term",
+      "front": "What is a register?",
+      "back": "A very small, very fast **storage location** inside the CPU that holds an instruction, data or address being used at that moment.",
+      "hint": "Compare it with main memory.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0r5dhx5",
+      "kind": "term",
+      "front": "What does the program counter hold?",
+      "back": "The **memory address** of the next instruction to be fetched.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ubela3",
+      "kind": "concept",
+      "front": "What is cache, and why does it help the CPU?",
+      "back": "Cache is a small, very fast **memory** between the CPU and RAM that keeps copies of recently used instructions and data, so the CPU waits less often.",
+      "hint": "Where does it sit compared with RAM?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02o41lh",
+      "kind": "concept",
+      "front": "Does a higher clock speed always mean a faster computer?",
+      "back": "No. **Clock speed**, measured in hertz, sets how many cycles each core can attempt every second, but a higher figure does not always mean a faster computer.",
+      "hint": "Look at what the note says about cores and cache.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f5rsdy",
+      "kind": "term",
+      "front": "What is ROM, and what does it hold?",
+      "back": "**ROM** is non-volatile, read-only memory that holds fixed instructions, such as start-up code, and is not normally written to during use.",
+      "hint": "Its contents survive when the power is removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "145ujgw",
+      "kind": "mistake",
+      "front": "A student says RAM is a safe place to keep files long-term because the computer stores them there. What is wrong?",
+      "back": "RAM is **volatile**, so it loses its contents when power is removed. Files that must survive need **secondary storage**, such as a hard disk drive or solid-state drive.",
+      "hint": "Check whether RAM is volatile.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lezeny",
+      "kind": "example",
+      "front": "A computer is switched on and must load its start-up instructions. Which memory holds them, and do they survive if the power is cut?",
+      "back": "**ROM** holds the start-up code, and its contents are kept when the power is removed.",
+      "hint": "Recall the memory that is not normally changed during use.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c18h8f",
+      "kind": "term",
+      "front": "What is an input device?",
+      "back": "A hardware device that **sends data** from the user or environment into a computer, such as a keyboard, mouse, microphone or camera.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d6iftu",
+      "kind": "term",
+      "front": "What is an output device?",
+      "back": "A hardware device that **presents the results** of processing to the user, such as a monitor, speaker or printer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0voawg7",
+      "kind": "term",
+      "front": "What is secondary storage?",
+      "back": "**Non-volatile** storage, separate from main memory, that keeps programs and files for long-term use, such as a hard disk drive or solid-state drive.",
+      "hint": "Think about what keeps data when the power is off.",
+      "sectionId": "s5"
+    }
+  ]
+}

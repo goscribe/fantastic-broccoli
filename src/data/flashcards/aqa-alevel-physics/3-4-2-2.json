@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-2-2",
+  "topicCode": "3.4.2.2",
+  "topicName": "The Young modulus",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:24.349Z",
+  "cards": [
+    {
+      "id": "1e972h2",
+      "kind": "term",
+      "front": "What is the Young modulus $E$ of a material?",
+      "back": "The **Young modulus** is the ratio of tensile stress to tensile strain, $E=\\frac{\\sigma}{\\varepsilon}$, measured in $\\text{Pa}$. While Hooke's law holds, this ratio is constant for a given material.",
+      "hint": "Think about how stress and strain are related while Hooke's law holds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jooqty",
+      "kind": "concept",
+      "front": "What does the gradient of the straight section of a stress–strain graph give?",
+      "back": "The **Young modulus**. The straight section starts at the origin and ends where the material stops obeying Hooke's law.",
+      "hint": "Think about what a straight line through the origin tells you about stress and strain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0us7d66",
+      "kind": "concept",
+      "front": "Why is a high Young modulus useful for a support or cable that must not stretch much?",
+      "back": "A high $E$ gives a **small strain** for a given stress, so the part stays nearly unchanged in length under load.",
+      "hint": "Think about how much a part changes length under load.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0zf9nlc",
+      "kind": "formula",
+      "front": "How is tensile stress $\\sigma$ defined in symbols?",
+      "back": "$\\sigma=\\frac{F}{A}$, where $F$ is the force in $\\text{N}$ and $A$ is the cross-sectional area in $\\text{m}^{2}$. Stress is measured in $\\text{Pa}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00z4mhg",
+      "kind": "formula",
+      "front": "What is the equation for tensile strain $\\varepsilon$?",
+      "back": "$\\varepsilon=\\frac{\\Delta L}{L}$, where $\\Delta L$ is the extension and $L$ is the original length. Both are in $\\text{m}$, so the **strain has no unit**.",
+      "hint": "Check the units of the two lengths before deciding whether a unit remains.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nac4xm",
+      "kind": "formula",
+      "front": "Which equation links the Young modulus to force, original length, area and extension?",
+      "back": "$E=\\frac{FL}{A\\,\\Delta L}$, where $F$ is force in $\\text{N}$, $L$ is original length in $\\text{m}$, $A$ is area in $\\text{m}^{2}$ and $\\Delta L$ is extension in $\\text{m}$. $E$ is in $\\text{Pa}$.",
+      "hint": "Start from stress divided by strain and substitute each definition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xzebbn",
+      "kind": "example",
+      "front": "A steel wire of length $2.5\\,\\text{m}$ and diameter $0.40\\,\\text{mm}$ carries $60\\,\\text{N}$ and extends by $6.0\\,\\text{mm}$. What is its Young modulus?",
+      "back": "$E=2.0\\times10^{11}\\,\\text{Pa}$. Working: $A=1.26\\times10^{-7}\\,\\text{m}^{2}$, so $\\sigma=4.76\\times10^{8}\\,\\text{Pa}$; $\\varepsilon=2.4\\times10^{-3}$; $E=\\frac{\\sigma}{\\varepsilon}$.",
+      "hint": "Find the cross-sectional area first, remembering to halve the diameter.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0p0pma1",
+      "kind": "mistake",
+      "front": "Why is it wrong to put the diameter straight into $A=\\pi r^{2}$?",
+      "back": "$r$ is the radius, not the diameter. Halve the diameter first, so $A=\\pi\\left(\\frac{d}{2}\\right)^{2}$; otherwise the area is four times too large.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kdcn1r",
+      "kind": "process",
+      "front": "What are the steps, in order, to find the Young modulus of a wire in the lab?",
+      "back": "Measure the diameter at several places and take the mean. Measure the original length from clamp to marker. Add masses one at a time, noting the marker each time. Find $F=mg$ and extension, plot $F$ against extension, then use $E=\\frac{L}{A}\\times\\text{gradient}$.",
+      "hint": "Start with the measurements you need to find $A$ and $L$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h5qg99",
+      "kind": "concept",
+      "front": "Why is a long, thin wire used when measuring the Young modulus?",
+      "back": "It gives a **large extension** for a modest load, so the extension can be measured with a small percentage error using a metre rule.",
+      "hint": "Think about what length and thickness do to the extension for a given load.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06b1udd",
+      "kind": "concept",
+      "front": "What does the area under the straight section of a stress–strain graph represent?",
+      "back": "The **energy stored** per cubic metre of material, in $\\text{J\\,m}^{-3}$. For the straight section this area is $\\frac{1}{2}\\sigma\\varepsilon$.",
+      "hint": "Think about the units you get when you multiply stress by strain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fyziwl",
+      "kind": "term",
+      "front": "What is the tensile strength of a material?",
+      "back": "The **tensile strength** is the highest stress the material reaches before it breaks, measured in $\\text{Pa}$. For a ductile metal it is the peak of the curve.",
+      "hint": "Consider the highest point reached on a ductile metal's stress–strain curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1a0x9r8",
+      "kind": "mistake",
+      "front": "Why does a high Young modulus not guarantee that a cable can carry a heavy load?",
+      "back": "$E$ measures **stiffness**, not strength. The material may have a low tensile strength or be brittle, so it can break at a low stress without stretching much first.",
+      "hint": "Compare what the Young modulus measures with what tensile strength measures.",
+      "sectionId": "s5"
+    }
+  ]
+}

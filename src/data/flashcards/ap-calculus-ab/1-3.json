@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-3",
+  "topicCode": "1.3",
+  "topicName": "Estimating limits from graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:30.596Z",
+  "cards": [
+    {
+      "id": "1pqzxf8",
+      "kind": "concept",
+      "front": "Does a limit depend on the function's value at the chosen input?",
+      "back": "No. A **limit** is the height the graph approaches near the input, so a filled or missing point at that input does not decide it.",
+      "hint": "Think about where the curve is heading, not where it sits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t78pwe",
+      "kind": "concept",
+      "front": "When does a two-sided limit exist at a point?",
+      "back": "When the graph approaches the same finite **height** from both sides. Compare the left and right approaches before giving one answer.",
+      "hint": "Check both sides of the input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03aun9a",
+      "kind": "process",
+      "front": "What are the steps to estimate a two-sided limit from a graph?",
+      "back": "Locate the target input on the horizontal axis. Trace toward it from each side and read the **approach heights**. Matching heights give the limit; different heights mean it does not exist.",
+      "hint": "There are four steps, and the last one compares.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b434i1",
+      "kind": "term",
+      "front": "What is a left-hand limit?",
+      "back": "The **height** approached using inputs smaller than the chosen input, found by tracing the graph from left to right toward that input.",
+      "hint": "Which side of the input are you on?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ietup2",
+      "kind": "term",
+      "front": "What is a right-hand limit?",
+      "back": "The **height** approached using inputs larger than the chosen input, found by tracing the graph from right to left toward that input.",
+      "hint": "Approach from the other side.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l512kx",
+      "kind": "example",
+      "front": "In panel B, what are the left-hand and right-hand limits at x=1?",
+      "back": "The left-hand limit is **2** and the right-hand limit is **4**. The filled point at height 3 gives $f(1)$, so it is neither limit.",
+      "hint": "Trace each branch toward x=1 separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0px9e8h",
+      "kind": "mistake",
+      "front": "A student sees a filled point at a jump and says the limit is that height. What is wrong?",
+      "back": "A filled point does not settle whether a **limit** exists. It only gives the function value, so compare how the graph approaches from both sides.",
+      "hint": "What does the filled point actually tell you?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ydkpfj",
+      "kind": "term",
+      "front": "What is an open circle on a graph?",
+      "back": "A marker for a **point** that is excluded from the graph, so the curve approaches that height without including it.",
+      "hint": "Think about what the marker leaves out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p01tuy",
+      "kind": "concept",
+      "front": "What happens at a jump, and should you average the two heights?",
+      "back": "At a **jump**, the sides approach different finite heights, so the two-sided limit does not exist. Do not average the heights.",
+      "hint": "Compare the two approach heights.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nbhnn0",
+      "kind": "mistake",
+      "front": "A student gives a one-sided limit as just a number. What is missing?",
+      "back": "A one-sided answer needs both a **side** and a height. State which side you approached from.",
+      "hint": "Your answer should name a direction.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14bfcd2",
+      "kind": "example",
+      "front": "Using panel A, estimate the limit as x approaches 2 of f(x).",
+      "back": "The limit is **3**. The curve approaches height 3 from the left and also from the right, so the approach heights match.",
+      "hint": "Compare the two approach heights.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sy7qki",
+      "kind": "formula",
+      "front": "What does the notation $\\lim_{x\\to 2}f(x)=3$ say?",
+      "back": "The **limit** of $f(x)$ as $x$ approaches 2 is 3. The function approaches height 3 near $x=2$, whether or not $f(2)=3$.",
+      "hint": "Read the subscript as the target input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1n7q917",
+      "kind": "mistake",
+      "front": "A graph has no point above x=2, so a student says the limit does not exist. Is this right?",
+      "back": "No. A **missing point** does not automatically mean the limit is missing; check the approach heights from each side.",
+      "hint": "What does the curve do near x=2?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b2hi00",
+      "kind": "term",
+      "front": "What is a function value?",
+      "back": "The **output** assigned to an input. On a graph, it is the height included at that input, if a point is marked there.",
+      "hint": "It is about the input itself, not the nearby curve.",
+      "sectionId": "s4"
+    }
+  ]
+}

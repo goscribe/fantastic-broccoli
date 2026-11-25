@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Potential energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:39.794Z",
+  "cards": [
+    {
+      "id": "1mnnqwa",
+      "kind": "formula",
+      "front": "What is the formula for gravitational potential energy near Earth's surface, and what does each symbol mean?",
+      "back": "$U_g=mgh$: **m** is mass in kg, g is 9.8 m/s^2, and h is height above a reference level in m. The energy is in joules.",
+      "hint": "Think about what gets lifted and how high it goes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pdptdn",
+      "kind": "concept",
+      "front": "Why does changing the reference level not change the energy difference between two heights?",
+      "back": "Because the change depends only on the **height difference**: $\\Delta U_g=mg\\Delta h$. Moving the reference level shifts both heights equally.",
+      "hint": "Look at what $\\Delta h$ subtracts.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03kyrfk",
+      "kind": "concept",
+      "front": "What happens to a spring's stored elastic energy when its displacement from natural length doubles?",
+      "back": "It **quadruples**, because $U_s$ depends on displacement squared. The spring force only doubles.",
+      "hint": "Check how $x$ appears in $U_s$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0499n6z",
+      "kind": "term",
+      "front": "What is gravitational potential energy?",
+      "back": "Energy stored in a system of masses because of their separation. Near Earth's surface it is $U_g=mgh$, measured in **joules**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f9rsga",
+      "kind": "term",
+      "front": "What is a reference level?",
+      "back": "The height where gravitational potential energy is defined to be **zero**. You may choose it freely for convenience, often the floor or ground.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gamkyc",
+      "kind": "mistake",
+      "front": "A book has $U_g=-20\\,\\mathrm{J}$. Does this mean it has negative mass or no energy?",
+      "back": "**No.** It only means the book lies below the chosen reference level. The sign shows its position relative to that level.",
+      "hint": "Where is the zero?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04xmsut",
+      "kind": "formula",
+      "front": "What is the formula for the change in gravitational potential energy, and how is $\\Delta h$ defined?",
+      "back": "$\\Delta U_g=mg\\Delta h$, where $\\Delta h$ is the **final height minus the initial height**. Raising gives a positive change; lowering gives a negative one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1s3dni4",
+      "kind": "example",
+      "front": "A 0.50 kg ball drops from 3.0 m to 1.0 m above the floor. What is its change in gravitational potential energy?",
+      "back": "$\\Delta U_g=-9.8\\,\\mathrm{J}$. Here $\\Delta h=-2.0\\,\\mathrm{m}$, so the **potential energy decreases** by 9.8 J.",
+      "hint": "Start with the height change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rgpvtw",
+      "kind": "process",
+      "front": "What are the steps to calculate a change in gravitational potential energy?",
+      "back": "1) Find $\\Delta h$ as final height minus initial height. 2) Substitute $m$, $g$ and $\\Delta h$ into $mg\\Delta h$. 3) Calculate, keeping the **sign**.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n2y7z4",
+      "kind": "formula",
+      "front": "What is Hooke's law for an ideal spring, and what does each symbol mean?",
+      "back": "$F_s=-k\\Delta x$: $F_s$ is the spring force in N, $k$ is the spring constant, and $\\Delta x$ is displacement from natural length. The minus sign means the force opposes the displacement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0824mne",
+      "kind": "term",
+      "front": "What is the spring constant?",
+      "back": "The constant $k$ that measures **stiffness**, in N/m. It gives the spring force per unit displacement from natural length.",
+      "hint": "Look at its units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d4ftdz",
+      "kind": "concept",
+      "front": "Does Hooke's law apply to a compressed spring, and which way does the force point?",
+      "back": "Yes, while the spring behaves ideally. Compression makes $\\Delta x$ negative, so the spring force points **outward**.",
+      "hint": "Think about the sign of $\\Delta x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09cjdgo",
+      "kind": "formula",
+      "front": "What is the elastic potential energy formula for an ideal spring, and what does $\\Delta x$ measure?",
+      "back": "$U_s=\\frac{1}{2}k(\\Delta x)^2$, where $\\Delta x$ is measured from the **natural length**. The energy is zero at natural length and positive on either side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16smucv",
+      "kind": "example",
+      "front": "A spring has $k=200\\,\\mathrm{N/m}$. What energy does it store at 0.10 m and at 0.20 m from natural length?",
+      "back": "At 0.10 m, $U_s=1.0\\,\\mathrm{J}$. At 0.20 m, $U_s=4.0\\,\\mathrm{J}$. Doubling the **displacement** quadruples the energy.",
+      "hint": "Use $\\frac{1}{2}k(\\Delta x)^2$.",
+      "sectionId": "s4"
+    }
+  ]
+}

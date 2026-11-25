@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Introduction to related rates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:13.111Z",
+  "cards": [
+    {
+      "id": "1hwu7ln",
+      "kind": "concept",
+      "front": "Why can you find the rate of one changing quantity from the rate of another?",
+      "back": "Because an **equation** connecting the quantities holds at every instant, so differentiating it with respect to time links their rates.",
+      "hint": "Think about what stays true as both quantities change."
+    },
+    {
+      "id": "1ozxt0b",
+      "kind": "process",
+      "front": "What are the steps for solving a related rates problem?",
+      "back": "1) Name each changing quantity as a function of time. 2) Write an equation connecting them. 3) Differentiate both sides with respect to time. 4) Substitute the known values and solve.",
+      "hint": "Substitution comes last, not first."
+    },
+    {
+      "id": "1frqi3p",
+      "kind": "mistake",
+      "front": "You are given a square's side length as 3 cm at one instant. Why is it wrong to treat that side length as constant?",
+      "back": "The 3 cm value describes only **one instant**. The side length can keep changing before and after that moment, so it is not a fixed number.",
+      "hint": "Ask what the value describes: one moment or all of time?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0t3lg16",
+      "kind": "term",
+      "front": "What is a related rates problem?",
+      "back": "A problem that connects the **time rates** of quantities linked by an equation, usually giving one rate and asking for another.",
+      "hint": "Look for two quantities linked by one equation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13ey31w",
+      "kind": "term",
+      "front": "What is a rate of change?",
+      "back": "A **rate of change** describes how quickly a quantity changes, often with respect to time, such as in cm/s.",
+      "hint": "Think of units written as something per second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1v716k5",
+      "kind": "formula",
+      "front": "For a square with side length $s$ and area $A$, what does $A=s^2$ mean?",
+      "back": "It is the **area relationship**: area equals side length squared, and it holds at every instant as the square changes.",
+      "hint": "Check that units are squared for area.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "193l710",
+      "kind": "formula",
+      "front": "For a square growing over time, what does $\\frac{dA}{dt}=2s\\frac{ds}{dt}$ tell you?",
+      "back": "It links the **area rate** $\\frac{dA}{dt}$ to the side length rate $\\frac{ds}{dt}$ at any instant, with $\\frac{ds}{dt}$ coming from the **chain rule**. Units are $\\mathrm{cm^2/s}$ when $s$ is in cm.",
+      "hint": "Which factor comes from differentiating $s$ with respect to time?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dvsqam",
+      "kind": "concept",
+      "front": "What is the chain rule doing in a related rates differentiation?",
+      "back": "It differentiates a function of a changing variable by **multiplying** by that variable's derivative, such as $\\frac{ds}{dt}$ when differentiating $s^2$ with respect to time.",
+      "hint": "Why does $s$ get a $\\frac{ds}{dt}$ factor?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jwhx1a",
+      "kind": "mistake",
+      "front": "When solving for $\\frac{dA}{dt}$ with $A=s^2$, when should you substitute $s=3$?",
+      "back": "Substitute **after** differentiating. Substituting first removes the changing quantity, so you cannot find the relationship between the rates.",
+      "hint": "Keep $s$ and $\\frac{ds}{dt}$ in the equation until the derivative is taken.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "159nzat",
+      "kind": "example",
+      "front": "A square's side length increases at 2 cm/s. Find its area rate when $s=3$ cm.",
+      "back": "$\\frac{dA}{dt}=2(3)(2)=12$, so the area increases at **12 cm^2/s**.",
+      "hint": "Differentiate $A=s^2$ first, then substitute.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yn01c2",
+      "kind": "example",
+      "front": "A square's side length is 4 cm and increases at 3 cm/s. Find its area rate.",
+      "back": "$\\frac{dA}{dt}=2s\\frac{ds}{dt}=2(4)(3)=24$, so the area increases at **24 cm^2/s**.",
+      "hint": "Use $\\frac{dA}{dt}=2s\\frac{ds}{dt}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19allxz",
+      "kind": "formula",
+      "front": "For a circle with radius $r$ and area $A$, what equation connects them, and what is its time-differentiated form?",
+      "back": "The **area relationship** is $A=\\pi r^2$. Differentiating with respect to time gives $\\frac{dA}{dt}=2\\pi r\\frac{dr}{dt}$.",
+      "hint": "Use the same method as the square.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0is4sb7",
+      "kind": "term",
+      "front": "What is a circle's radius?",
+      "back": "The **radius** $r$ is the distance from a circle's center to its edge.",
+      "hint": "Think of half of the diameter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17xvmfa",
+      "kind": "term",
+      "front": "What is an area relationship?",
+      "back": "An **area relationship** is an equation connecting a shape's area to its dimensions, such as $A=s^2$ for a square.",
+      "hint": "Which equation links area to a length?",
+      "sectionId": "s3"
+    }
+  ]
+}

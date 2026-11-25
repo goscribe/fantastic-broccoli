@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Composite and inverse functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:19.685Z",
+  "cards": [
+    {
+      "id": "0y5i03v",
+      "kind": "concept",
+      "front": "What is a composite function, and what does $(f\\circ g)(x)$ mean?",
+      "back": "A **composite function** feeds the output of one function into another. $(f\\circ g)(x)$ means $f(g(x))$: apply $g$ first, then $f$ to the result.",
+      "hint": "Work out which function acts first, the one nearest to x.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fvdnas",
+      "kind": "concept",
+      "front": "Why does the order of functions matter in a composite?",
+      "back": "Usually $f(g(x))$ and $g(f(x))$ are **different** functions. Swapping the order changes which function receives the input first.",
+      "hint": "Try f(x)=2x+3 and g(x)=x^2 at x=2.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12hmbah",
+      "kind": "term",
+      "front": "What is the inverse function $f^{-1}$?",
+      "back": "The **inverse function** $f^{-1}$ undoes $f$: if $f(a)=b$, then $f^{-1}(b)=a$. It is not $\\frac{1}{f}$; the $-1$ marks the inverse, not a reciprocal.",
+      "hint": "Think about going backwards from output to input.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "185w8c5",
+      "kind": "process",
+      "front": "What are the four steps to find the inverse of a function?",
+      "back": "1) Write $y=f(x)$. 2) Swap $x$ and $y$. 3) Rearrange to make $y$ the subject. 4) Write the result as $f^{-1}(x)$ and state its domain.",
+      "hint": "The first step changes the letter for the output.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1niayfk",
+      "kind": "concept",
+      "front": "How is the graph of $f^{-1}$ related to the graph of $f$?",
+      "back": "The graph of $f^{-1}$ is the **reflection** of $f$ in the line $y=x$. If $(a,b)$ lies on $f$, then $(b,a)$ lies on $f^{-1}$.",
+      "hint": "Swapping x and y swaps the coordinates of each point.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ipccd6",
+      "kind": "concept",
+      "front": "What must be true of a function for it to have an inverse?",
+      "back": "It must be **one-to-one**: no two inputs give the same output. A horizontal line meets its graph at most once.",
+      "hint": "What goes wrong if two inputs give the same output?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "127ntwj",
+      "kind": "concept",
+      "front": "What two conditions define the domain of $f\\circ g$?",
+      "back": "$x$ must be in the domain of $g$, and $g(x)$ must be in the domain of $f$. A composite may need a smaller domain than expected.",
+      "hint": "Both steps have to work for the chain to work.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kn0lg2",
+      "kind": "mistake",
+      "front": "A student says $f^{-1}(x)$ means $\\frac{1}{f(x)}$. What is wrong?",
+      "back": "The $-1$ in $f^{-1}$ marks the **inverse function**, not a reciprocal. $f^{-1}(x)$ is the rule that undoes $f$.",
+      "hint": "Compare the meaning of the symbol with a power.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qwjhc5",
+      "kind": "mistake",
+      "front": "Why should you work out the domain of a composite before simplifying its rule?",
+      "back": "**Simplifying can hide a restriction**. For $\\sqrt{x-4}$ the domain $x\\ge4$ is needed, even if the simplified form looks unrestricted.",
+      "hint": "Look at the table of square root composites.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hpuq6j",
+      "kind": "example",
+      "front": "Find $f^{-1}(x)$ for $f(x)=\\frac{2x+3}{5}$.",
+      "back": "$f^{-1}(x)=\\frac{5x-3}{2}$. Swap to $x=\\frac{2y+3}{5}$, multiply by 5, then subtract 3 and divide by 2.",
+      "hint": "Check: f(1)=1 and f^{-1}(1)=1.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1idqfvo",
+      "kind": "process",
+      "front": "How can you solve $f^{-1}(x)=k$ without finding $f^{-1}$ first?",
+      "back": "Use $x=f(k)$. The equation says $k$ is the input that $f$ sends to $x$, so evaluate $f(k)$ directly.",
+      "hint": "Turn the inverse into a forward evaluation.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0di2ojw",
+      "kind": "example",
+      "front": "Let $f(x)=2x+3$ and $g(x)=x^2$. Solve $f(g(x))=21$.",
+      "back": "$x=3$ or $x=-3$. Form $2x^2+3=21$, so $x^2=9$, giving $x=\\pm3$.",
+      "hint": "Form the composite first, then solve the quadratic.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0im112g",
+      "kind": "example",
+      "front": "Given $f(x)=x^2+1$ for $x\\ge0$, what is $f^{-1}(x)$ and its domain?",
+      "back": "$f^{-1}(x)=\\sqrt{x-1}$ with domain $x\\ge1$. The restriction $x\\ge0$ makes $f$ one-to-one, so the inverse exists.",
+      "hint": "Rearrange y=x^2+1 after swapping variables.",
+      "sectionId": "s5"
+    }
+  ]
+}

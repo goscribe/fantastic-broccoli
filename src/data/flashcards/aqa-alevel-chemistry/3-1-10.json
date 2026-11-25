@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-10",
+  "topicCode": "3.1.10",
+  "topicName": "Equilibrium constant Kp",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:23.967Z",
+  "cards": [
+    {
+      "id": "1osws2o",
+      "kind": "term",
+      "front": "Which quantities go into the equilibrium constant Kp for a reaction between gases?",
+      "back": "The **partial pressures** of the products divided by those of the reactants, each raised to its balanced-equation coefficient, all measured at equilibrium.",
+      "hint": "Think about what replaces concentrations in Kc.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18t9vl0",
+      "kind": "concept",
+      "front": "Which condition changes the value of Kp, and why?",
+      "back": "Only **temperature** changes $K_p$. Pressure, concentration and catalysts shift the position or speed of equilibrium but leave the value of $K_p$ at a fixed temperature unchanged.",
+      "hint": "Compare the effect of pressure with the effect of temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q4lqoz",
+      "kind": "formula",
+      "front": "Which equation gives the partial pressure of gas A in a mixture?",
+      "back": "$p(\\mathrm{A})=\\frac{n(\\mathrm{A})}{n_\\mathrm{total}}\\times p_\\mathrm{total}$, where $n$ is the amount in **moles** and the result is in kPa.",
+      "hint": "Start with the mole fraction of the gas.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1syqjzr",
+      "kind": "formula",
+      "front": "What is the Kp expression for $\\mathrm{N_2(g)+3H_2(g)\\rightleftharpoons 2NH_3(g)}$, and what are its units?",
+      "back": "$K_p=\\frac{p(\\mathrm{NH_3})^2}{p(\\mathrm{N_2})\\,p(\\mathrm{H_2})^3}$, with units of $\\mathrm{kPa^{-2}}$ when pressures are in kPa.",
+      "hint": "Products go on top, reactants below, each raised to its coefficient.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jw45j0",
+      "kind": "mistake",
+      "front": "Why is solid carbon left out of a Kp expression?",
+      "back": "Only **gases** have partial pressures, so solids and liquids never appear in $K_p$.",
+      "hint": "Think about which states of matter contribute a partial pressure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0id03v2",
+      "kind": "process",
+      "front": "What are the steps to calculate Kp from equilibrium moles of gases?",
+      "back": "Find total moles, then mole fractions, then partial pressures, then write the Kp expression, then substitute and calculate, keeping full values until the final step.",
+      "hint": "Start with the quantity you add up first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "070ga97",
+      "kind": "example",
+      "front": "At equilibrium, 200 kPa total holds 0.50 mol $\\mathrm{N_2O_4}$ and 1.50 mol $\\mathrm{NO_2}$. What is Kp for $\\mathrm{N_2O_4(g)\\rightleftharpoons 2NO_2(g)}$?",
+      "back": "$K_p=450\\,\\mathrm{kPa}$. Partial pressures are 50 kPa for $\\mathrm{N_2O_4}$ and 150 kPa for $\\mathrm{NO_2}$, so $K_p=\\frac{150^2}{50}$.",
+      "hint": "Find the total moles first, then the mole fractions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o8p8lh",
+      "kind": "mistake",
+      "front": "A student says Kp changes when the total pressure is increased. What is wrong with this?",
+      "back": "$K_p$ stays the same at a fixed temperature. Only the **partial pressures** change, and the position of equilibrium shifts until their ratio gives the same $K_p$.",
+      "hint": "Separate the value of Kp from the partial pressures that make it up.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v0pyjk",
+      "kind": "concept",
+      "front": "Which direction does raising the total pressure shift equilibrium, and what happens to the catalyst's effect?",
+      "back": "Pressure shifts equilibrium towards the side with **fewer gas moles**. A catalyst changes neither the position nor $K_p$, because it speeds up both directions equally.",
+      "hint": "Count gas moles on each side of the equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vy3njt",
+      "kind": "concept",
+      "front": "What happens to Kp when temperature rises and the forward reaction is exothermic?",
+      "back": "$K_p$ **decreases**. Raising the temperature favours the endothermic reverse reaction, so the position shifts towards reactants.",
+      "hint": "Which direction absorbs the extra heat?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gfqasw",
+      "kind": "concept",
+      "front": "What does a very large value of Kp tell you about the position of equilibrium?",
+      "back": "The position lies far towards **products**, so products dominate the equilibrium mixture.",
+      "hint": "Compare a very large Kp with a very small one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uzrxq7",
+      "kind": "mistake",
+      "front": "Why can a reaction with a very large Kp still be very slow?",
+      "back": "$K_p$ shows only the **position** of equilibrium, not how fast it is reached. It says nothing about the rate of reaction.",
+      "hint": "Separate how far a reaction goes from how quickly it gets there.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1sm9shy",
+      "kind": "example",
+      "front": "If Kp for $\\mathrm{N_2O_4(g)\\rightleftharpoons 2NO_2(g)}$ is 450 kPa, what is Kp for $\\mathrm{2NO_2(g)\\rightleftharpoons N_2O_4(g)}$?",
+      "back": "$\\frac{1}{450}=2.2\\times10^{-3}\\,\\mathrm{kPa^{-1}}$. Reversing an equation gives the reciprocal of $K_p$.",
+      "hint": "Consider what happens to the expression when the products and reactants swap places.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "10-2",
+  "topicCode": "10.2",
+  "topicName": "Conservation of charge and charging",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:19.894Z",
+  "cards": [
+    {
+      "id": "0vb93fa",
+      "kind": "concept",
+      "front": "What does the law of conservation of charge say?",
+      "back": "The **total charge** of an isolated system stays constant. Charge can move from one object to another but is never created or destroyed.",
+      "hint": "Think about what can move, not what can appear.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ibxlgg",
+      "kind": "concept",
+      "front": "How does charging by conduction differ from charging by induction?",
+      "back": "**Conduction** needs direct contact and leaves the object with the same sign as the charged object. **Induction** needs no contact and leaves the object with the opposite sign.",
+      "hint": "Compare the contact column and the final charge column in the table.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07wux81",
+      "kind": "term",
+      "front": "What is the difference between a conductor and an insulator?",
+      "back": "A **conductor** lets charge move freely through it, so added charge spreads out. An **insulator** holds added charge near where it was placed.",
+      "hint": "Metals are the standard example of one of them.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ij85sb",
+      "kind": "formula",
+      "front": "What is the charge of one electron, and what does the symbol $e$ stand for?",
+      "back": "Each electron carries $-e$, where $e=1.60\\times10^{-19}\\,\\mathrm{C}$ is the size of the electron's charge, measured in coulombs (C).",
+      "hint": "The unit is coulombs, abbreviated C.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d75amr",
+      "kind": "mistake",
+      "front": "A positively charged object is said to have lost electrons. Why not say it gained protons?",
+      "back": "It has **lost electrons**. In solid objects, protons stay fixed in the nuclei, so only electrons move between objects.",
+      "hint": "Ask which particles are free to move in a solid.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ttom9e",
+      "kind": "example",
+      "front": "Two identical metal spheres carry $+8.0\\,\\mathrm{nC}$ and $-2.0\\,\\mathrm{nC}$. They touch and are separated. What is the final charge on each?",
+      "back": "Each carries **$+3.0\\,\\mathrm{nC}$**. The total is $+6.0\\,\\mathrm{nC}$, and identical conductors share it equally.",
+      "hint": "Start by finding the total charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b16k16",
+      "kind": "term",
+      "front": "In charging by friction, what happens to the two rubbed materials?",
+      "back": "Electrons transfer from one material to the other, leaving one **positive** and the other **negative** with equal amounts of charge.",
+      "hint": "Think about which particles move between the two surfaces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vlgamw",
+      "kind": "process",
+      "front": "What are the four steps to charge a neutral metal sphere positively by induction using a negative rod?",
+      "back": "1) Bring the rod near without touching the sphere. 2) Connect the sphere to **ground** while the rod stays near. 3) Disconnect the ground. 4) Remove the rod.",
+      "hint": "The ground connection must be broken before the rod is taken away.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j11dhj",
+      "kind": "concept",
+      "front": "Why does a sphere keep a net charge opposite to the rod's after induction?",
+      "back": "Repelled electrons flow to **ground** and cannot return, leaving the sphere short of electrons. So its net charge is opposite to the rod's.",
+      "hint": "Follow where the repelled electrons go.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0479oot",
+      "kind": "term",
+      "front": "What is grounding?",
+      "back": "**Grounding** is connecting an object to Earth with a conductor, so charge can flow freely between the object and Earth.",
+      "hint": "Grounding is a key step in induction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17zedmw",
+      "kind": "mistake",
+      "front": "After a sphere is charged by induction, does the charged rod lose its charge?",
+      "back": "No. The **rod keeps its charge**. Only electrons in the sphere move, through the ground connection.",
+      "hint": "Which object's electrons actually moved?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x4ezzn",
+      "kind": "concept",
+      "front": "Where does excess charge sit on a conductor compared with an insulator?",
+      "back": "On a conductor, excess charge **spreads over the surface**. On an insulator, it stays where it was placed, so rubbing can leave charge in patches.",
+      "hint": "Think about whether the charge can travel.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0e8ydhr",
+      "kind": "example",
+      "front": "Why can you feel a small shock after walking across carpet and then touching a metal doorknob?",
+      "back": "Walking rubs electrons onto you by **friction**. When you touch the metal, that extra charge flows through the contact and you feel a small shock.",
+      "hint": "There are two stages: charging, then discharging.",
+      "sectionId": "s5"
+    }
+  ]
+}

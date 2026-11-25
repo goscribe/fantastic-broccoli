@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-12",
+  "topicCode": "3.12",
+  "topicName": "Vectors in kinematics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:41.636Z",
+  "cards": [
+    {
+      "id": "1dtdwjx",
+      "kind": "formula",
+      "front": "How is velocity found from a position vector $\\mathbf{r}(t)$?",
+      "back": "Velocity is the **derivative** of position: $\\mathbf{v}=\\frac{d\\mathbf{r}}{dt}$. Differentiate each component separately.",
+      "hint": "Think about the rate of change of position with time.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wapq6x",
+      "kind": "concept",
+      "front": "Why can an object moving at steady speed still be accelerating?",
+      "back": "**Acceleration** is the rate of change of velocity, and velocity includes direction. A car taking a bend at steady speed keeps changing direction, so it accelerates.",
+      "hint": "Velocity is a vector, not just a number.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mnrzi2",
+      "kind": "formula",
+      "front": "What is the displacement from position $\\mathbf{r}_1$ to position $\\mathbf{r}_2$?",
+      "back": "$\\mathbf{r}_2-\\mathbf{r}_1$. The **displacement** is final position minus initial position. It is a vector, so it has size and direction.",
+      "hint": "Subtract the starting position from the finishing position.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "012yro5",
+      "kind": "process",
+      "front": "What are the steps to check whether two objects A and B meet?",
+      "back": "1) Set $\\mathbf{r}_A=\\mathbf{r}_B$. 2) Compare components to get equations in $t$. 3) Solve and check that one $t$ satisfies every component. 4) Substitute to find the meeting point.",
+      "hint": "All components must agree on the same time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vmfxy9",
+      "kind": "formula",
+      "front": "For constant velocity, what is the position at time $t$ in terms of $\\mathbf{r}_0$ and $\\mathbf{v}$?",
+      "back": "$\\mathbf{r}=\\mathbf{r}_0+\\mathbf{v}t$. Here $\\mathbf{r}_0$ is the **initial position** at $t=0$, and $\\mathbf{v}$ is the constant velocity.",
+      "hint": "Start at the initial position and add the distance moved in time $t$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oe16zc",
+      "kind": "example",
+      "front": "A boat starts at $\\begin{pmatrix}2\\\\1\\end{pmatrix}$ km with constant velocity $\\begin{pmatrix}3\\\\2\\end{pmatrix}$ km/h. Where is it after 4 hours?",
+      "back": "$\\begin{pmatrix}14\\\\9\\end{pmatrix}$ km. Use $\\mathbf{r}=\\mathbf{r}_0+\\mathbf{v}t=\\begin{pmatrix}2\\\\1\\end{pmatrix}+4\\begin{pmatrix}3\\\\2\\end{pmatrix}$.",
+      "hint": "Substitute $t=4$ into $\\mathbf{r}=\\mathbf{r}_0+\\mathbf{v}t$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r4xv24",
+      "kind": "mistake",
+      "front": "Two boats' paths cross on a chart. Does this mean they collide?",
+      "back": "No. They collide only if both are at the same point at the same **time**. The paths can cross while the boats arrive at different times.",
+      "hint": "Check both place and time.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o4anu8",
+      "kind": "formula",
+      "front": "How is speed found from a velocity vector $\\mathbf{v}=\\begin{pmatrix}v_1\\\\v_2\\end{pmatrix}$?",
+      "back": "$|\\mathbf{v}|=\\sqrt{v_1^2+v_2^2}$. The **speed** is the magnitude of velocity, a single positive number with no direction.",
+      "hint": "Use Pythagoras on the two components.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0razt0q",
+      "kind": "example",
+      "front": "Find the speed of an object with velocity $\\begin{pmatrix}6\\\\-8\\end{pmatrix}$ m/s.",
+      "back": "10 m/s. Speed is $\\sqrt{6^2+(-8)^2}=\\sqrt{100}=10$. The negative sign does not change the size.",
+      "hint": "Square each component before adding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ckdtbv",
+      "kind": "example",
+      "front": "A particle has $\\mathbf{r}(t)=\\begin{pmatrix}t^2\\\\3t\\end{pmatrix}$ m. Find its velocity, acceleration and speed when $t=2$.",
+      "back": "Velocity $\\begin{pmatrix}4\\\\3\\end{pmatrix}$ m/s, acceleration $\\begin{pmatrix}2\\\\0\\end{pmatrix}$ m/s$^2$, speed 5 m/s. Differentiate once for $\\mathbf{v}$, again for $\\mathbf{a}$, then substitute.",
+      "hint": "Differentiate each component, then substitute $t=2$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13z7q5c",
+      "kind": "term",
+      "front": "What is the relative position of object A from object B?",
+      "back": "The **relative position** is $\\mathbf{r}_A-\\mathbf{r}_B$. It is the vector pointing from B to A, and its magnitude is the distance between them.",
+      "hint": "Subtract B's position from A's position.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1e4526y",
+      "kind": "concept",
+      "front": "How can you find the closest distance two objects with constant velocities come to each other?",
+      "back": "Find where the squared distance $|\\mathbf{r}_A-\\mathbf{r}_B|^2$, a quadratic in $t$, has its **minimum**: set its derivative to zero. Square root that minimum to get the closest distance.",
+      "hint": "A minimum of a quadratic occurs where its derivative is zero.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cq6oy1",
+      "kind": "term",
+      "front": "What is the initial position of an object?",
+      "back": "The **initial position** $\\mathbf{r}_0$ is the position vector of the object when $t=0$.",
+      "hint": "Think about the starting moment.",
+      "sectionId": "s4"
+    }
+  ]
+}

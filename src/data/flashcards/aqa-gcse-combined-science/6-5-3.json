@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-5-3",
+  "topicCode": "6.5.3",
+  "topicName": "Forces and elasticity",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:26.417Z",
+  "cards": [
+    {
+      "id": "0ladi9o",
+      "kind": "concept",
+      "front": "What is the difference between elastic and inelastic deformation?",
+      "back": "**Elastic** deformation reverses when the force is removed, so the object returns to its original shape. **Inelastic** deformation stays changed after the force is removed.",
+      "hint": "Think about what the shape does once the force is taken away.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cpwz01",
+      "kind": "formula",
+      "front": "What does the equation $F=ke$ tell you, and what unit does each symbol use?",
+      "back": "$F$ is the **force** in newtons ($\\mathrm{N}$), $k$ is the **spring constant** in newtons per metre ($\\mathrm{N/m}$), and $e$ is the **extension** in metres ($\\mathrm{m}$). It applies only within the proportional region.",
+      "hint": "Check the units of each letter before you substitute.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l169ic",
+      "kind": "concept",
+      "front": "Why does a force–extension graph stop being a straight line past a certain point?",
+      "back": "Past the **limit of proportionality**, equal increases in force no longer produce equal increases in extension, so the graph curves.",
+      "hint": "Compare the graph's shape with the straight-line case.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0824mne",
+      "kind": "term",
+      "front": "What is the spring constant?",
+      "back": "The **spring constant** is the force needed per unit extension within a spring's proportional region, measured in $\\mathrm{N/m}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1na0sp4",
+      "kind": "term",
+      "front": "How is extension worked out for a spring?",
+      "back": "Extension is the **stretched length** minus the **original length**.",
+      "hint": "Start from the length the spring had before any force was applied.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14clqp9",
+      "kind": "example",
+      "front": "What force stretches a spring with $k=25\\,\\mathrm{N/m}$ by 8 cm?",
+      "back": "$2\\,\\mathrm{N}$. Convert $8\\,\\mathrm{cm}$ to $0.08\\,\\mathrm{m}$, then use $F=ke=25\\times0.08$.",
+      "hint": "Start by converting the units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1x24sft",
+      "kind": "mistake",
+      "front": "Why is 'elastic' not the same as 'easy to stretch'?",
+      "back": "**Elastic** means the object returns to its original shape when the force is removed. It says nothing about how easily the object stretches.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08bw1le",
+      "kind": "concept",
+      "front": "How is $F=ke$ applied to a compressed spring?",
+      "back": "It is used in the same way within the proportional region, with the **magnitude of the compression** used in place of $e$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1smop7u",
+      "kind": "concept",
+      "front": "What does the gradient of the straight section of a force–extension graph represent?",
+      "back": "The **spring constant** $k$, because the gradient equals force divided by extension within the proportional region.",
+      "hint": "Recall the equation that links force, extension and k.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cucqqq",
+      "kind": "concept",
+      "front": "What does a straight line through the origin on a force–extension graph show?",
+      "back": "**Direct proportionality**: doubling the force doubles the extension.",
+      "hint": "Think about the shape the graph would have if the spring kept stretching in the same way.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08wq778",
+      "kind": "term",
+      "front": "What is a force–extension graph?",
+      "back": "A **force–extension graph** plots the applied force against an object's extension.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ta68f2",
+      "kind": "process",
+      "front": "What steps show whether a stretched material has undergone permanent deformation?",
+      "back": "1) Load the material and plot force against extension. 2) Remove the force while recording the unloading path. 3) If it returns to the origin, the deformation was **elastic**; if it reaches zero force at a positive extension, it is **permanent**.",
+      "sectionId": "s4"
+    }
+  ]
+}

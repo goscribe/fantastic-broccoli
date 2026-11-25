@@ -39,6 +39,13 @@ export interface PlanCaps {
    * access, but is not a paid conversion. Absent from servers before it was added.
    */
   complimentary?: boolean;
+  /**
+   * An admin gave this account the top tier for free, with no end date. Shown
+   * as "Unlimited · free": no renewal date and nothing to buy. Independent of
+   * `paid` (the user may still pay for a plan of their own). Absent from
+   * servers before it was added.
+   */
+  unlimitedGrant?: boolean;
   caps: {
     workspaces: number;
     studySessions: number;
@@ -58,6 +65,12 @@ export interface PlanCaps {
 
 /** Fired on `window` when the learner finishes a study session (debrief shown). */
 export const SESSION_COMPLETED_EVENT = "scribe:session-completed";
+
+/** `detail` of SESSION_COMPLETED_EVENT: which end screen is showing (the wall never opens on a Quick 5's). */
+export interface SessionCompletedDetail {
+  sessionId: string;
+  quickStart?: boolean;
+}
 
 export function fetchPlanCaps(): Promise<PlanCaps> {
   return rpc<PlanCaps>("payment.getPlanCaps", "query", undefined);
@@ -140,29 +153,39 @@ export interface PlanOption {
   storageLimitBytes: number;
   monthlyTokens: number;
   isActive: boolean;
+  /** Billing interval ("month", "year"); null for a pay-once plan. Undefined when the server does not send it. Labels only (plan-display.ts). */
+  interval?: string | null;
   /** `pass`: paid once, access until `accessUntil`, never renews. */
   kind: "pass" | "recurring";
+  /** When a pass's access ends (ISO); null for a monthly plan. */
   accessUntil: string | null;
+  /** Coursework reviews a day (null = unlimited, 0 = not included); undefined on servers without the grader. Labels only. */
+  courseworkReviewsPerDay?: number | null;
 }
 
 export async function fetchPlanOptions(): Promise<PlanOption[]> {
   const plans = await api.payment.getPlans.query();
-  return plans.map((plan) => ({
-    id: plan.id,
-    name: plan.name,
-    priceDollars: plan.price,
-    description: plan.description ?? "",
-    storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
-    // `monthlyTokens` is newer than the published @goscribe/server types.
-    monthlyTokens:
-      (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
-    isActive: plan.isActive,
-    // `kind` / `accessUntil` are newer than the published @goscribe/server types.
-    ...passFields(plan as unknown as { kind?: string; accessUntil?: string | Date | null; interval?: string | null }),
-  }));
+  return plans.map((plan) => {
+    // Display-only fields; `kind` / `accessUntil` are newer than the published @goscribe/server types.
+    const extra = plan as unknown as { interval?: string | null; kind?: string | null; accessUntil?: string | Date | null; courseworkReviewsPerDay?: number | null };
+    return {
+      id: plan.id,
+      name: plan.name,
+      priceDollars: plan.price,
+      description: plan.description ?? "",
+      storageLimitBytes: Number(plan.limit?.maxStorageBytes ?? 0),
+      // `monthlyTokens` is newer than the published @goscribe/server types.
+      monthlyTokens:
+        (plan as unknown as { monthlyTokens?: number }).monthlyTokens ?? 0,
+      isActive: plan.isActive,
+      interval: extra.interval,
+      ...passFields(extra),
+      courseworkReviewsPerDay: extra.courseworkReviewsPerDay,
+    };
+  });
 }
 
-function passFields(plan: { kind?: string; accessUntil?: string | Date | null; interval?: string | null }) {
+function passFields(plan: { kind?: string | null; accessUntil?: string | Date | null; interval?: string | null }) {
   const accessUntil = plan.accessUntil ? new Date(plan.accessUntil).toISOString() : null;
   const kind: PlanOption["kind"] =
     plan.kind === "pass" || (!plan.kind && accessUntil && !plan.interval) ? "pass" : "recurring";

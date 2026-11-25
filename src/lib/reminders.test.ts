@@ -1,8 +1,10 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
+  plannerWindowFromStudyTime,
   STUDY_TIME_PRESETS,
   canAskPush,
+  deviceSeenFor,
   formatStudyTime,
   habitSteps,
   isGoodSession,
@@ -109,5 +111,35 @@ describe("study time helpers", () => {
 
   it("decodes the VAPID key", () => {
     assert.deepEqual(Array.from(urlBase64ToUint8Array("AQID_w")), [1, 2, 3, 255]);
+  });
+});
+
+it("the habit prompt's study time places the planner window, but never over the student's own", () => {
+  const fresh = { windowStart: "15:00", windowEnd: "19:00", availability: null };
+  assert.deepEqual(plannerWindowFromStudyTime(fresh, 17 * 60), { windowStart: "17:00", windowEnd: "19:00" });
+  assert.deepEqual(plannerWindowFromStudyTime(fresh, 22 * 60 + 30), { windowStart: "22:30", windowEnd: "23:59" });
+  assert.equal(plannerWindowFromStudyTime({ ...fresh, windowStart: "16:00" }, 17 * 60), null, "own window kept");
+  assert.equal(plannerWindowFromStudyTime({ ...fresh, availability: [{ weekday: 1, start: "16:00", end: "18:00" }] }, 17 * 60), null, "own free times kept");
+});
+
+describe("deviceSeenFor: install hints come back when the user agent changes", () => {
+  const iphone17 = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Version/17.5 Mobile/15E148 Safari/604.1";
+  const iphone18 = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_1 like Mac OS X) AppleWebKit/605.1.15 Version/18.1 Mobile/15E148 Safari/604.1";
+  const pixel = "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 Chrome/130.0.0.0 Mobile Safari/537.36";
+
+  it("keeps the markers on the same user agent", () => {
+    assert.deepEqual(deviceSeenFor({ iosInstallHint: true, ua: iphone17 }, iphone17), { iosInstallHint: true, androidInstall: false });
+  });
+
+  it("clears them when the user agent changed, so the hint is offered again", () => {
+    assert.deepEqual(deviceSeenFor({ iosInstallHint: true, ua: iphone17 }, iphone18), unseen);
+    assert.deepEqual(deviceSeenFor({ androidInstall: true, ua: iphone17 }, pixel), unseen);
+    const seen = deviceSeenFor({ iosInstallHint: true, ua: iphone17 }, iphone18);
+    assert.deepEqual(habitSteps({ prefs: prefs(), platform: iosSafari, seen, goodSession: true }), ["study_time", "ios_install"]);
+  });
+
+  it("treats markers saved without a user agent, or nothing saved, as unseen", () => {
+    assert.deepEqual(deviceSeenFor({ iosInstallHint: true, androidInstall: true }, pixel), unseen);
+    assert.deepEqual(deviceSeenFor(null, pixel), unseen);
   });
 });

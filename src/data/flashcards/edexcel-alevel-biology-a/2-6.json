@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-6",
+  "topicCode": "2.6",
+  "topicName": "Protein synthesis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:08.365Z",
+  "cards": [
+    {
+      "id": "16sx8hx",
+      "kind": "concept",
+      "front": "How does the order of bases in a gene affect the function of the protein it codes for?",
+      "back": "The base order sets the amino acid order, which is the **primary structure**. This order folds the chain into a shape, and shape decides function, such as an enzyme's active site.",
+      "hint": "Follow the information from gene to protein, one step at a time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mudrjp",
+      "kind": "concept",
+      "front": "What is the difference between a codon and an anticodon?",
+      "back": "A **codon** is a group of three bases on mRNA that codes for one amino acid or a stop signal. An **anticodon** is three bases on tRNA that pair with a matching codon.",
+      "hint": "Think about which molecule each triplet sits on.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ech9rr",
+      "kind": "process",
+      "front": "What are the main steps of transcription, in order?",
+      "back": "DNA unwinds to expose the template strand. Free RNA nucleotides pair with the template bases. **RNA polymerase** joins them into mRNA. The mRNA leaves the nucleus through a nuclear pore, and the DNA closes up again.",
+      "hint": "Start with what must happen to the DNA before any copying can begin.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kc4fnr",
+      "kind": "mistake",
+      "front": "Why does adenine in the template strand pair with uracil in mRNA, not thymine?",
+      "back": "RNA contains **uracil** in place of thymine, so adenine in the template pairs with uracil in the mRNA.",
+      "hint": "Compare the bases found in DNA and RNA.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lszxhc",
+      "kind": "process",
+      "front": "What are the main steps of translation once mRNA has bound to a ribosome?",
+      "back": "The first tRNA pairs with the start codon AUG. A second tRNA pairs with the next codon. A **peptide bond** forms and the first tRNA leaves. The ribosome moves on one codon at a time until a stop codon releases the polypeptide.",
+      "hint": "Think about what happens at the first codon before the second one is read.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0uuqa8i",
+      "kind": "term",
+      "front": "Which bond joins two adjacent amino acids in a polypeptide?",
+      "back": "A **peptide bond**, the covalent bond between the carboxyl group of one amino acid and the amino group of the next.",
+      "hint": "Think about the chemical groups at the ends of each amino acid.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s1ohxp",
+      "kind": "concept",
+      "front": "What is the role of the ribosome during translation?",
+      "back": "The ribosome holds the mRNA and tRNA together while amino acids are joined. It moves along the mRNA one codon at a time.",
+      "hint": "Consider where the mRNA and tRNA must sit for amino acids to link.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0703evr",
+      "kind": "concept",
+      "front": "How does tRNA make sure amino acids join in the order the mRNA specifies?",
+      "back": "Each **anticodon** pairs with only one codon, so each tRNA brings its specific amino acid only at the correct point in the sequence.",
+      "hint": "Think about how specific the pairing rule is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1oa264e",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that DNA codes for the shape of a protein directly?",
+      "back": "DNA codes for the **order of amino acids**. That order then determines how the chain folds into its shape.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jqpqgz",
+      "kind": "concept",
+      "front": "Why does deleting a single base usually change every amino acid after it?",
+      "back": "The code is read in **threes**, so removing one base shifts every later codon into a new group of three, changing all the codons that follow.",
+      "hint": "Think about how the mRNA is grouped when it is read.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10a9xm6",
+      "kind": "example",
+      "front": "Which amino acid sequence is coded by the template strand 3′-TAC TTT CCC ATT-5′, and where does translation stop?",
+      "back": "Methionine, lysine, glycine. The mRNA is $\\text{5'-AUG AAA GGG UAA-3'}$, so the stop codon $\\text{UAA}$ ends translation.",
+      "hint": "Pair each template base with its RNA partner first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1jw931h",
+      "kind": "example",
+      "front": "What mRNA sequence, written 5′ to 3′, is made from the template strand 3′-TACGGACTT-5′?",
+      "back": "$\\text{5'-AUGCCUGAA-3'}$. Each template triplet pairs to a codon, with uracil replacing thymine.",
+      "hint": "Pair each base first, then check the direction you write the new strand in.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06kqwre",
+      "kind": "concept",
+      "front": "Why is energy from ATP needed during translation?",
+      "back": "ATP provides the energy to attach each amino acid to its tRNA before it can be added to the chain.",
+      "hint": "Look at the step that happens before amino acids are joined.",
+      "sectionId": "s3"
+    }
+  ]
+}

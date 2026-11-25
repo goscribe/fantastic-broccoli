@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-9-2",
+  "topicCode": "3.9.2",
+  "topicName": "Classification of stars",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:11.205Z",
+  "cards": [
+    {
+      "id": "0pf4sc0",
+      "kind": "concept",
+      "front": "What two properties does a Hertzsprung–Russell diagram plot against each other?",
+      "back": "**Luminosity** is plotted against surface temperature. Temperature increases to the left, and the luminosity scale is logarithmic.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "028jthx",
+      "kind": "formula",
+      "front": "Which equation gives a black body's luminosity in terms of its radius and surface temperature?",
+      "back": "Stefan's law: $L=4\\pi r^2\\sigma T^4$, where $r$ is the radius in $\\text{m}$, $T$ the surface temperature in $\\text{K}$, and $\\sigma=5.67\\times10^{-8}\\,\\text{W\\,m}^{-2}\\,\\text{K}^{-4}$ is the **Stefan–Boltzmann constant**.",
+      "hint": "Start from the surface area of a sphere.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02pyckc",
+      "kind": "concept",
+      "front": "How does the peak wavelength of a star's radiation change as its surface temperature rises?",
+      "back": "The peak wavelength gets **shorter**, so a hotter star looks bluer. Wien's law gives $\\lambda_\\mathrm{max}T=2.898\\times10^{-3}\\,\\text{m K}$.",
+      "hint": "Compare an iron bar heated from red glow to white.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "042zxzu",
+      "kind": "example",
+      "front": "A star's radiation peaks at a wavelength of $500\\,\\text{nm}$. What is its surface temperature?",
+      "back": "$T\\approx5.80\\times10^{3}\\,\\text{K}$, from $T=\\frac{2.898\\times10^{-3}\\,\\text{m K}}{5.00\\times10^{-7}\\,\\text{m}}$.",
+      "hint": "Convert the wavelength to metres before using Wien's law.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "14x4sxr",
+      "kind": "term",
+      "front": "What is a black-body radiator?",
+      "back": "An ideal object that **absorbs** all radiation falling on it. Stars approximate to black bodies.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0s8tgtw",
+      "kind": "concept",
+      "front": "Why does a star's spectrum show dark absorption lines?",
+      "back": "Atoms in the cooler **outer atmosphere** absorb photons whose energies match gaps between their energy levels, so those wavelengths are missing from the received light.",
+      "hint": "Trace the light from the hot interior outwards.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13skgeu",
+      "kind": "concept",
+      "front": "Why are the Balmer lines strongest at about $10\\,000\\,\\text{K}$ rather than much hotter or cooler?",
+      "back": "Above this temperature most hydrogen is **ionised**; below it nearly all electrons stay at $n=1$, so too few start at $n=2$.",
+      "hint": "Think about which energy level the Balmer lines start from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bk9dpp",
+      "kind": "mistake",
+      "front": "A student says spectral class tells you what a star is made of. What is wrong with this?",
+      "back": "Spectral class reflects **surface temperature**, not composition. Stars of different classes have broadly similar make-up.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gnsl8o",
+      "kind": "term",
+      "front": "What is the order of spectral classes from the hottest stars to the coolest?",
+      "back": "**O, B, A, F, G, K, M**. The Sun is a yellow G star.",
+      "hint": "Think of the colours running from blue to red.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ib055j",
+      "kind": "example",
+      "front": "A star has twice the Sun's radius and half its surface temperature. How does its luminosity compare with the Sun's?",
+      "back": "It is one **quarter** of the Sun's. Radius factor $2^2=4$, temperature factor $\\left(\\frac{1}{2}\\right)^4=\\frac{1}{16}$, so $4\\times\\frac{1}{16}=\\frac{1}{4}$.",
+      "hint": "Which powers of radius and temperature appear in Stefan's law?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0t7km6c",
+      "kind": "mistake",
+      "front": "A student says doubling a star's surface temperature doubles its luminosity. Why is this wrong?",
+      "back": "Luminosity depends on $T^4$, so doubling $T$ raises the luminosity by $2^4=16$ times, not 2.",
+      "hint": "Check the power of T in Stefan's law.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07oelzy",
+      "kind": "concept",
+      "front": "A giant is cool but very luminous. What does this tell you about its radius?",
+      "back": "It must be **very large**. A cool surface gives a small $T^4$ factor, so a large $r^2$ is needed to produce high luminosity.",
+      "hint": "Use Stefan's law to see which factors can compensate for each other.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p0jouc",
+      "kind": "term",
+      "front": "What is the diagonal band on a Hertzsprung–Russell diagram called?",
+      "back": "The **main sequence**. Stars on it fuse hydrogen to helium in their cores.",
+      "hint": "Most stars lie on this band.",
+      "sectionId": "s5"
+    }
+  ]
+}

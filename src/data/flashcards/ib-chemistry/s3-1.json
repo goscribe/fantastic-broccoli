@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s3-1",
+  "topicCode": "S3.1",
+  "topicName": "The periodic table",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:16.097Z",
+  "cards": [
+    {
+      "id": "0ti4gp0",
+      "kind": "concept",
+      "front": "What determines the order of elements in the periodic table?",
+      "back": "Elements are ordered by increasing **atomic number**, the number of protons in the nucleus. The table is not arranged by atomic mass.",
+      "hint": "Think about what makes each element unique.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jivr48",
+      "kind": "concept",
+      "front": "Why do elements in the same group often react in similar ways?",
+      "back": "Elements in a group often have similar **outer electron arrangements**, so they tend to behave alike chemically.",
+      "hint": "Link the answer to outer electrons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10x4z7u",
+      "kind": "concept",
+      "front": "Why can an element's position in the table help you predict its broad properties?",
+      "back": "Its **position** shows its period and group, which reveal its outer electron pattern and therefore its likely behaviour.",
+      "hint": "Position gives two pieces of information."
+    },
+    {
+      "id": "0xv78s3",
+      "kind": "term",
+      "front": "What is a period in the periodic table?",
+      "back": "A **period** is a horizontal row. Across a period, atomic number increases one element at a time.",
+      "hint": "Think about the direction of the row.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i0cr21",
+      "kind": "term",
+      "front": "What is a group in the periodic table?",
+      "back": "A **group** is a vertical column. Its elements often react similarly because their outer electron arrangements are similar.",
+      "hint": "Think about the direction of the column.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1i1xgxg",
+      "kind": "process",
+      "front": "How should you read the periodic table to learn about an element's behaviour?",
+      "back": "Read across a **row** to follow increasing atomic number. Read down a **column** to find elements with similar chemical behaviour.",
+      "hint": "Rows and columns do different jobs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i69woc",
+      "kind": "term",
+      "front": "What are metals?",
+      "back": "**Metals** are elements that generally conduct electricity and can be shaped without breaking. Most occupy the left and centre of the table.",
+      "hint": "Think about two typical properties.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dyesoc",
+      "kind": "term",
+      "front": "What are metalloids?",
+      "back": "**Metalloids** are elements near the metal–non-metal boundary that show a mixture of properties associated with metals and non-metals. Silicon is one example.",
+      "hint": "They sit near the stepped boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vm3r65",
+      "kind": "mistake",
+      "front": "A student says atomic number counts protons and neutrons together. Why is this wrong?",
+      "back": "**Atomic number** counts only the protons in the nucleus. Neutrons are not included in it.",
+      "hint": "Check what the nucleus contains.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02dg47w",
+      "kind": "mistake",
+      "front": "A student says an element's position guarantees all its typical properties. What is wrong with this?",
+      "back": "Position only **suggests** an element's classification. It does not guarantee every typical property, and boundary elements can be classified differently.",
+      "hint": "Think about how sharp the boundary is.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fli8ls",
+      "kind": "concept",
+      "front": "What ions do group 1 and group 17 elements tend to form, and why?",
+      "back": "Group 1 metals lose one electron to form $1+$ ions. Group 17 non-metals gain one electron to form $1-$ ions, because of their outer electron counts.",
+      "hint": "Compare losing and gaining one electron.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gp3ggv",
+      "kind": "concept",
+      "front": "How does metallic character change across a period and down a group?",
+      "back": "**Metallic character** generally decreases from left to right across a period and generally increases down a group.",
+      "hint": "Think about the two directions separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1nux35g",
+      "kind": "concept",
+      "front": "Why are group 18 elements generally unreactive?",
+      "back": "Group 18 elements are generally unreactive because their **outer shells are full**.",
+      "hint": "Think about the outer electron shell.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sj70ae",
+      "kind": "term",
+      "front": "What is metallic character?",
+      "back": "**Metallic character** describes how strongly an element shows typical metal properties, such as electrical conductivity.",
+      "hint": "Think about how metal-like an element is.",
+      "sectionId": "s4"
+    }
+  ]
+}

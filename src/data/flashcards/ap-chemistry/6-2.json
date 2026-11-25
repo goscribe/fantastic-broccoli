@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Energy diagrams",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:47.395Z",
+  "cards": [
+    {
+      "id": "1qdkl4h",
+      "kind": "concept",
+      "front": "What do the two axes of an energy diagram show?",
+      "back": "The **vertical axis** shows energy, and the **horizontal axis** shows reaction progress. Reaction progress is not elapsed time.",
+      "hint": "Ask yourself whether the horizontal axis has a time scale.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iaa2wo",
+      "kind": "term",
+      "front": "What is the activation energy on an energy diagram?",
+      "back": "The **energy difference** between the reactant level and the peak of the reaction pathway. The peak is the transition state.",
+      "hint": "Measure it vertically, from reactants up to the peak.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08egoka",
+      "kind": "formula",
+      "front": "How do you calculate the reaction enthalpy, $\\Delta H$, from an enthalpy diagram?",
+      "back": "$\\Delta H$ = **product enthalpy minus reactant enthalpy**. Products below reactants give a negative value, so the reaction is exothermic.",
+      "hint": "Subtract the starting level from the ending level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00co6ol",
+      "kind": "term",
+      "front": "What is the transition state?",
+      "back": "The **highest-energy** arrangement along a reaction pathway. It is short-lived and is not an isolable product.",
+      "hint": "It sits at the peak of the curve.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g05uc0",
+      "kind": "mistake",
+      "front": "Does a wider curve on an energy diagram mean a slower reaction?",
+      "back": "No. **Reaction progress** has no time scale, so width does not show speed. Barrier height is what matters for rate.",
+      "hint": "Horizontal distances do not show time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04q9pc4",
+      "kind": "mistake",
+      "front": "Does a high peak mean a reaction is endothermic?",
+      "back": "No. Only the **starting and ending levels** decide whether $\\Delta H$ is positive or negative. The peak sets the activation energy.",
+      "hint": "Compare the reactant and product levels only.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n5krth",
+      "kind": "process",
+      "front": "What are the steps to read both barriers and $\\Delta H$ from an energy diagram?",
+      "back": "Read all three levels. Forward barrier = peak minus reactants. Reverse barrier = peak minus products. $\\Delta H$ = products minus reactants, keeping the sign.",
+      "hint": "Read every level before you subtract.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i2pmvy",
+      "kind": "example",
+      "front": "Reactants are at 40 kJ/mol, the peak at 110 kJ/mol, and products at 10 kJ/mol. What is $\\Delta H$?",
+      "back": "$\\Delta H = 10-40 = -30\\ \\mathrm{kJ\\,mol^{-1}}$. The reaction is **exothermic** because products lie below reactants.",
+      "hint": "Products minus reactants, and keep the negative sign.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jh0job",
+      "kind": "example",
+      "front": "Using the same diagram (reactants 40, peak 110, products 10 kJ/mol), what is the reverse activation energy?",
+      "back": "$110-10 = 100\\ \\mathrm{kJ\\,mol^{-1}}$. It is measured from the **product level** up to the peak.",
+      "hint": "Start from the product level, not the reactant level.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v1jmgm",
+      "kind": "mistake",
+      "front": "Where should the activation energy arrow start and end?",
+      "back": "It should run from the **reactant level** up to the peak. Do not measure it from the bottom of the axis.",
+      "hint": "Think about where the barrier actually begins.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bg9e60",
+      "kind": "concept",
+      "front": "What does a catalyst change on an energy diagram?",
+      "back": "A catalyst provides a **lower-barrier pathway**, so the activation energy falls. The reactant and product energy levels stay the same.",
+      "hint": "Which levels move, and which stay put?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lkcnqe",
+      "kind": "concept",
+      "front": "How does an endothermic reaction look on an enthalpy diagram?",
+      "back": "The **products lie above** the reactants, so $\\Delta H$ is positive.",
+      "hint": "Compare the ending level with the starting level.",
+      "sectionId": "s3"
+    }
+  ]
+}

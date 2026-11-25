@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-7",
+  "topicCode": "8.7",
+  "topicName": "Persistent organic pollutants",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:46.094Z",
+  "cards": [
+    {
+      "id": "0c2cima",
+      "kind": "term",
+      "front": "What is a persistent organic pollutant (POP)?",
+      "back": "A **persistent organic pollutant** is a carbon-based chemical that breaks down very slowly and stays in air, water, soil, and living tissue for years.",
+      "hint": "Think about how long a chemical lasts after it is released.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nts9om",
+      "kind": "concept",
+      "front": "Why do POPs build up inside an animal's body over time?",
+      "back": "POPs are **fat-soluble**, so they dissolve in fat rather than water and are stored in fatty tissue. The animal cannot flush them out easily in urine, so intake can exceed loss.",
+      "hint": "Compare how a fat-soluble chemical and a water-soluble one leave the body.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j1321j",
+      "kind": "concept",
+      "front": "Why do animals at the top of a food chain hold the highest POP concentrations?",
+      "back": "POPs **concentrate** up food chains. Fat stores what each organism absorbs, and a predator eats many contaminated prey over its life, so the load keeps growing.",
+      "hint": "Follow one predator's meals across its lifetime.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13m22c6",
+      "kind": "concept",
+      "front": "Why are POPs so hard for sunlight, microbes, and water to break down?",
+      "back": "Many contain chlorine atoms bonded to carbon by **strong bonds**. Sunlight, microbes, and water have trouble breaking these bonds, so the molecules stay intact for a long time.",
+      "hint": "Look at the bonds in the molecule's structure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16vjy5g",
+      "kind": "process",
+      "front": "What steps let a POP travel from a warm region to a polar region?",
+      "back": "The POP **evaporates** in warm air, is carried by the wind, **condenses** in cold air, and falls to the ground or sea. Repeating this cycle moves it steadily toward the poles.",
+      "hint": "Start where the chemical is released, in a warm place.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ojsnvh",
+      "kind": "term",
+      "front": "What is long-range transport?",
+      "back": "**Long-range transport** is the movement of a pollutant by air, water, or animals to places far from where it was released.",
+      "hint": "Think about how a pollutant reaches remote areas with no local industry.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0k8l0rm",
+      "kind": "concept",
+      "front": "How did DDT harm birds of prey?",
+      "back": "DDT caused **thin eggshells**. The shells cracked under nesting parents, so fewer chicks hatched.",
+      "hint": "Think about what happens to an egg while a parent sits on it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00kquzd",
+      "kind": "concept",
+      "front": "What other harms do POPs cause in animals besides thin eggshells?",
+      "back": "POPs cause **reduced reproduction**, **weakened immune systems**, **abnormal growth and development**, and **interference with hormones**.",
+      "hint": "Think about the body systems that control growth and defence.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1voz84z",
+      "kind": "concept",
+      "front": "What is the main way people are exposed to POPs?",
+      "back": "**Eating contaminated fish, meat, and dairy** is the main route. POPs can also pass from a mother to her infant through **breast milk**.",
+      "hint": "Think about what the body takes in from food.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wt0u91",
+      "kind": "mistake",
+      "front": "What is wrong with thinking 'organic' in POP means grown without synthetic pesticides?",
+      "back": "In this context **organic** means carbon-based. It describes the chemistry of the pollutant, not how food or crops were farmed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kczu9i",
+      "kind": "mistake",
+      "front": "Why is it wrong to think a ban removes a POP from the environment straight away?",
+      "back": "A ban **stops new release** but does not remove what is already out there. The amounts already released persist and keep circulating for years.",
+      "hint": "Think about what was released before the ban took effect.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1fu82ol",
+      "kind": "concept",
+      "front": "Why is preventing POP release a better strategy than cleaning up afterward?",
+      "back": "A released POP **spreads** through air, water, and food webs and lasts for years, so cleanup is slow, costly, and often incomplete.",
+      "hint": "Consider where the chemical goes once it is released.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1x01est",
+      "kind": "concept",
+      "front": "What international agreement bans or restricts many POPs?",
+      "back": "The **Stockholm Convention** bans or restricts many POPs. Countries also replace them with less persistent chemicals and limit burning that creates dioxins.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1afkaq4",
+      "kind": "term",
+      "front": "Which common POP was once used as an insecticide on crops and against mosquitoes?",
+      "back": "**DDT**. Other POP sources include PCBs in electrical equipment, dioxins from burning chlorine-containing materials, and certain flame retardants.",
+      "sectionId": "s1"
+    }
+  ]
+}

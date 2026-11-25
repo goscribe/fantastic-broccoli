@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-5",
+  "topicCode": "5.5",
+  "topicName": "Introduction to integration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:54.859Z",
+  "cards": [
+    {
+      "id": "1mdgymv",
+      "kind": "term",
+      "front": "What is an antiderivative of a function $f(x)$?",
+      "back": "A **function $F$ whose derivative is $f$**. Adding any constant gives another antiderivative, so $f$ has many.",
+      "hint": "Differentiate your candidate and see what you get.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z9ixwo",
+      "kind": "formula",
+      "front": "What is the power rule for integrating $x^n$ when $n\\ne-1$?",
+      "back": "$\\int x^n\\,dx=\\frac{x^{n+1}}{n+1}+C$. **Raise the index by one, then divide by the new index.**",
+      "hint": "Undo the steps of differentiating a power, in reverse order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mmxe00",
+      "kind": "concept",
+      "front": "What does $\\int_a^b f(x)\\,dx$ represent when $f(x)\\ge0$ for $a\\le x\\le b$?",
+      "back": "The **area** between the graph of $y=f(x)$, the $x$-axis and the lines $x=a$ and $x=b$.",
+      "hint": "Think of the region under a speed-time graph.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1clk97v",
+      "kind": "concept",
+      "front": "Why must an indefinite integral include the constant $C$?",
+      "back": "Constants have **zero derivative**, so antiderivatives differ only by a constant. $C$ stands for the whole family.",
+      "hint": "What is the derivative of 7?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rqvv73",
+      "kind": "mistake",
+      "front": "A student writes $\\int 2x\\,dx=x^2$. What is wrong?",
+      "back": "They left out **$+C$**. Without it they give one antiderivative, not the whole family. The correct answer is $x^2+C$.",
+      "hint": "How many antiderivatives does $2x$ have?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09cjc30",
+      "kind": "process",
+      "front": "What are the steps to integrate a polynomial with several terms?",
+      "back": "Rewrite any roots or reciprocals as powers, **integrate each term separately** with the power rule, then combine the terms and add $C$.",
+      "hint": "Take one term at a time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0brvhyn",
+      "kind": "example",
+      "front": "Find $\\int(6x^2-4x+5)\\,dx$.",
+      "back": "$2x^3-2x^2+5x+C$. Each term is integrated separately, and the constant $5$ becomes $5x$.",
+      "hint": "Apply the power rule to each term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tz1pee",
+      "kind": "formula",
+      "front": "What is $\\int \\frac{1}{x}\\,dx$, and why does it need its own result?",
+      "back": "$\\ln|x|+C$ for $x\\ne0$. The power rule would divide by zero when $n=-1$.",
+      "hint": "Look at what happens to the power rule when $n=-1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1d6xjwy",
+      "kind": "process",
+      "front": "How do you find the value of $C$ when a point on the curve is known?",
+      "back": "**Substitute the point's coordinates** into the antiderivative, then solve the resulting equation for $C$.",
+      "hint": "Replace $x$ and $y$ with the given values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pc2ofx",
+      "kind": "example",
+      "front": "A curve has $\\frac{dy}{dx}=3x^2-2$ and passes through $(1,4)$. Find its equation.",
+      "back": "$y=x^3-2x+5$. Integrating gives $x^3-2x+C$, and substituting $(1,4)$ gives $C=5$.",
+      "hint": "Integrate first, then find $C$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dg6jce",
+      "kind": "process",
+      "front": "How do you evaluate a definite integral using an antiderivative $F$?",
+      "back": "Calculate **$F(b)-F(a)$**: evaluate at the upper limit first, then subtract the value at the lower limit. The constant $C$ cancels.",
+      "hint": "Where does the constant of integration go?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "16la8yg",
+      "kind": "example",
+      "front": "Find the area between $y=x^2$, the $x$-axis, $x=1$ and $x=3$.",
+      "back": "$\\frac{26}{3}\\approx8.67$ square units. This is $\\int_1^3 x^2\\,dx=F(3)-F(1)$ with $F(x)=\\frac{x^3}{3}$.",
+      "hint": "Write the area as a definite integral first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0b9opfh",
+      "kind": "mistake",
+      "front": "Why can a definite integral be negative when an area can never be negative?",
+      "back": "Where the graph lies **below the $x$-axis**, the definite integral is negative. The definite integral is signed, but an area is not.",
+      "hint": "What happens to the graph below the axis?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yedcwa",
+      "kind": "term",
+      "front": "What is the integrand in $\\int f(x)\\,dx$?",
+      "back": "The **function $f(x)$** written between the integral sign and $dx$.",
+      "hint": "It is the expression you are integrating.",
+      "sectionId": "s2"
+    }
+  ]
+}

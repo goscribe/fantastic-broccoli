@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "9-2",
+  "topicCode": "9.2",
+  "topicName": "Absolute entropy and entropy change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:37.060Z",
+  "cards": [
+    {
+      "id": "0b4q2s8",
+      "kind": "term",
+      "front": "What is absolute entropy?",
+      "back": "**Absolute entropy** is the entropy a substance has at a specified temperature and pressure. It describes one state, not a difference between two states.",
+      "hint": "Think about one state rather than a change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12huzg3",
+      "kind": "concept",
+      "front": "Why does a gas usually have higher entropy than the same substance as a liquid or solid?",
+      "back": "Gas particles can spread through their container, while solid particles stay near fixed positions. So the gas has more **accessible microstates**, meaning more possible arrangements.",
+      "hint": "Count the ways the particles can be arranged.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lar7wa",
+      "kind": "formula",
+      "front": "How is standard reaction entropy calculated from standard molar entropy values?",
+      "back": "$\\Delta S^\\circ_{\\mathrm{rxn}}=\\sum nS^\\circ(\\text{products})-\\sum nS^\\circ(\\text{reactants})$. Here $n$ is the balanced coefficient and $S^\\circ$ is in $\\mathrm{J\\,mol^{-1}\\,K^{-1}}$. The result is in $\\mathrm{J\\,K^{-1}}$.",
+      "hint": "Products first, then subtract the reactants.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "141rm0h",
+      "kind": "example",
+      "front": "Find $\\Delta S^\\circ_{\\mathrm{rxn}}$ for $2\\mathrm{H_2}+\\mathrm{O_2}\\rightarrow2\\mathrm{H_2O}$ at 298 K, with $S^\\circ$ H$_2$ 130.7, O$_2$ 205.0, H$_2$O 69.9",
+      "back": "**$-326.6\\;\\mathrm{J\\,K^{-1}}$**. Products: $2(69.9)=139.8$. Reactants: $2(130.7)+205.0=466.4$. Then $139.8-466.4=-326.6$.",
+      "hint": "Multiply each value by its coefficient first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i1xjdn",
+      "kind": "term",
+      "front": "What does standard molar entropy, $S^\\circ$, describe, and what are its units?",
+      "back": "It is the entropy of **one mole** of a substance in its standard state at a specified temperature. Its units are $\\mathrm{J\\,mol^{-1}\\,K^{-1}}$.",
+      "hint": "Look for the 'per mole' part.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wttykz",
+      "kind": "mistake",
+      "front": "Is the absolute entropy of every pure substance zero?",
+      "back": "**No.** The zero value applies only to a perfect crystal at absolute zero. Entropy generally rises as temperature rises.",
+      "hint": "Check the conditions the zero applies to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t68z2o",
+      "kind": "concept",
+      "front": "Why does water vapor have higher standard molar entropy than liquid water?",
+      "back": "It is the same substance in a different phase. Vapor particles have more **accessible arrangements** than liquid particles, so the vapor has higher entropy.",
+      "hint": "Compare the phases of one substance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03nu7rv",
+      "kind": "concept",
+      "front": "Among gases under comparable conditions, which tends to have higher molar entropy: simpler or more complex molecules?",
+      "back": "**More complex molecules** tend to have higher molar entropy, because they can store energy in more ways.",
+      "hint": "Think about how many ways a molecule can store energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0nhpoer",
+      "kind": "mistake",
+      "front": "Does a higher standard molar entropy value mean a reaction will happen faster?",
+      "back": "**No.** A higher value indicates more accessible arrangements. It says nothing about how fast a reaction proceeds.",
+      "hint": "Entropy is not the same as reaction rate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xlu21g",
+      "kind": "concept",
+      "front": "What does a positive standard reaction entropy change tell you?",
+      "back": "The products have **greater** total entropy than the reactants. A negative value means the products have less total entropy than the reactants.",
+      "hint": "Compare products with reactants.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i5xbrl",
+      "kind": "process",
+      "front": "What are the steps for calculating $\\Delta S^\\circ_{\\mathrm{rxn}}$ from a balanced equation?",
+      "back": "1) Multiply each $S^\\circ$ by its coefficient. 2) Add these for the products. 3) Add these for the reactants. 4) Subtract the reactant sum from the product sum.",
+      "hint": "Four steps, ending in a subtraction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0o01u72",
+      "kind": "mistake",
+      "front": "If $\\Delta S^\\circ_{\\mathrm{rxn}}$ is negative, does that mean one product has zero absolute entropy?",
+      "back": "**No.** A negative reaction entropy describes the total change between products and reactants. It does not mean any product has zero absolute entropy.",
+      "hint": "A change is not the same as a single value.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0h9uorf",
+      "kind": "concept",
+      "front": "Can the sign of $\\Delta S^\\circ_{\\mathrm{rxn}}$ alone decide whether a reaction is thermodynamically favorable?",
+      "back": "**No.** The sign alone does not establish favorability. Other energy changes and temperature also matter.",
+      "hint": "Entropy is only one part of the picture.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dd09yo",
+      "kind": "term",
+      "front": "What are microstates?",
+      "back": "**Microstates** are distinct ways to arrange particles and distribute energy while the overall state stays the same.",
+      "hint": "Think about arrangements of particles and energy.",
+      "sectionId": "s2"
+    }
+  ]
+}

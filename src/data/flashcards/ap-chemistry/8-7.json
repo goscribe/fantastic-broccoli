@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "8-7",
+  "topicCode": "8.7",
+  "topicName": "pH and pKa",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:13.080Z",
+  "cards": [
+    {
+      "id": "153s7pj",
+      "kind": "concept",
+      "front": "How does pKa relate to acid strength?",
+      "back": "A **lower** pKa means a stronger acid. Because pKa = -log10(Ka), a larger Ka gives a smaller pKa and more dissociation at equilibrium.",
+      "hint": "Think about the negative sign in the logarithm.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a1ijk3",
+      "kind": "concept",
+      "front": "When pH equals pKa, what is true about HA and A^- at equilibrium?",
+      "back": "Their equilibrium concentrations are **equal**. Below pKa, HA predominates; above pKa, A^- predominates.",
+      "hint": "Look at the Ka expression and what [H3O+] does to it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gp6pkf",
+      "kind": "formula",
+      "front": "What links pKa to Ka, and what does a one-unit difference in pKa mean?",
+      "back": "$\\mathrm{p}K_a=-\\log_{10}K_a$. A **one-unit** difference in pKa is a tenfold difference in Ka.",
+      "hint": "Which logarithm form connects pKa to Ka?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ps4dnq",
+      "kind": "term",
+      "front": "What is a conjugate base?",
+      "back": "The **species** left after an acid donates a proton. For HA, the conjugate base is A^-.",
+      "hint": "Think about what remains after a proton leaves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0sfi9z2",
+      "kind": "term",
+      "front": "What is acid dissociation?",
+      "back": "The **transfer of a proton** from an acid to water, producing hydronium and the acid's conjugate base.",
+      "hint": "Water is the proton acceptor here.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1watq1m",
+      "kind": "process",
+      "front": "How do you rank several acids by strength using their pKa values?",
+      "back": "Rank the pKa values from **lowest to highest**. That order runs from strongest to weakest acid. Compare values measured under the same conditions.",
+      "hint": "Lowest pKa comes first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "106vdg6",
+      "kind": "mistake",
+      "front": "A student says an acid with pKa 5 is stronger than one with pKa 3. What is wrong?",
+      "back": "The reasoning is **reversed**. The pKa 3 acid is stronger, because a lower pKa means a larger Ka and more dissociation.",
+      "hint": "Check which direction the negative log pushes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hg0mqh",
+      "kind": "mistake",
+      "front": "Why can't you fairly compare two pKa values measured at different temperatures?",
+      "back": "Equilibrium constants change with **temperature**, so the comparison is only valid when both values come from the same conditions.",
+      "hint": "What property of equilibrium constants depends on conditions?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "181qdxh",
+      "kind": "concept",
+      "front": "Why does the protonated form predominate when pH is below pKa?",
+      "back": "Hydronium concentration is relatively **high**, so the equilibrium favors the protonated form HA.",
+      "hint": "Trace how high [H3O+] affects the Ka expression.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1c07vhc",
+      "kind": "concept",
+      "front": "For a basic group, which form predominates when pH is above the pKa of its protonated form?",
+      "back": "The **unprotonated** form predominates, because the pH is above the pKa of the protonated form.",
+      "hint": "Compare pH with the pKa of the protonated form.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u8yjv3",
+      "kind": "formula",
+      "front": "How do you calculate the hydronium concentration from pH?",
+      "back": "$[\\mathrm{H_3O^+}]=10^{-\\mathrm{pH}}$, in mol L^-1. This is the **inverse** of the pH definition.",
+      "hint": "Undo the logarithm.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kn3ue0",
+      "kind": "example",
+      "front": "An acid has pKa 4 and the solution pH is 5. What is the ratio [A^-]/[HA]?",
+      "back": "**10:1**, so A^- predominates. Ka = 10^-4 divided by [H3O+] = 10^-5 gives a ratio of 10.",
+      "hint": "Use Ka divided by [H3O+].",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qibgl7",
+      "kind": "example",
+      "front": "An acid with pKa 3 is compared with one with pKa 5. How many times larger is the Ka of the stronger acid?",
+      "back": "**100 times** larger, since the pKa values differ by two units and each unit is a tenfold change.",
+      "hint": "Each pKa unit is a tenfold change in Ka.",
+      "sectionId": "s2"
+    }
+  ]
+}

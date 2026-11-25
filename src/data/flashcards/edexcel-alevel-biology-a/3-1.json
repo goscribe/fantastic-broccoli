@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Cell theory",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:24.663Z",
+  "cards": [
+    {
+      "id": "0x6hmkm",
+      "kind": "concept",
+      "front": "What are the three main ideas of cell theory?",
+      "back": "All living organisms are made of one or more **cells**. The cell is the basic unit of structure and function in organisms. New cells arise only from existing cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1m31evd",
+      "kind": "process",
+      "front": "What steps did Pasteur follow in his curved-neck flask experiment?",
+      "back": "He boiled nutrient broth in flasks with long, curved necks. Air could enter, but microorganisms were trapped in the bend and the broth stayed clear. Only when the neck was broken did the broth become cloudy, so the organisms came from existing ones.",
+      "hint": "Think about what could get into the flask and what happened when the neck was broken.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07koubw",
+      "kind": "concept",
+      "front": "What four kinds of evidence support cell theory today?",
+      "back": "Microscopes show cells in all the tissues examined. Cells are seen dividing by **mitosis**. Sterile cell cultures start only from existing cells. Every cell carries DNA, which is copied before division and passed to new cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ait8rn",
+      "kind": "term",
+      "front": "What is a cell?",
+      "back": "A **cell** is the smallest structural unit of an organism that can carry out the processes of life. It is a small unit of living matter enclosed by a membrane.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rjrxzh",
+      "kind": "term",
+      "front": "What is magnification?",
+      "back": "**Magnification** is how many times larger an image is than the real object.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1age97y",
+      "kind": "term",
+      "front": "What is resolution?",
+      "back": "**Resolution** is the smallest distance between two points that can still be seen as separate.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hxipu4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say Hooke saw the living contents of cork cells?",
+      "back": "Hooke saw only the walls of dead plant cells, which looked like small box-like compartments. The word **cell** came from these compartments.",
+      "hint": "Think about which part of the cell Hooke could actually make out through his lens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p4t5qn",
+      "kind": "term",
+      "front": "What is spontaneous generation?",
+      "back": "**Spontaneous generation** is the discredited idea that living organisms can arise from non-living matter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "065ga62",
+      "kind": "concept",
+      "front": "Why did spontaneous generation seem believable for so long?",
+      "back": "People saw maggots on rotting meat and mould on bread, which seemed to fit everyday observation. Careful experiments showed otherwise: fine mesh over meat stopped maggots because flies could not lay eggs on it.",
+      "hint": "Think about what people could observe without controlled tests.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gly6ed",
+      "kind": "concept",
+      "front": "Which scientist proposed in the 1850s that every cell comes from an existing cell?",
+      "back": "**Rudolf Virchow** proposed this idea. It challenged spontaneous generation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ekim72",
+      "kind": "term",
+      "front": "What is mitosis?",
+      "back": "**Mitosis** is nuclear division that normally produces two nuclei with the same chromosome number.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m00sdj",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a virus is made of cells?",
+      "back": "A **virus** is a non-cellular infectious particle. It has no cytoplasm of its own, does not divide, and reproduces only inside host cells.",
+      "hint": "Compare what a virus contains with the definition of a cell.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1tlja1z",
+      "kind": "concept",
+      "front": "How do skeletal muscle fibres and some fungi test cell theory?",
+      "back": "Muscle fibres are long structures with many nuclei sharing one cytoplasm. Some fungal threads have no dividing walls between nuclei. Scientists treat these as limits and refine the theory rather than reject it.",
+      "sectionId": "s5"
+    }
+  ]
+}

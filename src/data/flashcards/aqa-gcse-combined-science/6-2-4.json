@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-2-4",
+  "topicCode": "6.2.4",
+  "topicName": "Energy transfers in circuits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:19.188Z",
+  "cards": [
+    {
+      "id": "0qc4gci",
+      "kind": "term",
+      "front": "What does power measure?",
+      "back": "**Power** is the rate of energy transfer. Its unit is the **watt** ($\\text{W}$), where 1 W means one joule is transferred each second.",
+      "hint": "Think about how much energy moves in each second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lhd2fq",
+      "kind": "formula",
+      "front": "Which equation links power, potential difference and current?",
+      "back": "$P=VI$, where $P$ is power in $\\text{W}$, $V$ is potential difference in $\\text{V}$ and $I$ is current in $\\text{A}$.",
+      "hint": "Power depends on two things flowing through the component.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1699ft8",
+      "kind": "formula",
+      "front": "Which equation gives the energy transferred by an appliance running at constant power?",
+      "back": "$E=Pt$, where $E$ is energy in $\\text{J}$, $P$ is power in $\\text{W}$ and $t$ is time in $\\text{s}$. Convert minutes to seconds first.",
+      "hint": "Compare it with the definition of power.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ggqlpz",
+      "kind": "concept",
+      "front": "What is the difference between a useful transfer and an unwanted transfer?",
+      "back": "A **useful transfer** moves energy into the form needed for the device's purpose. An **unwanted transfer** moves energy into forms that do not serve that purpose, such as current warming wires.",
+      "hint": "Think about what the appliance is meant to produce.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kwq0a7",
+      "kind": "concept",
+      "front": "Why does a larger current at the same potential difference give a higher power?",
+      "back": "More charge flows each second, so more energy is transferred each second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gp9w2f",
+      "kind": "formula",
+      "front": "What does the equation $E=QV$ calculate?",
+      "back": "The energy transferred when charge $Q$ in $\\text{C}$ passes through a potential difference $V$ in $\\text{V}$.",
+      "hint": "Think about energy given to each coulomb of charge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0idld6x",
+      "kind": "example",
+      "front": "An appliance has 12 V across it and 2 A flows for 30 s. How much energy does it transfer?",
+      "back": "$720\\,\\text{J}$. Power is $12\\times2=24\\,\\text{W}$, so $E=24\\times30=720\\,\\text{J}$.",
+      "hint": "Find the power first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bcue9j",
+      "kind": "example",
+      "front": "A 40 W lamp runs for 3 minutes. How much energy does it transfer?",
+      "back": "$7200\\,\\text{J}$. Three minutes is 180 s, so $E=40\\times180=7200\\,\\text{J}$.",
+      "hint": "Check the units of time before multiplying.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12jgl75",
+      "kind": "mistake",
+      "front": "Why is it wrong to call every transfer to thermal energy wasted?",
+      "back": "Thermal transfer is useful when heating is the appliance's purpose. A heater warming a room is a useful transfer, not waste.",
+      "hint": "Think about whether the transfer helps the appliance do its job.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "062pxei",
+      "kind": "process",
+      "front": "What should you do first when trying to make a device more efficient?",
+      "back": "Identify where the unwanted transfers happen, then choose a change that suits the device's purpose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "153a7p0",
+      "kind": "concept",
+      "front": "How does lubricating the moving parts of a motor make it more efficient?",
+      "back": "Lubrication reduces friction, so less energy transfers to unwanted heating and more goes into movement.",
+      "hint": "Think about what happens to energy when parts rub together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09zar4d",
+      "kind": "concept",
+      "front": "Why does thermal insulation help a water heater but not a room heater?",
+      "back": "Insulation keeps energy in the water. A room heater needs its heat to reach the room, so blocking that heat would stop the useful transfer.",
+      "hint": "Think about where the energy must end up for each device.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "168iv27",
+      "kind": "term",
+      "front": "What does efficiency compare?",
+      "back": "**Efficiency** compares useful energy transferred with total energy supplied. It is the proportion of input transferred usefully and does not create extra energy.",
+      "sectionId": "s4"
+    }
+  ]
+}

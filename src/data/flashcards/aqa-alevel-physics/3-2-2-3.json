@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-2-2-3",
+  "topicCode": "3.2.2.3",
+  "topicName": "Energy levels and photon emission",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:28.244Z",
+  "cards": [
+    {
+      "id": "19bwask",
+      "kind": "concept",
+      "front": "Why can an electron bound in an atom only have certain energies?",
+      "back": "It can occupy only fixed **energy levels**, with nothing allowed between them, so its energies are discrete, like steps on a staircase.",
+      "hint": "Compare it with standing on a staircase.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1wmm8ae",
+      "kind": "formula",
+      "front": "What is the energy of a photon, in terms of its frequency $f$?",
+      "back": "$E=hf$, where $h=6.63\\times10^{-34}\\,\\mathrm{J\\,s}$ is the **Planck constant** and $f$ is the frequency in hertz.",
+      "hint": "Check the units of $h$ to see what unit $E$ must have.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wtcmop",
+      "kind": "formula",
+      "front": "When an electron falls between two levels, how is the photon's energy related to those levels?",
+      "back": "The photon energy equals the energy lost, so $hf=E_1-E_2$, where $E_1$ is the higher level and $E_2$ is the lower level.",
+      "hint": "Think about energy lost by the electron during the fall.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07jb343",
+      "kind": "concept",
+      "front": "Why does a hot gas give a line spectrum rather than a continuous spectrum?",
+      "back": "Its atoms have fixed energy levels, so only certain gaps and photon frequencies exist, giving separate **bright lines**. A hot solid emits a continuous range of colours instead.",
+      "hint": "Think about how many gaps exist between an atom's levels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lndq8u",
+      "kind": "term",
+      "front": "What is the **ground state** of an atom?",
+      "back": "The ground state is the **lowest energy level** of an atom, where its electrons are most tightly bound.",
+      "hint": "Compare it with the levels above it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ulgqda",
+      "kind": "term",
+      "front": "What is an **electronvolt**?",
+      "back": "The energy gained by an electron moving through a potential difference of $1\\,\\mathrm{V}$, equal to $1.60\\times10^{-19}\\,\\mathrm{J}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yn76p9",
+      "kind": "term",
+      "front": "What is **excitation** of an atom?",
+      "back": "Excitation is when an electron moves to a higher energy level after the atom takes in energy exactly equal to the gap, and the electron stays bound to the atom.",
+      "hint": "Think about how a collision can transfer energy to an atom.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "074bszh",
+      "kind": "term",
+      "front": "What is the **ionisation energy** of an atom?",
+      "back": "The minimum energy needed to remove an electron completely from the ground state; for hydrogen it is $13.6\\,\\mathrm{eV}$.",
+      "hint": "Compare it with the energy needed for excitation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h4wde1",
+      "kind": "mistake",
+      "front": "A student says an electron can rest between two energy levels after a small energy input. What is wrong with this?",
+      "back": "Electrons cannot rest between levels. An atom takes up energy for a jump only if the amount exactly matches the gap to a higher level.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mt7o3f",
+      "kind": "concept",
+      "front": "When does an atom absorb a photon?",
+      "back": "Only when the photon's energy exactly equals the gap between two levels of the atom.",
+      "hint": "Compare this with the rule for excitation by collision.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1e5komm",
+      "kind": "process",
+      "front": "What steps turn an energy gap in $\\mathrm{eV}$ into a wavelength?",
+      "back": "1) Subtract the lower level from the higher level. 2) Convert eV to J using $1\\,\\mathrm{eV}=1.60\\times10^{-19}\\,\\mathrm{J}$. 3) Find $f=\\frac{E}{h}$. 4) Find $\\lambda=\\frac{c}{f}$.",
+      "hint": "Start with the two energy levels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0sdasna",
+      "kind": "mistake",
+      "front": "A student uses 1.89 eV directly in $f=\\frac{E}{h}$ without converting. What is wrong?",
+      "back": "Planck's constant is in $\\mathrm{J\\,s}$, so energy must be in joules. Multiply by $1.60\\times10^{-19}$ first, giving $3.02\\times10^{-19}\\,\\mathrm{J}$.",
+      "hint": "Check the units of $h$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1miteuv",
+      "kind": "example",
+      "front": "An electron falls from the $-0.85\\,\\mathrm{eV}$ level to the $-3.40\\,\\mathrm{eV}$ level. What is the frequency of the photon emitted?",
+      "back": "$f\\approx6.15\\times10^{14}\\,\\mathrm{Hz}$, from a gap of $2.55\\,\\mathrm{eV}=4.08\\times10^{-19}\\,\\mathrm{J}$ and $f=\\frac{E}{h}$.",
+      "hint": "Find the energy gap first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "153esvx",
+      "kind": "example",
+      "front": "An electron in hydrogen falls from $-1.51\\,\\mathrm{eV}$ to $-3.40\\,\\mathrm{eV}$. What is the wavelength of the photon emitted?",
+      "back": "$\\lambda\\approx6.58\\times10^{-7}\\,\\mathrm{m}$ (658 nm, red light), from a $1.89\\,\\mathrm{eV}$ gap giving $f=4.56\\times10^{14}\\,\\mathrm{Hz}$, then $\\lambda=\\frac{c}{f}$.",
+      "sectionId": "s4"
+    }
+  ]
+}

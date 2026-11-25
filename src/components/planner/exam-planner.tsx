@@ -1,11 +1,15 @@
 "use client";
 
+import { Button, buttonClass } from "@/components/ui/button";
+import { PageShell } from "@/components/ui/page-header";
 import "@/lib/i18n/exam-planner";
+import "@/lib/i18n/exam-import";
 import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { CalendarClock, ChevronLeft, ChevronRight, Clock, Pencil, Plus, Trash2 } from "lucide-react";
+import { Mascot } from "@/components/rewards/mascot";
+import { CalendarClock, ChevronLeft, ChevronRight, Clock, Pencil, Plus, Trash2, X } from "lucide-react";
 import { accentForId } from "@/lib/accent-palette";
 import {
   addDays,
@@ -36,6 +40,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { ExamSetup, type SetupMode } from "@/components/planner/exam-setup";
 import { PLAN_KEY, PlanTaskCard, useStartTask } from "@/components/planner/plan-task";
 import { WeekTimetable } from "@/components/planner/week-timetable";
+import { ExamImportSheet, IMPORT_STATUS_KEY, type ImportOpen } from "@/components/planner/exam-import";
+import { ackExamMoved, fetchExamImportStatus, syncCalendarExams, type CalendarSyncResult, type ExamImportStatus } from "@/lib/api/exam-import";
+import { sourceLabelKey, syncNote, timeLabel } from "@/lib/exam-import-view";
+import { track } from "@/lib/funnel";
 
 type Tab = "today" | "plan" | "exams" | "timetable";
 const TABS: Tab[] = ["today", "plan", "exams", "timetable"];
@@ -46,7 +54,8 @@ export function ExamPlanner() {
   const router = useRouter();
   const params = useSearchParams();
   const [tab, setTab] = useState<Tab>(() => {
-    if (params.get("calendar")) return "timetable";
+    // Back from Google (?calendar=…) or "Connect Google Calendar" on home (?connect=1): the timetable, where connecting lives.
+    if (params.get("calendar") || params.get("connect")) return "timetable";
     const p = params.get("tab") as Tab | null;
     return p && TABS.includes(p) ? p : "today";
   });
@@ -68,26 +77,72 @@ export function ExamPlanner() {
       });
   }, [startParam, router, t]);
 
+  // Exam import. A server without it (an older deploy) fails this query, and every import entry stays hidden.
+  const qc = useQueryClient();
+  const importStatus = useQuery({ queryKey: IMPORT_STATUS_KEY, queryFn: fetchExamImportStatus, retry: false, staleTime: 60_000 });
+  const canImport = importStatus.isSuccess;
+  const [importing, setImporting] = useState<ImportOpen | null>(null);
+  const [synced, setSynced] = useState<CalendarSyncResult | null>(null);
+  // Opening the planner re-reads a connected calendar (the server does it at most every few hours;
+  // right after connecting, at once): clear tests are added, and the note below says so.
+  const justConnected = params.get("calendar") === "connected";
+  const calendarReady = !!importStatus.data?.connected && !importStatus.data.needsReconnect;
+  const syncedOnce = useRef(false);
+  useEffect(() => {
+    if (!calendarReady || syncedOnce.current) return;
+    syncedOnce.current = true;
+    syncCalendarExams(justConnected)
+      .then((r) => {
+        if (r.skipped || !r.connected) return;
+        if (r.needsReconnect) return void qc.invalidateQueries({ queryKey: IMPORT_STATUS_KEY });
+        if (r.added.length) track("planner.calendar_import_added", { count: r.added.length, source: "google" });
+        if (r.added.length || r.moved.length) void qc.invalidateQueries({ queryKey: PLAN_KEY });
+        if (r.added.length || r.moved.length || r.suggested.length) setSynced(r);
+      })
+      .catch(() => {
+        /* a failed background read changes nothing */
+      });
+  }, [calendarReady, justConnected, qc]);
+  const note = synced ? syncNote(synced, locale, t) : null;
+  const openImport = () => setImporting({ view: "entry" });
+
   const hasExams = (data?.exams.some((e) => e.daysLeft >= 0) ?? false);
   const title =
     tab === "today" && data ? dayLabel(data.today, locale, { weekday: "long", day: "numeric", month: "long" }) : t(`ep.tab.${tab}`);
 
   return (
-    <div className="mx-auto w-full max-w-[1080px] px-4 pb-16 pt-5 sm:px-6 sm:pt-6">
+    <PageShell as="div" max="max-w-[1080px]">
       <div className="mb-4 flex items-end justify-between gap-3">
-        <div className="min-w-0">
-          <div className="text-[12px] font-semibold text-faint">{t("ep.title")}</div>
-          <h1 className="truncate text-[22px] font-bold leading-tight tracking-tight sm:text-[26px]">{title}</h1>
+        <div className="flex min-w-0 items-center gap-3.5">
+          <Mascot pose="pencil" className="cat-peek h-[60px] shrink-0 self-end sm:h-[68px]" />
+          <div className="min-w-0">
+            <div className="text-[13px] font-bold text-muted-foreground">{t("ep.title")}</div>
+            <h1 className="page-h1 text-balance [overflow-wrap:anywhere]">{title}</h1>
+          </div>
         </div>
         {hasExams && tab !== "timetable" && (
-          <button
-            type="button"
-            onClick={() => setSetup({ kind: "new" })}
-            className="inline-flex h-10 shrink-0 items-center gap-1.5 rounded-xl bg-accent-soft px-3 text-[13.5px] font-semibold text-accent-dim hover:brightness-95"
-          >
-            <Plus className="size-4" />
-            <span className="hidden sm:inline">{t("ep.exams.add")}</span>
-          </button>
+          <div className="flex shrink-0 items-center gap-2">
+            {canImport && (
+              <button
+                type="button"
+                onClick={openImport}
+                // On a phone the long date title needs the row: the import is on the Exams tab and in "Add an exam".
+                className={cn("h-10 items-center rounded-xl border border-border bg-card px-3 text-[13.5px] font-semibold text-foreground hover:border-border-strong", tab === "exams" ? "inline-flex" : "hidden sm:inline-flex")}
+              >
+                <span className="sm:hidden">{t("ei.openShort")}</span>
+                <span className="hidden sm:inline">{t("ei.open")}</span>
+              </button>
+            )}
+            <button
+              type="button"
+              aria-label={t("ep.exams.add")}
+              onClick={() => setSetup({ kind: "new" })}
+              className="inline-flex h-10 items-center gap-1.5 rounded-xl border border-border bg-card px-3 text-[13.5px] font-semibold text-foreground hover:border-border-strong"
+            >
+              <Plus className="size-4" />
+              <span className="hidden sm:inline">{t("ep.exams.add")}</span>
+            </button>
+          </div>
         )}
       </div>
 
@@ -109,6 +164,30 @@ export function ExamPlanner() {
         ))}
       </div>
 
+      {note && synced && (
+        <div role="status" className="mb-4 flex items-center gap-2 rounded-xl border border-border bg-card py-2 pl-3.5 pr-1.5">
+          <span className="min-w-0 flex-1 text-small font-semibold [overflow-wrap:anywhere]">{note.text}</span>
+          {note.action && (
+            <Button
+              type="button"
+              variant="secondary"
+              size="sm"
+              className="shrink-0"
+              onClick={() => {
+                track("planner.calendar_import_opened", { source: "google" });
+                setImporting({ view: "summary", result: synced });
+                setSynced(null);
+              }}
+            >
+              {t(note.action === "review" ? "ei.banner.review" : "ei.banner.check")}
+            </Button>
+          )}
+          <button type="button" aria-label={t("ei.banner.dismiss")} onClick={() => setSynced(null)} className="grid size-9 shrink-0 place-items-center rounded-lg text-faint hover:bg-muted">
+            <X className="size-4" />
+          </button>
+        </div>
+      )}
+
       {tab === "timetable" ? (
         <WeekTimetable />
       ) : isLoading || !data ? (
@@ -118,13 +197,20 @@ export function ExamPlanner() {
           ))}
         </div>
       ) : !data.exams.length ? (
-        <EmptyPlan onAdd={() => setSetup({ kind: "new", withTime: true })} />
+        <EmptyPlan onAdd={() => setSetup({ kind: "new", withTime: true })} onImport={canImport ? openImport : undefined} />
       ) : tab === "today" ? (
         <TodayView data={data} starter={starter} onOpenExams={() => setTab("exams")} />
       ) : tab === "plan" ? (
         <PlanView today={data.today} starter={starter} />
       ) : (
-        <ExamsView data={data} onEdit={(exam) => setSetup({ kind: "edit", exam })} onTime={() => setSetup({ kind: "time" })} />
+        <ExamsView
+          data={data}
+          onEdit={(exam) => setSetup({ kind: "edit", exam })}
+          onTime={() => setSetup({ kind: "time" })}
+          importStatus={importStatus.data}
+          onImport={openImport}
+          onAttach={() => setImporting({ view: "attach" })}
+        />
       )}
 
       {setup && data && (
@@ -134,23 +220,47 @@ export function ExamPlanner() {
           weekdayMinutes={data.weekdayMinutes}
           firstExam={!data.exams.length}
           onClose={() => setSetup(null)}
+          onImport={
+            canImport
+              ? () => {
+                  setSetup(null);
+                  openImport();
+                }
+              : undefined
+          }
         />
       )}
-    </div>
+      {importing && importStatus.data && (
+        <ExamImportSheet
+          open={importing}
+          status={importStatus.data}
+          onClose={() => setImporting(null)}
+          onAddByHand={() => {
+            setImporting(null);
+            setSetup({ kind: "new", withTime: !data?.exams.length });
+          }}
+        />
+      )}
+    </PageShell>
   );
 }
 
-function EmptyPlan({ onAdd }: { onAdd: () => void }) {
+function EmptyPlan({ onAdd, onImport }: { onAdd: () => void; onImport?: () => void }) {
   const { t } = useI18n();
   return (
-    <div className="flex flex-col items-center rounded-3xl border border-border px-6 py-10 text-center sm:py-14">
-      <Image src="/design/cat2-book.png" alt="" width={120} height={120} unoptimized className="cat-bob h-28 w-auto" />
+    <div className="flex flex-col items-center px-6 py-10 text-center sm:py-14">
+      <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob h-28 w-auto" />
       <h2 className="mt-4 text-[20px] font-bold tracking-tight">{t("ep.empty.title")}</h2>
       <p className="mt-2 max-w-[460px] text-[14px] leading-relaxed text-muted-foreground">{t("ep.empty.body")}</p>
-      <button type="button" onClick={onAdd} className="mt-6 inline-flex h-11 items-center gap-2 rounded-xl bg-accent px-5 text-[14.5px] font-semibold text-white hover:bg-accent-dim">
+      <button type="button" onClick={onAdd} className={buttonClass({ className: "mt-6 gap-2" })}>
         <Plus className="size-4" />
         {t("ep.empty.cta")}
       </button>
+      {onImport && (
+        <Button type="button" variant="secondary" onClick={onImport} className="mt-3">
+          {t("ei.open")}
+        </Button>
+      )}
     </div>
   );
 }
@@ -170,13 +280,13 @@ function TodayView({ data, starter, onOpenExams }: { data: PlanToday; starter: R
     : allDone
       ? t("ep.today.allDone")
       : t("ep.today.cat");
-  const cat = rest ? "cat2-sleep" : allDone ? "cat2-cheer" : "cat2-book";
+  const cat = rest ? "cat3-sleep" : allDone ? "cat3-cheer" : "cat3-book";
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
       <div className="flex min-w-0 flex-col gap-3">
         <div className="flex items-end gap-3">
-          <Image src={`/design/${cat}.png`} alt="" width={72} height={72} unoptimized className={cn("h-16 w-auto shrink-0", allDone ? "cat-cheer" : "cat-bob")} />
+          <Image src={`/design/${cat}.webp`} alt="" width={72} height={72} unoptimized className={cn("h-16 w-auto shrink-0", allDone ? "cat-cheer" : "cat-bob")} />
           <div className="relative mb-2 min-w-0 flex-1 rounded-2xl rounded-bl-md bg-accent-soft/70 px-4 py-3">
             {!rest && (
               <div className="text-[12px] font-semibold text-accent-dim">
@@ -239,7 +349,7 @@ function CoverageBar({ exam }: { exam: ExamSummary }) {
 function CountdownRow({ exam }: { exam: ExamSummary }) {
   const { t, locale } = useI18n();
   return (
-    <div className="flex items-center gap-3.5 rounded-2xl border border-border p-3.5">
+    <div className="life-card flex items-center gap-3.5 p-3.5">
       <Countdown days={exam.daysLeft} />
       <div className="min-w-0 flex-1">
         <div className="truncate text-[14px] font-semibold">{exam.title}</div>
@@ -401,21 +511,43 @@ function DayBlock({
   );
 }
 
-function ExamsView({ data, onEdit, onTime }: { data: PlanToday; onEdit: (e: ExamSummary) => void; onTime: () => void }) {
+function ExamsView({
+  data,
+  onEdit,
+  onTime,
+  importStatus,
+  onImport,
+  onAttach,
+}: {
+  data: PlanToday;
+  onEdit: (e: ExamSummary) => void;
+  onTime: () => void;
+  /** Undefined on a server without the exam import: nothing about it is shown. */
+  importStatus?: ExamImportStatus;
+  onImport: () => void;
+  onAttach: () => void;
+}) {
   const { t, locale } = useI18n();
   const qc = useQueryClient();
   const upcoming = data.exams.filter((e) => e.daysLeft >= 0);
   const past = data.exams.filter((e) => e.daysLeft < 0);
   const names = weekdayNames(locale, "narrow");
   const remove = async (e: ExamSummary) => {
-    if (!window.confirm(t("ep.exams.deleteConfirm"))) return;
+    if (!window.confirm(t(e.source ? "ei.exam.removeConfirm" : "ep.exams.deleteConfirm"))) return;
     try {
       await deleteExam(e.id);
+      if (e.source) track("planner.calendar_exam_removed", { source: e.source });
       await qc.invalidateQueries({ queryKey: PLAN_KEY });
     } catch (err) {
       toastError(err, t("ep.err.save"));
     }
   };
+
+  const ackMoved = async (e: ExamSummary) => {
+    await ackExamMoved(e.id).catch(() => {});
+    await qc.invalidateQueries({ queryKey: PLAN_KEY });
+  };
+  const imported = data.exams.filter((e) => e.source).length;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
@@ -432,7 +564,9 @@ function ExamsView({ data, onEdit, onTime }: { data: PlanToday; onEdit: (e: Exam
                   <div className="truncate text-[17px] font-bold tracking-tight">{e.title}</div>
                   <div className="truncate text-[12.5px] text-faint">
                     {e.subject} · {t(`ep.setup.kind.${e.kind}`)} · {dayLabel(e.date, locale, { weekday: "short", day: "numeric", month: "short" })}
+                    {e.time ? ` · ${timeLabel(e.time, t)}` : ""}
                   </div>
+                  {e.source && <div className="mt-0.5 text-caption font-semibold text-faint">{t(sourceLabelKey(e.source))}</div>}
                   <div className="mt-2 flex gap-1">
                     <button type="button" onClick={() => onEdit(e)} className="inline-flex h-8 items-center gap-1.5 rounded-lg px-2 text-[12.5px] font-semibold text-muted-foreground hover:bg-muted">
                       <Pencil className="size-3.5" /> {t("ep.exams.edit")}
@@ -454,8 +588,16 @@ function ExamsView({ data, onEdit, onTime }: { data: PlanToday; onEdit: (e: Exam
                   <span className="inline-flex items-center gap-1"><span className="size-2 rounded-full" style={{ background: `${color}55` }} />{t("ep.exams.legendCovered")}</span>
                 </div>
               </div>
+              {e.movedFrom && (
+                <div className="mt-3 flex items-center justify-between gap-3 rounded-xl bg-muted px-3 py-2 text-small text-foreground">
+                  <span>{fill(t("ei.exam.moved"), { day: dayLabel(e.date, locale, { weekday: "short", day: "numeric", month: "short" }) })}</span>
+                  <button type="button" onClick={() => void ackMoved(e)} className="shrink-0 font-semibold underline">
+                    {t("ei.exam.movedOk")}
+                  </button>
+                </div>
+              )}
               {e.unplanned > 0 && (
-                <div className="mt-3 flex flex-col gap-2 rounded-xl bg-[#fff8ec] px-3 py-2.5 text-[12.5px] text-[#8a4a12] sm:flex-row sm:items-center sm:justify-between">
+                <div className="mt-3 flex flex-col gap-2 rounded-xl bg-muted px-3 py-2.5 text-[13px] text-foreground sm:flex-row sm:items-center sm:justify-between">
                   <span>{fill(t("ep.exams.unplanned"), { n: e.unplanned })}</span>
                   <button type="button" onClick={onTime} className="shrink-0 self-start font-semibold underline sm:self-auto">{t("ep.exams.changeTime")}</button>
                 </div>
@@ -495,6 +637,24 @@ function ExamsView({ data, onEdit, onTime }: { data: PlanToday; onEdit: (e: Exam
           </div>
           <div className="mt-2.5 text-[12.5px] text-muted-foreground">{fill(t("ep.time.perWeek"), { h: fmtDuration(weeklyMinutes(data.weekdayMinutes), t) })}</div>
         </div>
+        {importStatus && (
+          <div className="rounded-2xl border border-border p-4">
+            <h2 className="text-[15px] font-semibold">{t("ei.aside.heading")}</h2>
+            <p className="mt-1 text-small text-muted-foreground">
+              {imported === 0 ? t("ei.aside.none") : imported === 1 ? t("ei.aside.countOne") : fill(t("ei.aside.count"), { n: imported })}
+            </p>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {importStatus.connected && !importStatus.needsReconnect && (
+                <Button type="button" variant="secondary" size="sm" onClick={onAttach}>
+                  {t("ei.attach.open")}
+                </Button>
+              )}
+              <Button type="button" variant="secondary" size="sm" onClick={onImport}>
+                {t("ei.open")}
+              </Button>
+            </div>
+          </div>
+        )}
       </aside>
     </div>
   );

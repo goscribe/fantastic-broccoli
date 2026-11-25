@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-4",
+  "topicCode": "3.1.4",
+  "topicName": "Energetics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:03.583Z",
+  "cards": [
+    {
+      "id": "06vgxop",
+      "kind": "term",
+      "front": "What is the enthalpy change, $\\Delta H$, of a reaction?",
+      "back": "The **enthalpy change** is the heat transferred by a reaction at constant pressure, in $\\mathrm{kJ\\,mol^{-1}}$. It equals $H_\\mathrm{products}-H_\\mathrm{reactants}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0024jrs",
+      "kind": "concept",
+      "front": "Why is $\\Delta H$ negative for an exothermic reaction?",
+      "back": "The products hold **less enthalpy** than the reactants, so $\\Delta H=H_\\mathrm{products}-H_\\mathrm{reactants}$ is negative. The sign describes the chemicals, not the surroundings.",
+      "hint": "Compare the enthalpy of the products with that of the reactants.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xagii4",
+      "kind": "concept",
+      "front": "What does Hess's law say about different routes between the same start and finish?",
+      "back": "**Hess's law**: the total enthalpy change between identical initial and final states is the same, whatever pathway the reaction takes.",
+      "hint": "Compare it with climbing a hill by different paths.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02z42tx",
+      "kind": "process",
+      "front": "How do you estimate $\\Delta H$ for a gaseous reaction from mean bond enthalpies?",
+      "back": "Add the energy of all bonds **broken**, add the energy of all bonds **made**, then calculate $\\Delta H=\\sum(\\text{broken})-\\sum(\\text{made})$.",
+      "hint": "Start by listing which bonds are broken and which are made.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16qw3n3",
+      "kind": "formula",
+      "front": "Which equation gives the heat transferred to water in a reaction, and what does each symbol mean?",
+      "back": "$q=mc\\Delta T$: $q$ is heat in $\\text{J}$, $m$ is the mass of water in $\\text{g}$, $c$ is $4.18\\,\\text{J\\,K}^{-1}\\text{g}^{-1}$, and $\\Delta T$ is the temperature change in $\\text{K}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fua7bk",
+      "kind": "process",
+      "front": "What steps find $\\Delta H$ per mole from a temperature rise in water?",
+      "back": "1) Calculate $q=mc\\Delta T$ in J. 2) Convert $q$ to kJ. 3) Divide by the moles of reactant used. 4) Make the answer negative if the temperature rose.",
+      "hint": "Start with the heat transferred to the water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hdvteh",
+      "kind": "example",
+      "front": "A reaction in 50.0 g of water raises its temperature by 6.00 K, using 0.0200 mol of one reactant. What is $\\Delta H$ per mole of that reactant?",
+      "back": "$\\Delta H=-62.7\\,\\mathrm{kJ\\,mol^{-1}}$. Here $q=50.0\\times4.18\\times6.00=1254\\,\\text{J}=1.254\\,\\text{kJ}$, then $1.254/0.0200=62.7$, and the sign is negative.",
+      "hint": "Find $q$ first, then convert the units.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ut2o2d",
+      "kind": "example",
+      "front": "Estimate $\\Delta H$ for $\\mathrm{CH_4(g)+2O_2(g)\\rightarrow CO_2(g)+2H_2O(g)}$ from bond enthalpies: C–H 413, O=O 498, C=O 805, O–H 464.",
+      "back": "About $-818\\,\\mathrm{kJ\\,mol^{-1}}$. Bonds broken total $2648\\,\\text{kJ}$ and bonds made total $3466\\,\\text{kJ}$, so $2648-3466=-818$.",
+      "hint": "Count how many of each bond type appear on both sides.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n5dpup",
+      "kind": "formula",
+      "front": "Which equation gives $\\Delta H$ from standard enthalpies of formation?",
+      "back": "$\\Delta H=\\sum\\Delta_\\mathrm{f}H^{\\ominus}(\\text{products})-\\sum\\Delta_\\mathrm{f}H^{\\ominus}(\\text{reactants})$, with each value multiplied by its moles. Elements in standard states have $\\Delta_\\mathrm{f}H^{\\ominus}=0$.",
+      "hint": "Think about the route that goes through the elements.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1igi8pj",
+      "kind": "formula",
+      "front": "Which equation gives $\\Delta H$ from standard enthalpies of combustion?",
+      "back": "$\\Delta H=\\sum\\Delta_\\mathrm{c}H^{\\ominus}(\\text{reactants})-\\sum\\Delta_\\mathrm{c}H^{\\ominus}(\\text{products})$, so the reactants are summed first and the products subtracted.",
+      "hint": "Compare it with the formation equation: which side is subtracted this time?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08izeqq",
+      "kind": "mistake",
+      "front": "What common error is made when using formation data, and how do you avoid it?",
+      "back": "Forgetting the coefficients. Multiply each $\\Delta_\\mathrm{f}H^{\\ominus}$ value by its number of moles in the balanced equation before adding the totals.",
+      "hint": "Check the balanced equation before substituting any values.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0ptfvrp",
+      "kind": "mistake",
+      "front": "Why is a bond-enthalpy estimate of $\\Delta H$ only approximate?",
+      "back": "Mean bond enthalpies are averages taken over many compounds, so the bond values may not match the exact bonds in the reaction. The result can differ from a measured value.",
+      "hint": "Think about where the bond enthalpy values come from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jcex3i",
+      "kind": "concept",
+      "front": "On an enthalpy profile, how is the activation energy shown?",
+      "back": "$E_\\mathrm{a}$ is the vertical distance from the **reactants** up to the top of the hump. $\\Delta H$ is the vertical difference between reactants and products.",
+      "hint": "Look at the hump, not just the end levels.",
+      "sectionId": "s2"
+    }
+  ]
+}

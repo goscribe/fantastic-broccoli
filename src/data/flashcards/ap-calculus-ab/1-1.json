@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Change at an instant",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:26.884Z",
+  "cards": [
+    {
+      "id": "09xq4vp",
+      "kind": "term",
+      "front": "What is the instantaneous rate of change of a function at one input?",
+      "back": "The **value** that average rates over shrinking intervals near that input approach, when such a value exists. On a smooth graph, it is the slope of the tangent line at that point.",
+      "hint": "Think about average rates over shorter and shorter intervals.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0f7ommf",
+      "kind": "formula",
+      "front": "What is the average rate of change of $f$ from $a$ to $b$, and what does it look like on a graph?",
+      "back": "$\\frac{f(b)-f(a)}{b-a}$. It is the **slope of the secant line** through the two corresponding points on the graph.",
+      "hint": "Output change divided by input change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oybq7s",
+      "kind": "concept",
+      "front": "Why can an average rate over an interval differ from the rate at every moment in that interval?",
+      "back": "An average describes the **whole interval**, not each instant. A function can speed up, slow down, or stop within it, so its rate at one moment may differ from the average.",
+      "hint": "Consider a car trip of 100 miles in two hours.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17oufxr",
+      "kind": "term",
+      "front": "What is a function?",
+      "back": "A **rule** that assigns exactly one output to each input in its domain.",
+      "hint": "Each input gets one output.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13ey31w",
+      "kind": "term",
+      "front": "What is a rate of change?",
+      "back": "A **comparison** of a change in output with the input change that produced it. Its units are output units per input unit.",
+      "hint": "For position in meters and time in seconds, the units are meters per second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15yvf4f",
+      "kind": "term",
+      "front": "What is a secant line?",
+      "back": "A **line** that passes through two points on a graph. Its slope gives the average rate of change between those inputs.",
+      "hint": "Two points, not one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p2yfuo",
+      "kind": "term",
+      "front": "What is a tangent line?",
+      "back": "A line that shows a smooth graph's **direction at a single point**. Its slope is the instantaneous rate of change there.",
+      "hint": "It touches the graph at one point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pd2jnf",
+      "kind": "process",
+      "front": "How can you estimate the instantaneous velocity at a chosen time from position values?",
+      "back": "1) Compute average velocities over intervals starting at that time. 2) Use progressively **shorter intervals**. 3) If the values approach one number, that number estimates the instantaneous velocity.",
+      "hint": "Shrink the interval step by step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "149eqco",
+      "kind": "example",
+      "front": "For $x(t)=t^2$ (meters, seconds), what is the average velocity from 2 to 4 seconds?",
+      "back": "**6 m/s**, since $\\frac{x(4)-x(2)}{4-2}=\\frac{16-4}{2}=6$.",
+      "hint": "Use x(4) and x(2) in the average rate formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17zewzt",
+      "kind": "example",
+      "front": "For $x(t)=t^2$ (meters, seconds), what is the instantaneous velocity at 2 seconds?",
+      "back": "**4 m/s**. Average velocities over 2 to 2.1 and 2 to 2.01 seconds are 4.1 and 4.01 m/s, approaching 4.",
+      "hint": "Shorten the interval starting at t = 2.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jvpdmi",
+      "kind": "example",
+      "front": "For $x(t)=t^2$ (meters, seconds), what is the average velocity from 1 to 3 seconds?",
+      "back": "**4 m/s**, since $x(1)=1$, $x(3)=9$, and $\\frac{9-1}{3-1}=4$.",
+      "hint": "Find x(1) and x(3) first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mqn4qj",
+      "kind": "mistake",
+      "front": "A student finds the rate of change by taking the output change alone. What is wrong?",
+      "back": "A rate must **divide by the input change**. The output change alone does not show how fast the output changes per input unit.",
+      "hint": "What is the second quantity in the formula?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pwys0m",
+      "kind": "mistake",
+      "front": "Does every function have an instantaneous rate of change at every point?",
+      "back": "No. At a **sharp corner**, the graph approaches the point with different slopes from each side, so the instantaneous rate does not exist there.",
+      "hint": "Think about a graph with a pointed corner.",
+      "sectionId": "s3"
+    }
+  ]
+}

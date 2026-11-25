@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { usePageViewTracking } from "@/lib/use-page-view-tracking";
 import { Sidebar } from "@/components/layout/sidebar";
@@ -15,13 +15,22 @@ import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { NewShell } from "@/components/layout/new-shell";
 import { useNewUi } from "@/lib/new-ui";
 import { useAccentTheme } from "@/lib/rewards";
+import { prefetchHomeSummary } from "@/lib/api/home";
 import "@/app/design/design.css";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const newUi = useNewUi();
+  // Home's one request goes out with the session check, not after it: the
+  // action is ready when the page mounts (declared before useAuthUser so it
+  // is sent first).
+  useEffect(() => {
+    if (pathname === "/" && newUi) prefetchHomeSummary();
+    // Only the first page of the visit; later visits use the page's own query.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const { user, loading } = useAuthUser();
   usePageViewTracking(user !== null);
-  const newUi = useNewUi();
   const isPublic = isPublicPath(pathname) || pathname.startsWith("/admin");
   useAccentTheme(!isPublic && !loading && user !== null);
   const isSession = /^\/workspace\/[^/]+\/session\//.test(pathname);
@@ -37,7 +46,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   if (isSession && newUi) {
     return (
-      <div className="design-root flex h-dvh flex-col overflow-hidden bg-white text-foreground">
+      <div className="design-root app-brand flex h-dvh flex-col overflow-hidden bg-white text-foreground">
         {children}
         {!BILLING_PAUSED && <SubscribeWall />}
         <ConversionTracker />

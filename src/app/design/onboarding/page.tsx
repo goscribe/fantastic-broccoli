@@ -23,7 +23,7 @@ export default async function OnboardingPreview({ searchParams }: { searchParams
       <div className={cn("mt-8 w-full max-w-[560px]", n === 4 ? "max-w-[640px]" : "rounded-3xl border border-border px-8 py-8")}>
         {n === 1 && (
           <>
-            <Image src="/design/cat2-wave.png" alt="" width={96} height={96} unoptimized className="design-wiggle mx-auto size-24 object-contain" />
+            <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} unoptimized className="design-wiggle mx-auto size-24 object-contain" />
             <h1 className="mt-3 text-center text-[24px] font-bold">Hi Alan — what are you studying for?</h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">So the first session fits your exam, not a generic one.</p>
             <div className="mt-5 flex flex-wrap justify-center gap-2">{EXAMS.map((e) => <span key={e} className={cn("inline-flex h-10 items-center rounded-xl border px-4 text-[14px] font-semibold", e === "IB" ? "border-accent bg-accent-soft text-accent" : "border-border")}>{e}</span>)}</div>
@@ -34,7 +34,7 @@ export default async function OnboardingPreview({ searchParams }: { searchParams
         )}
         {n === 2 && (
           <>
-            <Image src="/design/cat2-think.png" alt="" width={96} height={96} unoptimized className="design-float mx-auto size-24 object-contain" />
+            <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="design-float mx-auto size-24 object-contain" />
             <h1 className="mt-3 text-center text-[24px] font-bold">Pick your subjects</h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">Two or three is plenty — you can add more any time.</p>
             <div className="mt-5 grid grid-cols-2 gap-2">{SUBJECTS.map(([s, c], i) => <span key={s} className={cn("flex h-12 items-center gap-3 rounded-xl border px-4 text-[14px] font-semibold", i < 2 ? "border-accent bg-accent-soft/40" : "border-border")}><span className={cn("size-2.5 rounded-full", c)} />{s}{i < 2 && <span className="ml-auto text-[11px] font-semibold text-accent">HL</span>}</span>)}</div>
@@ -43,7 +43,7 @@ export default async function OnboardingPreview({ searchParams }: { searchParams
         )}
         {n === 3 && (
           <>
-            <Image src="/design/cat2-book.png" alt="" width={96} height={96} unoptimized className="design-float mx-auto size-24 object-contain" />
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="design-float mx-auto size-24 object-contain" />
             <h1 className="mt-3 text-center text-[24px] font-bold">Add your first material</h1>
             <p className="mt-1 text-center text-[14px] text-muted-foreground">One file is enough. Scribe turns it into a 20-minute session with questions from <i>your</i> notes.</p>
             <div className="mt-5 flex flex-col items-center gap-2 rounded-2xl border-2 border-dashed border-accent/40 bg-accent-soft/30 px-6 py-8 text-center">

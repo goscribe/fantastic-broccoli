@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-chemistry",
+  "topicId": "s1-1",
+  "topicCode": "S1.1",
+  "topicName": "Particulate nature of matter",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:08.343Z",
+  "cards": [
+    {
+      "id": "009420o",
+      "kind": "concept",
+      "front": "What is the particle model of matter, and what is it used for?",
+      "back": "All matter is made of tiny **particles**. The model describes where particles are and how they move, which explains observable properties even though particles are too small to see.",
+      "hint": "Think about what the model explains, not what it looks like.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y4a1n8",
+      "kind": "concept",
+      "front": "How do particles differ in solids, liquids and gases?",
+      "back": "In a **solid**, particles are close together in fixed positions and vibrate. In a **liquid**, they stay close but move past one another. In a **gas**, they are far apart and move freely in different directions.",
+      "hint": "Compare the spacing and how freely the particles move.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "**Diffusion** is the net spreading of particles from a region of higher concentration to one of lower concentration, caused by random movement.",
+      "hint": "Think about dye spreading through still water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19g8fxb",
+      "kind": "term",
+      "front": "What is a molecule?",
+      "back": "A **molecule** is a group of atoms held together by chemical bonds. For example, an oxygen molecule contains two oxygen atoms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "179m4ie",
+      "kind": "term",
+      "front": "What is an atom?",
+      "back": "An **atom** is the smallest unit of an element that retains its chemical identity.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lvyheg",
+      "kind": "concept",
+      "front": "Why do tiny visible particles suspended in water move irregularly?",
+      "back": "**Brownian motion**: unseen water molecules strike the visible particles unevenly from different sides, so the particles change direction irregularly.",
+      "hint": "Think about what is actually seen and what is not.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xg74ea",
+      "kind": "mistake",
+      "front": "Does diffusion mean every particle moves from high to low concentration?",
+      "back": "No. Particles move **randomly** in every direction. Only the overall net spread goes from higher to lower concentration.",
+      "hint": "Consider what the word net means.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ggn0sd",
+      "kind": "mistake",
+      "front": "Are the water molecules seen in Brownian motion?",
+      "back": "No. Only the larger suspended particles are seen. Their irregular movement is evidence of collisions with the unseen water molecules.",
+      "hint": "Separate the visible particles from the fluid particles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0y2h7oe",
+      "kind": "mistake",
+      "front": "Does every substance consist of separate molecules?",
+      "back": "No. Some substances contain atoms in **extended structures** instead of discrete molecules.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0t523a7",
+      "kind": "concept",
+      "front": "What changes, and what stays the same, when a substance melts?",
+      "back": "Its particles leave fixed positions and can move past one another. The particles stay the same; only their arrangement, movement and spacing change.",
+      "hint": "Particles do not turn into different particles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03s8ea1",
+      "kind": "concept",
+      "front": "Why do solids keep their shape but liquids flow?",
+      "back": "Solid particles are held in fixed positions, so the shape is kept. Liquid particles can move past one another, so the substance flows.",
+      "hint": "Link the particle movement to the observable behaviour.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b1zzu7",
+      "kind": "example",
+      "front": "Why does a gas released in one part of a room spread throughout the room?",
+      "back": "Its particles move freely and randomly, colliding and travelling in every direction. This **diffusion** spreads them through the room without any stirring.",
+      "hint": "Apply the idea of random movement to a gas.",
+      "sectionId": "s3"
+    }
+  ]
+}

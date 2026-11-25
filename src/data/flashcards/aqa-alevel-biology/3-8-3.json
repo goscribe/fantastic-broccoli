@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-8-3",
+  "topicCode": "3.8.3",
+  "topicName": "Genome projects",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:37:09.099Z",
+  "cards": [
+    {
+      "id": "15askqd",
+      "kind": "term",
+      "front": "What is a reference genome?",
+      "back": "An assembled DNA sequence used as a **standard** against which other sequences are compared, for studying gene function, inherited variation and evolutionary relationships.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1owpeaj",
+      "kind": "process",
+      "front": "What steps turn many short sequence reads into an assembled genome?",
+      "back": "Researchers obtain many **reads**, computer programs compare their overlapping ends and join matching reads, then map positions and other evidence order the longer sequences along chromosomes.",
+      "hint": "Start with what the sequencing machine produces first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00ugzny",
+      "kind": "concept",
+      "front": "Why does a genome sequence not directly reveal an organism's proteome?",
+      "back": "Much DNA in complex organisms is **non-coding**, and regulatory genes and non-coding regions control when genes are expressed, so different cells can make different proteins from one genome.",
+      "hint": "Think about how much DNA codes for protein and what switches genes on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ddtpt8",
+      "kind": "term",
+      "front": "What does it mean to annotate a genome?",
+      "back": "To identify likely **genes** and other features in the assembled sequence.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c0qyly",
+      "kind": "term",
+      "front": "What is a physical map?",
+      "back": "A map that gives feature positions as **distances along DNA**, often measured in kilobases.",
+      "hint": "Compare how a genetic map measures distance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q6r7n8",
+      "kind": "concept",
+      "front": "How does a genetic map estimate the relative positions of features?",
+      "back": "It uses patterns of **inheritance**; its distances are based on recombination, not a direct count of base pairs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pxwnvq",
+      "kind": "formula",
+      "front": "How do you find the separation between two markers on a physical map?",
+      "back": "$d = x_2 - x_1$, where $x_1$ and $x_2$ are the positions and $d$ is the separation in $\\text{kb}$.",
+      "hint": "Think about what you do with two positions on the same chromosome.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1y4626g",
+      "kind": "formula",
+      "front": "How many base pairs are in one kilobase?",
+      "back": "$1\\,\\text{kb} = 1000\\,\\text{bp}$, so $12\\,\\text{kb}$ equals 12 000 bp.",
+      "hint": "Think about the prefix 'kilo'.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0g4wzpt",
+      "kind": "example",
+      "front": "Markers A, B and C lie at 12 kb, 19 kb and 35 kb on one chromosome. Which marker is nearest to B?",
+      "back": "Marker **A**, because $19-12=7\\,\\text{kb}$ is less than $35-19=16\\,\\text{kb}$.",
+      "hint": "Work out the separation of each pair of markers that includes B.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1n1ph0n",
+      "kind": "mistake",
+      "front": "Why is finding a gene's position on a genome map not enough to show what the gene does?",
+      "back": "Position does not establish **function**; the gene's function needs further evidence.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mh33e8",
+      "kind": "mistake",
+      "front": "Why is knowing a gene's sequence not enough to show when the gene is expressed?",
+      "back": "The sequence does not show **timing of expression** or which protein it forms; control elements and regulatory genes determine this.",
+      "hint": "Think about what controls whether a gene is switched on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1brd54x",
+      "kind": "mistake",
+      "front": "Why does a nearby marker on a physical map not prove it affects a trait?",
+      "back": "Nearby markers are close in DNA sequence, but **proximity** alone cannot show that either marker affects a trait.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00lo9n4",
+      "kind": "concept",
+      "front": "Why do repeated or very similar sequences make genome assembly difficult?",
+      "back": "A **short read** may fit in several places, so it is hard to tell where it belongs in the assembled sequence.",
+      "hint": "Think about how many places a read could match.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xlr0q7",
+      "kind": "term",
+      "front": "What is genetic privacy?",
+      "back": "Control over **access** to information obtained from a person's DNA; genome data can also reveal information about relatives.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-7",
+  "topicCode": "2.7",
+  "topicName": "Kinetic and static friction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:34.466Z",
+  "cards": [
+    {
+      "id": "0mw6pah",
+      "kind": "concept",
+      "front": "What is friction, and which way does it point?",
+      "back": "**Friction** is a contact force parallel to touching surfaces that opposes their sliding, or attempted sliding, relative to each other.",
+      "hint": "Think about the surface, not the object.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rb8tk0",
+      "kind": "concept",
+      "front": "How do static and kinetic friction differ when a box is pushed?",
+      "back": "**Static** friction acts while the surfaces do not slide and matches the push up to a maximum. **Kinetic** friction acts once they slide and has a fixed size.",
+      "hint": "Ask whether the surfaces are sliding."
+    },
+    {
+      "id": "19q9a2x",
+      "kind": "formula",
+      "front": "What is the limit on static friction, and what does each symbol mean?",
+      "back": "$F_s \\le \\mu_s F_N$. $F_s$ is static friction, $\\mu_s$ is the static coefficient set by the surfaces, and $F_N$ is the normal force in newtons. This is the maximum before the box slips.",
+      "hint": "Static friction can be smaller than this limit.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "133ww99",
+      "kind": "formula",
+      "front": "What is the equation for kinetic friction, and what are its units?",
+      "back": "$F_{f,k} = \\mu_k F_N$. $F_{f,k}$ is kinetic friction in newtons, $\\mu_k$ is the unitless kinetic coefficient, and $F_N$ is the normal force in newtons.",
+      "hint": "Which coefficient applies when sliding?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10bus84",
+      "kind": "mistake",
+      "front": "Does $F_s \\le \\mu_s F_N$ give the static friction on a gently pushed box?",
+      "back": "No. It gives only the **maximum**. Below that limit, static friction equals the push applied, so the net force is zero.",
+      "hint": "Compare a gentle push with a hard push.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "128tv12",
+      "kind": "mistake",
+      "front": "Is the normal force always equal to the weight?",
+      "back": "**No.** A downward push or an upward pull changes the normal force, and friction changes with it.",
+      "hint": "What else can press the surfaces together?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0egs792",
+      "kind": "concept",
+      "front": "What two things set the size of a friction force?",
+      "back": "The **surface pair**, captured by the coefficient $\\mu$, and the **normal force** $F_N$. Contact area and sliding speed do not change friction in this model.",
+      "hint": "Think about what presses the surfaces together.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1caevcv",
+      "kind": "process",
+      "front": "What are the steps for solving a friction problem?",
+      "back": "First decide whether the surfaces are sliding. Then find the normal force. Finally multiply it by the correct coefficient, $\\mu_s$ or $\\mu_k$.",
+      "hint": "Start with the sliding question.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dvezo4",
+      "kind": "example",
+      "front": "A 10 kg block slides on level ground with $\\mu_k = 0.40$. What is the kinetic friction? Use $g = 9.8\\ \\mathrm{m/s^2}$.",
+      "back": "**39 N**. The normal force is $mg = 98$ N, so $F_{f,k} = (0.40)(98) = 39$ N.",
+      "hint": "Find the normal force first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0po5txx",
+      "kind": "example",
+      "front": "A 20 kg crate on level ground has $\\mu_s = 0.50$ and $\\mu_k = 0.30$. What push starts it sliding?",
+      "back": "Just above **98 N**. The normal force is 196 N, so maximum static friction is $0.50 \\times 196 = 98$ N.",
+      "hint": "Maximum static friction uses $\\mu_s$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "096ffy3",
+      "kind": "example",
+      "front": "The same 20 kg crate slides under a steady 80 N push. What is its acceleration?",
+      "back": "About **1.1 m/s²** (1.06). Kinetic friction is $0.30 \\times 196 = 58.8$ N, so the net force is $80 - 58.8 = 21.2$ N and $a = 21.2/20$.",
+      "hint": "Subtract kinetic friction from the push first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14o9vzg",
+      "kind": "concept",
+      "front": "Why does a box take more force to start moving than to keep moving?",
+      "back": "Because the maximum static friction, $\\mu_s F_N$, is larger than the fixed kinetic friction, $\\mu_k F_N$, since $\\mu_k$ is usually smaller than $\\mu_s$.",
+      "hint": "Compare the two coefficients.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y853d6",
+      "kind": "concept",
+      "front": "What happens to a sliding crate if the push equals kinetic friction?",
+      "back": "The net force is zero, so the crate slides at **constant velocity**.",
+      "hint": "Use Newton's second law.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1yqyguj",
+      "kind": "term",
+      "front": "What is the coefficient of friction?",
+      "back": "**$\\mu$** is a unitless number giving the ratio of friction force to normal force for a particular pair of surfaces.",
+      "hint": "It is a ratio, so it has no units.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Cellular energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:29.302Z",
+  "cards": [
+    {
+      "id": "0gxsphw",
+      "kind": "concept",
+      "front": "Why do cells use ATP as an energy currency?",
+      "back": "**ATP** transfers energy between processes that release energy and processes that require it. Cells make and use it continually rather than storing most of their energy in it long term.",
+      "hint": "Think about what links energy-releasing and energy-requiring reactions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hq2me4",
+      "kind": "concept",
+      "front": "How can ATP hydrolysis drive work that needs energy?",
+      "back": "ATP reacts with water to form **ADP** and inorganic phosphate, releasing free energy overall. Cells couple that release to work such as active transport, motor proteins, and building larger molecules.",
+      "hint": "Focus on the overall reaction, not just one bond.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k2m41g",
+      "kind": "process",
+      "front": "What is the ATP cycle?",
+      "back": "The **ATP cycle** is the repeated hydrolysis of ATP and regeneration of ATP from ADP. Energy enters when ATP is made and is released for work when ATP is used, so the same ADP is reused many times.",
+      "hint": "Consider what happens to ADP and phosphate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pkjt9n",
+      "kind": "term",
+      "front": "What is ATP, and what does its name describe?",
+      "back": "**Adenosine triphosphate**, a molecule containing adenine, ribose, and three phosphate groups. Its name reflects that adenosine carries three phosphate groups.",
+      "hint": "Break the name into its parts.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ybuo6w",
+      "kind": "formula",
+      "front": "Write the equation for ATP hydrolysis and name the products.",
+      "back": "$\\text{ATP}+\\text{H}_2\\text{O}\\rightarrow\\text{ADP}+\\text{P}_{\\text{i}}$. The products are **ADP** and inorganic phosphate ($\\text{P}_{\\text{i}}$), and the reaction releases free energy overall.",
+      "hint": "Water is a reactant.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x8pha4",
+      "kind": "mistake",
+      "front": "A student says breaking ATP's phosphate bond requires energy, so ATP hydrolysis must cost energy overall. What is wrong?",
+      "back": "Breaking the bond does require energy, but **ATP hydrolysis** releases energy overall because forming the products releases more energy than breaking bonds requires.",
+      "hint": "Think about the whole reaction, not one step.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1avitnf",
+      "kind": "formula",
+      "front": "Write the equation for ATP regeneration and state whether it needs energy.",
+      "back": "$\\text{ADP}+\\text{P}_{\\text{i}}\\rightarrow\\text{ATP}$. It **requires** an energy input, which can come from breaking down food molecules or from captured light in photosynthetic cells.",
+      "hint": "Compare its direction with hydrolysis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10gicl7",
+      "kind": "term",
+      "front": "What is phosphorylation?",
+      "back": "The **addition of a phosphate group** to a molecule, often transferred from ATP. It can change a protein's shape or make a reactant more likely to undergo another reaction.",
+      "hint": "Think about what ATP gives away.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uzlb9f",
+      "kind": "concept",
+      "front": "What does it mean for an ATP reaction and cellular work to be coupled?",
+      "back": "They occur through **linked steps**, so the energy-releasing ATP reaction helps drive a process that requires energy. ATP does not make reactions happen automatically.",
+      "hint": "Linked, not simultaneous.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t7edf7",
+      "kind": "example",
+      "front": "How can phosphorylation help a membrane protein perform active transport?",
+      "back": "ATP transfers a phosphate group to the protein. **Phosphorylation** changes the protein's shape, which helps it move a substance across the membrane.",
+      "hint": "Follow the shape change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0miys7e",
+      "kind": "process",
+      "front": "List the two steps of the ATP cycle in order, starting from ATP being used.",
+      "back": "1. **ATP hydrolysis**: ATP reacts with water to give ADP and inorganic phosphate, releasing energy for work. 2. **ATP regeneration**: ADP and inorganic phosphate are joined using energy from food breakdown or light, making ATP again.",
+      "hint": "Start with ATP being used for work.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a8ll39",
+      "kind": "mistake",
+      "front": "A student says ATP regeneration releases energy because ATP hydrolysis does. What is wrong?",
+      "back": "Regeneration **requires** energy input, because ADP and inorganic phosphate are joined to make ATP. Energy is released only when ATP is used for work.",
+      "hint": "Check the direction of the arrow.",
+      "sectionId": "s4"
+    }
+  ]
+}

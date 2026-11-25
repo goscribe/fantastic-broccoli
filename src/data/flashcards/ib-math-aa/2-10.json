@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-10",
+  "topicCode": "2.10",
+  "topicName": "Solving equations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:11.617Z",
+  "cards": [
+    {
+      "id": "131reyi",
+      "kind": "concept",
+      "front": "When solving a linear equation, what must you do to both sides, and why?",
+      "back": "Apply the same operation to **both sides** so the equation stays balanced, like a level balance scale. Work backwards: undo additions first, then multiplications.",
+      "hint": "Think about a balance scale.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k6s8wv",
+      "kind": "formula",
+      "front": "What is the quadratic formula, and what does the discriminant tell you about the solutions?",
+      "back": "For $ax^2+bx+c=0$, $x=\\frac{-b\\pm\\sqrt{b^2-4ac}}{2a}$. The **discriminant** $\\Delta=b^2-4ac$ gives two real solutions if $\\Delta>0$, one if $\\Delta=0$, and none if $\\Delta<0$.",
+      "hint": "Look at the quantity under the square root.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0atalm0",
+      "kind": "concept",
+      "front": "Why must you check each solution in the original equation, not a rearranged one?",
+      "back": "Errors can enter during rearrangement, and **extraneous solutions** can appear in the working. Substituting into the original equation tests whether a value really works.",
+      "hint": "What can go wrong while rearranging?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08puufj",
+      "kind": "process",
+      "front": "What are the steps for solving simultaneous equations by substitution?",
+      "back": "1) Make one unknown the subject of the simpler equation. 2) Substitute that expression into the other equation. 3) Solve for the first unknown. 4) Substitute back to find the second.",
+      "hint": "Start with the simpler equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cu9njr",
+      "kind": "term",
+      "front": "What is a rational equation?",
+      "back": "An equation in which the unknown appears in the **denominator** of at least one term.",
+      "hint": "Where does the unknown sit?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kk21nq",
+      "kind": "process",
+      "front": "How do you solve a rational equation?",
+      "back": "First note the excluded values that make a denominator zero. Multiply every term by the common denominator, expand, and solve the remaining equation. Reject any excluded value.",
+      "hint": "Deal with zero denominators before multiplying.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00w0fwf",
+      "kind": "example",
+      "front": "Solve $\\frac{6}{x+1}=2$.",
+      "back": "$x=2$. Multiplying by $x+1$ gives $6=2(x+1)$, so $x=2$, which is allowed because $x\\neq-1$.",
+      "hint": "Clear the denominator first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0r9gxnt",
+      "kind": "mistake",
+      "front": "What is wrong with expanding $3(x-2)=3x-2$?",
+      "back": "Only the first term was multiplied. The correct expansion is $3x-6$, because **every** term inside the bracket must be multiplied by 3.",
+      "hint": "Count the terms inside the bracket.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0lu1m6m",
+      "kind": "mistake",
+      "front": "Why is dividing both sides of $x^2=3x$ by $x$ a mistake?",
+      "back": "It **loses the solution** $x=0$. Instead rearrange to $x^2-3x=0$ and factorise as $x(x-3)=0$, giving $x=0$ or $x=3$.",
+      "hint": "Is x ever zero here?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ov7p71",
+      "kind": "example",
+      "front": "Solve $2x^2-5x-3=0$ by factorising.",
+      "back": "$x=-\\frac{1}{2}$ or $x=3$, since $(2x+1)(x-3)=0$.",
+      "hint": "Split the middle term using two numbers with product -6 and sum -5.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lm2t1i",
+      "kind": "example",
+      "front": "Solve $y=2x-1$ and $y=x^2-4$ together.",
+      "back": "$(3,5)$ and $(-1,-3)$. Setting $x^2-4=2x-1$ gives $(x-3)(x+1)=0$, then substitute each $x$ into $y=2x-1$.",
+      "hint": "Set the two expressions for y equal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02zyiro",
+      "kind": "concept",
+      "front": "How many points can a line and a curve meet in?",
+      "back": "**Two points, one point, or none.** Each real solution of the substituted equation gives one intersection point.",
+      "hint": "Think of a line cutting through a parabola.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hyeqm3",
+      "kind": "mistake",
+      "front": "Is $x=2$ a valid solution of $\\frac{x^2}{x-2}=\\frac{4}{x-2}$ because it solves $x^2=4$?",
+      "back": "No. $x=2$ makes both denominators zero, so it is an **extraneous solution** and must be rejected. Only $x=-2$ is valid.",
+      "hint": "Substitute x=2 into the original denominators.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ujbjvs",
+      "kind": "term",
+      "front": "What is an extraneous solution?",
+      "back": "A value that appears during working but does **not** satisfy the original equation, so it must be rejected.",
+      "hint": "Test it in the original equation.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Reciprocal and rational functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:12.100Z",
+  "cards": [
+    {
+      "id": "1700wdz",
+      "kind": "formula",
+      "front": "For $f(x)=\\frac{ax+b}{cx+d}$ with $c\\ne0$, where are the vertical and horizontal asymptotes?",
+      "back": "The **vertical asymptote** is $x=-\\frac{d}{c}$, where the denominator is zero. The **horizontal asymptote** is $y=\\frac{a}{c}$, found from the $x$ terms for large $|x|$. The constants $b$ and $d$ do not change it.",
+      "hint": "Set the denominator to zero. For large $|x|$, compare the $x$ terms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01sm009",
+      "kind": "concept",
+      "front": "What happens to the graph of $f(x)=\\frac{1}{x}$ near $x=0$, and for large $|x|$?",
+      "back": "Near $x=0$ the outputs grow without bound, so the **vertical asymptote** is $x=0$. For large $|x|$ the outputs approach 0, so the **horizontal asymptote** is $y=0$.",
+      "hint": "Think about the outputs as the inputs shrink towards zero, then as they grow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00or7rc",
+      "kind": "process",
+      "front": "How do the asymptotes of a rational function give its domain and range?",
+      "back": "The **domain** excludes the $x$-value that makes the denominator zero. The **range** excludes the value of the **horizontal asymptote**. Keep these two excluded values apart.",
+      "hint": "Which asymptote limits the inputs, and which limits the outputs?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k5jdyl",
+      "kind": "term",
+      "front": "What is the reciprocal function, and why is $x=0$ excluded from its domain?",
+      "back": "The **reciprocal function** is $f(x)=\\frac{1}{x}$. Its domain excludes $x=0$ because division by zero is undefined. Its range also excludes 0.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09reb61",
+      "kind": "term",
+      "front": "What is a rational function?",
+      "back": "A **rational function** is a quotient of two polynomial expressions. Values of $x$ that make the denominator zero are excluded from its domain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nw3qml",
+      "kind": "term",
+      "front": "What is a polynomial?",
+      "back": "A **polynomial** is a finite sum of constant multiples of non-negative integer powers of $x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11r8w8p",
+      "kind": "term",
+      "front": "What is a vertical asymptote?",
+      "back": "A **vertical asymptote** is a line $x=a$ that the graph approaches as $x$ nears $a$, while the outputs grow without bound in size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zq6x2n",
+      "kind": "concept",
+      "front": "Why do the outputs of $f(x)=\\frac{1}{x}$ shrink as $x$ grows?",
+      "back": "The reciprocal is an inverse relationship: as $x$ grows, $\\frac{1}{x}$ shrinks towards **zero**. Journey time falls as speed rises for a fixed distance, which is the same idea.",
+      "hint": "Think about dividing 1 by a larger and larger number.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o0p3ck",
+      "kind": "mistake",
+      "front": "Why is writing the vertical asymptote of $f(x)=\\frac{1}{x}$ as just 0 wrong?",
+      "back": "An asymptote is a **line**, so write $x=0$. The number 0 alone is not the equation of a line.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0byx2kw",
+      "kind": "example",
+      "front": "Find the asymptotes, domain and range of $f(x)=\\frac{3x-2}{x+4}$.",
+      "back": "Asymptotes: $x=-4$ and $y=3$. Domain: $x\\ne-4$. Range: $y\\ne3$, since the denominator is zero at $x=-4$ and the horizontal asymptote is $y=3$.",
+      "hint": "Set the denominator to zero. Divide the $x$ coefficients for the horizontal asymptote.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ygjd6q",
+      "kind": "mistake",
+      "front": "Does the graph of $f(x)=\\frac{3x-2}{x+4}$ ever reach the output $y=3$?",
+      "back": "No. Setting $\\frac{3x-2}{x+4}=3$ gives $-2=12$, which is impossible. So $y=3$ is **excluded** from the range.",
+      "hint": "Try solving $f(x)=3$ and see whether it has a solution.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ya5owk",
+      "kind": "mistake",
+      "front": "Can the curve of a rational graph cross its vertical asymptote?",
+      "back": "No. Each side of the **vertical asymptote** has its own separate branch, and the curve never crosses the line.",
+      "hint": "Think about what the outputs do near the asymptote.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06n5u1b",
+      "kind": "example",
+      "front": "Find the $x$-intercept and $y$-intercept of $f(x)=\\frac{2x-6}{x+1}$.",
+      "back": "The $x$-intercept is $(3,0)$, from setting the numerator to zero. The $y$-intercept is $(0,-6)$, from $f(0)=-6$.",
+      "hint": "Numerator zero gives the $x$-intercept. Substitute $x=0$ for the $y$-intercept.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ryciv2",
+      "kind": "process",
+      "front": "What are the four steps for sketching a rational graph?",
+      "back": "Draw the asymptotes as dashed lines. Find the $y$-intercept by setting $x=0$. Find the $x$-intercept by setting the numerator to zero. Draw one smooth branch on each side of the **vertical asymptote**.",
+      "hint": "Start with the lines, then the points, then the curves.",
+      "sectionId": "s5"
+    }
+  ]
+}

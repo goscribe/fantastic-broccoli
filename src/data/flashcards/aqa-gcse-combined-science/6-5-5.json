@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-5-5",
+  "topicCode": "6.5.5",
+  "topicName": "Momentum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:16.289Z",
+  "cards": [
+    {
+      "id": "07w50wc",
+      "kind": "formula",
+      "front": "Which equation links momentum, mass and velocity, and what units does momentum use?",
+      "back": "$p=mv$, where $p$ is **momentum** in $\\text{kg m s}^{-1}$, $m$ is mass in $\\text{kg}$ and $v$ is velocity in $\\text{m s}^{-1}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15k9246",
+      "kind": "concept",
+      "front": "Why does the total momentum of a closed system stay constant during a collision?",
+      "back": "There is **no external force** on the system. The objects' forces on each other are internal, so they only transfer momentum between the objects.",
+      "hint": "Think about which forces act on the whole system, not on each object.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bvx71x",
+      "kind": "process",
+      "front": "What are the steps to find the shared speed after objects stick together?",
+      "back": "Find each object's momentum before impact, with direction, and add them. Divide this total by the **combined mass** to get the shared velocity.",
+      "hint": "Start with the momentum before the collision, not after.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "115wtl4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say each object keeps its momentum in a collision?",
+      "back": "Conservation applies to the **total** momentum of the system. Individual objects' momenta change during a collision, but the total stays the same.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hqymlf",
+      "kind": "example",
+      "front": "A 2 kg trolley moves at 3 m/s into a stationary 1 kg trolley and they stick together. What is their shared speed?",
+      "back": "$2\\ \\text{m s}^{-1}$ in the original direction. Initial momentum is $2\\times3=6$, so $3v=6$ and $v=2$.",
+      "hint": "Remember the stationary trolley has zero momentum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mmi45z",
+      "kind": "concept",
+      "front": "How does changing mass or velocity affect an object's momentum?",
+      "back": "Momentum increases if either **mass** or **velocity** increases while the other stays the same. An object at rest has **zero** momentum.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gj6icg",
+      "kind": "term",
+      "front": "What is a **closed system** in a momentum question?",
+      "back": "A system where **no external forces** act on the objects within it.",
+      "hint": "Contrast this with the chemistry meaning, which is about substances entering or leaving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wwk302",
+      "kind": "term",
+      "front": "What is the **conservation equation** in a collision?",
+      "back": "It sets the **total momentum** before an interaction equal to the total momentum afterwards.",
+      "hint": "Compare the two sides of the collision.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09i85tw",
+      "kind": "process",
+      "front": "How do you include a trolley that rebounds in a momentum calculation?",
+      "back": "**Choose a positive direction** first. Give the rebounding trolley a negative velocity if it moves opposite to that direction, so its momentum is negative in the sum.",
+      "hint": "Decide the direction before writing any velocities.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v79d65",
+      "kind": "example",
+      "front": "What is the momentum of a 4 kg trolley moving at 2.5 m/s?",
+      "back": "$p=4\\times2.5=10\\ \\text{kg m s}^{-1}$.",
+      "sectionId": "s1"
+    }
+  ]
+}

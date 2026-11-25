@@ -7,6 +7,7 @@
  * the tab closes still arrive.
  */
 import { apiUrl } from "./api/config";
+import type { WallReason, WallVariant } from "./wall";
 
 export type FunnelEvent =
   | "first_run.viewed"
@@ -18,17 +19,89 @@ export type FunnelEvent =
   | "first_run.wait_viewed"
   | "first_run.left_while_waiting"
   | "quick5.started"
-  | "quick5.finished";
+  | "quick5.finished"
+  /** Home's banner was tapped: its one "Today" button, a study time on the week, or the planner; `action` says which. */
+  | "home.today_tapped"
+  /** A note opened in the in-app reader; notes attached to / removed from a subject; a session started from an attached note. */
+  | "notes.opened_in_app"
+  | "notes.attached"
+  | "notes.detached"
+  | "notes.attached_session_started"
+  /** A student's own note opened in the editor; a highlight made in one (the server records notes.own_created, Scribe-note highlights and notes.diagram_generated itself). */
+  | "notes.own_opened"
+  | "notes.highlight_added"
+  /** First run: Scribe's notes for the picked course offered, taken, or passed over. */
+  | "first_run.notes_offered"
+  | "first_run.notes_accepted"
+  | "first_run.notes_skipped"
+  /** End screen: the one next step was tapped; `kind` says which. */
+  | "debrief.next_tapped"
+  /** The player's bottom-bar Next (against the card's own "Next question"). */
+  | "session.footer_next"
+  /** "How Scribe works" opened by hand, then closed after `seconds`. */
+  | "tour.shown"
+  | "tour.closed"
+  /** A search ran; `hasLocalResults` says whether the free local index found anything. */
+  | "search.query"
+  /** Subscribe wall: shown (`reason`, `variant`), dismissed, or checkout opened from it (a trial, or the pass when `variant` is "exam_pass"). */
+  | "wall.shown"
+  | "wall.dismissed"
+  | "wall.trial_started"
+  /** Coursework grader screen opened (the server records review_requested / review_completed / limit_hit itself). */
+  | "grader.opened"
+  /** Exam import: started (`source`), exams added by it (`count`, `source`), an imported exam removed, an event attached by hand. */
+  | "planner.calendar_import_opened"
+  | "planner.calendar_import_added"
+  | "planner.calendar_exam_removed"
+  | "planner.calendar_event_attached"
+  /** An upload given up in the app before the file reached us (`stage`: too_large, or the storage transfer failed). */
+  | "upload.failed"
+  /** "Skip" on the start check (the answers themselves are stored with the session). */
+  | "start_check.skipped";
+
+/** What the end screen's next step offered (the server's DEBRIEF_NEXT_KINDS). */
+export type DebriefNextKind = "session" | "quick5" | "mistakes" | "topic" | "review" | "plan" | "home" | "other";
+
+/** Where a notes event happened. */
+export type NoteEventSource = "library" | "course" | "subject" | "note" | "public" | "first_run";
+
+/**
+ * What was tapped in home's banner (the server's TODAY_ACTIONS). The one
+ * button: "mistakes" | "plan" | "quick5" | "upload" | "continue". The week
+ * around it: a study time on a day ("week_item") or the planner ("planner").
+ */
+export type TodayActionKind = "mistakes" | "plan" | "quick5" | "upload" | "continue" | "week_item" | "planner";
 
 export type FirstRunOption = "upload" | "camera" | "topic" | "paste" | "curriculum" | "skip";
 
 export interface FunnelProps {
   option?: FirstRunOption;
+  action?: TodayActionKind;
   durationMs?: number;
   fileCount?: number;
   sizeKb?: number;
   correct?: number;
   total?: number;
+  from?: NoteEventSource;
+  noteCount?: number;
+  /** A catalog course id (the server accepts only known ids). */
+  courseId?: string;
+  /** debrief.next_tapped: what the next step offered. */
+  kind?: DebriefNextKind;
+  /** tour.closed: seconds the tour was open. */
+  seconds?: number;
+  /** search.query: the free local index returned at least one row. */
+  hasLocalResults?: boolean;
+  /** wall.*: why the wall opened (server WALL_REASONS). */
+  reason?: WallReason;
+  /** wall.*: which wall layout (server WALL_VARIANTS). */
+  variant?: WallVariant;
+  /** planner.calendar_*: where the exams came from (server EXAM_IMPORT_SOURCES). */
+  source?: "google" | "ics" | "file";
+  /** planner.calendar_import_added: how many exams the import added. */
+  count?: number;
+  /** upload.failed: where it failed (server UPLOAD_FAILURE_STAGES). */
+  stage?: "too_large" | "transfer";
 }
 
 const FIRST_SCREEN_KEY = "scribe.firstRun.shownAt";
@@ -77,19 +150,21 @@ export function funnelPayload(
 
 export function track(event: FunnelEvent, props: FunnelProps = {}, workspaceId?: string): void {
   if (typeof window === "undefined" || !apiUrl) return;
-  const now = Date.now();
-  const body = funnelPayload(
-    event,
-    props,
-    {
-      now,
-      viewportWidth: window.innerWidth,
-      touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
-      sinceFirstScreen: msSinceFirstScreen(now),
-    },
-    workspaceId,
-  );
+  // Fire-and-forget, and nothing here may throw: callers track right before a
+  // navigation or upload, and a failed or rejected (400) event must never stop the tap.
   try {
+    const now = Date.now();
+    const body = funnelPayload(
+      event,
+      props,
+      {
+        now,
+        viewportWidth: window.innerWidth,
+        touch: typeof window.matchMedia === "function" ? window.matchMedia("(pointer: coarse)").matches : undefined,
+        sinceFirstScreen: msSinceFirstScreen(now),
+      },
+      workspaceId,
+    );
     void fetch(`${apiUrl}/trpc/activity.track`, {
       method: "POST",
       credentials: "include",

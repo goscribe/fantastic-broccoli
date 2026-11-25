@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "s4",
+  "topicCode": "S4",
+  "topicName": "Statistical distributions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:55.757Z",
+  "cards": [
+    {
+      "id": "0atu3dl",
+      "kind": "concept",
+      "front": "Which four conditions must hold before a situation can be modelled by a binomial distribution?",
+      "back": "There is a **fixed number** of trials $n$; each trial has two outcomes, success or failure; the probability of success $p$ is the same on every trial; and the trials are **independent** of each other.",
+      "hint": "Ask what would change from one trial to the next if the model did not fit.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tdeg3c",
+      "kind": "formula",
+      "front": "What is the formula for $P(X=r)$ when $X\\sim B(n,p)$, and what does each symbol mean?",
+      "back": "$P(X=r)={}^{n}\\mathrm{C}_{r}\\,p^r(1-p)^{n-r}$, where $n$ is the number of trials, $p$ is the probability of success, and $r$ is the number of successes. The ${}^{n}\\mathrm{C}_{r}$ term counts the possible orders.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lrvl8g",
+      "kind": "formula",
+      "front": "How is a normal value $x$ converted into a z-value?",
+      "back": "Use $z=\\frac{x-\\mu}{\\sigma}$, which is how many **standard deviations** $x$ lies from the mean $\\mu$. Subtracting $\\mu$ centres the curve at 0, and dividing by $\\sigma$ rescales its spread to 1.",
+      "hint": "Think how far x is from the mean, and what unit you would count that in.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b28ka8",
+      "kind": "term",
+      "front": "What is a random variable?",
+      "back": "A **random variable** is a variable whose numerical value is determined by the outcome of a random experiment, such as the number of sixes in 10 rolls of a die.",
+      "hint": "Compare it with a fixed number that never changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qfq96a",
+      "kind": "mistake",
+      "front": "Why does drawing items from a small set without replacing them break the binomial model?",
+      "back": "The trials become **dependent**. The probability of success changes after each draw, so $p$ is not the same on every trial and the binomial model does not fit.",
+      "hint": "Check whether the probability stays constant from one draw to the next.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gdqpy8",
+      "kind": "example",
+      "front": "For $X\\sim B(8,0.3)$, what is $P(X=2)$ to 3 significant figures?",
+      "back": "$P(X=2)={}^{8}\\mathrm{C}_{2}\\times0.3^2\\times0.7^6=28\\times0.09\\times0.117649\\approx0.296$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08ly53n",
+      "kind": "term",
+      "front": "What is a cumulative probability?",
+      "back": "A **cumulative probability** is $P(X\\le r)$, the sum of the probabilities for $0,1,\\dots,r$ successes.",
+      "hint": "Think about adding up probabilities from the start of the list.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fqybhi",
+      "kind": "example",
+      "front": "For $X\\sim B(8,0.3)$, what is $P(X\\ge3)$ to 3 significant figures?",
+      "back": "Use the complement: $P(X\\ge3)=1-P(X\\le2)=1-0.5518\\approx0.448$.",
+      "hint": "A calculator only reads less-than-or-equal directly, so rewrite the question first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1andh6i",
+      "kind": "concept",
+      "front": "How is probability shown on a normal distribution curve?",
+      "back": "**Probability is the area under the curve**. The curve is bell-shaped and symmetric about the mean $\\mu$, the total area is 1, and half lies on each side of the mean.",
+      "hint": "Think about the shape of a continuous variable such as height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15iz4g5",
+      "kind": "mistake",
+      "front": "A variable has distribution $N(50,16)$. Why is 16 not the standard deviation?",
+      "back": "The second number is the **variance**, $\\sigma^2$. Here $\\sigma^2=16$, so the standard deviation is $\\sigma=4$.",
+      "hint": "Recall what the square root of the variance gives you.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dmngjm",
+      "kind": "concept",
+      "front": "Why is $P(X=a)=0$ for a normal random variable $X$?",
+      "back": "A normal variable is **continuous**, so probability is an area under the curve. A single value has no width, so its area is zero, which gives $P(X<a)=P(X\\le a)$.",
+      "hint": "Think about the width of a single point on a graph.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17vxvqe",
+      "kind": "example",
+      "front": "For $X\\sim N(50,4^2)$, what is $P(X<56)$ to 3 significant figures?",
+      "back": "Standardise: $z=\\frac{56-50}{4}=1.5$, so $P(X<56)=P(Z<1.5)\\approx0.933$.",
+      "hint": "Convert the value to a z-score first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0go5ewp",
+      "kind": "term",
+      "front": "What is the standard normal distribution?",
+      "back": "The **standard normal distribution** is $N(0,1)$, with mean 0 and standard deviation 1. Any normal variable can be converted to it by standardising.",
+      "hint": "Think about which mean and which spread make the curve simplest.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0txdmg9",
+      "kind": "process",
+      "front": "How do you find $P(Z<-z)$ for a standard normal variable $Z$ when the table only gives positive values?",
+      "back": "Use symmetry: $P(Z<-z)=1-P(Z<z)$, because the curve is symmetric about 0.",
+      "hint": "Picture the curve mirrored across its centre.",
+      "sectionId": "s5"
+    }
+  ]
+}

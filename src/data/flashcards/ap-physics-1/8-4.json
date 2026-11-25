@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "8-4",
+  "topicCode": "8.4",
+  "topicName": "Fluids and conservation laws",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:05.033Z",
+  "cards": [
+    {
+      "id": "0wsb5fc",
+      "kind": "formula",
+      "front": "What does Bernoulli's equation say about a fluid moving along a streamline?",
+      "back": "The **total energy per unit volume is constant** along a streamline: $P+\\frac{1}{2}\\rho v^2+\\rho g y=\\text{constant}$. Pressure, speed and height can trade off, but their sum does not change.",
+      "hint": "Three terms: pressure, kinetic energy per volume, and height energy per volume.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b0a5ei",
+      "kind": "concept",
+      "front": "Why must the speed of water increase when a pipe narrows?",
+      "back": "The **continuity equation** $A_1v_1=A_2v_2$ holds because the same volume must pass each second. A smaller area therefore needs a higher speed.",
+      "hint": "Think about what stays the same at every section of the pipe.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bzhtcz",
+      "kind": "concept",
+      "front": "In a horizontal pipe carrying steady flow, where is the pressure lowest and why?",
+      "back": "**Where the speed is highest.** Height does not change, so a larger $\\frac{1}{2}\\rho v^2$ forces the pressure term to be smaller.",
+      "hint": "Use Bernoulli's equation with the height term removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0p23okx",
+      "kind": "formula",
+      "front": "Which equation links volume flow rate to cross-sectional area and speed, and what are its units?",
+      "back": "$Q=Av$, where $A$ is the cross-sectional area in $\\mathrm{m^2}$ and $v$ is the speed in $\\mathrm{m/s}$. The volume flow rate $Q$ is in $\\mathrm{m^3/s}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kao0ll",
+      "kind": "term",
+      "front": "What is a streamline?",
+      "back": "A **streamline** is a curve whose tangent at each point gives the fluid velocity there. In steady flow, it is the path followed by a small element of fluid.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j3sqap",
+      "kind": "term",
+      "front": "What is the volume flow rate of a fluid?",
+      "back": "The **volume flow rate** is the volume of fluid passing a cross section per unit time. Its symbol is $Q$ and its unit is $\\mathrm{m^3/s}$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gdqn6y",
+      "kind": "concept",
+      "front": "Name the three conditions that must hold before you apply Bernoulli's equation.",
+      "back": "The flow must be **steady**, the fluid must be **incompressible**, and the **viscosity must be negligible**. The two points compared must lie on the same streamline.",
+      "hint": "Two of these are about the fluid, one about the flow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1elhnzc",
+      "kind": "mistake",
+      "front": "A student says the flow rate stays the same, so the speed must stay the same too. What is wrong?",
+      "back": "Only the **product $Av$** is constant. When the area changes, the speed changes too. The flow rate is the same, but the speed is not.",
+      "hint": "Which quantity does continuity keep constant?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1npg9x4",
+      "kind": "mistake",
+      "front": "A student says that faster water in a pipe must be at higher pressure. Is this correct?",
+      "back": "No. In a horizontal pipe, the **fastest section has the lowest pressure**. Speed and pressure trade off, so higher speed means lower pressure.",
+      "hint": "Think about the sum $P+\\frac{1}{2}\\rho v^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jli0bp",
+      "kind": "example",
+      "front": "Water flows at 1.5 m/s through a 0.0020 m^2 pipe that narrows to 0.00050 m^2. What is the speed in the narrow section?",
+      "back": "**6.0 m/s**. Use $A_1v_1=A_2v_2$, so $v_2=\\frac{(0.0020)(1.5)}{0.00050}=6.0\\ \\mathrm{m/s}$.",
+      "hint": "Rearrange the continuity equation for $v_2$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08xn4nr",
+      "kind": "example",
+      "front": "In a horizontal pipe, water at 2.0 m/s has pressure $2.00\\times10^5$ Pa. It speeds up to 6.0 m/s. Find the new pressure. Density is 1000 kg/m^3.",
+      "back": "**$P_2=1.84\\times10^5$ Pa**. Heights are equal, so $P_2=P_1+\\frac{1}{2}\\rho(v_1^2-v_2^2)=200000-16000$.",
+      "hint": "Heights are equal, so the height term cancels.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rbpdsp",
+      "kind": "concept",
+      "front": "How does a change in height affect the pressure or speed of a flowing fluid?",
+      "back": "A fluid that **rises** gains potential energy, so its pressure or speed must fall. Moving downward does the reverse, so pressure or speed rises.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fa808v",
+      "kind": "example",
+      "front": "Water leaves a small hole 1.8 m below the surface of a large open tank. Using g = 9.8 m/s^2, what is the exit speed?",
+      "back": "**About 5.9 m/s**. The surface and hole are at atmospheric pressure and the surface speed is near zero, so $v=\\sqrt{2gh}=\\sqrt{35.28}$.",
+      "hint": "Use $v=\\sqrt{2gh}$ with $h$ as the depth of the hole.",
+      "sectionId": "s5"
+    }
+  ]
+}

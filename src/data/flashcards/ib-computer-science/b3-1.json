@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "b3-1",
+  "topicCode": "B3.1",
+  "topicName": "OOP with a single class",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:09.351Z",
+  "cards": [
+    {
+      "id": "1hwjfvy",
+      "kind": "term",
+      "front": "What is a class, and how does it differ from an object?",
+      "back": "A **class** is a template that defines the data and actions its objects share. An **object** is one item built from that template, with its own values.",
+      "hint": "Think of a blank form and each filled-in copy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15vj4qo",
+      "kind": "concept",
+      "front": "What is the difference between an attribute and a method?",
+      "back": "An **attribute** stores data about an object, such as a name. A **method** is a block of code the object can run, and it often uses those attributes.",
+      "hint": "One holds data, the other holds behaviour.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "03jim5f",
+      "kind": "concept",
+      "front": "What is a constructor, and when does it run?",
+      "back": "A **constructor** is a special method that runs once, when an object is created. It assigns starting values to the object's attributes.",
+      "hint": "It runs at the moment new is used.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bgau4o",
+      "kind": "process",
+      "front": "What are the three steps to create an object and use it?",
+      "back": "1) Create it with the constructor, e.g. s1 = new Student('Ana', 11). 2) Call a method with **dot notation**, e.g. s1.show(). 3) Read or change an attribute the same way, e.g. s1.grade.",
+      "hint": "Start with how the object is made.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b4b4xk",
+      "kind": "example",
+      "front": "Given Counter objects a and b, what are a.count and b.count after a = new Counter(), b = new Counter(), a.add(), a.add(), b.add()?",
+      "back": "a.count is 2 and b.count is 1. Both start at 0, then each object's add changes only its own count.",
+      "hint": "Each object keeps its own count.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cqiivj",
+      "kind": "example",
+      "front": "After s = new Student('Ana', 11), what are s.name and s.grade, if the constructor assigns n to name and g to grade?",
+      "back": "s.name is 'Ana' and s.grade is 11. The constructor assigns each value to the matching attribute.",
+      "hint": "Match each value to its parameter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ch0etd",
+      "kind": "mistake",
+      "front": "A student says: I have written the Student class, so a student now exists. What is wrong?",
+      "back": "A **class** is only the template. No student exists until an object is created with new, such as s = new Student(...).",
+      "hint": "Compare a form with a filled-in copy.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0079ibz",
+      "kind": "mistake",
+      "front": "Why is writing show() alone wrong when you want to display one student's details?",
+      "back": "It does not say which object to use. Name the object first with **dot notation**, such as s1.show().",
+      "hint": "Which object's data should be shown?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "10atc3m",
+      "kind": "process",
+      "front": "In what order do you write a class, from its first line to its last?",
+      "back": "Give the class its name, list its attributes, write each method using those attributes, then end the class.",
+      "hint": "The class name always comes first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kehmq1",
+      "kind": "concept",
+      "front": "Why might a constructor refuse some values it receives?",
+      "back": "It can check a value before storing it, for example refusing a **negative grade**.",
+      "hint": "Think about values a grade should never have.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1g73gwd",
+      "kind": "mistake",
+      "front": "Inside a method, is an attribute just a separate variable?",
+      "back": "No. An **attribute** belongs to the object that called the method, so it holds that object's own value.",
+      "hint": "Whose data does the method use?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1npr5e0",
+      "kind": "concept",
+      "front": "Why can one method serve every object made from the same class?",
+      "back": "Each object runs the method using its own attributes, so the outputs differ when the attribute values differ.",
+      "hint": "Think about whose data is used.",
+      "sectionId": "s5"
+    }
+  ]
+}

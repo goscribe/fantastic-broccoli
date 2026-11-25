@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-7-1",
+  "topicCode": "4.7.1",
+  "topicName": "Adaptations, interdependence and competition",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:35.645Z",
+  "cards": [
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited feature that helps an organism survive and reproduce in its environment.",
+      "hint": "Think about what the feature helps the organism do.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01q7mnu",
+      "kind": "term",
+      "front": "What is competition in ecology?",
+      "back": "**Competition** occurs when organisms need the same resource and there is not enough for all of them.",
+      "hint": "Think about what happens when two organisms want the same thing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08xxa9i",
+      "kind": "concept",
+      "front": "What does interdependence mean between organisms?",
+      "back": "**Interdependence** means organisms rely on other organisms for resources or survival, so a change in one species can affect others.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1heryp7",
+      "kind": "term",
+      "front": "What is a structural adaptation?",
+      "back": "A **structural adaptation** is a physical feature, such as thick fur or deep roots, that helps an organism survive.",
+      "hint": "Think about body parts or shape, not actions.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mufzfl",
+      "kind": "term",
+      "front": "What is a functional adaptation?",
+      "back": "A **functional adaptation** is an internal process, such as producing concentrated urine to reduce water loss.",
+      "hint": "Think about what happens inside the body rather than outside it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "133qccb",
+      "kind": "concept",
+      "front": "Why can the same feature help in one environment but harm in another?",
+      "back": "An adaptation is only useful in a particular environment. Thick fur reduces heat loss in the cold but could make cooling difficult in a hot environment.",
+      "hint": "Think about what the surroundings are doing to the animal's heat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1e745ya",
+      "kind": "concept",
+      "front": "How do animals in cold environments reduce heat loss?",
+      "back": "They may have thick **insulation** and a low surface-area-to-volume ratio, both of which reduce heat loss.",
+      "hint": "Think about body covering and body shape.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18hssbc",
+      "kind": "concept",
+      "front": "How can an animal in a hot, dry habitat conserve water?",
+      "back": "It may be active at night and produce **concentrated urine**, which reduces water loss.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15lg3zg",
+      "kind": "concept",
+      "front": "How do small leaves and spines help a plant in a dry habitat?",
+      "back": "They reduce the **surface area** available for water loss.",
+      "hint": "Think about the surfaces through which a plant loses water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1d8j9x3",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an organism develops an adaptation because it needs one?",
+      "back": "Adaptations do not develop in response to need. Inherited features that improve survival become more common over **generations**.",
+      "hint": "Think about where new inherited features come from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pyfmhe",
+      "kind": "term",
+      "front": "What is a habitat?",
+      "back": "A **habitat** is the place where an organism lives, providing the conditions and resources it needs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fuqplo",
+      "kind": "concept",
+      "front": "How does an animal visiting a flower help the plant?",
+      "back": "It feeds on **nectar** while transferring pollen between flowers, which helps the plant reproduce.",
+      "hint": "Think about what the animal gets from the flower and what it carries away.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09a9kl9",
+      "kind": "concept",
+      "front": "Why would a fall in prey numbers affect their predators?",
+      "back": "Predators depend on prey for food, so with fewer prey some predators may not get enough food to survive or reproduce.",
+      "hint": "Think about which organism relies on which.",
+      "sectionId": "s4"
+    }
+  ]
+}

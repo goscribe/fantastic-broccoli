@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Zonation, succession and change",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:27.028Z",
+  "cards": [
+    {
+      "id": "1ld29ft",
+      "kind": "concept",
+      "front": "How does succession turn bare rock into a community that can support trees?",
+      "back": "Pioneer species such as lichens and mosses colonise, and as they die they add organic matter that forms **soil**. Better soil lets grasses, shrubs and then trees establish in turn.",
+      "hint": "Think about what the first arrivals leave behind.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05i4mh6",
+      "kind": "concept",
+      "front": "Why does secondary succession usually proceed faster than primary succession?",
+      "back": "Because **soil** already exists after a disturbance, along with seeds, roots and soil organisms. Primary succession must first build soil on bare rock or sediment.",
+      "hint": "Compare what is present at the start in each case.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yah2ir",
+      "kind": "concept",
+      "front": "What happens to succession after a large disturbance such as a severe fire?",
+      "back": "Succession restarts at an **earlier stage**. Light reaches the ground, fast-growing pioneer species spread, and taller plants return over time.",
+      "hint": "Consider what the disturbance removes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17gq344",
+      "kind": "term",
+      "front": "What is zonation?",
+      "back": "The arrangement of **communities** in distinct bands along an environmental gradient, such as bands of plants up a mountain.",
+      "hint": "Think of bands across space, not change over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bnoad1",
+      "kind": "term",
+      "front": "What is an environmental gradient?",
+      "back": "A gradual change in a **physical factor**, such as temperature, salinity or exposure, across a distance.",
+      "hint": "The key word is gradual.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0oc4nqo",
+      "kind": "term",
+      "front": "What is a climax community?",
+      "back": "The relatively **stable community** that develops at the end of succession under the local climate and soil.",
+      "hint": "It is the end point of succession.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lwd9dv",
+      "kind": "mistake",
+      "front": "A student says the climax community is a permanent final state. Why is this wrong?",
+      "back": "It is only **stable under current conditions**. Disturbance or climate change can alter it, so it is not permanent.",
+      "hint": "Consider what could change it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "163pkpj",
+      "kind": "process",
+      "front": "Outline the steps of succession from bare ground to a climax community.",
+      "back": "1 **Pioneer species** colonise bare ground. 2 They add organic matter that forms soil. 3 Grasses and herbs, then shrubs, then trees replace earlier species. 4 The process ends in a climax community.",
+      "hint": "Four stages, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "169qq3v",
+      "kind": "term",
+      "front": "What is primary succession?",
+      "back": "Succession beginning on **bare surfaces with no soil**, such as new volcanic rock or ground exposed by a retreating glacier.",
+      "hint": "Nothing is there at the start.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07hyrlm",
+      "kind": "term",
+      "front": "What is a disturbance in ecology?",
+      "back": "An **event**, such as fire, flood, storm or human clearing, that damages or removes part of a community.",
+      "hint": "Think of sudden events.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03a3tgx",
+      "kind": "concept",
+      "front": "How can a disturbance change community structure?",
+      "back": "It changes **which species** are present, how many individuals each has and how the habitat is layered. After a fire, tall trees may be absent while ground plants are abundant.",
+      "hint": "Structure covers more than species names.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05hqhqk",
+      "kind": "term",
+      "front": "What is resilience in a community?",
+      "back": "The **ability to return** to its earlier state after a disturbance. Recovery is faster when soil, seeds and nearby populations remain.",
+      "hint": "Think of bouncing back.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1dxo7f9",
+      "kind": "mistake",
+      "front": "Does a repeated disturbance let a community recover in the same way as a single one?",
+      "back": "No. If a disturbance **repeats**, later stages never develop, so the community is held at an early stage, as with a lawn mown regularly.",
+      "hint": "Think about what regular mowing prevents.",
+      "sectionId": "s4"
+    }
+  ]
+}

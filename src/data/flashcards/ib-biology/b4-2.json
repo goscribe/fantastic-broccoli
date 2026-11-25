@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-biology",
+  "topicId": "b4-2",
+  "topicCode": "B4.2",
+  "topicName": "Ecological niches",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:30:44.167Z",
+  "cards": [
+    {
+      "id": "1w9c9p3",
+      "kind": "concept",
+      "front": "What is an ecological niche, and how does it differ from a habitat?",
+      "back": "An **ecological niche** is a species' role in its environment: the conditions it needs, the resources it uses and its interactions with other organisms. A habitat is only the place where it lives.",
+      "hint": "Think role, not location.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04jbdd5",
+      "kind": "concept",
+      "front": "Why might a species use fewer resources in practice than it could in principle?",
+      "back": "Its **realised niche** is what it actually uses. Its **fundamental niche** is what it could use without other species' interactions. Stronger competitors can stop it using part of its fundamental niche, so the realised niche is narrower.",
+      "hint": "Compare what it could use with what it actually uses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gbds9j",
+      "kind": "concept",
+      "front": "How can species living in the same habitat coexist?",
+      "back": "Through **resource partitioning**: they use a shared resource in different ways, such as different foods, feeding places or active times. This reduces how often they need the same limited resource.",
+      "hint": "Think about how they divide up the resource.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18nld3x",
+      "kind": "term",
+      "front": "What is a tolerance range?",
+      "back": "The range of an environmental condition, such as temperature or water availability, within which an organism can **survive and reproduce**.",
+      "hint": "Think of the limits a species can cope with.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "047uf5o",
+      "kind": "term",
+      "front": "What is niche overlap?",
+      "back": "The extent to which species use the **same resources** or require the same conditions.",
+      "hint": "Think about shared needs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14lxs99",
+      "kind": "mistake",
+      "front": "Is an ecological niche simply the place where a species lives?",
+      "back": "No. A niche is **not just a location**. Species in the same habitat can use it in different ways, so the niche describes how the species lives there.",
+      "hint": "Compare with the definition of habitat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1xpdsxg",
+      "kind": "mistake",
+      "front": "Does high niche overlap automatically prove that competition is happening?",
+      "back": "No. Overlap means species need some of the same resources, but **competition** needs a limited shared resource. Overlap alone does not prove competition occurs.",
+      "hint": "Check whether the shared resource is limited.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "14km1l5",
+      "kind": "concept",
+      "front": "Why do two species that depend on exactly the same limiting resources not usually coexist indefinitely?",
+      "back": "They must compete for the same limited resource under stable conditions. **Reduced niche overlap** helps species coexist.",
+      "hint": "Think about what happens when a limited resource is shared exactly.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tbvxdj",
+      "kind": "concept",
+      "front": "How can environmental change alter the niche a species uses?",
+      "back": "It changes the conditions or resources available. The species may use different resources or occupy fewer sites, and it may disappear locally if it cannot survive or reproduce.",
+      "hint": "Name the condition or resource that changed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g8uv95",
+      "kind": "concept",
+      "front": "What might happen to a species' niche if a competitor disappears?",
+      "back": "It may use resources it previously could not access, so its **realised niche** can widen.",
+      "hint": "Think about what the competitor was blocking.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jxxe5c",
+      "kind": "mistake",
+      "front": "If a species starts using a new food after a drought, has it evolved?",
+      "back": "Not necessarily. A **change in resource use** does not mean evolution. Individuals may use a different part of their existing range of resources.",
+      "hint": "Consider what is already within the species' range.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0txwex5",
+      "kind": "example",
+      "front": "Two bird species feed in the same tree. How could they partition the resource?",
+      "back": "One searches the **outer branches** for insects, while the other feeds near the trunk. Both use the tree, but their feeding niches differ, so they reduce competition.",
+      "hint": "Think about where in the tree each bird feeds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f0uu9p",
+      "kind": "term",
+      "front": "What is a fundamental niche?",
+      "back": "The conditions and resources a species **could use** without limiting interactions from other species.",
+      "hint": "Think about what is possible without competitors.",
+      "sectionId": "s3"
+    }
+  ]
+}

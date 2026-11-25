@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "Introduction to reaction mechanisms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:43.158Z",
+  "cards": [
+    {
+      "id": "0z5xixl",
+      "kind": "term",
+      "front": "What is a reaction mechanism?",
+      "back": "A **reaction mechanism** is a proposed sequence of elementary steps showing a possible route from reactants to products. It is more than the starting and ending substances.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0j04t2e",
+      "kind": "process",
+      "front": "How do you get the overall reaction from a mechanism's steps?",
+      "back": "**Add** all the steps, then **cancel** equal amounts of substances that appear on both sides. The remaining equation is the overall reaction.",
+      "hint": "Cancel only equal amounts of the same substance.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mf6et6",
+      "kind": "concept",
+      "front": "How can you tell an intermediate from a catalyst?",
+      "back": "An **intermediate** is formed before it is consumed. A **catalyst** is consumed before it is regenerated. Both cancel from the overall equation.",
+      "hint": "Look at which event happens first."
+    },
+    {
+      "id": "0pzqope",
+      "kind": "example",
+      "front": "What is the net equation for $\\mathrm{NO_2+NO_2\\rightarrow NO_3+NO}$ followed by $\\mathrm{NO_3+CO\\rightarrow NO_2+CO_2}$?",
+      "back": "$\\mathrm{NO_2+CO\\rightarrow NO+CO_2}$. Adding the steps and canceling one $\\mathrm{NO_3}$ and one $\\mathrm{NO_2}$ gives this.",
+      "hint": "Write out every substance on each side before canceling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0oxxf2a",
+      "kind": "term",
+      "front": "What is an intermediate?",
+      "back": "An **intermediate** is produced in one mechanism step and consumed in a later step. It therefore cancels when the steps are added.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zdzx3o",
+      "kind": "mistake",
+      "front": "Is every substance that cancels out of the steps an intermediate?",
+      "back": "No. A substance consumed first and regenerated later is a **catalyst**, not an intermediate.",
+      "hint": "Check the order in which the substance appears.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ek7ak3",
+      "kind": "example",
+      "front": "Steps $\\mathrm{A+C\\rightarrow AC}$ and $\\mathrm{AC+B\\rightarrow AB+C}$ give what overall equation?",
+      "back": "$\\mathrm{A+B\\rightarrow AB}$. C is a catalyst and AC is an intermediate, so neither appears in the net equation.",
+      "hint": "Cancel C and AC after adding the steps.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18b791d",
+      "kind": "term",
+      "front": "What does one elementary step represent?",
+      "back": "One **molecular event** within the reaction mechanism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01q4f85",
+      "kind": "concept",
+      "front": "Why is CO a reactant, not an intermediate, in the NO2 example?",
+      "back": "CO enters in the second step and becomes part of $\\mathrm{CO_2}$ without being regenerated. So it stays on the reactant side of the net equation.",
+      "hint": "Ask whether the substance is regenerated later.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17lv26d",
+      "kind": "concept",
+      "front": "Why can the overall reaction alone not establish a unique mechanism?",
+      "back": "It shows only the **net change**. Different sequences of steps can produce the same net change.",
+      "hint": "Think about what cancels when steps are added.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12juh9v",
+      "kind": "term",
+      "front": "What is a regenerated substance?",
+      "back": "A **regenerated substance** is consumed in one mechanism step and produced again in a later step.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w5b8tu",
+      "kind": "term",
+      "front": "What is a net equation?",
+      "back": "A **net equation** shows the reactants consumed and products formed after matching substances cancel. It leaves out substances that were produced and later consumed.",
+      "sectionId": "s2"
+    }
+  ]
+}

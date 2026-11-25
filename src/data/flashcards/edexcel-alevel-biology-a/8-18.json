@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-18",
+  "topicCode": "8.18",
+  "topicName": "Risks and benefits of GMOs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:14.707Z",
+  "cards": [
+    {
+      "id": "0ga5huo",
+      "kind": "concept",
+      "front": "Why can a GMO-made medicine give a more reliable supply than one extracted from animal or human tissue?",
+      "back": "Growing GM microorganisms in **fermenters** gives large, steady amounts at consistent quality, so supply does not depend on donors or animals.",
+      "hint": "Compare where the drug comes from in each case.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d6k24m",
+      "kind": "concept",
+      "front": "Why might a protein made in bacteria differ from the natural human protein?",
+      "back": "Bacteria cannot add **sugar groups** to proteins, so the altered protein could be less effective or could trigger an immune response.",
+      "hint": "Think about how human cells finish making a protein.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n9npdu",
+      "kind": "process",
+      "front": "What steps should a strong answer follow when discussing whether GMO medicines are worth using?",
+      "back": "State the benefit, the risk and the evidence for each argument, give at least one argument for and one against, then reach a justified conclusion.",
+      "hint": "Think about the order a good argument follows.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "13pkolj",
+      "kind": "term",
+      "front": "What is a genetically modified organism (GMO)?",
+      "back": "An organism whose DNA has been altered, often by adding a **gene** from another species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ywlezh",
+      "kind": "term",
+      "front": "What is an allergic reaction?",
+      "back": "An immune response to a normally harmless substance, such as a protein.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1h0ui98",
+      "kind": "concept",
+      "front": "Why are trials needed before newer GMO products are used?",
+      "back": "Long-term effects of newer products are hard to predict, so careful testing in trials is needed first.",
+      "hint": "Think about what can be known before a product has been used for years.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jaw8rr",
+      "kind": "term",
+      "front": "What is gene flow?",
+      "back": "The transfer of genes from one population to another through breeding.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dbgdjm",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume a GMO is harmful just because it has been modified?",
+      "back": "Modification alone does not make an organism harmful; the risk depends on the **gene**, the organism and how it is contained.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e4rshz",
+      "kind": "concept",
+      "front": "Why is GM bacteria in a sealed fermenter lower risk than GM crops in open fields?",
+      "back": "Sealed fermenters keep the bacteria from escaping or breeding with wild species, whereas crops can cross with wild relatives and spread genes.",
+      "hint": "Compare how easily each organism could reach wild populations.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0u3hrmo",
+      "kind": "concept",
+      "front": "Why are antibiotic resistance marker genes a concern?",
+      "back": "If they pass to disease-causing bacteria, infections could become harder to treat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ehw14x",
+      "kind": "term",
+      "front": "What is a patent?",
+      "back": "A legal right giving an inventor sole control over making and selling an invention for a set period.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ks8g14",
+      "kind": "concept",
+      "front": "How can a patent limit patients' access to a GMO-made drug?",
+      "back": "The company can charge high prices, so poorer patients or health services may be unable to afford the treatment.",
+      "hint": "Think about who decides the price while the patent lasts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13jvsbs",
+      "kind": "concept",
+      "front": "Why do GM animals raise more welfare concerns than GM bacteria?",
+      "back": "GM animals may suffer harm or be kept only to make a drug, whereas GM bacteria raise fewer welfare questions, though some people object on principle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zzgjxi",
+      "kind": "term",
+      "front": "What is a risk assessment?",
+      "back": "An evaluation of how likely a harm is to occur and how serious it would be.",
+      "sectionId": "s5"
+    }
+  ]
+}

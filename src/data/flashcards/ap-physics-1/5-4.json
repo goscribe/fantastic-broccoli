@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "5-4",
+  "topicCode": "5.4",
+  "topicName": "Rotational inertia",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:54.610Z",
+  "cards": [
+    {
+      "id": "0rx9ag3",
+      "kind": "term",
+      "front": "What is rotational inertia, and what are its symbol and SI unit?",
+      "back": "**Rotational inertia** ($I$) is an object's resistance to changes in its rotation about a chosen axis. Its SI unit is $\\mathrm{kg\\,m^2}$.",
+      "hint": "It plays the role mass plays for straight-line motion.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "037jxgs",
+      "kind": "concept",
+      "front": "Why does moving mass farther from the axis increase rotational inertia?",
+      "back": "Each piece of mass adds $mr^2$ to the total, so the same mass farther out contributes much more. The **square** of the distance makes the effect large.",
+      "hint": "Look closely at the $r^2$ term.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fa9qpn",
+      "kind": "concept",
+      "front": "Why does the same rod have different rotational inertias about different axes?",
+      "back": "The mass has not changed, but about one end more of the mass is farther from the **axis**, so $I$ is larger. Rotational inertia depends on the axis and the mass distribution.",
+      "hint": "Compare the center axis with the end axis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0epmx83",
+      "kind": "term",
+      "front": "What is a point mass in rotational inertia calculations?",
+      "back": "A **point mass** is an object treated as having all its mass at one point, so its size is ignored. Its contribution is $mr^2$, where $r$ is its distance from the axis.",
+      "hint": "Think about when an object's shape can be left out of the calculation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1o5wm8b",
+      "kind": "formula",
+      "front": "What is the rotational inertia of a system of separate point masses, and what does each symbol mean?",
+      "back": "$I = \\sum mr^2$, where $m$ is each mass and $r$ is its distance from the **axis**. Add the terms for all masses. Unit: $\\mathrm{kg\\,m^2}$.",
+      "hint": "The $\\sum$ means add over every mass.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f1sczf",
+      "kind": "process",
+      "front": "What are the steps to find the rotational inertia of separate masses on a light rod?",
+      "back": "1) Find each mass's distance from the **axis**. 2) Square each distance and multiply by its mass. 3) Add all the results. Masses on opposite sides still give positive terms.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1it8bd4",
+      "kind": "example",
+      "front": "A light rod has a 3.0 kg mass 0.40 m from an axis and a 1.0 kg mass 0.80 m from it, on opposite sides. Ignoring the rod's mass, what is $I$?",
+      "back": "$I = (3.0)(0.40)^2 + (1.0)(0.80)^2 = 0.48 + 0.64 = 1.12\\ \\mathrm{kg\\,m^2}$, about $1.1\\ \\mathrm{kg\\,m^2}$.",
+      "hint": "Square each distance before multiplying by mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0m96616",
+      "kind": "concept",
+      "front": "Which has the larger rotational inertia about its center: a hoop or a solid disk of the same mass and radius?",
+      "back": "The **hoop**, with $I = MR^2$, versus $\\frac{1}{2}MR^2$ for the disk. All of the hoop's mass sits at the rim, far from the axis.",
+      "hint": "Ask where the mass sits.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ajwjsd",
+      "kind": "formula",
+      "front": "What are the rotational inertias of a thin uniform rod of mass $M$ and length $L$, about its center and about one end?",
+      "back": "About the center, $I = \\frac{1}{12}ML^2$. About one end, $I = \\frac{1}{3}ML^2$. Both axes are perpendicular to the rod.",
+      "hint": "Two standard rod formulas.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "184nwv2",
+      "kind": "example",
+      "front": "A thin uniform rod has mass 3.0 kg and length 0.60 m. What is its rotational inertia about one end, perpendicular to its length?",
+      "back": "$I = \\frac{1}{3}(3.0)(0.60)^2 = 0.36\\ \\mathrm{kg\\,m^2}$.",
+      "hint": "Use the formula for an end axis.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wfgjz6",
+      "kind": "mistake",
+      "front": "A student says a rod has one rotational inertia no matter where it is spun. What is wrong?",
+      "back": "Wrong: $I$ depends on the **axis**. Right: name the axis each time. A rod has $\\frac{1}{12}ML^2$ about its center but $\\frac{1}{3}ML^2$ about its end.",
+      "hint": "Change the axis and see what happens.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1fhkx1r",
+      "kind": "mistake",
+      "front": "When finding $I$ for separate masses, a student measures distances between the masses. What is wrong?",
+      "back": "Wrong: distances must be measured from the **axis**, not from the other masses. Right: use each mass's distance to the axis, then square it and multiply by the mass.",
+      "hint": "Where is the axis?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09jtvp8",
+      "kind": "example",
+      "front": "A 1.5 kg point mass is 0.20 m from an axis and a 0.50 kg point mass is 0.60 m from the same axis. What is the total rotational inertia?",
+      "back": "$I = (1.5)(0.20)^2 + (0.50)(0.60)^2 = 0.060 + 0.18 = 0.24\\ \\mathrm{kg\\,m^2}$.",
+      "hint": "Add the $mr^2$ terms.",
+      "sectionId": "s2"
+    }
+  ]
+}

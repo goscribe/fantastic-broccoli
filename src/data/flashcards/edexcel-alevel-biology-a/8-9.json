@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-9",
+  "topicCode": "8.9",
+  "topicName": "Brain imaging",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:36:17.356Z",
+  "cards": [
+    {
+      "id": "0c1y22l",
+      "kind": "concept",
+      "front": "What is the difference between structural and functional brain imaging?",
+      "back": "**Structural imaging** shows the size, shape and position of brain structures. **Functional imaging** shows which regions are active at a given time.",
+      "hint": "Think about whether the image shows the layout or activity over time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ttue1y",
+      "kind": "concept",
+      "front": "How does a CT scan build an image of the brain?",
+      "back": "X-rays pass through the head from many angles, and detectors measure how much is absorbed. A computer combines these measurements into cross-sectional **slices**. Dense bone absorbs most and looks bright.",
+      "hint": "Recall the hand-and-X-ray idea from the start of the CT section.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17zy6hn",
+      "kind": "concept",
+      "front": "How does an MRI scan produce signals that differ between brain tissues?",
+      "back": "**Hydrogen nuclei** in the body's water line up in a strong magnetic field. Radio pulses knock them out of line, and as they return they give out signals that depend on water content. A computer turns these into slices.",
+      "hint": "Think about which atoms in the body the magnet affects.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0tk6wgb",
+      "kind": "term",
+      "front": "What is ionising radiation?",
+      "back": "**Ionising radiation** has enough energy to remove electrons from atoms, which can damage DNA and cells.",
+      "hint": "Think about what the energy does to atoms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wlkkts",
+      "kind": "term",
+      "front": "What is functional MRI (fMRI)?",
+      "back": "**fMRI** is a form of MRI that detects changes in blood oxygen levels to show which brain regions are active.",
+      "hint": "Compare it with the structural MRI described earlier.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a6mfvd",
+      "kind": "process",
+      "front": "What are the steps by which fMRI shows active regions of the brain?",
+      "back": "Active neurones use more **oxygen**, so blood flow to them increases. The scanner detects the change in oxygenated blood, and the computer marks active regions in colour.",
+      "hint": "Start with what active neurones need more of.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1xskhng",
+      "kind": "mistake",
+      "front": "Why is a brain scan not simply a photograph of the brain?",
+      "back": "A computer builds the image from **signals measured outside the head**, so the picture is constructed from measurements rather than captured directly.",
+      "hint": "Think about where the measurements are taken.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15qe4nh",
+      "kind": "concept",
+      "front": "Why is CT often chosen for a suspected brain bleed after a head injury?",
+      "back": "CT is **quick**, so treatment can start sooner. Fresh blood also looks brighter than brain tissue on CT slices, so it can be seen.",
+      "hint": "Think about how long the patient spends in the scanner.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1k1sexm",
+      "kind": "concept",
+      "front": "What is a drawback of MRI compared with CT for some patients?",
+      "back": "**Metal implants** can be unsafe in the strong magnet. MRI also takes longer in a narrow, noisy tube, which can be hard for a restless or very ill patient.",
+      "hint": "Think about the magnet and how long the patient must lie still.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0c7a92h",
+      "kind": "concept",
+      "front": "What is the main limitation shared by both CT and MRI scans?",
+      "back": "Both are **structural**, so neither shows activity directly. A functional method is needed to study function.",
+      "hint": "Compare what each scan image shows with what fMRI shows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01he724",
+      "kind": "mistake",
+      "front": "Why does an active region on an fMRI scan not prove it is essential for a task?",
+      "back": "fMRI measures **blood flow**, which is only an indirect measure of neurone activity. A region can be active during a task without being essential to it.",
+      "hint": "Think about what the scanner actually measures.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "094hp7r",
+      "kind": "concept",
+      "front": "How does a PET scan show which brain regions are active?",
+      "back": "The patient receives a small amount of a **radioactive tracer**, often a form of glucose. Active regions take up more of it, and detectors outside the head map where it collects.",
+      "hint": "Think about what active tissue needs more of.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0opf5jx",
+      "kind": "example",
+      "front": "A CT slice shows a bright white crescent just inside the skull, with one side of the brain squashed. What does this suggest?",
+      "back": "**Bleeding** between the skull and the brain, which presses on one side of the brain. Fresh blood looks brighter than brain tissue on CT.",
+      "hint": "Recall what dense material looks like on a CT slice.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0dabaku",
+      "kind": "mistake",
+      "front": "Why should one person's fMRI image be treated as weak evidence?",
+      "back": "One person's image is weak evidence. Results from **many people** carry more weight.",
+      "hint": "Think about how reliable a single sample is.",
+      "sectionId": "s6"
+    }
+  ]
+}

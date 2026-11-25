@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-5-1",
+  "topicCode": "5.5.1",
+  "topicName": "Exothermic and endothermic reactions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:54.547Z",
+  "cards": [
+    {
+      "id": "0jhne66",
+      "kind": "term",
+      "front": "What does an exothermic reaction do with energy?",
+      "back": "An **exothermic** reaction transfers energy from the reacting chemicals to their surroundings, usually as heat, so the mixture often warms up.",
+      "hint": "Think about which way the energy travels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07z0wmw",
+      "kind": "term",
+      "front": "What does an endothermic reaction do with energy?",
+      "back": "An **endothermic** reaction takes in energy from its surroundings, usually as heat, so the reaction mixture often cools.",
+      "hint": "Think about where the energy comes from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sa5bwu",
+      "kind": "concept",
+      "front": "How can temperature readings show whether a reaction is exothermic or endothermic?",
+      "back": "A **rise** in temperature shows an exothermic reaction, and a **fall** shows an endothermic one. Judge by the direction of the change, not its size.",
+      "hint": "Compare the final reading with the starting one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mfprb3",
+      "kind": "term",
+      "front": "What counts as the surroundings in a chemical reaction?",
+      "back": "Everything outside the reacting chemicals, such as the container and nearby air, that can receive or supply energy.",
+      "hint": "Think beyond the chemicals themselves.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1shta3i",
+      "kind": "concept",
+      "front": "Why are burning fuels useful for cooking and heating rooms?",
+      "back": "**Combustion** is exothermic, so burning fuel transfers energy to its surroundings as heat.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r8b28m",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an exothermic reaction makes energy disappear from the chemicals?",
+      "back": "Energy is not destroyed. It **transfers** from the reacting chemicals to their surroundings.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dqbihv",
+      "kind": "term",
+      "front": "What happens to a compound during thermal decomposition?",
+      "back": "It is broken down into simpler substances when **heated**. Calcium carbonate, for example, breaks down into calcium oxide and carbon dioxide.",
+      "hint": "Think about what the heat source is doing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0l0xp02",
+      "kind": "process",
+      "front": "What are the steps for finding the temperature change in a reaction?",
+      "back": "Record the **initial temperature** before mixing. After mixing, record the highest or lowest temperature reached. Subtract the initial temperature from that reading.",
+      "hint": "Start with the reading you take first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vb9zbb",
+      "kind": "example",
+      "front": "A mixture starts at 21 °C and its lowest reading is 16 °C. What is the temperature change?",
+      "back": "$16-21=-5\\,\\text{°C}$, so the reaction is **endothermic**.",
+      "hint": "Subtract the starting reading from the reading reached.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00gw4bs",
+      "kind": "formula",
+      "front": "What formula gives the temperature change of a reaction mixture?",
+      "back": "$\\text{temperature change} = \\text{final temperature} - \\text{initial temperature}$, in $\\text{°C}$. A negative value means the temperature fell.",
+      "hint": "Think about which reading goes first in the subtraction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01pf5j7",
+      "kind": "term",
+      "front": "What does a temperature probe measure during a reaction?",
+      "back": "Only the **mixture**, not every part of its surroundings. Heat may still transfer between the container and the air.",
+      "hint": "Consider where the probe is placed.",
+      "sectionId": "s4"
+    }
+  ]
+}

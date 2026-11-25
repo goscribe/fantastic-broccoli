@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "8-13",
+  "topicCode": "8.13",
+  "topicName": "Dose-response curves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:55.752Z",
+  "cards": [
+    {
+      "id": "0me6ruu",
+      "kind": "concept",
+      "front": "What does a dose-response curve plot on each axis?",
+      "back": "**Dose** goes on the horizontal axis and response goes on the vertical axis. Each point shows the share of the test group that responded at that dose.",
+      "hint": "Think about what you vary in a test and what you measure.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rzra5a",
+      "kind": "concept",
+      "front": "Why does a typical dose-response curve for a population have an S shape?",
+      "back": "Individuals differ in **sensitivity}. A few very sensitive people respond at low doses, most respond at middle doses so the curve is steep there, and almost everyone has responded by the top, so it levels off.",
+      "hint": "Picture how many individuals respond at low, middle and high doses.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04123iz",
+      "kind": "term",
+      "front": "What is the threshold dose?",
+      "back": "The **lowest dose** that produces a measurable response. Below it, no response is measured.",
+      "hint": "Look at where the flat start of the curve ends.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0otuuad",
+      "kind": "concept",
+      "front": "Why can a threshold exist for many pollutants?",
+      "back": "The body has **defenses**. The liver breaks down small amounts of many chemicals and cells repair minor damage, so harm appears only when the dose overwhelms them.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07rgg1r",
+      "kind": "mistake",
+      "front": "Why is a flat start on a dose-response graph not proof that a substance is harmless?",
+      "back": "A flat start only means no **response was measured** at those doses. It does not prove the substance is harmless in every way.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0e09bl4",
+      "kind": "concept",
+      "front": "Which curve shows the more toxic substance, and why?",
+      "back": "The curve lying further to the **left**, because a smaller dose of that substance gives the same response.",
+      "hint": "Compare the doses each substance needs to produce the same response.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jw7yr8",
+      "kind": "term",
+      "front": "What is the LD50?",
+      "back": "The **dose** that kills 50 percent of a test population within a stated time, usually given in mg/kg.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07vmrum",
+      "kind": "concept",
+      "front": "Why does the steepness of a dose-response curve matter for safety?",
+      "back": "On a **steep** curve, a small rise in dose moves the response from low to high, so there is little margin for error.",
+      "hint": "Consider how much dose change is needed to go from few to most individuals responding.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1pmiypm",
+      "kind": "formula",
+      "front": "How is the steepness of a dose-response curve between two points calculated?",
+      "back": "$\\text{steepness}=\\frac{\\text{rise in response (percentage points)}}{\\text{rise in dose (}\\text{mg/kg}\\text{)}}$. A larger value means a steeper curve.",
+      "hint": "Divide one change by the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0w3ykxj",
+      "kind": "example",
+      "front": "A test group responds 10% at 5 mg/kg and 90% at 9 mg/kg. What is the steepness between these two doses?",
+      "back": "$\\frac{80}{4}=20$. The response rises by **20** percentage points for each $1\\,\\text{mg/kg}$ of extra dose.",
+      "hint": "Find the change in response first, then the change in dose.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "177t6d3",
+      "kind": "process",
+      "front": "What are the three stages to describe when you explain a dose-response curve?",
+      "back": "A **slow rise** at low doses, a **steep rise** through the middle, then **leveling off** near the top. Say what each stage means for the group.",
+      "hint": "Think about how the curve looks from left to right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jkh729",
+      "kind": "concept",
+      "front": "How do regulators use a dose-response curve to set exposure limits?",
+      "back": "They set limits **below the threshold dose**, giving a margin of safety for people more sensitive than the test group.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0nbsf28",
+      "kind": "mistake",
+      "front": "Why can't animal or high-dose curves be applied directly to people?",
+      "back": "Most data come from animals or high-dose studies. Children, older adults and people with illness may respond at lower doses, so care is needed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0q5lgml",
+      "kind": "concept",
+      "front": "Why does a trace nutrient not follow a simple rising dose-response curve?",
+      "back": "Too little causes **deficiency}, a moderate amount is healthy, and too much causes poisoning. Safe limits must therefore work from both ends of the range.",
+      "hint": "Think about harm at both the low end and the high end."
+    }
+  ]
+}

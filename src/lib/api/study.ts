@@ -1,3 +1,4 @@
+import { askSubjectStartCheck } from "@/lib/start-check-client";
 import {
   studySessionApi,
   mapSession,
@@ -47,12 +48,22 @@ export interface CreateSessionInput {
   quickStart?: boolean;
 }
 
+/**
+ * Starts a session in a subject. The first time a learner studies a subject
+ * (and when their rating has gone stale) the start check is shown first:
+ * "How confident are you?" plus a paper choice or a focus note; see
+ * `askSubjectStartCheck`. `ask: false` is for sessions made in bulk or on the
+ * learner's behalf, which must never open a question.
+ */
 export async function createStudySession(
   input: CreateSessionInput,
+  opts: { ask?: boolean } = {},
 ): Promise<StudySession | undefined> {
+  const startCheck = opts.ask === false ? undefined : await askSubjectStartCheck({ workspaceId: input.workspaceId, title: input.title });
   const row = await studySessionApi.create({
     ...input,
     depth: depthToApi[input.depth],
+    ...(startCheck ? { startCheck } : {}),
   });
   if (!row) return undefined;
   return mapSession(row);
@@ -74,11 +85,13 @@ export async function markWorksheetAnswer(input: {
   answerImage?: string;
 }): Promise<PartMarking> {
   const result = await studySessionApi.markWorksheetAnswer(input);
+  const summary = result.summary ?? result.marking.summary;
   return {
     points: result.marking.points,
     achievedPoints: result.achievedPoints,
     totalPoints: result.totalPoints,
     correct: result.correct,
+    ...(summary ? { summary } : {}),
   };
 }
 
@@ -345,3 +358,6 @@ export async function appendActivities(
     })),
   );
 }
+
+/** `createStudySession` without the start check: onboarding, sessions made in bulk, and mistake practice. */
+export const createStudySessionQuietly = (input: CreateSessionInput) => createStudySession(input, { ask: false });

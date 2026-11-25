@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-3-3",
+  "topicCode": "3.3.3",
+  "topicName": "Digestion and absorption",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:27.606Z",
+  "cards": [
+    {
+      "id": "1ttcmz3",
+      "kind": "concept",
+      "front": "Why must large food molecules be broken down before they can be absorbed?",
+      "back": "Large food molecules usually cannot cross the small intestine's lining. **Digestion** breaks them into smaller molecules that can be absorbed.",
+      "hint": "Think about what the intestinal lining is able to let through.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d9acyk",
+      "kind": "process",
+      "front": "How does glucose enter an epithelial cell from the lumen, even when its concentration is lower inside the cell?",
+      "back": "A **sodium–potassium pump** uses ATP to move sodium ions out of the cell, keeping sodium low inside. Sodium ions then enter with glucose through a **co-transporter**, so glucose moves against its gradient.",
+      "hint": "Start with the membrane facing the blood and work back to the lumen.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1pi4s99",
+      "kind": "mistake",
+      "front": "Why is amylase alone not enough to finish the digestion of starch?",
+      "back": "Amylase produces maltose and other short sugar chains, not all glucose. **Maltase** and other enzymes on the epithelial surface complete the breakdown to monosaccharides.",
+      "hint": "Ask where the final steps of carbohydrate digestion take place.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lk0ru4",
+      "kind": "term",
+      "front": "What is hydrolysis in the context of digestion?",
+      "back": "**Hydrolysis** is a reaction that breaks a chemical bond by using water. Digestive enzymes catalyse it.",
+      "hint": "Think about what the enzyme adds to the molecule during the reaction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18ix26d",
+      "kind": "term",
+      "front": "What does maltase do to maltose?",
+      "back": "**Maltase** hydrolyses maltose into two **glucose** molecules. It acts on the epithelial surface of the small intestine.",
+      "hint": "It acts on the product that amylase leaves behind.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02ml4ni",
+      "kind": "concept",
+      "front": "Why are both endopeptidases and exopeptidases needed to digest proteins?",
+      "back": "**Endopeptidases** cut peptide bonds inside a chain, creating more ends. **Exopeptidases** then remove amino acids from those ends.",
+      "hint": "Compare where on the chain each type of enzyme acts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uwm83e",
+      "kind": "term",
+      "front": "What do dipeptidases hydrolyse dipeptides into?",
+      "back": "**Amino acids**. Dipeptidases act on small chains of two amino acids, and these are the final products that get absorbed into the blood.",
+      "hint": "Consider the size of the chain that this enzyme acts on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ve7to7",
+      "kind": "process",
+      "front": "How are fats digested and then taken into the epithelial cells?",
+      "back": "**Bile salts** emulsify fat into droplets. **Lipase** hydrolyses triglycerides into fatty acids and monoglycerides. **Micelles** carry these to the epithelium, where triglycerides reform and are packaged into chylomicrons.",
+      "hint": "Start with what happens to the fat before any enzyme acts on it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f40fw2",
+      "kind": "mistake",
+      "front": "Why is emulsification by bile salts not the same as enzyme digestion of fat?",
+      "back": "Bile salts only split fat into smaller droplets, which increases the surface for lipase. They do not break chemical bonds. **Lipase** is the enzyme that hydrolyses the bonds.",
+      "hint": "Ask which step actually changes the chemical bonds in the fat.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ibjsv8",
+      "kind": "term",
+      "front": "What is a lacteal, and what does it receive from the epithelial cells?",
+      "back": "A **lacteal** is a lymph vessel inside a villus. It receives **chylomicrons** containing digested lipid products and carries them through the lymphatic system.",
+      "hint": "Think about the vessel in each villus that is not a blood capillary.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1t29611",
+      "kind": "concept",
+      "front": "Why do villi and microvilli make absorption more efficient in the small intestine?",
+      "back": "They greatly increase the surface area for absorption. Microvilli add membrane for enzymes and transport proteins. The thin epithelium and blood flow keep concentration gradients steep.",
+      "hint": "Consider both the surface area available and the distance substances must travel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0b73dtv",
+      "kind": "concept",
+      "front": "Why is glucose absorption described as secondary active transport?",
+      "back": "ATP powers the sodium–potassium pump, not the co-transporter itself. Glucose uptake therefore depends on the sodium gradient that the pump creates.",
+      "hint": "Ask where the energy for the co-transporter directly comes from.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1uouojs",
+      "kind": "concept",
+      "front": "Which feature of enzymes explains why different enzymes are needed for carbohydrates, proteins and lipids?",
+      "back": "Each enzyme has an **active site** suited to particular molecules and bonds, so it only acts on a specific type of substrate.",
+      "hint": "Look at what the opening section of the note says about enzymes and their targets.",
+      "sectionId": "s1"
+    }
+  ]
+}

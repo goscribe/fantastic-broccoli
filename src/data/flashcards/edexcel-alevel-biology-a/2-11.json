@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "2-11",
+  "topicCode": "2.11",
+  "topicName": "Semi-conservative DNA replication",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:09.819Z",
+  "cards": [
+    {
+      "id": "01ie0ls",
+      "kind": "term",
+      "front": "What is semi-conservative replication?",
+      "back": "**Semi-conservative replication** is copying in which each new DNA molecule keeps one original strand and gains one newly made strand.",
+      "hint": "Contrast it with how a photocopier treats its original page.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0a7cfra",
+      "kind": "concept",
+      "front": "How does helicase differ from DNA polymerase in replication?",
+      "back": "**Helicase** breaks hydrogen bonds between complementary bases to separate the strands. **DNA polymerase** joins free nucleotides into a new strand by forming phosphodiester bonds.",
+      "hint": "Think about which bonds are broken first and which are built.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0j586f2",
+      "kind": "concept",
+      "front": "Describe what the density gradient centrifugation results showed about old and new DNA in the nitrogen experiment.",
+      "back": "Old and new DNA differed only in **density**. Heavy nitrogen-15 DNA settles lower in the tube than light nitrogen-14 DNA, so each type forms its own band.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mpm9hg",
+      "kind": "process",
+      "front": "What are the steps of semi-conservative replication, in order?",
+      "back": "1) Helicase breaks hydrogen bonds and separates the strands. 2) Each strand acts as a **template**. 3) Free nucleotides pair with exposed bases (A with T, C with G). 4) DNA polymerase joins them with phosphodiester bonds. 5) Each new strand coils with its template.",
+      "hint": "Start with the enzyme that opens the double helix.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fhhomz",
+      "kind": "formula",
+      "front": "How many DNA molecules are produced from one molecule after $n$ rounds of replication?",
+      "back": "$2^{n}$ molecules, where $n$ is the number of rounds of replication.",
+      "hint": "Think about what one round does to the number of molecules.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "18wirte",
+      "kind": "example",
+      "front": "One DNA molecule with two nitrogen-15 strands is copied three times in nitrogen-14. What proportion of molecules still contain a nitrogen-15 strand?",
+      "back": "$\\frac{2}{8}=\\frac{1}{4}$. There are $2^{3}=8$ molecules, and only 2 keep an original nitrogen-15 strand.",
+      "hint": "Count the total molecules first, then those with the original heavy strand.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tyhhyj",
+      "kind": "mistake",
+      "front": "Why is an intermediate band not evidence that half of each strand is new?",
+      "back": "**Wrong**: half of each strand is new. **Right**: every molecule has one heavy and one light strand, so each has the same intermediate density.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1nnxbgn",
+      "kind": "concept",
+      "front": "Why does a single intermediate band after one round rule out the conservative model?",
+      "back": "Conservative replication predicts one heavy band and one light band, not one intermediate band. The intermediate band fits only **semi-conservative** copying.",
+      "hint": "Compare the predicted bands in the table for each model.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i0zf8u",
+      "kind": "concept",
+      "front": "Why do two bands after two rounds rule out the dispersive model?",
+      "back": "**Dispersive** replication predicts that all molecules have the same mixed density, giving one band. Two bands mean some molecules differ in density from others.",
+      "hint": "Consider how many bands the dispersive model predicts at each generation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1le5nse",
+      "kind": "term",
+      "front": "What type of bond joins the sugar of one nucleotide to the phosphate of the next?",
+      "back": "A **phosphodiester bond**, formed in a condensation reaction, which builds a continuous chain along each new strand.",
+      "hint": "Consider which bonds hold a single strand together, not those between bases.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vfc9sk",
+      "kind": "concept",
+      "front": "Why is one new strand made in short pieces rather than continuously?",
+      "back": "DNA polymerase adds nucleotides only to the 3′ end, so the strand made away from the opening is built in short pieces. **DNA ligase** later joins these pieces.",
+      "hint": "Consider the direction each template strand runs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vlo5qo",
+      "kind": "term",
+      "front": "What is an isotope?",
+      "back": "An **isotope** is a form of an element whose atoms have a different number of neutrons, so a different mass. Nitrogen-14 and nitrogen-15 are isotopes of nitrogen.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1we2o1y",
+      "kind": "concept",
+      "front": "Describe how density gradient centrifugation separates DNA molecules.",
+      "back": "Molecules spin through a solution that is denser towards the bottom, so heavy DNA settles lower than light DNA and forms a **band** at its own position.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08hfnpn",
+      "kind": "mistake",
+      "front": "Why is it wrong to think the original double helix stays intact after replication?",
+      "back": "**Wrong**: the original molecule stays together. **Right**: its two strands separate, and each ends up in a different new molecule.",
+      "sectionId": "s1"
+    }
+  ]
+}

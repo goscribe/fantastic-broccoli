@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Limits and limit notation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:30.144Z",
+  "cards": [
+    {
+      "id": "1qxnpa6",
+      "kind": "term",
+      "front": "What is a limit?",
+      "back": "A **limit** is the value a function approaches as its input gets close to a chosen number. It describes nearby behavior, not necessarily the value at that input.",
+      "hint": "Think about approaching, not arriving.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xfvv3v",
+      "kind": "concept",
+      "front": "When does a two-sided limit exist at $x=a$?",
+      "back": "When both **one-sided limits** exist and equal the same finite value. The function's value at $a$ does not decide this.",
+      "hint": "Check each side separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xzag1y",
+      "kind": "concept",
+      "front": "Why can a limit exist even when the function's value at that input is different?",
+      "back": "A **limit** depends on the outputs the curve approaches from both sides. The filled point shows only the function value at one input, so check the approach first.",
+      "hint": "Look at what the curve approaches, not just one point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1nsbfai",
+      "kind": "formula",
+      "front": "What does $\\lim_{x\\to a}f(x)=L$ mean, and what does the arrow mean?",
+      "back": "The output $f(x)$ **approaches** $L$ as the input $x$ approaches $a$. The arrow means approaches, not that $x$ equals $a$.",
+      "hint": "Read it as a sentence about nearby inputs.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gqwgup",
+      "kind": "formula",
+      "front": "What do $\\lim_{x\\to a^-}f(x)$ and $\\lim_{x\\to a^+}f(x)$ mean?",
+      "back": "The **left-hand** limit uses inputs below $a$, and the **right-hand** limit uses inputs above $a$. The plus and minus signs show direction, not whether outputs are positive or negative.",
+      "hint": "Which side of $a$ is each one reading?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s3kv7p",
+      "kind": "process",
+      "front": "How do you test whether a two-sided limit exists?",
+      "back": "1) Find the left-hand limit. 2) Find the right-hand limit. 3) If both exist and match the same finite value $L$, the two-sided limit is $L$; otherwise it does not exist.",
+      "hint": "Work through the sides in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0n8ckm2",
+      "kind": "mistake",
+      "front": "A graph approaches different heights from each side of $x=a$. A student reports one number as the limit. What is wrong?",
+      "back": "Mistake: reporting one value. Correct: state the left-hand and right-hand limits separately and say the two-sided limit does not exist because they differ.",
+      "hint": "Do the sides agree?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vb5iem",
+      "kind": "mistake",
+      "front": "A student reads the height of a filled point as the limit. What is wrong?",
+      "back": "The **filled point** gives the function value, which can differ from the limit. Check the curve's approached height from both sides before deciding the limit.",
+      "hint": "Compare the point with nearby curve values.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ydkpfj",
+      "kind": "term",
+      "front": "What is an open circle on a graph?",
+      "back": "An **open circle** marks a point excluded from the graph at that location. It does not, by itself, determine the limit.",
+      "hint": "Compare it with the filled point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hco5zz",
+      "kind": "term",
+      "front": "What is a function value, written $f(a)$?",
+      "back": "A **function value** is the output assigned to the input $a$, such as a plotted point's height. It answers a different question from the limit.",
+      "hint": "It is about one specific input.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19jibu6",
+      "kind": "example",
+      "front": "A height graph $h(t)$ approaches 3 m from both sides of $t=2$ s, and a filled point at $t=2$ s has height 5 m. What are $\\lim_{t\\to 2}h(t)$ and $h(2)$?",
+      "back": "$\\lim_{t\\to 2}h(t)=3$ m, because both sides approach 3 m. $h(2)=5$ m, the filled point's value.",
+      "hint": "Read the curve and the point separately.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1stpo8j",
+      "kind": "example",
+      "front": "A graph approaches 2 m as $x$ nears 1 from the left and 4 m from the right. Does $\\lim_{x\\to 1}f(x)$ exist?",
+      "back": "No. $\\lim_{x\\to 1^-}f(x)=2$ m and $\\lim_{x\\to 1^+}f(x)=4$ m differ, so the two-sided limit does not exist.",
+      "hint": "Compare the two one-sided limits.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0whn8pj",
+      "kind": "concept",
+      "front": "How do you choose the right limit notation for a graph?",
+      "back": "Use $x\\to a^-$ when reading only the left side, $x\\to a^+$ for only the right side, and $x\\to a$ only when both sides **agree** on one value.",
+      "hint": "Match the notation to the sides you read.",
+      "sectionId": "s4"
+    }
+  ]
+}

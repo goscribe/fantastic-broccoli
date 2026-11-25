@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "7-3",
+  "topicCode": "7.3",
+  "topicName": "Representing and analyzing SHM",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:53.626Z",
+  "cards": [
+    {
+      "id": "0ftpezn",
+      "kind": "concept",
+      "front": "How does the acceleration of a simple harmonic oscillator compare in sign with its displacement?",
+      "back": "**Acceleration** always has the opposite sign to displacement, so the acceleration graph is an upside-down copy of the displacement graph.",
+      "hint": "Compare the sign of a with the sign of x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kiahey",
+      "kind": "formula",
+      "front": "What is angular frequency, and how is it related to frequency and period?",
+      "back": "$\\omega=2\\pi f=\\frac{2\\pi}{T}$, measured in $\\mathrm{rad/s}$. One full cycle corresponds to $2\\pi$ radians.",
+      "hint": "Think about how many radians fit in one full cycle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yktpla",
+      "kind": "concept",
+      "front": "Where is the velocity zero, and where is the speed greatest?",
+      "back": "Velocity is zero at the **turning points**, where the displacement graph has zero slope. Speed is greatest where the curve crosses zero, at equilibrium.",
+      "hint": "Look at the slope of the displacement graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c5i581",
+      "kind": "term",
+      "front": "What does sinusoidal mean?",
+      "back": "**Sinusoidal** describes motion that varies with time as a sine or cosine function, with constant amplitude and period.",
+      "hint": "Think of a smooth, repeating wave.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a6el3h",
+      "kind": "formula",
+      "front": "Write the displacement equation for an oscillator released from rest at $+A$, and name its symbols.",
+      "back": "$x=A\\cos(2\\pi ft)$, where $A$ is the **amplitude** in metres, $f$ is the frequency in hertz and $t$ is the time in seconds.",
+      "hint": "A cosine starts at a maximum.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aomnuh",
+      "kind": "formula",
+      "front": "What are the maximum speed and maximum acceleration in simple harmonic motion?",
+      "back": "$v_{max}=A\\omega$ and $a_{max}=A\\omega^2$, where $A$ is the amplitude in metres and $\\omega$ is the angular frequency in $\\mathrm{rad/s}$.",
+      "hint": "Both depend on amplitude and angular frequency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "133x3u5",
+      "kind": "mistake",
+      "front": "Does zero velocity mean zero acceleration?",
+      "back": "No. At the **turning points** the velocity is zero, but the acceleration has its largest magnitude, $A\\omega^2$. Velocity and acceleration are never both largest together.",
+      "hint": "Check what happens at the turning points.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1248ddj",
+      "kind": "process",
+      "front": "How do you read amplitude, period and frequency from a displacement graph?",
+      "back": "Find the **amplitude** as the peak height above equilibrium. Find the period as the time between consecutive peaks. Then calculate $f=\\frac{1}{T}$ and $\\omega=\\frac{2\\pi}{T}$.",
+      "hint": "Start by locating equilibrium on the graph.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0uo4j0i",
+      "kind": "example",
+      "front": "An oscillator has amplitude $0.050\\ \\mathrm{m}$ and period $0.40\\ \\mathrm{s}$. What is its maximum speed?",
+      "back": "**0.79 m/s**. First $\\omega=\\frac{2\\pi}{0.40}=15.7\\ \\mathrm{rad/s}$, then $v_{max}=(0.050)(15.7)=0.79\\ \\mathrm{m/s}$.",
+      "hint": "Find the angular frequency first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "147hcuk",
+      "kind": "example",
+      "front": "A displacement graph has peaks of $+0.12\\ \\mathrm{m}$ at $t=0$ and $t=0.80\\ \\mathrm{s}$, with none between. What is the frequency?",
+      "back": "**1.25 Hz**. The period is 0.80 s, so $f=\\frac{1}{0.80}=1.25\\ \\mathrm{Hz}$. The amplitude is 0.12 m.",
+      "hint": "Frequency is the reciprocal of period.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bhyf9f",
+      "kind": "concept",
+      "front": "What does the phase of an oscillator tell you?",
+      "back": "**Phase** tells where in its cycle the oscillator is at $t=0$. A cosine graph starts at a maximum, while a sine graph starts at zero and moves up.",
+      "hint": "Think about where the curve begins.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qo6d1k",
+      "kind": "mistake",
+      "front": "Is amplitude the height from trough to peak?",
+      "back": "No. Amplitude is measured from **equilibrium** to the peak. The peak-to-peak height is twice the amplitude.",
+      "hint": "Where is the zero line of the graph?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12s37il",
+      "kind": "term",
+      "front": "What are the turning points of an oscillator?",
+      "back": "The **turning points** are the positions of maximum displacement, where the object momentarily stops and reverses direction.",
+      "hint": "They sit at the ends of the motion.",
+      "sectionId": "s2"
+    }
+  ]
+}

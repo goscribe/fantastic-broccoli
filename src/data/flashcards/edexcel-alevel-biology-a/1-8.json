@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-8",
+  "topicCode": "1.8",
+  "topicName": "Data on illness and mortality",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:50.493Z",
+  "cards": [
+    {
+      "id": "0vm9ldh",
+      "kind": "concept",
+      "front": "Why are rates, rather than raw counts, used to compare how much disease there is in two places?",
+      "back": "A **rate** relates the number of cases or deaths to the population size, so places of different sizes can be compared fairly. Raw counts mostly reflect how many people live there.",
+      "hint": "Think about what a large town has more of than a small village, even at equal risk.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "105pqdw",
+      "kind": "formula",
+      "front": "How is a rate per 100 000 people calculated from a number of cases and a population size?",
+      "back": "Divide the number of cases by the population size, then multiply by $100\\,000$: $\\text{rate}=\\frac{\\text{cases}}{\\text{population}}\\times100\\,000$. This puts every population on the same scale.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14cjsk8",
+      "kind": "mistake",
+      "front": "Why does a correlation between two variables not prove that one causes the other?",
+      "back": "A **correlation** only shows that two variables change together. The pattern may be caused by a third factor, or may be coincidence, so further controlled studies are needed before a cause is accepted.",
+      "hint": "Consider whether something else could be driving both variables.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1h5ci89",
+      "kind": "term",
+      "front": "What is the incidence of a disease?",
+      "back": "The **incidence** is the number of new cases of a disease in a population during a stated time, often given per 100 000 people.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1jmlf6o",
+      "kind": "term",
+      "front": "What is a mortality rate?",
+      "back": "The **mortality rate** is the number of deaths from a stated cause in a population during a stated time, often given per 100 000 people.",
+      "hint": "It is similar to incidence, but it counts something different.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04altmx",
+      "kind": "example",
+      "front": "Town A has 240 deaths from cardiovascular disease and a population of 60 000. What is its mortality rate per 100 000 people per year?",
+      "back": "**400 deaths per 100 000 people per year**, from $\\frac{240}{60\\,000}\\times100\\,000=400$.",
+      "hint": "Start by dividing the deaths by the population.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0flrwbs",
+      "kind": "mistake",
+      "front": "Why can a town with more deaths still have a lower mortality rate than a town with fewer deaths?",
+      "back": "Its population is much larger, so each death carries less weight in the rate. You should compare rates, not counts, when judging risk per person.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yqj0rd",
+      "kind": "concept",
+      "front": "What does looking at a trend over many years show that a single year's figure cannot?",
+      "back": "A **trend** is the overall direction of change over time, rising, falling or level, which shows whether a disease is becoming more or less common.",
+      "hint": "Think about what one data point cannot tell you about change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iuru4w",
+      "kind": "process",
+      "front": "What steps should you follow when describing a trend shown by rates over time?",
+      "back": "State the overall direction (rising, falling or level), quote start and end values with units, describe any peaks, dips or changes in steepness, then calculate a percentage change if asked.",
+      "hint": "Start with the big picture before the detail.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ik925u",
+      "kind": "example",
+      "front": "A cardiovascular mortality rate falls from 320 to 200 deaths per 100 000 people per year. What is the percentage change?",
+      "back": "**$-37.5\\%$**, a fall of 37.5%, from $\\frac{200-320}{320}\\times100=-37.5$.",
+      "hint": "Find the change first, then divide it by the starting value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06p8u90",
+      "kind": "concept",
+      "front": "How can splitting data by group, such as sex, age or region, point to a possible risk factor?",
+      "back": "If one group has a much higher rate, scientists ask what that group has in common. This can suggest a **risk factor** worth investigating, though it is not proof on its own.",
+      "hint": "Think about what makes one group different from the others.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19upl9z",
+      "kind": "concept",
+      "front": "Which kind of variable, other than the one being studied, can produce a misleading correlation?",
+      "back": "A **confounding variable**, such as age, which affects the outcome and may also differ between the groups being compared. Studies must control it before a cause is accepted.",
+      "hint": "Think about a factor that older people tend to have more of.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ogkbi1",
+      "kind": "concept",
+      "front": "Why can raw mortality rates mislead when comparing two populations with different age structures?",
+      "back": "Older populations have more cardiovascular deaths, so raw rates partly reflect age. An **age-standardised rate** adjusts for this, allowing a fairer comparison.",
+      "hint": "Think about which age group usually has more cardiovascular deaths.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0y6r9y4",
+      "kind": "mistake",
+      "front": "Why is it misleading to describe a rise from 2 to 4 per 100 000 as only a tiny change?",
+      "back": "It is a doubling in relative terms, even though the absolute rise is small. When evaluating data, state both the absolute change and the relative change.",
+      "hint": "Compare the change with the starting value.",
+      "sectionId": "s5"
+    }
+  ]
+}

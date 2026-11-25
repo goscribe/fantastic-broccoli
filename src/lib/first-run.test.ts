@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pastedSubjectTitle, topicStart, uploadSubjectTitle } from "./first-run";
+import { pastedSubjectTitle, shouldShowFirstRun, topicStart, uploadSubjectTitle } from "./first-run";
 import { clampMs, funnelPayload } from "./funnel";
 
 test("typed topics keep their wording and pick up the exam board", () => {
@@ -44,4 +44,15 @@ test("funnel payloads carry only clean numbers and the device hints", () => {
     },
   );
   assert.equal(clampMs(1e12), 86_400_000);
+});
+
+test("first run is only for a successful, empty answer; a failed load never looks like a new account", () => {
+  const base = { treeFailed: false, workspaceCount: 0, skipped: false, sessionCounts: [] as (number | null)[] };
+  assert.equal(shouldShowFirstRun(base), true, "no subjects at all");
+  assert.equal(shouldShowFirstRun({ ...base, treeFailed: true }), false, "the subjects request failed");
+  assert.equal(shouldShowFirstRun({ ...base, workspaceCount: 2, sessionCounts: [0, 0] }), true, "subjects but never studied");
+  assert.equal(shouldShowFirstRun({ ...base, workspaceCount: 2, sessionCounts: [0, 3] }), false);
+  assert.equal(shouldShowFirstRun({ ...base, workspaceCount: 2, sessionCounts: [0, null] }), false, "a failed sessions request is unknown, not zero");
+  assert.equal(shouldShowFirstRun({ ...base, workspaceCount: 2, skipped: true, sessionCounts: [0, 0] }), false);
+  assert.equal(shouldShowFirstRun({ ...base, workspaceCount: 7, sessionCounts: [] }), false, "established students skip the check");
 });

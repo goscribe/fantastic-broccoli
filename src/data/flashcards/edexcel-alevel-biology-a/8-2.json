@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "8-2",
+  "topicCode": "8.2",
+  "topicName": "Coordination of responses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:57.805Z",
+  "cards": [
+    {
+      "id": "15nr93a",
+      "kind": "concept",
+      "front": "What three parts does every coordinated response pass through, in order?",
+      "back": "A **receptor** detects the stimulus, the **coordinator** (the CNS) processes the information, and an **effector** (a muscle or gland) carries out the response.",
+      "hint": "Follow a signal from detection all the way to action.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0svoyt6",
+      "kind": "concept",
+      "front": "What does the central nervous system do during a coordinated response?",
+      "back": "It receives impulses from sensory neurones, compares information from many sources, and sends impulses along **motor neurones** to effectors.",
+      "hint": "Think about what arrives at the CNS and what leaves it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yt9l8l",
+      "kind": "process",
+      "front": "What is the order of the reflex arc when you pull your hand away from heat?",
+      "back": "Receptor in the skin, then a sensory neurone to the spinal cord, then a relay neurone, then a motor neurone to a muscle, which contracts and pulls the hand away.",
+      "hint": "Start where the heat is first detected.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04185w3",
+      "kind": "term",
+      "front": "What is a stimulus?",
+      "back": "A **stimulus** is a detectable change inside or outside an organism.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "15b7oy2",
+      "kind": "mistake",
+      "front": "Why is it wrong to say the central nervous system is the whole nervous system?",
+      "back": "The CNS is only the brain and spinal cord. Many neurones and nerves lie outside them and form the peripheral nervous system.",
+      "hint": "Count what lies outside the brain and spinal cord.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0q9wyla",
+      "kind": "term",
+      "front": "What is the peripheral nervous system?",
+      "back": "The **peripheral nervous system** is all the neurones and nerves outside the brain and spinal cord.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ja6jbj",
+      "kind": "term",
+      "front": "What is a nerve?",
+      "back": "A **nerve** is a bundle of axons from many neurones, wrapped together in a protective covering. Nerves reach every part of the body.",
+      "hint": "Think of a cable made of many wires.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xk9dyx",
+      "kind": "term",
+      "front": "What is a reflex?",
+      "back": "A **reflex** is a quick, automatic response to a stimulus that does not need a conscious decision by the brain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06pom8c",
+      "kind": "term",
+      "front": "What is the name for the route impulses take during a reflex?",
+      "back": "The **reflex arc** is the pathway taken by impulses from a receptor to an effector.",
+      "hint": "The question is about the path, not the response itself.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1eg9ax5",
+      "kind": "concept",
+      "front": "How can the spinal cord produce a response without the brain deciding it?",
+      "back": "The spinal cord coordinates simple reflexes itself, passing impulses from sensory neurones to motor neurones without waiting for the brain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cf378s",
+      "kind": "concept",
+      "front": "Why is the pain from a hot object felt just after the hand has already moved?",
+      "back": "Other relay neurones in the reflex send impulses up to the brain, so the brain is informed after the response has happened.",
+      "hint": "Follow the branch of the pathway that goes up, not the one that goes to the muscle.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "045cfgt",
+      "kind": "concept",
+      "front": "How do reflexes protect the body?",
+      "back": "They give a very fast response that limits harm, such as tissue damage from heat or damage to the eye. They need no learning, so they work the first time.",
+      "hint": "Consider what speed can prevent.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0mwdyyd",
+      "kind": "concept",
+      "front": "Why is a voluntary response slower than a reflex but able to be adjusted to the situation?",
+      "back": "Areas of the brain plan the action along a longer pathway with more synapses, so the action can be tailored to the situation.",
+      "hint": "Compare how many areas of the brain are involved in each.",
+      "sectionId": "s5"
+    }
+  ]
+}

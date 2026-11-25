@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "2-2",
+  "topicCode": "2.2",
+  "topicName": "Two categorical variables: summary statistics",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:04.283Z",
+  "cards": [
+    {
+      "id": "1h3hq6z",
+      "kind": "concept",
+      "front": "What is the key difference between a conditional distribution and a marginal distribution?",
+      "back": "A **conditional distribution** describes one variable within a single group, dividing by that group's own total. A **marginal distribution** describes one variable using all units, ignoring the other variable.",
+      "hint": "Ask whether you are looking at one group or everyone.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k426qs",
+      "kind": "concept",
+      "front": "How can you tell whether two categorical variables are associated?",
+      "back": "Compare the **conditional distributions** across groups. If they differ noticeably, the variables are associated. If they are nearly identical, there is little or no association.",
+      "hint": "Compare the rows of percents, not the raw counts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11iqbhy",
+      "kind": "concept",
+      "front": "Does a strong association in an observational study prove that one variable causes the other?",
+      "back": "No. An **association** only shows the variables move together. Another linked factor could explain it, and only a randomized experiment supports cause and effect.",
+      "hint": "Think about who assigned the treatments.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ngzsbe",
+      "kind": "term",
+      "front": "What is a marginal distribution?",
+      "back": "The percent of all units in each category of one variable, **ignoring** the other variable. Each total is divided by the grand total of all units.",
+      "hint": "Look at the row or column totals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1watasc",
+      "kind": "formula",
+      "front": "What formula gives a conditional percent in a two-way table?",
+      "back": "$\\frac{\\text{cell count}}{\\text{group total}}$. The **group total** is the total for that group only, not the grand total of all units.",
+      "hint": "Which total should the denominator be?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lsj58y",
+      "kind": "example",
+      "front": "In the tracker survey, what percent of adults under 30 use a tracker?",
+      "back": "**75%**, since $\\frac{75}{100}=0.75$. The denominator is the under-30 group total of 100.",
+      "hint": "Which total should you divide by?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zughh5",
+      "kind": "mistake",
+      "front": "A student divides 75 by 300 to find the percent of under-30 adults who use a tracker. What is wrong?",
+      "back": "The **denominator** is wrong. 300 is the grand total, so the result describes all adults. The correct conditional percent divides by the under-30 total: $\\frac{75}{100}=75\\%$.",
+      "hint": "Which group does 100 describe?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06q84cp",
+      "kind": "term",
+      "front": "What unit describes the difference between two percents, such as 75% and 37.5%?",
+      "back": "A **percentage point**. The gap between 75.0% and 37.5% is 37.5 percentage points.",
+      "hint": "It is not simply a percent.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1d10liz",
+      "kind": "process",
+      "front": "What steps make a fair comparison of tracker use across age groups?",
+      "back": "1) Find the **conditional** percents within each age group, dividing by that group's total. 2) Compare the rows of percents, not raw counts, because the group sizes differ.",
+      "hint": "The group sizes are 100, 120 and 80.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0m1wyqu",
+      "kind": "example",
+      "front": "Of 160 city residents surveyed, 96 prefer online shopping. What percent of city residents prefer online shopping?",
+      "back": "**60%**, since $\\frac{96}{160}=0.60$. The denominator is the city residents total.",
+      "hint": "Divide by the city residents total, not 400."
+    },
+    {
+      "id": "1f3z2nb",
+      "kind": "term",
+      "front": "What is an observational study?",
+      "back": "A study in which researchers measure variables **without assigning treatments** to the units. It can show variables move together, but it cannot show cause and effect.",
+      "hint": "Did the researchers assign anything?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v4un1i",
+      "kind": "mistake",
+      "front": "A student says a 37.5-point gap in tracker use proves that age causes tracker use. What is wrong?",
+      "back": "The student makes a **causation claim** from observational data. A linked factor, such as income, or chance with small groups could explain the pattern. Report only the association.",
+      "hint": "Which kind of study can show cause and effect?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02fom04",
+      "kind": "example",
+      "front": "In the tracker survey, what is the marginal percent of all adults who use a tracker?",
+      "back": "**55%**, since $\\frac{165}{300}=0.55$. The denominator is the grand total of 300 adults.",
+      "hint": "Use the tracker column total and the grand total.",
+      "sectionId": "s1"
+    }
+  ]
+}

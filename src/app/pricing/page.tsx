@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,109 +19,94 @@ import {
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
-import { AskParentBand, PassOptions } from "@/components/billing/pass-options";
-import { AskParentDialog } from "@/components/billing/ask-parent-dialog";
-import { useI18n } from "@/lib/i18n";
-import { fill, formatPassDate } from "@/lib/pass";
-import "@/lib/i18n/billing";
+import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
+import { UNLIMITED_GRANT_LABEL, hasUnlimitedGrant } from "@/lib/plan-access";
+import { fetchPlanToday } from "@/lib/api/exam-planner";
+import { examPassPitch, freePerks, paidPerks, plural, type ExamPitch, type FreeCaps } from "@/lib/wall";
+
+/** The free plan's caps when the server didn't say (server FREE_TIER_CAPS). */
+const DEFAULT_FREE_CAPS: FreeCaps = { workspaces: 2, studySessions: 3, flashcardTests: 2 };
+import { cn } from "@/lib/utils";
+import { parsePricingQuery, pricingPick } from "@/lib/coursework-access";
+import { AskParentBand, PassOptions, type PitchedPass } from "@/components/billing/pass-options";
+import { AskParentDialog, payablePlans } from "@/components/billing/ask-parent-dialog";
 
 function PlanCard({
   plan,
   onSelect,
   switching,
   trialDays,
+  freeCaps,
+  pitch,
+  featured,
+  picked,
 }: {
+  /** The one primary on the page: the cheapest subscription (the trial), or the plan the link asked for. */
+  featured: boolean;
+  /** The plan the link asked for (`?plan=` / `?for=coursework`): marked, outlined in ink, scrolled to. */
+  picked?: string | null;
   plan: PlanOption;
   onSelect: (id: string) => void;
   switching: boolean;
-  /** Free-trial length offered on this paid plan; 0 when unavailable. */
+  /** The free plan's caps, for its own list. */
+  freeCaps: FreeCaps;
+  /** The pass pitched by the student's exam date, when they have one. */
+  pitch: ExamPitch | null;
+  /** Free-trial length the account can still use; 0 when unavailable. Only subscriptions have a trial. */
   trialDays: number;
 }) {
   const router = useRouter();
   const isCurrent = plan.isActive;
-  const trial = !isCurrent && plan.priceDollars > 0 && trialDays > 0;
+  const paid = plan.priceDollars > 0;
+  const price = planPriceLabel(plan);
+  const description = paid && planBilling(plan) === "once" && pitch ? pitch.headline : planDescription(plan);
+  const terms = isCurrent ? null : planTermsLine(plan, trialDays);
+  const pitched = paid && planBilling(plan) === "once" ? pitch : null;
+  const storage = plan.storageLimitBytes > 0 ? [`${formatBytes(plan.storageLimitBytes)} for your notes and files`] : [];
+  // Outcomes, not tokens: every line is a fact of the plan (see wall.ts paidPerks / freePerks).
+  const perks = paid ? [...paidPerks(plan, { examLine: pitched?.line ?? null }), ...storage] : [...freePerks(freeCaps), ...storage];
   return (
     <div
-      className={`flex flex-col rounded-2xl border p-5 ${
-        isCurrent ? "border-accent bg-accent-soft/40" : "border-border bg-card"
-      }`}
+      id={picked ? "picked-plan" : undefined}
+      data-picked={picked ? "" : undefined}
+      className={cn("life-card flex scroll-mt-24 flex-col p-5 max-md:scroll-mb-24 sm:p-6", isCurrent && "border-border-strong", picked && "border-foreground ring-1 ring-foreground")}
     >
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold">{plan.name}</p>
-        {isCurrent && (
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
-            Current
-          </span>
-        )}
+      <div className="flex items-baseline justify-between gap-3">
+        <h2 className="text-[18px] font-extrabold leading-tight">{planDisplayName(plan.name)}</h2>
+        {picked ? (
+          <span className="shrink-0 text-[13px] font-bold text-muted-foreground">{picked}</span>
+        ) : isCurrent ? (
+          <span className="shrink-0 text-[13px] font-bold text-muted-foreground">Current plan</span>
+        ) : paid && planBilling(plan) === "once" && pitch ? (
+          <span className="shrink-0 text-[13px] font-bold text-muted-foreground">For your exam</span>
+        ) : null}
       </div>
-      <p className="mt-1 text-[13px] text-muted-foreground">
-        {plan.description}
+      {description && <p className="mt-1 text-[14px] text-muted-foreground">{description}</p>}
+      <p className="mt-4 text-[30px] font-extrabold leading-none tracking-tight tabular-nums">
+        {paid ? price.amount : "$0"}
+        {price.suffix && <span className="text-[14px] font-semibold tracking-normal text-muted-foreground">{price.suffix}</span>}
       </p>
-      <p className="mt-4 text-2xl font-bold tracking-tight">
-        {plan.priceDollars === 0 ? "Free" : `$${plan.priceDollars}`}
-        {plan.priceDollars > 0 && (
-          <span className="text-sm font-normal text-faint"> / month</span>
-        )}
-      </p>
-      {trial && (
-        <p className="mt-1 text-[12px] text-muted-foreground">
-          {trialDays}-day free trial · $0 today · card required · billed $
-          {plan.priceDollars}/month after {trialDays} days unless you cancel
-        </p>
-      )}
-      <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-        <li className="flex items-center gap-2">
-          <Check className="h-4 w-4 text-accent" />
-          {formatBytes(plan.storageLimitBytes)} storage
-        </li>
-        <li className="flex items-center gap-2">
-          <Check className="h-4 w-4 text-accent" />
-          {plan.monthlyTokens} tokens / month
-        </li>
-        {plan.priceDollars === 0 && (
-          <li className="flex items-center gap-2">
-            <Check className="h-4 w-4 text-accent" />2 subjects · 3 full study
-            sessions · 2 tests · a free Quick 5 every day
+      <p className="mt-2 min-h-[2.6em] text-[13px] leading-snug text-muted-foreground">{terms}</p>
+      <ul className="mt-3 space-y-2 text-[14px]">
+        {perks.map((perk) => (
+          <li key={perk} className="flex items-start gap-2">
+            <Check className="mt-0.5 size-4 shrink-0 text-muted-foreground" strokeWidth={2.6} />
+            {perk}
           </li>
-        )}
-        {plan.priceDollars > 0 && (
-          <>
-            <li className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-accent" />
-              Unlimited subjects, study sessions and tests
-            </li>
-            <li className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-accent" />
-              Smarter AI model routing — strongest model on every activity
-            </li>
-            <li className="flex items-center gap-2">
-              <Check className="h-4 w-4 text-accent" />
-              Enough tokens for daily study sessions
-            </li>
-          </>
-        )}
+        ))}
       </ul>
-      <div className="mt-5">
-        {!isCurrent && plan.priceDollars === 0 ? (
-          <Button
-            className="w-full"
-            variant="outline"
-            onClick={() => router.push("/settings#plan")}
-          >
+      <div className="mt-auto pt-5">
+        {isCurrent ? (
+          <Button className="w-full" variant="secondary" disabled>
+            Your plan
+          </Button>
+        ) : !paid ? (
+          <Button className="w-full" variant="secondary" onClick={() => router.push("/settings#plan")}>
             Downgrade to Free
           </Button>
         ) : (
-          <Button
-            className="w-full"
-            variant={isCurrent ? "outline" : "primary"}
-            disabled={isCurrent || switching}
-            onClick={() => onSelect(plan.id)}
-          >
-            {isCurrent
-              ? "Your plan"
-              : trial
-                ? "Try for free"
-                : `Switch to ${plan.name}`}
+          <Button className="w-full" variant={featured ? "primary" : "secondary"} disabled={switching} onClick={() => onSelect(plan.id)}>
+            {planCta(plan, trialDays)}
           </Button>
         )}
       </div>
@@ -131,53 +116,66 @@ function PlanCard({
 
 export default function PricingPage() {
   const { user } = useAuthUser();
-  const { t, locale } = useI18n();
-  const [asking, setAsking] = useState(false);
-  const [buying, setBuying] = useState<string | null>(null);
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [loading, setLoading] = useState(true);
   const [switching, setSwitching] = useState(false);
-
+  const [pitched, setPitched] = useState<PitchedPass | null>(null);
+  const [buying, setBuying] = useState<string | null>(null);
+  const [asking, setAsking] = useState(false);
+  // `?plan=ultra&for=coursework` (a locked Coursework): the plan to pick, from the plans the server lists.
+  const [pickedId, setPickedId] = useState<string | null>(null);
+  const [pickedFor, setPickedFor] = useState<string | null>(null);
   useEffect(() => {
     Promise.all([
       fetchAccountSummary(),
       fetchPlanOptions(),
       fetchPlanCaps().catch(() => null),
+      fetchPlanToday().catch(() => null),
     ])
-      .then(([acct, nextPlans, nextCaps]) => {
+      .then(([acct, nextPlans, nextCaps, today]) => {
         setSummary(acct);
-        setPlans(nextPlans);
         setCaps(nextCaps);
+        // The cheapest pass that covers the student's exam date gets the pitch.
+        const locale = typeof navigator !== "undefined" ? navigator.language : "en-GB";
+        const passes = nextPlans.filter((p) => p.priceDollars > 0 && planBilling(p) === "once").sort((a, b) => a.priceDollars - b.priceDollars);
+        let nextPitched: PitchedPass | null = null;
+        for (const pass of today ? passes : []) {
+          const pitch = examPassPitch(today!.exams, pass, today!.today, locale);
+          if (pitch) {
+            nextPitched = { planId: pass.id, pitch };
+            break;
+          }
+        }
+        setPitched(nextPitched);
+        const query = parsePricingQuery(window.location.search);
+        setPickedId(pricingPick(nextPlans, query));
+        setPickedFor(query.for);
+        setPlans(nextPlans);
       })
       .finally(() => setLoading(false));
   }, []);
+  const freeCaps = caps?.caps ?? DEFAULT_FREE_CAPS;
+  // Monthly plans as cards; the exam passes ("pay once") in their own section below them.
+  const monthlyPlans = plans.filter((p) => planBilling(p) !== "once");
+  const passPlans = plans.filter((p) => p.priceDollars > 0 && planBilling(p) === "once");
+  const payable = payablePlans(plans);
+  // The one primary: the cheapest subscription for someone without a plan; for someone on one, the next plan up (never a downgrade).
+  const activePrice = plans.find((p) => p.isActive && p.priceDollars > 0)?.priceDollars ?? 0;
+  const featuredId =
+    (pickedId && monthlyPlans.some((p) => p.id === pickedId) ? pickedId : null) ??
+    [...monthlyPlans]
+      .filter((p) => p.priceDollars > activePrice && planBilling(p) !== "once" && !p.isActive)
+      .sort((a, b) => a.priceDollars - b.priceDollars)[0]?.id;
+  const pickedLabel = pickedFor === "coursework" ? "For coursework" : "Selected";
+  useEffect(() => {
+    if (loading || !pickedId) return;
+    document.getElementById("picked-plan")?.scrollIntoView({ block: "nearest" });
+  }, [loading, pickedId]);
 
   const trialDays = caps?.trialDays ?? 0;
   const trialEndsAt = caps?.trialEndsAt ? new Date(caps.trialEndsAt) : null;
-  const passEndsAt = caps?.passEndsAt ? new Date(caps.passEndsAt) : null;
-  const monthlyPlans = plans.filter((p) => p.kind !== "pass");
-  // A pass that ends no later than the one held adds nothing.
-  const passes = plans.filter(
-    (p) => p.kind === "pass" && (!passEndsAt || (p.accessUntil !== null && new Date(p.accessUntil) > passEndsAt)),
-  );
-  const payable = plans.filter((p) => p.priceDollars > 0 && (p.kind === "pass" ? passes.includes(p) : !passEndsAt));
-
-  const handleBuyPass = async (planId: string) => {
-    if (BILLING_PAUSED) {
-      toastError(new Error(BILLING_PAUSED_MESSAGE), "Checkout unavailable");
-      return;
-    }
-    setBuying(planId);
-    try {
-      await switchPlan(planId);
-    } catch (err) {
-      toastError(err, "Couldn't open checkout");
-    } finally {
-      setBuying(null);
-    }
-  };
 
   const handleSwitch = async (planId: string) => {
     if (BILLING_PAUSED) {
@@ -188,129 +186,131 @@ export default function PricingPage() {
       return;
     }
     setSwitching(true);
+    setBuying(planId);
     try {
       await switchPlan(planId);
     } catch (err) {
       toastError(err, "Couldn't open checkout");
     } finally {
       setSwitching(false);
+      setBuying(null);
     }
   };
 
-  return (
-    <main className={pageShellClass}>
-      <div>
-          <div>
-            <PageHeader back={{ href: "/settings", label: "Settings" }} title={<>Choose your plan</>} subtitle={<>Your storage and monthly token allowance are shown below.{" "}
-            {trialDays > 0
-              ? `Paid plans start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled by our payment provider; Scribe never sees your card.`
-              : "Upgrade anytime — checkout is handled by our payment provider; Scribe never sees your card."}</>} className="mb-2" />
-          {BILLING_PAUSED && (
-            <p className="mt-3 max-w-2xl rounded-xl border border-accent/30 bg-accent-soft px-4 py-3 text-sm text-foreground">
-              <span className="font-semibold">Billing is paused.</span> Our payment
-              provider has suspended card payments while they review our account, so
-              checkout is unavailable and nobody is being charged. Every account has Pro
-              for free this month; we will email when billing is back.
-            </p>
-          )}
-          {passEndsAt && (
-            <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3 py-1 text-[12px] font-medium text-accent">
-              {fill(t("set.passUntil"), { date: formatPassDate(passEndsAt, locale) })}
-            </p>
-          )}
-          {trialEndsAt && !BILLING_PAUSED && (
-            <p className="mt-2 inline-flex rounded-full bg-accent-soft px-3 py-1 text-[12px] font-medium text-accent">
-              Free trial — your first charge is on{" "}
-              {trialEndsAt.toLocaleDateString(undefined, {
-                month: "short",
-                day: "numeric",
-              })}
-              . Cancel before then in Settings to pay nothing.
-            </p>
-          )}
-        </div>
-      </div>
+  // The top tier, given free by an admin: nothing to choose, buy or upgrade to.
+  if (!loading && hasUnlimitedGrant(caps)) {
+    return (
+      <PageShell>
+        <PageHeader back={{ href: "/settings", label: "Settings" }} title="Your plan" className="mb-2" />
+        <section className="mt-6 max-w-xl border-y border-border py-5" role="status">
+          <p className="text-[18px] font-extrabold">{UNLIMITED_GRANT_LABEL}</p>
+          <p className="mt-1 text-[14px] text-muted-foreground">
+            You have everything Scribe offers, free, with no end date. There is nothing to buy and nothing renews.
+            {caps?.paid ? " You are still paying for a plan of your own; you can cancel it in Settings and keep everything." : ""}
+          </p>
+        </section>
+      </PageShell>
+    );
+  }
 
-      <section className="mt-8 rounded-2xl border border-border bg-card p-5">
-        <p className="text-sm font-semibold">Current usage</p>
+  return (
+    <PageShell>
+      <PageHeader
+        back={{ href: "/settings", label: "Settings" }}
+        title="Choose your plan"
+        subtitle={
+          trialDays > 0
+            ? `Subscriptions start with a ${trialDays}-day free trial: add a card, pay $0 today, and billing begins after ${trialDays} days unless you cancel. Checkout is handled by our payment provider; Scribe never sees your card.`
+            : "Upgrade anytime. Checkout is handled by our payment provider; Scribe never sees your card."
+        }
+        className="mb-2"
+      />
+      {BILLING_PAUSED && (
+        <p className="mt-3 max-w-2xl rounded-[var(--r-control)] border border-border px-4 py-3 text-[14px] text-foreground" role="status">
+          <span className="font-bold">Billing is paused.</span> Our payment provider has suspended card payments while they review our account, so
+          checkout is unavailable and nobody is being charged. Every account has Pro for free this month; we will email when billing is back.
+        </p>
+      )}
+      {trialEndsAt && !BILLING_PAUSED && (
+        <p className="mt-2 text-[14px] font-semibold text-foreground" role="status">
+          Free trial: your first charge is on {trialEndsAt.toLocaleDateString(undefined, { month: "short", day: "numeric" })}. Cancel before then in
+          Settings to pay nothing.
+        </p>
+      )}
+
+      {/* What you have used: one flat row, no boxes inside a box. */}
+      <section className="mt-6 border-y border-border py-4" aria-label="Current usage">
         {loading ? (
-          <div className="mt-4 space-y-3">
-            <Skeleton className="h-4 w-48" />
-            <Skeleton className="h-1.5 w-full rounded-full" />
-            <Skeleton className="h-4 w-40" />
+          <div className="flex gap-10">
+            <Skeleton className="h-10 w-40" />
+            <Skeleton className="h-10 w-40" />
           </div>
         ) : summary ? (
-          <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-xl border border-border bg-background p-4">
-              <p className="text-[12px] text-faint">Storage</p>
-              <p className="mt-1 text-lg font-semibold">
-                {formatBytes(summary.storageUsedBytes)}
-              </p>
-              <p className="text-[12px] text-muted-foreground">
-                of {formatBytes(summary.storageLimitBytes)}
-              </p>
+          <dl className="flex flex-wrap gap-x-12 gap-y-3">
+            <div>
+              <dt className="text-[13px] font-semibold text-muted-foreground">Storage used</dt>
+              <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                {formatBytes(summary.storageUsedBytes)} <span className="text-[13px] font-semibold text-muted-foreground">of {formatBytes(summary.storageLimitBytes)}</span>
+              </dd>
             </div>
-            <div className="rounded-xl border border-border bg-background p-4">
-              <p className="text-[12px] text-faint">Tokens</p>
-              <p className="mt-1 text-lg font-semibold">
-                {summary.tokenBalance}
-              </p>
-              <p className="text-[12px] text-muted-foreground">
-                of {summary.monthlyTokens} / month
-              </p>
-            </div>
-          </div>
+            {caps?.caps && (
+              <>
+                <div>
+                  <dt className="text-[13px] font-semibold text-muted-foreground">Subjects</dt>
+                  <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                    {caps.used.workspaces} <span className="text-[13px] font-semibold text-muted-foreground">of {caps.caps.workspaces}</span>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-[13px] font-semibold text-muted-foreground">Full study sessions</dt>
+                  <dd className="mt-0.5 text-[16px] font-extrabold tabular-nums">
+                    {caps.used.studySessions} <span className="text-[13px] font-semibold text-muted-foreground">of {caps.caps.studySessions}</span>
+                  </dd>
+                </div>
+              </>
+            )}
+          </dl>
         ) : null}
-        {!loading &&
-          summary &&
-          summary.monthlyTokens > 0 &&
-          summary.tokenBalance <= summary.monthlyTokens * 0.3 && (
-            <p className="mt-4 rounded-xl bg-accent-soft/50 px-4 py-3 text-[13px] text-muted-foreground">
-              You&apos;re running low on tokens. Paid plans come with a much
-              bigger monthly allowance and smarter AI model routing — every
-              session is generated with our strongest model.
-            </p>
-          )}
+        {!loading && caps?.caps && caps.used.workspaces >= caps.caps.workspaces && (
+          <p className="mt-3 text-[13.5px] text-muted-foreground">
+            You have the free plan&apos;s {plural(caps.caps.workspaces, "subject", "subjects")}. They stay free to use; a plan lets you add more.
+          </p>
+        )}
       </section>
 
-      <section className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-1">
+      <section className={cn("mt-6 grid gap-4", monthlyPlans.length >= 4 ? "sm:grid-cols-2 xl:grid-cols-4" : monthlyPlans.length === 3 ? "md:grid-cols-3" : monthlyPlans.length === 2 ? "sm:grid-cols-2" : "max-w-md")}>
         {loading
-          ? Array.from({ length: 1 }, (_, i) => (
-              <div
-                key={i}
-                className="rounded-2xl border border-border bg-card p-5 space-y-3"
-              >
-                <Skeleton className="h-4 w-20" />
-                <Skeleton className="h-4 w-full" />
+          ? Array.from({ length: 2 }, (_, i) => (
+              <div key={i} className="life-card space-y-3 p-5">
+                <Skeleton className="h-5 w-24" />
                 <Skeleton className="h-8 w-28" />
                 <Skeleton className="h-28 w-full rounded-xl" />
               </div>
             ))
-          : monthlyPlans.map((plan) => (
-              <PlanCard
-                key={plan.id}
-                plan={plan}
-                onSelect={handleSwitch}
-                switching={switching}
-                trialDays={trialDays}
-              />
-            ))}
+          : monthlyPlans.map((plan) => <PlanCard key={plan.id} plan={plan} onSelect={handleSwitch} switching={switching} trialDays={trialDays} freeCaps={freeCaps} pitch={null} featured={plan.id === featuredId} picked={plan.id === pickedId ? pickedLabel : null} />)}
       </section>
 
-      {!loading && (passes.length > 0 || payable.length > 0) && (
-        <div className="mx-auto mt-4 max-w-xl space-y-4">
-          <PassOptions passes={passes} busyId={buying} disabled={switching} onBuy={handleBuyPass} />
-          {payable.length > 0 && !BILLING_PAUSED && <AskParentBand onOpen={() => setAsking(true)} />}
-        </div>
+      {!loading && (
+        <PassOptions
+          className="mt-10"
+          passes={passPlans}
+          busyId={buying}
+          disabled={switching}
+          onBuy={handleSwitch}
+          pitched={pitched}
+          pickedId={pickedId}
+          pickedLabel={pickedLabel}
+        />
       )}
+      {!loading && payable.length > 0 && !BILLING_PAUSED && <AskParentBand className="mt-10" onOpen={() => setAsking(true)} />}
       {asking && (
         <AskParentDialog
           plans={payable}
-          defaultPlanId={payable.find((p) => p.kind === "pass")?.id}
+          defaultPlanId={pitched?.planId ?? payable[0]?.id}
           defaultFirstName={user?.name?.split(" ")[0] ?? ""}
           onClose={() => setAsking(false)}
         />
       )}
-    </main>
+    </PageShell>
   );
 }

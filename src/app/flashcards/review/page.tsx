@@ -2,11 +2,11 @@
 
 import "@/lib/i18n/flashcards";
 import Image from "next/image";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { fetchDueReview } from "@/lib/api/study-session";
-import { DeckLearnView } from "@/components/flashcards/deck-learn-view";
+import { DueReviewRound } from "@/components/flashcards/due-review-round";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useI18n } from "@/lib/i18n";
 
@@ -21,27 +21,13 @@ export default function DueReviewPage() {
     staleTime: Infinity,
   });
 
-  const entries = useMemo(
-    () =>
-      (data?.cards ?? []).map((c) => ({
-        front: c.front,
-        back: c.back,
-        flashcardId: c.flashcardId,
-      })),
-    [data],
-  );
-  const progress = useMemo(
-    () =>
-      (data?.cards ?? []).map((c) => ({
-        flashcardId: c.flashcardId,
-        progress: c.progress,
-      })),
+  const cards = useMemo(
+    () => (data?.cards ?? []).map((c) => ({ front: c.front, back: c.back, flashcardId: c.flashcardId })),
     [data],
   );
 
   return (
-    <main className={pageShellClass}>
-      <div className="mx-auto w-full max-w-3xl space-y-6">
+    <PageShell max="max-w-3xl" className="space-y-6">
         <PageHeader
           back={{ href: "/flashcards", label: t("fc.backToFlashcards") }}
           title={t("fc.dailyReview")}
@@ -57,33 +43,25 @@ export default function DueReviewPage() {
               : t("fc.reviewPastDue")}</>}
         />
 
-        {isLoading && <Skeleton className="h-[380px] w-full rounded-3xl" />}
+        {isLoading && <Skeleton className="h-[260px] w-full rounded-[28px]" />}
 
         {data && data.cards.length === 0 && (
-          <div className="rounded-2xl border border-border bg-card px-6 py-12 text-center">
+          <div className="px-6 py-10 text-center">
             <Image
-              src="/design/cat2-trophy.png"
+              src="/design/cat3-trophy.webp"
               alt=""
-              width={132}
-              height={160}
+              width={413}
+              height={400}
               className="cat-bob pointer-events-none mx-auto h-24 w-auto select-none"
             />
-            <p className="mt-3 text-sm font-medium">{t("fc.allCaughtUp")}</p>
+            <p className="mt-4 text-[18px] font-extrabold">{t("fc.allCaughtUp")}</p>
             <p className="mt-1 text-sm text-muted-foreground">
               {t("fc.noCardsDue")}
             </p>
           </div>
         )}
 
-        {data && data.cards.length > 0 && (
-          <DeckLearnView
-            entries={entries}
-            frontLabel="Front"
-            backLabel="Back"
-            progress={progress}
-          />
-        )}
-      </div>
-    </main>
+        {data && data.cards.length > 0 && <DueReviewRound cards={cards} />}
+    </PageShell>
   );
 }

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-12",
+  "topicCode": "7.12",
+  "topicName": "Origin of life on Earth",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:05.531Z",
+  "cards": [
+    {
+      "id": "1ts3t7b",
+      "kind": "term",
+      "front": "What is abiogenesis?",
+      "back": "**Abiogenesis** is the proposed emergence of living systems from nonliving matter through natural processes. Its details remain uncertain because the earliest stages left limited evidence.",
+      "hint": "Think of life arising from nonliving matter.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1s4lmaw",
+      "kind": "concept",
+      "front": "Why did early Earth's water and energy sources matter for the origin of life?",
+      "back": "**Liquid water** let substances dissolve and interact, and energy from lightning, ultraviolet radiation, and geothermal heat could drive chemical reactions. Reactions need both suitable ingredients and enough energy.",
+      "hint": "Reactions need ingredients to meet and energy to happen.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "158urpm",
+      "kind": "process",
+      "front": "What is a possible sequence from simple molecules to simple cells?",
+      "back": "1) Small organic molecules form and join into larger molecules. 2) Membranes enclose some molecules, forming vesicles or protocells. 3) Copying and chemical reactions develop inside cell-like systems that obtain materials and energy. The order may vary and steps may overlap.",
+      "hint": "Start with small molecules and end with a living unit."
+    },
+    {
+      "id": "1ac2k90",
+      "kind": "term",
+      "front": "What are hydrothermal vents, and why might they matter for early chemistry?",
+      "back": "**Hydrothermal vents** release heated, mineral-rich water. They can provide chemical gradients and minerals that could support reactions.",
+      "hint": "Think about heat, minerals, and chemical differences.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08b6sos",
+      "kind": "concept",
+      "front": "Where have scientists proposed that organic chemistry could have happened?",
+      "back": "In **shallow water**, where wet-dry cycles could concentrate molecules, or near hydrothermal vents, where minerals and chemical gradients could support reactions.",
+      "hint": "Consider two very different environments.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i3l4xt",
+      "kind": "term",
+      "front": "What is prebiotic chemistry?",
+      "back": "**Prebiotic chemistry** studies how compounds associated with life could form before living organisms existed. Some organic molecules can form under plausible early Earth conditions.",
+      "hint": "Prebiotic means before life.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1pi3ycj",
+      "kind": "mistake",
+      "front": "Does finding a plausible setting for life's start prove where life began?",
+      "back": "No. A plausible setting is not a confirmed birthplace of life. These hypotheses describe possible conditions, not a complete observed sequence.",
+      "hint": "Plausible is not the same as proven.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n4jhqw",
+      "kind": "concept",
+      "front": "Why do RNA-like molecules feature in the RNA world hypothesis?",
+      "back": "Some **RNA** molecules can store information and catalyze reactions. The hypothesis proposes these roles helped chemical systems develop before modern cells existed, though whether RNA appeared first remains uncertain.",
+      "hint": "Think about the two jobs a copying molecule needs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0odw93y",
+      "kind": "term",
+      "front": "What are vesicles?",
+      "back": "**Vesicles** are membrane-bound compartments that form when certain fatty molecules assemble in water. Their membranes separate an inside from an outside.",
+      "hint": "Think about fatty molecules forming a boundary.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "082gstw",
+      "kind": "mistake",
+      "front": "Is a vesicle by itself a living cell?",
+      "back": "No. A vesicle is only a membrane-bound compartment. A living system also needs a continuing supply of materials and a way to copy information.",
+      "hint": "A boundary alone is not enough.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15mdavh",
+      "kind": "term",
+      "front": "What is a protocell?",
+      "back": "A **protocell** is a proposed cell-like system enclosed by a boundary. It could contain molecules that copy information and take part in reactions, and it needed materials and energy to persist.",
+      "hint": "Proto means early or first stage.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ku8mv4",
+      "kind": "concept",
+      "front": "What do the first true cells have that protocells may have lacked?",
+      "back": "**Coordinated processes**. Cells use energy and maintain themselves through organized reactions, along with a boundary, while protocells may not have had all of these processes.",
+      "hint": "Look at the section's paragraph about the first cells.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dy1jtn",
+      "kind": "mistake",
+      "front": "Did early Earth's atmosphere contain plenty of free oxygen like today's?",
+      "back": "No. Early Earth's atmosphere contained little free **oxygen** compared with today's atmosphere, although its exact composition remains uncertain.",
+      "hint": "Compare it with the air you breathe now.",
+      "sectionId": "s2"
+    }
+  ]
+}

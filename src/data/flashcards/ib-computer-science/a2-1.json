@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a2-1",
+  "topicCode": "A2.1",
+  "topicName": "Network fundamentals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:54.834Z",
+  "cards": [
+    {
+      "id": "0w9uk21",
+      "kind": "concept",
+      "front": "Why would an organisation build a computer network instead of giving each room its own printer and files?",
+      "back": "A network lets devices **share data and resources**, so one printer or internet connection serves many people. This cuts cost and makes management easier.",
+      "hint": "Think about a school with a printer in every classroom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0eszquj",
+      "kind": "concept",
+      "front": "What is the main difference between a LAN and a WAN?",
+      "back": "A **LAN** covers one site, such as a building or campus, while a **WAN** spans cities, countries or continents. The internet is the best-known WAN.",
+      "hint": "Compare the area each one covers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sz4mog",
+      "kind": "mistake",
+      "front": "A student says a switch and a router do the same job. What is wrong with this?",
+      "back": "They differ. A **switch** joins devices within one LAN and forwards data only to its intended destination. A **router** joins separate networks, such as a LAN and the internet.",
+      "hint": "Ask what each device connects together.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hbzyiw",
+      "kind": "term",
+      "front": "What is a network interface card?",
+      "back": "The **hardware** inside a device that connects it to a network and sends and receives its data.",
+      "hint": "It is the device's connection point to the network.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g2oae6",
+      "kind": "concept",
+      "front": "What is a wireless access point used for, and where might you find one?",
+      "back": "It connects **wireless devices** to a wired LAN, such as a ceiling unit in a school.",
+      "hint": "Think about devices that connect without cables.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kfduiu",
+      "kind": "process",
+      "front": "Outline the components needed to connect four computers and a printer in a small office to the internet.",
+      "back": "Each device needs a **network interface card**. A transmission medium such as cable carries the signals. A switch joins the devices into one LAN. A router links the LAN to the internet. Add a wireless access point if wireless devices are needed.",
+      "hint": "Work from the devices outwards to the internet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hg64tm",
+      "kind": "term",
+      "front": "What is a transmission medium?",
+      "back": "The **physical cable or radio channel** that carries signals between networked devices, such as copper cable, fibre-optic cable or radio waves.",
+      "hint": "Think about what the signals travel through.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hn9kw7",
+      "kind": "concept",
+      "front": "Why is a router needed when an office LAN must reach the internet?",
+      "back": "The office LAN and the internet are **separate networks**. A router joins them and forwards data between them along a suitable route.",
+      "hint": "A switch alone only joins devices inside one LAN.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x5kl5p",
+      "kind": "mistake",
+      "front": "A student says a WAN is always owned and controlled by one organisation. Is this correct?",
+      "back": "No. A **LAN** is usually owned by one organisation, but a WAN is often shared, using leased lines, so its owner has less direct control.",
+      "hint": "Compare who owns and runs each type.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wxozv4",
+      "kind": "concept",
+      "front": "Why does a single failed switch or router matter in a network?",
+      "back": "It can **stop many users at once**. Extra equipment reduces this risk but raises the cost.",
+      "hint": "Think about what depends on that one device.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1d6rlv4",
+      "kind": "concept",
+      "front": "How does central management and central storage help a network?",
+      "back": "Updates can be applied from **one place**, and one backup can protect everyone's work.",
+      "hint": "Think about time saved and data protected.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ajtmn1",
+      "kind": "concept",
+      "front": "A home uses one box that combines a router, a switch and a wireless access point. Are the jobs still separate?",
+      "back": "Yes. The jobs are still **separate**, even when one piece of hardware performs all of them.",
+      "hint": "Hardware and function are not the same thing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0upq3x6",
+      "kind": "term",
+      "front": "What is a computer network?",
+      "back": "A **set of two or more devices** connected so that they can exchange data and share resources.",
+      "hint": "Count the minimum number of devices."
+    }
+  ]
+}

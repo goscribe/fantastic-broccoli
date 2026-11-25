@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-5",
+  "topicCode": "6.5",
+  "topicName": "Bacteria and viruses",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:32.908Z",
+  "cards": [
+    {
+      "id": "0ajsd3y",
+      "kind": "concept",
+      "front": "What makes a virus able to infect only certain cells?",
+      "back": "Its **attachment proteins** have a shape complementary to a receptor protein on the host cell surface, so only cells carrying that matching receptor can be infected.",
+      "hint": "Think about how the virus's outer surface meets the cell's surface.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0dc4yk2",
+      "kind": "process",
+      "front": "What are the five stages of a virus infecting a host cell, in order?",
+      "back": "**Attachment**, entry, replication, assembly, release. The particles leave by bursting the cell (lysis) or by budding off.",
+      "hint": "Start with how the virus first meets the cell surface.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0irkxb2",
+      "kind": "formula",
+      "front": "What is the symbol equation for the number of bacterial cells after a number of divisions?",
+      "back": "$N=N_0\\times2^{n}$, where $N_0$ is the starting number of cells, $n$ is the number of divisions and $N$ is the final number of cells.",
+      "hint": "Think about what happens to the number of cells at each division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0pffo6a",
+      "kind": "term",
+      "front": "What is binary fission?",
+      "back": "A form of **asexual reproduction** in which a cell copies its DNA and splits into two genetically identical daughter cells.",
+      "hint": "Compare it with reproduction that needs a partner.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qmrb3g",
+      "kind": "process",
+      "front": "What are the four stages of binary fission, in order?",
+      "back": "The circular DNA and plasmids are copied; the cell grows and the DNA copies move to opposite ends; the membrane and cell wall grow inwards across the middle; the cell splits into two daughter cells.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qyqh65",
+      "kind": "example",
+      "front": "A culture starts with 40 bacterial cells, each dividing every 30 minutes. How many cells are there after 3 hours if none die?",
+      "back": "**2560 cells.** There are 6 divisions, so $40\\times2^{6}=40\\times64=2560$.",
+      "hint": "Work out how many divisions fit into 3 hours first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w9t7u4",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that a virus divides or grows?",
+      "back": "Viruses do not divide or grow. New particles are **assembled** from parts, such as copied genetic material and capsid proteins, made by the host cell.",
+      "hint": "Think about where the parts for new particles come from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "104uacv",
+      "kind": "term",
+      "front": "What is a capsid?",
+      "back": "The **protein coat** that surrounds and protects the genetic material of a virus.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "07fq29u",
+      "kind": "concept",
+      "front": "Why is a bacterium classed as a living cell but a virus is not?",
+      "back": "A bacterium has cytoplasm, ribosomes and a cell surface membrane. A virus is a non-cellular particle with genetic material in a capsid, and it has no cytoplasm or ribosomes.",
+      "hint": "Compare the internal contents of each.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0irv2tt",
+      "kind": "term",
+      "front": "What is a plasmid?",
+      "back": "A small, circular loop of **DNA**, separate from the main bacterial DNA, which often carries useful genes such as one that helps the cell survive an antibiotic.",
+      "hint": "Compare it with the main circular DNA of a bacterium.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02hkkga",
+      "kind": "concept",
+      "front": "How can a bacterium gain new genes without reproducing?",
+      "back": "**Plasmids** can pass from one bacterium to another through direct contact, sometimes between different species, spreading a useful gene quickly through a population.",
+      "hint": "Think about contact between cells rather than division.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0azp8mt",
+      "kind": "term",
+      "front": "What is the host range of a virus?",
+      "back": "The **set of species and cell types** that the virus is able to infect.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tixmlf",
+      "kind": "concept",
+      "front": "Which host cell machinery is used to copy viral genetic material and make viral proteins?",
+      "back": "The host cell's **enzymes** copy the viral genetic material, and its **ribosomes** make the viral proteins.",
+      "hint": "Think about what a copying job and a protein-making job each need.",
+      "sectionId": "s4"
+    }
+  ]
+}

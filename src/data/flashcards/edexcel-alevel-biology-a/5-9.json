@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Chloroplast structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:14.420Z",
+  "cards": [
+    {
+      "id": "1woiiuz",
+      "kind": "concept",
+      "front": "Which part of the chloroplast hosts the light-dependent reactions?",
+      "back": "The **thylakoid membranes**, which hold chlorophyll in photosystems alongside electron carriers and the enzyme that makes ATP.",
+      "hint": "Think about where the green pigment sits.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0umdhv7",
+      "kind": "concept",
+      "front": "Which part of the chloroplast hosts the light-independent reaction?",
+      "back": "The **stroma**, where dissolved enzymes fix $\\text{CO}_2$ close to the ATP and reduced NADP supplied by the thylakoids.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1veqogr",
+      "kind": "concept",
+      "front": "How does stacking thylakoids into grana help photosynthesis?",
+      "back": "Stacking packs a large area of thylakoid membrane into a small volume, so more pigments, electron carriers and ATP-making enzymes fit in and more light is absorbed.",
+      "hint": "Think about how much pigment can fit in a small space.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1wzt0ps",
+      "kind": "term",
+      "front": "Which fluid fills most of a chloroplast and surrounds the thylakoids?",
+      "back": "The **stroma**, a fluid holding carbon-fixing enzymes, starch grains, lipid droplets, DNA and ribosomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fep72b",
+      "kind": "term",
+      "front": "What is a granum?",
+      "back": "A **granum** is a stack of flattened, fluid-filled thylakoid sacs, like coins. The plural is grana.",
+      "hint": "Think about how the sacs are arranged.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0iljofb",
+      "kind": "mistake",
+      "front": "Why is it wrong to call a single flattened sac a granum?",
+      "back": "A single sac is one **thylakoid**. A granum is the whole stack of thylakoids, so one sac alone is not a granum.",
+      "hint": "Count how many sacs make up one unit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0nv3g2e",
+      "kind": "term",
+      "front": "What is an intergranal lamella?",
+      "back": "A **strip of thylakoid membrane** linking one granum to the next. The thylakoid interiors are joined, forming one connected network.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fxcz9c",
+      "kind": "term",
+      "front": "What is the chloroplast envelope?",
+      "back": "The **double membrane**, made of an outer and an inner membrane, that encloses a chloroplast and controls which substances enter and leave.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rhtv0b",
+      "kind": "concept",
+      "front": "Why can an animal cell not carry out photosynthesis?",
+      "back": "It has no **chloroplasts**, the organelles that contain the thylakoids and stroma where photosynthesis takes place.",
+      "hint": "Compare the organelles found in plant and animal cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05bwxkg",
+      "kind": "concept",
+      "front": "Why does a chloroplast contain its own DNA and ribosomes?",
+      "back": "They let the chloroplast make some of its **own proteins** in the stroma, which can be used inside it without being imported.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18y02x8",
+      "kind": "process",
+      "front": "What happens to ADP and NADP after the stroma reaction uses ATP and reduced NADP?",
+      "back": "They return to the **thylakoid membranes** to be recharged, so the light-dependent reactions can make more ATP and reduced NADP.",
+      "hint": "Follow the molecules from the thylakoids to the stroma and back.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hylz51",
+      "kind": "concept",
+      "front": "Why is the thylakoid space kept small?",
+      "back": "Because it is small, **protons** that accumulate there during the light-dependent reactions build up quickly and form a gradient across the membrane.",
+      "hint": "Think about what the light-dependent reactions push into this space.",
+      "sectionId": "s5"
+    }
+  ]
+}

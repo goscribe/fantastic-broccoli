@@ -68,7 +68,7 @@ export default async function BlogPostPage({
       <div className="mx-auto max-w-3xl px-6">
         <Link
           href="/landing/blog"
-          className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-foreground"
+          className="inline-flex items-center gap-1.5 text-ui font-semibold text-muted-foreground transition-colors hover:text-foreground"
         >
           <ArrowLeft className="h-4 w-4" />
           All posts
@@ -84,19 +84,19 @@ export default async function BlogPostPage({
             >
               {persona.name[0]}
             </span>
-            <div className="text-sm">
+            <div className="text-ui">
               <p className="font-semibold">
                 {persona.name}{" "}
-                <span className="font-normal text-faint">· Scribe AI</span>
+                <span className="font-normal text-muted-foreground">· Scribe AI</span>
               </p>
-              <p className="text-xs text-faint">
+              <p className="text-caption text-muted-foreground">
                 {persona.role} · {formatDay(post.day)}
               </p>
             </div>
           </div>
           <MarkdownText
             text={post.content}
-            className="mt-8 text-[15px] leading-relaxed"
+            className="mt-8 text-read"
           />
         </article>
       </div>

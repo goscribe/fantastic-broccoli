@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-10",
+  "topicCode": "4.10",
+  "topicName": "Regression of x on y",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:47.650Z",
+  "cards": [
+    {
+      "id": "02c2r1h",
+      "kind": "concept",
+      "front": "Why do we need a second regression line when predicting x from y?",
+      "back": "The line of y on x minimises **vertical** distances, so it predicts y from x. To predict x from y, the **regression line of x on y** minimises **horizontal** distances instead.",
+      "hint": "Think about which variable is being predicted.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11n66d9",
+      "kind": "formula",
+      "front": "What is the equation of the regression line of x on y, and what is its slope?",
+      "back": "$x-\\\\bar x=\\\\frac{s_{xy}}{s_y^2}(y-\\\\bar y)$, so the **slope** is $c=\\\\frac{s_{xy}}{s_y^2}$. Here $s_{xy}$ is the covariance and $s_y^2$ is the variance of $y$.",
+      "hint": "Compare the denominator with the line of y on x.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09m6ue4",
+      "kind": "mistake",
+      "front": "A student rearranges the line of y on x to predict x from y. What goes wrong?",
+      "back": "The rearranged line gives a **different answer**, because the line of y on x minimised vertical distances. The line of x on y must be found directly, using horizontal distances.",
+      "hint": "Which distances did each line minimise?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "140oi6m",
+      "kind": "concept",
+      "front": "Which point do both regression lines always pass through?",
+      "back": "The **mean point** $(\\\\bar x,\\\\bar y)$. Checking that your line passes through it is a useful test of your working.",
+      "hint": "Think about what the means of the data are.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "029r52i",
+      "kind": "term",
+      "front": "What does the covariance $s_{xy}$ measure?",
+      "back": "How $x$ and $y$ **vary together**. It equals $\\\\frac{1}{n}\\\\sum(x-\\\\bar x)(y-\\\\bar y)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12gezf7",
+      "kind": "process",
+      "front": "What are the steps to find the regression line of x on y from data?",
+      "back": "1) Find the means $\\\\bar x$ and $\\\\bar y$. 2) Find $\\\\sum(y-\\\\bar y)^2$ and $\\\\sum(x-\\\\bar x)(y-\\\\bar y)$. 3) Substitute into the formula. The factor $\\\\frac{1}{n}$ cancels in the slope.",
+      "hint": "A table of deviations helps avoid slips.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1erpjwh",
+      "kind": "example",
+      "front": "For the hours and scores data, what is the slope of the regression line of x on y?",
+      "back": "$c=\\\\frac{64}{536}\\\\approx0.1194$, so $x-3=0.119(y-60)$, which is $x\\\\approx0.119y-4.16$.",
+      "hint": "The sum of products is 64; the sum of squared deviations in y is 536.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "147vioh",
+      "kind": "concept",
+      "front": "What does the slope c ≈ 0.119 tell you about hours and scores?",
+      "back": "**Hours** rise by about 0.119 for each extra mark in the score. Its sign matches the sign of the covariance.",
+      "hint": "Think about the units: hours per mark.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19xuc4y",
+      "kind": "example",
+      "front": "Using $x-3=\\\\frac{64}{536}(y-60)$, how many hours are predicted for a score of 70?",
+      "back": "About **4.19 hours**. Substituting $y=70$ gives $x-3\\\\approx1.194$, so $x\\\\approx4.19$.",
+      "hint": "Substitute first, then solve for x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0miyqhj",
+      "kind": "term",
+      "front": "What does the constant d ≈ -4.16 mean in x ≈ 0.119y − 4.16?",
+      "back": "The value of $x$ when $y=0$. It has **no sensible meaning** here, since a time cannot be negative.",
+      "hint": "Check whether y = 0 lies in a sensible range.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1j44b6x",
+      "kind": "term",
+      "front": "What is the difference between interpolation and extrapolation?",
+      "back": "**Interpolation** predicts inside the range of the data; **extrapolation** predicts outside it. Extrapolation is risky because the pattern may not continue.",
+      "hint": "Where do the data stop?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ixbryo",
+      "kind": "concept",
+      "front": "When are regression predictions more reliable?",
+      "back": "When the points lie **close to the line**. If the points lie exactly on a straight line, both regression lines are the same line.",
+      "hint": "Think about how the scatter looks.",
+      "sectionId": "s5"
+    }
+  ]
+}

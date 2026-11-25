@@ -5,8 +5,9 @@ import "./globals.css";
 import { AppShell } from "@/components/layout/app-shell";
 import { Providers } from "@/components/providers";
 import { themeInitScript } from "@/lib/theme";
-import { newUiInitScript } from "@/lib/new-ui-init";
+import { legacyBodyScript, newUiInitScript } from "@/lib/new-ui-init";
 import { accentInitScript } from "@/lib/accent-theme";
+import { daypartInitScript } from "@/lib/daypart";
 import {
   defaultDescription,
   defaultTitle,
@@ -52,13 +53,13 @@ export const metadata: Metadata = {
     url: siteUrl,
     title: defaultTitle,
     description: defaultDescription,
-    images: [{ url: "/logo.png", alt: "Scribe logo" }],
+    images: [{ url: "/brand/og-default-hp2.png", width: 1200, height: 630, alt: "Scribe: study from your notes" }],
   },
   twitter: {
     card: "summary_large_image",
     title: defaultTitle,
     description: defaultDescription,
-    images: ["/logo.png"],
+    images: ["/brand/og-default-hp2.png"],
   },
   robots: {
     index: true,
@@ -94,11 +95,19 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: newUiInitScript }} />
         <script dangerouslySetInnerHTML={{ __html: accentInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: daypartInitScript }} />
         <script {...jsonLdScriptProps(organizationJsonLd)} />
         <script {...jsonLdScriptProps(webSiteJsonLd)} />
         <script {...jsonLdScriptProps(softwareApplicationJsonLd)} />
       </head>
-      <body className="min-h-full bg-background text-foreground font-sans">
+      {/*
+        `app-brand` on <body> is what gives every screen the product palette and
+        font (tokens.css), including dialogs and toasts portalled here. The
+        legacy `?ui=old` screens keep the old :root tokens (and their dark
+        mode), so the class comes off before first paint when that is chosen.
+      */}
+      <body suppressHydrationWarning className="app-brand min-h-full bg-background text-foreground font-sans">
+        <script dangerouslySetInnerHTML={{ __html: legacyBodyScript }} />
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}`}
           strategy="afterInteractive"

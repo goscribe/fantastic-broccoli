@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "10-11",
+  "topicCode": "10.11",
+  "topicName": "Taylor polynomial approximations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:30.527Z",
+  "cards": [
+    {
+      "id": "02djkpv",
+      "kind": "concept",
+      "front": "Why is a Taylor polynomial useful for approximating a hard function like $e^x$ or $\\ln x$?",
+      "back": "A **Taylor polynomial** copies the function's value and derivatives at one chosen point. Polynomials are easy to evaluate, since they need only addition and multiplication.",
+      "hint": "Think about what a calculator can do quickly with a polynomial.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kd2bzk",
+      "kind": "formula",
+      "front": "What is the general formula for the degree $n$ Taylor polynomial $P_n(x)$ centered at $a$?",
+      "back": "$P_n(x)=f(a)+f'(a)(x-a)+\\frac{f''(a)}{2!}(x-a)^2+\\cdots+\\frac{f^{(n)}(a)}{n!}(x-a)^n$. Each term is the $k$th derivative at $a$ divided by $k!$, times $(x-a)^k$.",
+      "hint": "Each term is a derivative divided by a factorial.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13y88ep",
+      "kind": "concept",
+      "front": "How do you use a Taylor polynomial to estimate a function value $f(x)$?",
+      "back": "Write $f(x)\\approx P_n(x)$ and evaluate the polynomial at $x$. The approximation is most **accurate** near the **center**, and the error grows as $x$ moves away from it.",
+      "hint": "Think about where the match between the polynomial and the function is perfect.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12xut2l",
+      "kind": "term",
+      "front": "What is the center of a Taylor polynomial?",
+      "back": "The **center** is the input $x=a$ where the polynomial and the function share their value and derivatives.",
+      "hint": "It is the one point where the match is exact.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "151lfx8",
+      "kind": "term",
+      "front": "What is the degree of a nonzero polynomial, and can a Taylor polynomial's degree be lower than the $n$ you chose?",
+      "back": "The **degree** is the highest exponent with a nonzero coefficient. It can be lower than $n$ if $f^{(n)}(a)=0$, because that term vanishes.",
+      "hint": "Check whether the coefficient of the highest term is zero.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1e969jl",
+      "kind": "process",
+      "front": "What are the steps to build a Taylor polynomial $P_n$ for $f$ centered at $a$?",
+      "back": "1) Find $f(a)$. 2) Differentiate $f$ up to the $n$th derivative. 3) Evaluate each derivative at $a$. 4) Divide the $k$th value by $k!$. 5) Attach $(x-a)^k$ to each result and add the terms.",
+      "hint": "Five steps, and the order matters.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h6or8k",
+      "kind": "example",
+      "front": "What is the degree 2 Taylor polynomial for $f(x)=\\sqrt{x}$ centered at $a=4$?",
+      "back": "$P_2(x)=2+\\frac14(x-4)-\\frac1{64}(x-4)^2$. This uses $f(4)=2$, $f'(4)=\\frac14$, and $f''(4)=-\\frac1{32}$, with $f''(4)$ divided by $2!$.",
+      "hint": "Find $f(4)$, $f'(4)$, and $f''(4)$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y540mh",
+      "kind": "mistake",
+      "front": "A student writes the $(x-4)^2$ coefficient of $P_2$ for $\\sqrt{x}$ as $f''(4)=-\\frac{1}{32}$. What is wrong?",
+      "back": "They forgot the factorial. The coefficient is $\\frac{f''(4)}{2!}=-\\frac{1}{64}$, so the $k$th derivative must always be divided by $k!$.",
+      "hint": "Check what happens to the second derivative before using it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1963qxz",
+      "kind": "example",
+      "front": "What is $P_3(x)$ for $f(x)=e^x$ centered at 0, and how accurate is it at $x=0.5$?",
+      "back": "$P_3(x)=1+x+\\frac{x^2}{2}+\\frac{x^3}{6}$. At $x=0.5$ it gives about 1.646, while $e^{0.5}$ is about 1.649, an error of about 0.003.",
+      "hint": "Every derivative of $e^x$ equals $e^x$, and $e^0=1$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "098l138",
+      "kind": "concept",
+      "front": "How does raising the degree $n$ change the quality of the approximation?",
+      "back": "A **higher degree** usually keeps the polynomial close to the function over a wider stretch. Far from the center, every polynomial still drifts away.",
+      "hint": "Compare the tangent line with the degree 3 polynomial for $e^x$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0suj1jf",
+      "kind": "example",
+      "front": "What is the degree of $7+(x-2)-3(x-2)^3$?",
+      "back": "The degree is **3**, because the highest power of $(x-2)$ with a nonzero coefficient is 3.",
+      "hint": "Ignore the constant 7 and look at the powers of $(x-2)$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1r1o8dn",
+      "kind": "mistake",
+      "front": "Does a degree $n$ Taylor polynomial always have degree $n$ just because you used derivatives up to the $n$th?",
+      "back": "No. If $f^{(n)}(a)=0$, that term vanishes, so the degree can be lower. For $\\sin x$ at 0, the polynomial through the fourth derivative is $x-\\frac{x^3}{6}$, with degree 3.",
+      "hint": "What happens to a term whose coefficient is zero?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gl40ax",
+      "kind": "concept",
+      "front": "Why is the $k$th coefficient of a Taylor polynomial equal to $\\frac{f^{(k)}(a)}{k!}$?",
+      "back": "The $k$th derivative of $(x-a)^k$ is $k!$, and the other terms vanish at $a$. So $k!\\,c_k$ must equal $f^{(k)}(a)$, which gives $c_k=\\frac{f^{(k)}(a)}{k!}$.",
+      "hint": "Differentiate the $k$th term $c_k(x-a)^k$ exactly $k$ times.",
+      "sectionId": "s5"
+    }
+  ]
+}

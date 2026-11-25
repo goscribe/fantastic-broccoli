@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "6-4",
+  "topicCode": "6.4",
+  "topicName": "Distribution of energy resources",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:32.265Z",
+  "cards": [
+    {
+      "id": "0j0h0nq",
+      "kind": "concept",
+      "front": "Why must many countries trade for the energy resources they lack?",
+      "back": "No single place has plenty of every energy source. Resources are **concentrated** in some regions and scarce in others, so fuel often moves from producers to consumers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1j10ln9",
+      "kind": "mistake",
+      "front": "Why does owning a large energy reserve not guarantee good energy access?",
+      "back": "Access also depends on **infrastructure** and money. A country with big reserves but no power plants or power lines may still leave households without reliable energy.",
+      "hint": "Compare reserves with the systems needed to deliver energy to homes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lloyym",
+      "kind": "concept",
+      "front": "Why does heavy reliance on imports weaken a country's energy security?",
+      "back": "Conflict, accidents, or price spikes in supplier regions can interrupt supply. **Diversification**, using several sources and suppliers, reduces this risk because one disruption cannot cut off most supply.",
+      "hint": "Compare a country buying from one supplier with one buying from many.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hkhlzk",
+      "kind": "term",
+      "front": "What is resource distribution?",
+      "back": "The geographic pattern of where an energy resource occurs and how much each region holds, including whether it can be economically recovered.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03ouxpd",
+      "kind": "term",
+      "front": "What is a sedimentary basin?",
+      "back": "A **sedimentary basin** is a low area in Earth's crust where thick layers of sediment build up and can trap the organic matter that forms fuels.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0djdnzg",
+      "kind": "concept",
+      "front": "Which rock structure lets oil and natural gas stay trapped underground?",
+      "back": "Porous rock holds the oil and gas, and a layer of **tight rock** above stops them from escaping.",
+      "hint": "Think about what a rock needs to hold fluid and what it needs to seal it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0cs365z",
+      "kind": "concept",
+      "front": "What controls where uranium occurs?",
+      "back": "**Ore deposits** formed by geologic processes. Only some countries have them, so uranium is unevenly distributed.",
+      "hint": "Compare this with what controls where coal forms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d592x3",
+      "kind": "concept",
+      "front": "Why is geothermal energy practical only in certain regions?",
+      "back": "It needs heat close to the surface, which is found mainly near **plate boundaries** and hot spots.",
+      "hint": "Think about what is happening in Earth's crust in those places.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1w9mw7y",
+      "kind": "term",
+      "front": "What is a renewable resource?",
+      "back": "A **renewable resource** is an energy source that natural processes replace on a human time scale, such as sunlight, wind, flowing water, and biomass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05m58c8",
+      "kind": "concept",
+      "front": "Which landscape and climate features make hydroelectric power work best?",
+      "back": "Rivers that flow **steeply** through wet, hilly land give the strongest hydroelectric potential.",
+      "hint": "Think about how fast water must fall to turn turbines.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0d157hg",
+      "kind": "mistake",
+      "front": "Why does uneven resource distribution not mean a resource is running out?",
+      "back": "Uneven distribution means a resource is concentrated in some places and scarce in others. It does not mean the total supply is being used up.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hd8eag",
+      "kind": "term",
+      "front": "What is energy access?",
+      "back": "The ability of households and businesses to obtain reliable, affordable modern energy, such as electricity and clean cooking fuel.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l5wjsy",
+      "kind": "process",
+      "front": "How does fuel get from producing regions to consuming regions?",
+      "back": "Through trade, moved along **infrastructure**: oil by tanker and pipeline, coal by rail and ship, and natural gas by pipeline or specialist liquid-gas ships.",
+      "hint": "Think about the transport method suited to each fuel.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1svh1kj",
+      "kind": "term",
+      "front": "What is infrastructure in the energy sector?",
+      "back": "The physical systems, such as wells, mines, pipelines, ports, rail lines, and power grids, that extract, move, and deliver energy.",
+      "sectionId": "s5"
+    }
+  ]
+}

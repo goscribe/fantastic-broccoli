@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Regulation of cell cycle",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:36.909Z",
+  "cards": [
+    {
+      "id": "09spma0",
+      "kind": "concept",
+      "front": "What does a checkpoint decide, and why does it matter?",
+      "back": "A **checkpoint** decides whether the cell can safely continue. If conditions are unsuitable, the cell pauses for repair or leaves the cycle, which stops DNA damage reaching daughter cells.",
+      "hint": "Think about what happens if damage is copied into new cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vr22ef",
+      "kind": "concept",
+      "front": "How do cyclins and CDKs work together to move the cell cycle forward?",
+      "back": "A **cyclin** binds and activates a **CDK**. The active cyclin–CDK complex phosphorylates proteins that help the cell enter the next stage. Cyclin levels change during the cycle, so timing is controlled.",
+      "hint": "Which partner changes in amount, and which is the enzyme?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cbdcq5",
+      "kind": "concept",
+      "front": "How can failed cell cycle control lead to cancer?",
+      "back": "Overactive **proto-oncogenes** send strong growth signals, and disabled **tumor suppressor genes** remove restraints on division. A damaged cell may then pass checkpoints and divide uncontrollably.",
+      "hint": "Consider both growth signals and brakes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1l0wsot",
+      "kind": "term",
+      "front": "What is G0?",
+      "back": "**G0** is a nondividing state that a cell can enter instead of continuing through the active cell cycle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1aqqixm",
+      "kind": "term",
+      "front": "What is the spindle checkpoint?",
+      "back": "The **spindle checkpoint** monitors chromosome attachment during mitosis and delays sister chromatid separation until chromosomes are properly attached.",
+      "hint": "It works during mitosis, not before DNA copying.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jy8im1",
+      "kind": "process",
+      "front": "What are the three main checkpoints, in the order a cell passes them?",
+      "back": "First the **G1 checkpoint** (resources, growth signals, DNA damage), then the **G2 checkpoint** (DNA replication and damage, before mitosis), then the **spindle checkpoint** (chromosome attachment during mitosis).",
+      "hint": "Follow the cycle from G1 through mitosis."
+    },
+    {
+      "id": "0ggbbg4",
+      "kind": "mistake",
+      "front": "If a cell passes a checkpoint, does that mean no DNA errors remain?",
+      "back": "No. Checkpoints only **reduce the chance** that cells divide with harmful errors. Some errors may still escape detection.",
+      "hint": "Think about how reliable a check can be.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09atm8u",
+      "kind": "mistake",
+      "front": "Do cyclin levels and CDK levels both rise and fall across the cell cycle?",
+      "back": "No. Only **cyclin** levels change over the cycle. CDKs are enzymes that become active when a cyclin binds them.",
+      "hint": "Recall the tip about the two partners.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15n9nuq",
+      "kind": "concept",
+      "front": "Why does the spindle checkpoint protect the daughter cells?",
+      "back": "It delays **sister chromatid** separation until chromosomes are properly attached to the spindle, so each daughter cell receives the correct set of chromosomes.",
+      "hint": "Focus on what each new cell ends up with.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zewz3s",
+      "kind": "concept",
+      "front": "How do proto-oncogenes and tumor suppressor genes differ in their normal roles?",
+      "back": "**Proto-oncogenes** normally support regulated growth. **Tumor suppressor genes** help restrain division, repair damage, or eliminate damaged cells.",
+      "hint": "One promotes growth, the other restrains it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lsx76x",
+      "kind": "concept",
+      "front": "Does one altered gene always cause cancer?",
+      "back": "No. The outcome depends on the **combination of changes** present. Descendant cells may acquire further changes that favor survival and growth.",
+      "hint": "Think about how many changes a tumor needs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "028htju",
+      "kind": "term",
+      "front": "What is cancer in terms of cell division?",
+      "back": "**Cancer** is uncontrolled cell growth and division that can form a tumor and, in some cases, invade surrounding tissues.",
+      "sectionId": "s4"
+    }
+  ]
+}

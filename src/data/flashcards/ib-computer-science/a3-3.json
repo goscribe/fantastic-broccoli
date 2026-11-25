@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a3-3",
+  "topicCode": "A3.3",
+  "topicName": "Database programming",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:57.536Z",
+  "cards": [
+    {
+      "id": "0snup96",
+      "kind": "term",
+      "front": "What is SQL?",
+      "back": "**SQL** (Structured Query Language) is the standard language for defining, querying and changing data in a relational database.",
+      "hint": "Think about how you tell a DBMS what you want.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z7vdmz",
+      "kind": "concept",
+      "front": "Why do some questions need a join across two tables?",
+      "back": "Related facts sit in separate tables, so a **join** matches key values, usually a foreign key with a primary key, to bring matching rows together in one result.",
+      "hint": "Think about the Member and Club tables.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ig77vv",
+      "kind": "concept",
+      "front": "Why do transactions matter when moving stock between two warehouses?",
+      "back": "A **transaction** groups both updates into one unit: either every step is saved (commit) or none is (rollback), so no stock vanishes if a failure happens between them.",
+      "hint": "What would happen if only one update ran?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0sf3u77",
+      "kind": "term",
+      "front": "What is the job of the WHERE clause in a SELECT statement?",
+      "back": "WHERE keeps only the **rows** that meet a condition, such as Year = 12, which is true or false for each row.",
+      "hint": "Compare with SELECT, which picks columns.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c7ukk6",
+      "kind": "example",
+      "front": "Write a SELECT statement listing the names and marks of Year 12 students, highest mark first.",
+      "back": "SELECT Name, Mark FROM Student WHERE Year = 12 ORDER BY Mark DESC; it returns Chloe 91 and then Ana 78.",
+      "hint": "Use SELECT, FROM, WHERE and ORDER BY.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1mzgr2p",
+      "kind": "mistake",
+      "front": "A student runs UPDATE Student SET Mark = 82; with no WHERE clause. What goes wrong?",
+      "back": "It changes the **Mark** of every row, not just one student. Always add a WHERE condition, such as StudentID = 1, and check it before running.",
+      "hint": "Think about what WHERE selects.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08ji3ul",
+      "kind": "process",
+      "front": "What are the steps to list each member's name with their club name, using Member and Club?",
+      "back": "1) SELECT Member.Name, Club.ClubName FROM Member; 2) INNER JOIN Club; 3) ON Member.ClubID = Club.ClubID. Rows with no match, such as Dev, are left out.",
+      "hint": "Start from Member, then add the join.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1de4kao",
+      "kind": "term",
+      "front": "How does a left join differ from an inner join?",
+      "back": "A **left join** keeps every row of the first table, showing NULL where the second table has no match; an inner join returns only matching rows.",
+      "hint": "Think about which rows are kept.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vm9ng8",
+      "kind": "term",
+      "front": "What is the difference between a commit and a rollback?",
+      "back": "A **commit** permanently saves a transaction's changes; a **rollback** cancels them and restores the data to its state before the transaction began.",
+      "hint": "One saves, one undoes.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0c979wd",
+      "kind": "concept",
+      "front": "What do the four ACID properties describe?",
+      "back": "The **ACID** properties describe reliable transactions: atomicity (all or nothing), consistency (valid state to valid state), isolation (concurrent transactions do not interfere) and durability (committed changes survive a crash).",
+      "hint": "Each letter stands for one property.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "194y95x",
+      "kind": "term",
+      "front": "What is SQL injection?",
+      "back": "**SQL injection** is an attack where a user enters SQL code as input and the DBMS runs it, letting the attacker read, change or delete data.",
+      "hint": "It happens when typed text is joined straight into SQL.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "02gt8px",
+      "kind": "concept",
+      "front": "How does a parameterised query stop SQL injection?",
+      "back": "It passes input as **data**, never as SQL text, so typed input cannot be run as code. Validating type, length and allowed characters adds further protection.",
+      "hint": "Think about data versus code.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-11",
+  "topicCode": "7.11",
+  "topicName": "Variations in populations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:56.883Z",
+  "cards": [
+    {
+      "id": "174c5af",
+      "kind": "concept",
+      "front": "Where does new genetic variation in a population come from?",
+      "back": "**Mutation** changes a DNA sequence and can create a new allele, which is how new genetic variants enter a population.",
+      "hint": "Think about what changes the DNA itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fsvuj5",
+      "kind": "concept",
+      "front": "How does sexual reproduction create variation without making brand-new alleles?",
+      "back": "It **reshuffles** alleles already present in the parents through crossing over, independent assortment, and random fertilization, giving offspring new combinations.",
+      "hint": "Reshuffling is not the same as creating.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0f4yr0c",
+      "kind": "concept",
+      "front": "Why does a trait difference matter for a population over time?",
+      "back": "A difference matters only if it raises **reproductive success**: the trait must help an individual produce more offspring that inherit it, not just survive.",
+      "hint": "Survival alone is not enough.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hx62hm",
+      "kind": "term",
+      "front": "What is an allele?",
+      "back": "An **allele** is a different version of a gene that individuals in a population can carry.",
+      "hint": "Think of versions of one gene.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iroj6z",
+      "kind": "term",
+      "front": "What is a phenotype?",
+      "back": "A **phenotype** is an organism's observable traits, such as coloration or body size, shaped by both its genes and its environment.",
+      "hint": "What you can see or measure.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ohujv8",
+      "kind": "term",
+      "front": "What is crossing over?",
+      "back": "**Crossing over** exchanges DNA between paired chromosomes during meiosis.",
+      "hint": "It happens during meiosis.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qrb4u2",
+      "kind": "term",
+      "front": "What is independent assortment?",
+      "back": "**Independent assortment** places different combinations of maternal and paternal chromosomes into reproductive cells.",
+      "hint": "Think about how chromosome pairs sort.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ciz7fi",
+      "kind": "concept",
+      "front": "Why are offspring from the same parents genetically different?",
+      "back": "**Random fertilization** means any sperm may join any egg. Combined with crossing over and independent assortment, offspring inherit different allele combinations.",
+      "hint": "Three processes add to the variation.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a88siu",
+      "kind": "mistake",
+      "front": "Is it right to say a beetle mutated because it needed a darker color?",
+      "back": "No. **Mutations** arise without regard to an organism's needs, so a useful change is only one possible outcome, not the cause.",
+      "hint": "Think about whether need can direct change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gzx8lr",
+      "kind": "mistake",
+      "front": "A taller plant has more food, so is its height inherited? Explain.",
+      "back": "Not necessarily. An observed difference is **not automatically inherited**, because environment, such as food availability, can change traits like body size.",
+      "hint": "Genes and environment both matter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04ebwcc",
+      "kind": "concept",
+      "front": "Why can two beetles of the same species look different?",
+      "back": "Differences in **alleles** and in environment, such as food availability, can both shape traits like color and body size.",
+      "hint": "Consider genes and surroundings.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0p1pip5",
+      "kind": "concept",
+      "front": "Why can a trait that helps in one place hurt in another?",
+      "back": "An advantage depends on **context**. Dark coloration hides a beetle on dark ground but makes it easier to see on light ground.",
+      "hint": "Name the environment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0b4va9e",
+      "kind": "process",
+      "front": "How can an inherited trait spread through a population over generations?",
+      "back": "1) Variation gives individuals different traits. 2) Some traits aid survival in the environment. 3) Those individuals produce more offspring. 4) Offspring inherit the alleles, so the trait spreads.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s4"
+    }
+  ]
+}

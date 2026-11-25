@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-4",
+  "topicCode": "8.4",
+  "topicName": "Area between curves (functions of x)",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:34.712Z",
+  "cards": [
+    {
+      "id": "1y39d6z",
+      "kind": "process",
+      "front": "What are the main steps for finding the area between two curves as functions of $x$?",
+      "back": "Sketch both curves, find their **intersection points** to get the limits, identify the upper function, integrate upper minus lower across the interval, then evaluate the antiderivative at the limits.",
+      "hint": "Start with a sketch and end with an evaluated integral."
+    },
+    {
+      "id": "1kalcav",
+      "kind": "formula",
+      "front": "If $f(x)$ is above $g(x)$ from $x=a$ to $x=b$, what integral gives the area between them?",
+      "back": "$A=\\int_a^b[f(x)-g(x)]\\,dx$, where **$f(x)-g(x)$** is upper minus lower. The result is in square units when both axes use the same length unit.",
+      "hint": "Think about the height of one thin vertical strip.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1o8o5ga",
+      "kind": "concept",
+      "front": "Why must you decide which function is upper before writing the area integral?",
+      "back": "The strip height is **upper minus lower**, so the subtraction order sets the sign of each strip. Subtracting the wrong way gives a negative value, but area must be nonnegative.",
+      "hint": "Check which curve is higher at a test x-value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u69q9b",
+      "kind": "term",
+      "front": "What are intersection points, and why do they matter for area between curves?",
+      "back": "**Intersection points** are where two curves share the same $x$- and $y$-coordinates. Their $x$-coordinates, found by setting the functions equal, give the region's left and right edges.",
+      "hint": "Set the two functions equal to each other.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bjbwtv",
+      "kind": "term",
+      "front": "What are limits of integration?",
+      "back": "**Limits of integration** are the starting and ending $x$-values of a definite integral. For a region between curves, they are usually the $x$-coordinates of the intersection points.",
+      "hint": "They are the a and b in a definite integral.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w3wmtz",
+      "kind": "concept",
+      "front": "What does a vertical strip represent in the area between two curves?",
+      "back": "A **vertical strip** is a thin slice of the region with width $dx$ and height equal to upper function minus lower function. Adding up these strips gives the total area.",
+      "hint": "Picture slicing the region into thin vertical rectangles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0g8qysc",
+      "kind": "mistake",
+      "front": "A student subtracts the upper curve from the lower curve. What is wrong, and what is the fix?",
+      "back": "The integrand is the wrong sign, so the integral can come out negative. Use **upper minus lower** instead, so each strip height is nonnegative.",
+      "hint": "Compare the sign of the result with the picture.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yt91qq",
+      "kind": "example",
+      "front": "Find the area between $y=2x$ and $y=x^2$ from $x=0$ to $x=2$, with both axes in centimeters.",
+      "back": "$\\frac{4}{3}\\,\\mathrm{cm^2}$. Set up $\\int_0^2(2x-x^2)\\,dx$, then $\\left[x^2-\\frac{x^3}{3}\\right]_0^2=4-\\frac{8}{3}=\\frac{4}{3}$.",
+      "hint": "The line is the upper function on this interval.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08rfqyf",
+      "kind": "mistake",
+      "front": "A student answers 'Area = 4/3' for a region measured in centimeters. What is missing?",
+      "back": "The **units**. Area on axes measured in centimeters is in square centimeters, so the answer should be $\\frac{4}{3}\\,\\mathrm{cm^2}$.",
+      "hint": "Think about what unit area uses.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0843yca",
+      "kind": "term",
+      "front": "What is the integration interval?",
+      "back": "The **integration interval** is the set of $x$-values over which the enclosed region extends. It must match the region you sketched, such as $0\\leq x\\leq2$ for the line and parabola.",
+      "hint": "Compare it with where the curves meet.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0v6z6s8",
+      "kind": "term",
+      "front": "What is a reasonableness check for an area result?",
+      "back": "A **reasonableness check** compares the calculated area with a simple bound or expected sign. For example, if the vertical gap is at most 1 over an interval of length 2, the area must be less than 2.",
+      "hint": "Estimate the largest possible area using a box.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1t5tp8a",
+      "kind": "concept",
+      "front": "Why should the integral of the strip height for the line and parabola be positive?",
+      "back": "Between the intersections, $2x-x^2$ is positive and it is zero at both endpoints. A positive height over the interval gives a positive integral, which matches a real area.",
+      "hint": "Check the sign of the strip height on $0\\leq x\\leq2$.",
+      "sectionId": "s4"
+    }
+  ]
+}

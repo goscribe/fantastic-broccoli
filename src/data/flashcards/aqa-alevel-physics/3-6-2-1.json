@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-6-2-1",
+  "topicCode": "3.6.2.1",
+  "topicName": "Thermal energy transfer",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:02.276Z",
+  "cards": [
+    {
+      "id": "04kolwy",
+      "kind": "term",
+      "front": "What is thermal energy transfer?",
+      "back": "**Thermal energy transfer** is the one-way movement of energy from a hotter region to a cooler one, because of a temperature difference. It is measured in joules.",
+      "hint": "Think about what happens to a hot drink left on a table.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05jg67a",
+      "kind": "concept",
+      "front": "Why does trapped air make a good insulator?",
+      "back": "Air is a poor **conductor**, and when held in tiny pockets it cannot **circulate**, so convection is also small.",
+      "hint": "Consider how air behaves when it is held still in small spaces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f82njj",
+      "kind": "formula",
+      "front": "How does doubling the thickness $L$ change the rate of conduction in $\\frac{\\Delta Q}{\\Delta t}=\\frac{kA\\Delta\\theta}{L}$?",
+      "back": "It **halves** the rate, because the rate is inversely proportional to the thickness $L$ in $\\text{m}$.",
+      "hint": "Look at where $L$ sits in the equation.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1092zme",
+      "kind": "term",
+      "front": "What is conduction?",
+      "back": "**Conduction** is the passing of energy between neighbouring particles, which vibrate and pass energy on, without the material itself moving as a whole.",
+      "hint": "Think about what neighbouring particles do in a solid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nn98f8",
+      "kind": "concept",
+      "front": "Why do metals conduct energy better than non-metals?",
+      "back": "Metals contain **free electrons**, which move through the whole metal and carry energy quickly from hot regions to cooler ones.",
+      "hint": "Compare what carries energy in metals with what does in non-metals.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1x84lk7",
+      "kind": "concept",
+      "front": "Why does water rise when a pan is heated from below?",
+      "back": "Warm water becomes less dense and rises while cooler, denser water sinks to replace it. This circulation is **convection**, which needs a fluid.",
+      "hint": "Start with what happens to the water at the bottom of the pan.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1wkcno7",
+      "kind": "concept",
+      "front": "Why can the Sun warm the Earth across empty space?",
+      "back": "By **thermal radiation**, which is infrared electromagnetic waves. It needs no material to travel through, and all objects emit it, with hotter objects emitting more.",
+      "hint": "Consider which process does not depend on particles touching.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "146wbdz",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that cold flows into a warm object?",
+      "back": "Cold is not a substance. Energy flows **out** of the warm object into its cooler surroundings.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1si9f6m",
+      "kind": "mistake",
+      "front": "Why must thickness be converted to metres before using the conductivity equation?",
+      "back": "Thermal conductivity is in $\\text{W\\,m}^{-1}\\text{K}^{-1}$, so lengths must be in $\\text{m}$. Leaving thickness in $\\text{mm}$ makes the answer 1000 times too small.",
+      "hint": "Check the units of $k$ before substituting numbers.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0mrv11h",
+      "kind": "term",
+      "front": "What is thermal conductivity $k$?",
+      "back": "The rate of energy transfer per unit area per unit temperature gradient, in $\\text{W\\,m}^{-1}\\text{K}^{-1}$. It is high for good conductors and low for insulators.",
+      "hint": "Think about what is measured per unit area.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "09hfq8t",
+      "kind": "example",
+      "front": "What is the rate of transfer through glass: $A=2.0\\,\\text{m}^2$, $L=5.0\\,\\text{mm}$, $k=1.0\\,\\text{W\\,m}^{-1}\\text{K}^{-1}$, $\\Delta\\theta=12\\,\\text{K}$?",
+      "back": "$4.8\\times10^{3}\\,\\text{W}$, using $L=5.0\\times10^{-3}\\,\\text{m}$ in $\\frac{kA\\Delta\\theta}{L}$.",
+      "hint": "Start by converting the thickness into metres.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "17evp0z",
+      "kind": "example",
+      "front": "What happens to the glass pane's rate of transfer if its $k$ falls to $0.040\\,\\text{W\\,m}^{-1}\\text{K}^{-1}$, with all else equal?",
+      "back": "It falls by a factor of 25, to about $1.9\\times10^{2}\\,\\text{W}$. Conductivities are compared only for equal size and conditions.",
+      "hint": "Compare the new $k$ with the old one before doing any arithmetic.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "13p8eds",
+      "kind": "process",
+      "front": "How does a vacuum flask reduce each of the three processes?",
+      "back": "A vacuum stops conduction and convection, silvered surfaces reflect thermal radiation back to the drink, and a tight stopper stops warm air escaping by convection.",
+      "hint": "Go through conduction, convection and radiation in turn.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zmca0h",
+      "kind": "example",
+      "front": "What is the rate of transfer through a wall: $A=1.5\\,\\text{m}^2$, $L=0.25\\,\\text{m}$, $k=0.80\\,\\text{W\\,m}^{-1}\\text{K}^{-1}$, $\\Delta\\theta=15\\,\\text{K}$?",
+      "back": "$72\\,\\text{W}$, from $\\frac{0.80\\times1.5\\times15}{0.25}$.",
+      "sectionId": "s5"
+    }
+  ]
+}

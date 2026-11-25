@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Frequency and period of SHM",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:01.384Z",
+  "cards": [
+    {
+      "id": "1ryj3xo",
+      "kind": "term",
+      "front": "What is the period of an oscillation, and what unit is it measured in?",
+      "back": "The **period**, $T$, is the time taken for one complete cycle of a repeating motion. It is measured in seconds.",
+      "hint": "Think of one full round trip back to the start.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bm2n1x",
+      "kind": "formula",
+      "front": "What is the relationship between frequency $f$ and period $T$, and what unit is frequency measured in?",
+      "back": "They are **reciprocals**: $f=\\frac{1}{T}$. Frequency is measured in **hertz** (Hz), which equals $\\mathrm{s}^{-1}$.",
+      "hint": "A long period means few cycles each second.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05tf6ls",
+      "kind": "formula",
+      "front": "What equation gives the period of a mass on an ideal spring, and what does each symbol mean?",
+      "back": "$T=2\\pi\\sqrt{\\frac{m}{k}}$, where $m$ is the **mass** in kg, $k$ is the **spring constant** in N/m, and $T$ is in seconds.",
+      "hint": "Only the mass and the stiffness of the spring matter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06rpuhn",
+      "kind": "formula",
+      "front": "What equation gives the period of a simple pendulum for small angles, and which quantities affect it?",
+      "back": "$T=2\\pi\\sqrt{\\frac{L}{g}}$, where $L$ is the **length** from pivot to bob's centre and $g$ is the **gravitational field strength**. Bob mass does not appear.",
+      "hint": "Look at each symbol in the formula and what it stands for.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "01fge44",
+      "kind": "mistake",
+      "front": "A student says one oscillation is the motion from one extreme position to the other. What is wrong?",
+      "back": "That is only **half** a cycle. One full cycle returns to the same position and the same direction of motion.",
+      "hint": "Count a full round trip.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gqngc5",
+      "kind": "process",
+      "front": "How do you find the period and frequency from a number of cycles and a total time?",
+      "back": "Divide the **total time** by the number of cycles to get $T$. Divide the number of cycles by the time to get $f$. Both methods should agree.",
+      "hint": "Use the same data both ways and check.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13uc2jx",
+      "kind": "example",
+      "front": "A mass on a spring completes 30 cycles in 12 s. What are its period and frequency?",
+      "back": "$T=0.40\\ \\mathrm{s}$ and $f=2.5$ Hz. Check: $\\frac{1}{0.40}=2.5$.",
+      "hint": "Start by dividing the time by the cycles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08wfz3d",
+      "kind": "example",
+      "front": "A 0.50 kg mass oscillates on a spring with $k=50$ N/m. What are its period and frequency?",
+      "back": "$T\\approx0.63$ s and $f\\approx1.6$ Hz. Use $T=2\\pi\\sqrt{\\frac{0.50}{50}}$, then $f=\\frac{1}{T}$.",
+      "hint": "Find $\\sqrt{0.010}$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xq82sm",
+      "kind": "mistake",
+      "front": "Does doubling the swing amplitude of an ideal spring oscillator change its period?",
+      "back": "**No**. A bigger swing gives a bigger force and higher speeds, so each cycle still takes the same time.",
+      "hint": "Think about what a bigger swing changes: the force and the speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0zju24l",
+      "kind": "example",
+      "front": "A pendulum has length 1.0 m, and $g=9.8$ m/s². What is its period for small angles?",
+      "back": "About **2.0 s**. Use $T=2\\pi\\sqrt{\\frac{1.0}{9.8}}$, which gives $T\\approx2.0$ s.",
+      "hint": "Square-root the ratio $L/g$ first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hnxieb",
+      "kind": "concept",
+      "front": "If the mass of a spring oscillator is quadrupled, what happens to its period?",
+      "back": "It **doubles**. The period is proportional to $\\sqrt{m}$, and $\\sqrt{4}=2$.",
+      "hint": "Look at the square root in the formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mhoq2s",
+      "kind": "term",
+      "front": "What is a hertz?",
+      "back": "The **SI unit of frequency**, equal to one cycle per second. It is written Hz, or $\\mathrm{s}^{-1}$.",
+      "hint": "Frequency counts cycles per unit of time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1w6ff7f",
+      "kind": "mistake",
+      "front": "A student says that increasing a pendulum bob's mass increases its period. Why is this wrong?",
+      "back": "The **bob mass** does not appear in $T=2\\pi\\sqrt{\\frac{L}{g}}$. Only length and $g$ change the period.",
+      "hint": "Check which symbols are in the formula.",
+      "sectionId": "s4"
+    }
+  ]
+}

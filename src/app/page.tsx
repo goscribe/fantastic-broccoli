@@ -26,31 +26,29 @@ import {
   fetchStudySessions,
   type DailyActivityPoint,
 } from "@/lib/api/study";
-import dynamic from "next/dynamic";
 import { useNewUi } from "@/lib/new-ui";
 import {
   hasSkippedFirstSessionOnboarding,
   markFirstSessionOnboardingSkipped,
 } from "@/components/onboarding/first-session-onboarding";
 import { FirstRun } from "@/components/onboarding/first-run";
-import { AppTourAuto } from "@/components/onboarding/app-tour";
+import { FIRST_RUN_MAX_SUBJECTS, shouldShowFirstRun } from "@/lib/first-run";
+import { LoadError } from "@/components/ui/load-error";
 import { onTreeChanged } from "@/lib/tree-events";
 import { Search, ArrowRight, Plus, RotateCcw } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { fetchHomeSummary, HOME_SUMMARY_KEY } from "@/lib/api/home";
+import type { HomeSummary } from "@/lib/home-action";
+import { HomeError, HomeView } from "@/components/learn/home-view";
 import { fetchDueReview } from "@/lib/api/study-session";
 import { CardGridSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { HeroScene, ConfettiDots, Sticker } from "@/components/graphics/floating-decor";
 import { Banner } from "@/components/ui/banner";
 import { Button } from "@/components/ui/button";
 import { HomeUploadRow } from "@/components/workspace/home-upload-row";
-
-// The learn home is heavy (charts, covers, planner); a brand-new learner never
-// needs it on first paint, so it loads in its own chunk.
-const LearnHome = dynamic(() =>
-  import("@/components/learn/learn-home").then((m) => m.LearnHome),
-);
+import { CourseShelf } from "@/components/courses/course-shelf";
 
 function computeStreak(daily: DailyActivityPoint[]): number {
   const byDate = new Map(daily.map((d) => [d.date, d.count]));
@@ -78,7 +76,71 @@ function flattenWorkspaces(folders: Folder[], root: Workspace[]): Workspace[] {
   return all;
 }
 
+/** First run for a student with no subjects, or whose few subjects were never studied (unless they skipped it). */
+function firstRunFrom(summary: HomeSummary): boolean {
+  const count = summary.subjects.length;
+  return shouldShowFirstRun({
+    treeFailed: false,
+    workspaceCount: count,
+    skipped: hasSkippedFirstSessionOnboarding(),
+    sessionCounts: count <= FIRST_RUN_MAX_SUBJECTS ? summary.subjects.map((s) => s.sessionsTotal) : [],
+  });
+}
+
+/**
+ * The signed-in home (new UI): one `home.summary` request decides first run,
+ * the recommended action and the subject tiles. Nothing else on the page
+ * waits on, or is waited on by, that request.
+ */
+function NewHome() {
+  const { user } = useAuthUser();
+  const qc = useQueryClient();
+  const summary = useQuery({
+    queryKey: HOME_SUMMARY_KEY,
+    queryFn: fetchHomeSummary,
+    retry: false,
+    staleTime: 30_000,
+  });
+  useEffect(() => onTreeChanged(() => void qc.invalidateQueries({ queryKey: HOME_SUMMARY_KEY })), [qc]);
+  // Decided once from the first answer (sticky, so the dashboard never flashes into first run or back).
+  const [skippedNow, setSkippedNow] = useState(false);
+  const [firstRun, setFirstRun] = useState<boolean | undefined>(undefined);
+  const decided = firstRun ?? (summary.data ? firstRunFrom(summary.data) : undefined);
+  // Adjusting state while rendering (React's "store information from previous renders" pattern).
+  if (firstRun === undefined && decided !== undefined) setFirstRun(decided);
+
+  if (summary.data && decided && !skippedNow) {
+    const subjects = summary.data.subjects;
+    return (
+      <FirstRun
+        firstName={user?.name?.trim().split(/\s+/)[0] || undefined}
+        fallbackWorkspaceId={subjects[0]?.id}
+        autoStart={subjects.length === 0}
+        onSkip={
+          subjects.length > 0
+            ? () => {
+                markFirstSessionOnboardingSkipped();
+                setSkippedNow(true);
+              }
+            : undefined
+        }
+      />
+    );
+  }
+  if (summary.data) return <HomeView summary={summary.data} />;
+  // A failed load is its own state, never "no subjects yet" and never first run.
+  if (summary.isError) return <HomeError onRetry={() => void summary.refetch()} retrying={summary.isFetching} />;
+  // The request started with the session check (AppShell), so this is brief.
+  return <div className="flex-1 bg-white" aria-busy="true" />;
+}
+
 export default function HomePage() {
+  const newUi = useNewUi();
+  return newUi ? <NewHome /> : <LegacyHome />;
+}
+
+/** The legacy dashboard (`?ui=old`), unchanged. */
+function LegacyHome() {
   const router = useRouter();
   const { t } = useI18n();
   const { user } = useAuthUser();
@@ -114,13 +176,17 @@ export default function HomePage() {
     undefined,
   );
 
+  // A failed load is its own state: it must never look like "no subjects yet".
+  const [treeError, setTreeError] = useState(false);
+
   const loadTree = () =>
     fetchWorkspaceTree()
       .then((tree) => {
+        setTreeError(false);
         setFolders(tree.folders);
         setRootWorkspaces(tree.rootWorkspaces);
       })
-      .catch(() => {})
+      .catch(() => setTreeError(true))
       .finally(() => setTreeLoading(false));
 
   useEffect(() => {
@@ -136,19 +202,27 @@ export default function HomePage() {
   // study session yet (unless they chose to look around), lands on "What are
   // you studying?" instead of the dashboard.
   useEffect(() => {
-    if (treeLoading || showOnboarding !== undefined) return;
+    // Nothing is decided from a failed load (shouldShowFirstRun would say no,
+    // and a retry that succeeds must still be able to decide).
+    if (treeLoading || treeError || showOnboarding !== undefined) return;
     let cancelled = false;
     const decide = async (): Promise<boolean> => {
       const workspaces = flattenWorkspaces(folders, rootWorkspaces);
-      if (workspaces.length === 0) return true;
-      if (hasSkippedFirstSessionOnboarding()) return false;
+      const skipped = hasSkippedFirstSessionOnboarding();
       // Established users (many workspaces) are never onboarding candidates —
       // skip the per-workspace session queries entirely.
-      if (workspaces.length > 5) return false;
-      const lists = await Promise.all(
-        workspaces.map((w) => fetchStudySessions(w.id).catch(() => [])),
-      );
-      return lists.every((l) => l.length === 0);
+      const needSessions = workspaces.length > 0 && !skipped && workspaces.length <= FIRST_RUN_MAX_SUBJECTS;
+      const sessionCounts = needSessions
+        ? await Promise.all(
+            workspaces.map((w) =>
+              fetchStudySessions(w.id).then(
+                (l) => l.length,
+                () => null,
+              ),
+            ),
+          )
+        : [];
+      return shouldShowFirstRun({ treeFailed: false, workspaceCount: workspaces.length, skipped, sessionCounts });
     };
     decide().then((show) => {
       if (!cancelled) setShowOnboarding(show);
@@ -156,7 +230,7 @@ export default function HomePage() {
     return () => {
       cancelled = true;
     };
-  }, [treeLoading, folders, rootWorkspaces, showOnboarding]);
+  }, [treeLoading, treeError, folders, rootWorkspaces, showOnboarding]);
 
   const allWorkspaces = useMemo(
     () => flattenWorkspaces(folders, rootWorkspaces),
@@ -231,13 +305,13 @@ export default function HomePage() {
         ? t("misc.goodAfternoon")
         : t("misc.goodEvening");
 
-  const newUi = useNewUi();
   const hasWorkspaces = allWorkspaces.length > 0;
   if (showOnboarding === true) {
     return (
       <FirstRun
         firstName={user?.name?.trim().split(/\s+/)[0] || undefined}
         fallbackWorkspaceId={allWorkspaces[0]?.id}
+        autoStart={!hasWorkspaces}
         onSkip={
           hasWorkspaces
             ? () => {
@@ -249,18 +323,25 @@ export default function HomePage() {
       />
     );
   }
+  // The load failed and there is nothing to show: say so, with a way to retry.
+  // Never the first-run screen, never an empty dashboard.
+  if (treeError && !hasWorkspaces) {
+    return (
+      <div className="flex flex-1 items-center justify-center bg-white px-4 py-16">
+        <LoadError
+          onRetry={() => {
+            setTreeError(false);
+            setTreeLoading(true);
+            void loadTree();
+          }}
+        />
+      </div>
+    );
+  }
   // Still deciding: a new learner must not see the dashboard flash in first.
   if (showOnboarding === undefined && (treeLoading || !hasWorkspaces)) {
     return <div className="flex-1 bg-white" aria-busy="true" />;
   }
-  if (newUi)
-    return (
-      <>
-        <LearnHome />
-        {showOnboarding === false && <AppTourAuto />}
-      </>
-    );
-
   return (
     <div className="flex-1 flex flex-col">
       <Banner
@@ -543,6 +624,11 @@ export default function HomePage() {
             </div>
           )}
         </section>
+
+        {/* Courses: progress per course, or a way into the course picker */}
+        <div className="animate-fade-up">
+          <CourseShelf />
+        </div>
 
         {/* Search */}
         <div className="relative max-w-md animate-fade-up">

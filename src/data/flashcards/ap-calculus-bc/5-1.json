@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Mean value theorem",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:14.924Z",
+  "cards": [
+    {
+      "id": "0eng544",
+      "kind": "concept",
+      "front": "What does the Mean Value Theorem guarantee about a function on the interval $[a,b]$?",
+      "back": "Some point $c$ in $(a,b)$ where the **instantaneous** rate $f'(c)$ equals the **average** rate $\\frac{f(b)-f(a)}{b-a}$. The tangent at $c$ is parallel to the secant joining the endpoints.",
+      "hint": "Think about a tangent and a secant line.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09vkjpz",
+      "kind": "concept",
+      "front": "Which two conditions must hold before the Mean Value Theorem can be used on $[a,b]$?",
+      "back": "The function must be **continuous** on the closed interval $[a,b]$ and differentiable on the open interval $(a,b)$. Differentiability at the endpoints is not required.",
+      "hint": "Check the endpoints and the inside separately.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0c8d0dh",
+      "kind": "formula",
+      "front": "What do the parts of the equation $f'(c)=\\frac{f(b)-f(a)}{b-a}$ mean?",
+      "back": "$c$ is the guaranteed point in $(a,b)$. $f'(c)$ is the **instantaneous** rate of change at $c$. The fraction is the **average** rate of change on $[a,b]$.",
+      "hint": "The left side is a derivative; the right side is a secant slope.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1lmfxp5",
+      "kind": "process",
+      "front": "What are the steps to find every value $c$ guaranteed by the Mean Value Theorem?",
+      "back": "First check continuity on $[a,b]$ and differentiability on $(a,b)$. Then compute $\\frac{f(b)-f(a)}{b-a}$, solve $f'(c)$ equal to it, and keep only solutions strictly inside $(a,b)$.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bgpxy5",
+      "kind": "example",
+      "front": "For $f(x)=x^2$ on $[1,3]$, what value of $c$ does the Mean Value Theorem guarantee?",
+      "back": "$c=2$. The endpoint slope is $\\frac{9-1}{3-1}=4$, and $2c=4$ gives $c=2$, which lies in $(1,3)$.",
+      "hint": "Find the secant slope first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03p3xw5",
+      "kind": "mistake",
+      "front": "Is it wrong to require that $f$ be differentiable at the endpoints $a$ and $b$ when using the Mean Value Theorem?",
+      "back": "Yes, that is a **mistake**. The theorem requires differentiability only on the open interval $(a,b)$. Continuity is what must hold at the endpoints.",
+      "hint": "Where does the theorem require differentiability?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pe9ts8",
+      "kind": "mistake",
+      "front": "A graph has a sharp corner inside $(a,b)$. Can you still use the Mean Value Theorem?",
+      "back": "No. A **corner** or break inside the interval means the function is not differentiable there, so the theorem does not apply, even if a tangent looks parallel to the secant.",
+      "hint": "Check differentiability inside the interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1x9u9jy",
+      "kind": "term",
+      "front": "What is the average rate of change of $f$ on $[a,b]$?",
+      "back": "The **secant slope** $\\frac{f(b)-f(a)}{b-a}$, the slope of the line joining the two endpoint values.",
+      "hint": "Use the endpoint values.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1f7dsli",
+      "kind": "term",
+      "front": "What is Rolle's Theorem?",
+      "back": "It has the same continuity and differentiability conditions, plus $f(a)=f(b)$. It guarantees some $c$ in $(a,b)$ with $f'(c)=0$.",
+      "hint": "Compare it with the Mean Value Theorem.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1v85nu6",
+      "kind": "concept",
+      "front": "How does Rolle's Theorem relate to the Mean Value Theorem?",
+      "back": "Rolle's Theorem is a **special case** of the Mean Value Theorem. When $f(a)=f(b)$, the secant slope is zero, so $f'(c)=0$.",
+      "hint": "What is the secant slope when $f(a)=f(b)$?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yf36wx",
+      "kind": "mistake",
+      "front": "Does the Mean Value Theorem say the value $c$ is unique?",
+      "back": "No. It guarantees at least one $c$ in $(a,b)$, and there may be more than one. It also does not say where $c$ lies without further calculation.",
+      "hint": "Look at the phrase 'at least'.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12xtd2j",
+      "kind": "example",
+      "front": "For $f(x)=x^2+1$ on $[0,4]$, what value of $c$ does the Mean Value Theorem guarantee?",
+      "back": "$c=2$. The endpoint slope is $\\frac{17-1}{4-0}=4$, and $2c=4$ gives $c=2$, which lies in $(0,4)$.",
+      "hint": "Compute $f(4)$ and $f(0)$ first.",
+      "sectionId": "s3"
+    }
+  ]
+}

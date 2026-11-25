@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-13",
+  "topicCode": "1.13",
+  "topicName": "Removing discontinuities",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:44.153Z",
+  "cards": [
+    {
+      "id": "1cqrjhm",
+      "kind": "concept",
+      "front": "If a function has a removable discontinuity at $x=a$, what value should be assigned to $f(a)$ to make it continuous?",
+      "back": "Assign the **finite limit** $L=\\lim_{x\\to a}f(x)$ as the value at $a$. Only that one value changes, because nearby values already approach $L$.",
+      "hint": "Think about what nearby values approach.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iitzhb",
+      "kind": "concept",
+      "front": "Does changing the value of a function at a point change its limit at that point?",
+      "back": "**No**. The limit depends on values near $a$, not the value exactly at $a$, so check that the limit exists before filling a hole.",
+      "hint": "Limits look at nearby inputs, not the input itself.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yoxkmv",
+      "kind": "concept",
+      "front": "Why can't one assigned value repair a jump or infinite discontinuity?",
+      "back": "Neither has a finite two-sided limit. A jump has different left and right limits, and an infinite discontinuity grows without bound, so changing only the value at the point cannot fix it.",
+      "hint": "Compare what the two sides of the point do.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0orxe8n",
+      "kind": "term",
+      "front": "What is a **mismatched value** in a function?",
+      "back": "A function value at a point that **differs from the finite limit** there. Replacing it with the limit repairs the discontinuity.",
+      "hint": "Compare the assigned value with the limit.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1et02dp",
+      "kind": "formula",
+      "front": "For $x\\ne1$, what does $\\frac{x^2-1}{x-1}$ simplify to, using $x^2-1=(x-1)(x+1)$?",
+      "back": "$x+1$. Canceling $x-1$ gives an equivalent expression only where $x\\ne1$, so it does not define the original fraction at $x=1$.",
+      "hint": "Factor the numerator first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rr37oo",
+      "kind": "process",
+      "front": "What are the steps to fill a hole at $x=a$ in a function defined for $x\\ne a$?",
+      "back": "1) Factor and simplify the expression for $x\\ne a$. 2) Find $\\lim_{x\\to a}f(x)$. 3) Assign that limit as the value at $a$ and state it explicitly.",
+      "hint": "There are three steps, and the last one sets the value.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17c9n9j",
+      "kind": "mistake",
+      "front": "Is canceling $x-1$ from $\\frac{x^2-1}{x-1}$ enough to define the original function at $x=1$?",
+      "back": "**No**. The original fraction is still undefined at $x=1$, so you must state the new value explicitly, such as $g(1)=2$.",
+      "hint": "Ask whether the original expression is defined at $x=1$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a1xjrt",
+      "kind": "example",
+      "front": "For $f(x)=x+2$ when $x\\ne1$ but $f(1)=7$, what value should replace $f(1)$ to make the function continuous at $x=1$?",
+      "back": "$3$. The limit at $x=1$ is $3$, so changing $f(1)$ from $7$ to $3$ makes the value equal the limit.",
+      "hint": "Find the limit of $x+2$ as $x\\to1$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ujsqy2",
+      "kind": "example",
+      "front": "Rewrite $f(x)=\\frac{x^2-9}{x-3}$ for $x\\ne3$ so it is continuous at $x=3$. What is $f(3)$?",
+      "back": "$f(3)=6$. For $x\\ne3$, $f(x)=x+3$, so the limit at $3$ is $6$, and that value fills the hole.",
+      "hint": "Factor $x^2-9$ as a difference of squares.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19gzq21",
+      "kind": "term",
+      "front": "What is a **jump discontinuity**?",
+      "back": "A point where the **left-hand and right-hand limits both exist but are different**. No single value assigned at the point makes the function continuous.",
+      "hint": "Think about the two sides approaching different numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09q9wkz",
+      "kind": "term",
+      "front": "What is an **infinite discontinuity**?",
+      "back": "A point where function values **grow without bound** near that point, so no finite value assigned there creates a finite limit.",
+      "hint": "Think about the function getting very large near the point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0a791nt",
+      "kind": "example",
+      "front": "For $f(x)=\\frac{1}{(x-2)^2}$, can any value assigned at $x=2$ make the function continuous there?",
+      "back": "**No**. Values grow without bound near $x=2$, so there is no finite limit to assign.",
+      "hint": "Consider what happens to the denominator near $x=2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jey5s0",
+      "kind": "process",
+      "front": "How do you rule out a repair at a point where the function is not continuous?",
+      "back": "Explain why the finite two-sided limit does not exist, such as left and right limits that differ or values that grow without bound.",
+      "hint": "Check the nearby behavior first.",
+      "sectionId": "s4"
+    }
+  ]
+}

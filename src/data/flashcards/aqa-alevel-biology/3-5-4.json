@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-5-4",
+  "topicCode": "3.5.4",
+  "topicName": "Nutrient cycles",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:30.434Z",
+  "cards": [
+    {
+      "id": "03mqvet",
+      "kind": "concept",
+      "front": "Why must atmospheric nitrogen gas be converted before most organisms can use it?",
+      "back": "Most organisms cannot use nitrogen gas directly, so **nitrogen fixation** must first convert it into ammonia or ammonium compounds that can be absorbed and used.",
+      "hint": "Think about which forms of nitrogen plants take in through their roots.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12wm50g",
+      "kind": "process",
+      "front": "What route does phosphorus take from rock into organisms and back to rock?",
+      "back": "**Weathering** releases phosphate from rock; plants absorb it, animals gain it by feeding, decomposers release it from dead matter, and it may settle in sediments that later form rock after uplift.",
+      "hint": "Start with the store that has no significant gas stage.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sy53m1",
+      "kind": "concept",
+      "front": "Why can excess nutrients from fertiliser lead to too little oxygen for aquatic animals?",
+      "back": "**Eutrophication** causes rapid algal growth that shades plants; when algae and plants die, decomposers use dissolved oxygen in aerobic respiration, leaving too little for animals.",
+      "hint": "Follow the sequence that starts with nutrients entering the water.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lm1m8e",
+      "kind": "term",
+      "front": "Which process converts ammonium ions in soil into nitrate ions?",
+      "back": "**Nitrification**, carried out in successive stages by different aerobic bacteria.",
+      "hint": "Compare the oxygen needs of this process with denitrification.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t7pt5u",
+      "kind": "process",
+      "front": "Which process releases ammonia from nitrogen-containing organic matter in dead organisms and waste?",
+      "back": "**Ammonification**, carried out by microorganisms, releases ammonia which forms ammonium ions in soil.",
+      "hint": "Decomposers are the key organisms here.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "061pstk",
+      "kind": "term",
+      "front": "Which microbial process converts nitrate ions into nitrogen gas when oxygen is scarce?",
+      "back": "**Denitrification**, carried out by denitrifying bacteria; the nitrogen gas returns to the atmosphere.",
+      "hint": "Compare the product of this process with the product of nitrification.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "00f3uni",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that denitrification produces nitrate for plants?",
+      "back": "Denitrification **removes** nitrate by converting it into nitrogen gas, so it reduces the nitrate plants could absorb.",
+      "hint": "Consider which direction the nitrate moves in this process.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0w1joci",
+      "kind": "concept",
+      "front": "Why do plant uptake and decomposer release of phosphate move phosphorus in opposite directions?",
+      "back": "**Plants** absorb phosphate from soil into organisms, while **decomposers** release phosphate from dead matter and waste back into soil.",
+      "hint": "Think about which way each one moves phosphate relative to the soil.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "02nbu0p",
+      "kind": "term",
+      "front": "What are mycorrhizae?",
+      "back": "**Mycorrhizae** are mutual associations between fungi and plant roots; fungal threads increase the soil area for absorbing water and ions, including phosphate, while the fungus receives organic compounds.",
+      "hint": "Think about what fungal threads do in the soil.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19i3sfk",
+      "kind": "term",
+      "front": "What is a store in a nutrient cycle diagram?",
+      "back": "A **store** is a place where a nutrient is held, such as soil, organisms or the atmosphere.",
+      "hint": "Compare this with what an arrow represents in the diagram.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1e96fxb",
+      "kind": "concept",
+      "front": "How should you explain an arrow in a nutrient cycle diagram?",
+      "back": "Name its **starting store**, its destination and the process, after checking its direction; arrow thickness shows relative amounts only if the diagram defines it.",
+      "hint": "Check the direction before deciding which process it shows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g7hujn",
+      "kind": "concept",
+      "front": "Which two processes remove fertiliser nutrients from soil before crops can use them?",
+      "back": "Nitrate ions **leach** from soil, and phosphate can be carried away by **runoff** into water.",
+      "hint": "Think about water moving through soil and over the land.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0g30tq5",
+      "kind": "concept",
+      "front": "How does burning fossil fuels affect the nitrogen cycle?",
+      "back": "It releases **nitrogen oxides**, which contribute to nitrogen deposition, adding reactive nitrogen to ecosystems.",
+      "hint": "Think about what is released when fuels burn.",
+      "sectionId": "s5"
+    }
+  ]
+}

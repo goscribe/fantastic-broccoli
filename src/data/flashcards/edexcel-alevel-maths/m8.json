@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-maths",
+  "topicId": "m8",
+  "topicCode": "M8",
+  "topicName": "Forces and Newton's laws",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:32:52.065Z",
+  "cards": [
+    {
+      "id": "1h205ht",
+      "kind": "formula",
+      "front": "What does Newton's second law state, and what does each symbol in $F=ma$ mean?",
+      "back": "The **resultant force** $F$ in newtons equals mass $m$ in kilograms times acceleration $a$ in $\\mathrm{m\\,s^{-2}}$. The acceleration points in the direction of the resultant force.",
+      "hint": "Think about what unbalanced forces do to an object's motion.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ou9aeh",
+      "kind": "concept",
+      "front": "What is true of the resultant force on an object in equilibrium?",
+      "back": "It is **zero**, so the object stays at rest or keeps moving at constant velocity. Forces must balance in every direction separately.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cuds2j",
+      "kind": "term",
+      "front": "How does weight differ from mass?",
+      "back": "**Mass** is the amount of matter, in kilograms, and it stays the same everywhere. **Weight** is the gravitational force, $W=mg$, in newtons, acting vertically downwards and changing with location.",
+      "hint": "Think about whether an astronaut's mass or weight changes on the Moon.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gwwnm3",
+      "kind": "term",
+      "front": "What is the normal reaction $R$?",
+      "back": "The **contact force** a surface exerts on an object. It acts at right angles to the surface.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0y4l60u",
+      "kind": "process",
+      "front": "What are the steps for drawing a force diagram?",
+      "back": "Draw the object as a box or dot, draw the weight $W$ straight down, add contact forces with $R$ at right angles, add other forces, then label every force and mark a positive direction.",
+      "hint": "Start with the object itself, then add forces one at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0leqaic",
+      "kind": "mistake",
+      "front": "Why can't the equal and opposite partner of a force cancel a force on your object?",
+      "back": "The third-law partner acts on a **different object**, so it never cancels a force acting on the object you are studying.",
+      "hint": "Ask which object each force in the pair acts on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0wc6nvh",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a moving object needs a resultant force to keep moving?",
+      "back": "A resultant force **changes** velocity; it does not maintain it. A moving object with zero resultant force keeps its constant velocity.",
+      "hint": "Compare with what happens to an object when no resultant force acts on it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eq3w2h",
+      "kind": "example",
+      "front": "A car of mass 1200 kg has a driving force of 2500 N and a resistance of 700 N. What is its acceleration?",
+      "back": "$1.5\\,\\mathrm{m\\,s^{-2}}$ in the direction of the driving force. Resultant force is $2500-700=1800\\,\\mathrm{N}$, so $a=\\frac{1800}{1200}$.",
+      "hint": "Find the resultant force before using $F=ma$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17yh5ax",
+      "kind": "mistake",
+      "front": "What unit error should you avoid when using $F=ma$ or $W=mg$?",
+      "back": "Do not use grams for mass. Convert to **kilograms** first, since kilograms measure mass and newtons measure force.",
+      "hint": "Check the units of each value before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05ml76x",
+      "kind": "example",
+      "front": "A lift of mass 800 kg accelerates upwards at $1.2\\,\\mathrm{m\\,s^{-2}}$. What is the force $T$ in its cable? Take $g=9.8\\,\\mathrm{m\\,s^{-2}}$.",
+      "back": "$T=8800\\,\\mathrm{N}$. The weight is $800\\times9.8=7840\\,\\mathrm{N}$ down, so $T-7840=800\\times1.2=960$.",
+      "hint": "Find the weight first, then apply $F=ma$ in the upward direction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j9dxpc",
+      "kind": "formula",
+      "front": "For a force $P$ at angle $\\theta$ to a chosen direction, what are its components?",
+      "back": "$P\\cos\\theta$ along that direction and $P\\sin\\theta$ across it, at right angles to it.",
+      "hint": "Draw the right-angled triangle formed by the force and its two components.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0arc2s4",
+      "kind": "example",
+      "front": "A 5.0 kg block slides down a smooth plane at $30^{\\circ}$ to the horizontal. What are its acceleration and normal reaction? Take $g=9.8\\,\\mathrm{m\\,s^{-2}}$.",
+      "back": "Acceleration $4.9\\,\\mathrm{m\\,s^{-2}}$ down the slope, and $R\\approx42\\,\\mathrm{N}$. Along the slope $mg\\sin30^{\\circ}=ma$; across it $R=mg\\cos30^{\\circ}$.",
+      "hint": "Resolve the weight along and perpendicular to the slope.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qidldq",
+      "kind": "concept",
+      "front": "Why is the normal reaction on a smooth slope smaller than the weight?",
+      "back": "Only the component $mg\\cos\\theta$ of the weight into the slope is balanced by $R$. Since $\\cos\\theta$ is less than 1, $R$ is less than $mg$.",
+      "hint": "Which component of the weight is perpendicular to the slope?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11q4g9y",
+      "kind": "mistake",
+      "front": "When should you not use $F_\\mathrm{f}=\\mu R$ for friction?",
+      "back": "When the object is at rest and stable. Then find the friction by balancing forces; use $F_\\mathrm{f}=\\mu R$ only when the object is moving or about to slip.",
+      "hint": "Think about whether the object is moving or about to slip.",
+      "sectionId": "s6"
+    }
+  ]
+}

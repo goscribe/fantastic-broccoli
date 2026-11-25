@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Natural resources: use and management",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:42.839Z",
+  "cards": [
+    {
+      "id": "19xkfy3",
+      "kind": "concept",
+      "front": "What decides whether a natural resource is renewable or non-renewable?",
+      "back": "The **replacement rate**. A renewable resource is replaced by natural processes at least as fast as people use it. A non-renewable resource forms so slowly that its supply is effectively fixed.",
+      "hint": "Think about how fast nature refills it compared with how fast people take it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hca8bl",
+      "kind": "mistake",
+      "front": "Does 'renewable' mean a resource can never run out?",
+      "back": "No. A **renewable** resource can still be exhausted if people harvest it faster than it regrows, as happens with forests and fisheries.",
+      "hint": "Ask what happens if the harvest is bigger than the regrowth.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1l0ap00",
+      "kind": "term",
+      "front": "What is the sustainable yield of a renewable resource?",
+      "back": "The **sustainable yield** is the greatest amount that can be harvested each year without reducing the stock. It equals the natural increase in the stock over that year.",
+      "hint": "It is linked to the natural increase, not to the total stock.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q15z2h",
+      "kind": "term",
+      "front": "What is an ore?",
+      "back": "An **ore** is a rock holding enough of a metal or mineral to be mined at a profit. Mining removes it, and the deposit does not regrow within human lifetimes.",
+      "hint": "Think of the rock that metal is mined from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "08452cb",
+      "kind": "process",
+      "front": "What are the four stages where using a resource can cause environmental impacts, in order?",
+      "back": "**Extraction**, processing, transport and disposal. Extraction clears habitat and exposes soil. Processing releases pollutants. Transport adds carbon dioxide. Disposal builds up waste.",
+      "hint": "Follow a resource from the ground to the rubbish bin.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11n4pwa",
+      "kind": "term",
+      "front": "What is overexploitation?",
+      "back": "**Overexploitation** is harvesting a renewable resource faster than it can regenerate. Overfishing is a clear case, because fewer adults remain to breed.",
+      "hint": "The key idea is harvest speed compared with regrowth.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1eq7oj4",
+      "kind": "term",
+      "front": "What is resource depletion?",
+      "back": "**Resource depletion** is the fall in a resource's stock as it is used faster than it is replaced.",
+      "hint": "Think about the stock shrinking over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0eq0mwo",
+      "kind": "formula",
+      "front": "How do you calculate the yearly change in the stock of a renewable resource?",
+      "back": "Change in stock = **natural increase** − amount harvested, both in the same units per year. A negative answer means the stock is shrinking, so the harvest is unsustainable.",
+      "hint": "Compare what is gained each year with what is removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ipv3tu",
+      "kind": "example",
+      "front": "A woodland gains 150 m³ of timber a year and loggers remove 200 m³ a year. What is the yearly change in the stock?",
+      "back": "$150-200=-50$, so the stock falls by 50 m³ per year. The harvest is unsustainable and cannot continue without depleting the woodland.",
+      "hint": "Subtract the amount harvested from the natural increase.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ssd18j",
+      "kind": "term",
+      "front": "What is a quota?",
+      "back": "A **quota** is a legal limit on the quantity of a resource that may be harvested in a given period. It caps the catch, but it needs monitoring and enforcement to work.",
+      "hint": "Think of it as a legal cap on how much can be taken.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0czr60m",
+      "kind": "term",
+      "front": "What is a protected area?",
+      "back": "A **protected area** is a region of land or sea where law limits harvesting or development to conserve its species and ecosystems. It can limit the livelihoods of local people.",
+      "hint": "Think about where the law restricts use, not how much is taken.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0qodxvb",
+      "kind": "mistake",
+      "front": "Does knowing the sustainable yield stop people from overusing a resource?",
+      "back": "No. Knowing the safe limit does not stop overuse. Managers need tools such as quotas and protected areas to keep harvesting below that limit.",
+      "hint": "Knowledge of a limit is different from enforcing it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1rqum4p",
+      "kind": "concept",
+      "front": "Why do management strategies often work best when combined?",
+      "back": "A **quota** can cap the catch while a **protected area** gives young fish a place to grow. Combining tools covers the weaknesses of each single strategy.",
+      "hint": "Think about one tool that limits the catch and one that protects habitat.",
+      "sectionId": "s5"
+    }
+  ]
+}

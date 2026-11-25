@@ -1,0 +1,120 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-4-2",
+  "topicCode": "5.4.2",
+  "topicName": "Reactions of acids",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:55.517Z",
+  "cards": [
+    {
+      "id": "0ullrks",
+      "kind": "term",
+      "front": "What is neutralisation?",
+      "back": "**Neutralisation** is the reaction of an acid with a base, producing a salt and water.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "016qtgd",
+      "kind": "concept",
+      "front": "How can you identify the gas made when an acid reacts with a suitable metal?",
+      "back": "It is **hydrogen gas**, which gives a squeaky pop when tested with a lit splint.",
+      "hint": "Think about the test you would use on the gas as it escapes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0d3wcyp",
+      "kind": "process",
+      "front": "In what order do you make pure copper sulfate crystals from sulfuric acid and insoluble copper oxide?",
+      "back": "Warm the acid gently. Add copper oxide until some remains unreacted. Filter off the excess oxide. Evaporate some water, leave to crystallise, then remove and dry the crystals.",
+      "hint": "Start with how the acid is prepared, then think about what must be removed.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0r11vni",
+      "kind": "mistake",
+      "front": "Why is it wrong to expect hydrogen when copper is added to dilute hydrochloric acid?",
+      "back": "**Copper does not react** with dilute hydrochloric acid, so no hydrogen forms. Not every metal reacts with dilute acids.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1srp5is",
+      "kind": "example",
+      "front": "Write the word equation for hydrochloric acid reacting with magnesium.",
+      "back": "Hydrochloric acid + magnesium → magnesium chloride + hydrogen. The general pattern is acid + metal → salt + hydrogen.",
+      "hint": "Think about which salt the acid's name gives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "12g16n7",
+      "kind": "concept",
+      "front": "How can you show that carbon dioxide has been released when an acid reacts with a carbonate?",
+      "back": "Pass the gas through **limewater**; it turns cloudy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ja93po",
+      "kind": "term",
+      "front": "What is a base?",
+      "back": "A **base** is a substance that reacts with an acid and neutralises it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1eea6pr",
+      "kind": "concept",
+      "front": "What products form when an acid reacts with a metal oxide or metal hydroxide?",
+      "back": "A **salt and water**. No gas is produced, unlike the reaction with a carbonate.",
+      "hint": "Compare with what a carbonate adds to the products.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0puimpv",
+      "kind": "concept",
+      "front": "Which ions combine to form water during neutralisation with a hydroxide?",
+      "back": "**Hydrogen ions** from the acid react with **hydroxide ions** to form water. The remaining ions form the salt.",
+      "hint": "Think about which ions the acid supplies.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hk76lg",
+      "kind": "mistake",
+      "front": "Why is a neutralised solution not always at pH 7?",
+      "back": "The final pH **depends on how much acid and alkali** were added. Neutralisation does not automatically give pH 7.",
+      "hint": "Think about the amounts used.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "03i6ywg",
+      "kind": "mistake",
+      "front": "Why do equal volumes of acid and alkali not always react completely?",
+      "back": "Their **concentrations also matter**, so equal volumes do not guarantee complete reaction.",
+      "hint": "Think about what else, besides volume, describes a solution.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1h04rf7",
+      "kind": "term",
+      "front": "What is an alkali?",
+      "back": "An **alkali** is a base that dissolves in water and releases hydroxide ions.",
+      "hint": "Think about how alkalis differ from bases in general.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1104xzx",
+      "kind": "concept",
+      "front": "Why is the solid base added in excess when making a soluble salt?",
+      "back": "So that **all the acid reacts**. The unreacted insoluble base is then removed by filtration.",
+      "hint": "Think about what the acid must do in the reaction.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04pnv60",
+      "kind": "mistake",
+      "front": "Why should you not heat the salt solution to dryness to get crystals?",
+      "back": "Heating to dryness is wrong. Instead, **leave the concentrated solution to cool**, which allows crystals to form.",
+      "hint": "Think about how crystals form from a concentrated solution.",
+      "sectionId": "s4"
+    }
+  ]
+}

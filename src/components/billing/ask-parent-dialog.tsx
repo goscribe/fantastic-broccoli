@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import { Check, Copy, HeartHandshake, Mail, MessageCircle, MessageSquare, Share2, X } from "lucide-react";
+import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import type { PlanOption } from "@/lib/api/account";
@@ -10,15 +10,32 @@ import { createPayLink, type CreatedPayLink } from "@/lib/api/pay-link";
 import { copyText } from "@/lib/api/referrals";
 import { useI18n } from "@/lib/i18n";
 import { fill, formatPassDate, isPass, shareTargets } from "@/lib/pass";
+import { planDisplayName } from "@/lib/plan-display";
 import { toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
 import { usePassLabel } from "./pass-options";
 import "@/lib/i18n/billing";
 
+/** Passes first (what a parent most often pays for), then monthly plans from the cheapest. */
+export function payablePlans(plans: PlanOption[]): PlanOption[] {
+  const paid = plans.filter((p) => p.priceDollars > 0 && !p.isActive);
+  return [
+    ...paid.filter((p) => isPass(p)).sort((a, b) => a.priceDollars - b.priceDollars),
+    ...paid.filter((p) => !isPass(p)).sort((a, b) => a.priceDollars - b.priceDollars),
+  ];
+}
+
+const tileClass =
+  "flex min-h-11 items-center justify-center rounded-[14px] border border-border bg-white px-2 text-[13px] font-bold text-foreground hover:border-border-strong hover:bg-muted";
+
 /**
  * "Ask a parent to pay": pick a plan, then send a single-use link by the
  * phone's share sheet, WhatsApp, Messages, email or copy. The link opens the
  * public /pay/<token> page, where whoever pays needs no account.
+ *
+ * Plans offered: the exam passes and every monthly plan the server lists
+ * (Starter, Pro, and Ultra once it is on sale); the server checks again when
+ * the link is made.
  */
 export function AskParentDialog({
   plans,
@@ -27,7 +44,7 @@ export function AskParentDialog({
   onClose,
   initialLink = null,
 }: {
-  /** Payable plans (monthly and passes). */
+  /** Payable plans (passes and monthly), in display order. */
   plans: PlanOption[];
   defaultPlanId?: string;
   defaultFirstName: string;
@@ -54,7 +71,7 @@ export function AskParentDialog({
   const planLabel = (plan: PlanOption) =>
     isPass(plan)
       ? `${label(plan)} · $${plan.priceDollars} ${t("set.once")}`
-      : `${plan.name.charAt(0).toUpperCase()}${plan.name.slice(1)} · ${fill(t("ask.monthlyOption"), { price: `$${plan.priceDollars}` })}`;
+      : `${planDisplayName(plan.name)} · ${fill(t("ask.monthlyOption"), { price: `$${plan.priceDollars}` })}`;
 
   const create = async () => {
     setCreating(true);
@@ -104,44 +121,41 @@ export function AskParentDialog({
       role="dialog"
       aria-modal="true"
       aria-labelledby="ask-parent-title"
-      className="fixed inset-0 z-[210] flex items-end justify-center bg-foreground/30 backdrop-blur-sm sm:items-center sm:px-4"
+      className="fixed inset-0 z-[210] flex items-end justify-center bg-foreground/30 sm:items-center sm:px-4"
       onClick={(e) => e.target === e.currentTarget && onClose()}
     >
-      <div className="relative max-h-[92dvh] w-full max-w-md overflow-y-auto rounded-t-3xl bg-card p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-2xl sm:rounded-3xl sm:p-6">
+      <div className="relative max-h-[92dvh] w-full max-w-md overflow-y-auto rounded-t-[24px] border border-border bg-white p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-xl sm:rounded-[24px] sm:p-6">
         <button
           type="button"
           onClick={onClose}
           aria-label={t("ask.done")}
-          className="absolute right-4 top-4 grid size-8 place-items-center rounded-full text-muted-foreground hover:bg-muted"
+          className="absolute right-2 top-2 grid size-11 place-items-center rounded-full text-muted-foreground hover:bg-muted"
         >
           <X className="size-4" />
         </button>
-        <span className="grid size-10 place-items-center rounded-full bg-accent-soft text-accent">
-          <HeartHandshake className="size-5" />
-        </span>
 
         {!link ? (
           <>
-            <h2 id="ask-parent-title" className="mt-3 text-xl font-bold tracking-tight">
+            <h2 id="ask-parent-title" className="pr-10 text-[18px] font-extrabold leading-tight">
               {t("ask.title")}
             </h2>
-            <p className="mt-1 text-[13.5px] leading-snug text-muted-foreground">{t("ask.body")}</p>
+            <p className="mt-1 text-[15px] leading-snug text-muted-foreground">{t("ask.body")}</p>
 
             <fieldset className="mt-5">
-              <legend className="text-[13px] font-semibold">{t("ask.choosePlan")}</legend>
+              <legend className="text-[13px] font-bold">{t("ask.choosePlan")}</legend>
               <div className="mt-2 space-y-2">
                 {plans.map((plan) => (
                   <label
                     key={plan.id}
                     className={cn(
-                      "flex cursor-pointer items-center gap-3 rounded-2xl border px-3.5 py-3 text-[14px] transition-colors",
-                      planId === plan.id ? "border-accent bg-accent-soft/40" : "border-border hover:border-accent/40",
+                      "flex min-h-12 cursor-pointer items-center gap-3 rounded-[14px] border px-3.5 py-3 text-[15px] transition-colors",
+                      planId === plan.id ? "border-foreground font-bold" : "border-border hover:border-border-strong",
                     )}
                   >
                     <input
                       type="radio"
                       name="pay-plan"
-                      className="accent-accent"
+                      className="size-4 accent-foreground"
                       checked={planId === plan.id}
                       onChange={() => setPlanId(plan.id)}
                     />
@@ -152,7 +166,7 @@ export function AskParentDialog({
             </fieldset>
 
             <label className="mt-4 block">
-              <span className="text-[13px] font-semibold">{t("ask.nameLabel")}</span>
+              <span className="text-[13px] font-bold">{t("ask.nameLabel")}</span>
               <Input
                 className="mt-1.5"
                 value={firstName}
@@ -160,7 +174,7 @@ export function AskParentDialog({
                 autoComplete="given-name"
                 onChange={(e) => setFirstName(e.target.value)}
               />
-              <span className="mt-1 block text-[12px] text-faint">{t("ask.nameHint")}</span>
+              <span className="mt-1 block text-[12px] text-muted-foreground">{t("ask.nameHint")}</span>
             </label>
 
             <Button size="lg" className="mt-5 w-full" disabled={!planId || creating} onClick={create}>
@@ -169,55 +183,39 @@ export function AskParentDialog({
           </>
         ) : (
           <>
-            <h2 id="ask-parent-title" className="mt-3 text-xl font-bold tracking-tight">
+            <h2 id="ask-parent-title" className="pr-10 text-[18px] font-extrabold leading-tight">
               {t("ask.readyTitle")}
             </h2>
-            <p className="mt-1 text-[13.5px] leading-snug text-muted-foreground">
+            <p className="mt-1 text-[15px] leading-snug text-muted-foreground">
               {fill(t("ask.readyBody"), { date: formatPassDate(link.expiresAt, locale) })}
             </p>
 
-            <div className="mt-4 rounded-2xl border border-border bg-background p-3.5">
-              <p className="text-[13px] leading-snug text-muted-foreground [overflow-wrap:anywhere]">{message}</p>
+            <div className="mt-4 rounded-[14px] bg-muted p-3.5">
+              <p className="text-[13px] leading-snug text-foreground [overflow-wrap:anywhere]">{message}</p>
             </div>
 
             {canShare && (
-              <Button size="lg" className="mt-4 w-full gap-2" onClick={share}>
-                <Share2 className="size-4" />
+              <Button size="lg" className="mt-4 w-full" onClick={share}>
                 {t("ask.share")}
               </Button>
             )}
             <div className={cn("grid grid-cols-3 gap-2", canShare ? "mt-2" : "mt-4")}>
-              <a
-                href={targets!.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-background px-2 py-3 text-[12.5px] font-semibold hover:border-accent/50"
-              >
-                <MessageCircle className="size-5 text-[#25D366]" />
+              <a href={targets!.whatsapp} target="_blank" rel="noopener noreferrer" className={tileClass}>
                 {t("ask.whatsapp")}
               </a>
-              <a
-                href={targets!.sms}
-                className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-background px-2 py-3 text-[12.5px] font-semibold hover:border-accent/50"
-              >
-                <MessageSquare className="size-5 text-accent" />
+              <a href={targets!.sms} className={tileClass}>
                 {t("ask.messages")}
               </a>
-              <a
-                href={targets!.email}
-                className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-background px-2 py-3 text-[12.5px] font-semibold hover:border-accent/50"
-              >
-                <Mail className="size-5 text-accent" />
+              <a href={targets!.email} className={tileClass}>
                 {t("ask.email")}
               </a>
             </div>
 
-            <div className="mt-3 flex items-center gap-2 rounded-2xl border border-border bg-background py-1.5 pl-3.5 pr-1.5">
+            <div className="mt-3 flex items-center gap-2 rounded-[14px] border border-border bg-white py-1.5 pl-3.5 pr-1.5">
               <span className="min-w-0 flex-1 truncate text-[13px] text-muted-foreground" title={link.url}>
                 {link.url}
               </span>
-              <Button size="sm" variant="secondary" className="shrink-0 gap-1.5" onClick={copy}>
-                {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
+              <Button size="sm" variant={canShare ? "secondary" : "primary"} className="shrink-0" onClick={copy}>
                 {copied ? t("ask.copied") : t("ask.copy")}
               </Button>
             </div>
@@ -226,7 +224,7 @@ export function AskParentDialog({
               <Button variant="ghost" onClick={() => setLink(null)}>
                 {t("ask.another")}
               </Button>
-              <Button variant="outline" onClick={onClose}>
+              <Button variant="secondary" onClick={onClose}>
                 {t("ask.done")}
               </Button>
             </div>

@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-4",
+  "topicCode": "2.4",
+  "topicName": "Key features of graphs",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:22.903Z",
+  "cards": [
+    {
+      "id": "0oyp967",
+      "kind": "concept",
+      "front": "What is a turning point, and how does it relate to a maximum or minimum?",
+      "back": "A **turning point** is where the graph changes direction. A maximum or minimum occurs at a turning point, so it is the highest or lowest output nearby.",
+      "hint": "Think about where the graph stops rising or falling.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lruo0j",
+      "kind": "formula",
+      "front": "For a quadratic $f(x)=ax^2+bx+c$, what is the axis of symmetry?",
+      "back": "**$x=-\\frac{b}{2a}$**, using the coefficients of $x^2$ and $x$. The turning point of a quadratic always lies on this axis.",
+      "hint": "Use the coefficients of x squared and x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0043bc7",
+      "kind": "concept",
+      "front": "How can you tell where a function is increasing or decreasing?",
+      "back": "A function is **increasing** where larger inputs give larger outputs, and **decreasing** where larger inputs give smaller outputs. The turning point marks the boundary between these intervals.",
+      "hint": "Compare outputs as the input grows.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vgw5en",
+      "kind": "term",
+      "front": "What is an intercept?",
+      "back": "An **intercept** is a point where a graph meets an axis. The y-intercept has $x=0$, and an x-intercept has output zero.",
+      "hint": "Ask which axis the point lies on.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0x8ja0e",
+      "kind": "example",
+      "front": "For $P(x)=-x^2+6x-5$, what is the y-intercept?",
+      "back": "**$(0,-5)$**. Substituting $x=0$ gives $P(0)=-5$, a loss of 5 thousand euros before any sales.",
+      "hint": "Set x equal to zero.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00tmyh4",
+      "kind": "example",
+      "front": "Find the maximum point of $P(x)=-x^2+6x-5$.",
+      "back": "**$(3,4)$**. The turning point is at $x=3$, and $P(3)=-9+18-5=4$.",
+      "hint": "Find the input first, then substitute it in.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1u7iqmw",
+      "kind": "mistake",
+      "front": "A student gives the maximum of $P(x)=-x^2+6x-5$ as $x=3$ and calls that the maximum value. What is wrong?",
+      "back": "**Output versus input.** 3 is the input where the maximum occurs. The maximum value is the output, $P(3)=4$.",
+      "hint": "Which number is the output?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11foima",
+      "kind": "example",
+      "front": "Find the turning point of $f(x)=x^2-8x+7$.",
+      "back": "**$(4,-9)$**. The axis is $x=-\\frac{-8}{2(1)}=4$, and $f(4)=16-32+7=-9$.",
+      "hint": "Find the axis first, then substitute.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m2kpu2",
+      "kind": "process",
+      "front": "What steps should you follow to describe a whole graph in context?",
+      "back": "Start with the shape, then list the intercepts, the turning point, and the intervals of increase and decrease. Finish with any symmetry, and link each feature to the context with units.",
+      "hint": "Shape first, then features, then symmetry.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t53n8t",
+      "kind": "mistake",
+      "front": "A student says a graph is symmetric because one side looks similar to the other. What should they check?",
+      "back": "**Mirrored points.** Symmetry needs both sides to match exactly across the axis. Test a few pairs of points before claiming it.",
+      "hint": "Test pairs of points on either side.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "096kr38",
+      "kind": "concept",
+      "front": "What do points mirrored in an axis of symmetry have in common?",
+      "back": "**Equal outputs.** Points the same distance from the axis on opposite sides have the same output.",
+      "hint": "Think about the height of each point.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1g5fpah",
+      "kind": "term",
+      "front": "What is an interval in the context of increasing and decreasing?",
+      "back": "An **interval** is a stretch of input values from a lower endpoint to an upper endpoint, written with inequalities such as $1\\le x\\le 4$.",
+      "hint": "It describes inputs, not outputs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1q48jxa",
+      "kind": "example",
+      "front": "For $P(x)=-x^2+6x-5$, on which intervals is profit increasing and decreasing?",
+      "back": "Increasing for $x<3$ and decreasing for $x>3$. The change happens at the maximum, where $x=3$.",
+      "hint": "Where is the turning point?",
+      "sectionId": "s3"
+    }
+  ]
+}

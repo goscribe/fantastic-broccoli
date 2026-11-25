@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "2-1",
+  "topicCode": "2.1",
+  "topicName": "Straight lines",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:26.477Z",
+  "cards": [
+    {
+      "id": "01n8v24",
+      "kind": "formula",
+      "front": "What is the formula for the gradient of a line through two points $(x_1,y_1)$ and $(x_2,y_2)$?",
+      "back": "$m=\\frac{y_2-y_1}{x_2-x_1}$, the **vertical change** divided by the horizontal change. Any two points on the same line give the same value.",
+      "hint": "Think rise over run.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1pqujie",
+      "kind": "formula",
+      "front": "What do the numbers $m$ and $c$ tell you about the line $y=mx+c$?",
+      "back": "$m$ is the **gradient**, showing steepness and direction. $c$ is the **y-intercept**, the point $(0,c)$ where the line crosses the vertical axis.",
+      "hint": "One controls slope, one sets the starting height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05pvk57",
+      "kind": "concept",
+      "front": "How can you tell from their gradients whether two lines are parallel or perpendicular?",
+      "back": "**Parallel** lines have equal gradients, $m_1=m_2$. **Perpendicular** lines satisfy $m_1m_2=-1$, so the perpendicular gradient is the negative reciprocal.",
+      "hint": "Compare equal gradients, then flip and change the sign.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "02bt79c",
+      "kind": "example",
+      "front": "Find the gradient of the line through $(1,3)$ and $(4,9)$.",
+      "back": "**$m=2$**, since $\\frac{9-3}{4-1}=\\frac{6}{3}=2$.",
+      "hint": "Subtract the y-values, then the x-values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0xlzhb2",
+      "kind": "example",
+      "front": "Find the equation of the line with gradient 3 through $(2,5)$, in the form $y=mx+c$.",
+      "back": "$y=3x-1$, from $y-5=3(x-2)$, which expands to $y-5=3x-6$.",
+      "hint": "Start with point–gradient form.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ctbfc6",
+      "kind": "term",
+      "front": "What is the x-intercept of a line?",
+      "back": "The **x-coordinate** of the point where the line crosses the horizontal axis. Find it by setting $y=0$.",
+      "hint": "Set the y-value to zero.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11cco2j",
+      "kind": "concept",
+      "front": "In the taxi model $C=1.50x+4.00$, what does the gradient mean in context?",
+      "back": "Each extra kilometre adds **1.50 euros** to the cost. The $y$-intercept 4.00 is the fixed fee. The model applies only for $x\\ge0$.",
+      "hint": "Say what happens for each extra kilometre.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0acvfkt",
+      "kind": "example",
+      "front": "Using $C=1.50x+4.00$, what does a 12 km journey cost?",
+      "back": "**22 euros**, since $1.50\\times12+4.00=18+4=22$.",
+      "hint": "Substitute $x=12$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wofiin",
+      "kind": "process",
+      "front": "What are the steps to plot a straight line from its equation?",
+      "back": "1 Set $x=0$ to find the **y-intercept**. 2 Set $y=0$ to find the **x-intercept**. 3 Plot both points. 4 Join them with a ruler and extend the line.",
+      "hint": "A third point can check your work.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oa15uf",
+      "kind": "example",
+      "front": "Find the intercepts of $2x+3y-12=0$.",
+      "back": "The **y-intercept** is $(0,4)$, from $3y=12$. The **x-intercept** is $(6,0)$, from $2x=12$.",
+      "hint": "Set x to zero for one, y to zero for the other.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xb0q17",
+      "kind": "mistake",
+      "front": "A student says the gradient of $ax+by+d=0$ is $a$. What is wrong?",
+      "back": "**Rearrange to $y=mx+c$ first.** The gradient is $-\\frac{a}{b}$, not $a$.",
+      "hint": "Read the gradient only after rearranging.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04xisug",
+      "kind": "mistake",
+      "front": "Does the rule $m_1m_2=-1$ apply to a horizontal and a vertical line?",
+      "back": "**No.** They are perpendicular, but the vertical line has no gradient, so the rule cannot be used.",
+      "hint": "Think about undefined gradients.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "101ch8g",
+      "kind": "example",
+      "front": "Find the line through $(4,3)$ perpendicular to $y=2x+1$, in the form $y=mx+c$.",
+      "back": "$y=-\\frac{1}{2}x+5$, using gradient $-\\frac{1}{2}$ in $y-3=-\\frac{1}{2}(x-4)$.",
+      "hint": "First find the negative reciprocal of 2.",
+      "sectionId": "s5"
+    }
+  ]
+}

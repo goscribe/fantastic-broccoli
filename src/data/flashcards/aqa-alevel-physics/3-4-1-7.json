@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-physics",
+  "topicId": "3-4-1-7",
+  "topicCode": "3.4.1.7",
+  "topicName": "Work, energy and power",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:31:22.350Z",
+  "cards": [
+    {
+      "id": "1v0d7zu",
+      "kind": "concept",
+      "front": "What does the work done by a force measure?",
+      "back": "The **energy transferred** when a force moves an object, measured in joules, J. Pushing a stalled car is tiring because energy moves from you to the car, even if it moves slowly.",
+      "hint": "Think about where your effort goes when you push something that moves only a little.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1prd6co",
+      "kind": "formula",
+      "front": "What is the equation for kinetic energy, and what units does each symbol use?",
+      "back": "$E_k=\\frac{1}{2}mv^2$, where $m$ is the **mass** in kg, $v$ is the speed in $\\mathrm{m\\,s^{-1}}$, and $E_k$ is in J.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1mbc2cu",
+      "kind": "term",
+      "front": "How is power defined in terms of work done and time?",
+      "back": "**Power** is the rate of energy transfer: $P=\\frac{\\Delta W}{\\Delta t}$, work done divided by the time taken. Its unit is the **watt**, W.",
+      "hint": "Power is about how fast, not how much.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jzwqqc",
+      "kind": "formula",
+      "front": "What is the work done by a force acting at angle $\\theta$ to the movement?",
+      "back": "$\\Delta W=Fs\\cos\\theta$, where $\\theta$ is the angle between the force and the movement. Only the **part of the force along the movement** does work.",
+      "hint": "Which part of the force points along the direction the object moves?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17c95rg",
+      "kind": "mistake",
+      "front": "Why is $\\Delta W=Fs$ wrong for a rope pulled at $30^{\\circ}$ to the ground?",
+      "back": "The cosine term is missing. At an angle only $F\\cos\\theta$ acts along the movement, so use $\\Delta W=Fs\\cos\\theta$ with $\\theta$ the angle between force and movement.",
+      "hint": "Compare the direction of the rope with the direction of the sledge's motion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ax5mcp",
+      "kind": "example",
+      "front": "How much work does a 40 N rope force at 30° do moving a sledge 12 m along level ground?",
+      "back": "About $4.2\\times10^{2}\\,\\mathrm{J}$, from $\\Delta W=40\\times12\\times\\cos30^{\\circ}\\approx416\\,\\mathrm{J}$.",
+      "hint": "Use the cosine equation, not the simple one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o4f62h",
+      "kind": "formula",
+      "front": "What is the equation for the change in gravitational potential energy near the Earth's surface?",
+      "back": "$\\Delta E_p=mg\\Delta h$, where $m$ is mass in kg, $g=9.81\\,\\mathrm{N\\,kg^{-1}}$ is the **gravitational field strength**, and $\\Delta h$ is the change in height in m.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gjuf1e",
+      "kind": "example",
+      "front": "What gain in gravitational potential energy does a 4.0 kg box gain when lifted 1.5 m at constant speed?",
+      "back": "About $59\\,\\mathrm{J}$, from $\\Delta E_p=4.0\\times9.81\\times1.5=58.86\\,\\mathrm{J}$.",
+      "hint": "Which equation links mass, height and energy?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0atsuot",
+      "kind": "concept",
+      "front": "How does doubling an object's speed change its kinetic energy?",
+      "back": "It becomes **four times** larger. Kinetic energy depends on speed squared, $E_k=\\frac{1}{2}mv^2$.",
+      "hint": "Look at how $v$ appears in the equation.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ulycdb",
+      "kind": "formula",
+      "front": "For a constant force moving an object at constant speed along the force, what is power in terms of $F$ and $v$?",
+      "back": "$P=Fv$, where $F$ is the force in N and $v$ is the speed in $\\mathrm{m\\,s^{-1}}$. $P$ is in W.",
+      "hint": "Start from $P=\\frac{\\Delta W}{\\Delta t}$ and find the distance moved in time $\\Delta t$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15heezy",
+      "kind": "term",
+      "front": "How is the efficiency of a machine defined?",
+      "back": "**Efficiency** is the useful energy output divided by the total energy input. It has no unit and is a number between 0 and 1, or a percentage.",
+      "hint": "Compare the useful part with the whole.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0435r50",
+      "kind": "mistake",
+      "front": "Where does the energy wasted by a real machine go?",
+      "back": "It is not destroyed. It is transferred to other stores, usually as **thermal energy** in the surroundings, so useful output is less than total input.",
+      "hint": "Energy is conserved, so think about where the rest ends up.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "148edcb",
+      "kind": "example",
+      "front": "A motor with 98 W useful output takes in 120 W of electrical power. What is its efficiency?",
+      "back": "$0.82$, which is $82\\%$, from $\\frac{98\\,\\mathrm{W}}{120\\,\\mathrm{W}}$.",
+      "hint": "Divide useful output power by total input power.",
+      "sectionId": "s5"
+    }
+  ]
+}

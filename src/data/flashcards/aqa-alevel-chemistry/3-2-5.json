@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-2-5",
+  "topicCode": "3.2.5",
+  "topicName": "Transition metals",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:17.994Z",
+  "cards": [
+    {
+      "id": "12a82nu",
+      "kind": "concept",
+      "front": "Name four properties that most transition elements share.",
+      "back": "Transition elements form **coloured** compounds and ions, show variable oxidation states, form complex ions, and act as catalysts.",
+      "hint": "Think about what the note lists under the section on partly filled d sub-levels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yjlikm",
+      "kind": "concept",
+      "front": "How does a ligand bond to a central metal ion in a complex?",
+      "back": "A **ligand** donates a lone pair of electrons to the central metal ion, forming a coordinate bond. The metal ion and its ligands together make a complex ion.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qby78k",
+      "kind": "concept",
+      "front": "Why are many transition metal complexes coloured?",
+      "back": "Ligands split the d orbitals into two energy levels. An electron absorbs light of a frequency that matches the **energy gap**, and the light that is not absorbed is transmitted.",
+      "hint": "Compare this with how an electron gives out light when it drops to a lower energy level.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rjaenl",
+      "kind": "concept",
+      "front": "Why are chelate complexes more stable than complexes of single-bonded ligands?",
+      "back": "Multidentate ligands replace several monodentate ligands, so more particles are released and **entropy** rises. This is the chelate effect.",
+      "hint": "Count the particles on each side of the equation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17hww9j",
+      "kind": "term",
+      "front": "What is the coordination number of a complex ion?",
+      "back": "The number of **coordinate bonds** from ligands to the central metal ion. It is not always the same as the number of ligands.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01dsamv",
+      "kind": "mistake",
+      "front": "A student counts ligands to find the coordination number of a complex. Why is this wrong for bidentate ligands?",
+      "back": "A bidentate ligand such as 1,2-diaminoethane forms **two** coordinate bonds, so it counts twice. The coordination number counts bonds, not ligands.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "144hen1",
+      "kind": "formula",
+      "front": "Which equation links the energy gap ΔE to the frequency of absorbed light?",
+      "back": "$\\Delta E=h\\nu$, where $h$ is the **Planck constant** in $\\mathrm{J\\,s}$, $\\nu$ is the frequency in $\\mathrm{s^{-1}}$, and $\\Delta E$ is in $\\mathrm{J}$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ql5avv",
+      "kind": "example",
+      "front": "A complex absorbs light of frequency $4.50\\times10^{14}\\,\\mathrm{s^{-1}}$. What is its energy gap ΔE, using $h=6.63\\times10^{-34}\\,\\mathrm{J\\,s}$?",
+      "back": "$\\Delta E\\approx2.98\\times10^{-19}\\,\\mathrm{J}$, found by multiplying $6.63\\times10^{-34}$ by $4.50\\times10^{14}$.",
+      "hint": "Start with the equation that links energy gap and frequency.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09dtiaj",
+      "kind": "concept",
+      "front": "What colour change occurs when concentrated hydrochloric acid is added to aqueous copper(II) ions?",
+      "back": "The blue solution turns **yellow-green**, because four chloride ions replace six water ligands to form $\\mathrm{[CuCl_4]^{2-}}$ in a ligand substitution reaction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1l5seip",
+      "kind": "concept",
+      "front": "Why does swapping water for ammonia keep the coordination number at six?",
+      "back": "Water and ammonia are similar in size, so both ligands fit around the copper ion. The **coordination number** therefore stays at six.",
+      "hint": "Compare the sizes of the ligands involved.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1i4kgvb",
+      "kind": "process",
+      "front": "What happens when hydroxide ions are added to aqueous copper(II) ions?",
+      "back": "Hydroxide removes protons from water ligands, giving a neutral complex that forms a **blue precipitate**, $\\mathrm{[Cu(H_2O)_4(OH)_2]}$.",
+      "hint": "Think about what hydroxide does to water ligands rather than what it adds to them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v2h1kf",
+      "kind": "mistake",
+      "front": "A student says ligand substitution changes the oxidation state of copper. Why is this wrong?",
+      "back": "Ligand substitution only swaps ligands, so no electrons are gained or lost by the metal. Copper stays at **+2** in every complex.",
+      "hint": "Think about whether the metal ion gains or loses electrons in this reaction.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1trhgnz",
+      "kind": "mistake",
+      "front": "Why are zinc and scandium not transition elements, even though they are in the d-block?",
+      "back": "Zinc forms only $\\mathrm{Zn^{2+}}$ with a **full** d sub-level, and scandium forms only $\\mathrm{Sc^{3+}}$ with an empty one, so neither has a partly filled d sub-level in its ions.",
+      "hint": "Consider which ions these elements form.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "067ma99",
+      "kind": "example",
+      "front": "What is the overall charge of $\\mathrm{[CuCl_4]}$ when copper is $\\mathrm{Cu^{2+}}$ and each chloride ion has a charge of $-1$?",
+      "back": "$(+2)+4\\times(-1)=-2$, so the complex is $\\mathrm{[CuCl_4]^{2-}}$. The **charge** is the metal ion charge plus the ligand charges.",
+      "hint": "Add the metal ion charge to the charges of the four ligands.",
+      "sectionId": "s2"
+    }
+  ]
+}

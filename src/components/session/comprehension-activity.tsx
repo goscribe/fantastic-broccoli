@@ -1,5 +1,6 @@
 "use client";
 
+import { MarkBadge, PlayActions, PlayDone, PlayPrimary, playField, playLink } from "@/components/session/play-ui";
 import { useNewUi } from "@/lib/new-ui";
 import { useState } from "react";
 import { ComprehensionContent, ComprehensionEvaluation } from "@/types";
@@ -70,6 +71,87 @@ export function ComprehensionActivity({
     }
   };
 
+  if (newUi) {
+    const last = evaluations[evaluations.length - 1];
+    if (hasPassed) {
+      return (
+        <PlayDone
+          title={t("session.compConfirmed")}
+          sub={`${t("session.compUnderstoodIn")} ${evaluations.length} ${evaluations.length === 1 ? t("session.attemptNoun") : t("session.attemptsNoun")}`}
+          action={t("session.continueNext")}
+          onAction={onComplete}
+        >
+          {last?.feedback && (
+            <p className="text-ui text-foreground/80">
+              <MarkdownText text={last.feedback} />
+            </p>
+          )}
+        </PlayDone>
+      );
+    }
+    return (
+      <div className="space-y-4">
+        {showOriginal ? (
+          <>
+            <p data-scroll-line className="text-small font-semibold text-muted-foreground">{t("session.compReadInstruction")}</p>
+            {/* The passage is the page: reading-size text with nothing around it. */}
+            <div className="life-rise whitespace-pre-wrap text-[18px] leading-[1.7] text-foreground sm:text-[19px]">
+              <MarkdownText text={content.originalText} />
+            </div>
+            <PlayActions className="pt-1">
+              <PlayPrimary onClick={() => setShowOriginal(false)}>{t("session.compReadDone")}</PlayPrimary>
+            </PlayActions>
+          </>
+        ) : (
+          <>
+            <p data-scroll-line className="text-small font-semibold text-muted-foreground">
+              {t("session.attempt")} {attemptNumber}: {t("session.compWriteBack")}
+            </p>
+            {last && !last.passed && (
+              <div className="life-rise flex items-start gap-3" role="status">
+                <MarkBadge ok={false} className="mt-0.5 !size-8 [&>svg]:!size-5" />
+                <div className="min-w-0 text-ui text-foreground/80">
+                  <MarkdownText text={last.feedback} />
+                </div>
+              </div>
+            )}
+            <textarea
+              value={userText}
+              onChange={(e) => setUserText(e.target.value)}
+              placeholder={t("session.compPlaceholder")}
+              aria-label={t("session.compPlaceholder")}
+              className={cn(playField, "h-44")}
+            />
+            {error && <p className="text-small font-bold text-rose-700" role="alert">{error}</p>}
+            <PlayActions>
+              <button type="button" onClick={() => setShowOriginal(true)} className={cn(playLink, "justify-center sm:mr-3")}>
+                {t("session.reReadOriginal")}
+              </button>
+              <PlayPrimary onClick={handleSubmit} disabled={userText.trim().length < 20 || evaluating}>
+                {evaluating && <Loader2 className="mr-2 size-4 animate-spin" />}
+                {evaluating ? t("session.evaluating") : t("session.submit")}
+              </PlayPrimary>
+            </PlayActions>
+            {userRewrites.length > 0 && (
+              <details className="text-small text-muted-foreground">
+                <summary className="flex min-h-11 cursor-pointer items-center font-bold hover:text-foreground">
+                  {userRewrites.length === 1 ? t("session.yourPreviousAttempt") : t("session.yourPreviousAttempts")}
+                </summary>
+                <div className="space-y-3 pb-2">
+                  {userRewrites.map((rewrite, i) => (
+                    <p key={i} className="border-l-[3px] border-[var(--edge)] pl-4 italic leading-6">
+                      &ldquo;{rewrite}&rdquo;
+                    </p>
+                  ))}
+                </div>
+              </details>
+            )}
+          </>
+        )}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {/* Reading phase */}
@@ -77,12 +159,12 @@ export function ComprehensionActivity({
         <Card className="border-accent/20 bg-accent/5">
           <div className="flex items-center gap-2 mb-3">
             <Brain className="h-4 w-4 text-accent" />
-            <span className="text-sm font-medium text-accent">
+            <span className="text-ui font-medium text-accent">
               {t("session.compReadInstruction")}
             </span>
           </div>
           <div className="prose prose-sm max-w-none">
-            <p className="text-sm leading-relaxed whitespace-pre-wrap">
+            <p className="text-ui whitespace-pre-wrap">
               <MarkdownText text={content.originalText} />
             </p>
           </div>
@@ -102,7 +184,7 @@ export function ComprehensionActivity({
       {!showOriginal && !hasPassed && (
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-sm font-medium">
+            <span className="text-ui font-medium">
               {t("session.attempt")} {attemptNumber}: {t("session.compWriteBack")}
             </span>
             <button
@@ -123,7 +205,7 @@ export function ComprehensionActivity({
           />
 
           <div className="flex items-center justify-end gap-3">
-            {error && <span className="text-xs text-destructive">{error}</span>}
+            {error && <span className="text-caption text-destructive">{error}</span>}
             <Button
               variant="primary"
               size="sm"
@@ -148,14 +230,14 @@ export function ComprehensionActivity({
             <Card
               key={i}
               className={cn(
-                "text-sm",
+                "text-ui",
                 evaluation.passed
                   ? "border-success/20 bg-success/5"
                   : "border-warning/20 bg-warning/5",
               )}
             >
               <div className="flex items-center justify-between mb-2">
-                <span className="font-medium text-xs">
+                <span className="font-medium text-caption">
                   {t("session.attempt")} {evaluation.attempt}
                 </span>
                 <ProgressBar
@@ -165,7 +247,7 @@ export function ComprehensionActivity({
                   showLabel
                 />
               </div>
-              <p className="text-xs text-muted-foreground">
+              <p className="text-caption text-muted-foreground">
                 <MarkdownText text={evaluation.feedback} />
               </p>
             </Card>
@@ -175,7 +257,7 @@ export function ComprehensionActivity({
 
       {/* User's previous rewrites */}
       {userRewrites.length > 0 && !hasPassed && (
-        <details className="text-xs text-muted-foreground">
+        <details className="text-caption text-muted-foreground">
           <summary className="cursor-pointer hover:text-foreground">
             {userRewrites.length === 1
               ? t("session.yourPreviousAttempt")
@@ -183,7 +265,7 @@ export function ComprehensionActivity({
           </summary>
           <div className="mt-2 space-y-2">
             {userRewrites.map((rewrite, i) => (
-              <p key={i} className={newUi ? "rounded-xl bg-accent-soft/50 px-4 py-3 text-[13.5px] italic" : "p-2 rounded-lg border border-border bg-muted/50 italic"}>
+              <p key={i} className={newUi ? "rounded-xl bg-accent-soft/50 px-4 py-3 text-small italic" : "p-2 rounded-lg border border-border bg-muted/50 italic"}>
                 &ldquo;{rewrite}&rdquo;
               </p>
             ))}
@@ -195,8 +277,8 @@ export function ComprehensionActivity({
       {hasPassed && (
         <Card className="border-success/20 bg-success/5 text-center">
           <CheckCircle2 className="h-8 w-8 text-success mx-auto mb-2" />
-          <p className="text-sm font-medium">{t("session.compConfirmed")}</p>
-          <p className="text-xs text-muted-foreground mt-1">
+          <p className="text-ui font-medium">{t("session.compConfirmed")}</p>
+          <p className="text-caption text-muted-foreground mt-1">
             {t("session.compUnderstoodIn")} {evaluations.length}{" "}
             {evaluations.length === 1
               ? t("session.attemptNoun")

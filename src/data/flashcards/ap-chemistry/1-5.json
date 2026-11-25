@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "Atomic structure and electron configuration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:11.018Z",
+  "cards": [
+    {
+      "id": "1h15le5",
+      "kind": "term",
+      "front": "What are valence electrons, and how do you count them for a main-group atom?",
+      "back": "**Valence electrons** are the outermost electrons involved in bonding. Find the largest principal energy level and add the electrons in its s and p subshells.",
+      "hint": "Look at the highest energy level number in the configuration.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08ila0p",
+      "kind": "process",
+      "front": "What are the steps to write the electron configuration of a neutral atom?",
+      "back": "Fill subshells in **Aufbau order**: 1s, 2s, 2p, 3s, 3p, 4s, then 3d. Stop when the superscripts add up to the atom's electron count. Some transition metals are exceptions.",
+      "hint": "Check the superscripts add to the total electron count.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1iuvt0i",
+      "kind": "concept",
+      "front": "What does Hund's rule say about filling equal-energy orbitals?",
+      "back": "**Hund's rule**: place one electron in each equal-energy orbital before any pair up. The single electrons point the same way.",
+      "hint": "Think about the three 2p boxes in oxygen.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15q8tkf",
+      "kind": "term",
+      "front": "What does the atomic number of an atom tell you?",
+      "back": "The **atomic number** is the number of protons, which identifies the element. A neutral atom also has that many electrons.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1k6ir52",
+      "kind": "formula",
+      "front": "In the notation $2p^4$, what do the 2, the p, and the 4 mean?",
+      "back": "**2** is the principal energy level, **p** is the subshell letter, and **4** is the number of electrons in that subshell.",
+      "hint": "Read it from left to right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1kyjc4f",
+      "kind": "example",
+      "front": "How many valence electrons does chlorine have, given its configuration $1s^2 2s^2 2p^6 3s^2 3p^5$?",
+      "back": "**7** valence electrons. The largest energy level is 3, and $3s^2$ plus $3p^5$ gives 2 + 5 = 7.",
+      "hint": "Only count the outermost energy level.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16y9qpq",
+      "kind": "mistake",
+      "front": "A student puts two electrons in one p orbital while another p orbital stays empty. What is wrong?",
+      "back": "**Hund's rule** is broken. Put one electron in each equal-energy p orbital first, then pair them.",
+      "hint": "Think about spreading electrons out first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0argcy8",
+      "kind": "term",
+      "front": "What does the Pauli exclusion principle state?",
+      "back": "An orbital holds at most two electrons, and they must have **opposite spins**.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1qozujk",
+      "kind": "concept",
+      "front": "How should you think about an orbital in an atom?",
+      "back": "An **orbital** is a region outside the nucleus where an electron is likely to be found, not a fixed path.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19el8gx",
+      "kind": "example",
+      "front": "How many valence electrons does calcium have, given its configuration $1s^2 2s^2 2p^6 3s^2 3p^6 4s^2$?",
+      "back": "**2** valence electrons. Its outermost occupied subshell is $4s^2$ in energy level 4.",
+      "hint": "Find the largest energy level.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0s4ktl3",
+      "kind": "mistake",
+      "front": "A student counts all 17 electrons in chlorine as valence electrons. What is the error?",
+      "back": "**Core electrons** sit in inner levels and do not count. Chlorine has 10 core electrons and 7 valence electrons.",
+      "hint": "Which electrons sit in inner energy levels?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hbiqch",
+      "kind": "process",
+      "front": "How do you draw an orbital diagram for the 2p electrons in oxygen?",
+      "back": "Draw three 2p boxes. Place one arrow in each box first, then add a second arrow to one box, giving one pair and two single electrons.",
+      "hint": "Fill single boxes before pairing.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0n3078t",
+      "kind": "term",
+      "front": "What does the Aufbau principle tell you about where electrons go?",
+      "back": "Electrons fill the **lowest available energy orbitals** first, before higher energy orbitals.",
+      "sectionId": "s2"
+    }
+  ]
+}

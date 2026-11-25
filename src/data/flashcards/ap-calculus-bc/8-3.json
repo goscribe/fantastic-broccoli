@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "8-3",
+  "topicCode": "8.3",
+  "topicName": "Accumulation in applied contexts",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:51.047Z",
+  "cards": [
+    {
+      "id": "0te6xvp",
+      "kind": "concept",
+      "front": "What does the definite integral of a rate over a time interval give you?",
+      "back": "It gives the **net change** in the quantity over that interval. Its units are those of the accumulated quantity, not units per time, because the small changes are added up.",
+      "hint": "Think about what the units become after integrating.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0078rpe",
+      "kind": "concept",
+      "front": "Why is the integral of a rate not automatically the final amount?",
+      "back": "The integral only gives the **net change**. The final amount is $Q(b)=Q(a)+\\int_a^b r(t)\\,dt$, so you must add the **initial amount** $Q(a)$.",
+      "hint": "What must be added to the change?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0o0w3lq",
+      "kind": "concept",
+      "front": "How do you find the change in water volume in a tank with inflow $I(t)$ and outflow $O(t)$?",
+      "back": "Integrate the **net rate**: $\\int_a^b [I(t)-O(t)]\\,dt$. Outflow subtracts from inflow, so the result is the net change in volume.",
+      "hint": "Combine the two rates before integrating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "065yp4o",
+      "kind": "term",
+      "front": "What is an accumulation rate?",
+      "back": "An **accumulation rate** measures how quickly a quantity changes with respect to time. Its units are quantity units per time unit, such as liters per minute.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1f2ocg1",
+      "kind": "term",
+      "front": "What is a signed rate?",
+      "back": "A **signed rate** uses positive values for increases and negative values for decreases. For water in a tank, an inflow is positive and an outflow is negative.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14ahaqg",
+      "kind": "formula",
+      "front": "What does $Q(b)=Q(a)+\\int_a^b r(t)\\,dt$ mean, symbol by symbol?",
+      "back": "$Q(b)$ is the amount at time $b$, $Q(a)$ is the **initial amount** at time $a$, and $\\int_a^b r(t)\\,dt$ is the net change, with $r(t)$ in quantity units per time unit.",
+      "hint": "Which term is the starting amount?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bbsogl",
+      "kind": "process",
+      "front": "What are the steps to evaluate a rate integral in an applied context?",
+      "back": "1) Write the integral with its time limits. 2) Find an antiderivative. 3) Evaluate it at the upper limit and subtract the value at the lower limit. 4) If a final amount is asked, add the initial amount, then interpret with units.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1qtdrij",
+      "kind": "example",
+      "front": "A tank starts with 30 liters and water enters at $4+2t$ liters per minute, with $t$ in minutes. How much water is in the tank after 3 minutes?",
+      "back": "**51 liters**. The added water is $\\int_0^3(4+2t)\\,dt=21$ liters, and $30+21=51$.",
+      "hint": "Find the added water first, then add the starting amount.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vx1dgi",
+      "kind": "mistake",
+      "front": "Why is it wrong to call $\\int_a^b r(t)\\,dt$ the final amount?",
+      "back": "That integral is only the **net change**. Unless the initial amount is zero, you must add the initial amount to get the amount present at time $b$.",
+      "hint": "What is missing from the integral?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yqzft4",
+      "kind": "mistake",
+      "front": "What is the error when you subtract output from input to find the total input?",
+      "back": "Total input is $\\int_a^b I(t)\\,dt$ alone. Subtracting output gives the **net change** instead, which does not count everything that entered. Name the quantity before evaluating.",
+      "hint": "Does output cancel what entered?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1hfd2g1",
+      "kind": "mistake",
+      "front": "Can you multiply one rate value by the time interval to get the total accumulation?",
+      "back": "No. The **rate changes** with time, so a single rate value times the time need not give the correct total. Use the integral.",
+      "hint": "Is the rate constant over the interval?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12eb28a",
+      "kind": "term",
+      "front": "What is the net rate?",
+      "back": "The **net rate** is the rate of increase minus the rate of decrease. For input $I(t)$ and output $O(t)$, it is $I(t)-O(t)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15edr3z",
+      "kind": "term",
+      "front": "What is net change?",
+      "back": "**Net change** is the final amount minus the initial amount, including both increases and decreases over the interval.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0p08q4q",
+      "kind": "example",
+      "front": "A quantity grows at $3t+2$ units per day. How much does it grow from day 0 to day 4?",
+      "back": "**32 units**. $\\int_0^4(3t+2)\\,dt=[\\frac{3}{2}t^2+2t]_0^4=24+8=32$.",
+      "hint": "Use the antiderivative, then evaluate at the limits."
+    }
+  ]
+}

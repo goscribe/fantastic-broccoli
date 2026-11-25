@@ -1,11 +1,12 @@
 "use client";
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { MathText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/session";
 import "@/lib/i18n/rewards";
 import { cn } from "@/lib/utils";
+import "@/app/design/design.css";
 import type { SessionActivity } from "@/types";
 
 /** How long the reward card stays before the next activity opens on its own. */
@@ -24,21 +25,15 @@ export function remainingMinutes(activities: SessionActivity[]): number {
   );
 }
 
-/**
- * Compact "Step 2 of 5 · ~4 min left" line over a segmented bar — one
- * segment per activity, done ones filled, the current one highlighted.
- * Segments are tappable to jump around the plan.
- */
-export function SessionProgressHeader({
+/** "Step 2 of 5 · ~4 min left": the words that go with SessionStepBar. */
+export function SessionStepLabel({
   activities,
   activeIndex,
-  onSelect,
   className,
 }: {
   activities: SessionActivity[];
   /** Index of the open activity; `activities.length` on the debrief. */
   activeIndex: number;
-  onSelect?: (index: number) => void;
   className?: string;
 }) {
   const { t } = useI18n();
@@ -46,70 +41,91 @@ export function SessionProgressHeader({
   const minutes = remainingMinutes(activities);
   const onDebrief = activeIndex >= total;
   // On the summary screen its own title says it's done; the full bar is enough here.
+  // A one-activity session (a Quick 5) has no steps to count: just the time left.
+  const single = total <= 1;
   const label = onDebrief
     ? "\u00a0"
-    : t("session.stepOf")
+    : single
+      ? ""
+      : t("session.stepOf")
         .replace("{n}", String(activeIndex + 1))
         .replace("{total}", String(total));
-  const dense = total > 16;
-
   return (
-    <div className={cn("min-w-0 flex-1", className)}>
-      <p
-        className="flex min-w-0 items-baseline gap-1.5 text-[12.5px] font-semibold leading-none tabular-nums"
-        aria-live="polite"
-      >
-        <span className="shrink-0 text-foreground">{label}</span>
-        {!onDebrief && minutes > 0 && (
-          <>
+    <p
+      className={cn("flex min-w-0 items-baseline gap-1.5 text-small font-semibold leading-none tabular-nums", className)}
+      aria-live="polite"
+    >
+      {label && <span className="shrink-0 text-foreground">{label}</span>}
+      {!onDebrief && minutes > 0 && (
+        <>
+          {label && (
             <span className="text-faint" aria-hidden>
               ·
             </span>
-            <span className="truncate text-muted-foreground">
-              {t("session.minLeft").replace("{n}", String(minutes))}
-            </span>
-          </>
-        )}
-      </p>
-      <ol
-        aria-label={t("session.progressLabel")}
-        className={cn("mt-1.5 flex items-center", dense ? "gap-[3px]" : "gap-1")}
-      >
-        {activities.map((activity, i) => {
-          const current = i === activeIndex;
-          const done = activity.status === "completed";
-          const skipped = activity.status === "skipped";
-          return (
-            <li key={activity.id} className="flex min-w-0 flex-1">
-              <button
-                type="button"
-                disabled={!onSelect}
-                onClick={() => onSelect?.(i)}
-                aria-current={current ? "step" : undefined}
-                aria-label={`${t("session.activityWord")} ${i + 1}: ${activity.title}`}
-                title={activity.title}
-                className="group flex w-full min-w-0 py-1.5 disabled:cursor-default"
-              >
-                <span
-                  className={cn(
-                    "block h-2 w-full rounded-full transition-colors duration-500",
-                    done
-                      ? "bg-accent"
-                      : skipped
-                        ? "bg-accent/30"
-                        : current
-                          ? "bg-accent-soft"
-                          : "bg-muted group-hover:bg-border",
-                    current &&
-                      "outline-2 outline-offset-1 outline-accent",
-                  )}
-                />
-              </button>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
+          )}
+          <span className="truncate text-muted-foreground">
+            {t("session.minLeft").replace("{n}", String(minutes))}
+          </span>
+        </>
+      )}
+    </p>
+  );
+}
+
+/**
+ * The session's segmented bar: one segment per activity, done ones filled,
+ * the current one highlighted; segments are tappable to jump around the plan.
+ * It fills its container, so put it in the same column as the content under
+ * it and the two share their left and right edges.
+ */
+export function SessionStepBar({
+  activities,
+  activeIndex,
+  onSelect,
+  className,
+}: {
+  activities: SessionActivity[];
+  activeIndex: number;
+  onSelect?: (index: number) => void;
+  className?: string;
+}) {
+  const { t } = useI18n();
+  const dense = activities.length > 16;
+  return (
+    <ol
+      aria-label={t("session.progressLabel")}
+      className={cn("flex items-center", dense ? "gap-[3px]" : "gap-1", className)}
+    >
+      {activities.map((activity, i) => {
+        const current = i === activeIndex;
+        const done = activity.status === "completed";
+        const skipped = activity.status === "skipped";
+        return (
+          <li key={activity.id} className="flex min-w-0 flex-1">
+            <button
+              type="button"
+              disabled={!onSelect}
+              onClick={() => onSelect?.(i)}
+              aria-current={current ? "step" : undefined}
+              aria-label={`${t("session.activityWord")} ${i + 1}: ${activity.title}`}
+              title={activity.title}
+              className="group flex w-full min-w-0 py-1.5 disabled:cursor-default"
+            >
+              {/* The track; a finished step fills in from the left, the step you are on carries a slow sheen. */}
+              <span className={cn("relative block h-2.5 w-full overflow-hidden rounded-full bg-border", !done && !current && !skipped && "group-hover:bg-border-strong")}>
+                {done ? (
+                  <span key="done" className="play-fill absolute inset-0 rounded-full bg-accent" />
+                ) : skipped ? (
+                  <span className="absolute inset-0 bg-accent/30" />
+                ) : current ? (
+                  <span className="play-sheen absolute inset-0 bg-accent/35" />
+                ) : null}
+              </span>
+            </button>
+          </li>
+        );
+      })}
+    </ol>
   );
 }
 
@@ -159,7 +175,7 @@ export function ActivityRewardCard({
     <div
       role="status"
       className={cn(
-        "animate-reward-in pointer-events-auto relative w-full max-w-md overflow-hidden rounded-2xl border border-accent/25 bg-card p-3 shadow-[0_12px_40px_-12px_rgba(105,82,224,0.45)]",
+        "animate-reward-in pointer-events-auto relative w-full max-w-md overflow-hidden rounded-[22px] bg-card p-3 shadow-[0_12px_32px_-12px_rgba(29,26,22,0.4)] ring-1 ring-black/5",
         className,
       )}
     >
@@ -177,24 +193,21 @@ export function ActivityRewardCard({
           </svg>
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-[15px] font-bold leading-tight">{message}</p>
+          <p className="text-ui font-bold leading-tight">{message}</p>
           {bonusLine && (
-            <p className="mt-0.5 text-[12px] font-medium leading-tight text-muted-foreground">
+            <p className="mt-0.5 text-caption font-medium leading-tight text-muted-foreground">
               {bonusLine}
             </p>
           )}
         </div>
         {pill && (
-          <span className="animate-pts-rise inline-flex shrink-0 items-center gap-1 rounded-full border border-accent/25 bg-accent-soft px-2.5 py-1 text-[12px] font-semibold text-accent">
-            <Sparkles className="size-3.5" fill="currentColor" />
-            {pill}
-          </span>
+          <span className="animate-pts-rise shrink-0 text-small font-extrabold tabular-nums text-foreground">{pill}</span>
         )}
       </div>
       <button
         type="button"
         onClick={onNext}
-        className="mt-2.5 flex h-11 w-full items-center gap-2 rounded-xl bg-accent px-4 text-left text-[14px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
+        className="mt-2.5 flex h-11 w-full items-center gap-2 rounded-full bg-accent px-4 text-left text-[14px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2"
       >
         {next ? (
           <>

@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "9-3",
+  "topicCode": "9.3",
+  "topicName": "Thermal energy transfer and equilibrium",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:00.205Z",
+  "cards": [
+    {
+      "id": "10qd0fr",
+      "kind": "concept",
+      "front": "Which way does net energy transfer between two objects, and what decides the direction?",
+      "back": "**Temperature** decides it. Net energy flows from the higher-temperature object to the lower-temperature one, and the transfer continues until the temperatures match.",
+      "hint": "Think about what the note says drives the transfer.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0is8yvf",
+      "kind": "term",
+      "front": "What is thermal equilibrium?",
+      "back": "The state in which objects in thermal contact have the **same temperature**, so no net energy transfer occurs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b6fvy8",
+      "kind": "concept",
+      "front": "How do conduction, convection and radiation differ in what carries the energy?",
+      "back": "Conduction uses particle **collisions**, convection uses **bulk motion** of a fluid, and radiation uses **electromagnetic waves** and needs no matter.",
+      "hint": "Compare what carries the energy in each case.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gzs5fa",
+      "kind": "term",
+      "front": "What is heat?",
+      "back": "**Heat** is energy transferred between objects because of a temperature difference. It is measured in joules.",
+      "hint": "It describes a transfer, not a store.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qdpfo6",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an object contains a lot of heat?",
+      "back": "Heat is a **transfer**, not something stored. An object holds **thermal energy** in the random motion of its particles.",
+      "hint": "Heat describes a process.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dqeuze",
+      "kind": "process",
+      "front": "Describe how energy passes along a metal spoon when its end sits in hot soup.",
+      "back": "Fast particles at the hot end **collide** with slower neighbors and pass energy to them. This repeats along the spoon with no bulk movement of the metal.",
+      "hint": "Think about particle collisions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xaehxy",
+      "kind": "concept",
+      "front": "Why is conduction usually fastest in solids?",
+      "back": "Solid particles sit **close together**, so collisions pass energy along quickly.",
+      "hint": "Think about the spacing of particles.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xezupg",
+      "kind": "concept",
+      "front": "Why does warm air rise above a heater?",
+      "back": "Warm fluid **expands** and becomes less dense, so it rises while cooler, denser fluid sinks.",
+      "hint": "Think about density.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f8uoyo",
+      "kind": "concept",
+      "front": "Why can the Sun warm Earth across empty space?",
+      "back": "Radiation uses **electromagnetic waves**, which need no matter, so they cross empty space.",
+      "hint": "Check what radiation needs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0h2wjwr",
+      "kind": "mistake",
+      "front": "Is cold something that flows from one object to another?",
+      "back": "No. The **warmer** object loses energy and the cooler object gains it. Cold is not a substance that moves.",
+      "hint": "Consider which object loses energy.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kd5urx",
+      "kind": "mistake",
+      "front": "Does a large amount of thermal energy decide which object gives energy to the other?",
+      "back": "No. **Temperature** decides direction. A small cup of tea at 70 °C loses energy to a lake at 10 °C, even though the lake holds far more thermal energy.",
+      "hint": "Compare temperatures, not amounts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ufwwjf",
+      "kind": "example",
+      "front": "A cup of tea at 70 °C is placed in a lake at 10 °C. Which way does net energy flow, and when does it stop?",
+      "back": "Net energy flows from the tea to the lake. It stops when both reach the **same temperature**, which is thermal equilibrium.",
+      "hint": "Compare the two temperatures.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1p62mjg",
+      "kind": "example",
+      "front": "A cold drink at 4 °C is left in a room at 22 °C. Predict the direction of net energy transfer and the drink's final temperature.",
+      "back": "Energy flows from the room to the drink. The drink warms until it reaches **22 °C**, the room's temperature.",
+      "hint": "Energy moves from higher to lower temperature.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14qiutw",
+      "kind": "concept",
+      "front": "Why does net energy transfer stop between a hot block and a cold block in contact?",
+      "back": "Once both blocks reach the **same temperature**, there is no net transfer. Energy lost by the hot block then equals energy gained by the cold block.",
+      "hint": "Think about what happens to the temperature difference.",
+      "sectionId": "s4"
+    }
+  ]
+}

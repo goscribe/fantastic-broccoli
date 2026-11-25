@@ -2,36 +2,30 @@
 import { cn } from "@/lib/utils";
 
 import { Suspense, useEffect, useRef, useState } from "react";
-import { Check, Camera, X } from "lucide-react";
-import Image from "next/image";
+import { Camera, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
+import { BILLING_PAUSED } from "@/lib/billing-paused";
 import { CHECKOUT_REFRESH_DELAYS_MS, checkoutReturn } from "@/lib/checkout-return";
-import { Button } from "@/components/ui/button";
+import { planBilling, planDisplayName } from "@/lib/plan-display";
+import { hasUnlimitedGrant } from "@/lib/plan-access";
+import { CourseworkPlanRow } from "@/components/coursework/settings-row";
+import { Button, buttonClass } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { PageHeader } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { refreshSession, signOut, useAuthUser } from "@/lib/api/auth";
 import { toast, toastError } from "@/lib/toast";
 import {
   cancelSubscription,
-  describeLedgerEntry,
-  fetchAccountSummary,
   fetchCurrentSubscription,
+  fetchPlanCaps,
   fetchPlanOptions,
   resumeSubscription,
-  fetchTokenHistory,
-  fetchTokenOverview,
-  formatBytes,
-  switchPlan,
   updatePreferredLanguage,
   updateProfile,
   uploadProfilePicture,
-  type AccountSummary,
   type CurrentSubscription,
   type PlanOption,
-  type TokenLedgerEntry,
-  type TokenOverview,
 } from "@/lib/api/account";
 import {
   setUiLocale,
@@ -39,50 +33,16 @@ import {
   UI_LOCALES,
   UI_LOCALE_FLAGS,
   type Locale,
-  type TranslationKey,
 } from "@/lib/i18n";
 import "@/lib/i18n/settings";
 import "@/lib/i18n/billing";
-import { formatPassDate } from "@/lib/pass";
 import { RefundLinkRow } from "@/components/billing/refund-link-row";
-import "@/lib/i18n/growth";
-import { InviteCard } from "@/components/growth/invite-card";
+import "@/lib/i18n/reminders";
 import { ReminderSettings } from "@/components/reminders/reminder-settings";
 import { inputClass } from "@/components/ui/input";
+import { DeleteAccountSection } from "@/components/settings/delete-account-section";
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
-
-function UsageBar({
-  label,
-  used,
-  limit,
-  usedLabel,
-  limitLabel,
-}: {
-  label: string;
-  used: number;
-  limit: number;
-  usedLabel: string;
-  limitLabel: string;
-}) {
-  const pct = limit > 0 ? Math.min(100, (used / limit) * 100) : 0;
-  return (
-    <div className="py-3">
-      <div className="flex items-baseline justify-between text-sm">
-        <span className="text-muted-foreground">{label}</span>
-        <span className="font-medium tabular-nums">
-          {usedLabel} <span className="text-faint">/ {limitLabel}</span>
-        </span>
-      </div>
-      <div className="mt-2 h-1.5 rounded-full bg-muted overflow-hidden">
-        <div
-          className="h-full rounded-full bg-accent"
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-    </div>
-  );
-}
 
 function formatDate(value: Date | string, locale: string): string {
   return new Date(value).toLocaleDateString(locale, {
@@ -96,121 +56,75 @@ function needsBillingManagement(subscription: CurrentSubscription | null) {
   return Boolean(subscription && !["active", "trialing"].includes(subscription.status));
 }
 
-function PlanCard({
-  plan,
+/**
+ * The plan as one row: what you are on, what happens next, and where to
+ * change it (Pricing). Cancelling stays here: a subscriber must always be
+ * able to stop a trial or a renewal from their account.
+ *
+ * An account an admin gave the top tier to for free reads "Unlimited · free":
+ * no renewal date and no way to the plans (there is nothing to buy). If they
+ * also pay for a plan of their own, that plan is named with its next charge
+ * and stays cancellable.
+ */
+function PlanRow({
+  plans,
   subscription,
-  onSelect,
-  onDowngrade,
-  onResume,
+  unlimited,
+  loading,
   switching,
+  onCancel,
+  onResume,
 }: {
-  plan: PlanOption;
+  plans: PlanOption[];
   subscription: CurrentSubscription | null;
-  onSelect: (id: string) => void;
-  onDowngrade: () => void;
-  onResume: () => void;
+  /** The top tier, given free by an admin. */
+  unlimited: boolean;
+  loading: boolean;
   switching: boolean;
+  onCancel: () => void;
+  onResume: () => void;
 }) {
   const { t, locale } = useI18n();
-  const isFree = plan.priceDollars === 0;
-  const pass = plan.kind === "pass";
-  const cancelAt = subscription?.cancelAt ?? null;
-  const endsOn = cancelAt ? formatDate(cancelAt, locale) : null;
+  const active = plans.find((p) => p.isActive && p.priceDollars > 0) ?? null;
+  const ownName = active ? planDisplayName(active.name) : subscription ? planDisplayName(subscription.planName) : t("set.free");
+  const name = unlimited ? t("set.unlimitedFree") : ownName;
+  const isPass = active ? planBilling(active) === "once" : false;
+  const manageable = subscription && !needsBillingManagement(subscription) && !isPass;
+  let status: string | null = null;
+  if (subscription?.cancelAt) status = t("set.endsOn").replace("{date}", formatDate(subscription.cancelAt, locale));
+  else if (subscription?.isTrial) status = t("set.trialEndsOn").replace("{date}", formatDate(subscription.currentPeriodEnd, locale));
+  else if (isPass && active?.accessUntil) status = t("set.accessUntil").replace("{date}", formatDate(active.accessUntil, locale));
+  else if (subscription && !needsBillingManagement(subscription)) status = t("set.renewsOn").replace("{date}", formatDate(subscription.currentPeriodEnd, locale));
+  if (unlimited) {
+    // Their own plan, if they still pay for one; otherwise nothing renews.
+    status = subscription
+      ? t("set.unlimitedAlsoPaying").replace("{plan}", planDisplayName(subscription.planName)).replace("{status}", status ?? "").trim()
+      : t("set.unlimitedFreeNote");
+  }
   return (
-    <div
-      className={`flex flex-col rounded-2xl border p-5 ${
-        plan.isActive
-          ? "border-accent bg-accent-soft/40"
-          : "border-border bg-card"
-      }`}
-    >
-      <div className="flex items-center justify-between">
-        <p className="text-sm font-semibold">{plan.name}</p>
-        {plan.isActive && (
-          <span className="rounded-full bg-accent px-2 py-0.5 text-[11px] font-semibold text-white">
-            {t("set.current")}
-          </span>
-        )}
-      </div>
-      <p className="mt-1 text-[12px] text-muted-foreground">
-        {plan.description}
-      </p>
-      <p className="mt-3 text-lg font-bold tabular-nums">
-        {plan.priceDollars === 0 ? t("set.free") : `$${plan.priceDollars}`}
-        {plan.priceDollars > 0 && (
-          <span className="text-[12px] font-normal text-faint">
-            {" "}
-            {pass ? t("set.once") : t("set.perMonth")}
-          </span>
-        )}
-      </p>
-      <ul className="mt-3 space-y-1.5 text-[12px] text-muted-foreground">
-        <li className="flex items-center gap-1.5">
-          <Check className="h-3 w-3 text-accent" />
-          {t("set.storageAmount").replace(
-            "{amount}",
-            formatBytes(plan.storageLimitBytes),
-          )}
-        </li>
-        <li className="flex items-center gap-1.5">
-          <Check className="h-3 w-3 text-accent" />
-          {t("set.tokensPerMonth").replace(
-            "{count}",
-            String(plan.monthlyTokens),
-          )}
-        </li>
-      </ul>
-      <div className="mt-auto pt-4">
-        {plan.isActive && pass ? (
-          // A pass just ends on its date: nothing to cancel or resume.
-          <p className="text-[12px] text-muted-foreground">
-            {t("set.passUntil").replace(
-              "{date}",
-              formatPassDate(subscription?.isPass ? subscription.currentPeriodEnd : (plan.accessUntil ?? ""), locale),
-            )}
-          </p>
-        ) : plan.isActive && !isFree && endsOn ? (
-          <div className="space-y-2">
-            <p className="text-[12px] text-muted-foreground">
-              {t("set.endsOn").replace("{date}", endsOn)}
-            </p>
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full"
-              disabled={switching}
-              onClick={onResume}
-            >
-              {t("set.keepPlan")}
-            </Button>
-          </div>
-        ) : plan.isActive ? (
-          <Button variant="outline" size="sm" className="w-full" disabled>
-            {t("set.yourPlan")}
-          </Button>
-        ) : isFree && endsOn ? (
-          <Button variant="outline" size="sm" className="w-full" disabled>
-            {t("set.startsOn").replace("{date}", endsOn)}
-          </Button>
-        ) : isFree ? (
-          <Button
-            variant="outline"
-            size="sm"
-            className="w-full"
-            disabled={switching}
-            onClick={onDowngrade}
-          >
-            {subscription?.isTrial ? t("set.cancelTrial") : t("set.downgrade")}
-          </Button>
+    <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-y border-border py-4">
+      <div className="min-w-0">
+        {loading ? (
+          <Skeleton className="h-5 w-28" />
         ) : (
-          <Button
-            size="sm"
-            className="w-full"
-            disabled={switching || needsBillingManagement(subscription)}
-            onClick={() => onSelect(plan.id)}
-          >
-            {t("set.switchTo").replace("{name}", plan.name)}
+          <p className="text-[16px] font-extrabold">{name}</p>
+        )}
+        {!loading && status && <p className="mt-0.5 text-small text-muted-foreground">{status}</p>}
+      </div>
+      <div className="flex flex-wrap items-center gap-2">
+        {manageable && subscription?.cancelAt ? (
+          <Button variant="ghost" size="sm" disabled={switching} onClick={onResume}>
+            {t("set.keepPlan")}
           </Button>
+        ) : manageable ? (
+          <Button variant="ghost" size="sm" disabled={switching} onClick={onCancel}>
+            {subscription?.isTrial ? t("set.cancelTrial") : t("set.cancelPlan")}
+          </Button>
+        ) : null}
+        {!BILLING_PAUSED && !unlimited && (
+          <Link href="/pricing" className={buttonClass({ variant: "secondary", size: "sm" })}>
+            {active || subscription ? t("set.changePlan") : t("set.seePlans")}
+          </Link>
         )}
       </div>
     </div>
@@ -220,8 +134,8 @@ function PlanCard({
 const SETTINGS_SECTIONS = [
   ["account", "settings.account"],
   ["language", "settings.language"],
+  ["reminders", "remind.settingsTitle"],
   ["plan", "settings.plan"],
-  ["tokens", "set.tokensTitle"],
 ] as const;
 
 /**
@@ -256,7 +170,6 @@ function CheckoutReturnNotice({ onRefresh }: { onRefresh: () => Promise<void> })
 export default function SettingsPage() {
   const { user } = useAuthUser();
   const { t, locale } = useI18n();
-  const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
   const [editedName, setEditedName] = useState<string | null>(null);
   const name = editedName ?? user?.name ?? "";
@@ -267,23 +180,15 @@ export default function SettingsPage() {
     null,
   );
   const [confirmingDowngrade, setConfirmingDowngrade] = useState(false);
-  const [summaryLoading, setSummaryLoading] = useState(true);
   const [plansLoading, setPlansLoading] = useState(true);
+  const [unlimited, setUnlimited] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploadingPhoto, setUploadingPhoto] = useState(false);
   const [photoError, setPhotoError] = useState<string | null>(null);
-  const [tokens, setTokens] = useState<TokenOverview | null>(null);
-  const [ledger, setLedger] = useState<TokenLedgerEntry[] | null>(null);
-  const [tokensFailed, setTokensFailed] = useState(false);
-  const [showAllLedger, setShowAllLedger] = useState(false);
   const [savingLanguage, setSavingLanguage] = useState(false);
   const [languageSaved, setLanguageSaved] = useState(false);
 
   useEffect(() => {
-    fetchAccountSummary()
-      .then(setSummary)
-      .catch(() => {})
-      .finally(() => setSummaryLoading(false));
     fetchPlanOptions()
       .then(setPlans)
       .catch(() => {})
@@ -291,12 +196,9 @@ export default function SettingsPage() {
     fetchCurrentSubscription()
       .then(setSubscription)
       .catch(() => {});
-    fetchTokenOverview()
-      .then(setTokens)
-      .catch(() => setTokensFailed(true));
-    fetchTokenHistory(100)
-      .then(setLedger)
-      .catch(() => setLedger([]));
+    fetchPlanCaps()
+      .then((caps) => setUnlimited(hasUnlimitedGrant(caps)))
+      .catch(() => {});
   }, []);
 
   const handleSave = async () => {
@@ -353,30 +255,13 @@ export default function SettingsPage() {
     }
   };
 
-  const handleSwitch = async (planId: string) => {
-    if (BILLING_PAUSED) {
-      toastError(new Error(BILLING_PAUSED_MESSAGE), "Checkout unavailable");
-      return;
-    }
-    setSwitching(true);
-    try {
-      await switchPlan(planId);
-    } catch (err) {
-      toastError(err, "Failed to switch plan");
-    } finally {
-      setSwitching(false);
-    }
-  };
-
   const refreshBilling = async () => {
-    const [sub, options, acct] = await Promise.all([
+    const [sub, options] = await Promise.all([
       fetchCurrentSubscription(),
       fetchPlanOptions(),
-      fetchAccountSummary(),
     ]);
     setSubscription(sub);
     setPlans(options);
-    setSummary(acct);
   };
 
   const openDowngrade = async () => {
@@ -431,14 +316,14 @@ export default function SettingsPage() {
   };
 
   return (
-    <main className="mx-auto w-full max-w-[1180px] px-6 pb-12 pt-6">
+    <PageShell max="max-w-none">
       <Suspense fallback={null}>
         <CheckoutReturnNotice onRefresh={refreshBilling} />
       </Suspense>
       <PageHeader title={<>{t("settings.title")}</>} subtitle={<>{t("set.subtitle")}</>} />
       <div className="flex flex-col gap-8 lg:flex-row">
       <nav className="hidden w-[200px] shrink-0 lg:block">
-        <ul className="sticky top-6 space-y-1 text-[13.5px] font-semibold">
+        <ul className="sticky top-[calc(var(--app-top,0px)+1.5rem)] space-y-1 text-small font-semibold">
           {SETTINGS_SECTIONS.map(([id, label]) => (
             <li key={id}>
               <a href={`#${id}`} className="block rounded-xl px-3 py-2 text-muted-foreground hover:bg-muted hover:text-foreground">
@@ -452,10 +337,7 @@ export default function SettingsPage() {
 
         {/* Account */}
         <section id="account">
-          <h2 className="text-sm font-semibold">{t("settings.account")}</h2>
-          <p className="mt-0.5 text-[13px] text-muted-foreground">
-            {t("set.accountHint")}
-          </p>
+          <h2 className="page-h2">{t("settings.account")}</h2>
           <div className="mt-3 rounded-2xl border border-border bg-card p-5">
             <div className="flex items-start gap-5">
               <div className="shrink-0">
@@ -496,7 +378,7 @@ export default function SettingsPage() {
                   {uploadingPhoto ? t("set.uploading") : t("set.change")}
                 </button>
                 {photoError && (
-                  <p className="mt-1 w-14 text-[11px] text-red-500">
+                  <p className="mt-1 w-14 text-caption text-red-500">
                     {photoError}
                   </p>
                 )}
@@ -505,7 +387,7 @@ export default function SettingsPage() {
                 <div>
                   <label
                     htmlFor="settings-name"
-                    className="block text-[13px] font-medium"
+                    className="block text-small font-medium"
                   >
                     {t("set.displayName")}
                   </label>
@@ -516,14 +398,11 @@ export default function SettingsPage() {
                     onChange={(e) => setEditedName(e.target.value)}
                     className={cn(inputClass, "mt-1.5")}
                   />
-                  <p className="mt-1.5 text-[12px] text-faint">
-                    {t("set.displayNameHint")}
-                  </p>
                 </div>
                 <div>
                   <label
                     htmlFor="settings-email"
-                    className="block text-[13px] font-medium"
+                    className="block text-small font-medium"
                   >
                     {t("set.email")}
                   </label>
@@ -534,19 +413,16 @@ export default function SettingsPage() {
                     disabled
                     className={cn(inputClass, "mt-1.5 bg-muted/60 text-muted-foreground")}
                   />
-                  <p className="mt-1.5 text-[12px] text-faint">
+                  <p className="mt-1.5 text-caption text-faint">
                     {t("set.emailHint")}
                   </p>
                 </div>
               </div>
             </div>
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
-              <Button variant="outline" size="sm" onClick={() => signOut()}>
-                {t("nav.signOut")}
-              </Button>
+            <div className="mt-4 flex flex-wrap items-center justify-end gap-3 border-t border-border pt-4">
               <div className="flex items-center gap-2">
                 {saved && (
-                  <span className="text-[12px] text-accent font-medium">
+                  <span className="text-caption text-accent font-medium">
                     {t("set.saved")}
                   </span>
                 )}
@@ -564,11 +440,12 @@ export default function SettingsPage() {
 
         {/* Language */}
         <section id="language" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("settings.language")}</h2>
-          <p className="mt-0.5 text-[13px] text-muted-foreground">
+          <h2 className="page-h2">{t("settings.language")}</h2>
+          <p className="mt-0.5 text-small text-muted-foreground">
             {t("settings.languageHint")}
           </p>
-          <div className="mt-3 rounded-2xl border border-border bg-card p-5">
+          {/* One select: it sits on the page, no card around it. */}
+          <div className="mt-3">
             <label className="block max-w-sm">
               <span className="sr-only">{t("settings.language")}</span>
               <select
@@ -585,9 +462,9 @@ export default function SettingsPage() {
               </select>
             </label>
             <p
-              className={`mt-3 text-[12px] font-medium text-accent transition-opacity ${
-                languageSaved ? "opacity-100" : "opacity-0"
-              }`}
+              className={`mt-3 text-caption font-medium text-accent transition-opacity ${
+ languageSaved ?"opacity-100":"opacity-0"
+ }`}
             >
               {t("settings.languageSaved")}
             </p>
@@ -597,20 +474,17 @@ export default function SettingsPage() {
         {/* Study reminders (time + push on this device) */}
         <ReminderSettings />
 
-        {/* Plan */}
+        {/* Plan: one row; plans and prices live on Pricing. */}
         <section id="plan" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("settings.plan")}</h2>
-          <p className="mt-0.5 text-[13px] text-muted-foreground">
-            {t("set.planHint")}
-          </p>
+          <h2 className="page-h2">{t("settings.plan")}</h2>
           {needsBillingManagement(subscription) && subscription && (
             <div role="status" className="mt-3 space-y-3 rounded-2xl border border-border bg-card p-5">
-              <p className="text-sm font-semibold">{t("set.manageSubscription")}</p>
-              <p className="text-[13px] text-muted-foreground">
+              <p className="text-ui font-semibold">{t("set.manageSubscription")}</p>
+              <p className="text-small text-muted-foreground">
                 {t("set.inactiveSubscription").replace("{plan}", subscription.planName)}
               </p>
               {subscription.cancelAt ? (
-                <p className="text-[13px]">{t("set.renewalStopped")}</p>
+                <p className="text-small">{t("set.renewalStopped")}</p>
               ) : (
                 <Button variant="outline" size="sm" disabled={switching} onClick={openDowngrade}>
                   {t("set.stopRenewal")}
@@ -618,228 +492,27 @@ export default function SettingsPage() {
               )}
             </div>
           )}
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            {plansLoading
-              ? Array.from({ length: 3 }, (_, i) => (
-                  <div
-                    key={i}
-                    className="rounded-2xl border border-border bg-card p-4 space-y-3"
-                  >
-                    <Skeleton className="h-4 w-16" />
-                    <Skeleton className="h-3 w-full" />
-                    <Skeleton className="h-6 w-20" />
-                    <Skeleton className="h-8 w-full" />
-                  </div>
-                ))
-              : plans.map((plan) => (
-                  <PlanCard
-                    key={plan.id}
-                    plan={plan}
-                    subscription={subscription}
-                    onSelect={handleSwitch}
-                    onDowngrade={openDowngrade}
-                    onResume={handleResume}
-                    switching={switching}
-                  />
-                ))}
-          </div>
+          <PlanRow
+            plans={plans}
+            subscription={subscription}
+            unlimited={unlimited}
+            loading={plansLoading}
+            switching={switching}
+            onCancel={openDowngrade}
+            onResume={handleResume}
+          />
+          <CourseworkPlanRow />
           <RefundLinkRow className="mt-3" />
         </section>
 
-        {/* Usage */}
-        {summaryLoading && (
-          <section className="mt-8">
-            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
-            <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
-              {Array.from({ length: 3 }, (_, i) => (
-                <div key={i} className="py-3 space-y-2">
-                  <div className="flex justify-between">
-                    <Skeleton className="h-3.5 w-24" />
-                    <Skeleton className="h-3.5 w-16" />
-                  </div>
-                  <Skeleton className="h-1.5 w-full rounded-full" />
-                </div>
-              ))}
-            </div>
-          </section>
-        )}
-        {!summaryLoading && summary && (
-          <section className="mt-8">
-            <h2 className="text-sm font-semibold">{t("settings.usage")}</h2>
-            <p className="mt-0.5 text-[13px] text-muted-foreground">
-              {t("set.usageHint").replace("{plan}", summary.planName)}
-            </p>
-            <div className="mt-3 rounded-2xl border border-border bg-card px-5 py-2 divide-y divide-border">
-              <UsageBar
-                label={t("set.storage")}
-                used={summary.storageUsedBytes}
-                limit={summary.storageLimitBytes}
-                usedLabel={formatBytes(summary.storageUsedBytes)}
-                limitLabel={formatBytes(summary.storageLimitBytes)}
-              />
-            </div>
-          </section>
-        )}
-
-        {/* Invite friends */}
-        <section id="invite" className="mt-8">
-          <h2 className="mb-3 text-sm font-semibold">{t("growth.sectionTitle")}</h2>
-          <InviteCard />
+        <section className="mt-8">
+          <Button variant="secondary" size="sm" onClick={() => signOut()}>
+            {t("nav.signOut")}
+          </Button>
         </section>
 
-        {/* Tokens */}
-        <section id="tokens" className="mt-8">
-          <h2 className="text-sm font-semibold">{t("set.tokensTitle")}</h2>
-          <p className="mt-0.5 text-[13px] text-muted-foreground">
-            {t("set.tokensHint")}
-          </p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
-            <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-4">
-              <Image
-                src="/design/props/star.png"
-                alt=""
-                width={64}
-                height={64}
-                unoptimized
-                className="pointer-events-none h-12 w-12 shrink-0 select-none object-contain"
-              />
-              <div className="min-w-0">
-                <p className="text-[12px] text-muted-foreground">
-                  {t("set.balance")}
-                </p>
-                {tokens ? (
-                  <p className="mt-1 text-2xl font-bold tabular-nums">
-                    {tokens.balance.toLocaleString()}
-                    <span className="ml-1.5 text-[12px] font-normal text-faint">
-                      tokens
-                    </span>
-                  </p>
-                ) : (
-                  tokensFailed ? <p className="mt-2 text-[14px] text-faint">Unavailable right now</p> : <Skeleton className="mt-2 h-7 w-24" />
-                )}
-                {tokens && (
-                  <p className="mt-1 text-[12px] text-muted-foreground">
-                    {t("set.monthlyAllowance")
-                      .replace(
-                        "{count}",
-                        tokens.monthlyAllowance.toLocaleString(),
-                      )
-                      .replace("{plan}", tokens.planName)}
-                  </p>
-                )}
-                {tokens && tokens.planName === "Free" && !BILLING_PAUSED && (
-                  <p className="mt-2 rounded-lg bg-accent-soft/50 px-3 py-2 text-[12px] text-muted-foreground">
-                    {t("set.upgradeNudge")}{" "}
-                    <Link
-                      href="/pricing"
-                      className="font-medium text-accent underline"
-                    >
-                      {t("set.upgradeCta")}
-                    </Link>
-                  </p>
-                )}
-              </div>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-4">
-              <p className="text-[12px] text-muted-foreground">
-                {t("set.whatThingsCost")}
-              </p>
-              {tokens ? (
-                <ul className="mt-2 space-y-1 text-[12px]">
-                  {(
-                    [
-                      ["set.costStudySession", tokens.costs.GENERATION],
-                      ["set.costUpload", tokens.costs.GENERATION],
-                      ["set.costPodcast", tokens.costs.PODCAST_EPISODE],
-                      ["set.costStudyGuide", tokens.costs.STUDY_GUIDE],
-                      ["set.costFlashcards", tokens.costs.FLASHCARD_SET],
-                      ["set.costArtifactSearch", tokens.costs.ARTIFACT_SEARCH],
-                      ["set.costCopilot", 0],
-                    ] as const
-                  ).map(([label, cost]) => (
-                    <li
-                      key={label}
-                      className="flex items-baseline justify-between gap-3"
-                    >
-                      <span className="text-muted-foreground">
-                        {t(label as TranslationKey)}
-                      </span>
-                      <span className="font-medium tabular-nums">
-                        {cost === 0
-                          ? t("set.free")
-                          : t("set.nTokens").replace("{count}", String(cost))}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                tokensFailed ? <p className="mt-2 text-[13px] text-faint">Unavailable right now</p> : <Skeleton className="mt-2 h-24 w-full" />
-              )}
-            </div>
-          </div>
-
-          {/* Ledger */}
-          <div className="mt-3 rounded-2xl border border-border bg-card">
-            <p className="px-4 pt-3 text-[12px] font-medium text-muted-foreground">
-              {t("set.recentActivity")}
-            </p>
-            {!ledger && (
-              <div className="space-y-2 p-4">
-                {Array.from({ length: 3 }, (_, i) => (
-                  <Skeleton key={i} className="h-4 w-full" />
-                ))}
-              </div>
-            )}
-            {ledger && ledger.length === 0 && (
-              <p className="px-4 pb-4 pt-1 text-[13px] text-muted-foreground">
-                {t("set.noTokenActivity")}
-              </p>
-            )}
-            {ledger && ledger.length > 0 && (
-              <ul className="mt-1 divide-y divide-border">
-                {(showAllLedger ? ledger : ledger.slice(0, 8)).map((entry) => (
-                  <li
-                    key={entry.id}
-                    className="flex items-baseline justify-between gap-3 px-4 py-2 text-[13px]"
-                  >
-                    <span className="min-w-0 truncate">
-                      {describeLedgerEntry(entry)}
-                    </span>
-                    <span className="flex shrink-0 items-baseline gap-3">
-                      <span className="text-[11px] text-faint">
-                        {new Date(entry.createdAt).toLocaleDateString(
-                          undefined,
-                          { month: "short", day: "numeric" },
-                        )}
-                      </span>
-                      <span
-                        className={`font-medium tabular-nums ${
-                          entry.amount >= 0
-                            ? "text-emerald-600"
-                            : "text-foreground"
-                        }`}
-                      >
-                        {entry.amount >= 0 ? "+" : ""}
-                        {entry.amount.toLocaleString()}
-                      </span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            )}
-            {ledger && ledger.length > 8 && (
-              <button
-                type="button"
-                onClick={() => setShowAllLedger((v) => !v)}
-                className="w-full border-t border-border px-4 py-2 text-[12px] font-medium text-muted-foreground hover:text-foreground"
-              >
-                {showAllLedger
-                  ? t("set.showLess")
-                  : t("set.showAll").replace("{count}", String(ledger.length))}
-              </button>
-            )}
-          </div>
-        </section>
+        {/* Delete account: last on the page, its own section. */}
+        <DeleteAccountSection email={user?.email} />
       </div>
 
       {confirmingDowngrade && subscription && (
@@ -869,7 +542,7 @@ export default function SettingsPage() {
                   ? t("set.cancelTrialTitle")
                   : t("set.downgradeTitle")}
             </h2>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 text-ui text-muted-foreground">
               {t(
                 needsBillingManagement(subscription)
                   ? "set.stopRenewalBody"
@@ -911,6 +584,6 @@ export default function SettingsPage() {
         </div>
       )}
       </div>
-    </main>
+    </PageShell>
   );
 }

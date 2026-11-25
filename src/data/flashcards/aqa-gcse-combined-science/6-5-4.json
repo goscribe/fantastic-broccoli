@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "6-5-4",
+  "topicCode": "6.5.4",
+  "topicName": "Forces and motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:24.240Z",
+  "cards": [
+    {
+      "id": "17okv19",
+      "kind": "concept",
+      "front": "What happens to an object when the resultant force acting on it is not zero?",
+      "back": "It **accelerates** in the direction of the resultant force, so its speed, its direction, or both change. The resultant force is the single overall force after combining all forces on the object.",
+      "hint": "Think about what the overall force does, not each separate force.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "012bymt",
+      "kind": "formula",
+      "front": "Which equation calculates acceleration from the change in velocity and the time taken?",
+      "back": "$\\text{acceleration}=\\frac{\\text{final velocity}-\\text{initial velocity}}{\\text{time taken}}$, measured in **$\\mathrm{m/s^2}$**. It is the change in velocity per unit of time.",
+      "hint": "Compare with how speed is found from distance and time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "070hrfh",
+      "kind": "concept",
+      "front": "What does the gradient of a velocity–time graph represent?",
+      "back": "**Acceleration**. A horizontal line means zero acceleration, and a straight sloping line means constant acceleration.",
+      "hint": "Compare with what the gradient of a distance–time graph gives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1i9agos",
+      "kind": "formula",
+      "front": "What unit does speed have when distance is in metres and time is in seconds?",
+      "back": "**$\\mathrm{m/s}$**, found from speed = distance ÷ time.",
+      "hint": "Work out the unit from the formula, one quantity at a time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fvs7zb",
+      "kind": "example",
+      "front": "A cyclist travels 150 m in 30 s. What is their average speed?",
+      "back": "**$5\\,\\mathrm{m/s}$**, because $150\\div30=5$.",
+      "hint": "Start with the average speed equation and substitute the values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ecxvx8",
+      "kind": "concept",
+      "front": "What does a steeper rising line on a distance–time graph show?",
+      "back": "A **greater speed**, because the gradient equals the change in distance divided by the change in time.",
+      "hint": "Think about what the gradient represents on this graph.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0yx9pkj",
+      "kind": "mistake",
+      "front": "Why is average speed not enough to describe a journey that speeds up and slows down?",
+      "back": "Average speed uses total distance and total time, so it **does not show** whether the object sped up or slowed down during the trip.",
+      "hint": "Consider what information a single total hides.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "17wmozk",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that acceleration always means speeding up?",
+      "back": "**Acceleration** is any change in velocity. Slowing down counts, and so does turning at constant speed, because the direction of velocity changes.",
+      "hint": "Think about what velocity includes beyond speed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uw0kdd",
+      "kind": "process",
+      "front": "How does a falling object reach a constant terminal velocity?",
+      "back": "1) Weight is greater than air resistance, so it accelerates downwards. 2) Air resistance rises as speed increases. 3) The forces balance, the resultant force is zero, and the object reaches **terminal velocity**.",
+      "hint": "Start by asking which force is bigger when the object first falls.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0kqvpcq",
+      "kind": "mistake",
+      "front": "Why does a moving object keep going at constant velocity when its forces are balanced?",
+      "back": "The **resultant force is zero**, so there is no acceleration. The object does not need a force to keep moving; a resultant force is only needed to change its motion.",
+      "hint": "Think about what a resultant force of zero does to motion.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rd09q0",
+      "kind": "example",
+      "front": "A car's velocity rises from 4 m/s to 16 m/s in 6 s. What is its acceleration?",
+      "back": "**$2\\,\\mathrm{m/s^2}$**. The change in velocity is $16-4=12\\,\\mathrm{m/s}$, and $12\\div6=2$.",
+      "hint": "Find the change in velocity before dividing by the time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b4nzys",
+      "kind": "concept",
+      "front": "What does the area under a velocity–time graph give when velocity stays positive?",
+      "back": "The **distance travelled**. In general the area gives displacement, including direction, so areas below the time axis count as negative.",
+      "hint": "Compare the units of area with the units on each axis.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fvk8pw",
+      "kind": "mistake",
+      "front": "Why can a distance–time line never slope downwards?",
+      "back": "**Total distance** cannot decrease over time, so the line can only stay level or rise.",
+      "hint": "Think about what distance measures as time passes.",
+      "sectionId": "s2"
+    }
+  ]
+}

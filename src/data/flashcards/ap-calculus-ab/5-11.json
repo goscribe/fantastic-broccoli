@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-11",
+  "topicCode": "5.11",
+  "topicName": "Solving optimization problems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:16.473Z",
+  "cards": [
+    {
+      "id": "16ebtnp",
+      "kind": "concept",
+      "front": "Why must you check endpoints as well as critical points on a closed interval?",
+      "back": "The **absolute maximum** is the largest candidate value, and it can occur at an included endpoint, not only at a critical point. Compare every candidate, then pick the largest or smallest.",
+      "hint": "Think about where a function's largest value can sit on a closed interval.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tjrhk3",
+      "kind": "concept",
+      "front": "Why do you combine the objective function with the constraint before differentiating?",
+      "back": "Substituting the **constraint** rewrites the objective as a function of one variable, such as $A(x)=100x-2x^2$. You can then differentiate it to find critical points.",
+      "hint": "Count how many variables the derivative needs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0hao2go",
+      "kind": "mistake",
+      "front": "Does solving A'(x)=0 alone prove you have the maximum?",
+      "back": "No. It gives only a **candidate** interior point. Other critical points and included endpoints must also be compared, using their function values, before claiming the greatest value.",
+      "hint": "What else must you compare before deciding?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0g1jrxr",
+      "kind": "process",
+      "front": "What are the steps for solving an applied optimization problem?",
+      "back": "1. Define the objective and variables with units. 2. Write the constraint and reduce to one function. 3. Find critical points and endpoints. 4. Compare candidates and report the requested quantity with units.",
+      "hint": "There are four stages."
+    },
+    {
+      "id": "150eumy",
+      "kind": "term",
+      "front": "What is an objective function?",
+      "back": "The **objective function** expresses the quantity being maximized or minimized in terms of the problem's variables, such as area in the fence problem.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "08okxkw",
+      "kind": "term",
+      "front": "What is a constraint in an optimization problem?",
+      "back": "A **constraint** is a condition that restricts the possible values of the variables, such as the fencing constraint $2x+y=100$ linking the sides.",
+      "hint": "Look for a relation linking the variables.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07k3cnm",
+      "kind": "term",
+      "front": "What is the feasible domain?",
+      "back": "The **feasible domain** contains the input values allowed by every condition in the problem. For example, a length cannot be negative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0z70x4o",
+      "kind": "term",
+      "front": "What is a critical point in this topic?",
+      "back": "An interior **critical point** is a domain point where the derivative is zero or undefined, provided the function exists there. It is only a candidate for an optimum.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12eakc1",
+      "kind": "formula",
+      "front": "What is the area function for 100 meters of fencing along a wall, and what does each symbol mean?",
+      "back": "$A(x)=100x-2x^2$, where $x$ is each side perpendicular to the wall in meters and $A$ is enclosed area in square meters. Valid for $0\\leq x\\leq50$.",
+      "hint": "Substitute the fencing constraint into A = xy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16oi8e1",
+      "kind": "formula",
+      "front": "What derivative and critical point do you get for the fence area function?",
+      "back": "$A'(x)=100-4x$. Setting it to zero gives $x=25$ meters, and the constraint then gives $y=50$ meters.",
+      "hint": "Differentiate the area function term by term.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06bhqxt",
+      "kind": "example",
+      "front": "Find the greatest area enclosed by 100 meters of fencing along a wall. Include the endpoint check.",
+      "back": "**1250 square meters**. Compare $A(0)=0$, $A(25)=1250$, and $A(50)=0$; the interior critical point gives the largest value, with sides 25, 25, and 50 meters.",
+      "hint": "Compare all three candidate values.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wt7ekz",
+      "kind": "concept",
+      "front": "Why keep endpoints where the situation allows zero-length cases?",
+      "back": "A closed interval may include **zero-length boundary cases** when they are mathematically allowed. Include them, then interpret the result, even if they are not useful designs.",
+      "sectionId": "s1"
+    }
+  ]
+}

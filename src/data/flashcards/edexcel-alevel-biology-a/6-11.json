@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "6-11",
+  "topicCode": "6.11",
+  "topicName": "Pathogen entry and barriers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:34.375Z",
+  "cards": [
+    {
+      "id": "0o7qmug",
+      "kind": "concept",
+      "front": "Why does intact skin stop most pathogens from reaching the tissues beneath?",
+      "back": "The thick top layer of dead cells is filled with **keratin**, which makes it tough and waterproof, so pathogens find it hard to cross. This only works while the skin is unbroken.",
+      "hint": "Think about what the outer layer is made of and what it does to water.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19l6s0s",
+      "kind": "process",
+      "front": "How do cilia and mucus clear microorganisms from the airways?",
+      "back": "1) Goblet cells release **mucus**, which traps microorganisms and dust. 2) Cilia beat together and move the mucus up towards the throat. 3) The mucus is swallowed, and stomach acid destroys many microorganisms.",
+      "hint": "Start with what the goblet cells produce.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0aeyqx9",
+      "kind": "concept",
+      "front": "Why are skin and mucous membranes still important even though they are non-specific?",
+      "back": "They act **before any immune response begins** and defend against all pathogens in the same way. This means the immune system is needed less often.",
+      "hint": "Compare when these barriers act with when an immune response starts.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0a6gawh",
+      "kind": "term",
+      "front": "What is a pathogen?",
+      "back": "A **pathogen** is a microorganism or virus that causes disease in its host.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1db8k2q",
+      "kind": "term",
+      "front": "What is an infection?",
+      "back": "An **infection** is the entry and multiplication of a pathogen in the tissues of a host.",
+      "hint": "Think about what the pathogen must do once it gets inside.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16ulkeq",
+      "kind": "concept",
+      "front": "Which four main routes can pathogens use to enter the body?",
+      "back": "Through **broken skin**, the gas exchange system, the digestive system and the urinogenital tract.",
+      "hint": "Think about where the body has wounds or openings.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1grd1gd",
+      "kind": "term",
+      "front": "How do harmless skin flora help protect the skin?",
+      "back": "**Skin flora** are harmless microorganisms living on the skin that compete with pathogens for space and nutrients.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1v7rnj5",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that the skin kills pathogens?",
+      "back": "The skin is a **barrier**, not a killing mechanism. It works mainly by keeping pathogens out, and it fails when it is broken.",
+      "hint": "Compare what the skin blocks with what it actually does to pathogens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b2o4it",
+      "kind": "process",
+      "front": "What are the steps by which a cut is sealed?",
+      "back": "1) Platelets at the damaged vessel release chemicals. 2) These start reactions that change soluble fibrinogen into insoluble **fibrin**. 3) Fibrin forms a mesh that traps blood cells. 4) The mesh dries to form a scab.",
+      "hint": "The first step happens at the damaged blood vessel.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j63ioj",
+      "kind": "mistake",
+      "front": "Why can a bite or needle still cause infection even though clotting happens?",
+      "back": "Pathogens can be delivered **beneath the skin** before a clot forms, so the wound is not yet sealed.",
+      "hint": "Consider the timing of clotting compared with the injury.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1b4r0du",
+      "kind": "term",
+      "front": "What is a goblet cell?",
+      "back": "A **goblet cell** is an epithelial cell in a mucous membrane that secretes mucus onto the surface.",
+      "hint": "Look at the cells lining the airways and gut.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13ivlvx",
+      "kind": "concept",
+      "front": "Why do the lungs, gut and urinogenital tract need mucous membranes rather than skin?",
+      "back": "These surfaces must exchange materials, so they cannot be covered by thick, dead skin. They are lined with living **mucous membranes** instead.",
+      "hint": "Think about what these surfaces must let through.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0fi5bwx",
+      "kind": "term",
+      "front": "What does lysozyme do in tears and saliva?",
+      "back": "**Lysozyme** is an enzyme that breaks down the cell walls of bacteria.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-biology",
+  "topicId": "4-3-2",
+  "topicCode": "4.3.2",
+  "topicName": "Monoclonal antibodies",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:39.957Z",
+  "cards": [
+    {
+      "id": "1mlrs8q",
+      "kind": "term",
+      "front": "What are monoclonal antibodies?",
+      "back": "**Identical** antibodies made from one cloned cell, each binding to one specific antigen.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "043vbs6",
+      "kind": "concept",
+      "front": "Why is specificity the main advantage of monoclonal antibodies?",
+      "back": "Identical antibodies bind the same **target**, so a test can identify a chosen molecule and a treatment can aim at cells carrying a chosen antigen.",
+      "hint": "Think about what a test or treatment needs to hit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "09onxo9",
+      "kind": "process",
+      "front": "What are the four main steps in producing monoclonal antibodies?",
+      "back": "1) Collect lymphocytes from a mouse exposed to the antigen. 2) Fuse them with tumour cells to form **hybridoma cells**. 3) Select a hybridoma making the required antibody. 4) Clone and grow it, then collect and purify its antibodies.",
+      "hint": "Start with what the mouse is exposed to.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yszoh6",
+      "kind": "concept",
+      "front": "Why is a hybridoma used instead of ordinary lymphocytes to make monoclonal antibodies?",
+      "back": "Normal lymphocytes make the antibody but do not grow indefinitely. The **hybridoma** combines antibody production with repeated division, giving a continuing supply of the same antibody.",
+      "hint": "Compare how a normal lymphocyte behaves over time with the fused cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1svhngw",
+      "kind": "term",
+      "front": "What is a diagnostic test?",
+      "back": "A test that checks a sample for a **sign of a condition**, such as a particular molecule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0s6fap9",
+      "kind": "concept",
+      "front": "How does a monoclonal antibody pregnancy test produce a visible result?",
+      "back": "Antibodies in the test **bind hCG** in urine if it is present, and this binding helps produce a visible result.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02q3vak",
+      "kind": "concept",
+      "front": "What does the control indicator in a pregnancy test show?",
+      "back": "Whether the test has **worked**, even when the result is negative.",
+      "hint": "Think about what a negative result could mean without it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1fr3fnk",
+      "kind": "mistake",
+      "front": "Why is a negative pregnancy test result unreliable if the control indicator fails?",
+      "back": "The **test may not have worked**, so a negative result gives no valid evidence either way.",
+      "hint": "Consider what the control is checking.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "069pizn",
+      "kind": "concept",
+      "front": "What does a fluorescent label show about a monoclonal antibody?",
+      "back": "It reveals **where binding occurred**, so the bound molecule or cell can be seen with suitable equipment. It does not change what the antibody binds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c4i2y8",
+      "kind": "process",
+      "front": "How does an antibody carrying a toxic drug treat a cancer?",
+      "back": "The antibody binds a **surface antigen** on the cancer cell, and the attached toxic drug is delivered there to damage or kill it.",
+      "hint": "Name the antigen, the binding, then the effect on the cell.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04dqwzj",
+      "kind": "concept",
+      "front": "Why does an antibody treatment only work on some cancers?",
+      "back": "It works only when the cancer cells carry the **antigen** that the antibody recognises.",
+      "hint": "Think about what the antibody needs in order to bind.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1bw61j0",
+      "kind": "mistake",
+      "front": "Why can targeted cancer treatment still cause side effects?",
+      "back": "Specific binding does not mean only diseased cells are affected. **Healthy cells** may carry the same antigen, so they can also be harmed.",
+      "hint": "Think about where else the antigen might be found in the body.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zh04c8",
+      "kind": "concept",
+      "front": "What are two limitations of monoclonal antibodies?",
+      "back": "Producing and testing an antibody for a target takes **time and resources**, and it may bind healthy cells, causing side effects or unwanted immune reactions.",
+      "sectionId": "s4"
+    }
+  ]
+}

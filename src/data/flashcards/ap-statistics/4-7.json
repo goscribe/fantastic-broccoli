@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-statistics",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "Interval for a difference of two means",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:15.921Z",
+  "cards": [
+    {
+      "id": "1jbh0e3",
+      "kind": "concept",
+      "front": "Which procedure should you use to estimate $\\mu_1-\\mu_2$ from two separate, independent groups?",
+      "back": "The **two-sample t interval**, which uses the means and standard deviations of both groups. Use a paired interval when the same subjects give linked measurements.",
+      "hint": "Ask whether the two sets of data are linked.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0gi0qt0",
+      "kind": "formula",
+      "front": "What is the formula for a two-sample t interval for $\\mu_1-\\mu_2$?",
+      "back": "$(\\bar{x}_1-\\bar{x}_2)\\pm t^*\\sqrt{\\frac{s_1^2}{n_1}+\\frac{s_2^2}{n_2}}$: the **point estimate** plus or minus the **margin of error**, where $t^*$ is the critical value and the square root is the standard error.",
+      "hint": "Start with the center, then the spread around it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nu53xv",
+      "kind": "concept",
+      "front": "How should you correctly interpret a 95% two-sample t interval for $\\mu_1-\\mu_2$ in context?",
+      "back": "We are **95% confident** the interval captures the true difference in the population means. State the groups and the order of subtraction.",
+      "hint": "Think about what the interval estimates, not individual values.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1db2nv9",
+      "kind": "mistake",
+      "front": "Why is it wrong to say a 95% interval means 95% of individual students fall between the two bounds?",
+      "back": "**It is wrong** because the interval estimates the difference in population means, not individual values. The 95% describes how often the method captures the true difference.",
+      "hint": "Compare the interval to a range of individual scores.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mvo1tc",
+      "kind": "process",
+      "front": "What are the four steps, in order, for constructing and interpreting a two-sample t interval?",
+      "back": "**Check the conditions**, find the point estimate, find the margin of error, then write the interval and interpret it in context.",
+      "hint": "The first step happens before you use any numbers.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zq0o8i",
+      "kind": "concept",
+      "front": "Which four conditions must be checked before building a two-sample t interval?",
+      "back": "**Random** sampling or assignment, **independent groups**, the **10% condition**, and **normal or large** samples (roughly normal populations, each $n\\geq30$, or no strong skewness or outliers).",
+      "hint": "Two of these are about how the data were collected.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0xd571c",
+      "kind": "example",
+      "front": "For Method A ($n_1=15$, mean 78.4, $s_1=6.0$) and Method B ($n_2=12$, mean 72.1, $s_2=5.0$), find the 95% interval for $\\mu_1-\\mu_2$ using $t^*=2.201$.",
+      "back": "About $(1.6,\\ 11.0)$ points: point estimate $6.3$, standard error about $2.12$, margin of error about $4.67$.",
+      "hint": "Start with the difference of the two sample means.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ppec0v",
+      "kind": "term",
+      "front": "What is the critical value $t^*$ in a two-sample t interval?",
+      "back": "The **critical value** $t^*$ is the t distribution value that leaves the chosen central confidence level between $-t^*$ and $t^*$. By hand, use df equal to the smaller of $n_1-1$ and $n_2-1$.",
+      "hint": "Think about the confidence level and the t distribution.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1br63yf",
+      "kind": "mistake",
+      "front": "Why is a two-sample interval wrong for before-and-after scores from the same students?",
+      "back": "The scores are **not independent** because the same students produce both sets. Analyze the differences within each student with a paired (one-sample) interval instead.",
+      "hint": "Ask who produced each score.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ten2qb",
+      "kind": "concept",
+      "front": "What does the sign of the interval tell you about the order of subtraction?",
+      "back": "A **positive** interval means group 1 has the higher mean. A **negative** interval means group 2 has the higher mean.",
+      "hint": "Check which group is subtracted first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t7pmyi",
+      "kind": "term",
+      "front": "What is a point estimate for $\\mu_1-\\mu_2$?",
+      "back": "A **point estimate** is a single value computed from sample data to estimate a population parameter. Here it is $\\bar{x}_1-\\bar{x}_2$.",
+      "sectionId": "s2"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-9",
+  "topicCode": "2.9",
+  "topicName": "Circular motion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:33.221Z",
+  "cards": [
+    {
+      "id": "04erxaw",
+      "kind": "concept",
+      "front": "An object moves in a circle at constant speed. Is it accelerating, and why?",
+      "back": "Yes. **Velocity** is a vector, so a changing direction means a changing velocity, even though the speed stays constant.",
+      "hint": "Think about what velocity measures besides speed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1iwiv28",
+      "kind": "concept",
+      "front": "Which way does centripetal acceleration point?",
+      "back": "**Toward the center** of the circle, along the radius. It is perpendicular to the velocity, so it changes direction without changing speed.",
+      "hint": "Compare it with the direction the velocity change points.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1rh82r0",
+      "kind": "concept",
+      "front": "What is the net force in uniform circular motion, and what can supply it?",
+      "back": "The **centripetal force**, the net force toward the center. It can be tension, static friction, or gravity, depending on the situation.",
+      "hint": "Newton's second law links net force to acceleration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18iw97y",
+      "kind": "term",
+      "front": "What is the period of circular motion?",
+      "back": "The **time** for one complete revolution, measured in seconds, symbol $T$.",
+      "hint": "Think about one full lap.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zaecoa",
+      "kind": "formula",
+      "front": "What is the centripetal acceleration formula, and what do its symbols mean?",
+      "back": "$a_c=\\frac{v^2}{r}$, where $v$ is speed in m/s and $r$ is radius in m. The result is in $\\mathrm{m/s^2}$, directed toward the center.",
+      "hint": "Speed is squared.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ojb68p",
+      "kind": "formula",
+      "front": "What is the centripetal force formula, and what do its symbols mean?",
+      "back": "$F_c=\\frac{mv^2}{r}$, where $m$ is mass in kg, $v$ is speed in m/s, and $r$ is radius in m. The result is in newtons, directed toward the center.",
+      "hint": "Newton's second law gives $F = ma$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rkc2ry",
+      "kind": "formula",
+      "front": "How are speed, radius, and period related for uniform circular motion?",
+      "back": "$v=\\frac{2\\pi r}{T}$: the **distance** around the circle, $2\\pi r$, divided by the time for one lap.",
+      "hint": "Circumference divided by time.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dqeaox",
+      "kind": "concept",
+      "front": "If speed doubles and radius stays fixed, what happens to the net force needed?",
+      "back": "It becomes **four times** larger. Force depends on $v^2$, so doubling the speed quadruples it.",
+      "hint": "Speed is squared.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mwti9d",
+      "kind": "mistake",
+      "front": "A student draws an extra 'centripetal force' arrow on a rider. Why is that wrong?",
+      "back": "**Centripetal force** is the net inward force, not an extra force. The rider feels pushed outward only because the body tends to continue straight.",
+      "hint": "Is centripetal force a sum or a separate force?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12abl0s",
+      "kind": "mistake",
+      "front": "Why is 'centripetal acceleration means speeding up' wrong?",
+      "back": "It describes how quickly the **direction** changes, not the speed. Centripetal acceleration is perpendicular to the velocity, so it does not change speed.",
+      "hint": "Which way does it point relative to velocity?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hwlg2s",
+      "kind": "process",
+      "front": "What are the steps for solving a circular motion problem with forces?",
+      "back": "1) Draw a free-body diagram. 2) Take the direction toward the center as positive. 3) Add inward forces and subtract outward ones. 4) Set the sum equal to $\\frac{mv^2}{r}$.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "08izi9o",
+      "kind": "example",
+      "front": "A 1200 kg car travels at 15 m/s around a curve of radius 50 m. What is the net force on it?",
+      "back": "**5.4 × 10^3 N** toward the center. First $a_c=\\frac{(15)^2}{50}=4.5\\ \\mathrm{m/s^2}$, then $F_c=(1200)(4.5)=5400\\ \\mathrm{N}$.",
+      "hint": "Find the acceleration first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kyqiqz",
+      "kind": "example",
+      "front": "A 0.50 kg ball moves at 4.0 m/s in a horizontal circle of radius 0.80 m on a string. What is the tension?",
+      "back": "**10 N**. Only the tension points toward the center, so $T=\\frac{(0.50)(4.0)^2}{0.80}=10\\ \\mathrm{N}$.",
+      "hint": "Which force is the net inward force?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tpx395",
+      "kind": "concept",
+      "front": "What happens to the ball if the string tension suddenly disappears?",
+      "back": "No inward force remains, so the ball moves in a **straight line** along the tangent to the circle.",
+      "hint": "Think about Newton's first law.",
+      "sectionId": "s5"
+    }
+  ]
+}

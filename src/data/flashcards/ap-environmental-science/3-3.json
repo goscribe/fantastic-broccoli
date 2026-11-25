@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "3-3",
+  "topicCode": "3.3",
+  "topicName": "Survivorship curves",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:30.183Z",
+  "cards": [
+    {
+      "id": "14b7o6a",
+      "kind": "term",
+      "front": "What is a survivorship curve?",
+      "back": "A **survivorship curve** graphs the number or percent of a cohort still alive at each age. It starts with every newborn alive and slopes down as individuals die.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mynrsi",
+      "kind": "term",
+      "front": "What is a life history strategy?",
+      "back": "A **life history strategy** is a species' typical pattern of growth, reproduction, parental care and survival across its lifespan. It shows how the species divides its energy.",
+      "hint": "Think about how a species spends its energy over its life.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vn3t79",
+      "kind": "concept",
+      "front": "Why do species end up with such different survivorship curves?",
+      "back": "Each species divides its energy differently. Few offspring with heavy care gives a Type I curve, while very many offspring with little care gives a Type III curve.",
+      "hint": "Compare the number of offspring with the amount of care each one gets.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04dx9p0",
+      "kind": "term",
+      "front": "What is a cohort?",
+      "back": "A **cohort** is a group of individuals of one species born during the same time period and followed through their lives.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01qd5ro",
+      "kind": "concept",
+      "front": "Why do most offspring of a Type I species survive to adulthood?",
+      "back": "**Parents guard the few young closely**, so most reach adulthood. Deaths rise sharply only near the end of the lifespan.",
+      "hint": "Think about the care each offspring receives.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1tm1pa3",
+      "kind": "concept",
+      "front": "What shape does a Type II curve make on a logarithmic axis, and why?",
+      "back": "A **straight diagonal line**, because the chance of dying stays about the same at every age.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04bcqd9",
+      "kind": "term",
+      "front": "What defines a Type III survivorship curve?",
+      "back": "Very high death rates **early in life**. The curve drops steeply on the left, then flattens, and survivors of the early stage often live much longer.",
+      "hint": "Compare where its steep section sits with a Type I curve.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ifqk1f",
+      "kind": "concept",
+      "front": "Which r-selected and K-selected groups match Type III and Type I curves?",
+      "back": "Type III species resemble **r-selected** species, which have many offspring and mature early. Type I species resemble **K-selected** species, which have few offspring and long lives. These are general trends, not strict rules.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16x46ys",
+      "kind": "mistake",
+      "front": "Why is a high Type I curve not caused by having many offspring?",
+      "back": "Type I species have **few offspring** with heavy care. The curve stays high because parents protect each young, not because the species produces large numbers.",
+      "hint": "Compare offspring number with the parental care column in the table.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "12bycog",
+      "kind": "process",
+      "front": "How do you read a survivorship curve to classify it?",
+      "back": "1) Find the steepest section, where most deaths occur. 2) Name the curve type. 3) Link it to offspring number and parental care.",
+      "hint": "Look at the part of the graph that drops most, then think about biology.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vkjozb",
+      "kind": "example",
+      "front": "A cohort of 1,000 fish has 120 survivors at week 1. What percent of the cohort dies in week 1?",
+      "back": "$88\\%$ of the cohort dies in week 1, which is 880 fish (1,000 − 120). Most deaths occur early, so the data fit a Type III curve.",
+      "hint": "Compare each loss with the number alive at the start of that interval.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17zc0bu",
+      "kind": "example",
+      "front": "Counts fall from 1,000 to 500 to 250 over equal intervals. What percent is lost in each interval?",
+      "back": "$50\\%$ is lost in each interval. A steady percent loss points to a Type II curve.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "b-1",
+  "topicCode": "B.1",
+  "topicName": "Thermal energy transfers",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:32.798Z",
+  "cards": [
+    {
+      "id": "102pydy",
+      "kind": "concept",
+      "front": "What does the temperature of a substance tell you about its particles?",
+      "back": "**Average kinetic energy**. A higher temperature means greater average kinetic energy, but particles do not all have the same energy.",
+      "hint": "Think about particles moving at different speeds.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rayg3a",
+      "kind": "mistake",
+      "front": "A student says a hot object contains a lot of heat. What is wrong with this?",
+      "back": "A body has **internal energy**, not heat. Heat is energy transferred across a boundary because of a temperature difference.",
+      "hint": "Is heat something stored, or something that moves?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "027279m",
+      "kind": "formula",
+      "front": "Which equation links energy transferred to temperature change when there is no change of state?",
+      "back": "$Q=mc\\Delta T$, where $Q$ is energy in J, $m$ is mass in kg, $c$ is specific heat capacity in J kg^-1 K^-1 and $\\Delta T$ is temperature change in K.",
+      "hint": "Mass, specific heat capacity and temperature change.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ap02o9",
+      "kind": "term",
+      "front": "What is absolute zero?",
+      "back": "The **lowest possible temperature**, where the kelvin scale starts. A one kelvin change equals a one degree Celsius change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ux6y1z",
+      "kind": "term",
+      "front": "What is internal energy?",
+      "back": "The **total microscopic kinetic and potential energy** of a system's particles. Kinetic energy comes from motion and potential energy from interactions.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0kc0ito",
+      "kind": "concept",
+      "front": "How does convection transfer energy?",
+      "back": "By the **bulk movement of a fluid**. Heating makes a region less dense, so it rises while cooler fluid sinks.",
+      "hint": "Think about hot fluid rising and cooler fluid sinking.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "039sefq",
+      "kind": "concept",
+      "front": "Which transfer method can cross a vacuum, and why?",
+      "back": "**Thermal radiation**, because it is carried by electromagnetic waves. Conduction and convection both need matter.",
+      "hint": "Compare what each method needs to travel through.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0im5wca",
+      "kind": "term",
+      "front": "What is specific heat capacity?",
+      "back": "The **energy needed to raise one kilogram** of a substance by one kelvin.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dlv2m1",
+      "kind": "formula",
+      "front": "What equation gives the energy needed to change the state of a substance, and what does each symbol mean?",
+      "back": "$Q=mL$, where $Q$ is energy in J, $m$ is mass in kg and $L$ is the **specific latent heat** in J kg^-1.",
+      "hint": "Used at constant temperature during melting or boiling.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "022e0iy",
+      "kind": "concept",
+      "front": "Why does the temperature stay constant while ice melts?",
+      "back": "The supplied energy changes **particle separation and potential energy**, not average kinetic energy, so the temperature does not rise.",
+      "hint": "Which type of particle energy is changing?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0wtslpr",
+      "kind": "example",
+      "front": "How much energy is needed to warm 0.50 kg of water by 10 K, using c = 4200 J kg^-1 K^-1?",
+      "back": "**21 000 J**. Using $Q=mc\\Delta T=0.50\\times4\\,200\\times10$.",
+      "hint": "Substitute into Q = mcΔT.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wx54nr",
+      "kind": "example",
+      "front": "How much energy is needed to melt 0.20 kg of ice at its melting temperature, using L = 334 000 J kg^-1?",
+      "back": "**66 800 J**. Using $Q=mL=0.20\\times334\\,000$.",
+      "hint": "No temperature change is involved here.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0k7pkp2",
+      "kind": "process",
+      "front": "In what order do you calculate the energy needed to melt ice at 0 °C and then warm the water to 20 °C?",
+      "back": "1) Melting: $Q_1=mL$. 2) Find $\\Delta T$. 3) Warming: $Q_2=mc\\Delta T$. 4) Add the results: $Q=Q_1+Q_2$.",
+      "hint": "Do the state change before the temperature rise.",
+      "sectionId": "s5"
+    }
+  ]
+}

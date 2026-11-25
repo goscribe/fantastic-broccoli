@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "5-19",
+  "topicCode": "5.19",
+  "topicName": "Speciation and reproductive isolation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:35:15.824Z",
+  "cards": [
+    {
+      "id": "1adraca",
+      "kind": "term",
+      "front": "What is reproductive isolation?",
+      "back": "**Reproductive isolation** is when populations cannot exchange genes through successful interbreeding, so each keeps its own alleles.",
+      "hint": "Consider what happens when a horse and a donkey mate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cfs1th",
+      "kind": "concept",
+      "front": "What must happen to two populations of one species for speciation to begin?",
+      "back": "They must stop exchanging alleles, so **gene flow** between them stops. Each population then changes separately, and over generations its allele frequencies diverge.",
+      "hint": "Think about what happens to alleles when populations never meet.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0a1ubc7",
+      "kind": "process",
+      "front": "What are the steps of allopatric speciation?",
+      "back": "1. A physical barrier splits the population. 2. Gene flow stops. 3. Each part gets different mutations and selection pressures. 4. Allele frequencies diverge until the parts can no longer interbreed successfully.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "08zqfz6",
+      "kind": "term",
+      "front": "What is geographical isolation?",
+      "back": "**Geographical isolation** is when a physical barrier, such as a mountain range, widening river or rising sea, divides a population and stops its members meeting.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mvvrqv",
+      "kind": "term",
+      "front": "What is sympatric speciation?",
+      "back": "**Sympatric speciation** is the formation of new species from populations that live in the same area, with isolation coming from barriers such as different breeding times or food sources.",
+      "hint": "Compare where the populations live with allopatric speciation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0moyozk",
+      "kind": "concept",
+      "front": "How can a change in chromosome number isolate a new plant group within one generation?",
+      "back": "The plant with extra chromosome sets breeds fertile offspring with its own kind, but crossing with the original plants gives sterile offspring. Gene exchange stops even though both groups share the area.",
+      "hint": "Think about the offspring produced when the new plants cross with the original population.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1rdhtcw",
+      "kind": "term",
+      "front": "What is a prezygotic barrier?",
+      "back": "A **prezygotic barrier** prevents fertilisation between members of different species, so no zygote forms.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0rx49xf",
+      "kind": "term",
+      "front": "What is a postzygotic barrier?",
+      "back": "A **postzygotic barrier** acts after fertilisation, so hybrid offspring either die before birth or survive but cannot reproduce.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0d84x5e",
+      "kind": "concept",
+      "front": "Which prezygotic barrier stops mating because members do not recognise each other's courtship signals?",
+      "back": "The **behavioural** barrier. Courtship signals are not recognised, so mating does not occur and no fertilisation takes place.",
+      "hint": "Think about how animals find and choose a mate.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t7zlmf",
+      "kind": "mistake",
+      "front": "Why is it wrong to define a species only by how it looks?",
+      "back": "Very different-looking groups may interbreed freely, while similar-looking groups may be separate species. Species are judged mainly by whether they produce fertile offspring.",
+      "hint": "Recall the horse and donkey in the opening example.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1t6l0pf",
+      "kind": "mistake",
+      "front": "What does a sterile hybrid such as a mule show about its health?",
+      "back": "Nothing about its health. A sterile hybrid can be strong and healthy yet still be unable to produce offspring.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1t1f00c",
+      "kind": "example",
+      "front": "Why might two plant populations in the same field stay reproductively isolated if they flower in different months?",
+      "back": "Pollen from one population is not available when the other flowers, so fertilisation does not occur. This is a timing barrier, and gene flow is prevented.",
+      "hint": "Think about when pollen is available for each population.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1o98w12",
+      "kind": "concept",
+      "front": "How do allopatric and sympatric speciation differ in how reproductive isolation starts?",
+      "back": "In **allopatric** speciation a geographical barrier separates the populations. In **sympatric** speciation they share an area and isolation comes from other barriers or changes in the organisms.",
+      "sectionId": "s4"
+    }
+  ]
+}

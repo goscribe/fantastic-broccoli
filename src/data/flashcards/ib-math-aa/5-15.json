@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "5-15",
+  "topicCode": "5.15",
+  "topicName": "Derivatives of further functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:05.395Z",
+  "cards": [
+    {
+      "id": "0f77kgj",
+      "kind": "concept",
+      "front": "What makes the exponential function e^x special when you differentiate it?",
+      "back": "It is its own derivative: $\\frac{d}{dx}(e^x)=e^x$, so the rate of change at each point equals the value there. With a chain rule, $\\frac{d}{dx}(e^{g(x)})=g'(x)\\,e^{g(x)}$.",
+      "hint": "Compare it with the power rule, which does not apply here.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "04gik77",
+      "kind": "formula",
+      "front": "What are the derivatives of sin x and cos x when x is in radians?",
+      "back": "$\\frac{d}{dx}(\\sin x)=\\cos x$ and $\\frac{d}{dx}(\\cos x)=-\\sin x$. These results need **radian** measure; in degrees an extra factor of $\\frac{\\pi}{180}$ appears.",
+      "hint": "The pattern returns to sin x after four steps.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0kf022b",
+      "kind": "formula",
+      "front": "State the product rule for differentiating uv.",
+      "back": "$\\frac{d}{dx}(uv)=u\\,v'+v\\,u'$. Keep brackets round each inner function, and check that every chain-rule factor is included.",
+      "hint": "Two terms, each with one function differentiated.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1dndpyv",
+      "kind": "formula",
+      "front": "What is the derivative of ln(g(x)) with respect to x?",
+      "back": "$\\frac{g'(x)}{g(x)}$, the derivative of the inside divided by the inside. For $\\ln x$ alone, the derivative is $\\frac{1}{x}$ for $x>0$.",
+      "hint": "Differentiate the inside first, then divide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xf8zsj",
+      "kind": "formula",
+      "front": "State the quotient rule for differentiating u divided by v.",
+      "back": "$\\frac{d}{dx}\\left(\\frac{u}{v}\\right)=\\frac{v\\,u'-u\\,v'}{v^2}$, valid when $v\\neq0$. It is used for tan x because $\\tan x=\\frac{\\sin x}{\\cos x}$.",
+      "hint": "Watch the order: $v\\,u'$ comes first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14fl6ag",
+      "kind": "formula",
+      "front": "What is the derivative of arctan x?",
+      "back": "$\\frac{1}{1+x^2}$, with no square root. By contrast, arcsin x has derivative $\\frac{1}{\\sqrt{1-x^2}}$ for $-1<x<1$.",
+      "hint": "Learn it alongside the arcsin and arccos results.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "07bg9c3",
+      "kind": "formula",
+      "front": "What is the derivative of cot x?",
+      "back": "$-\\operatorname{cosec}^2x$. Every function whose name begins with 'co' has a minus sign in its derivative.",
+      "hint": "Think of cot x as cos x divided by sin x.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i4ck3j",
+      "kind": "mistake",
+      "front": "Why is differentiating e^x as x e^(x-1) wrong?",
+      "back": "The **power rule** does not apply to e^x, because the variable is in the exponent. The derivative of e^x is e^x itself.",
+      "hint": "Where is the x sitting in e^x?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0nvo6r0",
+      "kind": "mistake",
+      "front": "Why is the derivative of ln(kx) not 1/(kx)?",
+      "back": "The derivative is $\\frac{1}{x}$. Writing $\\ln(kx)=\\ln k+\\ln x$ shows it, because $\\ln k$ is a constant and disappears when differentiated.",
+      "hint": "Split the logarithm using the laws of logs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09popbn",
+      "kind": "mistake",
+      "front": "Does arcsin x mean 1 divided by sin x?",
+      "back": "**No**. arcsin x is the inverse function, which returns an angle. The reciprocal 1/sin x is written as cosec x.",
+      "hint": "Think about what the superscript -1 means for a function.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1100t8b",
+      "kind": "example",
+      "front": "For f(x)=ln(x^2+1), find f'(x) and then f'(1).",
+      "back": "$f'(x)=\\frac{2x}{x^2+1}$, using the inner function $g(x)=x^2+1$. Substituting $x=1$ gives $f'(1)=1$.",
+      "hint": "The inner function is $x^2+1$, so find its derivative first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ey9u7w",
+      "kind": "example",
+      "front": "For y=e^(2x) sin 3x, find dy/dx at x=0.",
+      "back": "$\\frac{dy}{dx}=e^{2x}(3\\cos3x+2\\sin3x)$. At $x=0$ this gives $1\\times3=3$, so the gradient is 3.",
+      "hint": "Use the product rule with $u=e^{2x}$ and $v=\\sin3x$.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0or0kxs",
+      "kind": "process",
+      "front": "What are the steps for differentiating a combined function?",
+      "back": "1) Identify the outer structure: a product, a quotient or a composite. 2) Apply the matching rule. 3) Differentiate each part using the standard results. 4) Simplify and factorise the answer.",
+      "hint": "Start by spotting the outer structure.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ocr-alevel-biology-a",
+  "topicId": "5-1-2",
+  "topicCode": "5.1.2",
+  "topicName": "Excretion",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:33:26.925Z",
+  "cards": [
+    {
+      "id": "0tg6dhc",
+      "kind": "concept",
+      "front": "Why does the liver convert ammonia into urea before the blood travels to the kidneys?",
+      "back": "Ammonia is **toxic** even at low concentrations. The ornithine cycle turns it into urea, which is far less harmful, so the blood can carry it safely.",
+      "hint": "Compare how harmful ammonia is with how harmful urea is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13uwkp6",
+      "kind": "concept",
+      "front": "What creates the high hydrostatic pressure that drives ultrafiltration in the glomerulus?",
+      "back": "The **efferent arteriole** is narrower than the afferent arteriole, so pressure builds inside the glomerulus. This forces fluid out of the capillaries into the capsule.",
+      "hint": "Compare the two arterioles that connect to each glomerulus.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1k2biq9",
+      "kind": "process",
+      "front": "What is the sequence of events when blood water potential falls and the body needs to conserve water?",
+      "back": "Hypothalamus receptors detect low water potential, the pituitary gland releases **ADH**, collecting duct cells insert aquaporins, and more water is reabsorbed by osmosis.",
+      "hint": "Start with where the detection happens in the brain.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0p12v5x",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that faeces are an excretory product?",
+      "back": "Faeces are mostly **undigested food** that never entered body cells, so removing them is egestion. Excretion removes metabolic waste made by cells.",
+      "hint": "Ask whether the material was ever inside a body cell.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07j1twp",
+      "kind": "term",
+      "front": "What is the name of the process that removes an amino group from an amino acid?",
+      "back": "**Deamination**, which forms ammonia and a keto acid.",
+      "hint": "This is the first step in breaking down excess amino acids in liver cells.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0xh5i5l",
+      "kind": "term",
+      "front": "What is the name of the liver process that converts alcohol and drugs into less harmful substances?",
+      "back": "**Detoxification**, carried out by enzymes in hepatocytes.",
+      "hint": "Think about what the liver does with toxins arriving in the blood.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07qkmlp",
+      "kind": "term",
+      "front": "What is the functional unit of the kidney that filters blood and forms urine?",
+      "back": "A **nephron**, a tiny tube found in large numbers in each kidney.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1alcy9l",
+      "kind": "concept",
+      "front": "Why does glucose reabsorption in the proximal tubule depend on sodium ions?",
+      "back": "Glucose and amino acids enter the cells with sodium ions through the **same carrier protein** (co-transport). This returns them to the blood, so healthy urine contains no glucose.",
+      "hint": "Consider how the cells lining the proximal tubule are adapted for transport.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1g05anj",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that urea is made in the kidney?",
+      "back": "Urea is made in the **liver** from excess amino acids. The kidneys only filter it from the blood and remove it in urine.",
+      "hint": "Trace where urea is produced before it reaches the kidneys.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dxlbmd",
+      "kind": "formula",
+      "front": "What is the formula for the percentage of filtrate reabsorbed, and what does each part mean?",
+      "back": "$\\frac{\\text{volume reabsorbed}}{\\text{volume of filtrate}}\\times100$, where volume is measured in $\\mathrm{dm^3}$ and volume reabsorbed equals filtrate volume minus urine volume.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1vrld41",
+      "kind": "example",
+      "front": "The kidneys form $180\\,\\mathrm{dm^3}$ of filtrate and make $1.5\\,\\mathrm{dm^3}$ of urine each day. What percentage of the filtrate is reabsorbed?",
+      "back": "About **99.2%**. Volume reabsorbed is $178.5\\,\\mathrm{dm^3}$, and $\\frac{178.5}{180}\\times100\\approx99.2$.",
+      "hint": "Find the reabsorbed volume first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1b2u4w1",
+      "kind": "concept",
+      "front": "Why does drinking a large volume of water lead to a large volume of dilute urine?",
+      "back": "Blood water potential rises, so **less ADH** is released. Fewer aquaporins are present, so less water is reabsorbed from the collecting duct.",
+      "hint": "Think about what happens to ADH when blood water potential is high.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0p6jub2",
+      "kind": "term",
+      "front": "What is osmoregulation?",
+      "back": "The **control of the water potential of the blood**, mainly by adjusting how permeable the collecting ducts are to water.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0yqwhob",
+      "kind": "concept",
+      "front": "How does the ascending limb of the loop of Henle help the collecting duct remove water from urine?",
+      "back": "It pumps sodium and chloride ions out into the medulla, **lowering the water potential** there. Water then leaves the collecting duct by osmosis when its walls are permeable.",
+      "hint": "Think about what determines the water potential of the medulla.",
+      "sectionId": "s6"
+    }
+  ]
+}

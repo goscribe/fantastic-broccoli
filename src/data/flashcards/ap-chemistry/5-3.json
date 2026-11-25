@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-3",
+  "topicCode": "5.3",
+  "topicName": "Concentration changes over time",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:01.704Z",
+  "cards": [
+    {
+      "id": "02fs3td",
+      "kind": "concept",
+      "front": "How can you tell the order of a reaction from concentration-time data?",
+      "back": "Make a **straight-line plot**. The plot that is straight shows the order: $[A]$ versus time for zero order, $\\ln[A]$ versus time for first order, and $1/[A]$ versus time for second order.",
+      "hint": "Test three transformed plots.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vdykkw",
+      "kind": "formula",
+      "front": "What is the integrated rate law for a first-order reaction?",
+      "back": "$\\ln[A]_t=\\ln[A]_0-kt$, or equivalently $[A]_t=[A]_0e^{-kt}$. A plot of $\\ln[A]$ against time is straight with **slope $-k$**.",
+      "hint": "Use natural logarithms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "071dtq9",
+      "kind": "formula",
+      "front": "What is the integrated rate law for a second-order reaction whose rate is proportional to $[A]^2$?",
+      "back": "$\\frac{1}{[A]_t}=\\frac{1}{[A]_0}+kt$. A plot of **$1/[A]$ against time** is straight, with slope $+k$.",
+      "hint": "Think about reciprocal concentration.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07yskto",
+      "kind": "formula",
+      "front": "What is the integrated rate law for a zero-order reaction in A?",
+      "back": "$[A]_t=[A]_0-kt$. Here $[A]_0$ is the initial concentration and $k$ is the **rate constant**. With mol/L and seconds, $k$ has units of mol/L/s.",
+      "hint": "The rate does not depend on [A].",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1btcw1e",
+      "kind": "formula",
+      "front": "What is the half-life of a first-order reaction in terms of the rate constant k?",
+      "back": "$t_{1/2}=\\frac{\\ln 2}{k}$. The **half-life stays the same** as concentration falls.",
+      "hint": "Recall how half-life relates to k for first order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0syx54y",
+      "kind": "term",
+      "front": "What is an integrated rate law?",
+      "back": "An **equation that links reactant concentration to elapsed time** and the rate constant.",
+      "hint": "Integrated means it covers a time span.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0chadxq",
+      "kind": "term",
+      "front": "What is the half-life of a reaction?",
+      "back": "The **time needed for a reactant concentration to fall to half** its starting value.",
+      "hint": "Think about halving.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iwntf3",
+      "kind": "term",
+      "front": "What is reciprocal concentration?",
+      "back": "**One divided by concentration**, written $1/[A]$.",
+      "hint": "Flip the fraction.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ots6xs",
+      "kind": "process",
+      "front": "What are the steps to find an unknown concentration at a given time?",
+      "back": "1) Identify the order from the straight plot. 2) Substitute into the matching law, keeping time units consistent with $k$. 3) For second order, calculate the right side first, then take its reciprocal. Check that $[A]$ decreases.",
+      "hint": "Match the law to the order first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1sawxrb",
+      "kind": "mistake",
+      "front": "Is a curved plot of [A] against time enough to show a reaction is first order?",
+      "back": "No. A curved $[A]$ plot does **not** identify first order by itself. Check which transformed plot, $\\ln[A]$ or $1/[A]$, is straight.",
+      "hint": "Test the transformed plots.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17n190p",
+      "kind": "mistake",
+      "front": "Can the zero-order equation $[A]_t=[A]_0-kt$ be used at any time?",
+      "back": "No. It applies **only while reactant remains**. It cannot predict a negative concentration.",
+      "hint": "Think about running out of reactant.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1dvpj7b",
+      "kind": "mistake",
+      "front": "Is the slope of a second-order $1/[A]$ plot the same sign as a first-order $\\ln[A]$ slope?",
+      "back": "No. The first-order $\\ln[A]$ slope is **$-k$**, while the second-order $1/[A]$ slope is **$+k$**.",
+      "hint": "Compare the sign of each slope.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0htz9ar",
+      "kind": "example",
+      "front": "A first-order reaction starts at 0.800 mol/L with $k=0.0200\\,\\mathrm{min^{-1}}$. What is [A] after 50.0 minutes, and what is its half-life?",
+      "back": "$[A]=0.294\\,\\mathrm{mol\\,L^{-1}}$ after 50.0 minutes. The half-life is $t_{1/2}=\\frac{0.693}{0.0200}=34.7\\,\\mathrm{min}$.",
+      "hint": "Use $[A]_0e^{-kt}$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1sbkpkr",
+      "kind": "example",
+      "front": "A zero-order reaction has $[A]_0=0.600\\,\\mathrm{mol\\,L^{-1}}$ and $k=0.0500\\,\\mathrm{mol\\,L^{-1}\\,s^{-1}}$. What is [A] after 4.00 seconds?",
+      "back": "$[A]_t=0.600-(0.0500)(4.00)=0.400\\,\\mathrm{mol\\,L^{-1}}$.",
+      "hint": "Subtract $kt$ from $[A]_0$.",
+      "sectionId": "s1"
+    }
+  ]
+}

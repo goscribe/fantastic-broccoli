@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-7-1",
+  "topicCode": "5.7.1",
+  "topicName": "Crude oil, hydrocarbons and alkanes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:01.227Z",
+  "cards": [
+    {
+      "id": "1cq3vv6",
+      "kind": "concept",
+      "front": "Why does fractional distillation separate crude oil into different fractions?",
+      "back": "Hydrocarbons have different **boiling points**, so each vapour condenses at its own height in the column, and hydrocarbons with similar boiling points collect together.",
+      "hint": "Think about what changes from the bottom of the column to the top.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1otk035",
+      "kind": "formula",
+      "front": "What general formula describes every alkane?",
+      "back": "$\\text{C}_n\\text{H}_{2n+2}$, where $n$ is the number of carbon atoms in one molecule.",
+      "hint": "Compare the formulas of methane and ethane.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rz187z",
+      "kind": "concept",
+      "front": "How does increasing hydrocarbon chain length affect boiling point and volatility?",
+      "back": "**Boiling point rises** and volatility falls. Longer chains also flow less easily and ignite less easily than shorter ones.",
+      "hint": "Link your answer to where long chains condense in the column.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0rnhe3h",
+      "kind": "process",
+      "front": "How did crude oil form from ancient organisms?",
+      "back": "Their remains were **buried** under layers of sediment. Over millions of years, heat and pressure changed them into oil.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gnzke8",
+      "kind": "mistake",
+      "front": "Why is crude oil not a single compound?",
+      "back": "It is a **mixture** of many compounds, mostly hydrocarbons, which can be separated because they have different properties.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "163zj7o",
+      "kind": "process",
+      "front": "What are the steps of fractional distillation of crude oil?",
+      "back": "1) Heat the crude oil until most of it vaporises. 2) The vapour enters a tall column that is hot at the bottom and cooler at the top. 3) Vapours rise, cool and condense at different heights. 4) Each fraction is collected.",
+      "hint": "Start from the heating stage.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0mx641e",
+      "kind": "example",
+      "front": "What is the formula of the alkane with 5 carbon atoms, using the general formula?",
+      "back": "$\\text{C}_5\\text{H}_{12}$, because $2 \\times 5 + 2 = 12$ hydrogen atoms.",
+      "hint": "Substitute $n = 5$ into the general formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0v5t0gm",
+      "kind": "concept",
+      "front": "What does it mean for an alkane to be saturated?",
+      "back": "It has only single carbon–carbon bonds, so each carbon holds the **maximum** possible number of hydrogen atoms.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0vg4j7b",
+      "kind": "concept",
+      "front": "What products form when an alkane burns with too little oxygen?",
+      "back": "**Incomplete combustion** produces carbon monoxide or carbon particles instead of carbon dioxide.",
+      "hint": "Compare with the products when oxygen is plentiful.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1u0mdgn",
+      "kind": "term",
+      "front": "What is a fraction in fractional distillation?",
+      "back": "A collected mixture of hydrocarbons with **similar boiling points**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hahuk3",
+      "kind": "concept",
+      "front": "What are very long-chain fractions used for?",
+      "back": "They are used as lubricants or for road surfacing. They have high boiling points, are less volatile and are more viscous.",
+      "hint": "Compare their properties with those of petrol.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0j7vopr",
+      "kind": "mistake",
+      "front": "Why is it wrong to say every molecule in a fraction has the same chain length?",
+      "back": "Each fraction contains **several** hydrocarbons with similar boiling points, so their chain lengths vary within it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04ztx7a",
+      "kind": "term",
+      "front": "What is a hydrocarbon?",
+      "back": "A compound containing only **carbon and hydrogen** atoms.",
+      "sectionId": "s1"
+    }
+  ]
+}

@@ -7,10 +7,13 @@ import { createStudySession } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import { toast, toastError } from "@/lib/toast";
 import { Button } from "@/components/ui/button";
+import { WaitScreen } from "@/components/ui/wait-screen";
+import "@/lib/i18n/first-run";
 import { cn } from "@/lib/utils";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
+import "@/lib/i18n/courses";
 import { UPLOAD_ACCEPT } from "@/lib/uploads";
 import { startWorkspaceFromUploads } from "@/lib/start-from-uploads";
 import {
@@ -18,7 +21,6 @@ import {
   Check,
   FilePlus2,
   GraduationCap,
-  Loader2,
   MessageCircle,
   Sparkles,
   Upload,
@@ -34,6 +36,7 @@ import {
   WORKSPACE_ICONS,
 } from "@/components/graphics/workspace-icon";
 import { inputClass, textareaClass } from "@/components/ui/input";
+import { chooseStudyLength } from "@/lib/study-length-client";
 
 const folderColors = [
   "#6fd420",
@@ -136,6 +139,24 @@ export function NewWorkspaceMenu({
             </button>
             <button
               type="button"
+              onClick={() => {
+                setOpen(false);
+                router.push("/courses");
+              }}
+              className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
+            >
+              <GraduationCap className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+              <span className="min-w-0">
+                <span className="block text-[13px] font-semibold text-foreground">
+                  {t("course.menuPick")}
+                </span>
+                <span className="block text-xs text-muted-foreground">
+                  {t("course.menuPickHint")}
+                </span>
+              </span>
+            </button>
+            <button
+              type="button"
               onClick={() => pick("workspace")}
               className="flex w-full items-start gap-2.5 rounded-lg p-2.5 text-left hover:bg-muted"
             >
@@ -184,14 +205,13 @@ function BusyOverlay({ files }: { files: File[] }) {
       aria-live="polite"
       className="fixed inset-0 z-50 flex items-center justify-center bg-ink/40 p-4"
     >
-      <div className="flex w-full max-w-sm flex-col items-center gap-2 rounded-2xl border border-border bg-card px-5 py-8 text-center">
-        <Loader2 className="h-5 w-5 animate-spin text-accent" />
-        <p className="text-sm font-semibold">{t("misc.buildingFromFiles")}</p>
-        <p className="max-w-full truncate text-xs text-muted-foreground">
-          {files.length === 1
-            ? files[0].name
-            : `${files.length} ${t("ws.files")}`}
-        </p>
+      <div className="w-full max-w-sm rounded-[var(--r-panel,24px)] bg-card px-5">
+        <WaitScreen
+          compact
+          title={t("misc.buildingFromFiles").replace(/…$/, "")}
+          status={files.length === 1 ? files[0].name : `${files.length} ${t("ws.files")}`}
+          time={t("firstRun.busyHint")}
+        />
       </div>
     </div>
   );
@@ -251,18 +271,20 @@ export function CreateResourceDialog({
       const workspaceId = await createWorkspace(title, parentId);
       if (!workspaceId) throw new Error("Could not create a workspace");
       emitTreeChanged();
-      const session = await createStudySession({
-        workspaceId,
-        title:
-          chosenUnits.length > 0
-            ? `${title}: ${chosenUnits.slice(0, 2).join(", ")}${chosenUnits.length > 2 ? "…" : ""}`
-            : title,
-        depth: "moderate",
-        durationMinutes: 30,
-        subject: chosenSubject,
-        topics: chosenUnits.join(", ").slice(0, 2000) || undefined,
-        examBoard: chosen.board,
-      });
+      const session = await createStudySession(
+        await chooseStudyLength({
+          workspaceId,
+          title:
+            chosenUnits.length > 0
+              ? `${title}: ${chosenUnits.slice(0, 2).join(", ")}${chosenUnits.length > 2 ? "…" : ""}`
+              : title,
+          depth: "moderate" as const,
+          durationMinutes: 30,
+          subject: chosenSubject,
+          topics: chosenUnits.join(", ").slice(0, 2000) || undefined,
+          examBoard: chosen.board,
+        }),
+      );
       toast.success(t("ws.workspaceCreated"));
       onClose();
       if (session) {
@@ -395,15 +417,7 @@ export function CreateResourceDialog({
         {kind === "workspace" && mode === "curated" && (
           <div className="mt-4">
             {busy ? (
-              <div className="flex flex-col items-center gap-2 py-8 text-center">
-                <Sparkles className="h-5 w-5 animate-pulse text-accent" />
-                <p className="text-sm font-medium">
-                  {t("ws.buildingSession")}
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  {t("ws.buildingSessionHint")}
-                </p>
-              </div>
+              <WaitScreen compact title={t("ws.buildingSession").replace(/…$/, "")} time={t("firstRun.busyHint")} />
             ) : !curriculum ? (
               <>
                 <p className="mb-3 text-xs text-muted-foreground">

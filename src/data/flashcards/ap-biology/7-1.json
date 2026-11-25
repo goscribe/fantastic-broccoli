@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-1",
+  "topicCode": "7.1",
+  "topicName": "Introduction to natural selection",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:48.328Z",
+  "cards": [
+    {
+      "id": "1bc03it",
+      "kind": "concept",
+      "front": "What three conditions must hold for natural selection to change a population?",
+      "back": "Individuals must differ in an inherited trait, the trait must be **heritable**, and it must affect survival or reproduction in the environment, leading to differential reproductive success.",
+      "hint": "Think variation, inheritance, and reproductive success.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wdiqa8",
+      "kind": "concept",
+      "front": "Where does genuinely new genetic variation come from?",
+      "back": "**Mutation** is the source of new alleles, because it changes the DNA sequence. Mutations arise regardless of whether they will help the organism survive.",
+      "hint": "Only one process creates new alleles; the others rearrange them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r0ucmz",
+      "kind": "concept",
+      "front": "Does natural selection change individuals or populations?",
+      "back": "**Populations** change across generations. Selection acts on differences among individuals, but an individual does not alter its inherited traits because it needs them.",
+      "hint": "Consider whether an insect's DNA changes when it needs camouflage.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yn1r1g",
+      "kind": "term",
+      "front": "What is genetic variation?",
+      "back": "**Genetic variation** is the presence of inherited DNA differences among individuals in a population.",
+      "hint": "Focus on inherited DNA, not appearance alone.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is an inherited trait that improves survival or reproduction in a particular environment.",
+      "hint": "It must be inherited and tied to a specific environment.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1o3463m",
+      "kind": "term",
+      "front": "What does heritability describe?",
+      "back": "Heritability describes the extent to which **genetic differences** account for variation in a trait within a population.",
+      "hint": "It concerns genes, not the environment alone.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ueiepc",
+      "kind": "term",
+      "front": "What is differential reproductive success?",
+      "back": "It occurs when individuals leave **different numbers of offspring** because of their traits.",
+      "hint": "Compare how many offspring each individual produces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f04swo",
+      "kind": "process",
+      "front": "Which three processes in sexual reproduction reshuffle existing alleles?",
+      "back": "**Crossing over** exchanges DNA between paired chromosomes in meiosis, **independent assortment** places different chromosome combinations into gametes, and **random fertilization** combines any sperm with any egg.",
+      "hint": "Two happen during meiosis; one happens at fertilization.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "096vlma",
+      "kind": "mistake",
+      "front": "Why is it wrong to say that meiosis usually creates new alleles?",
+      "back": "Meiosis mainly **rearranges** existing alleles. Mutation creates new alleles, while meiosis and fertilization mix them into new combinations.",
+      "hint": "Ask which process changes the DNA sequence itself.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0vfcgiu",
+      "kind": "mistake",
+      "front": "Why is it wrong to say an insect changes its coloration because it needs camouflage?",
+      "back": "Individuals do not change inherited traits to suit their needs. Selection favors **inherited variants** that already exist and raise reproductive success under current conditions.",
+      "hint": "Think about where the variation came from before selection.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vx2w0n",
+      "kind": "process",
+      "front": "What are the steps by which an inherited trait becomes more common through natural selection?",
+      "back": "1) Individuals differ in an inherited trait. 2) The trait affects survival and reproduction in the environment. 3) Individuals with it leave more offspring. 4) Offspring inherit it, so it becomes more common across generations.",
+      "hint": "Start with variation and end with the next generation.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z9iu0f",
+      "kind": "concept",
+      "front": "Why must a useful trait be heritable to spread through natural selection?",
+      "back": "**Offspring** must be able to inherit it. An advantage that is not inherited cannot pass to later generations, so it cannot become more common through selection.",
+      "hint": "Think about what passes from parents to offspring.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0s2x20g",
+      "kind": "concept",
+      "front": "Why can the same trait help in one habitat but not in another?",
+      "back": "The value of a trait depends on the **environment**. Coloration that helps in one habitat may offer no advantage in another.",
+      "hint": "Consider what the surroundings do to predator visibility.",
+      "sectionId": "s4"
+    }
+  ]
+}

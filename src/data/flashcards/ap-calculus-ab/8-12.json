@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-12",
+  "topicCode": "8.12",
+  "topicName": "Washer method about other axes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:58.210Z",
+  "cards": [
+    {
+      "id": "0r4rws7",
+      "kind": "concept",
+      "front": "Why must both radii be measured from the rotation axis, not from a coordinate axis?",
+      "back": "Because each cross section is a circle centered on the **rotation axis**, so each radius is the distance from that axis to a boundary.",
+      "hint": "Picture the circle that the slice traces out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "09hhimn",
+      "kind": "formula",
+      "front": "What is the washer volume formula for rotation about a horizontal line over $a\\leq x\\leq b$, and what do R(x) and r(x) mean?",
+      "back": "$V=\\pi\\int_a^b(R(x)^2-r(x)^2)\\,dx$, where **R(x)** is the outer radius and **r(x)** is the inner radius, both measured from the axis.",
+      "hint": "Each slice is a washer with area $\\pi(R^2-r^2)$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0k47j2z",
+      "kind": "process",
+      "front": "How do you choose the outer and inner radius when the rotation axis lies above the region?",
+      "back": "Measure **vertical** distances from the axis to each curve. The **lower** curve is farther away, so it gives R, and the upper curve gives r.",
+      "hint": "Which curve is farther from the axis?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ygu3z7",
+      "kind": "term",
+      "front": "What is a washer in the context of solids of revolution?",
+      "back": "A **washer** is a cross section shaped like a circle with a circular hole in its middle, formed when a region is rotated.",
+      "hint": "Think of the flat ring you put on a bolt.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1u1mum0",
+      "kind": "term",
+      "front": "What is the outer radius of a washer?",
+      "back": "The **outer radius** is the distance from the rotation axis to the farther boundary of a cross section.",
+      "hint": "It is the bigger of the two radii.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a31rmu",
+      "kind": "formula",
+      "front": "What is the area of a washer with outer radius R and inner radius r, and what does each symbol mean?",
+      "back": "$A=\\pi(R^2-r^2)$, where **R** is the outer radius and **r** is the inner radius, both measured from the rotation axis.",
+      "hint": "Think of a big disk with a smaller disk removed.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i6b9c1",
+      "kind": "mistake",
+      "front": "A student uses a curve's height as its radius when rotating around $y=2$. Why is this wrong?",
+      "back": "It is wrong **unless** the rotation axis is the x-axis. The radius must be the distance from the actual axis, such as $y=2$, to the curve.",
+      "hint": "Check where the axis is first.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1g5jkjx",
+      "kind": "mistake",
+      "front": "A student writes $(2-x^2)-(2-x)$ squared as the area term. What is the error?",
+      "back": "Square each full distance before subtracting: $(2-x^2)^2-(2-x)^2$. Squaring the difference gives the wrong result.",
+      "hint": "Square the radii, not their difference.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dihpyl",
+      "kind": "example",
+      "front": "Find the volume when the region between $y=x$ and $y=x^2$, for $0\\leq x\\leq 1$, is rotated around $y=2$.",
+      "back": "$\\frac{8\\pi}{15}$ cubic units, from $\\pi\\int_0^1[(2-x^2)^2-(2-x)^2]\\,dx$.",
+      "hint": "Find R and r first, then square each one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19p1hri",
+      "kind": "formula",
+      "front": "For rotation about a vertical line $x=h$, what is the washer integral and which variable does it use?",
+      "back": "$V=\\pi\\int(R(y)^2-r(y)^2)\\,dy$, using **horizontal** slices and **horizontal** distances from $x=h$ to the boundaries.",
+      "hint": "The boundaries are written as x in terms of y.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "088uwmp",
+      "kind": "formula",
+      "front": "Write the washer integral for the region between $y=x$ and $y=x^2$, for $0\\leq x\\leq 1$, rotated around $x=2$.",
+      "back": "$V=\\pi\\int_0^1[(2-y)^2-(2-\\sqrt{y})^2]\\,dy$. Here the boundaries are $x=y$ and $x=\\sqrt{y}$, written as x in terms of y.",
+      "hint": "Write each boundary as x in terms of y first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0x2vtks",
+      "kind": "process",
+      "front": "When rotating the region between $y=x$ and $y=x^2$ around $x=2$ for $0<y<1$, which boundary gives the outer radius?",
+      "back": "The **left** boundary, $x=y$, gives $R=2-y$ because it is farther from $x=2$. The right boundary $x=\\sqrt{y}$ gives $r=2-\\sqrt{y}$.",
+      "hint": "Which boundary is farther from x=2?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yfbftt",
+      "kind": "concept",
+      "front": "Which slices do you use for rotation around a horizontal line, and why must slices be perpendicular to the axis?",
+      "back": "Use **vertical** slices, integrating with respect to x. Perpendicular slices give circular cross sections centered on the axis.",
+      "hint": "Think about which direction the slice faces.",
+      "sectionId": "s1"
+    }
+  ]
+}

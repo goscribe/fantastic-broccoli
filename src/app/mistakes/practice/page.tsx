@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { WaitScreen } from "@/components/ui/wait-screen";
 import { mistakesApi } from "@/lib/api/mistakes";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/mistakes";
@@ -41,22 +41,24 @@ function PracticeInner() {
       .catch(() => setState({ kind: "failed" }));
   }, [attempt, workspaceId, sessionId, router]);
 
+  if (state.kind === "building") {
+    return (
+      <main className="mx-auto flex min-h-[70vh] w-full max-w-md flex-col items-center justify-center px-6">
+        <WaitScreen pose="book" title={t("mistakes.building").replace(/…$/, "")} />
+      </main>
+    );
+  }
+
   return (
     <main className="mx-auto flex min-h-[70vh] w-full max-w-md flex-col items-center justify-center px-6 text-center">
       <Image
-        src={state.kind === "empty" ? "/design/cat2-trophy.png" : "/design/cat2-book.png"}
+        src={state.kind === "empty" ? "/design/cat3-trophy.webp" : "/design/cat3-book.webp"}
         alt=""
-        width={132}
-        height={150}
+        width={413}
+        height={400}
         unoptimized
         className="cat-bob h-28 w-auto select-none"
       />
-      {state.kind === "building" && (
-        <p className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-muted-foreground" role="status">
-          <Loader2 className="size-4 animate-spin" />
-          {t("mistakes.building")}
-        </p>
-      )}
       {state.kind === "empty" && (
         <>
           <h1 className="mt-5 text-xl font-bold tracking-tight">{t("mistakes.nothingToFixTitle")}</h1>

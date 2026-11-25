@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "3-7",
+  "topicCode": "3.7",
+  "topicName": "Circular functions",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:23.939Z",
+  "cards": [
+    {
+      "id": "1okbc2x",
+      "kind": "formula",
+      "front": "What general form describes every transformed sine or cosine graph, and what does each letter control?",
+      "back": "$y=a\\sin(b(x-c))+d$. $|a|$ is the **amplitude**, $b$ sets the period $\\frac{2\\pi}{b}$, $c$ is the phase shift and $d$ gives the midline $y=d$.",
+      "hint": "Four letters, four features.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11omvdj",
+      "kind": "formula",
+      "front": "How do you find the amplitude and midline of a graph from its maximum and minimum values?",
+      "back": "Amplitude $|a|=\\frac{\\max-\\min}{2}$ and **midline** $d=\\frac{\\max+\\min}{2}$, the average of the two extremes.",
+      "hint": "Halve the spread; average the extremes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1mr40xb",
+      "kind": "concept",
+      "front": "Why does the tangent graph have a period of $\\pi$ rather than $2\\pi$?",
+      "back": "Tangent is $\\frac{\\sin x}{\\cos x}$, and each branch rises from one **asymptote** to the next, so the pattern repeats every $\\pi$.",
+      "hint": "Look at the gaps between asymptotes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "04p46mj",
+      "kind": "term",
+      "front": "What is the period of a repeating graph?",
+      "back": "The **period** is the horizontal length of one full cycle. For sine and cosine it is $2\\pi$ radians.",
+      "hint": "One full cycle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06rfch4",
+      "kind": "concept",
+      "front": "How is the cosine graph related to the sine graph?",
+      "back": "Cosine is the sine graph moved **left** by $\\frac{\\pi}{2}$. Cosine starts at 1, while sine passes through the origin.",
+      "hint": "Compare starting points.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r65xbq",
+      "kind": "term",
+      "front": "What is the phase shift $c$ in $y=a\\sin(b(x-c))+d$?",
+      "back": "The **phase shift** is the horizontal translation $c$, to the right when $c>0$.",
+      "hint": "Factorise the bracket first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0afe1bo",
+      "kind": "mistake",
+      "front": "A student writes the period of $y=\\sin(bx)$ as $2\\pi b$. What is wrong?",
+      "back": "The period is $\\frac{2\\pi}{b}$, not $2\\pi b$. A larger $b$ **squeezes** the graph and shortens the period.",
+      "hint": "Does a larger b shorten or lengthen the cycle?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0fy77ud",
+      "kind": "mistake",
+      "front": "For $y=\\sin(2x-\\pi)$, a student gives the phase shift as $\\pi$. What is the correct phase shift?",
+      "back": "$\\frac{\\pi}{2}$. Write $\\sin(2x-\\pi)=\\sin\\left(2\\left(x-\\frac{\\pi}{2}\\right)\\right)$, so you must factorise the bracket first.",
+      "hint": "Factorise out the 2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1czvv8h",
+      "kind": "example",
+      "front": "For $y=3\\cos(2x)-1$, find the period, midline, maximum and minimum.",
+      "back": "Period $\\pi$, midline $y=-1$, maximum 2 and minimum $-4$. The amplitude is 3.",
+      "hint": "Period is $\\frac{2\\pi}{b}$ with $b=2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11ijg6s",
+      "kind": "example",
+      "front": "For $h=2\\cos\\left(\\frac{\\pi}{6}t\\right)+5$, with $h$ in metres and $t$ in hours, what is the period?",
+      "back": "**12 hours**, since $\\frac{2\\pi}{\\pi/6}=12$. The greatest depth is 7 m and the least is 3 m.",
+      "hint": "Use $\\frac{2\\pi}{b}$ with $b=\\frac{\\pi}{6}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0hdl2ml",
+      "kind": "process",
+      "front": "How do you find $b$ and $c$ from a sine or cosine graph?",
+      "back": "Measure one full cycle to get the period $p$, then use $b=\\frac{2\\pi}{p}$. Find $c$ by noting where a cycle begins.",
+      "hint": "Measure first, then rearrange.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pk8uxu",
+      "kind": "formula",
+      "front": "For $y=a\\tan(b(x-c))+d$, what is the period?",
+      "back": "$\\frac{\\pi}{b}$. The vertical **asymptotes** move with the phase shift, and tangent has no amplitude.",
+      "hint": "Tangent repeats every $\\frac{\\pi}{b}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a4yyap",
+      "kind": "term",
+      "front": "What is an asymptote?",
+      "back": "An **asymptote** is a line that a curve approaches ever more closely without reaching it. For tangent these occur where $\\cos x=0$.",
+      "hint": "The curve gets close but never touches.",
+      "sectionId": "s2"
+    }
+  ]
+}

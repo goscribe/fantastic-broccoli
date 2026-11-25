@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-8",
+  "topicCode": "5.8",
+  "topicName": "Overfishing",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:57.663Z",
+  "cards": [
+    {
+      "id": "0swgj9i",
+      "kind": "term",
+      "front": "What is overfishing?",
+      "back": "**Overfishing** is catching fish faster than their populations can reproduce and replace them, so numbers fall year after year and the population can eventually crash.",
+      "hint": "Compare the rate of harvest with the rate of reproduction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01alcc9",
+      "kind": "concept",
+      "front": "Why do fishers keep catching fish even as catches fall?",
+      "back": "Rising demand, powerful technology, and open waters that no one owns reward catching more fish today, even though it harms catches tomorrow.",
+      "hint": "Think about who gains from each extra fish caught before others do.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "026owyw",
+      "kind": "concept",
+      "front": "How does a marine protected area help fish populations recover?",
+      "back": "Fishing is restricted, so fish grow larger and older, and larger fish produce many more young. Some fish spill into nearby waters, which can raise catches there.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0t2j36u",
+      "kind": "term",
+      "front": "What is the sustainable yield of a fish population?",
+      "back": "The **sustainable yield** is the largest harvest that can be taken each year without shrinking the population's long-term size.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hmfivp",
+      "kind": "term",
+      "front": "What is a subsidy in fishing?",
+      "back": "A **subsidy** is a payment or benefit from a government that lowers the cost of an activity, such as fuel or boat costs, which can keep fleets at sea when catches fall.",
+      "hint": "Think about who pays the cost instead of the fisher.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0grkhdf",
+      "kind": "term",
+      "front": "What is bottom trawling?",
+      "back": "**Bottom trawling** is a method that drags a weighted net along the seafloor to catch fish on or near it, and it flattens corals, sponges, and other habitat.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0t7aqry",
+      "kind": "term",
+      "front": "What is bycatch?",
+      "back": "**Bycatch** is the unintended capture of non-target animals, such as sea turtles, dolphins, seabirds, sharks, or young fish of the target species.",
+      "hint": "Compare it with the animals fishers actually want to catch.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0hixkhh",
+      "kind": "mistake",
+      "front": "What is a common mistake about what overfishing means for a species?",
+      "back": "Overfishing does not mean the species is extinct. It means harvest exceeds replacement, which can be reversed if fishing eases.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0l35u30",
+      "kind": "concept",
+      "front": "What is a trophic cascade?",
+      "back": "A **trophic cascade** is a chain of effects in which a change at one trophic level, such as removing large predators, alters populations at other levels.",
+      "hint": "Follow the effect one step at a time along the food chain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "149nlqe",
+      "kind": "process",
+      "front": "What is the process of fishing down the food web?",
+      "back": "1) Large predators decline. 2) Fishers shift to smaller species lower in the food chain. 3) Catches keep moving down, so biodiversity and catches both suffer.",
+      "hint": "Start with what happens to the big fish first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ktqqlo",
+      "kind": "term",
+      "front": "What is a trophic level?",
+      "back": "A **trophic level** is the feeding position of an organism in a food chain, such as a producer, a primary consumer, or a predator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0i9e9st",
+      "kind": "process",
+      "front": "How should a catch limit be used to reduce overfishing?",
+      "back": "1) Set the limit below the sustainable yield. 2) Enforce it with monitoring. This lets the population stay steady or rebuild.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1540jxk",
+      "kind": "concept",
+      "front": "How should you choose a fix for overfishing?",
+      "back": "Match each strategy to the problem it solves, such as gear rules for bycatch. Most strategies work best when used together.",
+      "hint": "Start by naming the cause of the problem.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ngcrsh",
+      "kind": "concept",
+      "front": "Why does removing young fish hurt a fishery later on?",
+      "back": "Young fish grow into the adults that reproduce, so removing them lowers the number of fish that will reproduce later.",
+      "sectionId": "s3"
+    }
+  ]
+}

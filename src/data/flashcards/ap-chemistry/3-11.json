@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "3-11",
+  "topicCode": "3.11",
+  "topicName": "Spectroscopy and the electromagnetic spectrum",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:27.737Z",
+  "cards": [
+    {
+      "id": "0ctg73d",
+      "kind": "concept",
+      "front": "How does a photon's energy change as its wavelength gets shorter?",
+      "back": "Photon energy **increases**. Shorter wavelength means higher frequency, and $E=\\frac{hc}{\\lambda}$ shows the energy rising as $\\lambda$ falls.",
+      "hint": "Use $E=\\frac{hc}{\\lambda}$ and think about what happens as $\\lambda$ gets smaller.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rluxew",
+      "kind": "concept",
+      "front": "When does a substance absorb a photon?",
+      "back": "Only when the photon's energy **matches** the gap between two allowed energy levels. The substance then moves to a higher-energy state.",
+      "hint": "Energy levels are allowed states, not a continuous range.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j33h70",
+      "kind": "concept",
+      "front": "Why can a spectrum help identify a substance?",
+      "back": "Its allowed transitions produce **characteristic** energies, so its pattern of peaks or lines works like a fingerprint. Several features are usually considered together.",
+      "hint": "Think about which transitions a substance is allowed to make.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vdmnvx",
+      "kind": "term",
+      "front": "What is electromagnetic radiation?",
+      "back": "**Electromagnetic radiation** is energy carried as waves through oscillating electric and magnetic fields.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "03uv6bj",
+      "kind": "term",
+      "front": "What is wavelength?",
+      "back": "The **distance** between corresponding points on successive waves, such as successive wave peaks.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0popg7s",
+      "kind": "formula",
+      "front": "What does $c=\\lambda\\nu$ relate, and what are its units?",
+      "back": "It relates the **speed of light** $c$ (m/s), wavelength $\\lambda$ (m), and frequency $\\nu$ (Hz, or s$^{-1}$).",
+      "hint": "Each symbol is a speed, length, or count per second.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1n98fph",
+      "kind": "formula",
+      "front": "What does $E=h\\nu$ give, and what does each symbol mean?",
+      "back": "The **energy of one photon** in joules. $h$ is Planck's constant, $6.626\\times10^{-34}$ J s, and $\\nu$ is frequency in Hz.",
+      "hint": "The result is for one photon, not a whole sample.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1nrgjgx",
+      "kind": "process",
+      "front": "How does absorption spectroscopy work?",
+      "back": "Radiation passes through a **sample**, and a detector compares the transmitted light with the incoming light. Reduced transmission at certain wavelengths shows what was absorbed.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qpe6fq",
+      "kind": "process",
+      "front": "How does a substance emit a photon?",
+      "back": "It moves from a higher-energy state to a **lower-energy** state. The emitted photon's energy equals the energy lost in that transition.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "17pp1h4",
+      "kind": "concept",
+      "front": "Which transitions match microwaves, infrared, and visible or ultraviolet light?",
+      "back": "Microwaves match molecular **rotations**, infrared matches molecular **vibrations**, and visible or ultraviolet light can match **electronic** transitions.",
+      "hint": "Each region involves a different kind of energy change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "185s2ur",
+      "kind": "mistake",
+      "front": "Is it true that a substance absorbs every photon with energy below a certain value?",
+      "back": "No. Absorption needs an **allowed transition** whose energy matches the photon. Not every possible transition absorbs strongly.",
+      "hint": "Matching energy is required, not just a lower energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12dxxm2",
+      "kind": "example",
+      "front": "What are the frequency and energy of a 500 nm photon?",
+      "back": "Frequency is $6.00\\times10^{14}$ Hz and energy is $3.98\\times10^{-19}$ J per **photon**. Convert 500 nm to $5.00\\times10^{-7}$ m first.",
+      "hint": "Convert nm to m before using $c$ and $h$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f4awkr",
+      "kind": "mistake",
+      "front": "Does the energy from a photon calculation describe a whole sample?",
+      "back": "No. The energy is for **one photon**, not for an entire sample.",
+      "sectionId": "s4"
+    }
+  ]
+}

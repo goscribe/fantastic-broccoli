@@ -1,5 +1,6 @@
 "use client";
 
+import { buttonClass } from "@/components/ui/button";
 import "@/lib/i18n/exam-planner";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -144,11 +145,14 @@ export function PlanTaskCard({
           type="button"
           disabled={!!startingId}
           onClick={() => onStart(task.id)}
-          className={cn(
-            "inline-flex shrink-0 items-center gap-1.5 rounded-xl font-semibold transition-colors disabled:opacity-60",
-            size === "card" ? "h-10 px-3 text-[14px] sm:px-3.5" : "h-8 px-2.5 text-[12.5px]",
-            primary ? "bg-accent text-white hover:bg-accent-dim" : "bg-accent-soft text-accent-dim hover:brightness-95",
-          )}
+          className={
+            primary
+              ? buttonClass({ size: "sm", className: cn("shrink-0 gap-1.5", size === "card" && "h-10") })
+              : cn(
+                  "inline-flex shrink-0 items-center gap-1.5 rounded-[12px] bg-muted font-bold text-foreground transition-colors hover:bg-border disabled:opacity-60",
+                  size === "card" ? "h-10 px-3 text-[14px] sm:px-3.5" : "h-9 px-2.5 text-[13px]",
+                )
+          }
         >
           {starting ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-3.5" fill="currentColor" />}
           <span className={size === "row" ? "sr-only sm:not-sr-only" : undefined}>

@@ -1,4 +1,4 @@
-import { createTRPCClient, httpBatchLink, type TRPCLink } from "@trpc/client";
+import { createTRPCClient, httpBatchLink, httpLink, splitLink, type TRPCLink } from "@trpc/client";
 import { observable } from "@trpc/server/observable";
 import type { AppRouter } from "@goscribe/server";
 import superjson from "superjson";
@@ -21,6 +21,16 @@ const refusalLink: TRPCLink<AppRouter> = () => ({ op, next }) =>
     }),
   );
 
+const withCredentials = (input: RequestInfo | URL, init?: RequestInit) => fetch(input, { ...init, credentials: "include" });
+
+/**
+ * Requests that must not wait for anything else. A batch answers when its
+ * slowest query does, so the notification bell (opened while a page is still
+ * loading a session or a plan) sat on skeletons for as long as that query
+ * took. These go out on their own; everything else is still batched.
+ */
+const UNBATCHED = /^notifications\./;
+
 /**
  * Typed tRPC client for the published goscribe/server router
  * (auth, workspace, payment/pricing, materials, …).
@@ -31,12 +41,10 @@ const refusalLink: TRPCLink<AppRouter> = () => ({ op, next }) =>
 export const api = createTRPCClient<AppRouter>({
   links: [
     refusalLink,
-    httpBatchLink({
-      url: `${apiUrl}/trpc`,
-      transformer: superjson,
-      fetch(input, init) {
-        return fetch(input, { ...init, credentials: "include" });
-      },
+    splitLink({
+      condition: (op) => UNBATCHED.test(op.path),
+      true: httpLink({ url: `${apiUrl}/trpc`, transformer: superjson, fetch: withCredentials }),
+      false: httpBatchLink({ url: `${apiUrl}/trpc`, transformer: superjson, fetch: withCredentials }),
     }),
   ],
 });

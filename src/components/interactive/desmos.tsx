@@ -233,13 +233,16 @@ export function ExpressionGraph({
   xLabel,
   yLabel,
   expressions,
+  bounds,
 }: {
   title: string;
   xLabel: string;
   yLabel: string;
   expressions: GraphExpression[];
+  /** Visible window; defaults to x ±10, y ±6. */
+  bounds?: { left: number; right: number; bottom: number; top: number };
 }) {
-  const key = useMemo(() => JSON.stringify(expressions), [expressions]);
+  const key = useMemo(() => JSON.stringify([expressions, bounds]), [expressions, bounds]);
 
   const { containerRef, failed } = useDesmos(
     (calc) => {
@@ -253,7 +256,7 @@ export function ExpressionGraph({
             : {}),
         });
       });
-      calc.setMathBounds({ left: -10, right: 10, bottom: -6, top: 6 });
+      calc.setMathBounds(bounds ?? { left: -10, right: 10, bottom: -6, top: 6 });
     },
     [key],
   );

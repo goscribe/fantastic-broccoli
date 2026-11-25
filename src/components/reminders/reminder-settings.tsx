@@ -63,7 +63,7 @@ export function ReminderSettings() {
 
   return (
     <section id="reminders" className="mt-8">
-      <h2 className="text-sm font-semibold">{t("remind.settingsTitle")}</h2>
+      <h2 className="page-h2">{t("remind.settingsTitle")}</h2>
       <p className="mt-0.5 text-[13px] text-muted-foreground">{t("remind.settingsHint")}</p>
       <div className="mt-3 rounded-2xl border border-border bg-card p-5">
         <div className="flex items-baseline justify-between gap-3">
@@ -86,7 +86,7 @@ export function ReminderSettings() {
             </p>
           </>
         ) : (
-          <div className="mt-3 h-[150px] max-w-md animate-pulse rounded-2xl bg-muted" />
+          <div className="mt-3 h-[326px] max-w-md sm:h-[408px] animate-pulse rounded-2xl bg-muted" />
         )}
 
         {pushRow && (

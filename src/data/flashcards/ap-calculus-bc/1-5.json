@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "1-5",
+  "topicCode": "1.5",
+  "topicName": "Algebraic properties of limits",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:53.682Z",
+  "cards": [
+    {
+      "id": "0n3p7p7",
+      "kind": "concept",
+      "front": "Why can you find the limit of a combined expression from the limits of its parts?",
+      "back": "Because the **limit rules** for sums, differences, products, and quotients let you combine the finite limits of the parts to get the limit of the whole.",
+      "hint": "Think about which limits you already know.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0r2tya1",
+      "kind": "formula",
+      "front": "What does the product rule say about the limit of $f(x)g(x)$?",
+      "back": "**Product rule**: $\\lim_{x\\to a}[f(x)g(x)]=LM$, where $L$ and $M$ are the finite limits of $f$ and $g$ as $x\\to a$.",
+      "hint": "Which two finite limits do you need first?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ew4bpa",
+      "kind": "mistake",
+      "front": "Can you use the quotient rule when the denominator's limit is 0?",
+      "back": "**No**. The quotient rule needs $M\\ne0$. A zero denominator limit means the rule cannot find the limit, and that alone does not prove no limit exists.",
+      "hint": "Check the denominator before dividing.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "13r88k6",
+      "kind": "formula",
+      "front": "What are the sum and difference rules for limits?",
+      "back": "$\\lim_{x\\to a}[f(x)+g(x)]=L+M$ and $\\lim_{x\\to a}[f(x)-g(x)]=L-M$, where $L$ and $M$ are the finite limits of $f$ and $g$ as $x\\to a$.",
+      "hint": "Both individual limits must exist.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06jwpke",
+      "kind": "formula",
+      "front": "What is the quotient rule, and what condition must hold?",
+      "back": "$\\lim_{x\\to a}\\frac{f(x)}{g(x)}=\\frac{L}{M}$, provided **$M\\ne0$**, where $L$ and $M$ are the finite limits of $f$ and $g$.",
+      "hint": "Check the denominator's limit first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1hhf7ai",
+      "kind": "formula",
+      "front": "What is the constant multiple rule for limits?",
+      "back": "$\\lim_{x\\to a}[cf(x)]=cL$ for a constant $c$, where $L$ is the finite limit of $f(x)$. The constant stays outside the limit.",
+      "hint": "The constant does not change as $x$ approaches $a$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "05pr7gb",
+      "kind": "formula",
+      "front": "What is the power rule for limits with a positive integer $n$?",
+      "back": "$\\lim_{x\\to a}[f(x)]^n=L^n$, where $L$ is the finite limit of $f(x)$. It follows from applying the product rule repeatedly.",
+      "hint": "Powers are repeated products.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0brqj7z",
+      "kind": "term",
+      "front": "What is a combined limit?",
+      "back": "A **combined limit** is a limit of one expression where several limit rules are applied together, starting from the limits of its parts.",
+      "hint": "More than one rule is used.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wvtyi6",
+      "kind": "process",
+      "front": "In what order should you apply limit rules to a combined expression?",
+      "back": "1) Find the limits of the parts. 2) Evaluate powers and constant multiples. 3) Combine sums or differences. 4) For a quotient, check the denominator's limit is nonzero, then divide.",
+      "hint": "Work from the inside out.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "192l7ph",
+      "kind": "example",
+      "front": "Given $\\lim_{x\\to 2}f(x)=4$ and $\\lim_{x\\to 2}g(x)=1$, find $\\lim_{x\\to 2}\\frac{3[f(x)]^2-2g(x)}{f(x)+g(x)}$.",
+      "back": "**$\\frac{46}{5}$**. The numerator approaches $3(4)^2-2(1)=46$, and the denominator approaches $4+1=5$, which is nonzero.",
+      "hint": "Find the numerator's and denominator's limits separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bb9ba6",
+      "kind": "example",
+      "front": "If $\\lim_{x\\to a}f(x)=6$ and $\\lim_{x\\to a}g(x)=2$, what are the limits of $f(x)+g(x)$ and $f(x)-g(x)$?",
+      "back": "**8** for the sum and **4** for the difference, since $6+2=8$ and $6-2=4$.",
+      "hint": "Apply each rule to the two finite limits.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hevee7",
+      "kind": "concept",
+      "front": "Why does the denominator condition matter even when every other part has a finite limit?",
+      "back": "Because the **quotient rule** requires a nonzero denominator limit. If the denominator approaches zero, stop using the quotient rule, since a different method may be needed.",
+      "hint": "Look at the denominator's limit only.",
+      "sectionId": "s4"
+    }
+  ]
+}

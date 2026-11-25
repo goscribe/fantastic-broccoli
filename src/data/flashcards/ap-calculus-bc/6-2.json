@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "6-2",
+  "topicCode": "6.2",
+  "topicName": "Riemann sums",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:29.369Z",
+  "cards": [
+    {
+      "id": "0xa5bzx",
+      "kind": "concept",
+      "front": "How does a Riemann sum estimate the area under a curve?",
+      "back": "It adds the areas of **rectangles** that sit beneath or above the curve. Each rectangle has a width and a height taken from a function value in its subinterval.",
+      "hint": "Think about what one rectangle contributes to the total.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fybijr",
+      "kind": "concept",
+      "front": "For an increasing function, how do left and right sums compare with the true area?",
+      "back": "The **left sum** underestimates and the **right sum** overestimates. Left rectangles lie below the curve on each subinterval, and right rectangles lie above it.",
+      "hint": "Sketch one subinterval where the curve rises.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jialb9",
+      "kind": "concept",
+      "front": "What does a definite integral represent in terms of Riemann sums?",
+      "back": "The **limit** of Riemann sums as the largest subinterval width approaches zero, when that limit exists. For a continuous function on a closed interval, the limit exists.",
+      "hint": "Think about what happens as n grows without bound.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1r4qgog",
+      "kind": "term",
+      "front": "What is a Riemann sum?",
+      "back": "A **Riemann sum** adds the products of rectangle widths and function values chosen from their subintervals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1plgrn1",
+      "kind": "term",
+      "front": "What is signed area?",
+      "back": "**Signed area** counts regions above the horizontal axis as positive and regions below it as negative.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zvjh3d",
+      "kind": "term",
+      "front": "Which point in each subinterval does a midpoint sum use for its rectangle height?",
+      "back": "The **midpoint**, the point halfway between the subinterval's endpoints, where the function value sets the height.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12l43m7",
+      "kind": "formula",
+      "front": "What is the width $\\Delta x$ of each rectangle when $[a,b]$ is split into $n$ equal subintervals?",
+      "back": "$\\Delta x=\\frac{b-a}{n}$, the same for every rectangle, where $n$ is the number of equal subintervals.",
+      "hint": "Subtract the endpoints, then divide.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "06lqovs",
+      "kind": "process",
+      "front": "What are the steps to calculate a left Riemann sum?",
+      "back": "1) Find the common width $\\Delta x=\\frac{b-a}{n}$. 2) List the left endpoint of each subinterval. 3) Evaluate $f$ at each left endpoint. 4) Add the products of each $f$ value and $\\Delta x$.",
+      "hint": "Start with the common width.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xjsjkb",
+      "kind": "example",
+      "front": "Find $L_2$ for $f(x)=x^2$ on $[0,2]$.",
+      "back": "$L_2=1$ square unit. The width is $1$ and the left endpoints are $0$ and $1$, so $1(0^2+1^2)=1$.",
+      "hint": "Two subintervals means the width is 1.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "18qmha2",
+      "kind": "example",
+      "front": "Find the midpoint sum $M_2$ for $f(x)=x^2$ on $[0,2]$.",
+      "back": "$M_2=2.5$ square units. The midpoints are $0.5$ and $1.5$, so $1(0.5^2+1.5^2)=2.5$.",
+      "hint": "Find the midpoints of [0,1] and [1,2].",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ofv1w3",
+      "kind": "mistake",
+      "front": "Can you tell whether a midpoint sum over- or underestimates just from whether the function increases or decreases?",
+      "back": "No. **Midpoint** rectangles can cross the curve, so increasing or decreasing behavior alone does not determine their error.",
+      "hint": "Think about where midpoint rectangles sit compared with the curve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12gikik",
+      "kind": "mistake",
+      "front": "A student says more rectangles always make every type of Riemann sum more accurate at each step. Is this right?",
+      "back": "Not necessarily. More rectangles do not guarantee that every sum improves at every step. The **reliable** trend is convergence as widths approach zero.",
+      "hint": "Separate a general trend from a guaranteed improvement.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1vgh511",
+      "kind": "mistake",
+      "front": "A function lies below the axis on an interval. Does its Riemann sum give the total area there?",
+      "back": "No. Below-axis rectangles contribute **negative** values, so the sum estimates signed area, not total area.",
+      "hint": "What sign does a below-axis height produce?",
+      "sectionId": "s1"
+    }
+  ]
+}

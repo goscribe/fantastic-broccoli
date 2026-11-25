@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "3-4",
+  "topicCode": "3.4",
+  "topicName": "Arcs and sectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:35.628Z",
+  "cards": [
+    {
+      "id": "0278fg1",
+      "kind": "formula",
+      "front": "What is the formula for the arc length $l$ of a sector with radius $r$ and angle $\\theta$ in degrees?",
+      "back": "$l=\\frac{\\theta}{360}\\times2\\pi r$. The arc is the **fraction** $\\frac{\\theta}{360}$ of the whole circumference $2\\pi r$.",
+      "hint": "Think about what fraction of the full turn the angle is.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1m7t07t",
+      "kind": "formula",
+      "front": "What is the formula for the area $A$ of a sector with radius $r$ and angle $\\theta$ in degrees?",
+      "back": "$A=\\frac{\\theta}{360}\\times\\pi r^2$. The sector takes the same **fraction** $\\frac{\\theta}{360}$ of the whole circle's area $\\pi r^2$.",
+      "hint": "It uses the same fraction as the arc formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "084aftf",
+      "kind": "mistake",
+      "front": "You put the diameter into the sector formulae instead of the radius. What goes wrong?",
+      "back": "Every **arc length** doubles and every **sector area** is multiplied by four. Halve the diameter to get the radius first.",
+      "hint": "Check which length the question actually gives you.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0834925",
+      "kind": "term",
+      "front": "What is a sector?",
+      "back": "The **region** of a circle enclosed by one arc and the two radii drawn to the ends of that arc.",
+      "hint": "It is a region, not a line.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0yp11kx",
+      "kind": "term",
+      "front": "What is an arc?",
+      "back": "A **continuous part** of a circle's circumference between two points on the circle.",
+      "hint": "Think of a piece of the circle's edge.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pyplh8",
+      "kind": "example",
+      "front": "A sector has radius 8.0 cm and angle 140°. What is its arc length to 3 significant figures?",
+      "back": "**19.5 cm**. Use $l=\\frac{140}{360}\\times2\\pi\\times8.0$, keeping the fraction exact until the final step.",
+      "hint": "Multiply the fraction by the circumference.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zybi06",
+      "kind": "process",
+      "front": "What are the steps to find the perimeter of a sector?",
+      "back": "1) Find the **arc length** $l$. 2) Find $2r$ for the two straight edges. 3) Add: $P=l+2r$. Give the answer in cm, not cm².",
+      "hint": "A sector has three boundary parts.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02o0fci",
+      "kind": "example",
+      "front": "A sector has radius 5.0 cm and angle 72°. What is its area to 3 significant figures?",
+      "back": "**15.7 cm²**. The fraction $\\frac{72}{360}=0.2$ of $\\pi\\times(5.0)^2\\approx78.54$ gives 15.71 cm².",
+      "hint": "Square the radius before multiplying.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1efnk9u",
+      "kind": "concept",
+      "front": "How can you check that a sector area you calculated is sensible?",
+      "back": "A **180°** sector should be half the full circle's area $\\pi r^2$, and a **90°** sector a quarter. Larger than the full circle means an error.",
+      "hint": "Compare your answer with the whole circle.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1tq8azf",
+      "kind": "process",
+      "front": "How do you find the angle of a sector when you know its area and radius?",
+      "back": "Rearrange to $\\theta=\\frac{360A}{\\pi r^2}$, substitute the known values, then solve. The angle must lie between $0^{\\circ}$ and $360^{\\circ}$.",
+      "hint": "Start from the area formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1lu6h6m",
+      "kind": "example",
+      "front": "A sprinkler waters a sector of radius 4.00 m covering 20.0 m². What is the angle to 3 significant figures?",
+      "back": "**143°**. Calculate $\\theta=\\frac{360\\times20.0}{\\pi\\times4.00^2}=143.2^{\\circ}$ before rounding.",
+      "hint": "Use the rearranged area formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "15eh7ep",
+      "kind": "mistake",
+      "front": "A question asks for the length around the curved edge, but you use the sector area formula. What is wrong?",
+      "back": "You chose the **wrong formula**. A length needs the arc formula $l=\\frac{\\theta}{360}\\times2\\pi r$; the area formula gives square units.",
+      "hint": "Check the units the question asks for.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-biology",
+  "topicId": "3-3-2",
+  "topicCode": "3.3.2",
+  "topicName": "Gas exchange",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:29:13.197Z",
+  "cards": [
+    {
+      "id": "1emlvih",
+      "kind": "concept",
+      "front": "Why must ventilation and blood flow be maintained at a gas exchange surface?",
+      "back": "They replace air or water and carry gases away, keeping **concentration gradients** steep so diffusion continues quickly.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l74yfi",
+      "kind": "concept",
+      "front": "What two features make a gas exchange surface efficient for diffusion?",
+      "back": "A **large surface area** and a **short diffusion distance**. Moist surfaces also let gases dissolve before crossing cell membranes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0d5nfo4",
+      "kind": "concept",
+      "front": "Why does countercurrent flow keep oxygen diffusing into fish blood along most of each lamella?",
+      "back": "Water and blood flow in opposite directions, so water always has **higher oxygen** than nearby blood, keeping the gradient steep along much of its length.",
+      "hint": "Compare the oxygen level in water with the blood at each point along a lamella.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "051253n",
+      "kind": "term",
+      "front": "What is diffusion?",
+      "back": "The **net movement** of particles from a region of higher concentration to a region of lower concentration.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1fy1zp1",
+      "kind": "concept",
+      "front": "Why can't large animals rely on diffusion across their outer surface alone?",
+      "back": "Gases cannot diffuse quickly enough through the whole body, so they need **specialised surfaces** to exchange gases.",
+      "hint": "Think about the distance from the outside of a large body to its inner cells.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "16kf91y",
+      "kind": "process",
+      "front": "What route does air take through an insect from outside to its cells?",
+      "back": "Through **spiracles**, along branching **tracheae**, into narrow **tracheoles**. Oxygen dissolves at their ends and diffuses into cells.",
+      "hint": "Start at the body surface and follow the tubes inward.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yj54wd",
+      "kind": "mistake",
+      "front": "Why is it wrong to say ventilation forces oxygen through alveolar walls?",
+      "back": "Ventilation only **moves air** in and out of the lungs. Oxygen crosses the alveolar walls by **diffusion**.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0f8zhz7",
+      "kind": "process",
+      "front": "How does inspiration bring air into the lungs?",
+      "back": "The **diaphragm** contracts and flattens, and the external intercostal muscles lift the ribs up and out. Chest volume rises, pressure falls below atmospheric, and air enters.",
+      "hint": "Think about what happens to pressure when chest volume increases.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ktipn9",
+      "kind": "process",
+      "front": "How does quiet expiration happen without muscle contraction?",
+      "back": "The muscles relax, and **elastic recoil** reduces chest volume. This raises pressure above atmospheric, so air leaves.",
+      "hint": "Consider what the muscles are doing and what the lungs do on their own.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1u67kbr",
+      "kind": "concept",
+      "front": "What role do guard cells play in gas exchange in leaves?",
+      "back": "They change shape to control the **opening of each stoma**, balancing gas exchange against water loss.",
+      "hint": "Think about what open stomata allow to pass in and out.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qebakk",
+      "kind": "concept",
+      "front": "How do xerophytes reduce water loss from their leaves?",
+      "back": "Features such as **sunken stomata**, hairs, rolled leaves and a thick waxy cuticle reduce water vapour escaping from the leaf.",
+      "hint": "Think about the problems a plant faces in a dry habitat.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qavjpt",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat stomata as the whole gas exchange surface of a leaf?",
+      "back": "Stomata are only **openings**. Most diffusion happens across the **moist cell surfaces** inside the leaf's air spaces.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0fdjtmk",
+      "kind": "concept",
+      "front": "Why do fish have less oxygen available when water warms?",
+      "back": "Warm water holds less **dissolved oxygen** than cool water, so less oxygen is available to the gills.",
+      "hint": "Think about how the amount of gas a liquid holds changes with temperature.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "16jj6qu",
+      "kind": "concept",
+      "front": "How does high altitude reduce oxygen uptake in mammals?",
+      "back": "Lower **oxygen pressure** reduces the gradient that drives oxygen diffusion into the blood.",
+      "hint": "Compare the air pressure at high altitude with sea level.",
+      "sectionId": "s6"
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "1-1",
+  "topicCode": "1.1",
+  "topicName": "Scalars and vectors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:13.308Z",
+  "cards": [
+    {
+      "id": "0lu9dzw",
+      "kind": "term",
+      "front": "What is the difference between a scalar and a vector?",
+      "back": "A **scalar** has magnitude only, while a **vector** has both magnitude and direction.",
+      "hint": "Think about whether a direction is needed to fully describe it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1y6acsv",
+      "kind": "concept",
+      "front": "Why is a bare number like 5 m/s an incomplete answer for a velocity?",
+      "back": "Velocity is a **vector**, so it needs a direction as well as a size. Say 5 m/s east, not just 5 m/s.",
+      "hint": "Which part of a vector is missing from a bare number?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1xcf0xi",
+      "kind": "process",
+      "front": "How do you add two vectors graphically using head to tail?",
+      "back": "Draw the first vector to scale. Place the tail of the second at the head of the first. The **resultant** runs from the tail of the first to the head of the last.",
+      "hint": "Start with the first arrow and link each next arrow to the end of the last.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17fpcca",
+      "kind": "formula",
+      "front": "What is the magnitude of the resultant of two perpendicular displacements, and what does each symbol mean?",
+      "back": "$R=\\sqrt{A^2+B^2}$, where $R$ is the resultant magnitude and $A$ and $B$ are the two perpendicular magnitudes, all in metres.",
+      "hint": "This comes from the right triangle formed by the arrows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b6qmbo",
+      "kind": "formula",
+      "front": "How is vector subtraction written in symbols?",
+      "back": "$\\vec{A}-\\vec{B}=\\vec{A}+(-\\vec{B})$. The **negative of a vector** has the same magnitude and the opposite direction.",
+      "hint": "Subtracting means adding something reversed.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "12moa1u",
+      "kind": "concept",
+      "front": "Do two vectors need to be drawn at the same place to be equal?",
+      "back": "No. Two vectors are equal when they have the **same magnitude and direction**. Their position on the page does not matter.",
+      "hint": "You can slide an arrow across the page.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1dl0dff",
+      "kind": "term",
+      "front": "What is a scale in a vector diagram?",
+      "back": "A **scale** is the ratio relating arrow length to the quantity it represents, such as 1 cm for 2 m/s, used for every arrow.",
+      "hint": "It links drawn length to real size.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ywy0jw",
+      "kind": "term",
+      "front": "What is the resultant of a set of vectors?",
+      "back": "The **resultant** is the single vector with the same effect as all the vectors added together.",
+      "hint": "It replaces the whole group.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06kx00o",
+      "kind": "example",
+      "front": "A student walks 3.0 m east then 4.0 m north. What is the magnitude and direction of the resultant displacement?",
+      "back": "5.0 m at 53° north of east, since $R=\\sqrt{3.0^2+4.0^2}=5.0\\ \\mathrm{m}$.",
+      "hint": "Use the Pythagorean theorem and then find the angle with tan.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0191aue",
+      "kind": "example",
+      "front": "A car moving at 10 m/s east turns to move at 10 m/s north. What is the change in velocity?",
+      "back": "14 m/s toward the northwest, 45° north of west. Magnitude is $\\sqrt{10^2+10^2}=14\\ \\mathrm{m/s}$.",
+      "hint": "Reverse the initial velocity before adding.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ovm65c",
+      "kind": "mistake",
+      "front": "A student says a vector's magnitude is negative because the vector points west. What is wrong?",
+      "back": "A **magnitude** is a scalar and is never negative. A minus sign only shows direction along a chosen axis.",
+      "hint": "Separate size from direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zubieu",
+      "kind": "mistake",
+      "front": "When finding a change in velocity, a student subtracts the velocities in the wrong order. What should they do?",
+      "back": "Write **final minus initial**, so $\\Delta\\vec{v}=\\vec{v}_f-\\vec{v}_i$, and reverse the initial vector before adding.",
+      "hint": "Check which velocity is the starting one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01ngzam",
+      "kind": "concept",
+      "front": "Why is speed a scalar but velocity a vector?",
+      "back": "Speed gives only size. Velocity gives **size and direction**, so it is a vector.",
+      "hint": "Compare what each one tells you.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1n9245m",
+      "kind": "concept",
+      "front": "Which motion quantities are vectors: displacement, speed, distance, velocity, acceleration?",
+      "back": "Displacement, velocity and acceleration are **vectors**. Speed and distance are scalars.",
+      "hint": "Each vector has a scalar partner.",
+      "sectionId": "s2"
+    }
+  ]
+}

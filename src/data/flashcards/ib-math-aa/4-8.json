@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-8",
+  "topicCode": "4.8",
+  "topicName": "Binomial distribution",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:44.751Z",
+  "cards": [
+    {
+      "id": "15jrj7i",
+      "kind": "concept",
+      "front": "What four conditions must hold before you can model a count of successes as binomial?",
+      "back": "The number of trials $n$ is fixed, each trial has **two outcomes** (success or failure), the trials are independent, and the probability of success $p$ is the same every trial.",
+      "hint": "Think fixed, two outcomes, independent, same chance.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0g7nb0v",
+      "kind": "formula",
+      "front": "What is the formula for $P(X=r)$ when $X\\sim\\mathrm{B}(n,p)$?",
+      "back": "$P(X=r)=\\binom{n}{r}p^r(1-p)^{n-r}$ for $r=0,1,\\ldots,n$. The **binomial coefficient** counts the orders, $p^r$ covers the successes and $(1-p)^{n-r}$ covers the failures.",
+      "hint": "Count of orders times probability of one order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uzh8ql",
+      "kind": "formula",
+      "front": "For a binomial variable $X\\sim\\mathrm{B}(n,p)$, what are the mean $E(X)$ and variance $\\mathrm{Var}(X)$?",
+      "back": "$E(X)=np$ and $\\mathrm{Var}(X)=np(1-p)$. The **mean** is the long-run average number of successes; both formulae need the binomial conditions to hold.",
+      "hint": "Mean is n times p; variance adds a factor of 1 minus p.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0r8guhq",
+      "kind": "term",
+      "front": "What is a binomial coefficient $\\binom{n}{r}$?",
+      "back": "The **number of ways** to choose $r$ items from $n$, equal to $\\frac{n!}{r!(n-r)!}$. In a binomial model it counts the different orders of successes and failures.",
+      "hint": "Ways to choose, not a probability.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "19spdvu",
+      "kind": "process",
+      "front": "How do you find $P(X\\ge r)$ for a binomial variable using the complement?",
+      "back": "Write $P(X\\ge r)=1-P(X\\le r-1)$. Find the cumulative probability up to $r-1$, then subtract from 1. Using $r$ instead of $r-1$ wrongly drops the value $r$.",
+      "hint": "Complement of at least r is at most what?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "056hj1f",
+      "kind": "term",
+      "front": "What is a cumulative probability $P(X\\le r)$?",
+      "back": "The **probability** that $X$ takes a value less than or equal to $r$, the sum of all probabilities from 0 up to $r$.",
+      "hint": "Add up the probabilities from the start.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1kv0e84",
+      "kind": "example",
+      "front": "$X\\sim\\mathrm{B}(6,0.3)$. Calculate $P(X=2)$ to three significant figures.",
+      "back": "$P(X=2)=\\binom{6}{2}(0.3)^2(0.7)^4=15\\times0.09\\times0.2401=0.324135\\approx0.324$.",
+      "hint": "Substitute into the formula with n=6, r=2, p=0.3.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "11rskxy",
+      "kind": "mistake",
+      "front": "A student writes $P(X\\ge3)=1-P(X\\le3)$ for a binomial variable. What is wrong?",
+      "back": "The complement of $X\\ge3$ is $X\\le2$, so the correct form is $1-P(X\\le2)$. Writing $1-P(X\\le3)$ wrongly removes the value 3 from the count.",
+      "hint": "Which whole number is still allowed after the complement?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qej0uu",
+      "kind": "mistake",
+      "front": "Why is drawing cards from a pack without replacement not a binomial situation?",
+      "back": "The probability of success **changes** after each draw, so $p$ is not constant and the trials are not independent.",
+      "hint": "What happens to the pack after each draw?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "13l7b04",
+      "kind": "concept",
+      "front": "Why is the distribution of $X\\sim\\mathrm{B}(4,0.5)$ symmetric, and what does $p$ below 0.5 do?",
+      "back": "It is symmetric because $p=0.5$. If $p$ is below 0.5 the distribution leans towards **low values**; if $p$ is above 0.5 it leans towards high values.",
+      "hint": "Compare the chance of success with a half.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "161t8hn",
+      "kind": "example",
+      "front": "Each item is faulty with probability 0.15, independently. A batch has 40 items. Find the mean and variance of the number of faulty items.",
+      "back": "$X\\sim\\mathrm{B}(40,0.15)$. $E(X)=40\\times0.15=6$ and $\\mathrm{Var}(X)=40\\times0.15\\times0.85=5.1$.",
+      "hint": "Identify n and p first.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19j805j",
+      "kind": "process",
+      "front": "When answering a binomial probability question, what does the note advise you to show in your working, even if a calculator gives the value?",
+      "back": "Write the **substituted formula** in your working, even when a calculator supplies the value. Show the values put into $\\binom{n}{r}p^r(1-p)^{n-r}$ before the final number.",
+      "hint": "Which line should appear before the number?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jcxjut",
+      "kind": "term",
+      "front": "What does the expected value of a discrete random variable $X$ represent?",
+      "back": "Its **long-run mean**, given by $E(X)=\\sum xP(X=x)$, the average of its values over many repetitions.",
+      "hint": "Think of the average over many repeats."
+    }
+  ]
+}

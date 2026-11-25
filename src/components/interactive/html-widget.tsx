@@ -9,6 +9,7 @@ import { MathText } from "@/components/ui/markdown-text";
 import { BrokenBlock } from "@/components/content/content-repair";
 import katex from "katex";
 import { prerenderFigureMath, type RenderTex } from "@/lib/figure-math";
+import { figureDarkVars } from "@/lib/figure-tokens";
 
 // Maths in the markup is typeset here, before the iframe exists, so it never
 // waits on (or depends on) the in-frame KaTeX script.
@@ -247,12 +248,22 @@ window.addEventListener("load",function(){
   );
 }
 
+// Figures are typeset in the app's font. The frame is sandboxed (opaque
+// origin), so it cannot reuse the page's self-hosted font files and loads
+// the same family from Google Fonts instead, like its other CDN assets.
+const FIGURE_FONT_LINK =
+  `<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>` +
+  `<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700&display=swap">`;
+
 function themeStyle(): string {
   const root = getComputedStyle(document.documentElement);
   const vars = THEME_TOKENS.map(
     (t) => `--${t}:${root.getPropertyValue(`--${t}`).trim()};`,
   ).join("");
-  return `<style>:root{${vars}}
+  const figureVars = document.documentElement.classList.contains("dark")
+    ? figureDarkVars()
+    : "";
+  return `${FIGURE_FONT_LINK}<style>:root{${vars}${figureVars}}
 body{margin:0;padding:14px 16px;font-family:ui-sans-serif,system-ui,sans-serif;color:var(--foreground);background:var(--card);}
 @media print{*{-webkit-print-color-adjust:exact;print-color-adjust:exact;}}
 .katex{max-width:100%;}

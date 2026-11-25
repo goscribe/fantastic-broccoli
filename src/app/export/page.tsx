@@ -17,9 +17,9 @@ import {
   stripAnswerLines,
 } from "@/lib/export-doc";
 import { MarkdownText } from "@/components/ui/markdown-text";
-import { Button } from "@/components/ui/button";
+import { Button, buttonClass } from "@/components/ui/button";
 import Link from "next/link";
-import { PageHeader, pageShellClass } from "@/components/ui/page-header";
+import { PageHeader, PageShell } from "@/components/ui/page-header";
 import { EmptyState } from "@/components/ui/empty-state";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -79,10 +79,10 @@ function ExportEditor() {
 
   if (ids.length === 0) {
     return (
-      <main className={pageShellClass}>
-        <PageHeader title="Export" subtitle="Print or save study material from a workspace bank." />
-        <EmptyState cat="think" title="Nothing selected" body={t("fc.exNothingSelected")} action={<Link href="/" className="inline-flex h-10 items-center rounded-xl bg-accent px-4 text-[14px] font-semibold text-white">Back to Learn</Link>} />
-      </main>
+      <PageShell>
+        <PageHeader title="Export" subtitle="Print or save study material from a subject." />
+        <EmptyState cat="think" title="Nothing selected" body={t("fc.exNothingSelected")} action={<Link href="/" className={buttonClass()}>Back to Home</Link>} />
+      </PageShell>
     );
   }
 

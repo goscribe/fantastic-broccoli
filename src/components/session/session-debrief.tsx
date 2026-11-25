@@ -7,22 +7,23 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { ConfettiDots } from "@/components/graphics/floating-decor";
+import { SparkleBurst } from "@/components/graphics/sparkle-burst";
+import { Skeleton } from "@/components/ui/skeleton";
+import { useCountUp } from "@/lib/use-count-up";
 import {
-  Sparkles,
   Loader2,
   Play,
-  Flame,
   ArrowRight,
   ChevronDown,
-  Target,
-  Clock,
-  CheckCircle2,
   ChevronRight,
-  Layers,
-  MessageCircle,
-  RotateCcw,
 } from "lucide-react";
-import { Mascot } from "@/components/rewards/mascot";
+import { Flame } from "lucide-react";
+import { Mascot, type MascotPose } from "@/components/rewards/mascot";
+import { restoredDraft } from "@/lib/use-activity-draft";
+import { bandCelebrates, questionTrail, resultBand, resultDots, type ResultBand } from "@/lib/session-result";
+import type { SessionActivity } from "@/types";
+import "@/lib/i18n/finish";
+import "@/app/design/design.css";
 import { useStreak } from "@/lib/rewards";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -33,7 +34,7 @@ import { deckEntries } from "@/components/bank/bank-content";
 import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
 import type { StudySession } from "@/types";
-import { SESSION_COMPLETED_EVENT } from "@/lib/api/account";
+import { SESSION_COMPLETED_EVENT, type SessionCompletedDetail } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/session";
@@ -42,8 +43,17 @@ import { InviteCard } from "@/components/growth/invite-card";
 import { HabitPrompt } from "@/components/reminders/habit-prompt";
 import "@/lib/i18n/habits";
 import "@/lib/i18n/mistakes";
-import { fixMinutes, masteryRow, practiceHref } from "@/lib/mistakes";
-import type { ApiSessionStats } from "@/lib/api/study-session";
+import { catalogTopicForLabel, fixMinutes, masteryRow, practiceHref, sessionMistakesHref } from "@/lib/mistakes";
+import { unfinishedSummary } from "@/lib/session-footer";
+import { coursesApi } from "@/lib/api/courses";
+import { loadCourse } from "@/components/courses/course-picker";
+import { notesApi } from "@/lib/api/notes";
+import { noteHref } from "@/lib/notes";
+import { track, type DebriefNextKind } from "@/lib/funnel";
+import "@/lib/i18n/purpose";
+import "@/lib/i18n/start-check";
+import { confidenceCat, confidenceFace, confidenceResult, type ConfidenceFace } from "@/lib/start-check";
+import type { ApiSessionDebrief, ApiSessionStats } from "@/lib/api/study-session";
 
 /** How long the mastery rows get on screen before the study-time sheet opens over them. */
 const MASTERY_READ_MS = 4000;
@@ -74,13 +84,11 @@ function pickFullSession(
  * (flashcards from the same notes, a question to Copilot), one tap each.
  */
 function NextStep({
-  icon,
   title,
   sub,
   href,
   onClick,
 }: {
-  icon: ReactNode;
   title: string;
   sub: string;
   href?: string;
@@ -88,17 +96,14 @@ function NextStep({
 }) {
   const body = (
     <>
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-accent-soft text-accent-dim">
-        {icon}
-      </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-[14.5px] font-semibold leading-5 text-foreground">{title}</span>
-        <span className="block text-[12.5px] leading-5 text-muted-foreground">{sub}</span>
+        <span className="block text-ui font-semibold leading-5 text-foreground">{title}</span>
+        <span className="block text-caption leading-5 text-muted-foreground">{sub}</span>
       </span>
       <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
     </>
   );
-  const cls = "flex w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none";
+  const cls = "flex min-h-14 w-full items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/60 focus-visible:bg-muted/60 focus-visible:outline-none";
   return href ? (
     <Link href={href} className={cls}>
       {body}
@@ -114,16 +119,22 @@ function NextStep({
 const usefulHeadline = (h: string | undefined) =>
   h && !/^session debrief\b/i.test(h.trim()) ? h : undefined;
 
-function StatTile({ icon, label, value, tone }: { icon: ReactNode; label: string; value: ReactNode; tone: string }) {
+/** One figure on the results slip: the label, then the number. No icon, no card of its own. */
+function StatTile({ label, value }: { label: string; value: ReactNode }) {
   return (
-    <div className="flex flex-col items-center gap-1 rounded-2xl border border-border bg-card px-2 py-3.5">
-      <span className={cn("flex items-center gap-1.5 text-[19px] font-bold tabular-nums leading-none", tone)}>
-        {icon}
-        {value}
-      </span>
-      <span className="text-[12px] font-medium text-muted-foreground">{label}</span>
+    <div className="flex flex-col gap-1.5 px-4 py-3.5 text-left first:pl-5 last:pr-5">
+      <span className="text-caption font-bold leading-none text-muted-foreground">{label}</span>
+      <span className="text-[24px] font-extrabold tabular-nums leading-none text-foreground">{value}</span>
     </div>
   );
+}
+
+/** The three figures in one row, split by hairlines; they sit on the page, with no box around them. */
+const slipRow = "grid grid-cols-3 divide-x divide-border";
+
+function CountUp({ value, prefix = "" }: { value: number; prefix?: string }) {
+  const n = useCountUp(value);
+  return <>{`${prefix}${n}`}</>;
 }
 
 type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
@@ -134,18 +145,30 @@ type MasteryChange = NonNullable<ApiSessionStats["mastery"]>[number];
  * another card. The bar shows where the topic was (muted) and what this
  * session added (accent).
  */
-function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
+function MasteryRows({
+  mastery,
+  className,
+  phoneMax = 2,
+  hrefFor,
+}: {
+  mastery: MasteryChange[];
+  className?: string;
+  phoneMax?: number;
+  /** Where each topic row leads (its note, or the topic in its subject). */
+  hrefFor?: (m: MasteryChange) => string | null;
+}) {
   const { t } = useI18n();
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-border bg-card" role="status">
-      <div className="grid grid-cols-3 divide-x divide-border [&>div]:rounded-none [&>div]:border-0">{tiles}</div>
-      <ul className="space-y-3 border-t border-border px-4 py-3.5 text-left" aria-label={t("debrief.masteryTitle")}>
-        {mastery.map((m) => {
+      <ul className={className} aria-label={t("debrief.masteryTitle")}>
+        {mastery.map((m, i) => {
           const { before, after, delta, base, gain } = masteryRow(m);
+          const href = hrefFor?.(m) ?? null;
           return (
-            <li key={m.topic}>
-              <div className="flex items-baseline justify-between gap-3 text-[13.5px]">
-                <span className="min-w-0 truncate font-semibold">{m.label}</span>
+            // Phones: two rows keep the next step above the fold.
+            <li key={m.topic} className={cn(i >= phoneMax && "max-sm:hidden")}>
+              <MaybeLink href={href} className={cn("group block", href && "-mx-1 rounded-lg px-1 py-0.5 hover:bg-muted/60 focus-visible:bg-muted/60")}>
+              <div className="flex items-baseline justify-between gap-3 text-small">
+                <span className={cn("min-w-0 truncate font-semibold", href && "underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground")}>{m.label}</span>
                 <span
                   className="shrink-0 tabular-nums text-muted-foreground"
                   aria-label={(before === null ? t("debrief.masteryAriaNew") : t("debrief.masteryAria"))
@@ -154,30 +177,166 @@ function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: Maste
                     .replace("{b}", String(after))}
                 >
                   {before === null ? (
-                    <span className="mr-1.5 rounded-full bg-muted px-1.5 py-px text-[11px] font-semibold">{t("debrief.masteryNew")}</span>
+                    <span className="mr-1.5 text-caption font-semibold">{t("debrief.masteryNew")} ·</span>
                   ) : (
                     <>{before}% → </>
                   )}
                   <span className="font-semibold text-foreground">{after}%</span>
                   {delta !== null && delta !== 0 && (
-                    <span className={cn("ml-1.5 font-semibold", delta > 0 ? "text-success" : "text-muted-foreground")}>
+                    <span className={cn("ml-1.5 font-bold", delta > 0 ? "text-accent-dim" : "text-muted-foreground")}>
                       {delta > 0 ? `+${delta}` : `−${-delta}`}%
                     </span>
                   )}
                 </span>
               </div>
-              <div className="mt-1.5 flex h-1.5 overflow-hidden rounded-full bg-muted" aria-hidden>
-                <span className="h-full bg-accent/35" style={{ width: `${base}%` }} />
+              <div className="mt-1.5 flex h-2 overflow-hidden rounded-full bg-muted" aria-hidden>
+                <span className="h-full bg-border-strong" style={{ width: `${base}%` }} />
                 <span
-                  className="h-full rounded-r-full bg-accent transition-[width] duration-700 ease-out"
+                  className="fill-grow h-full rounded-r-full bg-accent"
                   style={{ width: `${gain}%` }}
                 />
               </div>
+              </MaybeLink>
             </li>
           );
         })}
       </ul>
+  );
+}
+
+function StatsWithMastery({ tiles, mastery }: { tiles: ReactNode; mastery: MasteryChange[] }) {
+  return (
+    <div className="w-full" role="status">
+      <div className={slipRow}>{tiles}</div>
+      <MasteryRows mastery={mastery} className="mt-1 space-y-3.5 border-t border-border px-1 pb-1 pt-4 text-left" />
     </div>
+  );
+}
+
+/** The cat's reaction to the result: proud when it went well, at work when it was fine, thoughtful (never sad) when it was hard. */
+const BAND_POSE: Record<ResultBand, MascotPose> = { perfect: "trophy", strong: "cheer", okay: "pencil", rough: "think", done: "book" };
+
+/** Confetti in the tile colours and the cat's orange; no purple. */
+const CONFETTI_COLORS = ["#f6a53b", "#ffd166", "#34b27b", "#4f8df7", "#ef5d7a", "#ffffff"];
+
+/** Thrown from the cat, once, on a strong result. Positions are fixed, so server and client agree. */
+function FinishConfetti({ count = 38 }: { count?: number }) {
+  return (
+    <span aria-hidden className="finish-confetti">
+      {Array.from({ length: count }, (_, i) => {
+        // A fan over the top half, biased up and to the left where the words are; lengths vary so it reads as thrown.
+        const angle = (-200 + (220 * i) / (count - 1) + ((i * 37) % 17) - 8) * (Math.PI / 180);
+        const reach = 110 + ((i * 53) % 150);
+        const long = i % 3 !== 0;
+        return (
+          <span
+            key={i}
+            style={{
+              width: long ? 6 : 8,
+              height: long ? 12 : 8,
+              borderRadius: long ? 2 : 999,
+              background: CONFETTI_COLORS[i % CONFETTI_COLORS.length],
+              ["--x" as string]: `${Math.round(Math.cos(angle) * reach)}px`,
+              ["--y" as string]: `${Math.round(Math.sin(angle) * reach)}px`,
+              ["--r" as string]: `${((i * 71) % 300) - 150}deg`,
+              ["--i" as string]: i,
+            }}
+          />
+        );
+      })}
+    </span>
+  );
+}
+
+/** A link when there is somewhere to go, else a plain block with the same layout. */
+function MaybeLink({ href, className, children }: { href?: string | null; className?: string; children: ReactNode }) {
+  return href ? (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  ) : (
+    <div className={className}>{children}</div>
+  );
+}
+
+/** One dot per answer: a filled green dot for a right one, an open ring for one to fix (shape as well as colour). */
+function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: number; wrong: number; href?: string }) {
+  const { t } = useI18n();
+  return (
+    <MaybeLink href={wrong > 0 ? href : undefined} className={cn("flex flex-wrap items-center gap-x-4 gap-y-2", href && wrong > 0 && "group -mx-1 w-fit rounded-lg px-1 py-1 hover:bg-muted/60")}>
+      <ol
+        className="flex flex-wrap items-center gap-[7px]"
+        aria-label={t("finish.answersAria").replace("{c}", String(correct)).replace("{n}", String(wrong))}
+      >
+        {dots.map((ok, i) => (
+          <li
+            key={i}
+            aria-hidden
+            style={{ ["--i" as string]: i }}
+            className={cn("finish-dot size-3.5 rounded-full", ok ? "bg-emerald-500" : "border-[2.5px] border-rose-400")}
+          />
+        ))}
+      </ol>
+      {wrong > 0 && (
+        <span className={cn("text-small font-bold text-muted-foreground", href && "underline decoration-border-strong underline-offset-4 group-hover:text-foreground group-hover:decoration-foreground")}>
+          {t("finish.toFix").replace("{n}", String(wrong))}
+        </span>
+      )}
+    </MaybeLink>
+  );
+}
+
+/** One side of "You said 3/10 → You got 7/10": the cat's face for that number, then the number. */
+function SaidGot({ face, label, value, strong = false }: { face: ConfidenceFace; label: string; value: number; strong?: boolean }) {
+  return (
+    <span className="flex items-center gap-2">
+      <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-11 w-auto" />
+      <span className="flex flex-col">
+        <span className="text-caption font-bold leading-4 text-muted-foreground">{label}</span>
+        <span className={cn("text-[22px] font-extrabold leading-6 tabular-nums", strong ? "text-foreground" : "text-muted-foreground")}>
+          {value}
+          <span className="text-[0.6em]">/10</span>
+        </span>
+      </span>
+    </span>
+  );
+}
+
+/** A secondary action at the end of a session: words on the page, underlined, with a quiet note after them. */
+function TextAction({
+  title,
+  sub,
+  href,
+  onClick,
+  disabled,
+  i,
+}: {
+  title: ReactNode;
+  sub?: ReactNode;
+  href?: string;
+  onClick?: () => void;
+  disabled?: boolean;
+  i: number;
+}) {
+  const body = (
+    <>
+      <span className="font-bold text-foreground underline decoration-border-strong underline-offset-4 group-hover:decoration-foreground">{title}</span>
+      {sub && <span className="text-small text-muted-foreground">{sub}</span>}
+    </>
+  );
+  const cls = "group flex min-h-11 w-full flex-wrap items-center gap-x-2.5 gap-y-0 py-1.5 text-left text-[14.5px] leading-5 focus-visible:outline-none focus-visible:[&>span:first-child]:decoration-foreground disabled:opacity-60";
+  return (
+    <li className="life-rise" style={{ ["--i" as string]: i }}>
+      {href ? (
+        <Link href={href} className={cls}>
+          {body}
+        </Link>
+      ) : (
+        <button type="button" onClick={onClick} disabled={disabled} className={cls}>
+          {body}
+        </button>
+      )}
+    </li>
   );
 }
 
@@ -195,7 +354,13 @@ export function SessionDebrief({
   sessionBonus = 0,
   streakLitDays = null,
   onAskCopilot,
+  activities,
+  confidenceBefore = null,
 }: {
+  /** The learner's own 0-10 confidence from the start check; null when it was not asked. */
+  confidenceBefore?: number | null;
+  /** The session's activities: their saved answers draw the row of answer dots. */
+  activities?: SessionActivity[];
   onBack: () => void;
   /** Opens Copilot with this text in the input (the learner sends it). */
   onAskCopilot?: (prompt: string) => void;
@@ -273,7 +438,7 @@ export function SessionDebrief({
   });
 
   const { data: streak } = useStreak();
-  const { data: stats } = useQuery({
+  const { data: stats, isError: statsError } = useQuery({
     queryKey: ["session-stats", sessionId],
     queryFn: () => studySessionApi.getStats(sessionId),
     retry: 1,
@@ -286,8 +451,41 @@ export function SessionDebrief({
   });
 
   useEffect(() => {
-    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail: { sessionId } }));
-  }, [sessionId]);
+    // `quickStart` lets the subscribe wall stay off a Quick 5's end screen (its one ask is the habit prompt).
+    const detail: SessionCompletedDetail = { sessionId, quickStart };
+    window.dispatchEvent(new CustomEvent(SESSION_COMPLETED_EVENT, { detail }));
+  }, [sessionId, quickStart]);
+
+  // Mastery rows link to their topic: the catalog course (if the subject has one) and which topics have a note.
+  const { data: topicLinks } = useQuery({
+    queryKey: ["debrief-topic-links", workspaceId],
+    enabled: !!workspaceId && (stats?.mastery?.length ?? 0) > 0,
+    staleTime: 5 * 60_000,
+    retry: false,
+    queryFn: async () => {
+      // Only the course's id is needed, and most subjects follow no course: the student's course subjects say which do.
+      const courseId = (await coursesApi.mine().catch(() => [])).find((c) => c.workspaceId === workspaceId)?.courseId;
+      if (!courseId) return null;
+      const [course, notes] = await Promise.all([
+        loadCourse(courseId).catch(() => null),
+        notesApi.listForCourse(courseId).catch(() => []),
+      ]);
+      return course ? { course, withNotes: new Set(notes.map((n) => n.topicId)) } : null;
+    },
+  });
+  const topicHref = (m: MasteryChange): string | null => {
+    if (!workspaceId) return null;
+    const topic = topicLinks ? catalogTopicForLabel(topicLinks.course.units, m.label) : null;
+    if (topic && topicLinks) {
+      return topicLinks.withNotes.has(topic.id)
+        ? noteHref(topicLinks.course.id, topic.id)
+        : `/workspace/${encodeURIComponent(workspaceId)}?topic=${encodeURIComponent(topic.id)}`;
+    }
+    // Not a catalog topic: the subject, where its topics are listed.
+    return `/workspace/${encodeURIComponent(workspaceId)}`;
+  };
+  /** The one next step was tapped (funnel: which kind gets taken). */
+  const nextTapped = (kind: DebriefNextKind) => track("debrief.next_tapped", { kind }, workspaceId);
 
   const verdict = usefulHeadline(debrief?.headline) ?? debrief?.summary;
   const hasReport = !!debrief && (debrief.sections.length > 0 || !!usefulHeadline(debrief.headline));
@@ -311,14 +509,19 @@ export function SessionDebrief({
   const weakest = !quickStart && workspaceId ? stats?.weakest : null;
   // Fixing mistakes is the practice returners did; it takes the Copilot row's place.
   const askRow = mistakes > 0 && ask && wrong > 0 ? null : ask;
-  const showSteps = (!!deck && !!workspaceId) || (!!askRow && !!onAskCopilot) || mistakes > 0;
+  // "Fix N mistakes" sits right under the main button; the rest are optional extras further down.
+  const showSteps = (!!deck && !!workspaceId) || (!!askRow && !!onAskCopilot);
 
   const primary = handOff ? (
     <Button
       size="lg"
-      className="w-full text-[15px]"
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
       disabled={sessionsLoading || startFull.isPending}
-      onClick={() => (fullSession ? openSession(fullSession.id) : startFull.mutate())}
+      onClick={() => {
+        nextTapped("session");
+        if (fullSession) openSession(fullSession.id);
+        else startFull.mutate();
+      }}
     >
       {startFull.isPending || sessionsLoading ? (
         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -328,23 +531,33 @@ export function SessionDebrief({
       {t(fullSession ? "session.quick5FinishCta" : "session.quick5StartCta").replace("{n}", String(fullMinutes))}
     </Button>
   ) : quickStart ? (
-    <Button size="lg" className="w-full text-[15px]" onClick={onBack}>
+    <Button
+      size="lg"
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
+      onClick={() => {
+        nextTapped("home");
+        onBack();
+      }}
+    >
       {t("debrief.continue")}
       <ArrowRight className="ml-1.5 h-4 w-4" />
     </Button>
   ) : weakest ? (
     <Button
       size="lg"
-      className="w-full text-[15px]"
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
       disabled={startWeakest.isPending}
-      onClick={() => startWeakest.mutate(weakest.label)}
+      onClick={() => {
+        nextTapped("topic");
+        startWeakest.mutate(weakest.label);
+      }}
     >
       {startWeakest.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Play className="mr-2 h-4 w-4 fill-current" />}
       <span className="min-w-0 truncate">{t("debrief.nextTopic").replace("{topic}", weakest.label)}</span>
     </Button>
   ) : (
-    <Link href="/flashcards/review" className="block w-full">
-      <Button size="lg" className="w-full text-[15px]">
+    <Link href="/flashcards/review" className="block w-full" onClick={() => nextTapped("review")}>
+      <Button size="lg" className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold">
         {t("session.reviewDueCards")}
         <ArrowRight className="ml-1.5 h-4 w-4" />
       </Button>
@@ -354,81 +567,306 @@ export function SessionDebrief({
   const statTiles = (stats: ApiSessionStats) => (
     <>
       <StatTile
-        tone="text-accent"
-        icon={<Sparkles className="size-4" fill="currentColor" />}
-        value={`+${points}`}
+        value={<CountUp value={points} prefix="+" />}
         label={t("debrief.points")}
       />
       {stats.accuracy !== null ? (
         <StatTile
-          tone="text-success"
-          icon={<Target className="size-4" />}
           value={`${Math.round(stats.accuracy * 100)}%`}
           label={t("debrief.accuracy")}
         />
       ) : (
         <StatTile
-          tone="text-success"
-          icon={<CheckCircle2 className="size-4" />}
           value={`${stats.activitiesDone}/${stats.activitiesTotal}`}
           label={t("debrief.done")}
         />
       )}
       <StatTile
-        tone="text-[#0369a1]"
-        icon={<Clock className="size-4" />}
         value={t("debrief.minutes").replace("{n}", String(stats.minutes))}
         label={t("debrief.time")}
       />
     </>);
 
-  return (
-    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-2 text-center animate-fade-up">
-      <div className="relative" aria-hidden>
-        {newUi ? (
-          <Mascot pose="trophy" className="h-[112px] sm:h-[128px]" />
-        ) : (
-          <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
-        )}
-        <ConfettiDots />
-      </div>
+  if (newUi) {
+    const band = resultBand(stats?.accuracy);
+    const celebrate = !!stats && bandCelebrates(band);
+    // Today's streak day beats the pencil: the flame is the reward the student just earned.
+    const pose: MascotPose = band === "okay" && streakLitDays ? "flame" : BAND_POSE[band];
+    const pct = stats && stats.accuracy !== null ? Math.round(stats.accuracy * 100) : null;
+    const dots = stats ? resultDots(stats.answered, stats.correct, activities ? questionTrail(activities, restoredDraft) : []) : null;
+    // Mistakes to fix come first; a Quick 5 keeps its hand-off to the full session as the main step.
+    const fixFirst = mistakes > 0 && !handOff;
+    const fixTitle = (mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes));
+    const fixSub = t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)));
+    // Asked "how confident?" at the start: their number beside the result, on the same scale.
+    const said = stats ? confidenceResult(confidenceBefore, stats.correct, stats.answered) : null;
+    const mainButton = "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold sm:w-auto sm:min-w-[300px]";
+    // What the main button would have been, as a text link under "Fix N mistakes".
+    const demoted = !fixFirst ? null : quickStart ? (
+      <TextAction i={8} title={t("debrief.continue")} onClick={onBack} />
+    ) : weakest ? (
+      <TextAction
+        i={0}
+        title={t("debrief.nextTopic").replace("{topic}", weakest.label)}
+        onClick={() => startWeakest.mutate(weakest.label)}
+        disabled={startWeakest.isPending}
+      />
+    ) : (
+      <TextAction i={8} title={t("session.reviewDueCards")} href="/flashcards/review" />
+    );
+    return (
+      <div className="@container mx-auto flex w-full max-w-2xl flex-col pb-10 text-left" data-debrief data-band={stats ? band : undefined}>
+        {/*
+          One moment, in the home banner's own language: the scene for the student's time of day, the cat reacting to the result, the score.
+          The hero lays itself out from ITS OWN width (@container above), not the viewport's: with Copilot docked beside it the column can be
+          ~330px on a 768px screen, where the side-by-side layout put the cat over the score.
+        */}
+        <section
+          className="hero-card finish-hero relative isolate w-full overflow-hidden rounded-[var(--r-panel)] border border-border pt-[var(--banner-band)] @[520px]:flex @[520px]:min-h-[var(--banner-min)] @[520px]:items-center @[520px]:p-4"
+          aria-labelledby="finish-title"
+        >
+          {/* The scene, whole: a band above the words when narrow, the whole banner when wide. Nothing is faded over it. */}
+          <div aria-hidden className="hero-field pointer-events-none absolute inset-x-0 top-0 -z-10 h-[var(--banner-band)] @[520px]:inset-0 @[520px]:h-auto">
+            <div className="absolute bottom-[10px] left-1/2 h-[92px] -translate-x-1/2 @[520px]:bottom-[7%] @[520px]:left-auto @[520px]:right-[8%] @[520px]:h-[78%] @[520px]:max-h-[190px] @[520px]:translate-x-0">
+              <span className="hero-field__ground" />
+              {celebrate && <FinishConfetti />}
+              {stats && band === "okay" && <SparkleBurst burst={1} count={10} distance={64} />}
+              <Mascot pose={stats ? pose : "book"} key={stats ? pose : "wait"} className={cn("relative h-full", celebrate ? "cat-cheer" : "cat-peek")} priority />
+            </div>
+          </div>
+          {/* The words: under the band when narrow; on one solid card over the scene when wide. */}
+          <div className="hero-copy relative px-5 pb-5 pt-4 @max-[520px]:rounded-none @max-[520px]:border-0 @max-[520px]:bg-transparent @max-[520px]:shadow-none @[520px]:w-[58%] @[520px]:px-6 @[520px]:py-5">
+          <p className="hero-eyebrow line-clamp-2 break-words text-small font-extrabold">
+            {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
+          </p>
+          <h2 id="finish-title" className="mt-1 text-balance text-[28px] font-extrabold leading-[1.08] tracking-tight @[520px]:text-[32px]">
+            {stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
+          </h2>
+          <div className="mt-1 min-h-[22px] text-ui font-semibold text-foreground/75 line-clamp-2">
+            {verdict ? (
+              <MathText text={verdict} />
+            ) : debriefLoading ? (
+              <span className="skeleton inline-block h-4 w-44 rounded-full align-middle" />
+            ) : stats ? (
+              t(`finish.${band}Sub`)
+            ) : null}
+          </div>
+          {stats ? (
+            <p className="mt-3 flex items-baseline gap-3 @[520px]:mt-4" role="status">
+              <span className="finish-score text-[52px] font-extrabold leading-[0.9] tracking-tight tabular-nums @[520px]:text-[60px]">
+                {pct !== null ? (
+                  <>
+                    <CountUp value={pct} />
+                    <span className="text-[0.55em]">%</span>
+                  </>
+                ) : (
+                  `${stats.activitiesDone}/${stats.activitiesTotal}`
+                )}
+              </span>
+              <span className="text-ui font-bold leading-tight text-foreground/75">
+                {pct !== null
+                  ? t("finish.rightOf").replace("{c}", String(stats.correct)).replace("{n}", String(stats.answered))
+                  : t("debrief.done")}
+              </span>
+            </p>
+          ) : statsError ? null : (
+            <div className="mt-3 @[520px]:mt-4" role="status">
+              <span className="skeleton block h-[47px] w-40 rounded-2xl @[520px]:h-[54px]" />
+            </div>
+          )}
+          </div>
+        </section>
 
-      <h2 className="mt-4 text-2xl font-bold tracking-tight sm:text-[28px]">
-        {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
-      </h2>
-      <div className="mt-1.5 min-h-6 text-[15px] leading-6 text-muted-foreground">
-        {verdict ? (
-          <MathText text={verdict} />
-        ) : debriefLoading ? (
-          <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
-        ) : null}
+        {/* What they said beside what they got: the one comparison only this screen can make. */}
+        {said && (
+          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={said.verdict}>
+            <p className="sr-only">{t("finish.saidGot").replace("{a}", String(said.said)).replace("{b}", String(said.got))}</p>
+            <div className="flex items-center gap-3" aria-hidden>
+              <SaidGot face={confidenceFace(said.said)} label={t("finish.said")} value={said.said} />
+              <ArrowRight className="size-5 shrink-0 text-faint" />
+              <SaidGot face={confidenceFace(said.got)} label={t("finish.got")} value={said.got} strong />
+            </div>
+            <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${said.verdict}`)}</p>
+          </div>
+        )}
+
+        {/* One next step. */}
+        <div className="life-rise mt-6 w-full px-1" style={{ ["--i" as string]: 4 }}>
+          {fixFirst ? (
+            <>
+              <Link href={practiceHref({ sessionId })} className="block w-full sm:w-fit" onClick={() => nextTapped("mistakes")}>
+                <Button size="lg" className={mainButton}>
+                  <Play className="mr-2 h-4 w-4 fill-current" />
+                  {fixTitle}
+                </Button>
+              </Link>
+              <p className="mt-2.5 text-small text-muted-foreground">{fixSub}</p>
+            </>
+          ) : (
+            <div className="[&_button]:sm:w-auto [&_button]:sm:min-w-[300px] [&>a]:sm:w-fit">{primary}</div>
+          )}
+        </div>
+        {/* At most two other ways on, then everything else behind one disclosure. */}
+        <ul className="mt-3 w-full px-1">
+          {demoted}
+          {mistakes > 0 && !fixFirst && (
+            <TextAction i={5} title={fixTitle} sub={fixSub} href={practiceHref({ sessionId })} />
+          )}
+          {(handOff || !quickStart) && (
+            <TextAction i={6} title={t("session.backToWorkspace")} onClick={onBack} />
+          )}
+          <li className="life-rise" style={{ ["--i" as string]: 7 }}>
+            <button
+              type="button"
+              onClick={() => setShowReport((v) => !v)}
+              aria-expanded={showReport}
+              aria-controls="finish-details"
+              className="group flex min-h-11 items-center gap-1 py-1.5 text-[14.5px] font-bold text-muted-foreground hover:text-foreground"
+            >
+              {t(showReport ? "finish.hideDetails" : "finish.seeDetails")}
+              <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
+            </button>
+          </li>
+        </ul>
+
+        {showReport && (
+          <div id="finish-details" className="mt-2 flex w-full flex-col gap-7 border-t border-border px-1 pt-6 animate-fade-up">
+            {stats && (
+              <section aria-labelledby="finish-earned">
+                <h3 id="finish-earned" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsEarned")}</h3>
+                <ul className="mt-2.5 flex flex-wrap items-baseline gap-x-7 gap-y-2">
+                  <li className="flex items-baseline gap-1.5">
+                    <span className="text-[24px] font-extrabold leading-none tabular-nums">+{points}</span>
+                    <span className="text-small font-bold text-muted-foreground">{t("debrief.points").toLowerCase()}</span>
+                  </li>
+                  {streakDays !== null && streakDays > 0 && (
+                    <li className="flex items-baseline gap-1.5">
+                      <Flame aria-hidden className="size-[22px] shrink-0 self-center text-[var(--flame)]" fill="currentColor" strokeWidth={1.5} />
+                      <span className="text-small font-bold text-foreground">{t("rewards.streakDays").replace("{n}", String(streakDays))}</span>
+                    </li>
+                  )}
+                  <li className="flex items-baseline gap-1.5">
+                    <span className="text-[24px] font-extrabold leading-none tabular-nums">{stats.minutes}</span>
+                    <span className="text-small font-bold text-muted-foreground">{t("debrief.minutes").replace("{n}", "").trim()}</span>
+                  </li>
+                </ul>
+              </section>
+            )}
+            {dots && stats && (
+              <section aria-labelledby="finish-answers">
+                <h3 id="finish-answers" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsAnswers")}</h3>
+                <div className="mt-2.5">
+                  <AnswerDots dots={dots.dots} correct={stats.correct} wrong={wrong} href={sessionMistakesHref(workspaceId, sessionId)} />
+                </div>
+              </section>
+            )}
+            {stats && mastery.length > 0 && (
+              <section aria-labelledby="finish-mastery">
+                <h3 id="finish-mastery" className="text-small font-extrabold text-muted-foreground">{t("debrief.masteryTitle")}</h3>
+                <MasteryRows mastery={mastery} className="mt-3 space-y-3" phoneMax={3} hrefFor={topicHref} />
+              </section>
+            )}
+            {((deck && workspaceId) || (askRow && onAskCopilot)) && (
+              <section aria-labelledby="finish-more">
+                <h3 id="finish-more" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsMore")}</h3>
+                <ul className="mt-1">
+                  {deck && workspaceId && (
+                    <TextAction
+                      i={0}
+                      title={t("habit.flashcardsTitle")}
+                      sub={t("habit.flashcardsSub")
+                        .replace("{n}", String(deck.cards))
+                        .replace("{m}", String(Math.max(1, Math.min(10, Math.ceil(deck.cards / 6)))))}
+                      href={`/flashcards/${deck.id}?ws=${workspaceId}&mode=learn`}
+                    />
+                  )}
+                  {askRow && onAskCopilot && (
+                    <TextAction i={0} title={askRow.title} sub={askRow.sub} onClick={() => onAskCopilot(askRow.prompt)} />
+                  )}
+                  <InviteCard variant="link" />
+                </ul>
+              </section>
+            )}
+            {hasReport && debrief && (
+              <section aria-labelledby="finish-report">
+                <h3 id="finish-report" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsReport")}</h3>
+                <DebriefReport debrief={debrief} bare />
+              </section>
+            )}
+          </div>
+        )}
+        {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
+        {quickStart && stats && (
+          <HabitPrompt
+            sessionId={sessionId}
+            accuracy={stats.accuracy}
+            activitiesDone={stats.activitiesDone}
+            subjectTitle={subjectTitle}
+            // Let the mastery gains fill and be read before the sheet slides over them.
+            showAfterMs={mastery.length > 0 ? MASTERY_READ_MS : undefined}
+          />
+        )}
       </div>
+    );
+  }
+
+  return (
+    <div className="mx-auto flex max-w-md flex-col items-center pb-10 pt-0 text-center animate-fade-up sm:pt-2">
+      <>
+        <div className="relative" aria-hidden>
+          <Image src="/illustrations/props/trophy.png" alt="" width={160} height={160} className="w-24" />
+          <ConfettiDots />
+        </div>
+        <h2 className="mt-3 text-[30px] font-extrabold tracking-tight sm:mt-5 sm:text-[36px]">
+          {t(quickStart ? "debrief.quick5Complete" : "debrief.complete")}
+        </h2>
+        <div className="mt-1 min-h-6 text-ui text-muted-foreground line-clamp-2 sm:mt-1.5">
+          {verdict ? (
+            <MathText text={verdict} />
+          ) : debriefLoading ? (
+            <span className="inline-block h-4 w-56 animate-pulse rounded-full bg-muted align-middle" />
+          ) : null}
+        </div>
+      </>
 
       {stats && mastery.length > 0 ? (
-        <div className="mt-6 w-full">
+        <div className="mt-4 w-full sm:mt-6">
           <StatsWithMastery tiles={statTiles(stats)} mastery={mastery} />
         </div>
-      ) : (
-      <div className="mt-6 grid w-full grid-cols-3 gap-2.5" role="status">
+      ) : statsError ? null : (
+      <div className={cn("mt-4 w-full sm:mt-6", slipRow)} role="status">
         {stats ? (
           statTiles(stats)
         ) : (
-          [0, 1, 2].map((i) => <div key={i} className="h-[74px] animate-pulse rounded-2xl bg-muted" />)
+          [0, 1, 2].map((i) => (
+            <div key={i} className="px-4 py-3.5">
+              <Skeleton className="h-[42px] w-full" />
+            </div>
+          ))
         )}
       </div>
       )}
 
       {streakDays !== null && streakDays > 0 && (
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#fff1e6] px-3.5 py-1.5 text-[13px] font-semibold text-[#9a3412]">
-          <Flame className={cn("size-4 text-[#f97316]", streakLitDays !== null && "animate-streak-pop")} fill="currentColor" strokeWidth={1.6} />
+        <p className="mt-3 w-full px-1 text-left text-small font-bold text-foreground">
           {t("rewards.streakDays").replace("{n}", String(streakDays))}
         </p>
       )}
 
-      <div className="mt-7 w-full space-y-1">
+      <div className="mt-4 w-full space-y-3 sm:mt-7">
         {primary}
+        {/* The second step sits right under the first, so both are visible without scrolling. */}
+        {mistakes > 0 && (
+          <div className="life-press overflow-hidden rounded-[22px] bg-muted text-left">
+            <NextStep
+              title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
+              sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
+              href={practiceHref({ sessionId })}
+            />
+          </div>
+        )}
         {(handOff || !quickStart) && (
-          <Button size="lg" variant="ghost" className="w-full text-muted-foreground" onClick={onBack}>
+          <Button size="md" variant="ghost" className="h-11 w-full text-muted-foreground" onClick={onBack}>
             {t("session.backToWorkspace")}
           </Button>
         )}
@@ -439,18 +877,9 @@ export function SessionDebrief({
           <h3 id="debrief-next-steps" className="mb-2 px-1 text-[12.5px] font-semibold text-muted-foreground">
             {t("habit.nextSmallStep")}
           </h3>
-          <div className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
-            {mistakes > 0 && (
-              <NextStep
-                icon={<RotateCcw className="size-[18px]" />}
-                title={(mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes))}
-                sub={t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)))}
-                href={practiceHref({ sessionId })}
-              />
-            )}
+          <div className="divide-y divide-border border-y border-border">
             {deck && workspaceId && (
               <NextStep
-                icon={<Layers className="size-[18px]" />}
                 title={t("habit.flashcardsTitle")}
                 sub={t("habit.flashcardsSub")
                   .replace("{n}", String(deck.cards))
@@ -460,7 +889,6 @@ export function SessionDebrief({
             )}
             {askRow && onAskCopilot && (
               <NextStep
-                icon={<MessageCircle className="size-[18px]" />}
                 title={askRow.title}
                 sub={askRow.sub}
                 onClick={() => onAskCopilot(askRow.prompt)}
@@ -473,6 +901,7 @@ export function SessionDebrief({
       {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
       {quickStart && stats && (
         <HabitPrompt
+          sessionId={sessionId}
           accuracy={stats.accuracy}
           activitiesDone={stats.activitiesDone}
           subjectTitle={subjectTitle}
@@ -487,15 +916,24 @@ export function SessionDebrief({
             type="button"
             onClick={() => setShowReport((v) => !v)}
             aria-expanded={showReport}
-            className="mx-auto flex items-center gap-1 text-[13px] font-semibold text-accent-dim hover:underline"
+            className="mx-auto flex min-h-11 items-center gap-1 text-[13px] font-semibold text-foreground underline decoration-border-strong underline-offset-4"
           >
             {t(showReport ? "debrief.hideReport" : "debrief.seeReport")}
             <ChevronDown className={cn("size-4 transition-transform", showReport && "rotate-180")} />
           </button>
-          {showReport && debrief && (
-            <div className="mt-4 space-y-5 rounded-2xl border border-border p-5 animate-fade-up">
+          {showReport && debrief && <DebriefReport debrief={debrief} />}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** The model-written report, opened from "See your full report". */
+function DebriefReport({ debrief, bare = false }: { debrief: ApiSessionDebrief; /** Inside the details: no rule or inset of its own. */ bare?: boolean }) {
+  return (
+            <div className={bare ? "mt-2.5 space-y-5" : "mt-2 space-y-5 border-t border-border px-1 pt-5 animate-fade-up"}>
               {usefulHeadline(debrief.headline) && debrief.summary && (
-                <p className="text-sm leading-6 text-foreground">
+                <p className="text-ui text-foreground">
                   <MathText text={debrief.summary} />
                 </p>
               )}
@@ -503,7 +941,7 @@ export function SessionDebrief({
                 <section key={section.heading}>
                   <h3 className="mb-1.5 text-sm font-semibold">{section.heading}</h3>
                   {section.body && (
-                    <p className="text-sm leading-6 text-muted-foreground">
+                    <p className="text-ui text-muted-foreground">
                       <MathText text={section.body} />
                     </p>
                   )}
@@ -518,11 +956,11 @@ export function SessionDebrief({
                             )}
                           />
                           <div>
-                            <p className="text-sm font-medium leading-6">
+                            <p className="text-ui font-medium">
                               <MathText text={b.text} />
                             </p>
                             {b.detail && (
-                              <p className="text-sm leading-6 text-muted-foreground">
+                              <p className="text-ui text-muted-foreground">
                                 <MathText text={b.detail} />
                               </p>
                             )}
@@ -534,9 +972,39 @@ export function SessionDebrief({
                 </section>
               ))}
             </div>
-          )}
-        </div>
+  );
+}
+
+/**
+ * The summary for a session left before the end (purpose audit, finding 3):
+ * no cheer, no points, no streak day — what is left and one way back in.
+ */
+export function SessionUnfinished({
+  activities,
+  onResume,
+  onLeave,
+}: {
+  activities: SessionActivity[];
+  onResume: (activityId: string) => void;
+  onLeave: () => void;
+}) {
+  const { t } = useI18n();
+  const { left, minutes, resumeId } = unfinishedSummary(activities);
+  return (
+    <div className="mx-auto flex w-full max-w-md flex-col items-center pb-10 pt-6 text-center sm:pt-12" data-debrief="unfinished">
+      <Mascot pose="book" className="h-[104px]" />
+      <h2 className="mt-5 text-[26px] font-extrabold leading-tight tracking-tight">{t("purpose.unfinishedTitle")}</h2>
+      <p className="mt-2 text-ui text-muted-foreground">
+        {(left === 1 ? t("purpose.unfinishedSubOne") : t("purpose.unfinishedSub")).replace("{n}", String(left)).replace("{m}", String(minutes))}
+      </p>
+      {resumeId && (
+        <Button size="lg" className="mt-6 w-full sm:w-auto sm:min-w-[260px]" onClick={() => onResume(resumeId)}>
+          {t("purpose.keepGoing")}
+        </Button>
       )}
+      <button type="button" onClick={onLeave} className="mt-3 flex min-h-11 items-center text-[14.5px] font-bold text-muted-foreground hover:text-foreground">
+        {t("purpose.leaveForNow")}
+      </button>
     </div>
   );
 }

@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "3-2",
+  "topicCode": "3.2",
+  "topicName": "Implicit differentiation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:39:10.930Z",
+  "cards": [
+    {
+      "id": "03meg6z",
+      "kind": "concept",
+      "front": "What is the core idea behind implicit differentiation?",
+      "back": "Differentiate both sides with respect to $x$, treating $y$ as a **function of x**, then solve for $\\frac{dy}{dx}$. You do not need to isolate $y$ first.",
+      "hint": "Do you have to solve for y before differentiating?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1tbll5w",
+      "kind": "formula",
+      "front": "For $x^2+y^2=25$, what is $\\frac{dy}{dx}$?",
+      "back": "$\\frac{dy}{dx}=-\\frac{x}{y}$, valid when $y\\ne0$. It comes from differentiating to $2x+2y\\frac{dy}{dx}=0$ and dividing.",
+      "hint": "Collect the dy/dx terms, then factor and divide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1xpdxp2",
+      "kind": "mistake",
+      "front": "A student differentiates $y^2$ with respect to $x$ and writes $2y$. What is wrong?",
+      "back": "**y is not a constant**. Its derivative with respect to $x$ is $\\frac{dy}{dx}$, so the correct result is $2y\\frac{dy}{dx}$.",
+      "hint": "Does y change as x changes?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bj3omo",
+      "kind": "process",
+      "front": "What are the steps to find $\\frac{dy}{dx}$ implicitly at a given point?",
+      "back": "Check the point satisfies the equation. Differentiate every term with respect to $x$. Collect all $\\frac{dy}{dx}$ terms, factor, and divide. Then substitute the point.",
+      "hint": "Start by checking the point is on the curve.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ea171s",
+      "kind": "term",
+      "front": "What is an implicit equation?",
+      "back": "An **implicit equation** relates $x$ and $y$ without needing $y$ to be isolated, such as $x^2+y^2=25$.",
+      "hint": "Is y written on its own on one side?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "05x0e59",
+      "kind": "concept",
+      "front": "What does it mean to treat $y$ as a function of $x$?",
+      "back": "**y depends on x**, so its derivative with respect to $x$ may be nonzero. This is written $\\frac{dy}{dx}$, even when $y$'s formula is unknown.",
+      "hint": "Think about what y changes with.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1k02r2m",
+      "kind": "concept",
+      "front": "Why differentiate $xy$ with respect to $x$ using the product rule?",
+      "back": "Both factors depend on $x$. The **product rule** gives $y+x\\frac{dy}{dx}$.",
+      "hint": "Are both factors changing with x?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ykrfbf",
+      "kind": "mistake",
+      "front": "Why is $\\frac{dy}{dx}$ undefined at $(5,0)$ on $x^2+y^2=25$?",
+      "back": "The slope formula $-\\frac{x}{y}$ has denominator $y=0$, so you cannot divide. The tangent there is **vertical**, so its slope is undefined.",
+      "hint": "Look at the denominator of the slope formula.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09wsdj7",
+      "kind": "example",
+      "front": "Find $\\frac{dy}{dx}$ for $xy+y^2=6$ in terms of $x$ and $y$.",
+      "back": "$\\frac{dy}{dx}=-\\frac{y}{x+2y}$, when $x+2y\\ne0$. Differentiating gives $y+x\\frac{dy}{dx}+2y\\frac{dy}{dx}=0$, then factor.",
+      "hint": "Use the product rule on xy, then collect dy/dx terms.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05fn56u",
+      "kind": "formula",
+      "front": "What is $\\frac{dy}{dx}$ for the ellipse $\\frac{x^2}{9}+\\frac{y^2}{4}=1$?",
+      "back": "$\\frac{dy}{dx}=-\\frac{4x}{9y}$, when $y\\ne0$. It comes from $\\frac{2x}{9}+\\frac{y}{2}\\frac{dy}{dx}=0$.",
+      "hint": "Differentiate each term, then isolate dy/dx.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11gtb0h",
+      "kind": "example",
+      "front": "Find the tangent slope at $(0,2)$ on $\\frac{x^2}{9}+\\frac{y^2}{4}=1$.",
+      "back": "The slope is **0**. Check the point first, then substitute into $-\\frac{4x}{9y}$ to get $-\\frac{4(0)}{9(2)}=0$.",
+      "hint": "Substitute x = 0 and y = 2 into the slope formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1q90767",
+      "kind": "example",
+      "front": "Find $\\frac{dy}{dx}$ at $(3,4)$ on $x^2+y^2=25$.",
+      "back": "The slope is $-\\frac{3}{4}$. Use $\\frac{dy}{dx}=-\\frac{x}{y}$ with $x=3$ and $y=4$.",
+      "hint": "Substitute into the slope formula after checking the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "084cd7f",
+      "kind": "concept",
+      "front": "Why check that a point lies on the curve before finding its slope?",
+      "back": "A curve can have several points with the same $x$-coordinate, and their **slopes may differ**. So the point must satisfy the original equation.",
+      "hint": "Could two points with the same x have different slopes?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1p2yfuo",
+      "kind": "term",
+      "front": "What is a tangent line?",
+      "back": "A **tangent line** at a point follows the curve's local direction there. Its slope is $\\frac{dy}{dx}$ at that point, when the derivative exists.",
+      "hint": "Think about the direction of the curve at one point.",
+      "sectionId": "s4"
+    }
+  ]
+}

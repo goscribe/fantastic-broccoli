@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "7-4",
+  "topicCode": "7.4",
+  "topicName": "Atmospheric CO2 and particulates",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:51.835Z",
+  "cards": [
+    {
+      "id": "1fcd1cy",
+      "kind": "concept",
+      "front": "Why does human-released $\\text{CO}_2$ build up in the air when natural releases are much larger?",
+      "back": "Natural $\\text{CO}_2$ releases are roughly balanced by uptake in **carbon sinks** such as forests and oceans. Burning fossil fuels adds carbon locked away for millions of years, and sinks cannot absorb all of it.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "05mnol2",
+      "kind": "concept",
+      "front": "Why are fine particles such as $\\text{PM}_{2.5}$ more harmful to health than coarse particles?",
+      "back": "Coarse particles mostly lodge in the nose and throat. Fine particles travel deep into the lungs, and some pass into the blood.",
+      "hint": "Think about how far air travels down the airway before particles drop out.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dv2zvt",
+      "kind": "concept",
+      "front": "Why do light-colored and dark particles have opposite effects on climate?",
+      "back": "Light particles, such as sulfate droplets, reflect sunlight and cool the surface. Dark particles, such as soot, absorb sunlight and warm the air.",
+      "hint": "Think about what happens to sunlight when it hits a light surface versus a dark one.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1eq65xj",
+      "kind": "term",
+      "front": "What is a carbon sink?",
+      "back": "A **carbon sink** is a reservoir, such as a forest or the ocean, that absorbs more carbon than it releases.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1d4oxdb",
+      "kind": "term",
+      "front": "What is a fossil fuel?",
+      "back": "A **fossil fuel** is a carbon-rich energy source, such as coal, oil, or natural gas, formed from the remains of ancient organisms.",
+      "hint": "Think about the energy sources named in the note's section on burning fuels.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0csb3k1",
+      "kind": "concept",
+      "front": "Which natural processes add carbon dioxide to the air?",
+      "back": "**Respiration**, decomposition of dead matter, and volcanic eruptions all release carbon dioxide into the air.",
+      "hint": "Think about living things and about rocks.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0k9fi7v",
+      "kind": "term",
+      "front": "What is particulate matter?",
+      "back": "**Particulate matter** is a mix of tiny solid particles and liquid droplets suspended in air.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x6eegk",
+      "kind": "term",
+      "front": "What does PM2.5 mean?",
+      "back": "**PM2.5** is particulate matter $2.5\\,\\mu\\text{m}$ across or smaller, far thinner than a human hair.",
+      "hint": "The number in the name describes a size.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x2k0zk",
+      "kind": "concept",
+      "front": "How can particulates appear in the air without being released directly?",
+      "back": "Some form in the air when gases such as $\\text{SO}_2$ react. Others are released directly from sources like smoke, dust, or exhaust.",
+      "hint": "Think about whether every particle leaves a chimney as a solid.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "16haj6t",
+      "kind": "concept",
+      "front": "What long-term health risks does particulate exposure raise?",
+      "back": "Long-term exposure raises the risk of **heart disease** and lung cancer. Shorter exposure can cause coughing, asthma attacks, bronchitis, and reduced lung function.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0soku49",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat carbon dioxide as a toxic outdoor pollutant like soot?",
+      "back": "At outdoor levels $\\text{CO}_2$ is not directly harmful. Its main effects are indirect, through climate warming and heat stress.",
+      "hint": "Compare how soot harms people with how carbon dioxide does.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dsnzgn",
+      "kind": "term",
+      "front": "What is a greenhouse gas?",
+      "back": "A **greenhouse gas** absorbs outgoing infrared radiation that Earth radiates and re-emits it, warming the lower atmosphere. $\\text{CO}_2$ is one example.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wqkd5j",
+      "kind": "term",
+      "front": "What is albedo?",
+      "back": "**Albedo** is the fraction of incoming sunlight that a surface reflects rather than absorbs.",
+      "hint": "Think about how a snowy surface differs from a dark road in sunlight.",
+      "sectionId": "s4"
+    }
+  ]
+}

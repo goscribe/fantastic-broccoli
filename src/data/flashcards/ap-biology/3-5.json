@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "3-5",
+  "topicCode": "3.5",
+  "topicName": "Cellular respiration",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:31.857Z",
+  "cards": [
+    {
+      "id": "0l0jhia",
+      "kind": "process",
+      "front": "What are the main stages of aerobic cellular respiration, in order, and where does each happen?",
+      "back": "**Glycolysis** in the cytosol, then pyruvate oxidation and the citric acid cycle in the mitochondrial matrix, then the electron transport chain and ATP synthase in the inner mitochondrial membrane.",
+      "hint": "Three locations, three stages."
+    },
+    {
+      "id": "0bfk5p3",
+      "kind": "concept",
+      "front": "How does the electron transport chain help make most of the ATP?",
+      "back": "Electrons passing along the chain release energy that pumps hydrogen ions into the intermembrane space. Their flow back through **ATP synthase** drives ATP production.",
+      "hint": "Follow the hydrogen ions.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sy2qwi",
+      "kind": "concept",
+      "front": "Why does glucose release its energy in stages instead of all at once?",
+      "back": "Releasing energy in **stages** lets the cell capture some of it in ATP and electron carriers. The remaining energy stays in the products or is released as heat.",
+      "hint": "Think about what the cell can actually capture.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1gq7pt4",
+      "kind": "term",
+      "front": "What is glycolysis, and where does it happen?",
+      "back": "The pathway in the **cytosol** that splits one glucose into two pyruvate, making a small net amount of ATP and NADH. It does not need oxygen.",
+      "hint": "It starts the whole process.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18ptaev",
+      "kind": "term",
+      "front": "What is NADH?",
+      "back": "An **electron carrier** that moves high-energy electrons from earlier reactions to later reactions.",
+      "hint": "Think of it as a delivery vehicle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01rijau",
+      "kind": "term",
+      "front": "Where do pyruvate oxidation and the citric acid cycle take place?",
+      "back": "In the **mitochondrial matrix**, the compartment inside the inner membrane.",
+      "hint": "Inside the inner membrane.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01m1x5b",
+      "kind": "concept",
+      "front": "What does the citric acid cycle release and produce?",
+      "back": "It releases **carbon dioxide** from the acetyl group, makes a small amount of ATP, and transfers electrons to NADH and FADH2.",
+      "hint": "Most ATP comes later, from the chain.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0bv8px0",
+      "kind": "mistake",
+      "front": "Why is it wrong to say oxygen splits glucose during glycolysis?",
+      "back": "Glycolysis does not use oxygen. Oxygen is the **final electron acceptor** at the end of the mitochondrial electron transport chain.",
+      "hint": "Where in the process does oxygen appear?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0dwqtaa",
+      "kind": "term",
+      "front": "What does fermentation do to NADH?",
+      "back": "It transfers electrons from NADH to another molecule, **regenerating NAD+** so glycolysis can keep running without oxygen.",
+      "hint": "Glycolysis needs a supply of NAD+.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14nvzre",
+      "kind": "mistake",
+      "front": "Are fermentation and anaerobic respiration the same thing?",
+      "back": "No. Both work without oxygen, but only **anaerobic respiration** uses an electron transport chain. Fermentation does not.",
+      "hint": "Compare the use of an electron transport chain.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04wf25c",
+      "kind": "term",
+      "front": "What is anaerobic respiration?",
+      "back": "Respiration that uses an **electron transport chain** with a final electron acceptor other than oxygen.",
+      "hint": "Oxygen is not the final acceptor here.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18ulfp9",
+      "kind": "concept",
+      "front": "Why does fermentation not produce extra ATP?",
+      "back": "Fermentation only recycles NAD+. The only ATP comes from the **net ATP made by glycolysis**.",
+      "hint": "Fermentation's job is recycling a carrier.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bnizr9",
+      "kind": "concept",
+      "front": "Why is the folded inner mitochondrial membrane useful?",
+      "back": "Its folds give **extensive space** for the electron transport chain and ATP synthase.",
+      "hint": "More surface means more room for proteins.",
+      "sectionId": "s3"
+    }
+  ]
+}

@@ -3,7 +3,7 @@
 import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
-import { ArrowLeft, ArrowRight, Check, Layers, ListChecks, RotateCcw, Sparkles, X } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, Layers, ListChecks, RotateCcw, X } from "lucide-react";
 import { ScribeLogo } from "@/components/graphics/logo";
 import { Mascot } from "@/components/rewards/mascot";
 import { Button } from "@/components/ui/button";
@@ -20,9 +20,8 @@ const fill = (s: string, vars: Record<string, string | number>) =>
 function MakeYourOwn({ refCode }: { refCode: string | null }) {
   const { t } = useI18n();
   return (
-    <section className="mt-6 rounded-2xl border border-accent/20 bg-accent-soft p-5 text-center">
-      <Sparkles className="mx-auto size-6 text-accent" fill="currentColor" />
-      <h2 className="mt-2 text-[18px] font-bold tracking-tight">{t("share.ctaTitle")}</h2>
+    <section className="mt-6 border-t border-border pt-6 text-center">
+      <h2 className="page-h2">{t("share.ctaTitle")}</h2>
       <p className="mx-auto mt-1 max-w-sm text-[13.5px] leading-snug text-muted-foreground">{t("share.ctaBody")}</p>
       <Link href={signupHref(refCode)} className="mt-4 inline-block">
         <Button size="lg" className="gap-2 text-[15px]">

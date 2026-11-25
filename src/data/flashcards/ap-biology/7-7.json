@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "7-7",
+  "topicCode": "7.7",
+  "topicName": "Common ancestry",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:51.632Z",
+  "cards": [
+    {
+      "id": "18ozkqa",
+      "kind": "concept",
+      "front": "What does common ancestry mean for two living species?",
+      "back": "**Common ancestry** means two or more species descended from the same earlier population. Their lineages then diverged and changed separately over generations.",
+      "hint": "Think about where their lineages meet in the past.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1cym7uq",
+      "kind": "concept",
+      "front": "Why can homologous structures serve different functions yet still support shared ancestry?",
+      "back": "**Homologous structures** are corresponding features inherited from a common ancestor. Each lineage changed after diverging, so the function may differ, but the underlying pattern is kept.",
+      "hint": "Consider human arms, bat wings and whale flippers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1a74s6c",
+      "kind": "concept",
+      "front": "How do you find the most recent common ancestor of two tips on an evolutionary tree?",
+      "back": "Trace both branches backward until they meet. The meeting point is a **branch point**, or node, that represents their most recent common ancestor.",
+      "hint": "Follow the lines, not the labels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "06c32a5",
+      "kind": "term",
+      "front": "What is a common ancestor?",
+      "back": "An **ancestral population** from which two or more lineages descended and diverged.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0tjbgwi",
+      "kind": "term",
+      "front": "What are homologous structures?",
+      "back": "**Corresponding features** inherited from a common ancestor, even if their functions now differ.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1c4srbk",
+      "kind": "term",
+      "front": "What is a branch point on an evolutionary tree?",
+      "back": "A **node** where a shared ancestral lineage splits into descendant lineages.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13t33uh",
+      "kind": "term",
+      "front": "What does an evolutionary tree represent?",
+      "back": "A **proposed pattern of ancestry** inferred from evidence, showing branching relationships among lineages.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "048scb1",
+      "kind": "process",
+      "front": "What steps help you assess whether two features are homologous?",
+      "back": "1) Compare detailed structure. 2) Compare position within the body. 3) Add evidence from development or inherited DNA to strengthen the comparison.",
+      "hint": "Similarity alone is not enough.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0u5uve3",
+      "kind": "mistake",
+      "front": "Why is it wrong to say humans descended from living chimpanzees?",
+      "back": "Both living species followed **separate lineages** after their shared ancestor. Humans and chimpanzees share an ancestor, not a living parent-child relationship.",
+      "hint": "Think about what the shared ancestor is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vlglzc",
+      "kind": "mistake",
+      "front": "Two species look alike, so one must be the ancestor of the other. What is wrong with this?",
+      "back": "Resemblance does not make one living species the **ancestor** of another. Look for their shared ancestral population instead.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bq8fwo",
+      "kind": "mistake",
+      "front": "Why is it wrong to judge relatedness by how close two tip labels appear?",
+      "back": "Relatedness depends on the **most recent shared node**, not on label spacing. Rotating branches around a node can reorder tips without changing the ancestry shown.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yj2ezw",
+      "kind": "mistake",
+      "front": "Does a longer branch on a tree mean more time has passed?",
+      "back": "Not unless a **scale** is shown. Without a scale, branch length does not indicate elapsed time or the amount of evolutionary change.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ydv70a",
+      "kind": "mistake",
+      "front": "Is an evolutionary tree a ladder from less evolved to more evolved species?",
+      "back": "No. It describes **branching descent**, not a ladder. Species at the tips are not more or less advanced; they followed different lineages.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05q4a5c",
+      "kind": "concept",
+      "front": "Why is one shared feature not enough to place a derived trait on a tree branch?",
+      "back": "The feature could have **changed independently** in different lineages. Compare multiple structures or inherited DNA sequences; support is strongest when traits agree.",
+      "sectionId": "s4"
+    }
+  ]
+}

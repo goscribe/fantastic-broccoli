@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-physics",
+  "topicId": "c-5",
+  "topicCode": "C.5",
+  "topicName": "Doppler effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:31:38.795Z",
+  "cards": [
+    {
+      "id": "0f30i98",
+      "kind": "concept",
+      "front": "What causes the Doppler effect?",
+      "back": "**Relative motion** between a wave source and an observer changes the observed frequency. Moving closer raises it, and moving apart lowers it.",
+      "hint": "Think about what changes when the source and observer move.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0kl9q57",
+      "kind": "concept",
+      "front": "Why does a moving sound source change the pitch an observer hears?",
+      "back": "A moving source changes the **wavefront spacing** in the medium. Wavefronts ahead bunch together, giving a shorter wavelength and a higher frequency.",
+      "hint": "Where are the wavefronts closer together?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "12swwgg",
+      "kind": "formula",
+      "front": "Which equation gives the frequency heard from a moving sound source or observer along the line joining them?",
+      "back": "$f'=f\\frac{v\\pm v_o}{v\\mp v_s}$, where $f$ is emitted frequency, $f'$ is observed frequency, $v$ is sound speed in the **medium**, and $v_o$, $v_s$ are observer and source speeds. Use plus on top and minus below for approach.",
+      "hint": "Check that motion towards gives f' greater than f.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ahe2wz",
+      "kind": "mistake",
+      "front": "A student says a moving observer compresses the sound waves, so the pitch rises. What is wrong?",
+      "back": "A moving observer does not change wavefront spacing. They just cross wavefronts more often. Only **source** motion changes the spacing in the medium.",
+      "hint": "Where is the wavefront spacing measured?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1wd72o9",
+      "kind": "example",
+      "front": "A stationary observer hears a 500 Hz source approaching at 20 m s⁻¹. Sound travels at 340 m s⁻¹ in air. What frequency is heard?",
+      "back": "About **531 Hz**, from $f'=500\\times\\frac{340}{340-20}=531.25$ Hz. The denominator uses $v-v_s$ because the source moves towards the observer.",
+      "hint": "Which sign goes in the denominator for an approaching source?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1im8tsz",
+      "kind": "term",
+      "front": "What is a blueshift?",
+      "back": "A shift of received light towards **higher frequency** and shorter wavelength. It happens when the source approaches the observer.",
+      "hint": "Think of the colour at the blue end of the spectrum.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lj16mo",
+      "kind": "term",
+      "front": "What is a redshift?",
+      "back": "A shift of received light towards **lower frequency** and longer wavelength. It happens when the source moves away from the observer.",
+      "hint": "Think of the colour at the red end of the spectrum.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19zg0hk",
+      "kind": "concept",
+      "front": "Why can't the sound Doppler equation be used for light?",
+      "back": "Light needs no material **medium**, so there is no medium-relative wave speed to use in the sound equation. Light shifts need their own fractional shift equation.",
+      "hint": "What does the sound equation need that light does not have?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vryr5r",
+      "kind": "formula",
+      "front": "For light moving along the line of sight at speed u much less than c, what is the fractional shift for approach?",
+      "back": "$\\frac{\\Delta f}{f}\\approx\\frac{\\Delta\\lambda}{\\lambda}\\approx\\frac{u}{c}$, where $u$ is relative speed and $c$ is light speed in **vacuum**. Interchange the signs for recession.",
+      "hint": "Which speed of light is used here?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "119j70u",
+      "kind": "process",
+      "front": "How do astronomers use Doppler shifts of spectral lines?",
+      "back": "1. Compare known spectral lines with lines received from a distant object. 2. A shift to longer wavelengths means recession, and a shift to shorter wavelengths means approach, along the line of sight.",
+      "hint": "Compare known and received wavelengths.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "00d3u2b",
+      "kind": "mistake",
+      "front": "A student says a redshift tells you an object's full speed and direction. Is this correct?",
+      "back": "No. A redshift only gives motion **along the line of sight**, towards or away from us. It does not give the object's entire motion.",
+      "hint": "Which direction does the shift measure?",
+      "sectionId": "s5"
+    },
+    {
+      "id": "080rtl3",
+      "kind": "process",
+      "front": "How does Doppler radar measure motion along its beam?",
+      "back": "It sends out radio waves, detects their reflection from a moving object, and compares the reflected frequency with the transmitted frequency. The **frequency difference** shows motion along the beam.",
+      "hint": "What two frequencies are compared?",
+      "sectionId": "s5"
+    }
+  ]
+}

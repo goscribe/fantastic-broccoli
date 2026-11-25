@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-computer-science",
+  "topicId": "a4-4",
+  "topicCode": "A4.4",
+  "topicName": "Ethical considerations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:04.726Z",
+  "cards": [
+    {
+      "id": "00dgm6n",
+      "kind": "concept",
+      "front": "Why can a machine learning model produce unfair results even though it has no prejudice of its own?",
+      "back": "It learns whatever patterns its data holds, including unfair ones, so **biased data** leads to systematically less fair results. It copies the patterns in its data rather than holding any prejudice.",
+      "hint": "Think about where the model's patterns come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "076jfco",
+      "kind": "concept",
+      "front": "Why does training on personal data raise privacy concerns, and what principle should guide it?",
+      "back": "Training data often holds **personal data** such as browsing history, location or health records. The key principle is **informed consent**: people must be told clearly how their data will be used.",
+      "hint": "Ask whether the people in the data actually knew about it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ue3obq",
+      "kind": "concept",
+      "front": "Why can an automated decision seriously affect an individual, such as someone applying for a loan?",
+      "back": "Models help decide who gets a loan, a job interview or medical attention. A wrong decision can cost the person money, opportunity or health.",
+      "hint": "Consider what the decision is about and what it could cost them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "15l0ckr",
+      "kind": "term",
+      "front": "What is bias in machine learning?",
+      "back": "**Bias** is a systematic error in a machine learning system that produces unfair outcomes for particular individuals or groups.",
+      "hint": "Think of 'systematic', not random.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o0t7pv",
+      "kind": "term",
+      "front": "What is representative data?",
+      "back": "**Representative data** reflects the range of people and cases a model will meet when it is used, so it is the starting point for reducing bias.",
+      "hint": "Compare the data with the people the model will serve.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ph4xlt",
+      "kind": "concept",
+      "front": "At which stages of a project can bias enter?",
+      "back": "Bias can enter at data collection (groups under-represented or poorly measured), labelling (human judgements), design (choice of features or target) and use (model applied to unlike people).",
+      "hint": "There are four stages, following the workflow.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0j3hai6",
+      "kind": "term",
+      "front": "What is personal data?",
+      "back": "**Personal data** is information that identifies, or can be linked to, a particular living individual.",
+      "hint": "Think about whether a person could be identified from it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qlq1h6",
+      "kind": "term",
+      "front": "What is transparency in a machine learning system?",
+      "back": "**Transparency** is the extent to which it is possible to understand how a system works and why it produced a decision.",
+      "hint": "Think about whether a decision can be explained.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0n8gc4v",
+      "kind": "term",
+      "front": "What is accountability for a machine learning system?",
+      "back": "**Accountability** is the responsibility of identifiable people or organisations for the outcomes of a system they build or use.",
+      "hint": "Ask who must answer when harm occurs.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ca2x75",
+      "kind": "example",
+      "front": "A model refuses a loan applicant and gives no reason. What problems follow for the applicant?",
+      "back": "The applicant cannot learn why they were refused, so an error is hard to challenge or correct. It is also unclear who is accountable for the harm, due to lack of transparency.",
+      "hint": "Think about transparency and who must answer for the decision.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0jprcse",
+      "kind": "concept",
+      "front": "Why does using a system at scale make its errors more serious?",
+      "back": "One flawed model can affect very many people at once, so any error is multiplied across the population it serves.",
+      "hint": "Compare one flawed decision with the same flaw applied to thousands of people.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0cmb9sy",
+      "kind": "mistake",
+      "front": "Is removing a sensitive feature such as gender enough to remove bias from a model?",
+      "back": "No. Removing the feature does not always remove bias, because other features can act as stand-ins for it.",
+      "hint": "Think about what else in the data might correlate with the removed feature.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "1jl6l1p",
+      "kind": "process",
+      "front": "What actions can developers take at each stage of a project to reduce harm?",
+      "back": "Use and check representative data for gaps; test accuracy separately for different groups; collect only the data needed; keep a person able to review important decisions; explain how the system works and who is responsible.",
+      "hint": "There are five actions in the note.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "0nmcprv",
+      "kind": "concept",
+      "front": "Why is fairness difficult to achieve in a machine learning system?",
+      "back": "Fairness is not a single measure, and trade-offs exist. Improving overall accuracy may reduce accuracy for a small group, so developers must weigh these choices.",
+      "hint": "Consider whether one measure can capture everything fair.",
+      "sectionId": "s6"
+    }
+  ]
+}

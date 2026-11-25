@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "8-9",
+  "topicCode": "8.9",
+  "topicName": "Disc method about the x- or y-axis",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:40.321Z",
+  "cards": [
+    {
+      "id": "0pt1ral",
+      "kind": "concept",
+      "front": "When a region touches the rotation axis, what shape does a thin slice perpendicular to that axis sweep out?",
+      "back": "A **disc**: a solid circle with no hole, because the region reaches the axis. Its area is $A=\\pi r^2$, where $r$ is the radius.",
+      "hint": "Think about whether the slice has a hole in the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rgkrmk",
+      "kind": "formula",
+      "front": "What is the disc-method volume for the region between $y=f(x)$ and the x-axis, from $x=a$ to $x=b$, rotated about the x-axis?",
+      "back": "$V=\\pi\\int_a^b[f(x)]^2\\,dx$. Here $f(x)$ is the **radius** and $dx$ is the slice thickness.",
+      "hint": "The radius is the distance from the axis to the outer edge.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09eekhn",
+      "kind": "mistake",
+      "front": "Why is using vertical discs wrong when rotating a region about the y-axis?",
+      "back": "Discs must be **perpendicular** to the axis of rotation. For the y-axis, use **horizontal slices** at fixed y-values with radius $g(y)$ and thickness $dy$.",
+      "hint": "Which direction are slices perpendicular to the y-axis?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0cpypsz",
+      "kind": "term",
+      "front": "What is the radius in the disc method?",
+      "back": "The **radius** is the perpendicular distance from the rotation axis to a disc's outer edge.",
+      "hint": "Measure to the outer edge, not the middle.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1kntkbw",
+      "kind": "process",
+      "front": "What are the steps to set up and evaluate a disc-method volume?",
+      "back": "1) Find the radius from the axis to the outer edge. 2) Square the whole radius. 3) Integrate between the limits. 4) Apply the limits and multiply by $\\pi$.",
+      "hint": "Square first, then integrate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xw5s6f",
+      "kind": "concept",
+      "front": "Why might you need an inverse relation for a y-axis disc?",
+      "back": "The radius must be an x-value for each y-value, so you rewrite the curve as $x=g(y)$. For $y=x^2$, the right branch gives $x=\\sqrt{y}$.",
+      "hint": "Rewrite the curve so x is in terms of y.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1y89tp1",
+      "kind": "term",
+      "front": "What are the limits of integration in a disc-method volume?",
+      "back": "The **limits of integration** are the ends of the interval along the axis over which the disc areas are added, such as $x=a$ to $x=b$.",
+      "hint": "They match the variable you are integrating with respect to.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0wibtbj",
+      "kind": "mistake",
+      "front": "A region lies below the x-axis when rotated about the x-axis. What is the radius, and does the formula change?",
+      "back": "The radius is $|f(x)|$. Squaring gives the same result, so $V=\\pi\\int_a^b[f(x)]^2\\,dx$ still works.",
+      "hint": "Think about what squaring does to a negative number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jxvl0z",
+      "kind": "concept",
+      "front": "Before using discs about the x-axis, what must be true of the region?",
+      "back": "The region must reach the rotation axis. Only then does each slice rotate into a solid disc with no hole.",
+      "hint": "Compare with the note's first section.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1iitl9i",
+      "kind": "example",
+      "front": "Rotate the region under $y=x$, above the x-axis, from $x=0$ to $x=2$, about the x-axis. Both axes are in centimeters. Find the volume.",
+      "back": "$V=\\frac{8\\pi}{3}\\,\\mathrm{cm^3}$. The setup is $\\pi\\int_0^2 x^2\\,dx$.",
+      "hint": "The radius is $x$. Square it, then integrate.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1ga8qyb",
+      "kind": "example",
+      "front": "Rotate the region under $y=x$ from $x=0$ to $x=3$ about the x-axis. Both axes are in centimeters. Find the volume.",
+      "back": "$V=9\\pi\\,\\mathrm{cm^3}$, from $\\pi\\int_0^3 x^2\\,dx=\\pi\\left[\\frac{x^3}{3}\\right]_0^3$.",
+      "hint": "Evaluate $\\left[\\frac{x^3}{3}\\right]_0^3$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dpl4yx",
+      "kind": "term",
+      "front": "What are cubic units?",
+      "back": "**Cubic units** measure volume: each unit is a cube one length unit on each side. With centimeters, write the answer as $\\mathrm{cm^3}$.",
+      "hint": "Volume is built from cubes, not squares.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "130ew9u",
+      "kind": "mistake",
+      "front": "Lengths are in centimeters. Why is a volume answer written as plain cm wrong?",
+      "back": "A volume needs **cubic units**, so the answer must include $\\mathrm{cm^3}$. A plain length unit describes distance, not volume.",
+      "hint": "What shape does each unit of volume represent?",
+      "sectionId": "s4"
+    }
+  ]
+}

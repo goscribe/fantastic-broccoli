@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-2",
+  "topicCode": "4.2",
+  "topicName": "Presenting data",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:35.316Z",
+  "cards": [
+    {
+      "id": "06tmp78",
+      "kind": "concept",
+      "front": "Which display suits categories or counted values, and which suits grouped measured data?",
+      "back": "A **bar chart** suits categories or discrete data, with separate bars. A **histogram** suits grouped measured data, with touching bars whose area shows frequency.",
+      "hint": "Ask whether the values are counted or measured.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "01q3v27",
+      "kind": "formula",
+      "front": "What is the formula for the frequency density of a histogram class?",
+      "back": "$\\mathrm{frequency\\,density}=\\frac{\\mathrm{frequency}}{\\mathrm{class\\,width}}$. Dividing by width makes the **area** of each bar show frequency.",
+      "hint": "Divide the frequency by the width of the class.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1gmsdbs",
+      "kind": "formula",
+      "front": "How do you decide whether a value in a box plot data set is an outlier?",
+      "back": "It is an **outlier** if it is more than $1.5\\times\\mathrm{IQR}$ above $Q_3$ or below $Q_1$, where $\\mathrm{IQR}=Q_3-Q_1$.",
+      "hint": "Find the IQR first, then the limits either side of the quartiles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05o8vfb",
+      "kind": "process",
+      "front": "How do you build a frequency table from raw data?",
+      "back": "List each **distinct value**, count how often it occurs, write that count as its frequency, then check the frequencies add up to the number of items.",
+      "hint": "Tally marks help when counting by hand.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "185io85",
+      "kind": "term",
+      "front": "What is discrete data?",
+      "back": "**Discrete data** take separate values, usually found by counting, such as the number of siblings.",
+      "hint": "Think of things you count in whole numbers.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0b4fvu9",
+      "kind": "example",
+      "front": "In the sibling data, how many students had exactly 1 sibling?",
+      "back": "**8** students, since the value 1 has frequency 8 in the 20-student frequency table.",
+      "hint": "Look at the frequency beside the value 1.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qtkfsp",
+      "kind": "concept",
+      "front": "Why should the frequency axis of a bar chart start at zero?",
+      "back": "So the bar heights are **not misleading**. Starting elsewhere distorts the comparison between bars.",
+      "hint": "Think about what a short bar should look like next to a tall one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "05wo3m3",
+      "kind": "mistake",
+      "front": "Why is plotting frequency as the bar height wrong when class widths are unequal?",
+      "back": "The **wide class** would look too large. Use frequency density as the height so the area of each bar shows frequency.",
+      "hint": "Compare a wide class with a narrow one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oq7ut5",
+      "kind": "example",
+      "front": "A class $0\\le t<10$ contains 8 people. What is its frequency density?",
+      "back": "**0.8** people per minute, since $\\frac{8}{10}=0.8$.",
+      "hint": "The class width is 10 minutes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ci27l4",
+      "kind": "term",
+      "front": "What is a class interval?",
+      "back": "A **class interval** is a range of values, such as $10\\le t<30$, used to group data in a table or histogram.",
+      "hint": "It is a group of values, not a single value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0it5aq7",
+      "kind": "term",
+      "front": "What does the lower quartile $Q_1$ represent?",
+      "back": "The **lower quartile** is the value with a quarter of the ordered data below it. It is one of the three values that split data into four equal parts.",
+      "hint": "Think of the first split in the ordered data.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x3ipn6",
+      "kind": "example",
+      "front": "Data have $Q_1=14$ and $Q_3=22$. Is 38 an outlier?",
+      "back": "**Yes**. The IQR is 8, so the upper limit is $22+1.5\\times8=34$, and $38>34$.",
+      "hint": "Find the IQR, then the upper limit.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "090ozbn",
+      "kind": "process",
+      "front": "How should you compare two data sets using box plots?",
+      "back": "Draw both on the **same scale**. Compare the medians for the typical value and the IQRs for spread, mention any outliers, and refer to both data sets.",
+      "hint": "Use words such as higher median and larger spread.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0p434kb",
+      "kind": "concept",
+      "front": "What information is lost when data are grouped into a histogram?",
+      "back": "The **original values** are hidden. A histogram can show the shape, such as most journeys under 30 minutes, but not the exact times.",
+      "hint": "Think about what grouping removes.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-11",
+  "topicCode": "5.11",
+  "topicName": "Ecological footprints",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:07.175Z",
+  "cards": [
+    {
+      "id": "075y2lk",
+      "kind": "term",
+      "front": "What is an ecological footprint?",
+      "back": "An **ecological footprint** is the area of productive land and water needed to supply a person's resources and absorb their wastes.",
+      "hint": "Think about where the food and goods you use come from.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "00qasp8",
+      "kind": "concept",
+      "front": "What does comparing a footprint with biocapacity show?",
+      "back": "Whether people use resources faster than nature can renew them. A footprint larger than biocapacity is **ecological overshoot**.",
+      "hint": "Think of spending compared with what comes in.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v6mnmc",
+      "kind": "concept",
+      "front": "Why does using fewer resources shrink a footprint?",
+      "back": "A footprint is built from demand, so every unit of resource not used is land that does not have to be farmed, logged, or burned for energy.",
+      "hint": "Think about what the footprint is measuring.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ucac1g",
+      "kind": "term",
+      "front": "What is a global hectare?",
+      "back": "One hectare of biologically productive land or water with **world-average** productivity, used as the standard unit for footprints and biocapacity.",
+      "hint": "Why would different kinds of land need one standard unit?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0thygfo",
+      "kind": "term",
+      "front": "What is biocapacity?",
+      "back": "The **biologically productive** land and water a region has to renew resources and absorb wastes, measured in global hectares.",
+      "hint": "Think of it as the supply side of the comparison.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "19wm0bl",
+      "kind": "term",
+      "front": "What is a carbon footprint?",
+      "back": "The total **greenhouse gas** emissions caused by a person, product, or activity, expressed as an equivalent mass of carbon dioxide.",
+      "hint": "It is one part of a larger measure.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "02pkpmx",
+      "kind": "formula",
+      "front": "Which formula gives the footprint-to-biocapacity ratio?",
+      "back": "$\\text{ratio}=\\frac{\\text{footprint}}{\\text{biocapacity}}$, with both in gha. The ratio itself has no unit.",
+      "hint": "Put the quantity being compared on top.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0rz4xwv",
+      "kind": "example",
+      "front": "Food 2.0 gha, housing 1.5 gha, transportation 2.5 gha and goods 2.0 gha: what is the total footprint?",
+      "back": "$8.0\\,\\mathrm{gha}$, found by adding the four parts.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "098ahqi",
+      "kind": "example",
+      "front": "What is the ratio of an 8.0 gha footprint to 1.6 gha of biocapacity?",
+      "back": "$5.0$, so the footprint is 5.0 times the biocapacity per person.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0yep92v",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat the carbon footprint as the whole ecological footprint?",
+      "back": "The carbon footprint is only one part. Food, housing, and goods also need land, so cutting emissions alone does not cover everything.",
+      "hint": "Count what else takes land.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1yzbgy4",
+      "kind": "concept",
+      "front": "Which transport choices lower a person's footprint?",
+      "back": "Walking, cycling, and public transit lower it. Frequent flying and driving alone raise it.",
+      "hint": "Think about how each option uses fuel per trip.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1had85m",
+      "kind": "concept",
+      "front": "Why do people in higher-income countries usually have larger footprints?",
+      "back": "They consume more goods, energy, and meat, so they demand more land and water.",
+      "hint": "Think about what extra money usually buys.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0791mbh",
+      "kind": "concept",
+      "front": "Why should a footprint estimate be treated as approximate?",
+      "back": "It relies on averages and assumptions, so calculators can give different totals. It also misses impacts such as habitat loss or water quality.",
+      "hint": "Think about what averages cannot capture.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0n9vmru",
+      "kind": "process",
+      "front": "How should you track whether your own footprint is falling over time?",
+      "back": "Measure a baseline, change one habit, then measure again using the same method so the comparison stays fair.",
+      "hint": "Start with a starting measurement.",
+      "sectionId": "s5"
+    }
+  ]
+}

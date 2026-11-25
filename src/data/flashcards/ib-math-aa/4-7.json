@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-7",
+  "topicCode": "4.7",
+  "topicName": "Discrete random variables",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:40.545Z",
+  "cards": [
+    {
+      "id": "1u3myqd",
+      "kind": "term",
+      "front": "What is a discrete random variable?",
+      "back": "A **discrete random variable** is a variable whose numerical value depends on the outcome of a random process, and whose possible values can be listed one by one.",
+      "hint": "Think of counting heads in three coin tosses.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1elddjf",
+      "kind": "concept",
+      "front": "What two rules must every probability distribution satisfy?",
+      "back": "Each probability lies between **0 and 1**, and all the probabilities sum to 1, so $\\sum P(X=x)=1$. A total of 0.9 or 1.1 signals an error.",
+      "hint": "Think about what the probabilities represent as a whole.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "06pdrhw",
+      "kind": "formula",
+      "front": "How is the expected value E(X) calculated for a discrete random variable?",
+      "back": "$E(X)=\\sum xP(X=x)$: multiply each value by its probability and add. It is a **weighted mean**, the long-run average of X.",
+      "hint": "The probabilities act as weights.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j079ro",
+      "kind": "formula",
+      "front": "What are the two forms of Var(X), and what is E(X^2)?",
+      "back": "$\\mathrm{Var}(X)=E\\left[(X-\\mu)^2\\right]=E(X^2)-\\mu^2$, where $E(X^2)=\\sum x^2P(X=x)$. Variance is never negative.",
+      "hint": "Square the values of X, not the probabilities.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1xnqihy",
+      "kind": "process",
+      "front": "What are the steps to find the variance of a discrete random variable?",
+      "back": "1) Find $\\mu=E(X)$. 2) Find $E(X^2)=\\sum x^2P(X=x)$. 3) Subtract: $\\mathrm{Var}(X)=E(X^2)-\\mu^2$. 4) Take the square root for the standard deviation.",
+      "hint": "Work out the mean before squaring anything.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04dg540",
+      "kind": "mistake",
+      "front": "A student squares the probabilities when finding E(X^2). What is wrong?",
+      "back": "Squaring the probabilities is **wrong**. Square the values of X and keep each probability unchanged, so $E(X^2)=\\sum x^2P(X=x)$.",
+      "hint": "Which quantity should be squared: the value or the chance?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ijbpje",
+      "kind": "mistake",
+      "front": "Must the expected value E(X) be one of the possible values of X?",
+      "back": "No. $E(X)$ **need not be** a possible value. A fair die has $E(X)=3.5$, yet you can never roll 3.5.",
+      "hint": "E(X) is a long-run average.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0047god",
+      "kind": "example",
+      "front": "A spinner has P(X=1)=0.1, P(X=2)=0.3, P(X=3)=0.4 and P(X=4)=0.2. Find E(X).",
+      "back": "$E(X)=2.7$, from $1(0.1)+2(0.3)+3(0.4)+4(0.2)=0.1+0.6+1.2+0.8$.",
+      "hint": "Multiply each value by its probability, then add.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z01bq2",
+      "kind": "example",
+      "front": "For the same spinner (E(X)=2.7), find Var(X) and the standard deviation.",
+      "back": "$\\mathrm{Var}(X)=0.81$ and the standard deviation is $0.9$, since $E(X^2)=8.1$ and $8.1-2.7^2=0.81$.",
+      "hint": "Find E(X^2) first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0robzvc",
+      "kind": "example",
+      "front": "A variable has $P(X=x)=kx$ for x=1,2,3,4. What is k?",
+      "back": "$k=0.1$. The probabilities sum to 1, so $k+2k+3k+4k=10k=1$.",
+      "hint": "Form an equation using the sum of the probabilities.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q89alx",
+      "kind": "term",
+      "front": "What is the standard deviation of a discrete random variable?",
+      "back": "The **standard deviation** is the square root of the variance. It has the same units as X.",
+      "hint": "Take the square root of the variance.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0gvv20p",
+      "kind": "concept",
+      "front": "What is a fair game in terms of expected gain?",
+      "back": "A **fair game** has an expected gain of 0, where expected gain is expected prize minus cost to play. Fairness describes the average over many plays, not a single play.",
+      "hint": "Expected gain = expected prize minus cost.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gib6sr",
+      "kind": "concept",
+      "front": "How do E(aX+b) and Var(aX+b) relate to E(X) and Var(X)?",
+      "back": "$E(aX+b)=aE(X)+b$ and $\\mathrm{Var}(aX+b)=a^2\\mathrm{Var}(X)$. Adding b shifts the values without changing the spread; multiplying by a changes the variance by $a^2$.",
+      "hint": "Adding a constant does not change the spread.",
+      "sectionId": "s5"
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-alevel-chemistry",
+  "topicId": "3-1-1",
+  "topicCode": "3.1.1",
+  "topicName": "Atomic structure",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:30:06.772Z",
+  "cards": [
+    {
+      "id": "0jcbphj",
+      "kind": "concept",
+      "front": "Where in an atom is almost all of the mass located?",
+      "back": "In the **nucleus**, which holds the protons and neutrons. The nucleus is tiny compared with the whole atom, which is mostly empty space.",
+      "hint": "Compare how big the nucleus is with the whole atom.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rvl2zk",
+      "kind": "term",
+      "front": "What are isotopes?",
+      "back": "**Atoms** of the same element with the same number of protons but different numbers of neutrons.",
+      "hint": "Think about what stays the same and what changes in the nucleus.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0oet7b8",
+      "kind": "process",
+      "front": "How does a time of flight mass spectrometer separate ions by mass?",
+      "back": "An electric field gives all ions the same **kinetic energy**, so lighter ions move faster along the flight tube and arrive first.",
+      "hint": "Think about speed when the energy is the same.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "13y8jf3",
+      "kind": "term",
+      "front": "What is an ion?",
+      "back": "An **ion** is an atom or group of atoms with a net charge, formed by losing or gaining electrons.",
+      "hint": "Think about what happens to the charges when electrons move.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jevcxk",
+      "kind": "concept",
+      "front": "Why is a neutral atom uncharged even though it contains charged particles?",
+      "back": "It has equal numbers of **protons** and **electrons**, so their positive and negative charges cancel.",
+      "hint": "Compare the charge on a proton with that on an electron.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "15q8tkf",
+      "kind": "term",
+      "front": "What does the atomic number of an atom tell you?",
+      "back": "The **number of protons** in its nucleus, which decides which element the atom belongs to.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0onwivq",
+      "kind": "formula",
+      "front": "How do you calculate the number of neutrons in an atom from its mass number and atomic number?",
+      "back": "Neutrons $=A-Z$, where $A$ is the **mass number** and $Z$ is the **atomic number**.",
+      "hint": "Subtract the smaller number from the larger one.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1buzmdk",
+      "kind": "example",
+      "front": "How many protons, neutrons and electrons are in a $^{35}_{17}\\mathrm{Cl}^-$ ion?",
+      "back": "It has **17** protons, **18** neutrons and **18** electrons, because the 1− charge adds one electron to the 17 of a neutral atom.",
+      "hint": "Start with the atomic number, then use the charge.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1ll2dwi",
+      "kind": "example",
+      "front": "What is the relative atomic mass of chlorine when it is 75.0% $^{35}\\mathrm{Cl}$ and 25.0% $^{37}\\mathrm{Cl}$?",
+      "back": "**35.5**: $\\frac{(35\\times75.0)+(37\\times25.0)}{100}=\\frac{3550}{100}=35.5$.",
+      "hint": "Weight each isotope's mass by its percentage, then divide by the total.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pdkz9x",
+      "kind": "mistake",
+      "front": "What is wrong with saying that the mass number of chlorine is 35.5?",
+      "back": "A **mass number** is always a whole number, counting the protons plus neutrons in one atom. 35.5 is a weighted average, so it is a relative atomic mass.",
+      "hint": "Think about what each value describes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02d500g",
+      "kind": "process",
+      "front": "What happens to each gaseous particle in electron impact ionisation?",
+      "back": "A high-energy electron knocks out one **electron**, forming a 1+ ion: $\\mathrm{X(g)+e^-\\rightarrow X^+(g)+2e^-}$.",
+      "hint": "Think about what the incoming electron does on collision.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bvfxha",
+      "kind": "concept",
+      "front": "Why is electrospray ionisation used for large molecules?",
+      "back": "It adds a **proton** to each molecule, avoiding the breaking apart that electron impact tends to cause in larger molecules.",
+      "hint": "Compare it with the method that fires electrons at the sample.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0xv18um",
+      "kind": "formula",
+      "front": "What does the mass-to-charge ratio, $m/z$, equal for a 1+ ion?",
+      "back": "Its **relative mass**, because $m/z$ is the relative mass divided by the charge number, and the charge number is 1.",
+      "hint": "Think about what dividing by 1 does to a number.",
+      "sectionId": "s6"
+    }
+  ]
+}

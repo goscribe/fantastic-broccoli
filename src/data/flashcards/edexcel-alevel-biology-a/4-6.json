@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-6",
+  "topicCode": "4.6",
+  "topicName": "Classification and domains",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:53.738Z",
+  "cards": [
+    {
+      "id": "153h3y5",
+      "kind": "concept",
+      "front": "How did sequence data change the way life is grouped into domains?",
+      "back": "It showed that prokaryotes fall into two very different groups, so all life is sorted into **Bacteria**, **Archaea** and **Eukarya**.",
+      "hint": "Think about what kind of evidence reveals ancestry better than cell shape.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0htmpov",
+      "kind": "concept",
+      "front": "Why is comparing DNA sequences more reliable than comparing appearance?",
+      "back": "**Sequences** can be compared directly and objectively, and more differences suggest a more distant common ancestor. Appearance can mislead.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1od6jyb",
+      "kind": "term",
+      "front": "What is peptidoglycan, and which domain's cell walls contain it?",
+      "back": "**Peptidoglycan** is a polymer of sugar and amino acid units. It is found in the cell walls of **bacteria**.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0u5ncov",
+      "kind": "term",
+      "front": "What is a binomial name?",
+      "back": "A **two-part** Latin name for a species, with the **genus** first (capital letter) and the **species** second (lower-case letter), as in Homo sapiens.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cko1qu",
+      "kind": "process",
+      "front": "List the ranks of classification from largest to smallest.",
+      "back": "**Domain**, kingdom, phylum, class, order, family, genus, species.",
+      "hint": "Each rank sits inside the one above it.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1i8hwn6",
+      "kind": "term",
+      "front": "What does a phylogenetic tree show?",
+      "back": "The **inferred evolutionary relationships** between groups of organisms. Branch points mark common ancestors, and the tree is revised when new evidence arrives.",
+      "hint": "Think about how a family tree shows ancestors.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1cmofna",
+      "kind": "term",
+      "front": "What is convergent evolution?",
+      "back": "The **independent evolution** of similar features in unrelated organisms facing similar selection pressures.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x7g8k9",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume Bacteria and Archaea are each other's closest relatives?",
+      "back": "Both are **prokaryotes**, but being prokaryotic describes cell type, not ancestry. Archaea share a more recent ancestor with Eukarya than with Bacteria.",
+      "hint": "Think about what the word prokaryote actually describes.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mq2ghc",
+      "kind": "term",
+      "front": "What is the difference between a prokaryote and a eukaryote?",
+      "back": "A **prokaryote** has cells with no nucleus. A **eukaryote** has cells with a nucleus.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1fledln",
+      "kind": "term",
+      "front": "What is a histone?",
+      "back": "A **protein** around which DNA is wound, helping to package it into chromosomes. Histones are present in Eukarya and in many archaea.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jqdzg1",
+      "kind": "concept",
+      "front": "Why do some antibiotics not harm archaeal cells?",
+      "back": "They work by disrupting **peptidoglycan**, which archaeal cells do not have, so the drugs have no target in them.",
+      "hint": "Think about which cell wall component the drug targets.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wyib3i",
+      "kind": "mistake",
+      "front": "Why does living in an extreme habitat not decide whether an organism is an archaeon?",
+      "back": "Many archaea live in extreme habitats, but they also live in ordinary ones. **Habitat** does not decide the domain; cell features do.",
+      "hint": "Think about what the domain is actually based on.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1esiqvk",
+      "kind": "term",
+      "front": "Which four kingdoms are usually recognised within Eukarya?",
+      "back": "**Animals**, **plants**, **fungi** and **protoctists**.",
+      "hint": "Cell wall material and method of feeding help sort them.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0loo775",
+      "kind": "concept",
+      "front": "How do fungi obtain their nutrients?",
+      "back": "By **absorbing** nutrients from their surroundings. Fungi have chitin cell walls and no chloroplasts.",
+      "hint": "Compare with how plants make their food.",
+      "sectionId": "s5"
+    }
+  ]
+}

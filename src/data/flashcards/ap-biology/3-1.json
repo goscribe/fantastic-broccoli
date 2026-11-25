@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "3-1",
+  "topicCode": "3.1",
+  "topicName": "Enzymes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:35:28.750Z",
+  "cards": [
+    {
+      "id": "0rxmyfm",
+      "kind": "concept",
+      "front": "How do enzymes speed up reactions?",
+      "back": "Enzymes lower the **activation energy**, the energy barrier to reaching the high-energy transition state, so more reactant molecules form products in a given time.",
+      "hint": "Focus on the energy barrier, not the products.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v9l26z",
+      "kind": "concept",
+      "front": "Why does an enzyme's shape determine which reaction it catalyzes?",
+      "back": "The **active site** has a shape and chemical groups that favor certain substrates. Induced fit can adjust the site during binding to improve the fit and position groups needed for the reaction.",
+      "hint": "Consider both shape and chemistry.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "10gro5t",
+      "kind": "process",
+      "front": "What are the steps of an enzyme-catalyzed reaction?",
+      "back": "1) A suitable **substrate** binds the active site, forming the enzyme-substrate complex. 2) The bound substrate undergoes a chemical change. 3) Products leave, and the enzyme can bind again.",
+      "hint": "Three stages, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "00uyr5h",
+      "kind": "term",
+      "front": "What is an enzyme?",
+      "back": "A **biological catalyst**, usually a protein, that speeds specific reactions without being consumed by them.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0mkpfku",
+      "kind": "term",
+      "front": "What are amino acids?",
+      "back": "The **building blocks** of proteins. They are joined in chains by peptide bonds, and each has a side group.",
+      "hint": "Think about what makes up a protein chain.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0v0rhjr",
+      "kind": "concept",
+      "front": "How does the amino acid sequence affect enzyme function?",
+      "back": "The **sequence** determines which side-group interactions can form, which controls how the chain folds. Folding positions the active site's groups needed for binding and catalysis.",
+      "hint": "Follow the chain: sequence, then fold, then site.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0qon8os",
+      "kind": "term",
+      "front": "What is the active site?",
+      "back": "The **region** of an enzyme where a reactant binds and the reaction occurs.",
+      "hint": "Think about where binding happens.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "14fbsw2",
+      "kind": "term",
+      "front": "What is a substrate?",
+      "back": "A **reactant** that binds to an enzyme's active site.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "18onwcz",
+      "kind": "term",
+      "front": "What is induced fit?",
+      "back": "A **slight change** in active-site shape that occurs as the substrate binds. It can improve interactions with the substrate and position groups for the reaction.",
+      "hint": "Shape changes during binding.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1e2i2y8",
+      "kind": "mistake",
+      "front": "Is the active site a fixed pocket that matches the outline of its substrate?",
+      "back": "**No.** Its chemical groups matter, and its shape can adjust during binding, so binding is not always a rigid fit.",
+      "hint": "Consider chemistry and flexibility.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1nhaw2p",
+      "kind": "term",
+      "front": "What is the enzyme-substrate complex?",
+      "back": "The **temporary** association formed when a substrate binds at the enzyme's active site, before products form.",
+      "hint": "Think about what forms at the moment of binding.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "167m3l0",
+      "kind": "mistake",
+      "front": "Does lowering activation energy change the energy difference between reactants and products?",
+      "back": "**No.** Enzymes speed the reaction but do not change the energy difference between reactants and products or the reaction's equilibrium position.",
+      "hint": "Speed versus balance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0ns6914",
+      "kind": "mistake",
+      "front": "Is the enzyme used up when it catalyzes a reaction?",
+      "back": "**No.** The enzyme is not consumed, so after releasing the products it can catalyze another cycle.",
+      "hint": "Think about reuse.",
+      "sectionId": "s4"
+    }
+  ]
+}

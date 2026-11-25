@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "2-3",
+  "topicCode": "2.3",
+  "topicName": "Newton's third law",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:25.544Z",
+  "cards": [
+    {
+      "id": "0v0d5mo",
+      "kind": "term",
+      "front": "What is Newton's third law?",
+      "back": "When object A exerts a force on object B, B exerts a force on A that is **equal in size and opposite in direction**. Forces always come in pairs between two objects.",
+      "hint": "Think about pushing on a wall and feeling it push back.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1r8vyoj",
+      "kind": "process",
+      "front": "What are the steps to find the action-reaction partner of any force?",
+      "back": "1) Name the force and both objects. 2) **Swap the two objects**. 3) Keep the same **type of force**. 4) **Reverse the direction**.",
+      "hint": "Start by naming both objects in the original force.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "022c689",
+      "kind": "concept",
+      "front": "Why do the two forces in an action-reaction pair never cancel each other?",
+      "back": "They act on **different objects**. Forces only cancel when they act on the same object, and each force affects only the object that receives it.",
+      "hint": "Ask which object each force is acting on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0z0138y",
+      "kind": "mistake",
+      "front": "A heavier or faster object hits a lighter one. Does it push harder?",
+      "back": "No. Both objects exert **forces of equal size** on each other. Heavier or faster objects do not push harder in a collision.",
+      "hint": "Check what the third law says about the sizes of the two forces.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j71oj3",
+      "kind": "term",
+      "front": "What is an action-reaction pair?",
+      "back": "The two forces that two interacting objects exert on each other. They are **equal in magnitude, opposite in direction**, and always the **same type** of force.",
+      "hint": "Think of the swimmer pushing on the pool wall.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x00hej",
+      "kind": "concept",
+      "front": "Why can equal forces on two objects still produce different accelerations?",
+      "back": "Acceleration depends on **mass** as well as force. The object with less mass always has the greater acceleration for the same force.",
+      "hint": "Use the acceleration formula on each object separately.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1vpk8fk",
+      "kind": "formula",
+      "front": "What does $a=\\frac{F}{m}$ tell you, and what are its units?",
+      "back": "**Acceleration** $a$ equals net force $F$ divided by mass $m$. $F$ is in newtons (N), $m$ in kilograms (kg), and $a$ in m/s².",
+      "hint": "Compare how a changes when m doubles.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kasy77",
+      "kind": "example",
+      "front": "On frictionless ice, a 60 kg skater pushes a 40 kg skater with 120 N. What is the acceleration of each skater?",
+      "back": "Each skater feels **120 N**. The 40 kg skater has $a=3.0\\ \\mathrm{m/s^2}$ and the 60 kg skater has $a=2.0\\ \\mathrm{m/s^2}$, in opposite directions.",
+      "hint": "Use the third law first, then divide by each mass.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14isb9l",
+      "kind": "example",
+      "front": "On frictionless ice, a 50 kg skater pushes a 75 kg skater with 150 N. What is the acceleration of each skater?",
+      "back": "Each skater feels **150 N**. The 50 kg skater has $a=3.0\\ \\mathrm{m/s^2}$ and the 75 kg skater has $a=2.0\\ \\mathrm{m/s^2}$, in opposite directions.",
+      "hint": "The force is the same on both; only the mass changes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "17yk022",
+      "kind": "concept",
+      "front": "Why is a book's weight not an action-reaction pair with the normal force from the table?",
+      "back": "Both forces act on the **same object**, the book. A true pair always acts on two different objects.",
+      "hint": "Check which object each force acts on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j7y8q7",
+      "kind": "concept",
+      "front": "What is the true action-reaction partner of a book's weight, and of the normal force on it?",
+      "back": "The partner of its weight is the **book pulling on Earth** upward. The partner of the normal force is the **book pushing down on the table**.",
+      "hint": "Swap the objects and keep the force type.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c95j56",
+      "kind": "concept",
+      "front": "What is the partner force when Earth pulls a falling apple downward?",
+      "back": "The **apple pulls Earth upward** with a force of the same magnitude as Earth's pull on the apple.",
+      "hint": "Swap the two objects in the force.",
+      "sectionId": "s2"
+    }
+  ]
+}

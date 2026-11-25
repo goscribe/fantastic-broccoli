@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "5-7",
+  "topicCode": "5.7",
+  "topicName": "Second derivative test",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:08.410Z",
+  "cards": [
+    {
+      "id": "0qrndi9",
+      "kind": "concept",
+      "front": "What does the second derivative test tell you at a point c where f'(c)=0?",
+      "back": "If $f''(c)>0$, $f(c)$ is a local **minimum**. If $f''(c)<0$, $f(c)$ is a local **maximum**. The sign shows which way the graph bends at that point.",
+      "hint": "Think about whether the graph bends upward or downward.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0m77moe",
+      "kind": "concept",
+      "front": "Why can a zero second derivative not classify a stationary point?",
+      "back": "The test is **inconclusive** when $f''(c)=0$. The point may be a maximum, a minimum, or neither, so another check is needed.",
+      "hint": "Ask what the test is able to decide.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10tp13w",
+      "kind": "process",
+      "front": "What are the steps to classify the stationary points of f using the second derivative?",
+      "back": "1) Solve $f'(x)=0$. 2) Find $f''(x)$. 3) Evaluate $f''$ at each solution. 4) Positive gives a local **minimum**, negative a local **maximum**, and zero is **inconclusive**.",
+      "hint": "Four steps, in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1brxsaj",
+      "kind": "term",
+      "front": "What is a stationary point?",
+      "back": "A point on a graph where the **first derivative** equals zero, so the tangent line is horizontal.",
+      "hint": "Look at the value of f'.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ofbrpq",
+      "kind": "term",
+      "front": "What is a critical point?",
+      "back": "A domain value where $f'$ is either **zero** or **undefined**.",
+      "hint": "Two possible conditions for f'.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1t72rs6",
+      "kind": "formula",
+      "front": "What is the second derivative $f''$ and how is it found?",
+      "back": "$f''$ is the **derivative of $f'$**. You differentiate $f$ once to get $f'$, then differentiate again.",
+      "hint": "Differentiate twice.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0jjseet",
+      "kind": "example",
+      "front": "Find and classify the stationary points of $f(x)=x^3-3x$.",
+      "back": "Local **maximum** at $(-1,2)$ and local **minimum** at $(1,-2)$. Here $f'(x)=3x^2-3=0$ gives $x=\\pm 1$, and $f''(x)=6x$.",
+      "hint": "Solve f'(x)=0 first, then test the sign of f''.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jebd9z",
+      "kind": "example",
+      "front": "Use the second derivative test on $h(x)=x^3$ at zero.",
+      "back": "The test is **inconclusive** because $h'(0)=0$ and $h''(0)=0$. Values on each side of zero have opposite signs, so zero is **neither** a maximum nor a minimum.",
+      "hint": "Both derivatives are zero at zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1lwdrl2",
+      "kind": "example",
+      "front": "How do $f(x)=x^4$ and $g(x)=-x^4$ behave at zero?",
+      "back": "$x^4$ has a local **minimum** at zero because nearby outputs are positive. $-x^4$ has a local **maximum** there. Both have zero first and second derivatives at zero.",
+      "hint": "Compare nearby output values with zero.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0em50ul",
+      "kind": "mistake",
+      "front": "A student says that $f''(c)=0$ means there is no extremum at c. What is wrong?",
+      "back": "It is **wrong**. A zero second derivative is inconclusive, so the test cannot decide. The point may still be a maximum or minimum.",
+      "hint": "What does the test say when it cannot decide?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1w6prwc",
+      "kind": "mistake",
+      "front": "Why does the second derivative test not apply to $f(x)=|x|$ at zero?",
+      "back": "The **first derivative** does not exist at zero, so the test cannot be used. Zero is still a local **minimum** because nearby values are at least zero.",
+      "hint": "Check whether f'(0) exists.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0kkemas",
+      "kind": "process",
+      "front": "How do you classify a critical point where f' is undefined and f is continuous?",
+      "back": "Check the sign of $f'$ on each side. A change from **negative to positive** gives a local minimum, a change from **positive to negative** gives a local maximum, and no sign change means **neither**.",
+      "hint": "Compare the sign of f' just left and right of c.",
+      "sectionId": "s4"
+    }
+  ]
+}

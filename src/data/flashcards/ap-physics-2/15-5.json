@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "15-5",
+  "topicCode": "15.5",
+  "topicName": "The photoelectric effect",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:42:03.073Z",
+  "cards": [
+    {
+      "id": "0gt3jgo",
+      "kind": "concept",
+      "front": "Why does light below a threshold frequency eject no electrons, however intense it is?",
+      "back": "Each electron absorbs **one photon** at a time, receiving all of its energy or none. A weak photon cannot free an electron, and more photons do not add up to free it.",
+      "hint": "Compare the energy of one photon with the work function.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "17336b6",
+      "kind": "formula",
+      "front": "What equation gives the maximum kinetic energy of photoelectrons?",
+      "back": "$K_\\mathrm{max}=hf-\\phi$, where $hf$ is the photon energy and $\\phi$ is the **work function**, the energy needed to free an electron, usually in eV.",
+      "hint": "Recall which energy you start with and which one must be paid first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1m8mj0s",
+      "kind": "concept",
+      "front": "What does frequency control that intensity does not?",
+      "back": "**Frequency** sets the energy of each photon, so it sets the threshold and the speed of the fastest electrons. **Intensity** only sets how many photons arrive, so it sets how many electrons leave per second.",
+      "hint": "Separate energy per photon from number of photons.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "01csgsj",
+      "kind": "term",
+      "front": "What is the photoelectric effect?",
+      "back": "The **photoelectric effect** is the ejection of electrons from a metal surface by light. Each ejected electron is called a **photoelectron**.",
+      "hint": "Light goes in, electrons come out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0b6knk1",
+      "kind": "formula",
+      "front": "What is the energy of a photon, and what useful value of hc is given in eV nm?",
+      "back": "$E=hf=\\frac{hc}{\\lambda}$, with $hc=1240\\,\\mathrm{eV\\,nm}$. Use this form when the wavelength is in **nm** and the energy is wanted in **eV**.",
+      "hint": "A shorter wavelength means a higher photon energy.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "041ng2m",
+      "kind": "term",
+      "front": "What is the work function?",
+      "back": "The **work function** $\\phi$ is the minimum energy needed to remove an electron from a material's surface, usually given in eV.",
+      "hint": "It is the energy cost of escape.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1lm07pm",
+      "kind": "term",
+      "front": "What is the threshold frequency and how is it found?",
+      "back": "The **threshold frequency** $f_0$ is the minimum light frequency that can eject electrons from a given material, found from $f_0=\\frac{\\phi}{h}$.",
+      "hint": "Set the photon energy equal to the work function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0ky3zdi",
+      "kind": "mistake",
+      "front": "A student says brighter light gives each electron more energy. What is wrong with this?",
+      "back": "**Brighter light** delivers more photons, not more energy per photon. More photons means more electrons leave, but each electron's energy is set by the frequency.",
+      "hint": "Count photons, not energy per photon.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0w9jeb3",
+      "kind": "mistake",
+      "front": "A student gets a negative kinetic energy for light whose photon energy is less than the work function. What should they say?",
+      "back": "**No electrons are emitted.** Compare $hf$ with $\\phi$ first; if $hf<\\phi$, report that no emission occurs rather than giving a negative energy.",
+      "hint": "Check the photon energy against the work function first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1tz6moq",
+      "kind": "process",
+      "front": "What are the steps to find the maximum kinetic energy of photoelectrons?",
+      "back": "1) Find the photon energy $E=\\frac{hc}{\\lambda}$. 2) Check that $E$ is greater than $\\phi$; if not, no electrons are emitted. 3) Calculate $K_\\mathrm{max}=hf-\\phi$.",
+      "hint": "Three steps, in this order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06uqh4k",
+      "kind": "example",
+      "front": "Light of wavelength 400 nm shines on a metal with a work function of 2.30 eV. What is the maximum kinetic energy of the photoelectrons?",
+      "back": "About **0.80 eV**, or about $1.3\\times10^{-19}\\,\\mathrm{J}$. Photon energy is $1240/400=3.10\\,\\mathrm{eV}$, then $3.10-2.30=0.80\\,\\mathrm{eV}$.",
+      "hint": "Find the photon energy first, then subtract the work function.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0tzjjvi",
+      "kind": "example",
+      "front": "Light of wavelength 300 nm shines on a metal with a work function of 2.80 eV. What is the maximum kinetic energy of the photoelectrons?",
+      "back": "About **1.33 eV**. Photon energy is $1240/300\\approx4.13\\,\\mathrm{eV}$, then $4.13-2.80=1.33\\,\\mathrm{eV}$.",
+      "hint": "Use $hc=1240\\,\\mathrm{eV\\,nm}$ divided by the wavelength.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "11qhf01",
+      "kind": "term",
+      "front": "What is the stopping potential?",
+      "back": "The **stopping potential** is the smallest opposing voltage that stops even the fastest photoelectrons. Its value in volts equals $K_\\mathrm{max}$ in eV.",
+      "hint": "An opposing voltage that just stops the electrons.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1c7qhzz",
+      "kind": "concept",
+      "front": "Why is a graph of maximum kinetic energy against frequency a straight line, and what does its slope mean?",
+      "back": "$K_\\mathrm{max}=hf-\\phi$ matches $y=mx+b$, so the **slope** is $h$ and the intercept is $-\\phi$. The line crosses the frequency axis at $f_0$.",
+      "hint": "Match the equation to the form y = mx + b.",
+      "sectionId": "s5"
+    }
+  ]
+}

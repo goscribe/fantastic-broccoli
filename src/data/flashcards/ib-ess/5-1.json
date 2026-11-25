@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "5-1",
+  "topicCode": "5.1",
+  "topicName": "Soil",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:36.075Z",
+  "cards": [
+    {
+      "id": "0frtzjl",
+      "kind": "concept",
+      "front": "What two ingredients combine to make soil, and where does the second one come from?",
+      "back": "Weathered parent material mixed with **humus**, the dark, stable remains left after plants and animals are largely decomposed by decomposers.",
+      "hint": "Think rock and life.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0vo5y1s",
+      "kind": "concept",
+      "front": "Why does a soil profile usually show distinct layers instead of one uniform material?",
+      "back": "Water and organisms move material through the soil, forming **horizons**, layers that differ in colour, texture or composition. The dark A topsoil is rich in humus, while the B subsoil collects washed-down material.",
+      "hint": "Think about what moves downwards.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "050l8fe",
+      "kind": "concept",
+      "front": "Why does a sandy garden dry out faster than a clay garden?",
+      "back": "Small particles have a larger total **surface area**, so clay holds more water and nutrients on its surfaces. Sandy soil has large pores that let water drain quickly.",
+      "hint": "Compare particle sizes.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bc1icf",
+      "kind": "term",
+      "front": "What is weathering in soil formation?",
+      "back": "The **breakdown** of rock at or near Earth’s surface into smaller particles or new minerals. Physical weathering splits rock; chemical weathering changes minerals.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rvsrhv",
+      "kind": "term",
+      "front": "What is leaching in a soil profile?",
+      "back": "The **removal** of dissolved substances from upper soil layers by water moving downwards. Much of this material is deposited in the B horizon.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1qjd9bo",
+      "kind": "process",
+      "front": "Outline how soil forms from parent material.",
+      "back": "1. **Weathering** breaks parent material into smaller pieces. 2. Plants and animals die. 3. Decomposers break them down into **humus**. 4. Humus mixes with mineral particles to form soil.",
+      "hint": "Start with the rock beneath.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0cn4bpp",
+      "kind": "mistake",
+      "front": "Is crushed rock on its own the same thing as soil? Explain.",
+      "back": "No. Without **organic matter** and living organisms, weathered rock is not yet soil.",
+      "hint": "What is missing?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1lk2rma",
+      "kind": "term",
+      "front": "What determines soil texture?",
+      "back": "The **relative proportion** of sand, silt and clay particles. Sand is 0.05 to 2 mm, silt 0.002 to 0.05 mm, and clay below 0.002 mm.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1j6vix7",
+      "kind": "formula",
+      "front": "How do you calculate the percentage of one particle class in a dried soil sample?",
+      "back": "Percentage = $\\frac{\\text{mass of one class}}{\\text{total mass}}\\times100$, where both masses are in **grams** and the result is a percentage (%).",
+      "hint": "Divide the class mass by the total.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "00z8oxg",
+      "kind": "example",
+      "front": "A 50 g dried soil sample contains 30 g sand, 15 g silt and 5 g clay. What percentage is sand?",
+      "back": "**60%** sand, since $\\frac{30\\,\\mathrm{g}}{50\\,\\mathrm{g}}\\times100=60$%. The sample is also 30% silt and 10% clay.",
+      "hint": "Use sand mass divided by total mass.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1sa0ram",
+      "kind": "mistake",
+      "front": "Why is holding more water not always better for plant roots?",
+      "back": "Waterlogged soil has **little air** in its pores, so roots cannot get enough oxygen for respiration. Good soil balances water holding with air.",
+      "hint": "Think about pore spaces.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "08u5cn5",
+      "kind": "term",
+      "front": "What is loam?",
+      "back": "A soil with a **balanced mixture** of sand, silt and clay and a useful amount of organic matter. It drains well yet keeps water and nutrients.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0na9vew",
+      "kind": "concept",
+      "front": "How do humus and clay help plants keep the nutrients they need?",
+      "back": "They **hold nutrients** on their surfaces, which limits leaching losses, so plants can still take up nitrate and phosphate from the soil water.",
+      "hint": "Think about what stops nutrients being washed away.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mgt14n",
+      "kind": "concept",
+      "front": "What roles does soil play in ecosystems beyond supporting plants?",
+      "back": "Soil is a **habitat** for bacteria, fungi and earthworms that recycle nutrients. It also stores water, filters it as it passes through, and holds carbon in organic matter.",
+      "sectionId": "s5"
+    }
+  ]
+}

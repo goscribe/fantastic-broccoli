@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "2-5",
+  "topicCode": "2.5",
+  "topicName": "Natural disruptions to ecosystems",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:32.998Z",
+  "cards": [
+    {
+      "id": "0ds0q99",
+      "kind": "term",
+      "front": "What is a natural disruption?",
+      "back": "A **natural disruption** is a naturally occurring event, such as a fire or flood, that damages or removes organisms and alters an ecosystem. It is not caused by people.",
+      "hint": "Think about where the cause comes from, not how big the event is.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "07ndmit",
+      "kind": "concept",
+      "front": "How does a disruption change the structure of an ecosystem?",
+      "back": "It changes the **physical features** and the organisms present. Physical changes usually come first, and biological changes follow, so some species benefit while others lose.",
+      "hint": "Consider what happens to sunlight, soil, or the canopy first.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ogkqkn",
+      "kind": "term",
+      "front": "What is ecological succession?",
+      "back": "**Ecological succession** is the gradual return of species after a disruption, where early arrivals change conditions and later species replace them over time.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t9szpz",
+      "kind": "term",
+      "front": "What is ecosystem resilience?",
+      "back": "**Resilience** is an ecosystem's ability to absorb a disruption and return toward its earlier structure and function.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "181nqhg",
+      "kind": "concept",
+      "front": "Why does recovery speed depend on what a disruption leaves behind?",
+      "back": "Where soil and seeds survive, as after many fires, plants regrow within months or years. On bare lava rock there is no **soil**, so soil must form first, which takes far longer.",
+      "hint": "Compare a burned forest floor with a fresh lava flow.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1t6w1ce",
+      "kind": "concept",
+      "front": "How can regular fire benefit grasslands and pine forests?",
+      "back": "Fire clears dead material, returns **nutrients** to the soil, and opens space for new growth. Many of these ecosystems have burned at regular intervals for a very long time.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1cg7gym",
+      "kind": "mistake",
+      "front": "Why is it wrong to assume every natural disruption destroys an ecosystem?",
+      "back": "**Disruption is not the same as destruction.** For many ecosystems, occasional fire or flooding keeps habitat open for species that need it.",
+      "hint": "Think about species that depend on open ground.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13rknzs",
+      "kind": "concept",
+      "front": "What happens when fires are suppressed in a fire-adapted ecosystem for decades?",
+      "back": "**Dead material builds up**, so a later fire can burn far hotter than the regular fires the ecosystem was used to.",
+      "hint": "Consider what accumulates when nothing clears it.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0pkrcsj",
+      "kind": "concept",
+      "front": "How do some pine cones depend on natural fire?",
+      "back": "Certain pine cones open and release their **seeds only after heat**, so fire is needed for those seeds to spread.",
+      "hint": "Think about what triggers the cone to open.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1hy5zf9",
+      "kind": "concept",
+      "front": "How do the size and frequency of a disruption affect biodiversity?",
+      "back": "Moderate disruptions can **raise local biodiversity** by opening space and light for new species. Very large or very frequent disruptions can lower it, as slow-growing species disappear.",
+      "hint": "Consider what happens when there is no time to recover between events.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is the variation in life at genetic, species, and ecosystem levels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "11h9fqj",
+      "kind": "mistake",
+      "front": "How can human clearing of a hillside make a natural disruption worse?",
+      "back": "Clearing vegetation makes **landslides and floods more damaging**. The disruption itself is natural, but human activity increases its severity.",
+      "hint": "Compare a bare slope with a vegetated one.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1apbyjx",
+      "kind": "example",
+      "front": "Why might a hurricane help some plants on a forest floor while harming others?",
+      "back": "Opening the **canopy** lets more sunlight reach the floor, so plants suited to brighter conditions may thrive while shade-tolerant species lose out. This is a physical change followed by a biological one.",
+      "hint": "Think about which plants compete best in shade.",
+      "sectionId": "s2"
+    }
+  ]
+}

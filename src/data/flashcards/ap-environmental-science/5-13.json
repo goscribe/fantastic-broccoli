@@ -1,0 +1,110 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "5-13",
+  "topicCode": "5.13",
+  "topicName": "Reducing urban runoff",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:26:26.949Z",
+  "cards": [
+    {
+      "id": "15btkp0",
+      "kind": "concept",
+      "front": "Why do city streets flood within minutes while a forest soaks up the same rain?",
+      "back": "Roads, roofs and parking lots are **impervious surfaces** that water cannot pass through, so rain becomes runoff that rushes into storm drains.",
+      "hint": "Compare what happens to rain on soil with what happens on asphalt.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1177a5h",
+      "kind": "concept",
+      "front": "Why does urban runoff damage nearby streams and lakes?",
+      "back": "Runoff picks up **pollutants** such as oil, road salt, fertilizer and sediment, and storm drains often send it untreated into waterways.",
+      "hint": "Name one pollutant and the harm it causes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0c7hvxf",
+      "kind": "concept",
+      "front": "What is the core idea behind green infrastructure?",
+      "back": "It manages stormwater **where it falls** using soil, plants and natural processes, so rain is absorbed, slowed and filtered instead of rushing to a drain.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "196ze18",
+      "kind": "term",
+      "front": "What is nonpoint source pollution?",
+      "back": "Pollution that enters water from many **diffuse, scattered places** rather than one identifiable discharge point.",
+      "hint": "Contrast it with a single factory outflow pipe.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0obj0sp",
+      "kind": "term",
+      "front": "What is groundwater recharge?",
+      "back": "The slow process by which water soaks through soil to **refill underground aquifers**.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0qskn8v",
+      "kind": "term",
+      "front": "What is permeable pavement?",
+      "back": "A paving material with **pores or gaps** that let water pass through to a gravel layer below instead of running off.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1svyis6",
+      "kind": "term",
+      "front": "What is a rain garden?",
+      "back": "A shallow, planted **depression** that holds runoff temporarily so it can soak into the soil.",
+      "hint": "Think about where roof water goes first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1u8t6cp",
+      "kind": "concept",
+      "front": "How does a bioswale treat runoff as it moves?",
+      "back": "A bioswale is a sloped, **vegetated channel** that slows water, traps sediment and filters pollutants as it flows.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1dwgtn5",
+      "kind": "concept",
+      "front": "How does a rain garden reduce downstream flooding?",
+      "back": "It collects runoff and lets it soak in, so less water reaches storm drains at once and the **peak flow** is lower.",
+      "hint": "Think about how quickly water arrives downstream.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1c32ca3",
+      "kind": "formula",
+      "front": "Which formula gives the volume of runoff from a surface, and what do its symbols mean?",
+      "back": "$V = A \\times d$, where $V$ is volume in $\\mathrm{m^3}$, $A$ is area in $\\mathrm{m^2}$, and $d$ is rainfall depth in $\\mathrm{m}$.",
+      "hint": "Think of a box of water: base times height.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1b4flss",
+      "kind": "example",
+      "front": "What is the runoff volume from a 2,000 m² flat roof during a 25 mm storm, if all the rain runs off?",
+      "back": "$50\\,\\mathrm{m^3}$, found by converting $25\\,\\mathrm{mm}$ to $0.025\\,\\mathrm{m}$ and multiplying by $2{,}000\\,\\mathrm{m^2}$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "02ggrum",
+      "kind": "mistake",
+      "front": "Why is it wrong to think bigger storm drain pipes solve urban runoff problems?",
+      "back": "Bigger pipes only move polluted water faster; they do not filter it or refill groundwater.",
+      "hint": "Consider what the water still carries when it arrives.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0syn4ti",
+      "kind": "mistake",
+      "front": "What is wrong with thinking green infrastructure replaces storm drains entirely?",
+      "back": "It does not replace them; it **reduces** how much water the drains must handle.",
+      "sectionId": "s5"
+    }
+  ]
+}

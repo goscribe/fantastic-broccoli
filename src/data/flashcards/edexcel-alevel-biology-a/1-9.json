@@ -1,0 +1,122 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "1-9",
+  "topicCode": "1.9",
+  "topicName": "Studies of health risk factors",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:14.326Z",
+  "cards": [
+    {
+      "id": "1r4a4u6",
+      "kind": "concept",
+      "front": "Why does finding a correlation between a factor and a disease not prove that the factor causes the disease?",
+      "back": "A **confounding variable** (a third factor) may affect both the exposure and the disease, so the link can be explained without cause. Causation needs more evidence.",
+      "hint": "Think about what else could be linked to both things.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "18zhmqc",
+      "kind": "concept",
+      "front": "What is the key difference in starting point between a cohort study and a case-control study?",
+      "back": "A cohort study starts with **healthy people** and follows them forward in time. A case-control study starts with **people who already have the disease** and looks back at past exposure.",
+      "hint": "Consider who is recruited and which direction time runs."
+    },
+    {
+      "id": "1q0dzif",
+      "kind": "example",
+      "front": "What is the relative risk when 60 of 2000 smokers and 20 of 4000 non-smokers develop a disease?",
+      "back": "Smokers: $\\frac{60}{2000}=0.030$. Non-smokers: $\\frac{20}{4000}=0.0050$. Relative risk $=\\frac{0.030}{0.0050}=6.0$, with no units. Smokers were six times as likely to develop the disease.",
+      "hint": "Work out each group's proportion before dividing.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1bbt6un",
+      "kind": "term",
+      "front": "What is an exposure in a health study?",
+      "back": "An **exposure** is a factor, such as a habit or diet, whose possible effect on health is being investigated.",
+      "hint": "Think about the habit or substance under investigation.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0zjceqw",
+      "kind": "process",
+      "front": "What are the main steps of carrying out a cohort study?",
+      "back": "Recruit many people free from the disease, record each person's exposure, follow the group for many years, then compare disease rates in exposed and unexposed people.",
+      "hint": "Start with who is chosen at the beginning.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0x2xjhs",
+      "kind": "process",
+      "front": "How is a case-control study carried out?",
+      "back": "Select **cases** with the disease, match each with a **control** of similar age and sex, ask both groups about past exposure, then compare how often exposure was reported.",
+      "hint": "Begin with the group that already has the disease.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wikzsf",
+      "kind": "term",
+      "front": "What is a confounding variable?",
+      "back": "A **confounding variable** is a factor other than the one being studied that is linked to both the exposure and the outcome.",
+      "hint": "Consider a hidden third influence on both things.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0amh9x6",
+      "kind": "formula",
+      "front": "Which equation gives relative risk?",
+      "back": "$\\text{Relative risk} = \\frac{\\text{proportion exposed who develop disease}}{\\text{proportion unexposed who develop disease}}$. It has no units.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0fuamfq",
+      "kind": "concept",
+      "front": "What does a relative risk above 1, equal to 1, or below 1 tell you?",
+      "back": "Above 1: the exposed group was more likely to develop the disease. Equal to 1: no difference. Below 1: the exposure may be **protective**.",
+      "hint": "Compare the exposed risk with the unexposed risk.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "06flkts",
+      "kind": "mistake",
+      "front": "Why can't you calculate a relative risk directly from a case-control study's numbers?",
+      "back": "Researchers choose how many cases and controls to include, so the proportions do not reflect the whole population. Only cohort data give the rates needed.",
+      "hint": "Think about who chooses the numbers in each group.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ybif2y",
+      "kind": "concept",
+      "front": "Why is exposure data from a cohort study less likely to be wrong?",
+      "back": "Exposure is **recorded before the disease develops**, so people cannot be influenced by knowing they are ill or by faulty memory.",
+      "hint": "Think about when the exposure is written down.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xh1j93",
+      "kind": "concept",
+      "front": "What is the main weakness of the exposure data in a case-control study?",
+      "back": "It relies on **memory**: people may recall past exposure inaccurately, since the data are gathered after the disease has appeared.",
+      "hint": "Think about where the exposure information comes from.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1x7zf0h",
+      "kind": "concept",
+      "front": "Why do a large sample and long follow-up make a study's results more trustworthy?",
+      "back": "A large sample **reduces the effect of chance**, and following people for longer records more cases of the disease.",
+      "hint": "Think about chance in very small groups.",
+      "sectionId": "s6"
+    },
+    {
+      "id": "165n7o8",
+      "kind": "concept",
+      "front": "What evidence makes a causal link stronger than a single study can show?",
+      "back": "Several **independent studies** with similar results, together with a known biological mechanism that explains how the exposure could cause the disease.",
+      "hint": "Think about what one study alone cannot rule out.",
+      "sectionId": "s6"
+    }
+  ]
+}

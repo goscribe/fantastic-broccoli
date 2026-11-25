@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-environmental-science",
+  "topicId": "1-2",
+  "topicCode": "1.2",
+  "topicName": "Terrestrial biomes",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:25:02.961Z",
+  "cards": [
+    {
+      "id": "01ltq87",
+      "kind": "concept",
+      "front": "Why do plant types change so much between a hot jungle and a snowy plain?",
+      "back": "**Climate** decides it. Plants cannot move, so each region keeps only the plants suited to its local temperature and precipitation.",
+      "hint": "Think about whether plants can relocate when conditions change.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "02l92p7",
+      "kind": "term",
+      "front": "What is a biome?",
+      "back": "A **biome** is a large region with similar climate and similar vegetation. Biomes on land are called terrestrial biomes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0bqira2",
+      "kind": "concept",
+      "front": "Which factor limits plant growth most in warm biomes?",
+      "back": "**Water**. Temperature stays high in all warm biomes, so rainfall does most of the sorting between rainforest, savanna, and desert.",
+      "hint": "Consider what stays roughly the same across the three warm biomes.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1jyzm3z",
+      "kind": "term",
+      "front": "What is permafrost?",
+      "back": "**Permafrost** is soil that stays frozen below the surface all year. It keeps roots shallow and blocks drainage, so summer thaw leaves boggy patches.",
+      "hint": "Think about the cold biome where you would expect to find it.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mgbwpl",
+      "kind": "concept",
+      "front": "Why does soil form slowly in boreal forests and tundra?",
+      "back": "**Cold slows decay**, so dead plant material turns into soil only slowly.",
+      "hint": "Think about how quickly decomposers work in winter.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1rz7upm",
+      "kind": "term",
+      "front": "What is an adaptation?",
+      "back": "An **adaptation** is a trait that helps an organism survive and reproduce where it lives.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06q2vx5",
+      "kind": "concept",
+      "front": "Why do desert plants often have stems that store water?",
+      "back": "Deserts face **water shortage**, so stored water lets a plant survive long dry periods.",
+      "hint": "Start from the main problem desert organisms face.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "07rt4rv",
+      "kind": "concept",
+      "front": "Which main climate problem do tundra organisms mainly face?",
+      "back": "**Cold**. Tundra organisms mainly face cold, so traits like low growth close to the ground and thick fur help them survive.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "04ac9fa",
+      "kind": "mistake",
+      "front": "Why is lush rainforest growth not a sign of fertile soil?",
+      "back": "Most of a rainforest's **nutrients** sit in living tissue, not in the ground, so rich growth above does not mean rich soil.",
+      "hint": "Consider where the material in a rainforest is actually stored.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0al2k1i",
+      "kind": "mistake",
+      "front": "Why can two places at the same latitude have different biomes?",
+      "back": "**Rainfall** also matters. Latitude is not the only factor, so places at the same latitude can differ in biome.",
+      "hint": "Think about another part of climate besides temperature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "19ksbf9",
+      "kind": "concept",
+      "front": "Why does climbing a tall mountain pass through zones like those nearer the poles?",
+      "back": "**Air** is generally cooler at higher altitude, so the climate there resembles biomes found farther toward the poles.",
+      "hint": "Think about how height above sea level affects temperature.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1q3je14",
+      "kind": "term",
+      "front": "What is latitude?",
+      "back": "**Latitude** is the angular distance of a place north or south of the equator, measured in degrees.",
+      "sectionId": "s5"
+    }
+  ]
+}

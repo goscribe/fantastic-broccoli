@@ -120,14 +120,8 @@ export default function BankItemPage() {
   if (!item) {
     return (
       <WorkspaceShell workspace={workspace}>
-        <div className="rounded-3xl border border-dashed border-border-strong bg-card text-center py-14 px-6 animate-fade-up">
-          <Image
-            src="/illustrations/icons/target.png"
-            alt=""
-            width={160}
-            height={171}
-            className="pointer-events-none mx-auto mb-3 h-20 w-auto select-none"
-          />
+        <div className="text-center py-14 px-6">
+          <Image src="/design/cat3-think.webp" alt="" width={383} height={400} unoptimized className="pointer-events-none mx-auto mb-3 h-20 w-auto select-none" />
           <p className="text-sm font-semibold">{t("ws.itemNotFound")}</p>
           <p className="text-xs text-muted-foreground mt-1.5">
             {t("ws.itemNotFoundHint")}
@@ -173,13 +167,13 @@ export default function BankItemPage() {
           </Link>
         </div>
 
-        <div className="flex items-start gap-3 animate-fade-up">
-          <Art className="h-10 w-10 shrink-0" />
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
+          <Art className="hidden h-10 w-10 shrink-0 sm:block" />
           <div className="flex-1 min-w-0">
-            <h2 className="text-base font-semibold leading-tight">
+            <h1 className="page-h1 [overflow-wrap:anywhere]">
               <MathText text={item.title} />
-            </h2>
-            <p className="text-[11px] text-faint mt-1">
+            </h1>
+            <p className="mt-1 text-small text-muted-foreground">
               {config.label}
               {item.topic && ` · ${item.topic}`}
               {" · "}
@@ -194,7 +188,7 @@ export default function BankItemPage() {
               )}
             </p>
           </div>
-          <div className="flex items-center gap-1.5 shrink-0">
+          <div className="flex shrink-0 flex-wrap items-center gap-1.5">
             {!editing && (
               <ShareItemButton artifactId={item.id} kind={item.kind} title={item.title} />
             )}
@@ -380,7 +374,7 @@ export default function BankItemPage() {
         ) : (
           /* Document-page look: the live sheet is also what gets printed, so
              embedded figures/visualizers print at their real rendered size. */
-          <div className="print-sheet mx-auto max-w-3xl rounded-2xl border border-border bg-card p-6 shadow-sm animate-fade-up sm:p-10 print:mt-0 print:max-w-none print:rounded-none print:border-0 print:shadow-none">
+          <div className="print-sheet mx-auto max-w-3xl rounded-[var(--r-card)] border border-border bg-card p-6 sm:p-10 print:mt-0 print:max-w-none print:rounded-none print:border-0 print:shadow-none">
             <div className="print-watermark hidden">
               <span>Scribe · scribe.study</span>
             </div>

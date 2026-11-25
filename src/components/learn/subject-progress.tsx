@@ -7,10 +7,6 @@ import { LEVEL_FILL, LevelBadge } from "@/components/session/precheck";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/proficiency";
 import { cn } from "@/lib/utils";
-import { Check, ChevronRight, Repeat, RotateCcw } from "lucide-react";
-import Link from "next/link";
-import { mistakesApi, practiceHref, type MistakeSummary } from "@/lib/api/mistakes";
-import "@/lib/i18n/mistakes";
 
 /** Strongest first, so the summary reads "2 secure · 1 to practise · 1 to build". */
 const SUMMARY_ORDER: ProficiencyLevel[] = ["secure", "developing", "beginner", "unknown"];
@@ -23,79 +19,57 @@ const SUMMARY_KEY: Record<ProficiencyLevel, string> = {
 };
 
 /**
- * Subject page card: the student's level per topic (Elo-based, from the
- * pre-lesson check and every graded answer) and the switch that keeps the
- * subject in long-term spaced review.
+ * Subject page: the student's level per topic (Elo-based, from the pre-lesson
+ * check and every graded answer). Review lives in the one Review line; long-term
+ * review is always on, so there is no switch.
  */
 export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
   const { t } = useI18n();
   const [levels, setLevels] = useState<TopicLevel[] | null>(null);
-  const [pref, setPref] = useState<{ longTerm: boolean; dueItems: number } | null>(null);
-  const [mistakes, setMistakes] = useState<MistakeSummary | null>(null);
-  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
-    void Promise.all([
-      proficiencyApi.list(workspaceId).catch(() => []),
-      proficiencyApi.reviewPreference(workspaceId).catch(() => null),
-      mistakesApi.summary(workspaceId).catch(() => null),
-    ]).then(([l, p, m]) => {
-      if (cancelled) return;
-      setLevels(l);
-      setPref(p);
-      setMistakes(m);
-    });
+    void proficiencyApi
+      .list(workspaceId)
+      .catch(() => [] as TopicLevel[])
+      .then((l) => {
+        if (!cancelled) setLevels(l);
+      });
     return () => {
       cancelled = true;
     };
   }, [workspaceId]);
-
-  const toggle = async () => {
-    if (!pref || saving) return;
-    const longTerm = !pref.longTerm;
-    setSaving(true);
-    setPref({ ...pref, longTerm });
-    try {
-      await proficiencyApi.setReviewPreference(workspaceId, longTerm);
-    } catch {
-      setPref(pref);
-    } finally {
-      setSaving(false);
-    }
-  };
 
   if (levels === null) return null;
   const shown = [...levels].sort((a, b) => a.mastery - b.mastery).slice(0, 8);
   const counts = SUMMARY_ORDER.map((level) => ({ level, count: levels.filter((l) => l.level === level).length })).filter(
     (c) => c.count > 0,
   );
-  const labelId = `review-${workspaceId}`;
 
   return (
-    <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+    <section>
       <div className="flex items-baseline justify-between gap-3">
-        <h2 className="text-[17px] font-bold tracking-tight">{t("prof.progressTitle")}</h2>
+        <h2 className="text-[16px] font-semibold">{t("prof.progressTitle")}</h2>
         {levels.length > 0 && (
-          <span className="shrink-0 text-[12.5px] tabular-nums text-muted-foreground">
+          <span className="shrink-0 text-caption tabular-nums text-muted-foreground">
             {t("prof.topicCount").replace("{count}", String(levels.length))}
           </span>
         )}
       </div>
 
       {shown.length === 0 ? (
-        <div className="mt-4 flex items-center gap-4 rounded-2xl border border-dashed border-border-strong/80 bg-muted/40 px-4 py-4">
+        <div className="mt-3 flex items-center gap-4">
           <Image
-            src="/design/cat2-book.png"
+            src="/design/cat3-book.webp"
             alt=""
-            width={60}
-            height={66}
+            width={363}
+            height={400}
             unoptimized
             className="cat-bob h-[60px] w-auto shrink-0 select-none object-contain"
           />
           <div className="min-w-0">
-            <p className="text-[14px] font-semibold">{t("prof.progressEmptyTitle")}</p>
-            <p className="mt-0.5 text-[13px] leading-snug text-muted-foreground">{t("prof.progressEmpty")}</p>
+            <p className="text-ui font-semibold">{t("prof.progressEmptyTitle")}</p>
+            <p className="mt-0.5 text-small text-muted-foreground">{t("prof.progressEmpty")}</p>
           </div>
         </div>
       ) : (
@@ -110,7 +84,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               />
             ))}
           </div>
-          <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-muted-foreground">
+          <p className="mt-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-caption text-muted-foreground">
             {counts.map((c) => (
               <span key={c.level} className="inline-flex items-center gap-1.5">
                 <span className={cn("size-2 rounded-full", LEVEL_FILL[c.level])} aria-hidden />
@@ -134,7 +108,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
               return (
                 <li key={l.topic} className="-mx-2 min-w-0 rounded-xl px-2 py-2 transition-colors hover:bg-muted/50">
                   <div className="flex items-center justify-between gap-3">
-                    <span className="min-w-0 truncate text-[14px] font-semibold">{l.label}</span>
+                    <span className="min-w-0 truncate text-ui font-semibold">{l.label}</span>
                     <LevelBadge level={l.level} />
                   </div>
                   <div className="mt-2 flex items-center gap-2.5">
@@ -151,7 +125,7 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
                         style={{ width: `${Math.max(4, pct)}%` }}
                       />
                     </div>
-                    <span className="w-9 shrink-0 text-right text-[11.5px] font-medium tabular-nums text-muted-foreground">
+                    <span className="w-9 shrink-0 text-right text-caption font-medium tabular-nums text-muted-foreground">
                       {pct}%
                     </span>
                   </div>
@@ -160,110 +134,6 @@ export function SubjectProgress({ workspaceId }: { workspaceId: string }) {
             })}
           </ul>
         </>
-      )}
-
-      {mistakes && mistakes.total > 0 && (
-        <div className="mt-5 flex items-center gap-3.5 rounded-2xl border border-border p-4">
-          <span
-            className={cn(
-              "hidden size-9 shrink-0 place-items-center rounded-xl sm:grid",
-              mistakes.open > 0 ? "bg-rose/12 text-[#be123c]" : "bg-accent-soft text-accent",
-            )}
-            aria-hidden
-          >
-            {mistakes.open > 0 ? <RotateCcw className="size-[18px]" /> : <Check className="size-[18px]" strokeWidth={3} />}
-          </span>
-          <div className="min-w-0 flex-1">
-            <p className="text-[14px] font-semibold">
-              {mistakes.open === 0
-                ? t("mistakes.cardRowNone")
-                : (mistakes.open === 1 ? t("mistakes.cardRowOne") : t("mistakes.cardRow")).replace("{n}", String(mistakes.open))}
-            </p>
-            <Link
-              href={`/mistakes?workspace=${encodeURIComponent(workspaceId)}`}
-              className="mt-0.5 inline-flex items-center gap-0.5 text-[12.5px] font-semibold text-accent-dim hover:underline"
-            >
-              {t("mistakes.cardSeeAll")}
-              <ChevronRight className="size-3.5" />
-            </Link>
-          </div>
-          {mistakes.open > 0 && (
-            <Link
-              href={practiceHref({ workspaceId })}
-              className="shrink-0 rounded-full bg-accent px-4 py-2 text-[13px] font-semibold text-accent-foreground transition-colors hover:bg-accent-dim"
-            >
-              {t("mistakes.practice")}
-            </Link>
-          )}
-        </div>
-      )}
-
-      {pref && (
-        <div
-          className={cn(
-            "mt-5 flex items-start gap-3.5 rounded-2xl border p-4 transition-colors",
-            pref.longTerm ? "border-accent/25 bg-accent-soft/50" : "border-border bg-muted/40",
-          )}
-        >
-          <span
-            className={cn(
-              "hidden size-9 shrink-0 place-items-center rounded-xl transition-colors sm:grid",
-              pref.longTerm ? "bg-accent text-white" : "bg-card text-muted-foreground",
-            )}
-            aria-hidden
-          >
-            <Repeat className="size-[18px]" />
-          </span>
-          <div className="min-w-0 flex-1">
-            <p id={labelId} className="text-[14px] font-semibold">
-              {t("prof.reviewTitle")}
-            </p>
-            <p className="mt-0.5 text-[12.5px] leading-relaxed text-muted-foreground">
-              {pref.longTerm ? t("prof.reviewOnHint") : t("prof.reviewOffHint")}
-            </p>
-            {pref.longTerm && (
-              <p
-                className={cn(
-                  "mt-2 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] font-semibold",
-                  pref.dueItems > 0 ? "bg-accent text-white" : "bg-card text-accent",
-                )}
-              >
-                {pref.dueItems > 0 ? (
-                  <>
-                    <span className="size-1.5 rounded-full bg-white animate-pulse-dot" aria-hidden />
-                    {t("prof.dueItems").replace("{count}", String(pref.dueItems))}
-                  </>
-                ) : (
-                  <>
-                    <Check className="size-3.5" strokeWidth={3} aria-hidden />
-                    {t("prof.dueNone")}
-                  </>
-                )}
-              </p>
-            )}
-          </div>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={pref.longTerm}
-            aria-labelledby={labelId}
-            disabled={saving}
-            onClick={() => void toggle()}
-            className={cn(
-              "relative mt-0.5 h-7 w-12 shrink-0 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-card disabled:opacity-70",
-              pref.longTerm ? "bg-accent" : "bg-border-strong",
-            )}
-          >
-            <span
-              className={cn(
-                "absolute left-0 top-0.5 grid size-6 place-items-center rounded-full bg-white shadow-sm transition-transform duration-200 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
-                pref.longTerm ? "translate-x-[22px]" : "translate-x-0.5",
-              )}
-            >
-              {pref.longTerm && <Check className="size-3.5 text-accent" strokeWidth={3} aria-hidden />}
-            </span>
-          </button>
-        </div>
       )}
     </section>
   );

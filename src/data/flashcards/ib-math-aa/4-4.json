@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-aa",
+  "topicId": "4-4",
+  "topicCode": "4.4",
+  "topicName": "Correlation and regression",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:32:44.185Z",
+  "cards": [
+    {
+      "id": "0ath6je",
+      "kind": "concept",
+      "front": "What do the sign and size of the correlation coefficient $r$ tell you?",
+      "back": "The **sign** of $r$ gives the direction of the linear link, and values near $\\pm1$ mean the points lie close to a line. Always $-1\\le r\\le1$.",
+      "hint": "Think about points that rise or fall from left to right.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pb0baz",
+      "kind": "formula",
+      "front": "What is the equation of the regression line of $y$ on $x$?",
+      "back": "$y-\\bar{y}=\\frac{s_{xy}}{s_x^2}(x-\\bar{x})$. It is a **straight line** through the mean point $(\\bar{x},\\bar{y})$ that minimises the squared vertical distances to the points.",
+      "hint": "Its gradient is the covariance divided by the variance of $x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0sjbig2",
+      "kind": "concept",
+      "front": "Why is a prediction inside the data range usually more trustworthy than one outside it?",
+      "back": "Predicting inside the range is **interpolation**, usually reliable when $|r|$ is close to 1. Predicting outside is **extrapolation**, which is less reliable because the pattern may not continue.",
+      "hint": "Ask whether the pattern could change beyond the data.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1ryyfjj",
+      "kind": "term",
+      "front": "What are bivariate data?",
+      "back": "Data in which **two variables** are measured for each item, giving pairs of values $(x,y)$.",
+      "hint": "Think of each item giving two numbers.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qu1gvd",
+      "kind": "process",
+      "front": "What are the steps to draw a scatter diagram?",
+      "back": "Plot each pair $(x,y)$ as a point, with the **explaining variable** $x$ on the horizontal axis. Label each axis with its variable and units.",
+      "hint": "Which variable goes across the horizontal axis?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1hs8nbb",
+      "kind": "mistake",
+      "front": "A student says a high $|r|$ proves that $x$ causes $y$. What is wrong?",
+      "back": "**Correlation is not causation**. $r$ shows only association. A third factor may drive both variables, or the link may be a coincidence.",
+      "hint": "What else could affect both variables?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1p7suic",
+      "kind": "mistake",
+      "front": "A student sees $r$ close to 0 and concludes there is no relationship. What is the flaw?",
+      "back": "$r$ measures only **linear** association. A clear curved pattern can still give $r$ close to 0, so a relationship may exist.",
+      "hint": "What kind of pattern does $r$ actually measure?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "09yfv91",
+      "kind": "term",
+      "front": "What is the covariance $s_{xy}$?",
+      "back": "The **mean of the products** $xy$ minus the product of the means: $\\frac{\\sum xy}{n}-\\bar{x}\\bar{y}$.",
+      "hint": "Compare it with the variance of $x$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "038hln1",
+      "kind": "process",
+      "front": "What steps find the regression line of $y$ on $x$ from data?",
+      "back": "Find $\\bar{x}$ and $\\bar{y}$, then $\\sum xy$ and $\\sum x^2$. Work out $s_{xy}$ and $s_x^2$, then the gradient $\\frac{s_{xy}}{s_x^2}$. Finally use the mean point to write the line.",
+      "hint": "Start with the two means.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "19pvdku",
+      "kind": "example",
+      "front": "For $x=1,2,3,4,5$ and $y=2,4,5,4,6$, what is the regression line of $y$ on $x$?",
+      "back": "**$y=0.8x+1.8$**. The means are 3 and 4.2, $s_{xy}=1.6$ and $s_x^2=2$, so the gradient is 0.8.",
+      "hint": "Use the mean point and the gradient $s_{xy}/s_x^2$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1944lz8",
+      "kind": "concept",
+      "front": "In $y=0.8x+1.8$, where $x$ is revision hours and $y$ is marks, what do the gradient and intercept mean?",
+      "back": "Gradient 0.8: each extra hour adds **0.8 marks** on average. Intercept 1.8: the predicted mark for **no revision**.",
+      "hint": "Think about a one-unit increase in $x$.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "18oxwf8",
+      "kind": "example",
+      "front": "Using $y=0.8x+1.8$, what is the predicted mark for 6 hours of revision, and is it reliable?",
+      "back": "$y=0.8\\times6+1.8=6.6$ marks. The data only went up to 5 hours, so this is **extrapolation** and less reliable.",
+      "hint": "Compare 6 with the range of x in the data.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1uibmpl",
+      "kind": "mistake",
+      "front": "Can you use $y=0.8x+1.8$ to predict revision hours from a given mark?",
+      "back": "No. The line of $y$ on $x$ predicts $y$ from $x$. Predicting $x$ from $y$ needs a **different line**.",
+      "hint": "Which variable is the explaining one?",
+      "sectionId": "s5"
+    }
+  ]
+}

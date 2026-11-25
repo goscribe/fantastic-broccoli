@@ -1,0 +1,111 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-chemistry",
+  "topicId": "5-9",
+  "topicCode": "5.9",
+  "topicName": "Steady-state approximation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:00.503Z",
+  "cards": [
+    {
+      "id": "0wj3gzt",
+      "kind": "concept",
+      "front": "What does the steady-state approximation assume about an intermediate's concentration?",
+      "back": "Its **formation** and **consumption** rates nearly balance, so its concentration changes slowly and $\\frac{d[I]}{dt}\\approx 0$. This does not mean the concentration is zero.",
+      "hint": "Think about the two rates acting on the intermediate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1entig9",
+      "kind": "formula",
+      "front": "Write the intermediate balance for $A \\rightarrow I$ ($k_1$), $I \\rightarrow A$ ($k_{-1}$), and $I+B \\rightarrow P$ ($k_2$).",
+      "back": "$\\frac{d[I]}{dt}=k_1[A]-k_{-1}[I]-k_2[I][B]$. The first term is **formation** of $I$; the last two are **consumption**. At steady state, set this approximately to zero.",
+      "hint": "Formation adds to $[I]$; consumption subtracts from it.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "075c6nv",
+      "kind": "formula",
+      "front": "What is the steady-state product formation rate law for this mechanism?",
+      "back": "$\\frac{d[P]}{dt}=\\frac{k_1k_2[A][B]}{k_{-1}+k_2[B]}$. It contains **no intermediate** concentration, only reactant concentrations and rate constants.",
+      "hint": "Substitute the steady-state $[I]$ into $\\frac{d[P]}{dt}=k_2[I][B]$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0oxxf2a",
+      "kind": "term",
+      "front": "What is an intermediate?",
+      "back": "A **substance** produced in one mechanism step and consumed in a later step.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0an7ja4",
+      "kind": "term",
+      "front": "Define the steady-state approximation.",
+      "back": "An approximation that treats an intermediate's concentration as nearly constant because its **formation and consumption rates nearly balance**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qouywg",
+      "kind": "process",
+      "front": "What are the steps to derive a steady-state rate law for a mechanism?",
+      "back": "1) Write the full **intermediate balance**. 2) Set it approximately to zero. 3) Solve for $[I]$. 4) Substitute into the product-forming rate and simplify.",
+      "hint": "Four steps, in order."
+    },
+    {
+      "id": "0h7cctd",
+      "kind": "example",
+      "front": "Using $k_1=0.020$, $k_{-1}=0.30$, $k_2=0.50$, $[A]=0.40$, $[B]=0.20$ (mol/L), find $\\frac{d[P]}{dt}$.",
+      "back": "$0.0020\\,\\mathrm{mol\\,L^{-1}\\,s^{-1}}$. Here $k_{-1}+k_2[B]=0.40\\,\\mathrm{s^{-1}}$, so $[I]\\approx0.020\\,\\mathrm{mol\\,L^{-1}}$.",
+      "hint": "Find $k_2[B]$ first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0znf6vu",
+      "kind": "concept",
+      "front": "Why does the denominator $k_{-1}+k_2[B]$ appear in the rate law?",
+      "back": "It accounts for **both ways** $I$ can be consumed: reverting to $A$ (rate $k_{-1}[I]$) and reacting with $B$ (rate $k_2[I][B]$).",
+      "hint": "Look at the two consumption terms in the balance.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1iyxle3",
+      "kind": "mistake",
+      "front": "A student sets the rate of each step equal to the others to find $[I]$. What is wrong?",
+      "back": "Balance **all** pathways that form the intermediate against **all** pathways that consume it. Setting each step's rate equal to the next is not the method.",
+      "hint": "Count every route in and every route out.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "006cfkl",
+      "kind": "mistake",
+      "front": "Why can the steady-state rate law be wrong just after a reaction begins?",
+      "back": "The derivation assumes $[I]$ changes **slowly**. Early on, $[I]$ may still be adjusting, so the derived law may not describe that brief period.",
+      "hint": "Think about when the assumption holds.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0f19a94",
+      "kind": "concept",
+      "front": "What happens to the rate when $k_2[B]$ dominates the denominator?",
+      "back": "The rate approaches $k_1[A]$, so it becomes **nearly independent** of $[B]$. These are limiting cases of one mechanism, not separate mechanisms.",
+      "hint": "Compare the denominator with the numerator.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13pcj1m",
+      "kind": "term",
+      "front": "What is apparent reaction order?",
+      "back": "The **dependence** of an observed rate on concentration under specified conditions.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "14r5q4y",
+      "kind": "term",
+      "front": "What is an intermediate balance?",
+      "back": "An equation giving an intermediate's concentration change as its **total formation rate minus its total consumption rate**.",
+      "sectionId": "s2"
+    }
+  ]
+}

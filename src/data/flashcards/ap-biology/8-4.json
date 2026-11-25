@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-biology",
+  "topicId": "8-4",
+  "topicCode": "8.4",
+  "topicName": "Effect of density on populations",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:36:09.629Z",
+  "cards": [
+    {
+      "id": "15oopth",
+      "kind": "concept",
+      "front": "Why does rising population density slow growth when a resource is limited?",
+      "back": "More individuals must share the same limited resource, so each gets less. **Intraspecific competition** lowers survival or reproduction, which slows growth.",
+      "hint": "Think about what happens to each individual's share of the resource.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1sqi8ki",
+      "kind": "concept",
+      "front": "What makes a limiting factor density-dependent?",
+      "back": "Its **effect gets stronger as population density increases**. Examples include competition, disease spread, and predators finding prey more often.",
+      "hint": "Ask whether the effect changes as the population gets more crowded.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1egme9f",
+      "kind": "term",
+      "front": "What is carrying capacity?",
+      "back": "The **population size an environment can sustain over time** under current conditions. It can change if resources or environmental conditions change.",
+      "hint": "Consider whether this limit stays the same when resources change.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0iesu7a",
+      "kind": "concept",
+      "front": "What is a density-independent limiting factor?",
+      "back": "A factor that affects a population **without its effect depending on crowding**, such as a severe freeze, drought, or flood.",
+      "hint": "Does the effect change with how crowded the population is?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "130psnc",
+      "kind": "mistake",
+      "front": "A factor kills many individuals, so it must be density-independent. Why is that wrong?",
+      "back": "Classify a factor by whether its **effect changes with density**, not by whether it causes deaths. Density-independent does not mean every individual has an identical chance of dying.",
+      "hint": "What decides the classification: deaths, or change with density?",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1f4ug7f",
+      "kind": "mistake",
+      "front": "Does high population density automatically mean a population is shrinking?",
+      "back": "No. **High density does not automatically mean decline**. Growth may continue, but at a slower rate.",
+      "hint": "Slower growth and shrinking are not the same thing.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1o9wp2m",
+      "kind": "concept",
+      "front": "When does competition become strong?",
+      "back": "When **demand approaches or exceeds the available supply** of a limited resource. A crowded population with abundant resources may have weak competition.",
+      "hint": "Compare how much is needed with how much is available.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0e2kwue",
+      "kind": "concept",
+      "front": "Why does crowding make infectious disease spread more easily?",
+      "back": "Individuals **contact each other more often** in crowds, so infections pass more readily. Predators also meet prey more often when prey are concentrated.",
+      "hint": "Think about how often individuals meet each other.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1drncbd",
+      "kind": "process",
+      "front": "How should you explain population change after a drought that also reduces food?",
+      "back": "1) Identify the initial **density-independent** event, which reduces survival regardless of crowding. 2) Identify the later **density-dependent** competition for the remaining food.",
+      "hint": "Separate the first event from the knock-on effect.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "12rse0w",
+      "kind": "process",
+      "front": "What steps predict population change from a limiting factor?",
+      "back": "1) Identify the **limiting factor**. 2) Decide how it affects births or deaths. 3) Conclude whether growth slows, numbers fall if deaths exceed births, or growth rises if density drops.",
+      "hint": "Three steps: identify, trace the effect, then conclude.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "13ubu1q",
+      "kind": "term",
+      "front": "What is per capita growth rate?",
+      "back": "The **rate of population change divided by population size**, which describes change relative to how many individuals there are.",
+      "hint": "Think of it as growth per individual.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "158yhce",
+      "kind": "concept",
+      "front": "How does per capita growth rate usually change as density rises under density-dependent limits?",
+      "back": "It often **falls**, because crowding reduces survival or reproduction for each individual.",
+      "hint": "Consider what crowding does to each individual.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1wc3rm7",
+      "kind": "concept",
+      "front": "After a density-independent event, what determines the population's later growth?",
+      "back": "The **remaining resources and other conditions**. The initial event does not fix future growth on its own.",
+      "hint": "Look at what is left after the event.",
+      "sectionId": "s4"
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+/*
+ * Cascade-layer order, stated first in every stylesheet that uses a layer.
+ * Layers rank by where they are FIRST named. This file (via design.css) can
+ * be loaded before globals.css: the production build (Turbopack) links its
+ * chunk first. Without this line `components` was then the lowest layer, so
+ * Tailwind's preflight in `base` beat every rule below: `a { color: inherit }`
+ * turned subject-tile titles ink, `* { padding: 0 }` stripped the pill.
+ */
+@layer properties, theme, base, components, utilities;
+
+/*
+ * Scribe UI tokens (v5). One source for the signed-in app (.app-brand) and the
+ * public note pages (.notes-look); keep this file identical on every branch.
+ *
+ * The rules:
+ * - Chrome is quiet: a white page, white cards, a cool-grey ramp for borders
+ *   and secondary text, near-black text. No tinted page, no tinted panels.
+ * - Colour lives in content objects, not chrome: a subject or course is a
+ *   full-bleed tile in its family's hue with its illustration (.subject-tile,
+ *   .subject-band; hues and art in src/lib/subject-family.ts). Many hues on
+ *   one screen read as one set because structure, saturation, radius and
+ *   illustration style are shared.
+ * - Purple is the brand accent: the primary button, links, the selected nav
+ *   item (--accent-tint pill), progress. --accent-soft stays a NEUTRAL fill.
+ * - --flame for streaks, --hl (highlighter) for key phrases. Green and rose
+ *   only after an answer.
+ * - Shape by size: controls 12, buttons 16, cards 20, the hero 24. Depth is a
+ *   hairline, plus a 1px shadow at most.
+ */
+/*
+ * Body type scale. Every run of body copy (paragraphs, list items, helper and
+ * card text, callouts, questions, answer options, explanations, captions) uses
+ * one of these four, through the Tailwind utilities text-read / text-ui /
+ * text-small / text-caption (mapped in globals.css @theme). Each size carries
+ * its own line-height; hierarchy inside a size comes from weight, colour and
+ * spacing, never from a half-pixel step. Headings have their own tokens
+ * (--h1 / --h2, design.css); buttons, chips and tiles keep their own type.
+ *
+ *   read     17px / 1.6, 18px from 640px   long-form reading: a note's body,
+ *                                          lists, callouts, worked examples,
+ *                                          recall and practice questions,
+ *                                          options, explanations; landing prose
+ *   ui       15px / 1.5                    standard app body: card text,
+ *                                          descriptions, list rows, figure
+ *                                          captions, table cells
+ *   small    13px / 1.45                   secondary: meta, helper text,
+ *                                          labels over a block ("Common mistake")
+ *   caption  12px / 1.35                   micro: eyebrows, timestamps, counts
+ *
+ * Only `read` steps up on wider screens (a phone holds ~60 characters at 17px;
+ * a note's column holds ~70 at 18px). One screen uses at most three of these.
+ */
+:root {
+  --fs-read: 17px;
+  --lh-read: 1.6;
+  --fs-ui: 15px;
+  --lh-ui: 1.5;
+  --fs-small: 13px;
+  --lh-small: 1.45;
+  --fs-caption: 12px;
+  --lh-caption: 1.35;
+}
+@media (min-width: 640px) {
+  :root { --fs-read: 18px; }
+}
+
+:root .app-brand,
+:root .notes-look {
+  --page: #ffffff;
+  --background: #ffffff;
+  --card: #ffffff;
+  --paper: #ffffff;
+  --card-hover: #fafafb;
+  --foreground: #16161a;
+  --card-foreground: #16161a;
+  --ink: #16161a;
+  --muted: #f4f4f6;
+  --muted-foreground: #5c5c68;
+  --faint: #767683;
+  --border: #e8e8ec;
+  --border-strong: #d5d5dc;
+  --edge: #e2e2e8;
+
+  --accent-soft: #f4f4f6;
+  --energy-soft: #f4f4f6;
+  --accent-tint: #efecfc;
+
+  /* v4's cream panel is gone; the names stay as neutral fills for anything that still reads them. */
+  --cream: #f4f4f6;
+  --cream-edge: #e8e8ec;
+  --hl: #ffe08f;
+  /* The four highlighters a reader marks a note with: the app's yellow and three from the subject palette, as light as a marker stroke. */
+  --hl-yellow: var(--hl);
+  --hl-green: #bfeccb;
+  --hl-pink: #ffc7dc;
+  --hl-blue: #bfdcff;
+  --flame: #ff9a1f;
+  --flame-edge: #e67700;
+  --flame-soft: #fff4e2;
+  --flame-ink: #3a2420;
+
+  --r-control: 12px;
+  --r-button: 16px;
+  --r-card: 20px;
+  --r-panel: 24px;
+  --card-shadow: 0 1px 2px rgba(22, 22, 26, 0.05);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+/*
+ * Default brand accent. A points-shop theme (<html data-accent>) keeps its own
+ * accent and soft tint. `:root:root` is deliberate: it outranks any older
+ * `:root:not([data-accent]) .app-brand` rule whatever order the CSS loads in.
+ */
+:root:root:not([data-accent]) .app-brand,
+:root:root:not([data-accent]) .notes-look {
+  --accent-soft: #f4f4f6;
+  --energy-soft: #f4f4f6;
+  --accent: #6952e0;
+  --accent-dim: #5a43d1;
+  --accent-edge: #4f3bbd;
+  --ring: #6952e0;
+  --energy: #6952e0;
+}
+:root[data-accent] .app-brand,
+:root[data-accent] .notes-look {
+  --accent-edge: var(--accent-dim);
+  --accent-tint: var(--accent-soft);
+}
+
+@layer components {
+  /* Highlighter: the mark a student makes on the phrase that matters. */
+  .hl-mark {
+    background-image: linear-gradient(var(--hl), var(--hl));
+    background-repeat: no-repeat;
+    background-size: 100% 0.5em;
+    background-position: 0 88%;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    border-radius: 2px;
+  }
+  /* Exam-paper rule: a heavy ink line with a hairline under it. */
+  .paper-rule {
+    height: 5px;
+    border-top: 2px solid var(--foreground);
+    border-bottom: 1px solid var(--foreground);
+  }
+
+  /*
+   * Keyboard focus: one soft accent ring for links and buttons, instead of the
+   * browser's own heavy two-tone box (which also appears on a clicked link as
+   * soon as any key is pressed). :where() keeps it at the weight of a single
+   * class, so a component's own focus style still wins.
+   */
+  .app-brand :where(a, button, summary, [role="button"], [role="tab"]):focus-visible {
+    outline: 2px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    outline-offset: 2px;
+  }
+  /* Sidebar rows sit edge to edge in a scroller that clips: the ring goes inside. */
+  .app-brand aside :where(a, button):focus-visible { outline-offset: -2px; }
+
+  /*
+   * Subject tile: a full-bleed card in its family's hue (--tile-a deep,
+   * --tile-b bright, set inline from subject-family.ts). White text sits on
+   * the left over --tile-a (≥ 4.5:1 for every family); the bright end only
+   * glows behind the illustration, which bleeds off the right edge.
+   */
+  .subject-tile,
+  .subject-band {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    color: #fff;
+    background: radial-gradient(85% 135% at 100% 30%, var(--tile-b) 0%, var(--tile-a) 62%);
+  }
+  /*
+   * The tile is a size container, so the art and the text column follow the
+   * tile's own width (150–400px), not the viewport's. Its height is fixed by
+   * the component: a long title is clamped, it never grows the tile, and the
+   * art (a share of the height) stays the size it was drawn for.
+   */
+  .subject-tile {
+    container-type: inline-size;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: var(--r-card);
+    text-decoration: none;
+    transition: transform 0.2s var(--ease-out), box-shadow 0.2s ease;
+  }
+  .subject-tile:focus-visible { outline: 3px solid var(--tile-a); outline-offset: 3px; }
+  .subject-tile__art {
+    position: absolute;
+    z-index: -1;
+    right: -9%;
+    bottom: -15%;
+    height: 90%;
+    width: auto;
+    max-width: none;
+    pointer-events: none;
+    user-select: none;
+    transform: rotate(6deg);
+    transform-origin: 60% 60%;
+    transition: transform 0.35s var(--ease-out);
+  }
+  /* An unmatched subject in a borrowed hue: the neutral art goes white-grey so it sits on any colour. */
+  .subject-tile__art--neutral { filter: saturate(0) brightness(1.12); opacity: 0.9; }
+  /* Short rows (phone lists, the picker): the art is cropped harder so the title keeps its room. */
+  .subject-tile--row .subject-tile__art { right: -4%; bottom: -34%; height: 150%; }
+  .subject-tile--row .subject-tile__text { max-width: 60%; }
+  /*
+   * Course tiles grow with their text (a long name, a wrapped stats line), so
+   * their art is capped by the tile's width too: a taller tile no longer means
+   * bigger art running under the words, the status line and the pill.
+   */
+  .course-tile:not(.subject-tile--row) > .subject-tile__art { height: min(90%, 72cqw); bottom: -8%; }
+  /* The words keep the left; the art keeps the right. */
+  .subject-tile__text { max-width: 62%; min-width: 0; }
+  .subject-tile__title,
+  .subject-band__title {
+    color: #fff;
+    overflow-wrap: anywhere;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
+  .subject-band__title { -webkit-line-clamp: 3; line-clamp: 3; }
+  .course-tile__title { -webkit-line-clamp: 3; line-clamp: 3; }
+  .subject-tile__sub { color: rgb(255 255 255 / 0.92); }
+  .subject-tile__sub--line { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .subject-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    height: 36px;
+    max-width: 100%;
+    padding: 0 10px 0 16px;
+    border-radius: 999px;
+    background: #fff;
+    color: var(--tile-a);
+    font-size: 14.5px;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+    box-shadow: 0 2px 0 rgb(0 0 0 / 0.14);
+  }
+  .subject-track { height: 6px; border-radius: 999px; background: rgb(255 255 255 / 0.3); overflow: hidden; }
+  .subject-track > span { display: block; height: 100%; border-radius: inherit; background: #fff; }
+  /*
+   * Narrow tiles (the queries measure the tile inside its padding): the art
+   * steps back so it never runs under the words or the pill…
+   */
+  @container (max-width: 195px) {
+    .subject-tile:not(.subject-tile--row) > .subject-tile__art { height: 62%; right: -12%; bottom: -10%; }
+    .subject-tile:not(.subject-tile--row) .subject-tile__text { max-width: 68%; }
+  }
+  /* …and under ~170px of tile there is no room for both: the words take it. */
+  @container (max-width: 132px) {
+    .subject-tile:not(.subject-tile--row) > .subject-tile__art { display: none; }
+    .subject-tile:not(.subject-tile--row) .subject-tile__text { max-width: none; }
+  }
+  @container (max-width: 180px) {
+    .subject-tile--row > .subject-tile__art { display: none; }
+    .subject-tile--row .subject-tile__text { max-width: none; }
+  }
+  @media (hover: hover) {
+    .subject-tile:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -12px var(--tile-a); }
+    .subject-tile:hover .subject-tile__art { transform: rotate(2deg) scale(1.05); }
+  }
+  .subject-tile:active { transform: scale(0.985); }
+  /* A header band in the subject's colour (note pages, a course's page, the result screen). */
+  .subject-band { border-radius: var(--r-panel); }
+  .subject-band .subject-tile__art { right: -2%; bottom: -22%; height: 128%; max-height: 230px; }
+  @media (max-width: 639px) {
+    .subject-band .subject-tile__art { right: -12%; bottom: -8%; height: 78%; opacity: 0.95; }
+  }
+  /*
+   * The hero (home, the notes index): an illustrated landscape that follows the
+   * visitor's own time of day. <html data-daypart> is written by a head script
+   * before first paint (src/lib/daypart.ts), which also preloads the one
+   * matching file; with no attribute it is afternoon. 800px on phones, 1600px
+   * from sm up.
+   * .hero-card is the card; .hero-field the scene inside it; --hero-sky is the
+   * scene's sky colour, shown until the image arrives; --hero-wash is the card
+   * colour under a scene band (white by day, the night sky after dark).
+   *
+   * Nothing is ever faded over the scene. Words that sit on it go on a solid
+   * card (.hero-copy, or the home week's .hero-cell) in --hero-surface: white
+   * by day, the night sky lifted a step after dark.
+   *
+   * Banner heights, shared by every screen with a scene:
+   *   --banner-band  the scene band above the words on a narrow banner
+   *   --banner-min   the least height of a wide banner (scene behind, words on a card)
+   * Subject bands (.nl-band) have no fixed height; their padding is --band-pad-*.
+   */
+  :root { --banner-band: 112px; --banner-min: 200px; --band-pad-y: 20px; --band-pad-x: 20px; }
+  @media (min-width: 640px) { :root { --band-pad-y: 24px; --band-pad-x: 32px; } }
+  .hero-card { --hero-wash: #ffffff; --hero-sky: #a8dafb; --hero-surface: #ffffff; background-color: var(--hero-wash); }
+  .hero-copy {
+    background: var(--hero-surface);
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    border-radius: var(--r-card);
+    box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 8px 18px -10px rgb(22 22 26 / 0.35);
+  }
+  .hero-field {
+    background-color: var(--hero-sky);
+    background-image: url("/design/hero/afternoon-800.webp");
+    background-position: right 60%;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  /* The cat's contact shadow on the grass; goes inside the box that holds the cat. */
+  .hero-field__ground { position: absolute; left: 52%; bottom: -3%; width: 74%; height: 9%; transform: translateX(-50%); border-radius: 50%; background: rgb(20 40 30 / 0.2); pointer-events: none; }
+  html[data-daypart="morning"] .hero-card { --hero-sky: #e6e9f6; }
+  html[data-daypart="evening"] .hero-card { --hero-sky: #d9719a; }
+  /* After dark the card goes dark with the sky, and its words turn light. */
+  html[data-daypart="night"] .hero-card,
+  html[data-daypart="late"] .hero-card {
+    --hero-wash: #0b1351; --hero-sky: #0b1351;
+    --foreground: #ffffff; --muted-foreground: #c5c9ec; --border-strong: rgb(255 255 255 / 0.45); --hero-eyebrow: #cdc5ff;
+    color: #ffffff; border-color: #0b1351;
+  }
+  html[data-daypart="late"] .hero-card { --hero-wash: #0d013c; --hero-sky: #0d013c; border-color: #0d013c; }
+  /* After dark the solid cards are the night sky lifted a step, so they read as cards against it. */
+  html[data-daypart="night"] .hero-card,
+  html[data-daypart="late"] .hero-card { --hero-surface: color-mix(in srgb, var(--hero-wash) 86%, #ffffff); }
+  .hero-eyebrow { color: var(--hero-eyebrow, var(--accent-dim)); }
+  html[data-daypart="morning"] .hero-field { background-image: url("/design/hero/morning-800.webp"); }
+  html[data-daypart="evening"] .hero-field { background-image: url("/design/hero/evening-800.webp"); }
+  html[data-daypart="night"] .hero-field { background-image: url("/design/hero/night-800.webp"); }
+  html[data-daypart="late"] .hero-field { background-image: url("/design/hero/late-800.webp"); }
+  @media (min-width: 640px) {
+    .hero-field { background-image: url("/design/hero/afternoon-1600.webp"); }
+    html[data-daypart="morning"] .hero-field { background-image: url("/design/hero/morning-1600.webp"); }
+    html[data-daypart="evening"] .hero-field { background-image: url("/design/hero/evening-1600.webp"); }
+    html[data-daypart="night"] .hero-field { background-image: url("/design/hero/night-1600.webp"); }
+    html[data-daypart="late"] .hero-field { background-image: url("/design/hero/late-1600.webp"); }
+  }
+  /*
+   * The wait (WaitScreen): one calm bar in ink, never the accent. With a real
+   * fraction the fill is that wide; without one a short piece slides across.
+   * Steps are a ring that fills when done; the current one has a dot.
+   */
+  .wait-bar { position: relative; height: 6px; border-radius: 999px; background: var(--muted); overflow: hidden; }
+  .wait-bar > span { position: absolute; inset-block: 0; left: 0; border-radius: inherit; background: var(--foreground); transition: width 0.7s ease-out; }
+  .wait-bar--calm > span { width: 38%; animation: wait-slide 1.8s ease-in-out infinite; }
+  @keyframes wait-slide { 0% { transform: translateX(-100%); } 100% { transform: translateX(270%); } }
+  .wait-step { flex: none; width: 14px; height: 14px; border-radius: 999px; border: 2px solid var(--border-strong); }
+  .wait-step--now { border-color: var(--foreground); box-shadow: inset 0 0 0 2px var(--background), inset 0 0 0 8px var(--foreground); }
+  .wait-step--done { border-color: var(--foreground); background: var(--foreground); }
+  @media (prefers-reduced-motion: reduce) {
+    .wait-bar > span { transition: none; }
+    .wait-bar--calm > span { animation: none; width: 100%; opacity: 0.35; }
+    .subject-tile, .subject-tile__art { transition: none; }
+    .subject-tile:hover, .subject-tile:active, .subject-tile:hover .subject-tile__art { transform: none; }
+    .subject-tile:hover .subject-tile__art { transform: rotate(6deg); }
+  }
+}

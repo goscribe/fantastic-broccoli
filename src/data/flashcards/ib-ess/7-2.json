@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-ess",
+  "topicId": "7-2",
+  "topicCode": "7.2",
+  "topicName": "Energy sources",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:34:53.755Z",
+  "cards": [
+    {
+      "id": "05nsmza",
+      "kind": "concept",
+      "front": "Why is no single energy source the best choice for every situation?",
+      "back": "Every source trades a **benefit against a cost**, and the balance depends on how and where it is used.",
+      "hint": "Think about the table of advantages and disadvantages.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0xjmwtk",
+      "kind": "concept",
+      "front": "Why do fossil fuels still supply much of the world's energy despite their drawbacks?",
+      "back": "They have a **high energy density** and can be stored and burned whenever power is needed. However, burning them releases carbon dioxide and pollutants.",
+      "hint": "Think about reliability first, then the costs.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1urq2i7",
+      "kind": "term",
+      "front": "What is a renewable energy source?",
+      "back": "A **renewable energy source** is replenished by natural processes fast enough to be used again and again, such as solar or wind.",
+      "hint": "Focus on the rate of replenishment.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0dgr87s",
+      "kind": "term",
+      "front": "What does intermittent mean for an energy supply?",
+      "back": "**Intermittent** means the supply is not continuous because it changes with weather or time of day, so storage or a backup is needed.",
+      "hint": "Think about solar panels at night.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "09u1c8z",
+      "kind": "mistake",
+      "front": "Is natural gas a low-carbon fuel because it burns more cleanly than coal?",
+      "back": "**No.** It releases less carbon dioxide than coal for the same energy, but it is still a fossil fuel and adds to climate change.",
+      "hint": "Compare it with coal, but remember what it is made from.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0eq395g",
+      "kind": "mistake",
+      "front": "Is biomass always a renewable energy source?",
+      "back": "**Only if** the plants burned are regrown at the same rate they are used. Otherwise it is not renewable.",
+      "hint": "What condition does the note attach to biomass?",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0iummxa",
+      "kind": "concept",
+      "front": "Why do renewable sources still have environmental drawbacks?",
+      "back": "Some drawbacks depend on the source: hydroelectric dams **flood land** and displace people, wind and solar farms affect wildlife, and building the equipment uses materials and energy.",
+      "hint": "Consider construction as well as running.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0gse0a6",
+      "kind": "process",
+      "front": "What steps should you follow when evaluating an energy source?",
+      "back": "1) Name a benefit. 2) Pair it with a limit. 3) Name who or what is affected by both.",
+      "hint": "Three steps, in order.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0dqyd2p",
+      "kind": "concept",
+      "front": "Why are the costs of energy choices often unevenly shared?",
+      "back": "People living near a mine, dam or power station may **bear the costs**, while distant users gain the benefits.",
+      "hint": "Think about who lives closest to the source.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0k3wcu5",
+      "kind": "term",
+      "front": "What is a country's energy mix?",
+      "back": "The **energy mix** is the combination of energy sources a country uses to meet its total demand, shaped by wealth, climate, geography and industry.",
+      "hint": "Think of the sources combined together.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "14p2nti",
+      "kind": "concept",
+      "front": "How does wealth affect energy use per person?",
+      "back": "**High-income countries** use more energy per person for vehicles, appliances and industry, while many low-income households burn wood, charcoal or dung for cooking.",
+      "hint": "Compare vehicles with cooking fuels.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0lxe6dg",
+      "kind": "concept",
+      "front": "Why might a country like Norway rely heavily on hydroelectric power?",
+      "back": "A country with many rivers and mountains can use its **local resources** for hydroelectric power, as Norway does.",
+      "hint": "Think about what the land and water provide.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1j29yy4",
+      "kind": "term",
+      "front": "What does energy security mean?",
+      "back": "A country's ability to obtain **reliable and affordable** energy supplies without serious interruption.",
+      "hint": "Think about what a government wants to avoid.",
+      "sectionId": "s5"
+    }
+  ]
+}

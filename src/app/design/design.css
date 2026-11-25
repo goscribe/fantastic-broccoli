@@ -1,6 +1,16 @@
-/* Scoped tokens for the redesign preview (RevisionDojo-like: white, violet, grey cards). */
-.design-root,
-html.new-ui {
+/* Layer order first (see tokens.css): this file can load before globals.css. */
+@layer properties, theme, base, components, utilities;
+@import "./tokens.css";
+
+/*
+ * Scoped tokens for the redesign PREVIEWS only (/design, and the old landing):
+ * white, violet #7c3aed, Inter. The product itself reads tokens.css through
+ * `.app-brand`, which the root layout puts on <body>, so every screen (auth,
+ * invite, shared quiz, paywall, loader, toasts and anything portalled to
+ * <body>) gets Scribe's own palette and Nunito. This block must not name
+ * `html.new-ui`: that made the preview palette the default outside the shell.
+ */
+.design-root {
   --background: #ffffff;
   --foreground: #111114;
   --card: #ffffff;
@@ -19,7 +29,7 @@ html.new-ui {
   font-family: var(--font-sans);
   letter-spacing: -0.005em;
 }
-.design-root h1, .design-root h2, html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
+.design-root h1, .design-root h2 { letter-spacing: -0.025em; }
 
 @keyframes design-pop { 0% { transform: scale(.4) translateX(var(--tx, 0)); opacity: 0 } 60% { transform: scale(1.12) translateX(var(--tx, 0)); opacity: 1 } 100% { transform: scale(1) translateX(var(--tx, 0)) } }
 @keyframes design-bounce { 0% { transform: translateY(24px); opacity: 0 } 55% { transform: translateY(-6px); opacity: 1 } 100% { transform: translateY(0) } }
@@ -31,7 +41,8 @@ html.new-ui {
 @keyframes design-wiggle { 0%,100% { transform: rotate(-4deg) } 50% { transform: rotate(4deg) } }
 @keyframes design-bob { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-4px) } }
 @keyframes design-float { 0%,100% { transform: translateY(0) rotate(-2deg) } 50% { transform: translateY(-6px) rotate(2deg) } }
-@keyframes design-peek { 0% { transform: translateY(18px) rotate(6deg); opacity: 0 } 100% { transform: translateY(0) rotate(0); opacity: 1 } }
+/* Transform only: the cat is on screen from the first frame (it stands in the scenes), it just settles into place. */
+@keyframes design-peek { 0% { transform: translateY(18px) rotate(6deg) } 100% { transform: translateY(0) rotate(0) } }
 @keyframes design-cheer { 0% { transform: translateY(0) scale(.6); opacity: 0 } 50% { transform: translateY(-14px) scale(1.08); opacity: 1 } 70% { transform: translateY(0) scale(.98) } 85% { transform: translateY(-6px) scale(1.02) } 100% { transform: translateY(0) scale(1) } }
 .cat-wiggle { animation: design-wiggle 1.6s ease-in-out infinite; transform-origin: 50% 90%; }
 .cat-bob { animation: design-bob 3s ease-in-out infinite; }
@@ -40,3 +51,332 @@ html.new-ui {
 .cat-cheer { animation: design-cheer .9s cubic-bezier(.34,1.56,.64,1) both; transform-origin: 50% 100%; }
 
 html.new-ui body { background: #ffffff; }
+
+/*
+ * The signed-in app (shell + session player) in Scribe's own brand: Nunito,
+ * neutral paper surfaces and purple #6952E0 as the accent only. The palette
+ * lives in tokens.css (shared with the public note pages); a points-shop
+ * theme (<html data-accent>) still wins.
+ */
+.app-brand {
+  --font-sans: var(--font-nunito), system-ui, sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+.app-brand h1, .app-brand h2 { letter-spacing: -0.02em; }
+/*
+ * What every approved screen was actually drawn with: this selector outranks
+ * the one above (and the note pages' own), and always has. Kept exactly, so
+ * moving the palette off html.new-ui does not re-space a single heading.
+ */
+html.new-ui h1, html.new-ui h2 { letter-spacing: -0.025em; }
+/*
+ * Heading scale. A page has one title (.page-h1, through PageHeader) and
+ * section titles (.page-h2, through SectionTitle). Home's hero greeting, a
+ * subject's colour band and the session player set their own type: they are
+ * content objects, not page chrome.
+ */
+.app-brand {
+  --h1: 26px;
+  --h2: 18px;
+  --h-weight: 800;
+}
+@media (min-width: 640px) {
+  .app-brand { --h1: 30px; --h2: 20px; }
+}
+
+/*
+ * "Life" layer for the signed-in app: a student product, not a dashboard.
+ * White cards with a hairline on a white page; colour lives in the subject
+ * tiles and the illustrated hero (tokens.css), not in the chrome. A chunky
+ * button with a lip that presses down, and motion that eases things in.
+ * Purple is the accent only; orange is for streak flames and ticks.
+ * Everything that moves stops under prefers-reduced-motion.
+ */
+/* In the components layer so Tailwind utilities on the same element still win. */
+@layer components {
+.page-h1 { font-size: var(--h1, 26px); font-weight: var(--h-weight, 800); line-height: 1.15; }
+.page-h2 { font-size: var(--h2, 18px); font-weight: var(--h-weight, 800); line-height: 1.25; }
+/* A white card: a hairline and a 1px shadow, no glow. */
+.life-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r-card);
+  box-shadow: var(--card-shadow);
+}
+/* A quiet neutral panel (v4's cream panel; home's hero no longer uses it). */
+.life-panel {
+  background: var(--cream);
+  border-radius: var(--r-panel);
+}
+.life-press {
+  transition: transform 0.18s var(--ease-out), border-color 0.15s ease;
+}
+.life-press:active { transform: scale(0.98); }
+@media (hover: hover) {
+  .life-press:hover { border-color: var(--border-strong); }
+}
+/* Things ease up into place, one after another (--i staggers them). */
+@keyframes life-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.life-rise { animation: life-rise 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; animation-delay: calc(var(--i, 0) * 70ms); }
+/* Chunky button: a darker lip that presses down. */
+.btn-chunky {
+  border-radius: var(--r-button);
+  box-shadow: 0 4px 0 0 var(--accent-edge);
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background-color 0.15s ease;
+}
+.btn-chunky:active:not(:disabled) { transform: translateY(3px); box-shadow: 0 1px 0 0 var(--accent-edge); }
+@keyframes life-grow-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.fill-grow { transform-origin: left center; animation: life-grow-x 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+@keyframes life-ring { from { stroke-dasharray: 0 999; } }
+.ring-draw circle:last-of-type { animation: life-ring 1s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both; }
+@keyframes life-sparkle {
+  0% { transform: translate(-50%, -50%) rotate(var(--a)) translateY(0) scale(0.4); opacity: 1; }
+  100% { transform: translate(-50%, -50%) rotate(var(--a)) translateY(calc(var(--d) * -1)) scale(1); opacity: 0; }
+}
+.life-sparkle { position: absolute; left: 50%; top: 50%; animation: life-sparkle 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes life-pop { 0% { transform: scale(0.96); } 45% { transform: scale(1.025); } 100% { transform: scale(1); } }
+.life-pop { animation: life-pop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@keyframes life-shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 60% { transform: translateX(4px); } }
+.life-shake { animation: life-shake 0.35s ease-in-out; }
+/* Streak ticks land one after another. */
+@keyframes life-tick { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.12); opacity: 1; } 100% { transform: scale(1); } }
+.life-tick { animation: life-tick 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--i, 0) * 60ms + 150ms); }
+@keyframes life-shimmer { from { background-position: 150% 0; } to { background-position: -50% 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .life-press, .life-press:hover, .life-press:active, .btn-chunky:active:not(:disabled) { transform: none; transition: none; }
+  .fill-grow, .ring-draw circle:last-of-type, .life-pop, .life-shake, .life-tick, .life-rise { animation: none !important; }
+  .life-sparkle { display: none; }
+}
+}
+
+/*
+ * The end of a session, and the small cheers inside one. Everything here is a
+ * transform or an opacity change, lasts well under 1.5s, never delays a tap,
+ * and is switched off under prefers-reduced-motion.
+ */
+@layer components {
+/* Confetti thrown from where the cat stands: out along --x/--y, then it drops and fades. */
+@keyframes finish-confetti {
+  0% { transform: translate(-50%, -50%) scale(0.3) rotate(0deg); opacity: 0; }
+  12% { opacity: 1; }
+  55% { transform: translate(calc(-50% + var(--x)), calc(-50% + var(--y))) scale(1) rotate(var(--r)); opacity: 1; }
+  100% { transform: translate(calc(-50% + var(--x) * 1.18), calc(-50% + var(--y) + 56px)) scale(0.9) rotate(calc(var(--r) * 1.8)); opacity: 0; }
+}
+.finish-confetti { position: absolute; left: 50%; top: 46%; pointer-events: none; }
+.finish-confetti > span { position: absolute; left: 0; top: 0; opacity: 0; animation: finish-confetti 1.25s cubic-bezier(0.2, 0.7, 0.3, 1) both; animation-delay: calc(var(--i, 0) * 9ms + 180ms); }
+/* The big score lands with a small overshoot. */
+@keyframes finish-score { 0% { transform: scale(0.7); opacity: 0; } 60% { transform: scale(1.06); opacity: 1; } 100% { transform: scale(1); } }
+.finish-score { transform-origin: left bottom; animation: finish-score 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.15s both; }
+/* Answer dots, and anything else that pops in one after another (--i). */
+@keyframes finish-dot { 0% { transform: scale(0); opacity: 0; } 70% { transform: scale(1.25); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+.finish-dot { animation: finish-dot 0.34s cubic-bezier(0.34, 1.56, 0.64, 1) both; animation-delay: calc(var(--i, 0) * 34ms + 520ms); }
+/* The streak flame flickers once when today is added. */
+@keyframes finish-flame { 0%, 100% { transform: scale(1) rotate(0); } 30% { transform: scale(1.28) rotate(-8deg); } 60% { transform: scale(1.1) rotate(6deg); } }
+.finish-flame { transform-origin: 50% 90%; animation: finish-flame 0.7s ease-in-out 0.75s both; }
+/* A number that has just gone up. */
+@keyframes finish-bump { 0% { transform: translateY(0.5em); opacity: 0; } 60% { transform: translateY(-0.12em); opacity: 1; } 100% { transform: translateY(0); } }
+.finish-bump { display: inline-block; animation: finish-bump 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+/* In-session: the tick that draws itself, the sheen on the step you are on, a flashcard turning over. */
+@keyframes play-tick { from { stroke-dashoffset: 24; } to { stroke-dashoffset: 0; } }
+.play-tick path { stroke-dasharray: 24; animation: play-tick 0.32s ease-out 0.12s both; }
+@keyframes play-sheen { 0% { background-position: 130% 0; } 60%, 100% { background-position: -30% 0; } }
+.play-sheen {
+  background-image: linear-gradient(100deg, transparent 35%, rgb(255 255 255 / 0.75) 50%, transparent 65%);
+  background-size: 220% 100%; background-repeat: no-repeat;
+  animation: play-sheen 2.4s ease-in-out infinite;
+}
+@keyframes play-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+.play-fill { transform-origin: left center; animation: play-fill 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes play-flip { 0% { transform: perspective(900px) rotateX(-14deg) scale(0.985); opacity: 0.4; } 100% { transform: perspective(900px) rotateX(0) scale(1); opacity: 1; } }
+.play-flip { animation: play-flip 0.28s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .finish-confetti { display: none; }
+  .finish-score, .finish-dot, .finish-flame, .finish-bump, .play-tick path, .play-fill, .play-flip, .play-sheen { animation: none !important; }
+  .play-sheen { background-image: none; }
+}
+}
+
+/* The redesign's skeletons shimmer instead of pulsing. */
+html.new-ui .skeleton {
+  background: linear-gradient(90deg, var(--muted) 30%, rgba(255, 255, 255, 0.85) 50%, var(--muted) 70%) var(--muted);
+  background-size: 250% 100%;
+  animation: life-shimmer 1.4s ease-in-out infinite !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.new-ui .skeleton { animation: none !important; }
+}
+
+/*
+ * Home's right rail: its sections sit on the page, split by hairlines, not a
+ * stack of outlined boxes. Unlayered on purpose, so it beats the cards' own
+ * padding utilities.
+ */
+.rail-flat .life-card,
+.rail-flat .rail-box { background: transparent; border: 0; border-radius: 0; box-shadow: none; }
+.rail-flat > * > .life-card { padding: 0; }
+.rail-flat > *,
+.rail-flat > .life-card,
+.rail-flat > .rail-box { padding: 20px 2px; }
+.rail-flat > :first-child { padding-top: 6px; }
+.rail-flat > * + *,
+.rail-flat > * + .life-card,
+.rail-flat > * + .rail-box { border-top: 1px solid var(--border); }
+/*
+ * These rules own every rail section's padding, so a section must not bring a
+ * surface of its own: a tinted block here would have its text 2px from its edge.
+ * A subject's rail stacks under the main column on small screens; .rail-flush
+ * drops the 2px inset so both share one left edge.
+ */
+.rail-flat.rail-flush > * { padding-left: 0; padding-right: 0; }
+/*
+ * A subject's rail: separate widgets, so each is its own card (home's approved
+ * rail stays hairline-split above). The plan widget brings its own outline;
+ * this gives it the same surface as the .life-card ones beside it.
+ */
+.rail-cards > .rail-box { background: var(--card); border-radius: var(--r-card); box-shadow: var(--card-shadow); }
+
+/*
+ * Sign-in and sign-up: the home banner's landscape in a tall panel, whole and
+ * unwashed. The words sit on one solid card at the top (.hero-copy); the cat
+ * and the hills keep the rest.
+ */
+.auth-scene .hero-field { background-position: 72% 100%; }
+
+/*
+ * Toasts (sonner): a white card with a hairline in the app's tokens, whatever
+ * the message type. Unlayered and doubled up so they beat sonner's own
+ * injected styles, which load later.
+ */
+[data-sonner-toaster][data-sonner-theme] .scribe-toast {
+  --normal-bg: var(--card, #fff);
+  --normal-border: var(--border, #e8e8ec);
+  --normal-text: var(--foreground, #16161a);
+  background: var(--card, #fff);
+  color: var(--foreground, #16161a);
+  border: 1px solid var(--border, #e8e8ec);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px -12px rgb(22 22 26 / 0.25);
+  font-family: var(--font-sans, inherit);
+  font-size: 14px;
+  padding: 14px 16px;
+}
+[data-sonner-toaster] .scribe-toast .scribe-toast__title { font-weight: 700; line-height: 1.35; }
+[data-sonner-toaster] .scribe-toast .scribe-toast__description { color: var(--muted-foreground, #5c5c68); }
+[data-sonner-toaster] .scribe-toast[data-type="error"] [data-icon] { color: #e11d48; }
+[data-sonner-toaster] .scribe-toast[data-type="success"] [data-icon] { color: #059669; }
+[data-sonner-toaster] .scribe-toast [data-close-button] { background: var(--card, #fff); border-color: var(--border, #e8e8ec); color: var(--muted-foreground, #5c5c68); }
+
+/*
+ * The old landing (/landing, until its redesign in #300 replaces it) is a
+ * preview scope without .app-brand: it keeps the flat pill buttons it was
+ * designed with. Scoped by the Button primitive's marker classes; remove this
+ * block when the landing moves to the product look.
+ */
+.design-root:not(.app-brand) .ui-btn { border-radius: 9999px; box-shadow: none; font-weight: 500; transform: none; }
+.design-root:not(.app-brand) .ui-btn--primary { font-weight: 600; color: var(--accent-foreground, #fff); }
+.design-root:not(.app-brand) .ui-btn--sm { height: 2rem; padding-inline: 0.75rem; font-size: 0.875rem; line-height: 1.25rem; }
+.design-root:not(.app-brand) .ui-btn--md { height: 2.5rem; padding-inline: 1.25rem; font-size: 0.875rem; line-height: 1.25rem; }
+.design-root:not(.app-brand) .ui-btn--lg { height: 3rem; padding-inline: 1.75rem; font-size: 1rem; line-height: 1.5rem; }
+.design-root:not(.app-brand) .ui-btn--secondary { background: var(--muted); border-color: var(--border-strong); font-weight: 500; }
+.design-root:not(.app-brand) .ui-btn--outline { background: var(--card); border-color: var(--border-strong); font-weight: 500; }
+
+/*
+ * Home banner's week: the landscape runs edge to edge, and every word sits on
+ * a solid card over it (--hero-surface, tokens.css: white by day, the night
+ * sky lifted a step after dark), so the contrast never depends on the picture.
+ * Today's card is always white and lifts above the row.
+ */
+.hero-cell {
+  background: var(--hero-surface, #fff);
+  border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+  box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 8px 18px -10px rgb(22 22 26 / 0.35);
+}
+.hero-cell--missed { border: 1.5px dashed color-mix(in srgb, var(--foreground) 28%, transparent); }
+.hero-cell--today {
+  --foreground: #16161a;
+  --muted-foreground: #5c5c68;
+  --hero-surface: #ffffff;
+  color: var(--foreground);
+  background: #ffffff;
+  border: 0;
+  box-shadow: 0 2px 0 rgb(22 22 26 / 0.06), 0 18px 34px -14px rgb(22 22 26 / 0.5);
+}
+/* Today's pill on phones: the one dark (by night, light) pill in the row. */
+.hero-pill--today {
+  background: var(--foreground);
+  color: var(--hero-surface, #fff);
+  border-color: transparent;
+}
+/* The week line and its controls: a small solid chip on the scene. */
+.hero-chip {
+  background: var(--hero-surface, #fff);
+  box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 6px 14px -8px rgb(22 22 26 / 0.3);
+}
+/*
+ * A planned study time: a chip in its subject's deep colour (the family's
+ * `a`, white text at AA) with a flat darker lip, like the chunky buttons.
+ * Review blocks and times with no subject are neutral; a missed day's go grey.
+ */
+.week-chip {
+  --chip-lip: color-mix(in srgb, var(--chip, #16161a) 70%, #000);
+  border-radius: 10px;
+  background: var(--chip);
+  color: #ffffff;
+  box-shadow: 0 2px 0 0 var(--chip-lip);
+  transition: transform 0.15s var(--ease-out), box-shadow 0.15s var(--ease-out);
+}
+.week-chip--plain {
+  --chip-lip: color-mix(in srgb, var(--foreground) 16%, transparent);
+  background: color-mix(in srgb, var(--foreground) 7%, var(--hero-surface, #fff));
+  color: var(--foreground);
+}
+/*
+ * A day card's chip title: lines break only between words, never inside one
+ * (each word is an unbreakable box; one too wide for the chip ends in an
+ * ellipsis). hyphens/overflow-wrap/word-break are set so nothing above can
+ * re-enable a mid-word break.
+ */
+.week-chip__title { hyphens: auto; -webkit-hyphens: auto; overflow-wrap: normal; word-break: normal; }
+.week-chip__word { display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
+@media (hover: hover) {
+  .week-chip:hover { transform: translateY(-1px); box-shadow: 0 3px 0 0 var(--chip-lip); }
+}
+.week-chip:active { transform: translateY(2px); box-shadow: 0 0 0 0 var(--chip-lip); }
+.week-chip:focus-visible { outline: 2px solid var(--foreground); outline-offset: 2px; }
+/* The streak's tick on a day that counted. */
+.week-tick { background: var(--flame); color: var(--flame-ink); box-shadow: 0 1.5px 0 0 var(--flame-edge); }
+@media (prefers-reduced-motion: reduce) {
+  .week-chip, .week-chip:hover, .week-chip:active { transition: none; transform: none; }
+}
+/* Wide (the banner's container ≥ 42rem): each day is a card; on phones the li dissolves and the pill carries the look. */
+@container (min-width: 42rem) {
+  .hero-day {
+    background: var(--hero-surface, #fff);
+    border: 1px solid color-mix(in srgb, var(--foreground) 9%, transparent);
+    box-shadow: 0 1px 0 rgb(22 22 26 / 0.05), 0 8px 18px -10px rgb(22 22 26 / 0.35);
+  }
+  .hero-day--missed { border: 1.5px dashed color-mix(in srgb, var(--foreground) 28%, transparent); }
+  .hero-day--today {
+    --foreground: #16161a;
+    --muted-foreground: #5c5c68;
+    --hero-surface: #ffffff;
+    color: var(--foreground);
+    background: #ffffff;
+    border: 0;
+    box-shadow: 0 2px 0 rgb(22 22 26 / 0.06), 0 18px 34px -14px rgb(22 22 26 / 0.5);
+  }
+}
+.week-pill { transition: transform 0.15s var(--ease-out); }
+.week-pill:active { transform: scale(0.95); }
+@media (prefers-reduced-motion: reduce) { .week-pill, .week-pill:active { transition: none; transform: none; } }
+
+/* Session build progress: a light sheen travels along the filled part. */
+.build-stage__fill {
+  background-image: linear-gradient(90deg, transparent 0%, rgb(255 255 255 / 0.35) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: life-shimmer 1.8s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .build-stage__fill { animation: none; }
+}

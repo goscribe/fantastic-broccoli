@@ -1,0 +1,118 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-ab",
+  "topicId": "1-11",
+  "topicCode": "1.11",
+  "topicName": "Continuity at a point",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:37:38.420Z",
+  "cards": [
+    {
+      "id": "0tkk54p",
+      "kind": "concept",
+      "front": "What must all be true for a function to be continuous at $x=a$?",
+      "back": "**Three conditions**: $f(a)$ is defined, $\\lim_{x\\to a}f(x)$ exists, and that limit equals $f(a)$. If any one fails, the function is not continuous there.",
+      "hint": "Check them in order.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1foikic",
+      "kind": "concept",
+      "front": "Why does having a defined value $f(a)$ not, by itself, prove continuity?",
+      "back": "Nearby outputs must approach **one number**, and that limit must equal $f(a)$. The limit depends on inputs near $a$, not on the output at $a$.",
+      "hint": "Think about what the limit describes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0i8ejhx",
+      "kind": "mistake",
+      "front": "A student sees a filled dot at $x=a$ and concludes the function is continuous. What is wrong?",
+      "back": "**A filled point does not guarantee continuity.** Nearby function values must approach that point's height, so the limit must equal $f(a)$.",
+      "hint": "Compare the limit with the height of the point.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "13rskbv",
+      "kind": "term",
+      "front": "What does it mean for a function to be continuous at $x=a$?",
+      "back": "$f(a)$ and $\\lim_{x\\to a}f(x)$ both exist and are **equal**.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0pmzftj",
+      "kind": "formula",
+      "front": "Write the continuity condition at $x=a$ as an equation. What does each side mean?",
+      "back": "$\\lim_{x\\to a}f(x)=f(a)$. The left side is the **limit** of nearby outputs; the right side is the output assigned at $a$.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1968uzs",
+      "kind": "term",
+      "front": "What is a two-sided limit?",
+      "back": "The **two-sided limit** $\\lim_{x\\to a}f(x)$ exists only when the left-hand and right-hand limits both exist and equal the same number.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ys7tiu",
+      "kind": "process",
+      "front": "What steps should you follow to check continuity at $x=a$ for a formula?",
+      "back": "1) Find $f(a)$ and say whether it is defined. 2) Find the left and right limits and whether they agree. 3) Compare the limit with $f(a)$.",
+      "hint": "State the value, the limit, and whether they agree.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "151ceuh",
+      "kind": "concept",
+      "front": "If $f(a)$ is undefined, even though nearby outputs approach one number, which condition fails?",
+      "back": "The **first condition** fails, because the function assigns no output at $a$.",
+      "hint": "Look at the first check.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1in9vzj",
+      "kind": "concept",
+      "front": "What happens to continuity at $x=a$ if the left-hand and right-hand limits disagree?",
+      "back": "The **two-sided limit** does not exist, so the second condition fails and the function is not continuous at $a$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "071ecvb",
+      "kind": "concept",
+      "front": "If the limit at $x=a$ exists but differs from $f(a)$, which condition fails?",
+      "back": "The **third condition** fails, because $\\lim_{x\\to a}f(x)\\ne f(a)$.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0mv6d5a",
+      "kind": "example",
+      "front": "Is $h$ continuous at $x=2$ if $h(x)=x+1$ for $x\\ne2$ and $h(2)=7$?",
+      "back": "No. $\\lim_{x\\to2}h(x)=3$ but $h(2)=7$, so the **third condition** fails.",
+      "hint": "Find the limit using nearby inputs.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0i0tfhm",
+      "kind": "process",
+      "front": "How do you check continuity at a boundary of a piecewise function?",
+      "back": "Find the **limit from each side** using that side's rule, check they agree, then compare the common value with the assigned function value at the boundary.",
+      "hint": "Do not use just one rule.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0lanhca",
+      "kind": "example",
+      "front": "Let f(x)=x+1 for x<2, f(2)=5, and f(x)=x^2-1 for x>2. Is $f$ continuous at $x=2$?",
+      "back": "No. Both one-sided limits equal $3$, so $\\lim_{x\\to2}f(x)=3\\ne5=f(2)$. The **third condition** fails.",
+      "hint": "Find the left and right limits first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "06nwpz1",
+      "kind": "term",
+      "front": "What is a piecewise function?",
+      "back": "A **piecewise function** uses different rules for different parts of its domain.",
+      "sectionId": "s4"
+    }
+  ]
+}

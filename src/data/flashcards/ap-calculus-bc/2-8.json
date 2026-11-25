@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-calculus-bc",
+  "topicId": "2-8",
+  "topicCode": "2.8",
+  "topicName": "Product rule",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:38:58.535Z",
+  "cards": [
+    {
+      "id": "0y84936",
+      "kind": "formula",
+      "front": "What is the product rule for y = u(x)v(x)?",
+      "back": "$y'=u'(x)v(x)+u(x)v'(x)$. Differentiate each factor once, keeping the other unchanged, then **add** the two results.",
+      "hint": "Two terms, added together.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0ogmypx",
+      "kind": "mistake",
+      "front": "Is the derivative of a product the product of the derivatives?",
+      "back": "**No**. For $y=x^2x^3=x^5$, $y'=5x^4$, not $6x^3$. The product rule adds two terms instead.",
+      "hint": "Test it with x^2 times x^3.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1a9zdti",
+      "kind": "process",
+      "front": "What are the steps for differentiating a product of two functions?",
+      "back": "1) Name the factors $u$ and $v$. 2) Find $u'$ and $v'$. 3) Write $u'v+uv'$ before simplifying. 4) Simplify using **like terms**.",
+      "hint": "Name the factors before differentiating.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01nfrbo",
+      "kind": "concept",
+      "front": "Why does the product rule have two terms?",
+      "back": "A change in either factor changes the product, so **both** factor derivatives contribute to the answer.",
+      "hint": "Think about what happens when either factor changes.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0o12nai",
+      "kind": "term",
+      "front": "What is a variable factor?",
+      "back": "A **variable factor** is one part of a product whose value depends on $x$.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0lizmmg",
+      "kind": "concept",
+      "front": "When is the product rule not needed?",
+      "back": "A **constant** times a function, or a single power such as $x^5$, does not need the product rule.",
+      "hint": "Is there more than one function of x being multiplied?",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ptvgpb",
+      "kind": "term",
+      "front": "What is an original factor?",
+      "back": "An **original factor** is a part of the product before differentiation. Keep it visible while applying the rule.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "163mtbt",
+      "kind": "example",
+      "front": "Differentiate y = (x^2+1)(3x-2) and simplify.",
+      "back": "$y'=9x^2-4x+3$, from $2x(3x-2)+3(x^2+1)$.",
+      "hint": "Let u = x^2+1 and v = 3x-2.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "01geusk",
+      "kind": "example",
+      "front": "Find dy/dx for y = x^2(x+1) using the product rule.",
+      "back": "$y'=3x^2+2x$, from $2x(x+1)+x^2$.",
+      "hint": "Identify u and v first.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0bh8k48",
+      "kind": "concept",
+      "front": "When should you choose factored form over expanded form?",
+      "back": "Use **factored form** when it shows a shared factor or a zero; use expanded form when combining terms is clearer. Both give the same derivative.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qgt0pk",
+      "kind": "term",
+      "front": "What are like terms?",
+      "back": "**Like terms** have the same variable raised to the same power, so they can be combined.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "061wkuj",
+      "kind": "process",
+      "front": "How can you check a polynomial product-rule result?",
+      "back": "**Expand** the product first, then differentiate. The result should match. This is a check, not a step you must always show.",
+      "hint": "Expand before differentiating.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0hq5ybh",
+      "kind": "mistake",
+      "front": "Why is the derivative of x^2(x+1) not just 2x?",
+      "back": "Both factors depend on $x$, so both can change. The product rule gives $3x^2+2x$, not $2x$.",
+      "hint": "Count how many factors depend on x.",
+      "sectionId": "s1"
+    }
+  ]
+}

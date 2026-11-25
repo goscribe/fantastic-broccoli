@@ -1,0 +1,107 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-1",
+  "topicId": "6-1",
+  "topicCode": "6.1",
+  "topicName": "Rotational kinetic energy",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:40:40.015Z",
+  "cards": [
+    {
+      "id": "0y996nk",
+      "kind": "concept",
+      "front": "Why does a spinning object have kinetic energy even when its center does not move?",
+      "back": "Every piece of the object travels along a circle, so every piece has **kinetic energy**. Adding these pieces gives the object's rotational kinetic energy.",
+      "hint": "Think about a fan blade turning in place.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1qn781m",
+      "kind": "formula",
+      "front": "What is the formula for rotational kinetic energy, and what does each symbol mean?",
+      "back": "$K = \\frac{1}{2}I\\omega^2$, where $K$ is the **rotational kinetic energy** in joules (J), $I$ is the rotational inertia in $\\mathrm{kg\\,m^2}$, and $\\omega$ is the angular speed in rad/s.",
+      "hint": "Compare it with the formula for linear kinetic energy.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1srn6q1",
+      "kind": "concept",
+      "front": "Why does the energy of a spinning object depend on how its mass is spread out?",
+      "back": "The energy depends on rotational inertia $I = \\sum mr^2$. Mass **farther from the axis** raises $I$, so at the same angular speed the object has more rotational kinetic energy.",
+      "hint": "Look at how r appears in the sum.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1a6ula1",
+      "kind": "term",
+      "front": "What is angular speed?",
+      "back": "The **angular speed** $\\omega$ is the rate of rotation, measured in radians per second (rad/s).",
+      "hint": "It is the rotational counterpart of linear speed.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0ex3ueu",
+      "kind": "concept",
+      "front": "How does doubling the angular speed change the rotational kinetic energy?",
+      "back": "It **quadruples** the energy, because the energy depends on $\\omega^2$. Doubling the rotational inertia only doubles it.",
+      "hint": "Check what power of omega appears in the formula.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tu06qy",
+      "kind": "formula",
+      "front": "How does rotational kinetic energy compare with linear kinetic energy?",
+      "back": "Linear: $K = \\frac{1}{2}mv^2$. Rotational: $K = \\frac{1}{2}I\\omega^2$. Mass $m$ is replaced by rotational inertia $I$, and speed $v$ by angular speed $\\omega$. Both are in joules.",
+      "hint": "Match each symbol to its partner.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "15f8i13",
+      "kind": "process",
+      "front": "What steps should you follow to calculate rotational kinetic energy from a problem?",
+      "back": "1) Write $K = \\frac{1}{2}I\\omega^2$. 2) Convert $\\omega$ to rad/s first. 3) Substitute $I$ in $\\mathrm{kg\\,m^2}$ and $\\omega$. 4) Square $\\omega$, then multiply. Give the answer in joules.",
+      "hint": "Units come before substituting.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "178eceu",
+      "kind": "mistake",
+      "front": "A student uses 60 rpm directly in $K = \\frac{1}{2}I\\omega^2$. What is wrong?",
+      "back": "The angular speed must be in **radians per second**. Convert first: 1 revolution is $2\\pi$ rad and 1 minute is 60 s, so $\\omega = 60 \\times 2\\pi / 60 = 2\\pi$ rad/s.",
+      "hint": "Check the units of omega before substituting.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0gn4dem",
+      "kind": "mistake",
+      "front": "A student computes $K$ with $\\omega = 30$ rad/s as $\\frac{1}{2}(0.80)(30)$. What error is made?",
+      "back": "The student forgot to **square the angular speed**. The correct calculation is $\\frac{1}{2}(0.80)(30)^2 = 360\\ \\mathrm{J}$.",
+      "hint": "Which part of the formula is squared?",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0z7azk5",
+      "kind": "example",
+      "front": "A flywheel has $I = 0.80\\ \\mathrm{kg\\,m^2}$ and turns at 30 rad/s. What is its rotational kinetic energy?",
+      "back": "$K = \\frac{1}{2}(0.80)(30)^2 = 360\\ \\mathrm{J}$.",
+      "hint": "Square the speed before multiplying.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0zdwkce",
+      "kind": "example",
+      "front": "A hoop and a solid disk each have mass 2.0 kg and radius 0.50 m, and both turn at 10 rad/s. Which stores more energy, and by how much?",
+      "back": "The **hoop** stores $25\\ \\mathrm{J}$ and the disk stores $12.5\\ \\mathrm{J}$, so the hoop has twice the energy. The hoop has $I = MR^2$ and the disk has $I = \\frac{1}{2}MR^2$.",
+      "hint": "Use the different inertia for each shape.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "180749j",
+      "kind": "example",
+      "front": "A wheel has $I = 0.60\\ \\mathrm{kg\\,m^2}$ and turns at 20 rad/s. What is its rotational kinetic energy?",
+      "back": "$K = \\frac{1}{2}(0.60)(20)^2 = 120\\ \\mathrm{J}$.",
+      "hint": "Square the angular speed first."
+    }
+  ]
+}

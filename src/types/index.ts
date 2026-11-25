@@ -1,3 +1,5 @@
+import type { SubjectFamily } from "@/lib/subject-family";
+
 export type ActivityType =
   | "mcq"
   | "comprehension_check"
@@ -50,6 +52,10 @@ export interface StudySession {
   quickStart: boolean;
   /** Built from the learner's mistakes ("Practice my mistakes"). */
   mistakesPractice?: boolean;
+  /** The learner's own 0-10 confidence, asked just before this session. */
+  confidenceBefore?: number;
+  /** Catalog topics the session is on: "<courseId>:<topicId>[,<topicId>…]". */
+  courseTopic?: string;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;
@@ -179,12 +185,28 @@ export type ReadingFigure =
   | ReadingImageFigure
   | ReadingHtmlFigure;
 
+/** Where a source-first reading's text comes from (the student's own notes). */
+export interface ReadingSource {
+  kind: "notes";
+  documents?: string[];
+  pages?: number[];
+  /** Ready-made badge, e.g. "From your notes: physics.pdf, p. 3". */
+  label?: string;
+}
+
 export interface ReadingContent {
   type: "reading";
   text: string;
   figures?: ReadingFigure[];
   highlights?: { start: number; end: number; note: string }[];
   completed: boolean;
+  /** "source": the student's notes verbatim; "scribe"/"topic": written by Scribe. */
+  mode?: "source" | "scribe" | "topic";
+  source?: ReadingSource;
+  /** Teach-back checklist (used by the server). */
+  keyPoints?: string[];
+  /** Typed blocks (origin "source" | "scribe"); inline quick checks live here. */
+  blocks?: { type: string; origin?: "source" | "scribe"; text?: string; [key: string]: unknown }[];
 }
 
 export interface WorksheetFigure {
@@ -199,14 +221,28 @@ export interface MarkSchemePoint {
   requirements: string;
 }
 
+/** One level of a level-marked essay (practice papers). */
+export interface MarkBand {
+  level: number;
+  minMarks: number;
+  maxMarks: number;
+  descriptor: string;
+}
+
 export interface MarkScheme {
   points: MarkSchemePoint[];
   totalPoints: number;
+  /** Level-marked essays: marked by best-fit level. */
+  bands?: MarkBand[];
+  /** Long-answer questions: the board's level descriptors (marking guidance; marks stay per point). */
+  levels?: MarkBand[];
 }
 
 export interface MarkedPoint extends MarkSchemePoint {
   achievedPoints: number;
   feedback: string;
+  /** Long-answer marking: the words of the answer that earned (or attempted) this point, verbatim. */
+  quote?: string;
 }
 
 export interface PartMarking {
@@ -214,12 +250,19 @@ export interface PartMarking {
   achievedPoints: number;
   totalPoints: number;
   correct: boolean;
+  /** Long-answer marking: how the answer did and the one change worth the most marks. */
+  summary?: string;
 }
 
 export interface WorksheetPart {
   label: string;
   prompt: string;
-  type: "text" | "numeric" | "true_false";
+  /** mcq and essay come from practice papers. */
+  type: "text" | "numeric" | "true_false" | "mcq" | "essay";
+  /** mcq: the four options (the answer is the letter A-D). */
+  options?: string[];
+  /** The command term the part opens with (practice papers). */
+  commandTerm?: string;
   answer?: string;
   userAnswer?: string;
   marks?: number;
@@ -234,12 +277,38 @@ export interface WorksheetStep {
   figure?: WorksheetFigure;
   /** LLM-generated static figures (graph / image / static html diagram). */
   figures?: ReadingFigure[];
+  /** Practice papers: the section this question is in ("Section A"). */
+  section?: string;
+  /** Practice papers: sources or documents the question is on. */
+  sources?: WorksheetSource[];
   parts: WorksheetPart[];
+}
+
+export interface WorksheetSource {
+  label: string;
+  attribution?: string;
+  text: string;
+}
+
+/** A practice paper's cover: written in a board's exam format, never a real past paper. */
+export interface PaperInfo {
+  id?: string;
+  board?: string;
+  name: string;
+  minutes?: number;
+  calculator?: boolean | null;
+  instructions?: string[];
+  sections?: { name: string; instructions?: string }[];
+  totalMarks?: number;
 }
 
 export interface WorksheetContent {
   type: "worksheet";
+  /** "long_answer": one exam-style extended response, shown by LongAnswerActivity. */
+  format?: "long_answer";
   source?: { file: string; generatedByAi?: boolean };
+  /** Set when this worksheet is a whole practice paper. */
+  paper?: PaperInfo;
   steps: WorksheetStep[];
 }
 
@@ -305,6 +374,16 @@ export interface Workspace {
   color: string;
   /** Generated cover illustration (transparent landscape, object on the right). */
   coverUrl?: string;
+  /**
+   * Which cover family the server stored for the subject (picked once by a
+   * model, the course or the learner). Absent: the app's own name rules.
+   */
+  subjectFamily?: SubjectFamily;
+  /**
+   * The catalog course the subject follows; null when it follows none.
+   * Absent: an older server that does not say (ask `course.progress`).
+   */
+  courseId?: string | null;
   course?: string;
   folderId?: string;
   sessions: StudySession[];

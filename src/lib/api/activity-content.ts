@@ -157,7 +157,28 @@ function normalizeReading(raw: Raw): ReadingContent {
       ? (raw.highlights as ReadingContent["highlights"])
       : undefined,
     completed: raw.completed === true,
+    ...readingSourceFields(raw),
   };
+}
+
+/** Source-first reading fields: mode, attribution, key points, typed blocks. */
+function readingSourceFields(raw: Raw): Partial<ReadingContent> {
+  const out: Partial<ReadingContent> = {};
+  if (raw.mode === "source" || raw.mode === "scribe" || raw.mode === "topic") out.mode = raw.mode;
+  const source = obj(raw.source);
+  if (source.kind === "notes") {
+    out.source = {
+      kind: "notes",
+      label: str(source.label) || undefined,
+      documents: arr(source.documents).map(str).filter(Boolean),
+      pages: arr(source.pages).filter((p): p is number => typeof p === "number"),
+    };
+  }
+  const keyPoints = arr(raw.keyPoints).map(str).filter(Boolean);
+  if (keyPoints.length > 0) out.keyPoints = keyPoints;
+  const blocks = arr(raw.blocks).filter((b) => obj(b).type);
+  if (blocks.length > 0) out.blocks = blocks as ReadingContent["blocks"];
+  return out;
 }
 
 function markScheme(raw: unknown): MarkScheme | undefined {
@@ -172,12 +193,22 @@ function markScheme(raw: unknown): MarkScheme | undefined {
     })
     .filter((p) => p.requirements);
   if (points.length === 0) return undefined;
+  const levels = arr(scheme.levels)
+    .map((l) => obj(l))
+    .filter((l) => str(l.descriptor))
+    .map((l) => ({
+      level: typeof l.level === "number" ? l.level : 0,
+      minMarks: typeof l.minMarks === "number" ? l.minMarks : 0,
+      maxMarks: typeof l.maxMarks === "number" ? l.maxMarks : 0,
+      descriptor: str(l.descriptor),
+    }));
   return {
     points,
     totalPoints:
       typeof scheme.totalPoints === "number"
         ? scheme.totalPoints
         : points.reduce((s, p) => s + p.point, 0),
+    ...(levels.length ? { levels } : {}),
   };
 }
 
@@ -186,7 +217,8 @@ function worksheetPart(raw: Raw): WorksheetPart {
   return {
     label: str(raw.label),
     prompt: str(raw.prompt ?? raw.question),
-    type: type === "numeric" || type === "true_false" ? type : "text",
+    type: type === "numeric" || type === "true_false" || type === "essay" ? type : "text",
+    ...(str(raw.commandTerm) ? { commandTerm: str(raw.commandTerm) } : {}),
     answer: typeof raw.answer === "string" ? raw.answer : undefined,
     userAnswer: typeof raw.userAnswer === "string" ? raw.userAnswer : undefined,
     marks: typeof raw.marks === "number" ? raw.marks : undefined,
@@ -210,6 +242,7 @@ function normalizeWorksheet(raw: Raw): WorksheetContent {
   });
   return {
     type: "worksheet",
+    ...(raw.format === "long_answer" ? { format: "long_answer" as const } : {}),
     source: raw.source as WorksheetContent["source"],
     steps,
   };

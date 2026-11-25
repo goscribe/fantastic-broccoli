@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "4-6-4",
+  "topicCode": "4.6.4",
+  "topicName": "Classification of living organisms",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:27:29.168Z",
+  "cards": [
+    {
+      "id": "1jqep2w",
+      "kind": "concept",
+      "front": "Why do scientists classify living organisms?",
+      "back": "To organise the huge **diversity** of living things into groups, so they can be studied, identified and compared. Groups also show how closely related organisms may be.",
+      "hint": "Think about what grouping makes it easier to deal with millions of different organisms.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0rvsbk9",
+      "kind": "term",
+      "front": "What is a species?",
+      "back": "A **species** is a group of organisms that can breed together and produce fertile offspring.",
+      "hint": "Consider what happens when two members of the group mate.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "181ea22",
+      "kind": "concept",
+      "front": "Why do scientists sometimes change how an organism is classified?",
+      "back": "New evidence, such as **DNA** comparisons or clearer cell observations, can show that an older grouping is misleading, so scientists revise it.",
+      "hint": "Think about what older groupings were based on and what newer tools can reveal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "05ajxrd",
+      "kind": "process",
+      "front": "What are the seven Linnaean levels, from largest to smallest?",
+      "back": "**Kingdom**, phylum, class, order, family, genus, species. Each successive level groups organisms with more features in common.",
+      "hint": "Start with the broadest group and work down to the single species.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1l6w7pd",
+      "kind": "concept",
+      "front": "How is the scientific name of a species built?",
+      "back": "It has two parts: the **genus** name first, then a name identifying the species within that genus.",
+      "hint": "Think about which group the name begins with.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1uurar1",
+      "kind": "term",
+      "front": "What is a genus?",
+      "back": "A **genus** is a classification group containing one or more closely related species.",
+      "hint": "Find it in the list of Linnaean levels, just above the smallest one.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pms9yj",
+      "kind": "term",
+      "front": "What is the three-domain system?",
+      "back": "A system that places organisms in the broadest groups: **Bacteria**, **Archaea** and **Eukaryota**. Domain sits above kingdom.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "07rdbwi",
+      "kind": "concept",
+      "front": "How does the three-domain system relate to the Linnaean levels?",
+      "back": "It adds a broader level above kingdom and reflects genetic evidence. It does not replace the Linnaean levels.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "10ty6d3",
+      "kind": "mistake",
+      "front": "Why is it wrong to treat Bacteria and Archaea as the same domain?",
+      "back": "Both have cells without a nucleus, but genetic evidence shows they differ, so they are separate **domains**.",
+      "hint": "Focus on what the shared feature does and does not tell us about relationships.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04rmlof",
+      "kind": "term",
+      "front": "What is Eukaryota?",
+      "back": "The **domain** containing organisms whose cells have a nucleus, including animals, plants and fungi.",
+      "hint": "Think about the cell feature that separates it from the other two domains.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0bsmqqa",
+      "kind": "term",
+      "front": "What are observable features?",
+      "back": "Characteristics scientists can examine, such as **body structures** or cell structures.",
+      "hint": "Think about what you could see with your eyes or a microscope.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0vvoc8v",
+      "kind": "mistake",
+      "front": "Why should similar-looking organisms not be assumed to be closely related?",
+      "back": "Appearance can mislead: organisms may look alike without being closely related, and one organism may look very different at different life stages.",
+      "hint": "Consider what appearance-based evidence cannot reveal.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1jh5nn3",
+      "kind": "term",
+      "front": "What does DNA do in the context of classification?",
+      "back": "**DNA** carries genetic information, which is copied before a cell divides. Scientists compare it between organisms to find relationships.",
+      "hint": "Think about which molecules scientists can compare between organisms.",
+      "sectionId": "s4"
+    }
+  ]
+}

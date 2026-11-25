@@ -31,7 +31,7 @@ function MatIcon({ kind, large = false }: { kind: "pdf" | "img" | "pp"; large?: 
   return <span className={cn("grid shrink-0 place-items-center", large ? "size-9 rounded-[11px]" : "size-6 rounded-[7px] shadow-sm", cls)}><Icon className={large ? "size-4" : "size-3.5"} /></span>;
 }
 
-const CAT_FOR: Record<string, string> = { Reading: "/design/cat2-book.png", Worksheet: "/design/cat2-pencil.png", Cloze: "/design/cat2-pencil.png", "Quick 5": "/design/cat2-think.png", Flashcards: "/design/cat2-think.png", "Explain aloud": "/design/cat2-wave.png", Debrief: "/design/cat2-trophy.png" };
+const CAT_FOR: Record<string, string> = { Reading: "/design/cat3-book.webp", Worksheet: "/design/cat3-pencil.webp", Cloze: "/design/cat3-pencil.webp", "Quick 5": "/design/cat3-think.webp", Flashcards: "/design/cat3-think.webp", "Explain aloud": "/design/cat3-wave.webp", Debrief: "/design/cat3-trophy.webp" };
 
 function MiniRing({ pct, done, children }: { pct: number; done?: boolean; children?: React.ReactNode }) {
   const r = 20, c = 2 * Math.PI * r;
@@ -114,7 +114,7 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
           </div>
           <div className="rounded-[18px] border border-border p-3.5">
             <div className="flex items-center gap-3">
-              <Image src="/design/cat2-wave.png" alt="" width={40} height={40} className="cat-wiggle h-10 w-auto" />
+              <Image src="/design/cat3-wave.webp" alt="" width={352} height={400} className="cat-wiggle h-10 w-auto" />
               <span className="flex-1 text-[15px] text-faint">What do you want to practise?</span>
               <span className="grid size-9 place-items-center rounded-[10px] bg-accent text-white"><ArrowUp className="size-4" /></span>
             </div>
@@ -137,7 +137,7 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
             ))}
             {expanded && (
               <div className="flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-dashed border-border p-4 text-center">
-                <Image src="/design/cat2-sleep.png" alt="" width={64} height={64} className="cat-bob h-16 w-auto" />
+                <Image src="/design/cat3-sleep.webp" alt="" width={401} height={400} className="cat-bob h-16 w-auto" />
                 <div><div className="text-[14.5px] font-semibold">Add material</div><div className="mt-0.5 text-[12px] text-faint">Upload · Photos · Record · Paste a link</div></div>
               </div>
             )}
@@ -148,7 +148,7 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
               const pct = s.done / s.total;
               return (
                 <div key={s.title} className="flex items-center gap-3.5 px-4 py-3">
-                  {rows === "ring" && <MiniRing pct={pct} done={s.status === "done"}><Image src={s.status === "done" ? "/design/cat2-trophy.png" : CAT_FOR[s.next.split(" · ")[0]] ?? "/design/cat2-think.png"} alt="" width={34} height={34} unoptimized className="size-[34px] object-contain" /></MiniRing>}
+                  {rows === "ring" && <MiniRing pct={pct} done={s.status === "done"}><Image src={s.status === "done" ? "/design/cat3-trophy.webp" : CAT_FOR[s.next.split(" · ")[0]] ?? "/design/cat3-think.webp"} alt="" width={413} height={400} unoptimized className="size-[34px] object-contain" /></MiniRing>}
                   {rows === "trend" && <Spark v={s.scores} />}
                   {rows === "tile" && <span className={cn("grid size-12 shrink-0 place-items-center rounded-xl text-[14px] font-bold", { pdf: "bg-accent-soft text-accent", img: "bg-sky-50 text-sky-600", pp: "bg-emerald-50 text-emerald-600" }[s.kind])}>{s.topic}</span>}
                   {rows === "stack" && <Stack kind={s.kind} />}
@@ -179,7 +179,7 @@ export default async function LearnPreview({ searchParams }: { searchParams: Pro
         </div>
         <div className="flex w-[300px] shrink-0 flex-col gap-3.5">
           <div className="relative overflow-hidden rounded-2xl p-[18px]" style={{ background: T.lavender }}>
-            <Image src="/design/cat2-book.png" alt="" width={72} height={72} className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
+            <Image src="/design/cat3-book.webp" alt="" width={363} height={400} className="cat-peek absolute right-2.5 top-2 h-[72px] w-auto" />
             <div className="flex items-center gap-2"><Ring pct={0.6} size={28} stroke={12} /><span className="text-[11px] font-semibold text-accent-dim">Suggested next · 3 of 5 today</span></div>
             <div className="mt-2 pr-16 text-[16px] font-bold leading-tight">Worksheet · Osmosis calculations</div>
             <div className="mt-1 text-[12.5px] text-accent-dim">6 min · fits your 17:30 slot · from Bio notes pp. 13–16</div>

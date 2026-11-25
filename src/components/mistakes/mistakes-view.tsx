@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { Check, ChevronDown, Play, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query";
+import { Check, ChevronDown, Loader2, Play, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { InlineMarkdown, MathText } from "@/components/ui/markdown-text";
@@ -16,7 +17,11 @@ import {
   type MistakeFilter,
   type MistakeState,
 } from "@/lib/api/mistakes";
-import { fixMinutes } from "@/lib/mistakes";
+import { fixMinutes, mistakeSessionHref, mistakeTopicHref, mixedRoundSubjects } from "@/lib/mistakes";
+import { coursesApi } from "@/lib/api/courses";
+import { createStudySessionQuietly } from "@/lib/api/study";
+import { toastError } from "@/lib/toast";
+import "@/lib/i18n/purpose";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/mistakes";
 import { cn } from "@/lib/utils";
@@ -29,14 +34,14 @@ export const STATE_KEY: Record<MistakeState, string> = {
   STILL_INCORRECT: "mistakes.stateStill",
 };
 const STATE_FILL: Record<MistakeState, string> = {
-  STILL_INCORRECT: "bg-rose",
-  NEVER_CORRECTED: "bg-amber",
-  CORRECTED: "bg-accent",
+  STILL_INCORRECT: "bg-rose-500",
+  NEVER_CORRECTED: "bg-border-strong",
+  CORRECTED: "bg-emerald-500",
 };
 const STATE_BADGE: Record<MistakeState, string> = {
-  STILL_INCORRECT: "bg-rose/12 text-[#be123c]",
-  NEVER_CORRECTED: "bg-amber/15 text-[#a16207]",
-  CORRECTED: "bg-accent-soft text-accent-dim",
+  STILL_INCORRECT: "text-rose-700",
+  NEVER_CORRECTED: "text-muted-foreground",
+  CORRECTED: "text-emerald-700",
 };
 const KIND_KEY: Record<string, string> = {
   mcq: "mistakes.kindMcq",
@@ -56,7 +61,7 @@ function ClozePassage({ m }: { m: Mistake }) {
   const yours = m.detail.yours ?? [];
   const wrong = new Set(m.detail.wrong ?? []);
   return (
-    <p className="text-[15px] leading-8">
+    <p className="text-ui leading-8">
       {parts.map((part, i) => (
         <span key={i}>
           <InlineMarkdown text={part} />
@@ -81,40 +86,79 @@ function AnswerRow({ ok, label, children }: { ok: boolean; label: string; childr
       <span
         className={cn(
           "mt-0.5 grid size-5 shrink-0 place-items-center rounded-full",
-          ok ? "bg-success/15 text-success" : "bg-rose/15 text-[#be123c]",
+          ok ? "bg-emerald-600 text-white" : "bg-rose-500 text-white",
         )}
         aria-hidden
       >
         {ok ? <Check className="size-3" strokeWidth={3} /> : <X className="size-3" strokeWidth={3} />}
       </span>
-      <div className="min-w-0 text-[14px] leading-6">
-        <span className="mr-1.5 text-[12.5px] font-semibold text-muted-foreground">{label}</span>
+      <div className="min-w-0 text-ui">
+        <span className="mr-1.5 text-caption font-semibold text-muted-foreground">{label}</span>
         {children}
       </div>
     </div>
   );
 }
 
-function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
+/** "Practise this topic": a Quick 5 on the mistake's catalog topic, or on its label in its subject. */
+function PractiseTopic({ m }: { m: Mistake }) {
+  const { t } = useI18n();
+  const router = useRouter();
+  const start = useMutation({
+    mutationFn: async () => {
+      if (m.courseTopic) {
+        const r = await coursesApi.startTopic({ courseId: m.courseTopic.courseId, topicId: m.courseTopic.topicId });
+        return `/workspace/${r.workspaceId}/session/${r.sessionId}`;
+      }
+      const s = await createStudySessionQuietly({ workspaceId: m.workspaceId, title: m.label, topics: m.label, depth: "light", durationMinutes: 5, quickStart: true });
+      return s ? `/workspace/${m.workspaceId}/session/${s.id}` : `/workspace/${m.workspaceId}`;
+    },
+    onSuccess: (href) => router.push(href),
+    onError: (e) => toastError(e, t("debrief.nextTopicFailed")),
+  });
+  return (
+    <button
+      type="button"
+      onClick={() => start.mutate()}
+      disabled={start.isPending || start.isSuccess}
+      className="-my-2 inline-flex min-h-10 items-center gap-1.5 text-[13.5px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground disabled:opacity-60"
+    >
+      {start.isPending && <Loader2 className="size-3.5 animate-spin" />}
+      {t("purpose.practiseTopic")}
+    </button>
+  );
+}
+
+function MistakeCard({ m, showSubject, highlight = false }: { m: Mistake; showSubject: boolean; highlight?: boolean }) {
   const { t, locale } = useI18n();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(highlight);
+  const topicHref = mistakeTopicHref(m);
+  const sessionHref = mistakeSessionHref(m);
   const explanation = m.explanation?.trim();
   const yours =
     m.yourAnswer === "(drawing)" ? t("mistakes.drawing") : m.yourAnswer?.trim() ? m.yourAnswer : null;
   const dateFmt = new Intl.DateTimeFormat(locale, { day: "numeric", month: "short" });
   return (
-    <li className="rounded-2xl border border-border bg-card p-4 sm:p-5">
+    <li id={`mistake-${m.id}`} className={cn("life-card scroll-mt-24 p-4 sm:p-5", highlight && "ring-2 ring-accent/40")} data-highlight={highlight || undefined}>
       <div className="flex items-center justify-between gap-3">
-        <p className="min-w-0 truncate text-[12.5px] font-medium text-muted-foreground">
-          {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} · {m.label}
+        <p className="min-w-0 truncate text-caption font-medium text-muted-foreground">
+          {t(KIND_KEY[m.kind] ?? "mistakes.kindMcq")} ·{" "}
+          {topicHref ? (
+            // Its topic: Scribe's note when there is one, else the topic in its subject.
+            <Link href={topicHref} className="font-semibold text-foreground underline decoration-border-strong underline-offset-2 hover:decoration-foreground">
+              {m.courseTopic ? m.courseTopic.title : m.label}
+            </Link>
+          ) : (
+            m.label
+          )}
           {showSubject && m.workspaceTitle !== m.label ? ` · ${m.workspaceTitle}` : ""}
         </p>
-        <span className={cn("shrink-0 rounded-full px-2.5 py-0.5 text-[11.5px] font-semibold", STATE_BADGE[m.state])}>
+        <span className={cn("shrink-0 text-caption font-bold", STATE_BADGE[m.state])}>
           {t(STATE_KEY[m.state])}
         </span>
       </div>
 
-      <div className="mt-2.5 text-[15px] font-semibold leading-6">
+      <div className="mt-2 text-ui font-extrabold [overflow-wrap:anywhere]">
         {m.kind === "cloze" ? (
           <ClozePassage m={m} />
         ) : m.kind === "mcq" && m.detail.figures?.length ? (
@@ -148,21 +192,32 @@ function MistakeCard({ m, showSubject }: { m: Mistake; showSubject: boolean }) {
             type="button"
             onClick={() => setOpen((v) => !v)}
             aria-expanded={open}
-            className="inline-flex items-center gap-1 text-[12.5px] font-semibold text-accent-dim hover:underline"
+            className="-my-2 inline-flex min-h-10 items-center gap-1 text-[13.5px] font-bold text-foreground underline decoration-border-strong underline-offset-4 hover:decoration-foreground"
           >
             {t("mistakes.why")}
             <ChevronDown className={cn("size-3.5 transition-transform", open && "rotate-180")} />
           </button>
           {open && (
-            <div className="mt-1.5 rounded-xl bg-muted/60 px-3.5 py-2.5 text-[13.5px] leading-6 text-muted-foreground">
+            <div className="life-rise mt-2 border-l-[3px] border-[var(--edge)] pl-4 text-ui text-foreground/80">
               <MathText text={explanation} />
             </div>
           )}
         </div>
       )}
 
+      <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-1">
+        {sessionHref && m.session && (
+          <Link href={sessionHref} className="inline-flex min-h-10 min-w-0 items-center text-small text-muted-foreground hover:text-foreground">
+            <span className="truncate underline decoration-border-strong underline-offset-4">
+              {fill(t("purpose.fromSession"), { session: m.session.title, date: dateFmt.format(new Date(m.session.date)) })}
+            </span>
+          </Link>
+        )}
+        {m.state !== "CORRECTED" && <PractiseTopic m={m} />}
+      </div>
+
       {(m.wrongCount > 1 || m.correctedAt) && (
-        <p className="mt-3 text-[12px] text-faint">
+        <p className="mt-3 text-caption text-faint">
           {m.wrongCount > 1 && fill(t("mistakes.wrongTimes"), { n: m.wrongCount })}
           {m.wrongCount > 1 && m.correctedAt && m.state === "CORRECTED" && " · "}
           {m.correctedAt && m.state === "CORRECTED" && fill(t("mistakes.correctedOn"), { date: dateFmt.format(new Date(m.correctedAt)) })}
@@ -187,7 +242,7 @@ export function MistakeSummaryBar({ counts }: { counts: Record<MistakeState, num
           />
         ))}
       </div>
-      <p className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[12.5px] text-muted-foreground">
+      <p className="mt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-caption text-muted-foreground">
         {STATE_ORDER.map((s) => (
           <span key={s} className="inline-flex items-center gap-1.5">
             <span className={cn("size-2 rounded-full", STATE_FILL[s])} aria-hidden />
@@ -208,12 +263,21 @@ export function MistakeSummaryBar({ counts }: { counts: Record<MistakeState, num
 export function MistakesView({
   workspaceId,
   onWorkspaceChange,
+  focusMistakeId,
+  sessionId,
+  onClearSession,
 }: {
   workspaceId?: string;
   onWorkspaceChange?: (id: string | undefined) => void;
+  /** `?mistake=<id>` (search, links): open the list on it, scrolled to and highlighted. */
+  focusMistakeId?: string;
+  /** `?session=<id>` (an end screen's "N to fix"): only that session's mistakes. */
+  sessionId?: string;
+  onClearSession?: () => void;
 }) {
   const { t } = useI18n();
-  const [filter, setFilter] = useState<MistakeFilter>("open");
+  // A linked mistake may already be corrected: look in all of them.
+  const [filter, setFilter] = useState<MistakeFilter>(focusMistakeId ? "all" : "open");
   // Subject chips always come from the overall summary.
   const { data: overall } = useQuery({ queryKey: ["mistakes-summary", null], queryFn: () => mistakesApi.summary() });
   const { data: scoped } = useQuery({
@@ -224,15 +288,24 @@ export function MistakesView({
   const summary = workspaceId ? scoped : overall;
   const list = useInfiniteQuery({
     queryKey: ["mistakes", workspaceId ?? null, filter],
-    queryFn: ({ pageParam }) => mistakesApi.list({ workspaceId, filter, cursor: pageParam, limit: 20 }),
+    queryFn: ({ pageParam }) => mistakesApi.list({ workspaceId, filter, cursor: pageParam, limit: focusMistakeId || sessionId ? 50 : 20 }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (last) => last.nextCursor ?? undefined,
   });
-  const items = useMemo(() => list.data?.pages.flatMap((p) => p.items) ?? [], [list.data]);
+  const all = useMemo(() => list.data?.pages.flatMap((p) => p.items) ?? [], [list.data]);
+  const items = useMemo(() => (sessionId ? all.filter((m) => (m.session?.id ?? m.sessionId) === sessionId) : all), [all, sessionId]);
+  const fromSession = sessionId ? all.find((m) => (m.session?.id ?? m.sessionId) === sessionId)?.session : undefined;
   const subjects = overall?.subjects ?? [];
-  // Practice runs on one subject: this one, or overall the one with most to fix.
-  const practiceSubject = workspaceId ? undefined : subjects.find((s) => s.open > 0);
-  const practiceCount = workspaceId ? (summary?.open ?? 0) : (practiceSubject?.open ?? 0);
+  // Practice runs on this subject, or overall on every subject with something to fix (one mixed round).
+  const mixed = workspaceId ? "" : mixedRoundSubjects(subjects);
+  const practiceCount = summary?.open ?? 0;
+
+  // Scroll a linked mistake into view once it is on the page.
+  const focused = !!focusMistakeId && items.some((m) => m.id === focusMistakeId);
+  useEffect(() => {
+    if (!focused) return;
+    document.getElementById(`mistake-${focusMistakeId}`)?.scrollIntoView({ block: "center" });
+  }, [focused, focusMistakeId]);
 
   const filters: Array<{ id: MistakeFilter; label: string; count?: number }> = [
     { id: "open", label: t("mistakes.filterOpen"), count: summary?.open },
@@ -241,36 +314,36 @@ export function MistakesView({
   ];
   const chip = (active: boolean) =>
     cn(
-      "inline-flex shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-semibold transition-colors",
-      active ? "border-accent bg-accent-soft text-accent-dim" : "border-border bg-card text-muted-foreground hover:bg-muted",
+      "inline-flex max-w-[240px] shrink-0 items-center gap-1.5 rounded-full border px-3 py-1.5 text-[13px] font-semibold transition-colors",
+      active ? "border-foreground bg-foreground text-background" : "border-transparent bg-muted text-foreground hover:bg-[var(--edge)]",
     );
 
   if (summary && summary.total === 0) {
     return (
-      <div className="rounded-3xl border border-border bg-card px-6 py-12 text-center">
-        <Image src="/design/cat2-book.png" alt="" width={120} height={132} unoptimized className="cat-bob mx-auto h-24 w-auto select-none" />
-        <p className="mt-3 text-[15px] font-semibold">{t("mistakes.emptyTitle")}</p>
-        <p className="mx-auto mt-1 max-w-sm text-sm text-muted-foreground">{t("mistakes.empty")}</p>
+      <div className="px-6 py-10 text-center">
+        <Image src="/design/cat3-book.webp" alt="" width={363} height={400} unoptimized className="cat-bob mx-auto h-24 w-auto select-none" />
+        <p className="mt-3 text-ui font-semibold">{t("mistakes.emptyTitle")}</p>
+        <p className="mx-auto mt-1 max-w-sm text-ui text-muted-foreground">{t("mistakes.empty")}</p>
       </div>
     );
   }
 
   return (
     <div className="space-y-5">
-      <section className="rounded-3xl border border-border bg-card p-5 sm:p-6">
+      <section>
         {summary ? (
           <>
             <MistakeSummaryBar counts={summary.counts} />
             {summary.open > 0 ? (
               <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-                <Link href={practiceHref({ workspaceId: workspaceId ?? practiceSubject?.workspaceId })} className="w-full sm:w-auto">
-                  <Button size="lg" className="w-full text-[15px] sm:w-auto">
+                <Link href={practiceHref({ workspaceId })} className="w-full sm:w-auto">
+                  <Button size="lg" className="btn-chunky h-[52px] w-full rounded-[var(--r-button)] px-7 text-[16px] font-extrabold sm:w-auto">
                     <Play className="mr-2 size-4 fill-current" />
                     {t("mistakes.practice")}
                   </Button>
                 </Link>
-                <span className="w-full text-center text-[13px] text-muted-foreground sm:w-auto sm:text-left">
-                  {practiceSubject && !workspaceId && subjects.length > 1 ? `${practiceSubject.title} · ` : ""}
+                <span className="w-full text-center text-small text-muted-foreground sm:w-auto sm:text-left">
+                  {mixed ? `${mixed} · ` : ""}
                   {fill(t(practiceCount === 1 ? "mistakes.practiceSubOne" : "mistakes.practiceSub"), {
                     n: practiceCount,
                     m: fixMinutes(practiceCount),
@@ -278,11 +351,11 @@ export function MistakesView({
                 </span>
               </div>
             ) : (
-              <div className="mt-4 flex items-center gap-3 rounded-2xl bg-accent-soft/60 px-4 py-3">
-                <Check className="size-5 shrink-0 text-accent" strokeWidth={3} />
+              <div className="mt-4 flex items-center gap-3">
+                <span className="grid size-8 shrink-0 place-items-center rounded-full bg-emerald-600 text-white"><Check className="size-4" strokeWidth={3.5} /></span>
                 <div>
-                  <p className="text-[14px] font-semibold">{t("mistakes.allFixedTitle")}</p>
-                  <p className="text-[12.5px] text-muted-foreground">{t("mistakes.allFixed")}</p>
+                  <p className="text-ui font-semibold">{t("mistakes.allFixedTitle")}</p>
+                  <p className="text-caption text-muted-foreground">{t("mistakes.allFixed")}</p>
                 </div>
               </div>
             )}
@@ -306,8 +379,8 @@ export function MistakesView({
               className={chip(workspaceId === s.workspaceId)}
               onClick={() => onWorkspaceChange(s.workspaceId)}
             >
-              {s.title}
-              {s.open > 0 && <span className="tabular-nums opacity-70">{s.open}</span>}
+              <span className="min-w-0 truncate" title={s.title}>{s.title}</span>
+              {s.open > 0 && <span className="shrink-0 tabular-nums opacity-70">{s.open}</span>}
             </button>
           ))}
         </div>
@@ -332,6 +405,17 @@ export function MistakesView({
         ))}
       </div>
 
+      {sessionId && (
+        <p className="flex flex-wrap items-center gap-x-3 text-ui">
+          <span className="font-semibold">{fill(t("purpose.onlySession"), { session: fromSession?.title ?? "…" })}</span>
+          {onClearSession && (
+            <button type="button" onClick={onClearSession} className="inline-flex min-h-10 items-center font-bold text-muted-foreground underline decoration-border-strong underline-offset-4 hover:text-foreground">
+              {t("purpose.showAll")}
+            </button>
+          )}
+        </p>
+      )}
+
       {list.isLoading ? (
         <div className="space-y-3">
           {[0, 1, 2].map((i) => (
@@ -339,13 +423,14 @@ export function MistakesView({
           ))}
         </div>
       ) : items.length === 0 ? (
-        <p className="rounded-2xl border border-dashed border-border px-4 py-8 text-center text-sm text-muted-foreground">
-          {filter === "open" ? t("mistakes.allFixed") : t("mistakes.noneCorrected")}
-        </p>
+        // Nothing left to fix is already said once, in the summary above; only the other tabs need their own line.
+        filter === "open" ? null : (
+          <p className="py-8 text-ui font-semibold text-muted-foreground">{t("mistakes.noneCorrected")}</p>
+        )
       ) : (
         <ul className="space-y-3">
           {items.map((m) => (
-            <MistakeCard key={m.id} m={m} showSubject={!workspaceId} />
+            <MistakeCard key={m.id} m={m} showSubject={!workspaceId} highlight={m.id === focusMistakeId} />
           ))}
         </ul>
       )}

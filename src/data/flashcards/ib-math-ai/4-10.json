@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ib-math-ai",
+  "topicId": "4-10",
+  "topicCode": "4.10",
+  "topicName": "Spearman's rank correlation",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:33:51.751Z",
+  "cards": [
+    {
+      "id": "0xg0kpk",
+      "kind": "concept",
+      "front": "What does Spearman's rank correlation coefficient measure, and what range of values can it take?",
+      "back": "It measures the strength and direction of a **monotonic** relationship between two variables, using ranks. Its value lies from $-1$ to $+1$.",
+      "hint": "Think about ranks rather than the actual values.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1bmgts8",
+      "kind": "formula",
+      "front": "What is the rank-difference formula for $r_s$, and what does each symbol mean?",
+      "back": "$r_s=1-\\frac{6\\sum d^2}{n(n^2-1)}$, where $d$ is the difference between the two ranks of one pair and $n$ is the number of pairs. It applies when there are no tied values.",
+      "hint": "Each pair gives one d value.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "04ixnk9",
+      "kind": "concept",
+      "front": "What do values of $r_s$ near $+1$, near $-1$ and near $0$ tell you?",
+      "back": "Near $+1$: a strong **positive** monotonic link, with ranks agreeing. Near $-1$: a strong **negative** link, with ranks reversed. Near $0$: little or no monotonic association.",
+      "hint": "Consider which ranks agree or reverse.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0qsz2im",
+      "kind": "process",
+      "front": "What are the steps to convert a data set into ranks before calculating $r_s$?",
+      "back": "Order one variable from smallest to largest, giving rank 1 to the smallest, then 2 to the next and so on. Repeat for the second variable using the same direction.",
+      "hint": "Keep the direction the same for both variables.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "150q1dv",
+      "kind": "term",
+      "front": "What are tied values, and what rank is given to them?",
+      "back": "**Tied values** are equal values in a data set. Each gets the mean of the rank positions they would occupy.",
+      "hint": "For scores 12, 15, 15, 20 the two 15s share a rank.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1ffsx9c",
+      "kind": "example",
+      "front": "Maths marks 72, 65, 90, 58, 81 and physics marks 68, 60, 85, 62, 70 for the same five students. What is $r_s$?",
+      "back": "Ranks: maths 3, 4, 1, 5, 2; physics 3, 5, 1, 4, 2. Differences $d$: 0, $-1$, 0, 1, 0, so $\\sum d^2=2$. $r_s=1-\\frac{6\\times 2}{5\\times 24}=0.9$.",
+      "hint": "Rank both variables in the same direction first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "19gn826",
+      "kind": "mistake",
+      "front": "Why is it wrong to rank one variable from largest and the other from smallest?",
+      "back": "It **reverses the sign** of $r_s$, so a genuine positive link would appear negative. Rank both variables in the same direction.",
+      "hint": "Check the direction used for each list.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1uwdy8o",
+      "kind": "mistake",
+      "front": "Why is it wrong to use the shortcut formula when the data contain tied values?",
+      "back": "The shortcut formula assumes **no ties**. With ties, calculate Pearson's coefficient on the ranks instead, which is the method given by the note.",
+      "hint": "The shortcut is only for data without ties.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1pwb5zh",
+      "kind": "mistake",
+      "front": "A student says a high $r_s$ proves that one variable causes the other. What is wrong with this?",
+      "back": "A high $r_s$ **does not prove causation**. It shows only that the two variables tend to move together.",
+      "hint": "Association is not the same as cause.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1bvku11",
+      "kind": "term",
+      "front": "What is a monotonic relationship?",
+      "back": "A **monotonic relationship** is one in which one variable either never decreases or never increases as the other variable increases.",
+      "hint": "Think of a relationship that keeps one direction.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1c51m24",
+      "kind": "concept",
+      "front": "How do Pearson's and Spearman's coefficients differ in the data they use and the relationship they measure?",
+      "back": "Pearson's $r$ uses the actual values and measures a **linear** relationship. Spearman's $r_s$ uses ranks and measures a **monotonic** relationship, so it suits ranked data.",
+      "hint": "Consider actual values versus positions.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0tyy96j",
+      "kind": "concept",
+      "front": "Why are outliers usually less of a problem for Spearman's coefficient than for Pearson's?",
+      "back": "An extreme value only receives the **highest rank**, so its size does not dominate. In Pearson's calculation the same value can have a large effect.",
+      "hint": "Focus on what the outlier's rank is.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0gql81i",
+      "kind": "concept",
+      "front": "Why can points on a rising curve give $r_s=1$ while Pearson's $r$ is below 1?",
+      "back": "Each larger $x$ gives a larger $y$, so the **ranks agree exactly** and $r_s=1$. The points are not on a straight line, so Pearson's $r$ is below 1.",
+      "hint": "Ranks only need the order to match.",
+      "sectionId": "s5"
+    }
+  ]
+}

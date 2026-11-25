@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "courseId": "ap-physics-2",
+  "topicId": "12-2",
+  "topicCode": "12.2",
+  "topicName": "Magnetism and moving charges",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T15:41:20.470Z",
+  "cards": [
+    {
+      "id": "0axc4q7",
+      "kind": "formula",
+      "front": "What is the size of the magnetic force on a moving charge, and what does each symbol mean?",
+      "back": "$F_B=|q|vB\\sin\\theta$ gives the **magnetic force** in newtons, where $q$ is charge, $v$ is speed, $B$ is field strength, and $\\theta$ is the angle between velocity and field.",
+      "hint": "Think about when the force is largest.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "042rv00",
+      "kind": "process",
+      "front": "What are the steps of the right-hand rule for the force on a positive charge?",
+      "back": "Point your **fingers** along the velocity, curl them toward the field, and your **thumb** points along the force. A negative charge feels the opposite direction.",
+      "hint": "Start with your fingers, not your thumb.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "005raae",
+      "kind": "concept",
+      "front": "Why can a magnetic force never change the speed of a charged particle?",
+      "back": "The force is always **perpendicular** to the velocity, so it does no work. It changes only the direction of motion, not the speed.",
+      "hint": "Think about the angle between the force and the motion.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0o9z7i0",
+      "kind": "concept",
+      "front": "What produces a magnetic field, and does a charge at rest make one?",
+      "back": "A **moving charge** produces a magnetic field, because current is charge in motion. A charge at rest has no magnetic field.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0jt7ifd",
+      "kind": "term",
+      "front": "What is a uniform magnetic field?",
+      "back": "A **uniform magnetic field** has the same strength and the same direction at every point in the region.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0eogwjs",
+      "kind": "example",
+      "front": "A proton moves at $3.0\\times10^{6}\\,\\mathrm{m/s}$ perpendicular to a $0.50\\,\\mathrm{T}$ field. What is the magnitude of the magnetic force?",
+      "back": "$2.4\\times10^{-13}\\,\\mathrm{N}$, from $F_B=(1.6\\times10^{-19})(3.0\\times10^{6})(0.50)\\sin90^{\\circ}$.",
+      "hint": "Perpendicular means the sine of the angle is 1.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0zehoux",
+      "kind": "mistake",
+      "front": "A student says a magnetic field can speed up a charged particle moving across it. What is wrong with this?",
+      "back": "**Wrong**: the force is perpendicular to the velocity, so it cannot speed the particle up or slow it down. It only bends the path.",
+      "hint": "Check what the force does to the velocity.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1gqnioq",
+      "kind": "mistake",
+      "front": "An electron moves right in a field directed into the page. A student says the force points up the page. What is the error?",
+      "back": "The student forgot the **negative charge**. The rule gives up for a positive charge, so an electron feels a force **down** the page.",
+      "hint": "Check the sign of the charge first.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1yxm5m5",
+      "kind": "formula",
+      "front": "What is the radius of the circular path of a charged particle moving perpendicular to a uniform magnetic field?",
+      "back": "$r=\\frac{mv}{|q|B}$, where $m$ is **mass**, $v$ is speed, $|q|$ is charge size, and $B$ is field strength. The radius grows with mass and speed.",
+      "hint": "Set the magnetic force equal to the force toward the center.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "117k88h",
+      "kind": "concept",
+      "front": "How can a magnetic field sort particles that all travel at the same speed?",
+      "back": "Particles with a larger **mass-to-charge ratio** follow larger circles, so the field separates them by that ratio.",
+      "hint": "Look at what the radius formula depends on.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "17msqsm",
+      "kind": "example",
+      "front": "What is the radius of a proton's path in a $0.50\\,\\mathrm{T}$ field at $3.0\\times10^{6}\\,\\mathrm{m/s}$, given its mass is $1.67\\times10^{-27}\\,\\mathrm{kg}$?",
+      "back": "About $0.063\\,\\mathrm{m}$, from $r=\\frac{mv}{|q|B}$.",
+      "hint": "Use the proton's charge of $1.6\\times10^{-19}\\,\\mathrm{C}$.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "1mp8yso",
+      "kind": "concept",
+      "front": "What path does a charge follow if its velocity has a component along the magnetic field?",
+      "back": "The along-field component feels no force, so the path becomes a **spiral** around the field direction.",
+      "sectionId": "s4"
+    }
+  ]
+}

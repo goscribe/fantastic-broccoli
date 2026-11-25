@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "courseId": "edexcel-alevel-biology-a",
+  "topicId": "4-1",
+  "topicCode": "4.1",
+  "topicName": "Variety of life and extinction",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:34:35.156Z",
+  "cards": [
+    {
+      "id": "1xu67fs",
+      "kind": "concept",
+      "front": "How has biodiversity changed over the history of life on Earth?",
+      "back": "Overall it has **risen** over hundreds of millions of years, but not steadily. Sudden falls during mass extinctions were followed by recovery as survivors gave rise to new species.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1ij9k31",
+      "kind": "concept",
+      "front": "How can fossils show changes in biodiversity through time?",
+      "back": "Counting the fossil types in each dated rock layer shows diversity. A **sudden fall** marks an extinction event, and later layers show recovery.",
+      "hint": "Think about what you count in each layer.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0mmgoh0",
+      "kind": "concept",
+      "front": "Why does a cause such as habitat loss lead to extinction?",
+      "back": "Each cause cuts a species’ **survival or reproduction** until too few individuals remain to keep the species going.",
+      "hint": "Follow the effect on individuals and their numbers.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "1v8cgp3",
+      "kind": "term",
+      "front": "What is biodiversity?",
+      "back": "**Biodiversity** is variation within species, between species, and among ecosystems.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "01jpgkm",
+      "kind": "term",
+      "front": "What is a mass extinction?",
+      "back": "A **mass extinction** is a short geological interval in which species are lost far faster than they are replaced, worldwide.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0aotw3e",
+      "kind": "mistake",
+      "front": "Why is it wrong to think extinction is rare or recent?",
+      "back": "Most species that have ever lived are now **extinct**, and many vanished long before humans existed.",
+      "hint": "Consider how many species have existed in total.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fn3qez",
+      "kind": "process",
+      "front": "What happens to biodiversity in the millions of years after a mass extinction?",
+      "back": "Surviving groups evolve and spread into the **freed resources and space**, so diversity recovers over millions of years.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pi1imu",
+      "kind": "concept",
+      "front": "Which causes have been proposed for mass extinctions?",
+      "back": "Huge **volcanic eruptions**, rapid climate change and an asteroid impact.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "0pzt3s2",
+      "kind": "term",
+      "front": "What is an introduced species?",
+      "back": "An **introduced species** is a species brought by human activity to an area where it did not naturally occur.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0qxnvae",
+      "kind": "concept",
+      "front": "Which species are most at risk of extinction?",
+      "back": "Species with **small ranges or narrow diets**, because a single change can remove all their food or living space.",
+      "hint": "Think about how many places and foods a species depends on.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0wr2twm",
+      "kind": "concept",
+      "front": "How are rocks dated so that fossils can be placed at a known time?",
+      "back": "Rocks are dated by the steady **decay of radioactive atoms**. Sedimentary layers normally have older rock beneath younger rock.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kzwqm8",
+      "kind": "term",
+      "front": "What is the fossil record?",
+      "back": "The **fossil record** is the collection of all known fossils, arranged by the age of the rock layers containing them.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "020cbcn",
+      "kind": "mistake",
+      "front": "Why does a gap in the fossil record not prove a species was absent?",
+      "back": "The species may not have **fossilised**, or its fossils may simply not have been found yet.",
+      "sectionId": "s5"
+    },
+    {
+      "id": "0ey9s6p",
+      "kind": "concept",
+      "front": "Why are soft-bodied organisms rarely preserved as fossils?",
+      "back": "They **decay quickly**, whereas shells and bones can last. Burial in sediment must also happen before the remains rot.",
+      "hint": "Compare soft tissue with hard parts.",
+      "sectionId": "s5"
+    }
+  ]
+}

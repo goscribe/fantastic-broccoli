@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "courseId": "aqa-gcse-combined-science",
+  "topicId": "5-2-3",
+  "topicCode": "5.2.3",
+  "topicName": "Structure and bonding of carbon",
+  "noteVersion": 1,
+  "model": "anthropic/claude-haiku-5.5",
+  "generatedAt": "2026-11-22T16:28:00.085Z",
+  "cards": [
+    {
+      "id": "1czhmlf",
+      "kind": "concept",
+      "front": "Why is diamond very hard and does it have a high melting point?",
+      "back": "Each carbon forms four strong **covalent bonds** in a three-dimensional network that extends throughout the whole crystal, so the strong bonds make diamond hard and hard to melt.",
+      "hint": "Think about how far the bonded network reaches in the crystal.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "1vjbs2k",
+      "kind": "concept",
+      "front": "Why does graphite conduct electricity when diamond does not?",
+      "back": "Each carbon in graphite forms only three bonds in a layer, so its fourth outer electron is **delocalised** and can move along the layers carrying charge.",
+      "hint": "Count how many outer electrons each carbon uses in bonds.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1bhfvvs",
+      "kind": "concept",
+      "front": "Why can the layers in graphite slide over one another?",
+      "back": "Only **weak forces** hold the layers together, so they slide past each other, making graphite soft and useful as a lubricant.",
+      "hint": "Compare the forces between layers with the bonds within a layer.",
+      "sectionId": "s2"
+    },
+    {
+      "id": "1dmnxef",
+      "kind": "term",
+      "front": "What is a giant covalent structure?",
+      "back": "A **giant covalent structure** is a network of atoms joined by covalent bonds throughout the whole structure.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0hgnari",
+      "kind": "term",
+      "front": "What are delocalised electrons?",
+      "back": "**Delocalised electrons** are electrons that can move through a structure rather than staying in one covalent bond.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0fi6ix5",
+      "kind": "mistake",
+      "front": "Why is it wrong to picture diamond as a small molecule?",
+      "back": "Diamond is a **giant covalent structure**; its bonded network extends throughout the whole crystal rather than forming one small molecule.",
+      "sectionId": "s1"
+    },
+    {
+      "id": "0f606xx",
+      "kind": "concept",
+      "front": "Why is graphene strong even though it is only one atom thick?",
+      "back": "Each carbon bonds to three others in a hexagonal pattern, and the **strong covalent bonds** make the single sheet strong despite its small thickness.",
+      "hint": "Consider how the atoms are arranged within a single sheet.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "0b4iv8d",
+      "kind": "mistake",
+      "front": "Why is it wrong to think graphene's properties come from stacked layers?",
+      "back": "Graphene is a **single** bonded sheet, one atom thick; its properties come from that sheet, while stacked layers describe graphite.",
+      "hint": "Compare how many sheets graphene has with graphite.",
+      "sectionId": "s3"
+    },
+    {
+      "id": "11b79ef",
+      "kind": "term",
+      "front": "What are fullerenes?",
+      "back": "**Fullerenes** are carbon structures whose atoms form hollow shapes, such as cages or tubes, built from rings of six carbon atoms, sometimes with rings of five or seven.",
+      "hint": "Compare their shape with the flat sheet of graphene.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "16f8czq",
+      "kind": "term",
+      "front": "What is a carbon nanotube?",
+      "back": "A **carbon nanotube** is a long, hollow cylindrical fullerene made from bonded carbon atoms.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "127slia",
+      "kind": "example",
+      "front": "What shape does buckminsterfullerene, $\\text{C}_{60}$, form?",
+      "back": "A roughly spherical **cage** of 60 carbon atoms; it was the first fullerene discovered.",
+      "hint": "Look closely at the number in its formula.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "0yjih73",
+      "kind": "concept",
+      "front": "Why are carbon nanotubes useful for reinforcing lightweight materials?",
+      "back": "They are **strong for their mass**, so they add strength without adding much weight.",
+      "hint": "Think about what matters when adding material to something that must stay light.",
+      "sectionId": "s4"
+    },
+    {
+      "id": "1kxrkt0",
+      "kind": "concept",
+      "front": "Why can spherical fullerenes be useful in drug-delivery research?",
+      "back": "Their hollow cages can **hold other molecules inside**, which is why they are studied for delivering drugs.",
+      "hint": "Revisit the second paragraph of section 4 on fullerene uses.",
+      "sectionId": "s4"
+    }
+  ]
+}
