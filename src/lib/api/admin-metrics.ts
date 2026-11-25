@@ -186,7 +186,123 @@ export interface AiCost extends WindowOut {
   byModel: Array<{ feature: string; model: string; measured: boolean; calls: number; usd: number; previousUsd: number }>;
 }
 
-export type MetricUserList = "activation" | "streak" | "limit" | "paying" | "uploadFailed";
+// ── What students study / First test scores (AdminStudyMetricsService) ──
+
+export interface ShareCount {
+  current: number;
+  previous: number;
+  pctCurrent: number | null;
+  pctPrevious: number | null;
+  change: MetricChange;
+}
+
+type CurPrev = { current: number; previous: number };
+
+export interface StudyMix extends WindowOut {
+  definitions: Record<"students" | "subjects" | "sessions" | "activities" | "type" | "board" | "detected" | "family", string>;
+  subjectTypes: Array<{ key: string; label: string; definition: string }>;
+  total: Record<"students" | "subjects" | "sessions" | "activities", CurPrev & { change: MetricChange }>;
+  types: Array<{
+    key: string;
+    label: string;
+    definition: string;
+    students: ShareCount;
+    sessions: ShareCount;
+    activities: ShareCount;
+    subjects: ShareCount;
+    /** Both typed-topic rows carry the one typed-subject share. */
+    subjectsShared: boolean;
+  }>;
+  catalogStudents: CurPrev;
+  boards: Array<{
+    key: string;
+    label: string;
+    students: ShareCount;
+    activities: CurPrev;
+    levels: Array<{ level: string; students: number; activities: number; previousStudents: number }>;
+  }>;
+  ownStudents: CurPrev;
+  detected: Array<{ key: string; label: string; students: ShareCount; activities: CurPrev }>;
+  topCourses: Array<{
+    courseId: string;
+    title: string;
+    board: string;
+    boardLabel: string;
+    students: number;
+    activities: number;
+    previousStudents: number;
+    previousActivities: number;
+    studentsChange: MetricChange;
+    levels: Array<{ level: string; students: number }>;
+  }>;
+  families: Array<{
+    key: string;
+    label: string;
+    students: number;
+    activities: number;
+    previousStudents: number;
+    pctStudents: number | null;
+    pctStudentsPrevious: number | null;
+    change: MetricChange;
+  }>;
+}
+
+export interface ScoreSummary {
+  n: number;
+  median: number | null;
+  p25: number | null;
+  p75: number | null;
+  perfectPct: number | null;
+  under40Pct: number | null;
+  histogram: number[];
+}
+
+export type ScoreLine = Omit<ScoreSummary, "histogram">;
+
+export interface ScoreHeadline {
+  current: ScoreSummary;
+  previous: ScoreSummary;
+  change: Record<"n" | "median" | "perfectPct" | "under40Pct", MetricChange>;
+}
+
+export interface ScoreSplit {
+  key: string;
+  label: string;
+  students: number;
+  firstSet: ScoreLine;
+  session: ScoreLine;
+}
+
+export interface FirstScores extends WindowOut {
+  definitions: Record<"cohort" | "firstSet" | "session" | "w1" | "confidence", string>;
+  starters: CurPrev & { change: MetricChange };
+  firstSet: ScoreHeadline;
+  session: ScoreHeadline;
+  byType: ScoreSplit[];
+  byBoard: ScoreSplit[];
+  byFormat: ScoreSplit[];
+  w1ByBand: Array<{ key: string; label: string; eligible: number; returned: number; pct: number | null }>;
+  w1Eligible: { students: number; returned: number; pct: number | null };
+  confidence: {
+    trackingSince: Date | null;
+    firstSessionsAsked: number;
+    bands: Array<{ key: string; label: string } & ScoreLine>;
+    byValue: Array<{ confidence: number; n: number; median: number | null }>;
+  };
+}
+
+export type MetricUserList =
+  | "activation"
+  | "streak"
+  | "limit"
+  | "paying"
+  | "uploadFailed"
+  | "studyType"
+  | "studyCourse"
+  | "studyBoard"
+  | "studyDetected"
+  | "studyFamily"
+  | "firstScore";
 
 export interface MetricUsers {
   list: MetricUserList;
@@ -207,6 +323,8 @@ export const adminMetricsApi = {
   features: (days: MetricDays) => q<FeatureAdoption>("getMetricsFeatures", days),
   quality: (days: MetricDays) => q<ContentQuality>("getMetricsQuality", days),
   aiCost: (days: MetricDays) => q<AiCost>("getMetricsAiCost", days),
+  study: (days: MetricDays) => q<StudyMix>("getMetricsStudy", days),
+  firstScores: (days: MetricDays) => q<FirstScores>("getMetricsFirstScores", days),
   users: (input: { list: MetricUserList; key: string; days: MetricDays; missed?: boolean }) =>
     rpc<MetricUsers>("admin.getMetricUsers", "query", input),
 };

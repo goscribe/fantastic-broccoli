@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { barWidths, changeTone, formatChange, formatMetric, rateCell, trackingNote } from "./admin-metrics";
+import { barWidths, changeTone, formatChange, formatMetric, levelSplit, quartileNote, rateCell, scoreBucketLabel, trackingNote } from "./admin-metrics";
 
 test("values are formatted by unit, unknown as a dash", () => {
   assert.equal(formatMetric(1234, "count"), "1,234");
@@ -37,4 +37,13 @@ test("tracking note only when the data starts inside the window", () => {
 test("bar widths are relative to the largest value", () => {
   assert.deepEqual(barWidths([5, 10, 0]), [50, 100, 0]);
   assert.deepEqual(barWidths([0, 0]), [0, 0]);
+});
+
+test("score buckets, quartiles and level splits read plainly", () => {
+  assert.equal(scoreBucketLabel(0), "0–9%");
+  assert.equal(scoreBucketLabel(4), "40–49%");
+  assert.equal(scoreBucketLabel(9), "90–100%");
+  assert.equal(quartileNote(40, 66.7), "middle half 40–66.7%");
+  assert.equal(quartileNote(null, 80), "");
+  assert.equal(levelSplit([{ level: "HL", students: 5 }, { level: "SL", students: 3 }]), "HL 5 · SL 3");
 });

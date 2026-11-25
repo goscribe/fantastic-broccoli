@@ -70,3 +70,20 @@ export function barWidths(values: number[]): number[] {
   const max = Math.max(0, ...values);
   return values.map((v) => (max > 0 ? Math.round((v / max) * 1000) / 10 : 0));
 }
+
+/** Label of a 10% score bucket: "0–9%", …, "90–100%" (100% sits in the last one). */
+export function scoreBucketLabel(i: number): string {
+  return i >= 9 ? "90–100%" : `${i * 10}–${i * 10 + 9}%`;
+}
+
+/** "IQR 40–80%" for the middle half of the scores, or "" when there are none. */
+export function quartileNote(p25: number | null, p75: number | null): string {
+  if (p25 === null || p75 === null) return "";
+  const f = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 1 });
+  return `middle half ${f(p25)}–${f(p75)}%`;
+}
+
+/** "SL 3 · HL 5" for a course's level split. */
+export function levelSplit(levels: Array<{ level: string; students: number }>): string {
+  return levels.map((l) => `${l.level} ${l.students}`).join(" · ");
+}
