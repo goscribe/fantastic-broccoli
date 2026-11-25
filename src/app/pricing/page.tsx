@@ -18,6 +18,7 @@ import {
 } from "@/lib/api/account";
 import { useAuthUser } from "@/lib/api/auth";
 import { toastError } from "@/lib/toast";
+import { handleCheckoutFailure } from "@/lib/checkout-landing";
 import { BILLING_PAUSED, BILLING_PAUSED_MESSAGE } from "@/lib/billing-paused";
 import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine } from "@/lib/plan-display";
 import { UNLIMITED_GRANT_LABEL, hasUnlimitedGrant } from "@/lib/plan-access";
@@ -115,6 +116,7 @@ function PlanCard({
 }
 
 export default function PricingPage() {
+  const pageRouter = useRouter();
   const { user } = useAuthUser();
   const [summary, setSummary] = useState<AccountSummary | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
@@ -190,7 +192,8 @@ export default function PricingPage() {
     try {
       await switchPlan(planId);
     } catch (err) {
-      toastError(err, "Couldn't open checkout");
+      // Never the provider's words or a dead end: a friendly line, and the first run for a student with no subject yet.
+      await handleCheckoutFailure(err, pageRouter);
     } finally {
       setSwitching(false);
       setBuying(null);

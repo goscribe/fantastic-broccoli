@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,7 +36,9 @@ import {
 } from "@/lib/wall";
 import { track } from "@/lib/funnel";
 import { useAuthUser } from "@/lib/api/auth";
-import { toast, toastError } from "@/lib/toast";
+import { toast } from "@/lib/toast";
+import { checkoutFailure } from "@/lib/checkout-failure";
+import { handleCheckoutFailure } from "@/lib/checkout-landing";
 import { cn } from "@/lib/utils";
 import { AskParentLink, PassDisclosure } from "./pass-options";
 import { AskParentDialog, payablePlans } from "./ask-parent-dialog";
@@ -122,6 +124,7 @@ async function loadExamPitch(plans: PlanOption[]): Promise<{ pitch: ExamPitch; p
  */
 export function SubscribeWall() {
   const pathname = usePathname();
+  const router = useRouter();
   const { user } = useAuthUser();
   const [caps, setCaps] = useState<PlanCaps | null>(null);
   const [plans, setPlans] = useState<PlanOption[]>([]);
@@ -250,7 +253,13 @@ export function SubscribeWall() {
     try {
       await switchPlan(plan.id);
     } catch (err) {
-      toastError(err, "Could not start checkout. Please try again.");
+      // The wall closes: the student keeps studying free (or goes into the first run with no subject yet).
+      const answer = checkoutFailure(err).kind === "answer";
+      if (!answer) {
+        openRef.current = null;
+        setOpen(null);
+      }
+      await handleCheckoutFailure(err, router);
     } finally {
       setSwitching(null);
     }

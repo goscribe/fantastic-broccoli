@@ -1,3 +1,5 @@
+import { CHECKOUT_UNAVAILABLE_LINE } from "./checkout-failure";
+
 /**
  * What to tell the learner when the hosted checkout (Stripe or Airwallex)
  * sends them back to `/settings?checkout=…`.
@@ -7,8 +9,10 @@
  * when the server hears from the payment provider, so neither outcome claims a
  * payment or the lack of one; both point at the plan shown on Settings, which
  * is re-read after either return. Checkout is never reopened from here.
+ * A student with no subject yet is taken on into the first run (Settings,
+ * via landingAfterCheckout) instead of being left on a billing page.
  */
-export type CheckoutReturn = { kind: "finished" | "closed"; message: string };
+export type CheckoutReturn = { kind: "finished" | "closed" | "failed"; message: string };
 
 export function checkoutReturn(param: string | null | undefined): CheckoutReturn | null {
   if (param === "success") {
@@ -20,6 +24,10 @@ export function checkoutReturn(param: string | null | undefined): CheckoutReturn
   }
   if (param === "cancelled") {
     return { kind: "closed", message: "Checkout closed. Check your current plan below." };
+  }
+  // The provider sent the student back without a payment going through.
+  if (param === "failed" || param === "error") {
+    return { kind: "failed", message: CHECKOUT_UNAVAILABLE_LINE };
   }
   return null;
 }
