@@ -13,6 +13,7 @@ import {
   RevenueSection,
   UploadsSection,
 } from "@/components/admin/metrics/business-sections";
+import { FirstScoresSection, StudySection } from "@/components/admin/metrics/study-sections";
 import type { MetricDays } from "@/lib/api/admin-metrics";
 
 const SECTIONS = [
@@ -25,11 +26,14 @@ const SECTIONS = [
   ["features", "Features"],
   ["quality", "Quality"],
   ["cost", "AI cost"],
+  ["study", "What students study"],
+  ["scores", "First test scores"],
 ] as const;
 
 /**
  * The numbers to decide with: activation, retention, engagement, uploads,
- * money, limits, feature use, content quality and AI cost, each for the
+ * money, limits, feature use, content quality, AI cost, what students study
+ * and their first test scores, each for the
  * chosen range against the same-length period before. Real users only.
  */
 export default function AdminMetricsPage() {
@@ -60,6 +64,8 @@ export default function AdminMetricsPage() {
       <FeaturesSection days={days} />
       <QualitySection days={days} />
       <AiCostSection days={days} />
+      <StudySection days={days} />
+      <FirstScoresSection days={days} />
     </UserListProvider>
   );
 }

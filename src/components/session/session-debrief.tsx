@@ -55,6 +55,8 @@ import { track, type DebriefNextKind } from "@/lib/funnel";
 import "@/lib/i18n/purpose";
 import "@/lib/i18n/start-check";
 import { confidenceCat, confidenceFace, confidenceResult, type ConfidenceFace } from "@/lib/start-check";
+import { difficultyResults, quick5SaidGot } from "@/lib/quick5-confidence";
+import "@/lib/i18n/quick5-confidence";
 import type { ApiSessionDebrief, ApiSessionStats } from "@/lib/api/study-session";
 
 /** How long the mastery rows get on screen before the study-time sheet opens over them. */
@@ -289,7 +291,7 @@ function AnswerDots({ dots, correct, wrong, href }: { dots: boolean[]; correct: 
 }
 
 /** One side of "You said 3/10 → You got 7/10": the cat's face for that number, then the number. */
-function SaidGot({ face, label, value, strong = false }: { face: ConfidenceFace; label: string; value: number; strong?: boolean }) {
+function SaidGot({ face, label, value, max = 10, strong = false }: { face: ConfidenceFace; label: string; value: number; max?: number; strong?: boolean }) {
   return (
     <span className="flex items-center gap-2">
       <Image src={confidenceCat(face)} alt="" width={336} height={400} unoptimized className="h-11 w-auto" />
@@ -297,10 +299,25 @@ function SaidGot({ face, label, value, strong = false }: { face: ConfidenceFace;
         <span className="text-caption font-bold leading-4 text-muted-foreground">{label}</span>
         <span className={cn("text-[22px] font-extrabold leading-6 tabular-nums", strong ? "text-foreground" : "text-muted-foreground")}>
           {value}
-          <span className="text-[0.6em]">/10</span>
+          <span className="text-[0.6em]">/{max}</span>
         </span>
       </span>
     </span>
+  );
+}
+
+/**
+ * A Quick 5's exam-level questions: how many were right and, when some were
+ * missed, that they were pitched at the real exam (a target, not a failure).
+ */
+function Quick5ExamLine({ exam, fallback }: { exam: { right: number; total: number } | null; fallback?: string }) {
+  const { t } = useI18n();
+  if (!exam) return fallback ? <p className="mt-2 text-ui font-semibold text-muted-foreground">{fallback}</p> : null;
+  return (
+    <p className="mt-2 text-ui font-semibold text-muted-foreground" data-exam-level={`${exam.right}/${exam.total}`}>
+      <span className="font-extrabold text-foreground">{t("quick5Conf.examLevel").replace("{r}", String(exam.right)).replace("{n}", String(exam.total))}</span>{" "}
+      {t(exam.right < exam.total ? "quick5Conf.examLevelMissed" : "quick5Conf.examLevelAll")}
+    </p>
   );
 }
 
@@ -612,6 +629,10 @@ export function SessionDebrief({
     const fixSub = t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)));
     // Asked "how confident?" at the start: their number beside the result, on the same scale.
     const said = stats ? confidenceResult(confidenceBefore, stats.correct, stats.answered) : null;
+    // A Quick 5: "You got 3/5" (its own score), and how the exam-level questions went.
+    const quick = quickStart && stats ? quick5SaidGot(confidenceBefore, stats.correct, stats.answered) : null;
+    const levels = quickStart && activities ? difficultyResults(activities, restoredDraft) : null;
+    const exam = levels && levels.examLevel.total > 0 ? levels.examLevel : null;
     const mainButton = "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold sm:w-auto sm:min-w-[300px]";
     // What the main button would have been, as a text link under "Fix N mistakes".
     const demoted = !fixFirst ? null : quickStart ? (
@@ -690,7 +711,18 @@ export function SessionDebrief({
         </section>
 
         {/* What they said beside what they got: the one comparison only this screen can make. */}
-        {said && (
+        {quick ? (
+          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={quick.verdict}>
+            <p className="sr-only">{t("quick5Conf.saidGot").replace("{a}", String(quick.said)).replace("{b}", String(quick.got)).replace("{n}", String(quick.of))}</p>
+            <div className="flex items-center gap-3" aria-hidden>
+              <SaidGot face={confidenceFace(quick.said)} label={t("finish.said")} value={quick.said} />
+              <ArrowRight className="size-5 shrink-0 text-faint" />
+              <SaidGot face={confidenceFace(said?.got ?? quick.said)} label={t("finish.got")} value={quick.got} max={quick.of} strong />
+            </div>
+            {/* Missed an exam-level one: they were meant to be hard, not a verdict on the student. */}
+            <Quick5ExamLine exam={exam} fallback={t(`finish.verdict.${quick.verdict}`)} />
+          </div>
+        ) : said ? (
           <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }} data-confidence-result={said.verdict}>
             <p className="sr-only">{t("finish.saidGot").replace("{a}", String(said.said)).replace("{b}", String(said.got))}</p>
             <div className="flex items-center gap-3" aria-hidden>
@@ -700,7 +732,11 @@ export function SessionDebrief({
             </div>
             <p className="mt-2 text-ui font-semibold text-muted-foreground">{t(`finish.verdict.${said.verdict}`)}</p>
           </div>
-        )}
+        ) : exam ? (
+          <div className="life-rise mt-5 px-1" style={{ ["--i" as string]: 2 }}>
+            <Quick5ExamLine exam={exam} />
+          </div>
+        ) : null}
 
         {/* One next step. */}
         <div className="life-rise mt-6 w-full px-1" style={{ ["--i" as string]: 4 }}>

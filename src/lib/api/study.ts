@@ -1,4 +1,3 @@
-import { askSubjectStartCheck } from "@/lib/start-check-client";
 import {
   studySessionApi,
   mapSession,
@@ -49,21 +48,18 @@ export interface CreateSessionInput {
 }
 
 /**
- * Starts a session in a subject. The first time a learner studies a subject
- * (and when their rating has gone stale) the start check is shown first:
- * "How confident are you?" plus a paper choice or a focus note; see
- * `askSubjectStartCheck`. `ask: false` is for sessions made in bulk or on the
- * learner's behalf, which must never open a question.
+ * Starts a session in a subject, at once. "How confident are you?" is asked
+ * on the session's wait screen the first time a learner studies a subject
+ * (and when the rating has gone stale), never before the start.
  */
 export async function createStudySession(
   input: CreateSessionInput,
-  opts: { ask?: boolean } = {},
 ): Promise<StudySession | undefined> {
-  const startCheck = opts.ask === false ? undefined : await askSubjectStartCheck({ workspaceId: input.workspaceId, title: input.title });
+  // Nothing is asked before a start: "How confident?" comes on the wait screen
+  // (src/components/session/wait-confidence.tsx), once per subject; the paper is the remembered one.
   const row = await studySessionApi.create({
     ...input,
     depth: depthToApi[input.depth],
-    ...(startCheck ? { startCheck } : {}),
   });
   if (!row) return undefined;
   return mapSession(row);
@@ -360,4 +356,4 @@ export async function appendActivities(
 }
 
 /** `createStudySession` without the start check: onboarding, sessions made in bulk, and mistake practice. */
-export const createStudySessionQuietly = (input: CreateSessionInput) => createStudySession(input, { ask: false });
+export const createStudySessionQuietly = (input: CreateSessionInput) => createStudySession(input);
