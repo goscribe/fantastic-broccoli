@@ -37,10 +37,14 @@ const english = {
   "prof.masteryLabel": "Mastery",
   "prof.topicCount": "{count} topics",
   "prof.progressEmptyTitle": "No levels yet",
+  "prof.buildSteps": "{count} steps",
+  "prof.buildStepsHide": "Hide steps",
 };
 
 registerTranslations(english, {
   es: {
+    "prof.buildSteps": "{count} pasos",
+    "prof.buildStepsHide": "Ocultar pasos",
     "prof.checkTitle": "Comprobación rápida: ¿qué sabes ya?",
     "prof.checkHint": "Unas preguntas mientras se crea tu sesión. Repasaremos rápido lo que sabes y dedicaremos el tiempo a lo que no.",
     "prof.skip": "Saltar",
@@ -76,6 +80,8 @@ registerTranslations(english, {
     "prof.progressEmptyTitle": "Aún no hay niveles",
   },
   fr: {
+    "prof.buildSteps": "{count} étapes",
+    "prof.buildStepsHide": "Masquer les étapes",
     "prof.checkTitle": "Petit test : que sais-tu déjà ?",
     "prof.checkHint": "Quelques questions pendant que ta session se prépare. On survole ce que tu sais et on passe du temps sur le reste.",
     "prof.skip": "Passer",
@@ -111,6 +117,8 @@ registerTranslations(english, {
     "prof.progressEmptyTitle": "Pas encore de niveaux",
   },
   de: {
+    "prof.buildSteps": "{count} Schritte",
+    "prof.buildStepsHide": "Schritte ausblenden",
     "prof.checkTitle": "Kurzer Check: Was weißt du schon?",
     "prof.checkHint": "Ein paar Fragen, während deine Session entsteht. Was du kannst, überfliegen wir – die Zeit geht in den Rest.",
     "prof.skip": "Überspringen",
@@ -146,6 +154,8 @@ registerTranslations(english, {
     "prof.progressEmptyTitle": "Noch keine Stände",
   },
   zh: {
+    "prof.buildSteps": "{count} 个步骤",
+    "prof.buildStepsHide": "收起步骤",
     "prof.checkTitle": "快速检测：你已经掌握了哪些？",
     "prof.checkHint": "课程生成期间回答几道题。已掌握的内容快速带过，把时间花在还不会的地方。",
     "prof.skip": "跳过",
@@ -181,6 +191,8 @@ registerTranslations(english, {
     "prof.progressEmptyTitle": "还没有水平记录",
   },
   hi: {
+    "prof.buildSteps": "{count} चरण",
+    "prof.buildStepsHide": "चरण छिपाएँ",
     "prof.checkTitle": "जल्दी जाँच: आप पहले से क्या जानते हैं?",
     "prof.checkHint": "सत्र बनने तक कुछ सवाल। जो आप जानते हैं उसे जल्दी देखेंगे, और समय उस पर लगाएँगे जो नहीं जानते।",
     "prof.skip": "छोड़ें",
@@ -216,6 +228,8 @@ registerTranslations(english, {
     "prof.progressEmptyTitle": "अभी कोई स्तर नहीं",
   },
   tl: {
+    "prof.buildSteps": "{count} hakbang",
+    "prof.buildStepsHide": "Itago ang mga hakbang",
     "prof.checkTitle": "Mabilis na check: ano na ang alam mo?",
     "prof.checkHint": "Ilang tanong habang binubuo ang session mo. Sasaglitin namin ang alam mo at tututok sa hindi pa.",
     "prof.skip": "Laktawan",

@@ -5,12 +5,15 @@ import { McqOptionBody, McqQuestionBody, optionsHaveFigures } from "@/components
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   proficiencyApi,
+  type BankAnswerResult,
   type PrecheckItem,
   type PrecheckTopic,
   type ProficiencyLevel,
   type TopicLevel,
 } from "@/lib/api/proficiency";
 import { WarmupQuiz } from "@/components/onboarding/warmup-quiz";
+import { HERO_KEY, HERO_OPTION } from "@/components/session/quiz-row";
+import { studySessionApi, type ApiWarmupQuestion } from "@/lib/api/study-session";
 import { ConfettiBurst } from "@/components/graphics/confetti-burst";
 import { MarkdownText } from "@/components/ui/markdown-text";
 import { useI18n } from "@/lib/i18n";
@@ -21,6 +24,7 @@ import { ArrowRight, Check, X } from "lucide-react";
 
 // Flat on the page like the session player; no card around it.
 const HERO = "w-full text-left";
+
 const SECTION = "mt-4 border-t border-border pt-3 text-left";
 
 /** Up to two questions per topic: start in the middle, then step up after a right answer or down after a wrong one. */
@@ -116,6 +120,19 @@ export function LevelBadge({ level, className }: { level: ProficiencyLevel; clas
   );
 }
 
+/** Where the quick check (and the warm-up after it) reads and marks questions; /design previews pass fixtures. */
+export interface QuizApi {
+  precheck: (workspaceId: string, focus?: string) => Promise<PrecheckTopic[]>;
+  answer: (input: { workspaceId: string; artifactId: string; index: number; selectedIndex: number }) => Promise<BankAnswerResult>;
+  warmup: (workspaceId: string) => Promise<ApiWarmupQuestion[]>;
+}
+
+export const LIVE_QUIZ_API: QuizApi = {
+  precheck: proficiencyApi.precheck,
+  answer: proficiencyApi.answerBankQuestion,
+  warmup: studySessionApi.getWarmupQuiz,
+};
+
 interface Step {
   topicIndex: number;
   /** Position in the topic's ladder (easiest → hardest). */
@@ -152,10 +169,15 @@ export function SessionPrecheck({
   workspaceId,
   focus,
   hero = false,
+  api = LIVE_QUIZ_API,
+  onShown,
 }: {
   workspaceId: string;
   focus?: string;
   hero?: boolean;
+  api?: QuizApi;
+  /** Whether a question, the results or the warm-up is on screen (the wait screen then shrinks its build header). */
+  onShown?: (shown: boolean) => void;
 }) {
   const { t } = useI18n();
   const [topics, setTopics] = useState<PrecheckTopic[] | null>(null);
@@ -168,10 +190,16 @@ export function SessionPrecheck({
   const [score, setScore] = useState({ right: 0, answered: 0 });
   const [burst, setBurst] = useState(0);
   const nextRef = useRef<HTMLButtonElement>(null);
+  const [warmupShown, setWarmupShown] = useState(false);
+  const checking = topics !== null && topics.length > 0 && !skipped;
+  const shown = checking || (topics !== null && warmupShown);
+  useEffect(() => {
+    onShown?.(shown);
+  }, [shown, onShown]);
 
   useEffect(() => {
     let cancelled = false;
-    proficiencyApi
+    api
       .precheck(workspaceId, focus)
       .then((rows) => {
         if (cancelled) return;
@@ -183,7 +211,7 @@ export function SessionPrecheck({
     return () => {
       cancelled = true;
     };
-  }, [workspaceId, focus]);
+  }, [workspaceId, focus, api]);
 
   const item: PrecheckItem | undefined = useMemo(
     () => (topics && step ? topics[step.topicIndex]?.ladder[step.rung] : undefined),
@@ -196,7 +224,7 @@ export function SessionPrecheck({
       setPicked(selectedIndex);
       setSubmitting(true);
       try {
-        const res = await proficiencyApi.answerBankQuestion({
+        const res = await api.answer({
           workspaceId,
           artifactId: item.artifactId,
           index: item.index,
@@ -214,7 +242,7 @@ export function SessionPrecheck({
         setSubmitting(false);
       }
     },
-    [item, picked, workspaceId, topics, step],
+    [item, picked, workspaceId, topics, step, api],
   );
 
   const next = useCallback(() => {
@@ -260,7 +288,7 @@ export function SessionPrecheck({
   }, [item, skipped, picked, result, answer, next]);
 
   if (topics === null) return null;
-  if (topics.length === 0 || skipped) return <WarmupQuiz workspaceId={workspaceId} hero={hero} />;
+  if (topics.length === 0 || skipped) return <WarmupQuiz workspaceId={workspaceId} hero={hero} load={api.warmup} onShown={setWarmupShown} />;
 
   const wrap = hero ? HERO : SECTION;
   const levelOf = (topic: PrecheckTopic): ProficiencyLevel => levels[topic.topic]?.level ?? topic.level;
@@ -274,16 +302,16 @@ export function SessionPrecheck({
           <Image
             src="/design/cat3-cheer.webp"
             alt=""
-            width={hero ? 64 : 40}
-            height={hero ? 76 : 48}
+            width={hero ? 48 : 40}
+            height={hero ? 57 : 48}
             unoptimized
-            className={cn("cat-cheer shrink-0 select-none object-contain", hero ? "h-[68px] w-auto" : "h-10 w-auto")}
+            className={cn("cat-cheer shrink-0 select-none object-contain", hero ? "h-12 w-auto" : "h-10 w-auto")}
           />
           <div className="min-w-0">
-            <p className={cn("font-bold leading-snug", hero ? "text-[18px] tracking-tight" : "text-sm")}>
+            <p className={cn("font-bold leading-snug", hero ? "text-ui font-extrabold" : "text-sm")}>
               {t("prof.doneTitle")}
             </p>
-            <p className={cn("mt-0.5 text-muted-foreground", hero ? "text-[13px]" : "text-xs")}>
+            <p className={cn("mt-0.5 text-muted-foreground", hero ? "text-small" : "text-xs")}>
               {score.answered > 0 &&
                 t("prof.score")
                   .replace("{right}", String(score.right))
@@ -292,7 +320,7 @@ export function SessionPrecheck({
             </p>
           </div>
         </div>
-        <ul className={cn("grid", hero ? "mt-5 gap-2.5" : "mt-3 gap-2")}>
+        <ul className={cn("grid", hero ? "mt-3" : "mt-3 gap-2")}>
           {topics.map((topic, i) => {
             const level = levelOf(topic);
             const mastery = levels[topic.topic]?.mastery ?? LEVEL_MASTERY[level];
@@ -301,12 +329,12 @@ export function SessionPrecheck({
                 key={topic.topic}
                 className={cn(
                   "animate-fade-up border-b border-border last:border-0",
-                  hero ? "py-3.5" : "py-2.5",
+                  hero ? "py-2.5" : "py-2.5",
                 )}
                 style={{ animationDelay: `${120 + i * 70}ms` }}
               >
                 <div className="flex items-start justify-between gap-2">
-                  <span className={cn("min-w-0 font-semibold leading-snug", hero ? "text-[14px]" : "text-[13px]")}>
+                  <span className={cn("min-w-0 font-semibold leading-snug", hero ? "text-small" : "text-[13px]")}>
                     {topic.label}
                   </span>
                   <span className="flex shrink-0 items-center gap-2">
@@ -319,7 +347,7 @@ export function SessionPrecheck({
                   </span>
                 </div>
                 <div
-                  className="mt-2.5 h-1.5 overflow-hidden rounded-full bg-muted"
+                  className={cn("h-1.5 overflow-hidden rounded-full bg-muted", hero ? "mt-2" : "mt-2.5")}
                   role="meter"
                   aria-label={t("prof.masteryLabel")}
                   aria-valuemin={0}
@@ -331,7 +359,7 @@ export function SessionPrecheck({
                     style={{ width: `${Math.max(6, Math.round(mastery * 100))}%` }}
                   />
                 </div>
-                <p className="mt-2 text-[12px] leading-snug text-muted-foreground">{t(LEVEL_PLAN_KEY[level])}</p>
+                <p className={cn("text-muted-foreground", hero ? "mt-1.5 text-caption" : "mt-2 text-[12px] leading-snug")}>{t(LEVEL_PLAN_KEY[level])}</p>
               </li>
             );
           })}
@@ -351,13 +379,13 @@ export function SessionPrecheck({
       {/* Header: mascot, title, skip */}
       <div className="flex items-start gap-3">
         <div className="min-w-0 flex-1">
-          <p className={cn("text-accent", hero ? "text-[12px] font-bold uppercase tracking-wide" : "text-[11px] font-semibold uppercase tracking-wide")}>
+          <p className={cn("text-accent", hero ? "text-caption font-bold uppercase tracking-wide" : "text-[11px] font-semibold uppercase tracking-wide")}>
             {t("prof.checkTitle")}
           </p>
           {hero && isFirst ? (
-            <p className="mt-0.5 text-[12.5px] leading-snug text-muted-foreground">{t("prof.checkHint")}</p>
+            <p className="mt-0.5 text-small text-muted-foreground">{t("prof.checkHint")}</p>
           ) : (
-            <p className={cn("mt-0.5 truncate text-muted-foreground", hero ? "text-[12.5px]" : "text-[11.5px]")}>
+            <p className={cn("mt-0.5 truncate text-muted-foreground", hero ? "text-small" : "text-[11.5px]")}>
               <span className="font-semibold text-foreground">{topic.label}</span>
               <span className="mx-1.5">·</span>
               <span className="tabular-nums">
@@ -371,7 +399,7 @@ export function SessionPrecheck({
           onClick={() => setSkipped(true)}
           className={cn(
             "shrink-0 rounded-full font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground",
-            hero ? "-mr-1 px-3 py-1.5 text-[12.5px]" : "-mr-1 px-2 py-0.5 text-[11.5px]",
+            hero ? "-my-1.5 -mr-2 min-h-9 px-3 text-small font-semibold" : "-mr-1 px-2 py-0.5 text-[11.5px]",
           )}
         >
           {t("prof.skip")}
@@ -379,7 +407,7 @@ export function SessionPrecheck({
       </div>
 
       {/* Per-topic stepper: finished topics take their level colour. */}
-      <div className={cn("flex items-center gap-1.5", hero ? "mt-4" : "mt-2.5")} aria-hidden>
+      <div className={cn("flex items-center gap-1.5", hero ? "mt-3" : "mt-2.5")} aria-hidden>
         {topics.map((tp, i) => {
           const done = i < step.topicIndex;
           const current = i === step.topicIndex;
@@ -404,7 +432,7 @@ export function SessionPrecheck({
         })}
       </div>
       {hero && isFirst && (
-        <p className="mt-2 truncate text-[12px] text-muted-foreground">
+        <p className="mt-2 truncate text-small text-muted-foreground">
           <span className="font-semibold text-foreground">{topic.label}</span>
           <span className="mx-1.5">·</span>
           <span className="tabular-nums">
@@ -415,10 +443,10 @@ export function SessionPrecheck({
 
       {/* Question + options, slide in on each new question */}
       <div key={`${step.topicIndex}-${step.asked}`} className="animate-slide-in-right">
-        <div className={hero ? "mt-4 text-[19px] font-bold leading-[1.35] sm:text-[20px]" : "mt-2.5 text-sm font-medium"}>
+        <div className={hero ? "mt-3 text-read font-bold leading-snug" : "mt-2.5 text-sm font-medium"}>
           <McqQuestionBody text={item.question} figures={item.figures} options={item.options} />
         </div>
-        <div className={cn(hero ? "mt-4 grid gap-2.5" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(item.options) && "grid-cols-2")}>
+        <div className={cn(hero ? "mt-3 grid gap-2" : "mt-2 grid gap-1.5 sm:grid-cols-2", optionsHaveFigures(item.options) && "grid-cols-2")}>
           {item.options.map((option, i) => {
             const done = result !== null;
             const isCorrect = done && i === result.correctIndex;
@@ -432,7 +460,7 @@ export function SessionPrecheck({
                 onClick={() => void answer(i)}
                 className={cn(
                   "group flex w-full items-center border bg-card text-left font-medium transition-[border-color,background-color,opacity,box-shadow] duration-200",
-                  hero ? "gap-3.5 rounded-[14px] px-3.5 py-3 text-[15px]" : "gap-2 rounded-lg px-2.5 py-1.5 text-xs",
+                  hero ? HERO_OPTION : "gap-2 rounded-lg px-2.5 py-1.5 text-xs",
                   picked === null &&
                     "border-border hover:border-accent hover:bg-accent-soft/40 hover:shadow-[0_2px_10px_-4px_rgba(124,58,237,0.35)] focus-visible:border-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/30",
                   isCorrect && "animate-answer-pop border-accent bg-accent-soft/60",
@@ -444,7 +472,7 @@ export function SessionPrecheck({
                 {hero && (
                   <span
                     className={cn(
-                      "grid size-7 shrink-0 place-items-center rounded-lg text-[13px] font-bold transition-colors",
+                      HERO_KEY,
                       isCorrect
                         ? "bg-accent text-white"
                         : wrong
@@ -473,13 +501,13 @@ export function SessionPrecheck({
         <div
           className={cn(
             "animate-fade-up flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between",
-            hero ? "mt-4 rounded-2xl px-4 py-3" : "mt-2.5 rounded-xl px-3 py-2",
+            hero ? "mt-3 rounded-[var(--r-control)] px-3.5 py-2.5" : "mt-2.5 rounded-xl px-3 py-2",
             result.correct ? "bg-accent-soft/70" : "bg-rose-500/8",
           )}
           aria-live="polite"
         >
-          <div className={cn("min-w-0 flex-1 text-muted-foreground", hero ? "text-[13px]" : "text-xs")}>
-            <p className={cn("mb-0.5 font-bold", hero && "text-[14px]", result.correct ? "text-accent" : "text-rose-600 [html.dark:not(.new-ui)_&]:text-rose-300")}>
+          <div className={cn("min-w-0 flex-1 text-muted-foreground", hero ? "text-small" : "text-xs")}>
+            <p className={cn("mb-0.5 font-bold", hero && "text-ui", result.correct ? "text-accent" : "text-rose-600 [html.dark:not(.new-ui)_&]:text-rose-300")}>
               {result.correct ? t("prof.correct") : t("prof.notQuite")}
             </p>
             {result.explanation && <MarkdownText text={result.explanation} />}
@@ -490,7 +518,7 @@ export function SessionPrecheck({
             onClick={next}
             className={cn(
               "inline-flex shrink-0 items-center justify-center gap-1.5 self-stretch rounded-xl bg-accent font-semibold text-white shadow-[0_6px_16px_-8px_rgba(124,58,237,0.7)] transition-[opacity,transform] hover:opacity-90 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-card sm:self-auto",
-              hero ? "h-10 px-4 text-[13.5px]" : "h-7 px-3 text-xs",
+              hero ? "h-10 rounded-[var(--r-control)] px-4 text-small" : "h-7 px-3 text-xs",
             )}
           >
             {finishing ? t("prof.seeResults") : t("prof.next")}
@@ -499,7 +527,7 @@ export function SessionPrecheck({
         </div>
       ) : (
         hero && (
-          <p className="mt-3.5 hidden text-[12px] text-faint sm:block">
+          <p className="mt-3 hidden text-caption text-faint sm:block">
             {t("prof.keysHint")}
           </p>
         )
