@@ -7,7 +7,6 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
-import { askTopicsStartCheck } from "@/lib/start-check-client";
 import { chooseStudyLength } from "@/lib/study-length-client";
 import { MAX_SELECTED_TOPICS, mixedSessionMinutes } from "@/lib/topic-select";
 
@@ -25,17 +24,13 @@ export async function startPickedTopics(
   const topicIds = input.topicIds.slice(0, MAX_SELECTED_TOPICS);
   const usual = { depth: "moderate" as const, durationMinutes: mixedSessionMinutes(topicIds.length), quickStart: false };
   const chosen = topicIds.length > 1 ? await chooseStudyLength(usual) : usual;
-  // Topics they have not rated yet: one "How confident are you?" for them (never holds the start up).
-  const startCheck = input.topicNames
-    ? await askTopicsStartCheck({ courseId: input.courseId, topics: topicIds.map((id) => ({ id, name: input.topicNames?.[id] ?? id })) })
-    : undefined;
+  // "How confident are you?" is not asked here: once per subject, on the wait screen of its first session.
   onBuilding?.();
   return coursesApi.startTopics({
     courseId: input.courseId,
     topicIds,
     ...(input.level ? { level: input.level } : {}),
     ...(chosen !== usual ? { durationMinutes: chosen.durationMinutes } : {}),
-    ...(startCheck ? { startCheck } : {}),
   });
 }
 
@@ -58,13 +53,12 @@ export function useStartCourseTopic(opts: { onStarted?: (workspaceId: string) =>
     setBusyTopicId(topic.id);
     setBusyMode(mode ?? "quick5");
     try {
-      const startCheck = await askTopicsStartCheck({ courseId: course.id, topics: [{ id: topic.id, name: topic.name }] });
+      // Nothing is asked before a start: "How confident?" comes on the wait screen, once per subject.
       const { workspaceId, sessionId } = await coursesApi.startTopic({
         courseId: course.id,
         topicId: topic.id,
         ...(level ? { level } : {}),
         ...(mode ? { mode } : {}),
-        ...(startCheck ? { startCheck } : {}),
       });
       emitTreeChanged();
       opts.onStarted?.(workspaceId);

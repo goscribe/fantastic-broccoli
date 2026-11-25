@@ -28,7 +28,6 @@ import { NotesOffer, type NotesOfferSelection } from "@/components/onboarding/no
 import { attachedNotesApi } from "@/lib/api/notes";
 import { getAttribution } from "@/lib/attribution";
 import { hasAutoStarted, knownCourse, markAutoStarted, mayKnowCourse, readKnownCourseSignals, rememberAutoSession, type KnownCourse } from "@/lib/known-course";
-import { askTopicsStartCheck } from "@/lib/start-check-client";
 import {
   PASTE_MAX_CHARS,
   PASTE_MIN_CHARS,
@@ -344,8 +343,8 @@ export function FirstRun({
    * session's own `quick5.started` then carries the time since this screen
    * was first shown, which is the time to the first question.
    *
-   * The very first session is never held up by "How confident are you?"
-   * (as on every first-run path); adding a subject later asks it as usual.
+   * Nothing is asked before the start: "How confident are you?" is asked on
+   * the Quick 5's wait screen while its questions are written.
    */
   const startLikely = (summary: CourseSummary) => {
     void run(
@@ -356,10 +355,9 @@ export function FirstRun({
         const course = await loadCourse(summary.id);
         const first = firstTopic(course);
         if (!first) throw new Error(t("course.errorStart"));
-        const startCheck = firstRun ? undefined : await askTopicsStartCheck({ courseId: course.id, topics: [{ id: first.topic.id, name: first.topic.name }] });
         setBusy("building");
         setMaking(`${course.title} · ${first.topic.name}`);
-        const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.topic.id, ...(startCheck ? { startCheck } : {}) });
+        const { workspaceId, sessionId } = await coursesApi.startTopic({ courseId: course.id, topicId: first.topic.id });
         emitTreeChanged();
         track("first_run.session_requested", { option: "curriculum", courseId: course.id, durationMs: Date.now() - tappedAt }, workspaceId);
         router.push(`/workspace/${workspaceId}/session/${sessionId}`);

@@ -274,7 +274,7 @@ export interface ScoreSplit {
 }
 
 export interface FirstScores extends WindowOut {
-  definitions: Record<"cohort" | "firstSet" | "session" | "w1" | "confidence", string>;
+  definitions: Record<"cohort" | "firstSet" | "session" | "w1" | "confidence", string> & { difficulty?: string };
   starters: CurPrev & { change: MetricChange };
   firstSet: ScoreHeadline;
   session: ScoreHeadline;
@@ -283,6 +283,8 @@ export interface FirstScores extends WindowOut {
   byFormat: ScoreSplit[];
   w1ByBand: Array<{ key: string; label: string; eligible: number; returned: number; pct: number | null }>;
   w1Eligible: { students: number; returned: number; pct: number | null };
+  /** First tests with difficulty-tagged questions (new Quick 5s): % right per difficulty. Missing on older servers. */
+  byDifficulty?: Array<{ key: "easy" | "medium" | "hard"; answered: number; correct: number; pct: number | null }>;
   confidence: {
     trackingSince: Date | null;
     firstSessionsAsked: number;
