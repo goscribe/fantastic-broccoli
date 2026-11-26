@@ -4,7 +4,7 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Bell, Check, Share, SquarePlus, X } from "lucide-react";
+import { Bell, Share, SquarePlus, X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
@@ -16,11 +16,15 @@ import {
   formatStudyTime,
   habitSteps,
   isGoodSession,
+  nextHabitStep,
   type HabitStep,
   type ReminderPrefs,
 } from "@/lib/reminders";
 import {
+  askedThisVisit,
+  browserTimezone,
   enablePush,
+  markAskedThisVisit,
   markDeviceSeen,
   promptInstall,
   readDeviceSeen,
@@ -29,7 +33,7 @@ import {
 import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/reminders";
-import { claimEndScreenAsk } from "@/lib/wall";
+import { claimEndScreenAsk, wallWillOpen } from "@/lib/wall";
 import { fetchStudyPlan, updateStudyPlan } from "@/lib/api/planner";
 import { plannerWindowFromStudyTime } from "@/lib/reminders";
 
@@ -59,11 +63,17 @@ async function syncPlannerWindow(minute: number): Promise<void> {
 const SHOW_AFTER_MS = 1400;
 
 /**
- * After a finished Quick 5: "When do you usually study?", then (once) the
- * push soft-ask before the browser's own prompt, or on iOS Safari the "Add to
- * Home Screen" hint (web push only works there once installed), or Chrome's
- * install offer. Each is shown once (see `habitSteps`); old servers without
- * the reminders API simply show nothing.
+ * On a finished session's end screen (the first session, a Quick 5, any
+ * later one): "When do you want to study tomorrow?" with four one-tap times,
+ * then "Get the reminder as a notification" where push can work, or on iOS
+ * Safari the "Add to Home Screen" hint (web push only works there once
+ * installed), or Chrome's install offer.
+ *
+ * It never nags: one sheet per visit, a dismissed ask comes back only after
+ * a gap and a few times at most (see `habitSteps`), and on a full session's
+ * end screen the subscribe wall goes first when it is due. The browser's own
+ * permission prompt opens only from the "Turn on notifications" tap. Old
+ * servers without the reminders API simply show nothing.
  */
 export function HabitPrompt({
   sessionId,
@@ -81,6 +91,7 @@ export function HabitPrompt({
   showAfterMs?: number;
 }) {
   const canInstall = useCanInstall();
+  const queryClient = useQueryClient();
   const { data: prefs } = useQuery({
     queryKey: REMINDER_PREFS_KEY,
     queryFn: remindersApi.get,
@@ -88,9 +99,9 @@ export function HabitPrompt({
     staleTime: 60_000,
   });
   const [steps, setSteps] = useState<HabitStep[] | null>(null);
-  // Decided once per finished Quick 5; later changes (e.g. Chrome's install
-  // event arriving) wait for the next one. `closed` keeps a refetch of the
-  // prefs from opening the sheet again.
+  // Decided once per end screen; later changes (e.g. Chrome's install event
+  // arriving) wait for the next one. `closed` keeps a refetch of the prefs
+  // from opening the sheet again.
   const decided = useRef<HabitStep[] | null>(null);
   const closed = useRef(false);
 
@@ -101,15 +112,24 @@ export function HabitPrompt({
       platform: detectPlatform(canInstall),
       seen: readDeviceSeen(),
       goodSession: isGoodSession(accuracy, activitiesDone),
+      now: Date.now(),
+      askedThisVisit: askedThisVisit(),
     });
     const planned = decided.current;
     if (planned.length === 0) return;
-    const timer = window.setTimeout(() => {
-      // One ask per end screen; the habit prompt goes first.
+    let cancelled = false;
+    const timer = window.setTimeout(async () => {
+      // One ask per end screen: the subscribe wall keeps a full session's when it is due.
+      if (sessionId && (await wallWillOpen(sessionId))) return;
+      if (cancelled || askedThisVisit()) return;
       if (sessionId && !claimEndScreenAsk(sessionId, "habit")) return;
+      markAskedThisVisit();
       setSteps(planned);
     }, showAfterMs);
-    return () => window.clearTimeout(timer);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(timer);
+    };
   }, [prefs, canInstall, accuracy, activitiesDone, showAfterMs, sessionId]);
 
   if (!prefs || !steps || steps.length === 0) return null;
@@ -121,6 +141,8 @@ export function HabitPrompt({
       onDone={() => {
         closed.current = true;
         setSteps([]);
+        // Pick up what the server recorded (asked-at stamps, the subscription).
+        void queryClient.invalidateQueries({ queryKey: REMINDER_PREFS_KEY });
       }}
     />
   );
@@ -138,27 +160,58 @@ export function HabitSheet({
   subjectTitle?: string;
   onDone: () => void;
 }) {
-  const { t } = useI18n();
+  const { t, locale } = useI18n();
   const queryClient = useQueryClient();
   const [index, setIndex] = useState(0);
   const [minute, setMinute] = useState<number | null>(prefs.studyReminderMinute);
+  const [saving, setSaving] = useState(false);
   const step = steps[index];
 
-  const next = () => (index + 1 < steps.length ? setIndex(index + 1) : onDone());
+  const advance = (outcome: "answered" | "dismissed") => {
+    const to = nextHabitStep(steps, index, outcome);
+    if (to === null) onDone();
+    else setIndex(to);
+  };
 
-  const update = (p: ReminderPrefs) => queryClient.setQueryData(REMINDER_PREFS_KEY, p);
   const shownMinute = minute ?? prefs.studyReminderMinute ?? DEFAULT_REMINDER_MINUTE;
 
-  /** The step's "not now": remembered so it isn't asked again, then on to the next. */
+  // Recorded when shown (not when answered), once per step: the server stamps
+  // studyTimeAskedAt / pushAskedAt so the ask isn't repeated too soon.
+  const recorded = useRef(new Set<HabitStep>());
+  useEffect(() => {
+    if (!step || recorded.current.has(step)) return;
+    recorded.current.add(step);
+    if (step === "study_time" || step === "push") void remindersApi.markAsked(step).catch(() => undefined);
+  }, [step]);
+
+  /** The step's "not now". */
   const dismiss = () => {
-    if (step === "study_time" || step === "push") {
-      void remindersApi.markAsked(step).catch(() => undefined);
-    } else if (step === "ios_install") {
-      markDeviceSeen("iosInstallHint");
-    } else if (step === "android_install") {
-      markDeviceSeen("androidInstall");
+    if (step === "ios_install") markDeviceSeen("iosInstallHint");
+    else if (step === "android_install") markDeviceSeen("androidInstall");
+    advance("dismissed");
+  };
+
+  /** One tap on a time is the answer: saved, then on to the push offer (or done). */
+  const pickTime = async (picked: number) => {
+    if (saving) return;
+    setMinute(picked);
+    setSaving(true);
+    try {
+      queryClient.setQueryData(REMINDER_PREFS_KEY, await remindersApi.setStudyTime(picked, browserTimezone()));
+      // The one "when do you study" answer also places the planner's study window.
+      void syncPlannerWindow(picked);
+      // With no second step, say what happens next; the push offer says it itself.
+      if (nextHabitStep(steps, index, "answered") === null) {
+        toast.success(t("remind.askSaved").replace("{time}", formatStudyTime(picked, locale)));
+      }
+      advance("answered");
+    } catch {
+      // Offline or an old server: nothing was saved, so don't pretend it was.
+      toast(t("remind.askSaveFailed"));
+      onDone();
+    } finally {
+      setSaving(false);
     }
-    next();
   };
 
   // Escape = "not now".
@@ -178,37 +231,15 @@ export function HabitSheet({
 
   let body: ReactNode;
   if (step === "study_time") {
-    body = (
-      <StudyTimeStep
-        minute={minute}
-        setMinute={setMinute}
-        onSkip={dismiss}
-        onSave={async () => {
-          if (minute === null) return;
-          try {
-            update(await remindersApi.setStudyTime(minute));
-          } catch {
-            // Old server or offline: the default time still applies.
-          }
-          // The one "when do you study" answer also places the planner's study window.
-          void syncPlannerWindow(minute);
-          next();
-        }}
-      />
-    );
+    body = <StudyTimeStep minute={minute} saving={saving} onPick={pickTime} onSkip={dismiss} />;
   } else if (step === "push") {
     body = (
       <PushStep
         minute={shownMinute}
         subjectTitle={subjectTitle}
         onSkip={dismiss}
-        onEnable={async () => {
-          const result = await enablePush(prefs.vapidPublicKey ?? "");
-          void remindersApi.markAsked("push").catch(() => undefined);
-          void queryClient.invalidateQueries({ queryKey: REMINDER_PREFS_KEY });
-          return result;
-        }}
-        onFinished={next}
+        onEnable={() => enablePush(prefs.vapidPublicKey ?? "")}
+        onFinished={() => advance("answered")}
       />
     );
   } else if (step === "ios_install") {
@@ -220,7 +251,7 @@ export function HabitSheet({
         onInstall={async () => {
           markDeviceSeen("androidInstall");
           await promptInstall();
-          next();
+          advance("answered");
         }}
       />
     );
@@ -236,6 +267,7 @@ export function HabitSheet({
         role="dialog"
         aria-modal="true"
         aria-labelledby="habit-sheet-title"
+        data-habit-step={step}
         onClick={(e) => e.stopPropagation()}
         className={cn(
           "relative max-h-[92dvh] w-full max-w-md overflow-y-auto overscroll-contain rounded-t-[28px] border border-border bg-card px-5 pb-[max(1rem,env(safe-area-inset-bottom))] pt-3 shadow-xl animate-fade-up",
@@ -251,13 +283,6 @@ export function HabitSheet({
         >
           <X className="size-4" />
         </button>
-        {steps.length > 1 && (
-          <div className="mb-1 flex justify-center gap-1.5" aria-hidden>
-            {steps.map((s, i) => (
-              <span key={s} className={cn("h-1.5 rounded-full transition-all", i === index ? "w-5 bg-accent" : "w-1.5 bg-border")} />
-            ))}
-          </div>
-        )}
         {body}
       </div>
     </div>,
@@ -277,44 +302,31 @@ function StepHeader({ pose, title, sub }: { pose: MascotPose; title: string; sub
   );
 }
 
+/** "When do you want to study tomorrow?": four times, one tap. Works with email alone. */
 function StudyTimeStep({
   minute,
-  setMinute,
+  saving,
+  onPick,
   onSkip,
-  onSave,
 }: {
   minute: number | null;
-  setMinute: (m: number) => void;
+  saving: boolean;
+  onPick: (m: number) => void;
   onSkip: () => void;
-  onSave: () => Promise<void>;
 }) {
   const { t } = useI18n();
-  const [saving, setSaving] = useState(false);
   return (
     <>
-      <StepHeader pose="wave" title={t("remind.studyTitle")} sub={t("remind.studySub")} />
-      <StudyTimePicker value={minute} onChange={setMinute} className="mt-4" />
-      <div className="mt-4 space-y-0.5">
-        <Button
-          size="lg"
-          className="w-full text-[15px]"
-          disabled={minute === null || saving}
-          onClick={async () => {
-            setSaving(true);
-            await onSave();
-            setSaving(false);
-          }}
-        >
-          {t("remind.continue")}
-        </Button>
-        <Button size="lg" variant="ghost" className="w-full" onClick={onSkip}>
-          {t("remind.skip")}
-        </Button>
-      </div>
+      <StepHeader pose="wave" title={t("remind.askTitle")} sub={t("remind.askSub")} />
+      <StudyTimePicker presetsOnly value={minute} onChange={onPick} disabled={saving} label={t("remind.askTitle")} className="mt-4" />
+      <Button size="lg" variant="ghost" className="mt-2 w-full" onClick={onSkip} disabled={saving}>
+        {t("remind.notNow")}
+      </Button>
     </>
   );
 }
 
+/** "Get the reminder as a notification": the browser's own prompt opens only from this button. */
 function PushStep({
   minute,
   subjectTitle,
@@ -334,10 +346,10 @@ function PushStep({
   const topic = subjectTitle?.trim();
   return (
     <>
-      <StepHeader pose="flame" title={t("remind.pushTitle").replace("{time}", time)} sub={t("remind.pushSub").replace("{time}", time)} />
+      <StepHeader pose="flame" title={t("remind.askPushTitle")} sub={t("remind.askPushSub").replace("{time}", time)} />
 
       {/* What it will look like: one calm notification, not a feed. */}
-      <div className="mt-5 rounded-2xl bg-muted/70 p-3" aria-hidden>
+      <div className="mt-4 rounded-2xl bg-muted/70 p-3" aria-hidden>
         <div className="flex items-start gap-3 rounded-xl bg-card p-3 shadow-sm">
           <Image src="/icons/hp-maskable-192.png" alt="" width={36} height={36} className="size-9 shrink-0 rounded-[10px] border border-border" />
           <div className="min-w-0 flex-1">
@@ -346,25 +358,14 @@ function PushStep({
               <span>{time}</span>
             </div>
             <p className="mt-0.5 line-clamp-2 text-[13.5px] font-semibold leading-5">
-              {topic ? t("remind.previewTitle").replace("{topic}", topic) : t("remind.previewTitleNoTopic")}
+              {topic ? t("remind.askPreviewTitle").replace("{topic}", topic) : t("remind.askPreviewTitleNoTopic")}
             </p>
-            <p className="text-[12.5px] leading-5 text-muted-foreground">{t("remind.previewBody")}</p>
+            <p className="text-[12.5px] leading-5 text-muted-foreground">{t("remind.askPreviewBody")}</p>
           </div>
         </div>
       </div>
 
-      <ul className="mt-4 space-y-2 text-[14px]">
-        {(["remind.pushPoint1", "remind.pushPoint2", "remind.pushPoint3"] as const).map((k) => (
-          <li key={k} className="flex items-center gap-2.5">
-            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-success/15 text-success">
-              <Check className="size-3.5" strokeWidth={3} />
-            </span>
-            {t(k)}
-          </li>
-        ))}
-      </ul>
-
-      <div className="mt-5 space-y-1">
+      <div className="mt-4 space-y-1">
         <Button
           size="lg"
           className="w-full text-[15px]"
@@ -380,10 +381,10 @@ function PushStep({
           }}
         >
           <Bell className="mr-2 size-4" />
-          {t("remind.pushCta")}
+          {t("remind.askPushCta")}
         </Button>
-        <Button size="lg" variant="ghost" className="w-full" onClick={onSkip}>
-          {t("remind.notNow")}
+        <Button size="lg" variant="ghost" className="w-full" onClick={onSkip} disabled={busy}>
+          {t("remind.askPushSkip")}
         </Button>
       </div>
       <p className="mt-1 text-center text-[12px] text-muted-foreground">{t("remind.pushNext")}</p>

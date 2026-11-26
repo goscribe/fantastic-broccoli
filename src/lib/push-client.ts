@@ -7,7 +7,7 @@
  */
 import { useSyncExternalStore } from "react";
 import { remindersApi } from "@/lib/api/reminders";
-import { deviceSeenFor, urlBase64ToUint8Array, type DeviceSeen, type StoredDeviceSeen } from "@/lib/reminders";
+import { deviceSeenFor, isUsableVapidKey, urlBase64ToUint8Array, type DeviceSeen, type StoredDeviceSeen } from "@/lib/reminders";
 
 const SW_URL = "/sw.js";
 
@@ -45,8 +45,10 @@ function toServer(sub: PushSubscription) {
  */
 export async function enablePush(vapidPublicKey: string): Promise<"granted" | "denied" | "failed"> {
   try {
+    // Without a usable server key the subscribe below can only throw: don't open the browser's prompt for it.
+    if (!isUsableVapidKey(vapidPublicKey)) return "failed";
     const reg = await registration();
-    if (!reg || !("Notification" in window)) return "failed";
+    if (!reg || !("PushManager" in window) || !("Notification" in window)) return "failed";
     const permission = await Notification.requestPermission();
     if (permission !== "granted") return permission === "denied" ? "denied" : "failed";
     const sub =
@@ -155,5 +157,39 @@ export function markDeviceSeen(key: keyof DeviceSeen): void {
     window.localStorage.setItem(SEEN_KEY, JSON.stringify(next));
   } catch {
     // Storage blocked: may show again, which is harmless.
+  }
+}
+
+// ── One ask per visit ───────────────────────────────────────────────────────
+// The end-screen asks (study time, push, install hints) show at most once
+// between opening the app and closing the tab, however many sessions are
+// finished. Kept in memory too, for browsers that block sessionStorage.
+
+const VISIT_KEY = "scribe.reminder-ask.shown";
+let askedInMemory = false;
+
+export function askedThisVisit(): boolean {
+  if (askedInMemory) return true;
+  try {
+    return window.sessionStorage.getItem(VISIT_KEY) === "1";
+  } catch {
+    return false;
+  }
+}
+export function markAskedThisVisit(): void {
+  askedInMemory = true;
+  try {
+    window.sessionStorage.setItem(VISIT_KEY, "1");
+  } catch {
+    // Storage blocked: the in-memory flag covers this page load.
+  }
+}
+
+/** The browser's IANA zone, sent with the study time so the reminder goes out at that local time. */
+export function browserTimezone(): string | undefined {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || undefined;
+  } catch {
+    return undefined;
   }
 }

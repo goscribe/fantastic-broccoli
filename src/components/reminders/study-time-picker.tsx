@@ -37,10 +37,19 @@ export function StudyTimePicker({
   value,
   onChange,
   className,
+  presetsOnly = false,
+  disabled = false,
+  label,
 }: {
   value: number | null;
   onChange: (minute: number) => void;
   className?: string;
+  /** Just the four time chips, each a one-tap answer (the end-screen ask); the custom time stays in Settings. */
+  presetsOnly?: boolean;
+  /** While the tapped answer is being saved. */
+  disabled?: boolean;
+  /** The question the chips answer, for screen readers (default: "When do you usually study?"). */
+  label?: string;
 }) {
   const { t, locale } = useI18n();
   const id = useId();
@@ -50,7 +59,7 @@ export function StudyTimePicker({
 
   return (
     <div className={className}>
-      <div role="radiogroup" aria-label={t("remind.studyTitle")} className="grid grid-cols-2 gap-2.5">
+      <div role="radiogroup" aria-label={label ?? t("remind.studyTitle")} className="grid grid-cols-2 gap-2.5">
         {STUDY_TIME_PRESET_ORDER.map((p) => {
           const minute = STUDY_TIME_PRESETS[p];
           const selected = !custom && preset === p;
@@ -61,12 +70,13 @@ export function StudyTimePicker({
               type="button"
               role="radio"
               aria-checked={selected}
+              disabled={disabled}
               onClick={() => {
                 setCustom(false);
                 onChange(minute);
               }}
               className={cn(
-                "flex flex-col overflow-hidden rounded-2xl border text-left transition-colors",
+                "flex flex-col overflow-hidden rounded-2xl border text-left transition-colors disabled:cursor-default",
                 "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40",
                 selected
                   ? "border-accent bg-accent-soft text-foreground shadow-[0_0_0_1px_var(--accent)]"
@@ -94,60 +104,62 @@ export function StudyTimePicker({
         })}
       </div>
 
-      <div
-        className={cn(
-          "mt-2.5 flex min-h-[56px] items-center gap-3 rounded-2xl border py-2 pl-2 pr-3.5 transition-colors",
-          custom ? "border-accent bg-accent-soft shadow-[0_0_0_1px_var(--accent)]" : "border-border bg-card",
-        )}
-      >
-        <button
-          type="button"
-          role="radio"
-          aria-checked={custom}
-          onClick={() => {
-            setCustom(true);
-            onChange(customValue);
-          }}
-          className="flex flex-1 items-center gap-2.5 text-left focus-visible:outline-none sm:gap-3"
+      {!presetsOnly && (
+        <div
+          className={cn(
+            "mt-2.5 flex min-h-[56px] items-center gap-3 rounded-2xl border py-2 pl-2 pr-3.5 transition-colors",
+            custom ? "border-accent bg-accent-soft shadow-[0_0_0_1px_var(--accent)]" : "border-border bg-card",
+          )}
         >
-          {/* A calm stretch of sky with the alarm-clock prop. */}
-          <span
-            aria-hidden
-            className={cn(
-              "block size-10 shrink-0 sm:w-[60px] rounded-xl bg-[#a8dafb] bg-no-repeat transition-[filter]",
-              custom ? "saturate-[1.1]" : "saturate-[0.8]",
-            )}
-            style={{
-              backgroundImage: "url(/design/reminders/clock.webp), url(/design/reminders/sky.webp)",
-              backgroundSize: "auto 82%, cover",
-              backgroundPosition: "center, center",
-            }}
-          />
-          <span className="text-[14.5px] font-semibold">{t("remind.custom")}</span>
-        </button>
-        <label htmlFor={`${id}-time`} className="sr-only">
-          {t("remind.custom")}
-        </label>
-        <input
-          id={`${id}-time`}
-          type="time"
-          step={STUDY_TIME_STEP * 60}
-          value={minuteToTimeInput(customValue)}
-          onFocus={() => {
-            if (!custom) {
+          <button
+            type="button"
+            role="radio"
+            aria-checked={custom}
+            onClick={() => {
               setCustom(true);
               onChange(customValue);
-            }
-          }}
-          onChange={(e) => {
-            const m = timeInputToMinute(e.target.value);
-            if (m === null) return;
-            setCustom(true);
-            onChange(m);
-          }}
-          className="h-10 rounded-xl border border-border bg-background px-2.5 text-[15px] font-semibold tabular-nums outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
-        />
-      </div>
+            }}
+            className="flex flex-1 items-center gap-2.5 text-left focus-visible:outline-none sm:gap-3"
+          >
+            {/* A calm stretch of sky with the alarm-clock prop. */}
+            <span
+              aria-hidden
+              className={cn(
+                "block size-10 shrink-0 sm:w-[60px] rounded-xl bg-[#a8dafb] bg-no-repeat transition-[filter]",
+                custom ? "saturate-[1.1]" : "saturate-[0.8]",
+              )}
+              style={{
+                backgroundImage: "url(/design/reminders/clock.webp), url(/design/reminders/sky.webp)",
+                backgroundSize: "auto 82%, cover",
+                backgroundPosition: "center, center",
+              }}
+            />
+            <span className="text-[14.5px] font-semibold">{t("remind.custom")}</span>
+          </button>
+          <label htmlFor={`${id}-time`} className="sr-only">
+            {t("remind.custom")}
+          </label>
+          <input
+            id={`${id}-time`}
+            type="time"
+            step={STUDY_TIME_STEP * 60}
+            value={minuteToTimeInput(customValue)}
+            onFocus={() => {
+              if (!custom) {
+                setCustom(true);
+                onChange(customValue);
+              }
+            }}
+            onChange={(e) => {
+              const m = timeInputToMinute(e.target.value);
+              if (m === null) return;
+              setCustom(true);
+              onChange(m);
+            }}
+            className="h-10 rounded-xl border border-border bg-background px-2.5 text-[15px] font-semibold tabular-nums outline-none focus:border-accent focus:ring-2 focus:ring-accent/20"
+          />
+        </div>
+      )}
     </div>
   );
 }

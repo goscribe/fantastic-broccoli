@@ -16,6 +16,9 @@ import type { SessionActivity } from "@/types";
  *   ?view=papers    the first session of a course with several papers
  *   ?view=ready     the questions came first; one tap to start
  *   ?view=debrief   "You said 7/10 → You got 3/5" and the exam-level line
+ *   ?view=debrief&full=1   the same end screen for a full (not Quick 5) session
+ * The end screen's reminder ask ("When do you want to study tomorrow?") reads
+ * the reminders API, so it only shows here when a test mocks `reminders.get`.
  */
 const noop = () => {};
 const state = (over: Partial<WaitConfidenceState> = {}): WaitConfidenceState => ({
@@ -73,7 +76,7 @@ const ACTIVITIES: SessionActivity[] = [
 const STATS: ApiSessionStats = { activitiesDone: 1, activitiesTotal: 1, answered: 5, correct: 2, accuracy: 0.4, minutes: 4, points: 20, mistakes: 3, mastery: [] };
 const DEBRIEF: ApiSessionDebrief = { headline: "", summary: "", sections: [] };
 
-function Debrief() {
+function Debrief({ full = false }: { full?: boolean }) {
   const queryClient = useQueryClient();
   // Seeded before the first render, so nothing is fetched.
   useState(() => {
@@ -83,14 +86,15 @@ function Debrief() {
   });
   return (
     <main className="mx-auto w-full max-w-3xl px-5 py-6 sm:px-10">
-      <SessionDebrief activities={ACTIVITIES} confidenceBefore={7} sessionId="fixture-session" subjectTitle="AP US History" quickStart onBack={noop} />
+      <SessionDebrief activities={ACTIVITIES} confidenceBefore={7} sessionId="fixture-session" subjectTitle="AP US History" quickStart={!full} onBack={noop} />
     </main>
   );
 }
 
 function Inner() {
-  const view = useSearchParams().get("view") ?? "wait";
-  if (view === "debrief") return <Debrief />;
+  const params = useSearchParams();
+  const view = params.get("view") ?? "wait";
+  if (view === "debrief") return <Debrief full={params.get("full") === "1"} />;
   if (view === "ready") {
     return (
       <main className="mx-auto w-full max-w-[640px] px-5 pt-8">

@@ -57,8 +57,9 @@ export type EndScreenAsk = "habit" | "wall";
 const asked = new Map<string, EndScreenAsk>();
 
 /**
- * Claims the single ask an end screen gets. The habit prompt claims first on
- * a Quick 5's end screen; the wall only ever claims on a full session's.
+ * Claims the single ask an end screen gets. The reminder ask claims a Quick
+ * 5's end screen; on a full session's the wall goes first when it is due
+ * (see `wallWillOpen`), else the reminder ask.
  * Returns false when another ask already holds this end screen.
  */
 export function claimEndScreenAsk(sessionId: string, ask: EndScreenAsk): boolean {
@@ -68,9 +69,27 @@ export function claimEndScreenAsk(sessionId: string, ask: EndScreenAsk): boolean
   return true;
 }
 
+/**
+ * Whether the post-session wall is going to open on this end screen, once
+ * known. The wall registers its decision when a session completes; the
+ * reminder ask on a full session's end screen waits for it and stays away
+ * when the wall is coming, so the two never race for the same screen.
+ */
+const wallDecisions = new Map<string, Promise<boolean>>();
+
+export function noteWallDecision(sessionId: string, decision: Promise<boolean>): void {
+  wallDecisions.set(sessionId, decision.catch(() => false));
+}
+
+/** Resolves true when the wall will take this end screen; false when it won't (or nothing registered). */
+export function wallWillOpen(sessionId: string): Promise<boolean> {
+  return wallDecisions.get(sessionId) ?? Promise.resolve(false);
+}
+
 /** Tests only. */
 export function resetEndScreenAsks(): void {
   asked.clear();
+  wallDecisions.clear();
 }
 
 /* ---------- Why the wall opened (funnel `wall.shown {reason}`) ---------- */

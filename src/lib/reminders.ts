@@ -1,7 +1,8 @@
 /**
- * Study-time reminders and the one-time prompts after a Quick 5 ("When do
- * you usually study?", the push soft-ask, the install hints). Pure: no React
- * or API imports, so the decisions can be unit tested.
+ * Study-time reminders and the asks on a finished session's end screen
+ * ("When do you want to study tomorrow?", then "Get the reminder as a
+ * notification", or an install hint). Pure: no React or API imports, so the
+ * decisions can be unit tested.
  */
 
 /** Minutes after local midnight. Mirrors the server's STUDY_TIME_PRESETS. */
@@ -92,6 +93,11 @@ export interface ReminderPrefs {
   vapidPublicKey: string | null;
   pushDevices: number;
   timezone: string | null;
+  /** When each ask was last shown (ISO) and how many times. Absent on an older server, which only knows "asked". */
+  studyTimeAskedAt?: string | null;
+  pushAskedAt?: string | null;
+  studyTimeAsks?: number;
+  pushAsks?: number;
 }
 
 /** Per-device "already shown" markers (the install hints are about this device). */
@@ -118,11 +124,41 @@ export function deviceSeenFor(stored: StoredDeviceSeen | null | undefined, userA
 
 export type HabitStep = "study_time" | "push" | "ios_install" | "android_install";
 
+/** A dismissed ask comes back after this long. */
+export const REASK_GAP_DAYS = 7;
+/** Each ask is shown this many times at most; after that the answer is "no" (Settings still has both). */
+export const MAX_ASKS = 3;
+/** After any ask, a different one waits at least this long (a "no" to one isn't followed by the other the next day). */
+export const QUIET_DAYS_BETWEEN_ASKS = 3;
+const DAY_MS = 86_400_000;
+
+function msSince(iso: string | null | undefined, now: number): number | null {
+  if (!iso) return null;
+  const at = Date.parse(iso);
+  return Number.isFinite(at) ? now - at : null;
+}
+
+/** Never shown, or shown and left unanswered long enough ago and not too often. */
+function askDue(asked: boolean, askedAt: string | null | undefined, asks: number | undefined, now: number): boolean {
+  if (!asked) return true;
+  const since = msSince(askedAt, now);
+  // An older server only says "asked": keep its ask-once behaviour.
+  if (since === null) return false;
+  if ((asks ?? 1) >= MAX_ASKS) return false;
+  return since >= REASK_GAP_DAYS * DAY_MS;
+}
+
+/** "When do you want to study tomorrow?" is due: no time set, and never asked or dismissed a while ago. */
+export function studyTimeAskDue(prefs: ReminderPrefs, now: number): boolean {
+  if (prefs.studyReminderMinute != null) return false;
+  return askDue(prefs.studyTimeAsked, prefs.studyTimeAskedAt, prefs.studyTimeAsks, now);
+}
+
 /** Whether this browser can ask for push permission right now. */
 export function canAskPush(prefs: ReminderPrefs, platform: Platform): boolean {
   return (
     prefs.pushAvailable &&
-    !!prefs.vapidPublicKey &&
+    isUsableVapidKey(prefs.vapidPublicKey) &&
     platform.pushSupported &&
     platform.permission === "default" &&
     // iOS only delivers web push to the home-screen app.
@@ -131,11 +167,24 @@ export function canAskPush(prefs: ReminderPrefs, platform: Platform): boolean {
 }
 
 /**
- * The prompts to show after a finished Quick 5, in order, at most two per
- * visit: the study-time question (once per account), then one of the push
- * soft-ask (once per account), the iOS "Add to Home Screen" hint (once per
- * device, only after a good session) or the Android install offer (once per
- * device). Whatever isn't shown now comes after a later Quick 5.
+ * "Get the reminder as a notification" is due: push would work here (server
+ * keys, a browser that supports it and hasn't decided, not iOS Safari outside
+ * the home-screen app), and it was never asked or was dismissed a while ago.
+ */
+export function pushAskDue(prefs: ReminderPrefs, platform: Platform, now: number): boolean {
+  return canAskPush(prefs, platform) && askDue(prefs.pushAsked, prefs.pushAskedAt, prefs.pushAsks, now);
+}
+
+/**
+ * The asks to show on a finished session's end screen, in order, at most two:
+ * the study-time question first (it works with email alone), then one of the
+ * push offer, the iOS "Add to Home Screen" hint (once per device, only after
+ * a good session) or the Android install offer (once per device).
+ *
+ * Nothing when an ask was already shown in this visit. Without the study-time
+ * question in front, the second ask also waits out a quiet period after the
+ * last ask of either kind. The sheet stops after a "not now" on the first
+ * step, so the second is only ever offered to someone who just said yes.
  */
 export function habitSteps(input: {
   prefs: ReminderPrefs;
@@ -143,11 +192,20 @@ export function habitSteps(input: {
   seen: DeviceSeen;
   /** Finished with a decent score; the iOS hint waits for one. */
   goodSession: boolean;
+  /** Date.now(); the re-ask gaps are measured from it. */
+  now: number;
+  /** An ask was already shown since the app was opened (once per visit). */
+  askedThisVisit?: boolean;
 }): HabitStep[] {
-  const { prefs, platform, seen, goodSession } = input;
+  const { prefs, platform, seen, goodSession, now } = input;
+  if (input.askedThisVisit) return [];
   const steps: HabitStep[] = [];
-  if (!prefs.studyTimeAsked) steps.push("study_time");
-  if (!prefs.pushAsked && canAskPush(prefs, platform)) {
+  if (studyTimeAskDue(prefs, now)) steps.push("study_time");
+  if (steps.length === 0) {
+    const last = [msSince(prefs.studyTimeAskedAt, now), msSince(prefs.pushAskedAt, now)].filter((v): v is number => v !== null);
+    if (last.some((since) => since < QUIET_DAYS_BETWEEN_ASKS * DAY_MS)) return [];
+  }
+  if (pushAskDue(prefs, platform, now)) {
     steps.push("push");
   } else if (platform.ios && !platform.standalone && !seen.iosInstallHint && goodSession) {
     steps.push("ios_install");
@@ -155,6 +213,17 @@ export function habitSteps(input: {
     steps.push("android_install");
   }
   return steps.slice(0, 2);
+}
+
+/** The step after `index`, or null when the sheet is done: a "not now" on the study time ends it. */
+export function nextHabitStep(steps: HabitStep[], index: number, outcome: "answered" | "dismissed"): number | null {
+  if (outcome === "dismissed" && steps[index] === "study_time") return null;
+  return index + 1 < steps.length ? index + 1 : null;
+}
+
+/** A VAPID public key is 65 bytes of URL-safe base64; anything else would make the browser's subscribe throw. */
+export function isUsableVapidKey(key: string | null | undefined): key is string {
+  return !!key && /^[A-Za-z0-9_-]{87}$/.test(key);
 }
 
 /** A session worth celebrating: most answers right, or nothing to score. */
