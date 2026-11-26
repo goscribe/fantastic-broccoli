@@ -7,6 +7,10 @@ const RESERVED = /^(sitemap|opengraph-image|twitter-image|icon|apple-icon)(\b|[.
 export const isReservedNotesPath = (courseId: string, segment: string | undefined) =>
   RESERVED.test(courseId) || (segment !== undefined && (RESERVED.test(segment) || segment === ""));
 
+/** A course's share card (/notes/<course>/opengraph-image), built at build time for known courses only. */
+export const isCourseCardPath = (courseId: string, segment: string | undefined) =>
+  !RESERVED.test(courseId) && (segment === "opengraph-image" || segment === "twitter-image");
+
 export type RouteDecision = { action: "next" } | { action: "redirect"; path: string } | { action: "not_found" };
 
 /**
@@ -14,6 +18,7 @@ export type RouteDecision = { action: "next" } | { action: "redirect"; path: str
  * - outline `undefined` (not looked up, or the API failed): let the page handle it;
  * - unknown course (outline null) or unknown segment: 404;
  * - non-canonical segment: 308 to the canonical one;
+ * - a course's share card: 404 for an unknown course, else serve it;
  * - otherwise render. Pure, so it is tested.
  */
 export function notesRouteDecision(
@@ -21,6 +26,8 @@ export function notesRouteDecision(
   segment: string | undefined,
   outline: { id: string; units: SlugUnit[] } | null | undefined,
 ): RouteDecision {
+  // An unknown course's card is a 404 here; otherwise it would fall through to the topic page.
+  if (courseId && isCourseCardPath(courseId, segment)) return outline === null ? { action: "not_found" } : { action: "next" };
   if (!courseId || isReservedNotesPath(courseId, segment)) return { action: "next" };
   if (outline === undefined) return { action: "next" };
   if (outline === null) return { action: "not_found" };

@@ -1,6 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
+import { OG_CACHE_CONTROL, OG_SIZE } from "./og-size";
 
 /**
  * Open Graph / Twitter card for the public note pages, 1200×630 PNG: the
@@ -8,7 +9,7 @@ import { ImageResponse } from "next/og";
  * (one pre-drawn picture, og-notes-scene-hp.png), and the words in Nunito on
  * a solid white card at the left so they read at any preview size.
  */
-export const OG_SIZE = { width: 1200, height: 630 };
+export { OG_SIZE, OG_CACHE_CONTROL };
 
 const dataUrl = (type: string) => (b: Buffer) => `data:${type};base64,${b.toString("base64")}`;
 
@@ -66,6 +67,6 @@ export async function notesOgImage(opts: { eyebrow: string; title: string; subti
         </div>
       </div>
     ),
-    { ...OG_SIZE, ...(fontList.length ? { fonts: fontList } : {}) },
+    { ...OG_SIZE, headers: { "cache-control": OG_CACHE_CONTROL }, ...(fontList.length ? { fonts: fontList } : {}) },
   );
 }

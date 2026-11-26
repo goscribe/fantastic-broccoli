@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
     return [
       // A course is a subject: its own page duplicated the subject page's topic list.
       { source: "/courses/:workspaceId", destination: "/workspace/:workspaceId", permanent: true },
+      // Topic and unit pages share their course's card now (built once, at build time;
+      // src/app/notes/[courseId]/opengraph-image.tsx): old per-topic image URLs that
+      // crawlers and link previews still hold go to it without a render.
+      { source: "/notes/:courseId/:topicId/opengraph-image", destination: "/notes/:courseId/opengraph-image", permanent: true },
+      { source: "/notes/:courseId/:topicId/twitter-image", destination: "/notes/:courseId/twitter-image", permanent: true },
     ];
   },
   async headers() {

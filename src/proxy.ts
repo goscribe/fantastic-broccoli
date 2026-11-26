@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { publicNotesApi, type PublicCourse } from "@/lib/api/public-notes";
-import { isReservedNotesPath, notesRouteDecision } from "@/lib/notes-public/route-decision";
+import { isCourseCardPath, isReservedNotesPath, notesRouteDecision } from "@/lib/notes-public/route-decision";
 
 /**
  * Real HTTP status codes for the public note pages. Pages stream (the root
@@ -45,8 +45,8 @@ export async function proxy(request: NextRequest) {
   return new NextResponse(NOT_FOUND_HTML, { status: 404, headers: { "content-type": "text/html; charset=utf-8" } });
 }
 
-/** Skips the lookup for paths that are not note pages (sitemaps, OG images). */
+/** Skips the lookup for paths that are not note pages (sitemaps, the index's OG images); a course's card needs it (404 when unknown). */
 async function outlineFor(courseId: string | undefined, segment: string | undefined) {
-  if (!courseId || isReservedNotesPath(courseId, segment)) return undefined;
+  if (!courseId || (isReservedNotesPath(courseId, segment) && !isCourseCardPath(courseId, segment))) return undefined;
   return outline(decodeURIComponent(courseId));
 }
