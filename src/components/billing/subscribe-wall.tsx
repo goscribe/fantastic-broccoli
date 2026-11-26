@@ -22,6 +22,7 @@ import { hasPlanAccess } from "@/lib/plan-access";
 import { planBilling, planCta, planDescription, planDisplayName, planPriceLabel, planTermsLine, planTrialDays } from "@/lib/plan-display";
 import {
   claimEndScreenAsk,
+  noteWallDecision,
   countCompletedFullSessions,
   examPassPitch,
   freePlanSummary,
@@ -201,10 +202,14 @@ export function SubscribeWall() {
     const onCompleted = (event: Event) => {
       const detail = (event as CustomEvent<SessionCompletedDetail | undefined>).detail;
       if (!detail?.sessionId) return;
-      void load("post-session", {
-        delayMs: POST_SESSION_DELAY_MS,
-        session: { id: detail.sessionId, quickStart: detail.quickStart === true },
-      });
+      // Registered so the end screen's reminder ask knows whether the wall is coming.
+      noteWallDecision(
+        detail.sessionId,
+        load("post-session", {
+          delayMs: POST_SESSION_DELAY_MS,
+          session: { id: detail.sessionId, quickStart: detail.quickStart === true },
+        }),
+      );
     };
     const onLimit = (event: Event) => {
       const detail = (event as CustomEvent<string>).detail;

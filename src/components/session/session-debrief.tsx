@@ -881,8 +881,8 @@ export function SessionDebrief({
             )}
           </div>
         )}
-        {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
-        {quickStart && stats && (
+        {/* After any finished session (the first one, a Quick 5): "When do you want to study tomorrow?", then the push offer. */}
+        {stats && (
           <HabitPrompt
             sessionId={sessionId}
             accuracy={stats.accuracy}
@@ -984,8 +984,8 @@ export function SessionDebrief({
         </section>
       )}
       <InviteCard variant="compact" className="mt-4" />
-      {/* After a Quick 5: "When do you usually study?", push soft-ask / install hints (each once). */}
-      {quickStart && stats && (
+      {/* After any finished session (the first one, a Quick 5): "When do you want to study tomorrow?", then the push offer. */}
+      {stats && (
         <HabitPrompt
           sessionId={sessionId}
           accuracy={stats.accuracy}

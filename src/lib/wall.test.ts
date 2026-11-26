@@ -2,6 +2,8 @@ import { beforeEach, test } from "node:test";
 import assert from "node:assert/strict";
 import {
   claimEndScreenAsk,
+  noteWallDecision,
+  wallWillOpen,
   countCompletedFullSessions,
   examPassPitch,
   freePerks,
@@ -161,4 +163,26 @@ test("a pass that ends before the exam is never pitched as covering it", () => {
   const p = examPassPitch([exam("2027-05-12"), exam("2027-08-01")], pass, "2026-11-21");
   assert.equal(p?.date, "2027-05-12", "the last exam it does cover");
   assert.equal(examPassPitch([exam("2027-08-01")], { accessUntil: null }, "2026-11-21")?.date, "2027-08-01", "no end date sent: covers");
+});
+
+/* ---------- The wall and the reminder ask on a full session's end screen ---------- */
+
+test("the reminder ask learns whether the wall is coming, and takes the end screen only when it isn't", async () => {
+  // Nothing registered (a Quick 5, an exempt page, a signed-out preview): the ask is free to show.
+  assert.equal(await wallWillOpen("first-session"), false);
+
+  // First full session: the wall decides it isn't due, so the reminder ask claims the screen.
+  noteWallDecision("first-session", Promise.resolve(false));
+  assert.equal(await wallWillOpen("first-session"), false);
+  assert.equal(claimEndScreenAsk("first-session", "habit"), true);
+  assert.equal(claimEndScreenAsk("first-session", "wall"), false);
+
+  // A later full session where the wall is due: the ask stays away.
+  noteWallDecision("third-session", Promise.resolve(true));
+  assert.equal(await wallWillOpen("third-session"), true);
+  assert.equal(claimEndScreenAsk("third-session", "wall"), true);
+
+  // A wall that failed to load counts as not coming.
+  noteWallDecision("offline-session", Promise.reject(new Error("offline")));
+  assert.equal(await wallWillOpen("offline-session"), false);
 });

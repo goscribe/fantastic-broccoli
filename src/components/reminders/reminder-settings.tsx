@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { StudyTimePicker } from "@/components/reminders/study-time-picker";
 import { remindersApi, REMINDER_PREFS_KEY } from "@/lib/api/reminders";
 import { DEFAULT_REMINDER_MINUTE, detectPlatform, formatStudyTime, type Platform } from "@/lib/reminders";
-import { currentPushSubscription, disablePush, enablePush } from "@/lib/push-client";
+import { browserTimezone, currentPushSubscription, disablePush, enablePush } from "@/lib/push-client";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/reminders";
 
@@ -49,7 +49,7 @@ export function ReminderSettings() {
 
   const setTime = async (minute: number | null) => {
     try {
-      const next = await remindersApi.setStudyTime(minute);
+      const next = await remindersApi.setStudyTime(minute, browserTimezone());
       queryClient.setQueryData(REMINDER_PREFS_KEY, next);
       setSaved(true);
       window.setTimeout(() => setSaved(false), 1600);

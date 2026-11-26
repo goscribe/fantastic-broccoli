@@ -7,6 +7,10 @@ import {
   deviceSeenFor,
   formatStudyTime,
   habitSteps,
+  isUsableVapidKey,
+  nextHabitStep,
+  pushAskDue,
+  studyTimeAskDue,
   isGoodSession,
   minuteToTimeInput,
   presetFor,
@@ -16,12 +20,14 @@ import {
   type ReminderPrefs,
 } from "./reminders";
 
+/** Shaped like a real VAPID public key: 87 URL-safe base64 characters (65 bytes). */
+const VAPID = `B${"A".repeat(86)}`;
 const prefs = (over: Partial<ReminderPrefs> = {}): ReminderPrefs => ({
   studyReminderMinute: null,
   studyTimeAsked: false,
   pushAsked: false,
   pushAvailable: true,
-  vapidPublicKey: "BAbc",
+  vapidPublicKey: VAPID,
   pushDevices: 0,
   timezone: "Europe/Berlin",
   ...over,
@@ -32,51 +38,117 @@ const iosHome: Platform = { ios: true, standalone: true, pushSupported: true, pe
 const android: Platform = { ios: false, standalone: false, pushSupported: true, permission: "default", canInstall: true };
 const unseen = { iosInstallHint: false, androidInstall: false };
 
-describe("habitSteps: what to ask after a Quick 5", () => {
-  it("asks the study time, then the push soft-ask, on a browser that can push", () => {
-    assert.deepEqual(habitSteps({ prefs: prefs(), platform: desktop, seen: unseen, goodSession: true }), ["study_time", "push"]);
+const NOW = Date.parse("2026-11-26T18:00:00Z");
+const daysAgo = (n: number) => new Date(NOW - n * 86_400_000).toISOString();
+const steps = (over: Partial<Parameters<typeof habitSteps>[0]> = {}) =>
+  habitSteps({ prefs: prefs(), platform: desktop, seen: unseen, goodSession: true, now: NOW, ...over });
+
+describe("habitSteps: what to ask on a finished session's end screen", () => {
+  it("asks the study time first, then offers push, on a browser that can push", () => {
+    assert.deepEqual(steps(), ["study_time", "push"]);
   });
 
-  it("asks each question only once per account", () => {
-    assert.deepEqual(habitSteps({ prefs: prefs({ studyTimeAsked: true }), platform: desktop, seen: unseen, goodSession: true }), ["push"]);
-    assert.deepEqual(
-      habitSteps({ prefs: prefs({ studyTimeAsked: true, pushAsked: true }), platform: desktop, seen: unseen, goodSession: true }),
-      [],
-    );
+  it("asks nothing more once an ask was shown in this visit", () => {
+    assert.deepEqual(steps({ askedThisVisit: true }), []);
+    assert.deepEqual(steps({ askedThisVisit: true, platform: iosSafari }), []);
   });
 
-  it("never shows the soft-ask when the browser already decided or push is off on the server", () => {
-    const asked = prefs({ studyTimeAsked: true });
-    assert.deepEqual(habitSteps({ prefs: asked, platform: { ...desktop, permission: "denied" }, seen: unseen, goodSession: true }), []);
-    assert.deepEqual(habitSteps({ prefs: asked, platform: { ...desktop, permission: "granted" }, seen: unseen, goodSession: true }), []);
-    assert.deepEqual(habitSteps({ prefs: prefs({ studyTimeAsked: true, pushAvailable: false }), platform: desktop, seen: unseen, goodSession: true }), []);
+  it("an answered study time is never asked again; push follows on its own after the quiet period", () => {
+    const answered = prefs({ studyReminderMinute: 1140, studyTimeAsked: true, studyTimeAskedAt: daysAgo(1), studyTimeAsks: 1 });
+    // Answered yesterday on a phone that couldn't push: no second ask the next day on the laptop.
+    assert.deepEqual(steps({ prefs: answered }), []);
+    assert.deepEqual(steps({ prefs: { ...answered, studyTimeAskedAt: daysAgo(3) } }), ["push"]);
+    assert.deepEqual(steps({ prefs: { ...answered, studyTimeAskedAt: daysAgo(400), studyTimeAsks: 1 } }), ["push"]);
   });
 
-  it("on iOS Safari shows the Add to Home Screen hint instead (push needs the installed app), after a good session, once", () => {
-    assert.deepEqual(habitSteps({ prefs: prefs(), platform: iosSafari, seen: unseen, goodSession: true }), ["study_time", "ios_install"]);
-    assert.deepEqual(habitSteps({ prefs: prefs(), platform: iosSafari, seen: unseen, goodSession: false }), ["study_time"]);
-    assert.deepEqual(
-      habitSteps({ prefs: prefs(), platform: iosSafari, seen: { ...unseen, iosInstallHint: true }, goodSession: true }),
-      ["study_time"],
-    );
+  it("a dismissed study-time ask comes back after a week, three times at most", () => {
+    const dismissed = (days: number, asks: number) =>
+      prefs({ studyTimeAsked: true, studyTimeAskedAt: daysAgo(days), studyTimeAsks: asks, pushAvailable: false });
+    assert.deepEqual(steps({ prefs: dismissed(1, 1) }), []);
+    assert.deepEqual(steps({ prefs: dismissed(6.9, 1) }), []);
+    assert.deepEqual(steps({ prefs: dismissed(7, 1) }), ["study_time"]);
+    assert.deepEqual(steps({ prefs: dismissed(30, 2) }), ["study_time"]);
+    assert.deepEqual(steps({ prefs: dismissed(30, 3) }), []);
+    assert.equal(studyTimeAskDue(dismissed(30, 3), NOW), false);
   });
 
-  it("in the home-screen app on iOS asks for push like anywhere else", () => {
-    assert.deepEqual(habitSteps({ prefs: prefs({ studyTimeAsked: true }), platform: iosHome, seen: unseen, goodSession: true }), ["push"]);
+  it("a dismissed push offer comes back after a week, three times at most", () => {
+    const set = { studyReminderMinute: 1140, studyTimeAsked: true, studyTimeAskedAt: daysAgo(60), studyTimeAsks: 1 };
+    const offered = (days: number, asks: number) => prefs({ ...set, pushAsked: true, pushAskedAt: daysAgo(days), pushAsks: asks });
+    assert.deepEqual(steps({ prefs: offered(2, 1) }), []);
+    assert.deepEqual(steps({ prefs: offered(7, 1) }), ["push"]);
+    assert.deepEqual(steps({ prefs: offered(7, 3) }), []);
+    assert.equal(pushAskDue(offered(7, 2), desktop, NOW), true);
+  });
+
+  it("after a 'not now' on the study time, push is not offered the next day", () => {
+    const dismissed = prefs({ studyTimeAsked: true, studyTimeAskedAt: daysAgo(1), studyTimeAsks: 1 });
+    assert.deepEqual(steps({ prefs: dismissed }), []);
+    assert.deepEqual(steps({ prefs: { ...dismissed, studyTimeAskedAt: daysAgo(3) } }), ["push"]);
+  });
+
+  it("an older server (no timestamps) keeps ask-once", () => {
+    assert.deepEqual(steps({ prefs: prefs({ studyTimeAsked: true }) }), ["push"]);
+    assert.deepEqual(steps({ prefs: prefs({ studyTimeAsked: true, pushAsked: true }) }), []);
+  });
+
+  it("never offers push when it can't work: no server keys, a malformed key, or the browser already decided", () => {
+    const asked = prefs({ studyReminderMinute: 1140, studyTimeAsked: true });
+    assert.deepEqual(steps({ prefs: asked, platform: { ...desktop, permission: "denied" } }), []);
+    assert.deepEqual(steps({ prefs: asked, platform: { ...desktop, permission: "granted" } }), []);
+    assert.deepEqual(steps({ prefs: asked, platform: { ...desktop, pushSupported: false, permission: "unsupported" } }), []);
+    assert.deepEqual(steps({ prefs: { ...asked, pushAvailable: false } }), []);
+    assert.deepEqual(steps({ prefs: { ...asked, vapidPublicKey: null } }), []);
+    assert.deepEqual(steps({ prefs: { ...asked, vapidPublicKey: "not-a-key" } }), []);
+    // The study-time ask still shows without push: the reminder goes by email.
+    assert.deepEqual(steps({ prefs: prefs({ pushAvailable: false, vapidPublicKey: null }) }), ["study_time"]);
+  });
+
+  it("on iOS Safari keeps the time ask and skips push (it needs the installed app); the Home Screen hint comes once, after a good session", () => {
+    assert.deepEqual(steps({ platform: iosSafari }), ["study_time", "ios_install"]);
+    assert.deepEqual(steps({ platform: iosSafari, goodSession: false }), ["study_time"]);
+    assert.deepEqual(steps({ platform: iosSafari, seen: { ...unseen, iosInstallHint: true } }), ["study_time"]);
+    // Even if Safari claims the APIs, the tab can't receive pushes.
+    assert.deepEqual(steps({ platform: { ...iosSafari, pushSupported: true, permission: "default" }, goodSession: false }), ["study_time"]);
+    assert.equal(pushAskDue(prefs(), { ...iosSafari, pushSupported: true, permission: "default" }, NOW), false);
+  });
+
+  it("in the home-screen app on iOS offers push like anywhere else", () => {
+    assert.deepEqual(steps({ platform: iosHome }), ["study_time", "push"]);
   });
 
   it("on Android Chrome offers install once push was asked", () => {
-    const asked = prefs({ studyTimeAsked: true, pushAsked: true });
-    assert.deepEqual(habitSteps({ prefs: asked, platform: android, seen: unseen, goodSession: true }), ["android_install"]);
-    assert.deepEqual(habitSteps({ prefs: asked, platform: android, seen: { ...unseen, androidInstall: true }, goodSession: true }), []);
-    assert.deepEqual(habitSteps({ prefs: asked, platform: { ...android, standalone: true }, seen: unseen, goodSession: true }), []);
-    // Push first: never more than two sheets in one visit.
-    assert.deepEqual(habitSteps({ prefs: prefs(), platform: android, seen: unseen, goodSession: true }), ["study_time", "push"]);
+    const asked = prefs({ studyReminderMinute: 960, studyTimeAsked: true, pushAsked: true });
+    assert.deepEqual(steps({ prefs: asked, platform: android }), ["android_install"]);
+    assert.deepEqual(steps({ prefs: asked, platform: android, seen: { ...unseen, androidInstall: true } }), []);
+    assert.deepEqual(steps({ prefs: asked, platform: { ...android, standalone: true } }), []);
+    assert.deepEqual(steps({ platform: android }), ["study_time", "push"]);
   });
 
-  it("canAskPush needs a server key", () => {
+  it("canAskPush needs a usable server key", () => {
     assert.equal(canAskPush(prefs({ vapidPublicKey: null }), desktop), false);
+    assert.equal(canAskPush(prefs({ vapidPublicKey: "BAbc" }), desktop), false);
+    assert.equal(canAskPush(prefs(), desktop), true);
     assert.equal(canAskPush(prefs(), iosSafari), false);
+    assert.equal(isUsableVapidKey(VAPID), true);
+    assert.equal(isUsableVapidKey(`${VAPID}=`), false);
+  });
+});
+
+describe("nextHabitStep: one step at a time", () => {
+  it("answering the study time moves on to the push offer", () => {
+    assert.equal(nextHabitStep(["study_time", "push"], 0, "answered"), 1);
+    assert.equal(nextHabitStep(["study_time"], 0, "answered"), null);
+  });
+
+  it("a 'not now' on the study time ends the sheet: no second ask after a no", () => {
+    assert.equal(nextHabitStep(["study_time", "push"], 0, "dismissed"), null);
+    assert.equal(nextHabitStep(["study_time", "ios_install"], 0, "dismissed"), null);
+  });
+
+  it("the last step closes it either way", () => {
+    assert.equal(nextHabitStep(["study_time", "push"], 1, "answered"), null);
+    assert.equal(nextHabitStep(["push"], 0, "dismissed"), null);
   });
 });
 
@@ -135,7 +207,7 @@ describe("deviceSeenFor: install hints come back when the user agent changes", (
     assert.deepEqual(deviceSeenFor({ iosInstallHint: true, ua: iphone17 }, iphone18), unseen);
     assert.deepEqual(deviceSeenFor({ androidInstall: true, ua: iphone17 }, pixel), unseen);
     const seen = deviceSeenFor({ iosInstallHint: true, ua: iphone17 }, iphone18);
-    assert.deepEqual(habitSteps({ prefs: prefs(), platform: iosSafari, seen, goodSession: true }), ["study_time", "ios_install"]);
+    assert.deepEqual(habitSteps({ prefs: prefs(), platform: iosSafari, seen, goodSession: true, now: NOW }), ["study_time", "ios_install"]);
   });
 
   it("treats markers saved without a user agent, or nothing saved, as unseen", () => {
