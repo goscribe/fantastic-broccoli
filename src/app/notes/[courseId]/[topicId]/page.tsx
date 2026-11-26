@@ -17,6 +17,7 @@ import { crumbsFor, isTopicIndexable, topicDescription, topicTitle, unitTitleSeo
 import { isLocked, lockedCountLabel } from "@/lib/notes-public/gate";
 import { LockedCount } from "@/components/notes-public/locked-count";
 import { flashcardSet } from "@/lib/notes-public/flashcards-server";
+import { OG_SIZE } from "@/lib/notes-public/og-size";
 
 export const revalidate = 3600;
 
@@ -26,6 +27,16 @@ export async function generateStaticParams() {
 }
 
 type Params = { params: Promise<{ courseId: string; topicId: string }> };
+
+/**
+ * Unit and topic pages share their course's card (built once, at build time:
+ * ../opengraph-image.tsx); a card per topic meant rendering one per crawl.
+ */
+function courseCard(courseId: string, alt: string) {
+  const base = coursePath(courseId);
+  const image = (name: string) => ({ url: `${base}/${name}`, ...OG_SIZE, alt, type: "image/png" });
+  return { openGraph: [image("opengraph-image")], twitter: [image("twitter-image")] };
+}
 
 /** Resolves the URL; redirects old or bare slugs (/notes/ib-biology/a1-1) to the canonical one. */
 async function resolve(courseId: string, segment: string) {
@@ -40,6 +51,7 @@ async function resolve(courseId: string, segment: string) {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const { courseId, topicId } = await params;
   const { course, match } = await resolve(courseId, topicId);
+  const card = courseCard(course.id, `${course.title} notes and practice questions on Scribe`);
   if (match.kind === "unit") {
     const title = unitTitleSeo(course, match.unit, course.unitLabel);
     const description = `${course.title} ${match.unit.code} ${match.unit.name}: ${match.unit.topics.length} topics with Scribe notes and exam-style practice questions with worked answers. Free, no sign-up.`;
@@ -49,8 +61,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description,
       alternates: { canonical: path },
       robots: match.unit.topics.some(rowIndexable) ? { index: true, follow: true } : { index: false, follow: true },
-      openGraph: { type: "website", title: `${title} | Scribe`, description, url: path },
-      twitter: { card: "summary_large_image", title: `${title} | Scribe`, description },
+      openGraph: { type: "website", title: `${title} | Scribe`, description, url: path, images: card.openGraph },
+      twitter: { card: "summary_large_image", title: `${title} | Scribe`, description, images: card.twitter },
     };
   }
   const data = await getTopic(course.id, match.topic.id);
@@ -74,8 +86,9 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       description,
       url: path,
       ...(data.updatedAt ? { modifiedTime: data.updatedAt } : {}),
+      images: card.openGraph,
     },
-    twitter: { card: "summary_large_image", title: `${title} | Scribe`, description },
+    twitter: { card: "summary_large_image", title: `${title} | Scribe`, description, images: card.twitter },
   };
 }
 

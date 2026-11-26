@@ -74,6 +74,10 @@ describe("slug / URL logic", () => {
     assert.deepEqual(notesRouteDecision("ib-biology", undefined, outline), { action: "next" });
     assert.deepEqual(notesRouteDecision("sitemap", "0.xml", undefined), { action: "next" });
     assert.deepEqual(notesRouteDecision("ib-biology", "opengraph-image", outline), { action: "next" });
+    assert.deepEqual(notesRouteDecision("nope", "opengraph-image", null), { action: "not_found" }, "unknown course's card");
+    assert.deepEqual(notesRouteDecision("nope", "twitter-image", null), { action: "not_found" });
+    assert.deepEqual(notesRouteDecision("ib-biology", "twitter-image", undefined), { action: "next" }, "API down: serve the card");
+    assert.deepEqual(notesRouteDecision("opengraph-image", undefined, undefined), { action: "next" });
     assert.deepEqual(notesRouteDecision("ib-biology", "a1-1", undefined), { action: "next" }, "API down: let the page decide");
   });
 });

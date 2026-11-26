@@ -127,11 +127,15 @@ function unwrap<T>(body: Envelope): T {
   return (data && typeof data === "object" && "json" in data ? data.json : data) as T;
 }
 
-async function query<T>(path: string, input?: unknown): Promise<T> {
+/**
+ * `revalidate: false` caches the response until the next deploy: for build-time
+ * output (the course share images) that must never re-render at request time.
+ */
+async function query<T>(path: string, input?: unknown, revalidate: number | false = NOTES_REVALIDATE): Promise<T> {
   if (!apiUrl) throw new Error("NEXT_PUBLIC_API_URL is not set");
   const qs = input === undefined ? "" : `?input=${encodeURIComponent(JSON.stringify({ json: input }))}`;
   const res = await fetch(`${apiUrl}/trpc/publicNotes.${path}${qs}`, {
-    next: { revalidate: NOTES_REVALIDATE, tags: ["public-notes"] },
+    next: { revalidate, tags: ["public-notes"] },
   });
   const body = (await res.json().catch(() => ({}))) as Envelope;
   if (!res.ok || body.error) throw new Error(body.error?.json?.message ?? `publicNotes.${path} failed (${res.status})`);
@@ -139,7 +143,7 @@ async function query<T>(path: string, input?: unknown): Promise<T> {
 }
 
 export const publicNotesApi = {
-  courses: () => query<PublicCourseSummary[]>("courses"),
+  courses: (opts?: { revalidate?: number | false }) => query<PublicCourseSummary[]>("courses", undefined, opts?.revalidate),
   course: (courseId: string) => query<PublicCourse | null>("course", { courseId }),
   topic: (courseId: string, topicId: string) => query<PublicTopic | null>("topic", { courseId, topicId }),
   sitemap: () => query<SitemapRow[]>("sitemap"),
