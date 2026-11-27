@@ -40,6 +40,8 @@ export interface SubjectTileProps {
   progress?: number | null;
   /** A short row (phone lists, the course picker) instead of a card. */
   row?: boolean;
+  /** With `row`: a smaller row for long lists (the whole catalogue on "Add a subject"). */
+  compact?: boolean;
   /** Replaces the row's chevron (a spinner, a badge). */
   trailing?: ReactNode;
   href?: string;
@@ -60,7 +62,7 @@ export interface SubjectTileProps {
  * the tile's height is fixed and never follows the text: the title clamps to
  * two lines, the line under it to one, and the art is sized from the tile.
  */
-export function SubjectTile({ title, match, family, stored, seed, sub, badge, action, progress, row, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
+export function SubjectTile({ title, match, family, stored, seed, sub, badge, action, progress, row, compact, trailing, href, onClick, disabled, eager, className, style }: SubjectTileProps) {
   const text = typeof title === "string" ? title.trim() : null;
   const fam = family ?? resolveSubjectFamily(stored, match ?? text ?? "");
   const neutral = hueFamilyFor(fam, seed) !== fam;
@@ -81,7 +83,7 @@ export function SubjectTile({ title, match, family, stored, seed, sub, badge, ac
       {row ? (
         <span className="flex w-full items-center gap-3">
           <span className="subject-tile__text min-w-0 flex-1">
-            <span className="subject-tile__title text-[16px] font-extrabold leading-snug text-white">{shownTitle}</span>
+            <span className={cn("subject-tile__title font-extrabold text-white", compact ? "text-[14px] leading-[1.25]" : "text-[16px] leading-snug")}>{shownTitle}</span>
             {subLine && <span className="subject-tile__sub subject-tile__sub--line mt-0.5 block text-[12.5px] font-semibold leading-snug">{subLine}</span>}
           </span>
         </span>
@@ -112,7 +114,7 @@ export function SubjectTile({ title, match, family, stored, seed, sub, badge, ac
   );
   const cls = cn(
     "subject-tile text-left",
-    row ? "subject-tile--row min-h-[76px] w-full justify-center px-4 py-3" : "h-[156px] p-[18px] sm:h-[176px] sm:p-5",
+    row ? cn("subject-tile--row w-full justify-center", compact ? "min-h-[60px] px-3 py-2" : "min-h-[76px] px-4 py-3") : "h-[156px] p-[18px] sm:h-[176px] sm:p-5",
     disabled && "opacity-70",
     className,
   );
