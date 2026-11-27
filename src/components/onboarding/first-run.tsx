@@ -20,6 +20,7 @@ import "@/lib/i18n/courses";
 import "@/app/design/design.css";
 import { CoursePicker, loadCourse, loadCourses } from "@/components/courses/course-picker";
 import { QuickCourses } from "@/components/onboarding/quick-courses";
+import { AddSubject } from "@/components/onboarding/add-subject";
 import { startPickedTopics } from "@/components/courses/use-start-topic";
 import { coursesApi, type CatalogTopic, type Course, type CourseLevel, type CourseSummary } from "@/lib/api/courses";
 import { firstTopic, localBoardOrder } from "@/lib/courses";
@@ -59,6 +60,10 @@ const quietLink =
  * Anything typed that matches nothing starts on exactly that. The whole
  * catalog (units and topics picked by hand), upload (one-tap camera on
  * phones) and paste are quiet links under the tiles.
+ *
+ * "Add a subject" later (`context="new_subject"`) is a different first view:
+ * the whole catalogue next to "use your own notes" (see AddSubject). A course
+ * tapped there is added and its page opened; nothing starts by itself.
  *
  * When the app already knows the course (the note page they signed up from,
  * the topic they practised before signing up, the ad's keyword; see
@@ -368,6 +373,25 @@ export function FirstRun({
   };
 
   /**
+   * "Add a subject": the course becomes a subject (the server reuses the one
+   * that already follows it) and its page opens, where the student picks what
+   * to study. No session is started, so there is no wait screen.
+   */
+  const addCourse = (summary: CourseSummary, level?: CourseLevel) => {
+    void run(
+      "curriculum",
+      async () => {
+        setBusyCourseId(summary.id);
+        const { workspaceId } = await coursesApi.enroll(summary.id, level);
+        emitTreeChanged();
+        router.push(`/workspace/${workspaceId}`);
+      },
+      t("addSubject.errorAdd"),
+      { courseId: summary.id },
+    );
+  };
+
+  /**
    * The app already knows the course: its Quick 5 is started without a tap,
    * on the topic they were on when there is one, else the course's first.
    * "Change" on the wait screen stops it: a subject made in the meantime is
@@ -460,7 +484,7 @@ export function FirstRun({
 
   return (
     <div className="flex min-h-full w-full shrink-0 flex-col items-center bg-white px-4 pb-10 pt-2 sm:px-6 sm:pt-4">
-      <div className="w-full max-w-[720px] animate-fade-up">
+      <div className={cn("w-full animate-fade-up", !firstRun && mode === "start" && !waiting ? "max-w-[1080px]" : "max-w-[720px]")}>
         {resolving && !waiting && <div className="min-h-[50dvh]" aria-busy="true" />}
         {busy === "uploading" && (
           <UploadStage
@@ -486,7 +510,24 @@ export function FirstRun({
         )}
         {/* Kept mounted while a session is made, so a start that fails comes back to the same course and picks. */}
         <div className={waiting || resolving ? "hidden" : undefined}>
-          {mode === "start" ? (
+          {mode === "start" && !firstRun ? (
+            <>
+              <h1 className="mt-3 text-[26px] font-extrabold leading-tight tracking-tight sm:text-[30px]">{t("firstRun.newTitle")}</h1>
+              <p className="mt-1.5 text-ui text-muted-foreground">{t("addSubject.lead")}</p>
+              <div className="mt-5">
+                <AddSubject
+                  busyCourseId={busyCourseId}
+                  onAddCourse={addCourse}
+                  onOpenSubject={(workspaceId) => router.push(`/workspace/${workspaceId}`)}
+                  onStartTopic={startCourse}
+                  onFreeTopic={startTopic}
+                  onUpload={startUpload}
+                  onPaste={() => pickMode("paste")}
+                  onPickByHand={() => pickMode("course")}
+                />
+              </div>
+            </>
+          ) : mode === "start" ? (
             <>
               {/* The scene for the student's time of day, compact, with the cat: picture only, the words sit under it on white. */}
               <div aria-hidden className="hero-card relative isolate h-[var(--banner-band)] overflow-hidden rounded-[var(--r-panel)] border border-border">
@@ -498,9 +539,9 @@ export function FirstRun({
               </div>
               {firstName && <p className="mt-5 text-small font-semibold text-muted-foreground">{t("firstRun.hi").replace("{name}", firstName)}</p>}
               <h1 className={cn("text-[26px] font-extrabold leading-tight tracking-tight sm:text-[30px]", firstName ? "mt-0.5" : "mt-5")}>
-                {firstRun ? t("firstRun.title") : t("firstRun.newTitle")}
+                {t("firstRun.title")}
               </h1>
-              <p className="mt-1.5 text-ui text-muted-foreground">{firstRun ? t("firstRun.lead") : t("firstRun.newLead")}</p>
+              <p className="mt-1.5 text-ui text-muted-foreground">{t("firstRun.lead")}</p>
               <div className="mt-4">
                 <QuickCourses
                   lead={lead}
@@ -659,7 +700,8 @@ export function FirstRun({
                 {error}
               </p>
             )}
-            <p className="mt-3 text-caption text-muted-foreground">{t("firstRun.footnote")}</p>
+            {/* "Add a subject" adds a course without starting anything: the line about 5 questions is not true of it. */}
+            {(firstRun || mode !== "start") && <p className="mt-3 text-caption text-muted-foreground">{t("firstRun.footnote")}</p>}
             {onSkip && (
               <button
                 type="button"
