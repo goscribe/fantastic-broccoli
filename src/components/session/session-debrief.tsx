@@ -308,8 +308,8 @@ function SaidGot({ face, label, value, max = 10, strong = false }: { face: Confi
 }
 
 /**
- * A Quick 5's exam-level questions: how many were right and, when some were
- * missed, that they were pitched at the real exam (a target, not a failure).
+ * A Quick 5's harder questions (medium and hard): how many were right and,
+ * when some were missed, that they were a step up (a target, not a failure).
  */
 function Quick5ExamLine({ exam, fallback }: { exam: { right: number; total: number } | null; fallback?: string }) {
   const { t } = useI18n();
@@ -712,8 +712,8 @@ export function SessionDebrief({
     const fixSub = t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)));
     // Asked "how confident?" at the start: their number beside the result, on the same scale.
     const said = stats && !studyOnly ? confidenceResult(confidenceBefore, stats.correct, stats.answered) : null;
-    // A Quick 5: "You got 3/5" (its own score), and how the exam-level questions went.
-    const quick = quickStart && stats ? quick5SaidGot(confidenceBefore, stats.correct, stats.answered) : null;
+    // "You got 3/5": the same count as the headline, and (a Quick 5) how the harder questions went.
+    const quick = stats && !studyOnly ? quick5SaidGot(confidenceBefore, stats.correct, stats.answered) : null;
     const levels = quickStart && activities ? difficultyResults(activities, restoredDraft) : null;
     const exam = levels && levels.examLevel.total > 0 ? levels.examLevel : null;
     const mainButton = "btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold sm:w-auto sm:min-w-[300px]";
@@ -807,7 +807,7 @@ export function SessionDebrief({
             className="life-rise mt-5 px-1"
             style={{ ["--i" as string]: 2 }}
           >
-            {/* Missed an exam-level one: they were meant to be hard, not a verdict on the student. */}
+            {/* Missed a harder one: they were meant to stretch, not a verdict on the student. */}
             <Quick5ExamLine exam={exam} fallback={t(`finish.verdict.${quick.verdict}`)} />
           </SaidGotRow>
         ) : said ? (

@@ -86,6 +86,18 @@ export function sessionPath(confidence: number | null | undefined): SessionPath 
   return band === "low" ? "notes" : band === "medium" ? "recap" : "questions";
 }
 
+/**
+ * Which screen comes before a session's first question, from the learner's
+ * own rating. A full session: `sessionPath`. A Quick 5: the notes when they
+ * are not confident (0 to 4), so "I don't know this yet" is answered with
+ * something to read, not five questions cold; from 5 up it stays what it is,
+ * five quick questions (no recap screen in front of them).
+ */
+export function primerPath(confidence: number | null | undefined, quickStart: boolean): SessionPath {
+  const path = sessionPath(confidence);
+  return quickStart && path !== "notes" ? "questions" : path;
+}
+
 /** What the notes-first / recap screen shows from one Scribe topic note. */
 export interface NotePrimer {
   courseId: string;

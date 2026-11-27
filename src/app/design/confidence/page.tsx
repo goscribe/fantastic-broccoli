@@ -35,10 +35,10 @@ function Inner() {
         {rows.map((r, i) => (
           <SaidGotRow key={i} said={r.said} got={r.got} verdict={r.verdict} className="mt-6 px-1" />
         ))}
-        {/* A Quick 5: its own score out of five, and the exam-level line. */}
+        {/* A Quick 5: its own score out of five, and the harder-questions line. */}
         <SaidGotRow said={7} got={3} of={5} gotFace={confidenceFace(6)} verdict="asExpected" className="mt-6 px-1">
           <p className="mt-2 text-ui font-semibold text-muted-foreground">
-            <span className="font-extrabold text-foreground">Exam-level: 1 of 2.</span> Those are pitched at the real exam.
+            <span className="font-extrabold text-foreground">1 of 2 harder questions right.</span> Those go a step beyond the warm-up.
           </p>
         </SaidGotRow>
       </main>

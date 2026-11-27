@@ -10,7 +10,7 @@ import { CONFIDENCE_MAX, clampConfidence } from "./start-check";
 export type Quick5Path = "gentle" | "mixed" | "hard";
 export type Quick5Difficulty = "easy" | "medium" | "hard";
 
-/** The server's bands (0-4, 5-7, 8-10): low 1 easy + 3 medium + 1 hard, middle 1 + 2 + 2, high 1 medium + 4 hard. */
+/** The server's bands (0-4, 5-7, 8-10): low 2 easy + 3 medium and no hard one, middle 1 + 2 + 2, high 1 medium + 4 hard. */
 export function quick5Path(confidence: number): Quick5Path {
   const c = clampConfidence(confidence);
   return c <= 4 ? "gentle" : c <= 7 ? "mixed" : "hard";
@@ -24,7 +24,7 @@ export function confidenceSkipKey(session: { workspaceId: string }): string {
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v);
 
 export interface DifficultyResult {
-  /** Medium and hard: the exam-level questions. */
+  /** Medium and hard: the questions harder than the warm-up (shown as "harder questions", never "exam-level"). */
   examLevel: { right: number; total: number };
   hard: { right: number; total: number };
 }
@@ -64,7 +64,11 @@ export function difficultyResults(
   return tagged ? out : null;
 }
 
-/** "You said 7/10 → You got 3/5": a Quick 5 shows its own score, the verdict still compares on one scale. */
+/**
+ * "You said 7/10 → You got 3/5": the result is shown as the real count (right / answered), the same
+ * numbers as the headline's "3 of 5 right", never rescaled to a second "/10" that reads like a count.
+ * The verdict still compares the two on one scale.
+ */
 export function quick5SaidGot(confidence: number | null | undefined, correct: number, answered: number) {
   if (typeof confidence !== "number" || !(answered > 0)) return null;
   const said = clampConfidence(confidence);

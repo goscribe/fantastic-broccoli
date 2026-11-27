@@ -9,6 +9,7 @@ import {
   confidenceResult,
   notePrimer,
   parseCourseTopics,
+  primerPath,
   primerPlan,
   readingOrder,
   readingPoints,
@@ -139,6 +140,27 @@ test("which screen comes first: Scribe's note when it has a figure, else the lea
   // Nothing anywhere: the session's own reading does the teaching.
   assert.deepEqual(primerPlan({ path: "notes", notes: [], material: material({ status: "none", reading: null }) }), { kind: "none" });
   assert.deepEqual(primerPlan({ path: "notes", notes: [], material: null }), { kind: "none" });
+});
+
+test("regression: confidence 0 with practice questions gives the notes first, in a Quick 5 and in a full session", () => {
+  // The start step sends the rating with the start, so it is on the session from its first render.
+  for (const quickStart of [true, false]) {
+    for (const rating of [0, 2, 4]) assert.equal(primerPath(rating, quickStart), "notes", `rating ${rating}, quickStart ${quickStart}`);
+  }
+  // A catalog course topic (IB Physics, a Quick 5, rating 0): Scribe's note for the topic comes first.
+  const path = primerPath(0, true);
+  assert.deepEqual(primerPlan({ path, notes: [notePrimer(NOTE, "notes")], material: null }), { kind: "note", path: "notes" });
+  // The learner's own material: its reading comes first; while that reading is still being written, the screen waits for it.
+  assert.deepEqual(primerPlan({ path, notes: [], material: material() }), { kind: "material", path: "notes" });
+  assert.deepEqual(primerPlan({ path, notes: [], material: material({ status: "preparing", reading: null }) }), { kind: "preparing" });
+});
+
+test("a Quick 5 from 5/10 up stays five quick questions; a full session keeps its recap", () => {
+  assert.deepEqual([5, 7, 8, 10].map((c) => primerPath(c, true)), ["questions", "questions", "questions", "questions"]);
+  assert.deepEqual([5, 7, 8, 10].map((c) => primerPath(c, false)), ["recap", "recap", "questions", "questions"]);
+  // Not asked (or skipped): straight in, either way.
+  assert.equal(primerPath(null, true), "questions");
+  assert.equal(primerPath(undefined, false), "questions");
 });
 
 test("a recap of own material only shows when there is something to look at", () => {
