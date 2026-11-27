@@ -154,7 +154,7 @@ function Block({
     case "callout":
       return (
         <aside className="rounded-xl bg-muted/60 px-4 py-3">
-          <p className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+          <p className="text-[12.5px] font-semibold text-muted-foreground">
             {t(block.kind === "mistake" ? "notes.mistake" : "notes.tip")}
           </p>
           <p className="mt-1 text-[15.5px] leading-snug sm:text-[16px]">{field(block.text, (b, v) => (b.text = v))}</p>
@@ -163,7 +163,7 @@ function Block({
     case "example":
       return (
         <div className="rounded-xl border border-border px-4 py-4">
-          <p className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">
+          <p className="text-[12.5px] font-semibold text-muted-foreground">
             {t("notes.workedExample")}
           </p>
           <p className="mt-1 font-semibold leading-snug">{field(block.title, (b, v) => (b.title = v))}</p>
@@ -185,7 +185,7 @@ function Block({
       return (
         <details className="group rounded-xl border border-border px-4 py-3 [&_summary::-webkit-details-marker]:hidden">
           <summary className="flex min-h-8 cursor-pointer list-none items-center gap-2 font-semibold">
-            <span className="text-[12.5px] font-semibold uppercase tracking-[0.04em] text-muted-foreground">{t("notes.goDeeper")}</span>
+            <span className="text-[12.5px] font-semibold text-muted-foreground">{t("notes.goDeeper")}</span>
             <span className="min-w-0 flex-1">{field(block.title, (b, v) => (b.title = v))}</span>
             <ChevronDown className="size-4 shrink-0 text-faint transition-transform group-open:rotate-180" />
           </summary>

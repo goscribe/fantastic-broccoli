@@ -21,7 +21,7 @@ export const TONE_TEXT = {
   flat: "text-muted-foreground",
 } as const;
 
-export const TH = "whitespace-nowrap px-3 py-2 text-left text-[11px] font-semibold uppercase tracking-wide text-faint";
+export const TH = "whitespace-nowrap px-3 py-2 text-left text-[12px] font-semibold text-faint";
 export const TD = "px-3 py-2 align-top tabular-nums";
 
 export function RangePicker({ days, onChange, busy }: { days: MetricDays; onChange: (d: MetricDays) => void; busy?: boolean }) {
@@ -79,7 +79,7 @@ export function MetricTile({
 }) {
   const body = (
     <>
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">{label}</p>
+      <p className="text-[12px] font-semibold text-faint">{label}</p>
       <div className="mt-1 flex flex-wrap items-baseline gap-x-2">
         <span className="text-xl font-bold tabular-nums">{formatMetric(value, unit)}</span>
         <ChangeText change={change ?? null} better={better} />

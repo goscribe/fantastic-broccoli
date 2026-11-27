@@ -354,7 +354,7 @@ function PushStep({
           <Image src="/icons/hp-maskable-192.png" alt="" width={36} height={36} className="size-9 shrink-0 rounded-[10px] border border-border" />
           <div className="min-w-0 flex-1">
             <div className="flex items-center justify-between gap-2 text-[11.5px] text-muted-foreground">
-              <span className="font-semibold uppercase tracking-wide">Scribe</span>
+              <span className="font-semibold">Scribe</span>
               <span>{time}</span>
             </div>
             <p className="mt-0.5 line-clamp-2 text-[13.5px] font-semibold leading-5">

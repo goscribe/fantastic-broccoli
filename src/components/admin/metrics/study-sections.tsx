@@ -310,7 +310,7 @@ function SplitTable({ groups }: { groups: Array<{ title: string; rows: ScoreSpli
       {groups.map((g) => (
         <tbody key={g.title} className="divide-y divide-border">
           <tr className="bg-muted/40">
-            <td className="px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-faint" colSpan={7}>
+            <td className="px-3 py-1 text-[12px] font-semibold text-faint" colSpan={7}>
               {g.title}
             </td>
           </tr>
@@ -426,7 +426,7 @@ export function FirstScoresSection({ days }: { days: MetricDays }) {
                   label="First test score distribution"
                   onOpen={(i) => users.open({ list: "firstScore", key: `b${i}`, title: `First test ${scoreBucketLabel(i)}` })}
                 />
-                <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-faint">
+                <p className="mt-3 text-[12px] font-semibold text-faint">
                   Whole first session
                   {quartileNote(data.session.current.p25, data.session.current.p75) && (
                     <span className="ml-2 font-normal normal-case tracking-normal">{quartileNote(data.session.current.p25, data.session.current.p75)}</span>
@@ -526,7 +526,7 @@ export function FirstScoresSection({ days }: { days: MetricDays }) {
                 </tbody>
               </table>
               <div className="border-t border-border px-3 py-3">
-                <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">Median first test by rating</p>
+                <p className="text-[12px] font-semibold text-faint">Median first test by rating</p>
                 <div role="img" aria-label="Median first test score by confidence rating" className="mt-2 flex h-16 items-end gap-1">
                   {data.confidence.byValue.map((v) => (
                     <div key={v.confidence} title={`${v.confidence}: ${v.n ? `${pctText(v.median)} median of ${v.n}` : "nobody"}`} className="flex h-full flex-1 items-end">
@@ -547,7 +547,7 @@ export function FirstScoresSection({ days }: { days: MetricDays }) {
               </div>
               {data.byDifficulty && data.byDifficulty.some((d) => d.answered > 0) && (
                 <div className="border-t border-border px-3 py-3">
-                  <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">First test by question difficulty</p>
+                  <p className="text-[12px] font-semibold text-faint">First test by question difficulty</p>
                   <table className="mt-1 w-full text-sm">
                     <tbody className="divide-y divide-border">
                       {data.byDifficulty.map((d) => (

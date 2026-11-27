@@ -47,7 +47,7 @@ function MiniQuiz({ questions }: { questions: McqContent["questions"] }) {
   const [picked, setPicked] = useState<Record<number, number>>({});
   return (
     <div className="mt-8 space-y-3 border-t border-border pt-6">
-      <p className="text-xs font-semibold uppercase tracking-wide text-accent-dim">
+      <p className="text-xs font-semibold text-accent-dim">
         Check yourself
       </p>
       {questions.map((q, i) => {

@@ -350,7 +350,7 @@ export default function BankItemPage() {
                   {deck.entries.map((card, i) => (
                     <div key={i} className="cutout-card grid grid-cols-2">
                       <div className="border-r border-dashed border-border-strong p-4 text-center">
-                        <p className="text-[9px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        <p className="text-[12px] font-semibold text-muted-foreground">
                           {deck.frontLabel}
                         </p>
                         <p className="mt-1.5 text-sm font-semibold leading-5">
@@ -358,7 +358,7 @@ export default function BankItemPage() {
                         </p>
                       </div>
                       <div className="p-4 text-center">
-                        <p className="text-[9px] font-semibold uppercase tracking-wide text-muted-foreground">
+                        <p className="text-[12px] font-semibold text-muted-foreground">
                           {deck.backLabel}
                         </p>
                         <p className="mt-1.5 text-[13px] leading-5">

@@ -289,7 +289,7 @@ export function WorkspaceMembersDialog({
 
           {invitations.length > 0 && (
             <div>
-              <p className="mb-2.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">
+              <p className="mb-2.5 text-[12px] font-semibold text-muted-foreground">
                 {t("ws.pendingInvitations")}
               </p>
               <div className="space-y-2">

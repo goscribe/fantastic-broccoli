@@ -50,7 +50,7 @@ function TrendCard({ metric, trends }: { metric: TrendMetric; trends: Trends }) 
   return (
     <div className="rounded-xl border border-border bg-card p-4">
       <p
-        className="text-[12px] font-medium uppercase tracking-wide text-faint"
+        className="text-[12px] font-medium text-faint"
         title={metric.description}
       >
         {metric.label}

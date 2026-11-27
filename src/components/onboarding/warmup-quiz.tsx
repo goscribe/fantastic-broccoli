@@ -130,7 +130,7 @@ export function WarmupQuiz({
   return (
     <div className={hero ? HERO : SECTION}>
       <div className="flex items-center justify-between">
-        <p className={hero ? "text-caption font-bold uppercase tracking-wide text-accent" : "text-[11px] font-semibold uppercase tracking-wide text-accent"}>
+        <p className={hero ? "text-caption font-bold text-accent" : "text-[12px] font-semibold text-accent"}>
           Warm-up while you wait
         </p>
         <p className={hero ? "text-caption tabular-nums text-muted-foreground" : "text-[11px] text-muted-foreground"}>

@@ -154,7 +154,7 @@ export function StudyNowCard({
   if (session?.generating) {
     return (
       <div className={cn(shell, "border-accent/30 bg-accent-soft/50")}>
-        <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
+        <p className="flex items-center gap-1.5 text-caption font-semibold text-accent">
           <Loader2 className="h-3.5 w-3.5 animate-spin" />
           {session.quickStart
             ? t("ws.studyNow.buildingQuick5")
@@ -214,7 +214,7 @@ export function StudyNowCard({
           </div>
         )}
         <div className="relative">
-          <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
+          <p className="flex items-center gap-1.5 text-caption font-semibold text-accent">
             {session.quickStart ? (
               <>
                 <Zap className="h-3.5 w-3.5" />
@@ -279,7 +279,7 @@ export function StudyNowCard({
   if (hasMaterials) {
     return (
       <div className={cn(shell, "border-accent/30 bg-accent-soft/50")}>
-        <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
+        <p className="flex items-center gap-1.5 text-caption font-semibold text-accent">
           <Zap className="h-3.5 w-3.5" />
           {t("ws.studyNow.quick5")}
         </p>
@@ -326,7 +326,7 @@ export function StudyNowCard({
 
   return (
     <div className={cn(shell, "border-dashed border-border-strong bg-card")}>
-      <p className="flex items-center gap-1.5 text-caption font-semibold uppercase tracking-wide text-accent">
+      <p className="flex items-center gap-1.5 text-caption font-semibold text-accent">
         <Upload className="h-3.5 w-3.5" />
         {t("ws.studyNow.step1")}
       </p>
@@ -342,7 +342,7 @@ export function StudyNowCard({
       </Button>
       {onImportYoutube && (
         <>
-          <p className="mt-4 text-caption font-semibold uppercase tracking-wide text-faint">
+          <p className="mt-4 text-caption font-semibold text-faint">
             {t("ws.youtube.or")}
           </p>
           <YoutubePaste

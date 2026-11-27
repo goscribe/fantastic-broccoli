@@ -265,7 +265,7 @@ export function EngagementSection({ days }: { days: MetricDays }) {
               />
             ))}
             <Card className="p-3">
-              <p className="text-[11px] font-semibold uppercase tracking-wide text-faint">Daily active users</p>
+              <p className="text-[12px] font-semibold text-faint">Daily active users</p>
               <div role="img" aria-label={`Daily active users, peak ${peak}`} className="mt-2 flex h-16 items-end gap-[2px]">
                 {data.dauSeries.map((d) => (
                   <div key={String(d.day)} title={`${shortDate(d.day)}: ${d.dau}`} className="flex h-full flex-1 items-end">

@@ -54,7 +54,7 @@ export function NoteToc({ note, variant }: { note: TopicNoteContent; variant: "b
   if (variant === "rail")
     return (
       <nav aria-label={t("notes.onThisPage")} className="sticky top-6">
-        <p className="text-[12px] font-semibold uppercase tracking-[0.04em] text-faint">{t("notes.onThisPage")}</p>
+        <p className="text-[12px] font-semibold text-faint">{t("notes.onThisPage")}</p>
         <ol className="mt-2 flex flex-col gap-0.5 border-l border-border">
           {list.map((e) => (
             <li key={e.id}>

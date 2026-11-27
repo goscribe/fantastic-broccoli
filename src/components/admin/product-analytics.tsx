@@ -39,7 +39,7 @@ function ActiveUsersChart({ series }: { series: ActiveUsersPoint[] }) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
       <div className="mb-3 flex items-baseline justify-between">
-        <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+        <p className="text-[12px] font-medium text-faint">
           Daily active users
         </p>
         <p className="text-[12px] text-muted-foreground">

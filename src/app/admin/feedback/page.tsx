@@ -38,7 +38,7 @@ function Answers({ row }: { row: FeedbackResponse }) {
     <div className="space-y-1.5">
       {entries.map(([k, v]) => (
         <p key={k} className="text-sm">
-          <span className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+          <span className="text-xs font-medium text-muted-foreground">
             {LABELS[k] ?? k}
           </span>
           <br />
