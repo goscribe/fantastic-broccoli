@@ -287,7 +287,7 @@ function AssessmentRow({
           <td colSpan={8} className="bg-muted/30 px-4 py-3">
             <div className="grid gap-3 text-sm md:grid-cols-2">
               <div>
-                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+                <p className="mb-1 text-[12px] font-semibold text-faint">
                   Material fit notes
                 </p>
                 <p className="text-muted-foreground">
@@ -295,7 +295,7 @@ function AssessmentRow({
                 </p>
               </div>
               <div>
-                <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+                <p className="mb-1 text-[12px] font-semibold text-faint">
                   Generation quality notes
                 </p>
                 <p className="text-muted-foreground">

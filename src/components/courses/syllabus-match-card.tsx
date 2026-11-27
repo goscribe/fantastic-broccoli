@@ -154,7 +154,7 @@ export function SyllabusMatchCard({
           <GraduationCap className="size-[18px]" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-caption font-bold uppercase tracking-[0.06em] text-faint">Your exam</p>
+          <p className="text-caption font-bold text-faint">Your exam</p>
           {step === "confirm" && s ? (
             <>
               <h2 className="mt-0.5 text-[16px] font-extrabold leading-snug sm:text-[17px]">{matchHeadline(s)}</h2>

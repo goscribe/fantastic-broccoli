@@ -256,7 +256,7 @@ function ClaimCard({ c }: { c: CheckedClaim }) {
       onClick={() => jump(c.where)}
       className={cn("rounded-xl border px-3 py-2 text-left", c.applied ? "border-sky/40 bg-sky/5" : "border-amber/50 bg-amber/5")}
     >
-      <span className="text-[12px] font-semibold uppercase tracking-[0.03em] text-muted-foreground">
+      <span className="text-[12px] font-semibold text-muted-foreground">
         {c.applied ? "Auto-fixed, confirm" : c.verdict === "wrong" ? "Likely wrong" : "Check"} · {c.where}
       </span>
       <span className="mt-0.5 block font-semibold">

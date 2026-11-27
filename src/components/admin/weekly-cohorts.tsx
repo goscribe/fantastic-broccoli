@@ -15,7 +15,7 @@ import { formatMinutes, pageLabel } from "@/lib/admin-insights";
 import { cn } from "@/lib/utils";
 
 const WEEK_OPTIONS = [8, 12] as const;
-const TH = "whitespace-nowrap px-3 py-2 text-[11px] font-semibold uppercase tracking-wide text-faint";
+const TH = "whitespace-nowrap px-3 py-2 text-[12px] font-semibold text-faint";
 
 function FirstVisit({ cohort, data }: { cohort: WeeklyCohort; data: WeeklyCohorts }) {
   const visit = cohort.firstVisit;
@@ -24,7 +24,7 @@ function FirstVisit({ cohort, data }: { cohort: WeeklyCohort; data: WeeklyCohort
     : null;
   return (
     <div className="mt-3 rounded-xl border border-border bg-card p-4">
-      <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+      <p className="text-[12px] font-medium text-faint">
         First hour after signing up · week of {weekLabel(cohort.weekStart)}
       </p>
       {!visit || visit.trackedUsers === 0 ? (

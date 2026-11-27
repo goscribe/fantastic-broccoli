@@ -693,7 +693,7 @@ function WorksheetQuestions({
                   {!newUi && isMarked && marking.points.length > 0 && (
                     <div className={newUi ? "mt-3 rounded-2xl border border-border bg-card overflow-hidden shadow-[0_8px_24px_-16px_rgba(17,17,20,.2)]" : "mt-2 rounded-lg border border-border overflow-hidden"}>
                       <div className={cn("flex items-center justify-between border-b border-border", newUi ? "px-4 py-2.5" : "bg-muted/60 px-3 py-1.5")}>
-                        <p className={newUi ? "text-small font-semibold" : "text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
+                        <p className={newUi ? "text-small font-semibold" : "text-caption font-semibold text-muted-foreground"}>
                           {t("session.markScheme")}
                         </p>
                         <span

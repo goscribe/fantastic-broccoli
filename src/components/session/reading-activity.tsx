@@ -293,7 +293,7 @@ function CalloutView({ callout }: { callout: Callout }) {
   // Never an empty card (a label with nothing under it).
   if (calloutIsEmpty(callout)) return null;
   const label = (
-    <span className={newUi ? "block text-caption font-extrabold text-muted-foreground" : "block text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
+    <span className={newUi ? "block text-caption font-extrabold text-muted-foreground" : "block text-caption font-semibold text-muted-foreground"}>
       {callout.label}
     </span>
   );
@@ -335,7 +335,7 @@ function QuickCheck({ check }: { check: ReadingCheck }) {
   const correct = picked === check.correctIndex;
   return (
     <div className={newUi ? "space-y-3 py-1" : "rounded-xl border border-border bg-card px-4 py-3 space-y-2.5"}>
-      <span className={newUi ? "block text-caption font-extrabold text-muted-foreground" : "block text-caption font-semibold uppercase tracking-wide text-muted-foreground"}>
+      <span className={newUi ? "block text-caption font-extrabold text-muted-foreground" : "block text-caption font-semibold text-muted-foreground"}>
         {t("session.quickCheck")}
       </span>
       <p className={cn(BODY_TEXT, newUi ? "font-extrabold" : "font-medium")}>

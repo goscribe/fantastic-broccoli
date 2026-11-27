@@ -124,7 +124,7 @@ function EventRow({ event }: { event: JourneyEvent }) {
 function PageChips({ pages }: { pages: JourneyPage[] }) {
   return (
     <div className="flex flex-wrap items-center gap-1.5 border-b border-border px-4 py-2.5">
-      <span className="mr-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+      <span className="mr-1 text-[12px] font-semibold text-faint">
         Pages
       </span>
       {pages.map((p) => (
@@ -148,7 +148,7 @@ function PageChips({ pages }: { pages: JourneyPage[] }) {
 function PagesCard({ pages, views }: { pages: JourneyPage[]; views: number }) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
-      <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+      <p className="text-[12px] font-medium text-faint">
         Pages in this period
       </p>
       {pages.length === 0 ? (
@@ -238,7 +238,7 @@ function Totals({ totals }: { totals: UserTimeline["totals"] }) {
   ];
   return (
     <div className="rounded-xl border border-border bg-card p-4">
-      <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+      <p className="text-[12px] font-medium text-faint">
         All time
       </p>
       <dl className="mt-2 space-y-1.5 text-sm">
@@ -256,7 +256,7 @@ function Totals({ totals }: { totals: UserTimeline["totals"] }) {
 function Milestones({ milestones }: { milestones: UserTimeline["milestones"] }) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
-      <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+      <p className="text-[12px] font-medium text-faint">
         First times
       </p>
       <dl className="mt-2 space-y-1.5 text-sm">
@@ -481,7 +481,7 @@ export default function AdminUserActivityPage({
                   <Milestones milestones={data.milestones} />
                   <Totals totals={data.totals} />
                   <div className="rounded-xl border border-border bg-card p-4 text-[12px] leading-relaxed text-muted-foreground">
-                    <p className="mb-1 font-medium uppercase tracking-wide text-faint">
+                    <p className="mb-1 font-medium text-faint">
                       What this can&rsquo;t show
                     </p>
                     {

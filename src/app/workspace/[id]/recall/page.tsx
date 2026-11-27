@@ -167,7 +167,7 @@ function EpisodeCover({
       )}
     >
       <Headphones className="h-7 w-7" />
-      <span className="mt-1 text-[10px] font-bold uppercase tracking-widest opacity-80">
+      <span className="mt-1 text-[12px] font-bold st opacity-80">
         Scribe FM
       </span>
     </div>
@@ -201,7 +201,7 @@ function EpisodeCard({
         </div>
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
-            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-accent-dim">
+            <span className="rounded-full bg-accent-soft px-2 py-0.5 text-[12px] font-bold text-accent-dim">
               Ep. {episodeNumber}
             </span>
             <span className="text-[11px] text-faint">

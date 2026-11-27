@@ -71,7 +71,7 @@ export function PaperPicker({ workspaceId, onClose }: { workspaceId: string; onC
         <h2 id="paper-picker-title" className="text-[20px] font-bold leading-tight tracking-tight">{t("paper.title")}</h2>
         <p className="mt-1 text-[14px] text-muted-foreground">{t("paper.sub")}</p>
 
-        <p className="mt-4 text-[12px] font-bold uppercase tracking-wide text-muted-foreground">{t("paper.board")}</p>
+        <p className="mt-4 text-[12px] font-bold text-muted-foreground">{t("paper.board")}</p>
         <div className="mt-2 flex flex-wrap gap-2" role="radiogroup" aria-label={t("paper.board")}>
           {PAPER_BOARDS.map((b) => (
             <button

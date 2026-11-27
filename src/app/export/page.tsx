@@ -228,7 +228,7 @@ function ExportEditor() {
 
         {/* Document header */}
         <header className="mb-8">
-          <div className="mb-4 flex items-center justify-between gap-4 text-[11px] font-bold uppercase tracking-[0.18em] opacity-60">
+          <div className="mb-4 flex items-center justify-between gap-4 text-[12px] font-bold opacity-60">
             <span>
               {theme.emoji} {t("fc.exStudyPack")}
             </span>
@@ -358,7 +358,7 @@ function ExportEditor() {
           ))}
         </div>
 
-        <footer className="mt-10 flex items-center justify-between border-t border-current/20 pt-3 text-[10px] font-semibold uppercase tracking-widest opacity-50">
+        <footer className="mt-10 flex items-center justify-between border-t border-current/20 pt-3 text-[12px] font-semibold st opacity-50">
           <span>{doc.title}</span>
           <span>{t("fc.exMadeWithFooter")}</span>
         </footer>

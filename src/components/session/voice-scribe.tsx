@@ -766,7 +766,7 @@ export function VoiceScribe({
                 ) : (
                   // What Scribe wrote is its reading of the words: labelled, and editable.
                   <span className="mt-1 flex flex-wrap items-baseline gap-x-2 border-l-2 border-accent/40 pl-2.5">
-                    <span className="text-[11.5px] font-extrabold uppercase tracking-wide text-muted-foreground">{t("voice.writtenAs")}</span>
+                    <span className="text-[12px] font-extrabold text-muted-foreground">{t("voice.writtenAs")}</span>
                     <span className={cn("text-[17px] leading-snug text-foreground [&_p]:m-0", s.state === "undone" && "line-through")}>
                       <MarkdownText text={s.wrote} />
                     </span>

@@ -567,7 +567,7 @@ export function CodeBlock({ code, lang }: { code: string; lang?: string }) {
   return (
     <span className="block my-2 overflow-hidden rounded-lg border border-border bg-muted/50">
       {lang && (
-        <span className="block border-b border-border px-3 py-1 text-[10px] uppercase tracking-wide text-muted-foreground">
+        <span className="block border-b border-border px-3 py-1 text-[12px] text-muted-foreground">
           {lang}
         </span>
       )}

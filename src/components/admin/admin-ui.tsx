@@ -40,7 +40,7 @@ export function StatCard({
 }) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
-      <p className="text-[12px] font-medium uppercase tracking-wide text-faint">
+      <p className="text-[12px] font-medium text-faint">
         {label}
       </p>
       {loading ? (
@@ -75,7 +75,7 @@ export function Table({
             {headers.map((h) => (
               <th
                 key={h}
-                className="whitespace-nowrap px-4 py-2.5 text-[11px] font-semibold uppercase tracking-wide text-faint"
+                className="whitespace-nowrap px-4 py-2.5 text-[12px] font-semibold text-faint"
               >
                 {h}
               </th>

@@ -107,7 +107,7 @@ function ConfirmDialog({
             unlimited does not cancel it: they keep being billed until they cancel in Settings.
           </p>
         )}
-        <label htmlFor="grant-note" className="mt-4 block text-[12px] font-semibold uppercase tracking-wide text-faint">
+        <label htmlFor="grant-note" className="mt-4 block text-[12px] font-semibold text-faint">
           Note (optional)
         </label>
         <textarea
@@ -197,7 +197,7 @@ export default function AdminGrantsPage() {
         </div>
       )}
 
-      <h2 className="mb-2 text-[13px] font-semibold uppercase tracking-wide text-faint">Find someone</h2>
+      <h2 className="mb-2 text-[13px] font-semibold text-faint">Find someone</h2>
       <SearchInput value={search} onChange={setSearch} placeholder="Search by email or name…" className="mb-3 max-w-md" />
       <Table headers={["User", "Current plan", "Joined", ""]}>
         {!searching ? (
@@ -241,7 +241,7 @@ export default function AdminGrantsPage() {
         )}
       </Table>
 
-      <h2 className="mb-2 mt-8 text-[13px] font-semibold uppercase tracking-wide text-faint">
+      <h2 className="mb-2 mt-8 text-[13px] font-semibold text-faint">
         Has free unlimited now{grants.data ? ` · ${list.length}` : ""}
       </h2>
       <Table headers={["User", "Given by", "When", "Note", ""]}>

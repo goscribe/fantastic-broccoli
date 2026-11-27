@@ -63,7 +63,7 @@ function ArtifactPreview({ artifactId }: { artifactId: string }) {
     <div className="space-y-4 p-4">
       {data.latestVersion?.content && (
         <div>
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+          <p className="mb-1 text-[12px] font-semibold text-faint">
             Latest version (v{data.latestVersion.version})
           </p>
           <div className="max-h-96 overflow-auto rounded-lg border border-border bg-muted/40 p-3">
@@ -74,7 +74,7 @@ function ArtifactPreview({ artifactId }: { artifactId: string }) {
 
       {data.flashcards.length > 0 && (
         <div>
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+          <p className="mb-1 text-[12px] font-semibold text-faint">
             Flashcards ({data.flashcards.length})
           </p>
           <ul className="space-y-1.5">
@@ -93,7 +93,7 @@ function ArtifactPreview({ artifactId }: { artifactId: string }) {
 
       {data.questions.length > 0 && (
         <div>
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+          <p className="mb-1 text-[12px] font-semibold text-faint">
             Questions ({data.questions.length})
           </p>
           <ul className="space-y-1.5">
@@ -119,7 +119,7 @@ function ArtifactPreview({ artifactId }: { artifactId: string }) {
 
       {data.podcastSegments.length > 0 && (
         <div>
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+          <p className="mb-1 text-[12px] font-semibold text-faint">
             Podcast segments ({data.podcastSegments.length})
           </p>
           <ul className="space-y-1.5">
@@ -138,7 +138,7 @@ function ArtifactPreview({ artifactId }: { artifactId: string }) {
 
       {data.content != null && (
         <div>
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-faint">
+          <p className="mb-1 text-[12px] font-semibold text-faint">
             Bank content
           </p>
           {data.kind && typeof data.content === "object" && (
