@@ -151,6 +151,64 @@ export default function PrivacyPage() {
           comply with the law.
         </p>
       </LegalSection>
+      <LegalSection heading="How we protect your data">
+        <p>
+          We use the following safeguards for all personal data, including
+          sensitive data such as your Google account email, the access
+          credentials Google issues, and anything read from your Google
+          Calendar.
+        </p>
+        <p>
+          <strong>Encryption in transit.</strong> Every connection between
+          your device and Scribe, and between Scribe and the services it
+          relies on (our database, file storage, Google, AI model providers,
+          email and payment providers), uses HTTPS/TLS.
+        </p>
+        <p>
+          <strong>Encryption at rest.</strong> Our database and file storage
+          are hosted by providers that encrypt stored data at rest. Passwords
+          are stored only as a salted hash, never in readable form.
+        </p>
+        <p>
+          <strong>Google credentials stay on our servers.</strong> The access
+          credentials Google issues when you connect Google Calendar are kept
+          only on our servers. They are never sent to your browser or to any
+          third party other than Google, and are used only to read your
+          calendar events for the Planner. They are revoked and deleted when
+          you disconnect, and deleted when your account is deleted.
+        </p>
+        <p>
+          <strong>Private storage.</strong> Uploaded files and pictures are
+          kept in private storage that is not publicly listed or reachable.
+          They are served only through time-limited links, or to the signed-in
+          account that owns them.
+        </p>
+        <p>
+          <strong>Restricted access.</strong> Only authorised Scribe staff
+          who need it can reach production systems, through accounts with
+          individual sign-ins. Secrets such as API keys are kept in our
+          hosting provider&apos;s protected configuration, not in our code.
+          Admin access to user content is limited to the purposes described
+          under &quot;Quality review by our team&quot; below, and Google
+          Calendar data is excluded from routine review.
+        </p>
+        <p>
+          <strong>Monitoring and logging.</strong> We keep an audit log of
+          account and subject actions so we can detect and investigate
+          misuse of accounts.
+        </p>
+        <p>
+          <strong>Payments.</strong> Card details are entered with and held
+          by our payment provider. Scribe never receives or stores your full
+          card number.
+        </p>
+        <p>
+          <strong>If something goes wrong.</strong> If we learn of a security
+          incident that affects your personal data, we will investigate, fix
+          the cause, and notify affected users and the relevant authorities
+          as the law requires.
+        </p>
+      </LegalSection>
       <LegalSection heading="Quality review by our team">
         <p>
           Because study content is AI-generated, authorised Scribe staff can
