@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pastedSubjectTitle, shouldShowFirstRun, topicStart, uploadSubjectTitle } from "./first-run";
+import { pastedSubjectTitle, shouldShowFirstRun, topicStart, topicTitle, uploadSubjectTitle } from "./first-run";
 import { clampMs, funnelPayload } from "./funnel";
 
 test("typed topics keep their wording and pick up the exam board", () => {
@@ -16,6 +16,41 @@ test("typed topics keep their wording and pick up the exam board", () => {
   // "ap" inside a word is not a board.
   assert.equal(topicStart("maps and apps")?.examBoard, undefined);
   assert.equal(topicStart(" x "), null);
+});
+
+test("a pasted prompt is named after its topic, not the whole prompt", () => {
+  // The subject behind 9 false QA alarms on 2026-11-27, as it reached topicStart (cut at 100 characters).
+  const prompt = "**Topic: Artificial Intelligence (AI)** Create a detailed, student-friendly educational presentatio";
+  const start = topicStart(prompt);
+  assert.equal(start?.title, "Artificial Intelligence (AI)");
+  // The planner still gets everything the student asked for.
+  assert.equal(start?.topics, prompt);
+
+  assert.equal(topicTitle("Topic: Photosynthesis. Create a detailed presentation for grade 9 students."), "Photosynthesis");
+  assert.equal(topicTitle("# Cell transport\nExplain diffusion and osmosis with examples"), "Cell transport");
+  assert.equal(topicTitle("The French Revolution: please write a summary with key dates"), "The French Revolution");
+  assert.equal(topicTitle("Sujet : la stéréochimie. Explain it simply."), "la stéréochimie");
+  assert.equal(topicTitle("`recursion` in **Python**"), "recursion in Python");
+  // Capped at a word boundary.
+  const long = topicTitle("The causes and the consequences of the First World War for the countries of central and eastern Europe");
+  assert.equal(long, "The causes and the consequences of the First World War for the countries of");
+  assert.ok(long.length <= 80);
+});
+
+test("ordinary typed topics are left as typed", () => {
+  for (const topic of [
+    "IB Physics – atomic structure",
+    "Design and technology",
+    "Make-up artistry",
+    "organic chemistry: alkenes",
+    "Create a study plan",
+    "C++ pointers",
+    "A-level Chemistry bonding",
+    "World War 2. Causes",
+  ])
+    assert.equal(topicTitle(topic), topic, topic);
+  // Only marks: nothing to name it by, so the typed text stays.
+  assert.equal(topicTitle("**"), "**");
 });
 
 test("pasted notes are named after their first line", () => {
