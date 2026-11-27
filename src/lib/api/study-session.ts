@@ -123,6 +123,9 @@ export interface ApiStudySession {
   courseTopic?: string | null;
   /** Start check: the paper the session practises (a server paper id, e.g. "ib-math-p1"); null = mix. */
   paperFocus?: string | null;
+  /** "study" = "Just study the topic": readings only, no practice questions. Null/absent: the usual session. */
+  mode?: string | null;
+  subject?: string | null;
   examBoard: ExamBoard | null;
   syllabus: string | null;
   topics: string | null;
@@ -160,7 +163,9 @@ export interface CreateStudySessionInput {
   endDate?: Date;
   /** Quick 5: one easy 5-question quiz from the material instead of a full plan. */
   quickStart?: boolean;
-  /** What the learner answered on the start check, when it was shown. */
+  /** "Just study the topic": readings with their figures, no practice questions (never a Quick 5). */
+  mode?: "study";
+  /** What the learner answered on the start step, when it was shown. */
   startCheck?: StartCheckAnswers;
 }
 
@@ -180,6 +185,8 @@ export interface StartCheckOptions {
   papers: PaperChoice[];
   /** The paper chosen last time; null = mix. */
   paperId: string | null;
+  /** They answered the paper question for this course before ("Mix" counts). Older servers omit it. */
+  paperChosen?: boolean;
 }
 
 export interface StartCheckAnswers {
@@ -795,6 +802,9 @@ export function mapSession(s: ApiStudySession): StudySession {
     confidenceBefore: typeof s.confidenceBefore === "number" ? s.confidenceBefore : undefined,
     courseTopic: s.courseTopic ?? undefined,
     paperFocus: s.paperFocus ?? undefined,
+    mode: s.mode === "study" ? "study" : undefined,
+    topics: s.topics ?? undefined,
+    subject: s.subject ?? undefined,
     status: s.status.toLowerCase() as StudySession["status"],
     startDate: s.startDate.toISOString(),
     endDate: s.endDate?.toISOString(),

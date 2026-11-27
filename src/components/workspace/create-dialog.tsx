@@ -38,7 +38,7 @@ import {
   WORKSPACE_ICONS,
 } from "@/components/graphics/workspace-icon";
 import { inputClass, textareaClass } from "@/components/ui/input";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 
 const folderColors = [
   "#6fd420",
@@ -282,7 +282,7 @@ export function CreateResourceDialog({
       if (!workspaceId) throw new Error("Could not create a workspace");
       emitTreeChanged();
       const session = await createStudySession(
-        await chooseStudyLength({
+        await prepareStart({
           workspaceId,
           title:
             chosenUnits.length > 0

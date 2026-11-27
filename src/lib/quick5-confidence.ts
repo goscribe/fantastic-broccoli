@@ -1,9 +1,9 @@
 /**
- * Pure helpers for the confidence question asked on a session's wait screen
- * (once per subject, normally in its first Quick 5) and for a Quick 5's end
- * screen: what the answer does, the skip memory it shares with the start
- * check, and how the learner did on the warm-up versus the exam-level
- * questions.
+ * Pure helpers for the confidence question of a Quick 5 (asked on the start
+ * step, or on its wait screen when it started without one) and for a Quick
+ * 5's end screen: which mix a rating picks, the skip memory it shares with
+ * the start step, and how the learner did on the warm-up versus the
+ * exam-level questions.
  */
 import { CONFIDENCE_MAX, clampConfidence } from "./start-check";
 
@@ -19,11 +19,6 @@ export function quick5Path(confidence: number): Quick5Path {
 /** "Skip" quiets the question for the subject (it is asked once per subject, in its first session). */
 export function confidenceSkipKey(session: { workspaceId: string }): string {
   return `subject:${session.workspaceId}`;
-}
-
-/** What the answer changes, said under the slider: a Quick 5's mix, or how a subject's later sessions are pitched. */
-export function waitConfidenceNext(confidence: number, quickStart: boolean): string {
-  return quickStart ? `quick5Conf.next.${quick5Path(confidence)}` : "quick5Conf.nextSession";
 }
 
 const isRecord = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v);

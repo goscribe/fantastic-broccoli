@@ -36,7 +36,7 @@ import {
   uploadSubjectTitle,
 } from "@/lib/first-run";
 import type { ExamBoard } from "@/types";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 import { useDaypart } from "@/lib/use-daypart";
 
 /** "start" is the screen itself (the question, the search, the likely courses); the others open from its quiet links. */
@@ -166,7 +166,7 @@ export function FirstRun({
     extra: { topics?: string; examBoard?: ExamBoard } = {},
   ) => {
     // First session: ask how long first (a long answer makes it a full plan).
-    const input = await chooseStudyLength({
+    const input = await prepareStart({
       workspaceId,
       title,
       depth: "light" as const,

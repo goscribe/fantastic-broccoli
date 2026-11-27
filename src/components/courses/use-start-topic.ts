@@ -7,31 +7,42 @@ import { emitTreeChanged } from "@/lib/tree-events";
 import { toastError } from "@/lib/toast";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareTopicStart } from "@/lib/start-step-client";
 import { MAX_SELECTED_TOPICS, mixedSessionMinutes } from "@/lib/topic-select";
 
 /**
  * One session over several picked topics of a course (the server reuses or
  * creates the course's subject, so this also adds the subject). A single pick
- * is that topic's usual 5 questions. A learner's first sessions are asked how
- * long; an answer is passed on, otherwise the server sets the length.
+ * is that topic's usual 5 questions. What is asked first (how long, practice
+ * or just study, how confident) is asked on one screen, and passed on.
  */
 export async function startPickedTopics(
-  input: { courseId: string; topicIds: string[]; level?: CourseLevel; /** Topic names by id, for the start check's title; without them it is not asked. */ topicNames?: Record<string, string> },
+  input: { courseId: string; topicIds: string[]; level?: CourseLevel; /** Topic names by id, for the start step's title. */ topicNames?: Record<string, string> },
   /** Called once the length is settled and the session is being made. */
   onBuilding?: () => void,
 ): Promise<{ workspaceId: string; sessionId: string }> {
   const topicIds = input.topicIds.slice(0, MAX_SELECTED_TOPICS);
-  const usual = { depth: "moderate" as const, durationMinutes: mixedSessionMinutes(topicIds.length), quickStart: false };
-  const chosen = topicIds.length > 1 ? await chooseStudyLength(usual) : usual;
-  // "How confident are you?" is not asked here: once per subject, on the wait screen of its first session.
+  const several = topicIds.length > 1;
+  // One screen, before anything is made: how long (several topics, a learner's first sessions), practice or
+  // just study, and how confident they are (once per course).
+  const step = await prepareTopicStart({
+    courseId: input.courseId,
+    topics: topicIds.map((id) => ({ id, name: input.topicNames?.[id] ?? "" })),
+    quickStart: !several,
+    durationMinutes: several ? mixedSessionMinutes(topicIds.length) : 15,
+    askLength: several,
+  });
   onBuilding?.();
-  return coursesApi.startTopics({
+  const out = await coursesApi.startTopics({
     courseId: input.courseId,
     topicIds,
     ...(input.level ? { level: input.level } : {}),
-    ...(chosen !== usual ? { durationMinutes: chosen.durationMinutes } : {}),
+    ...(step.durationMinutes ? { durationMinutes: step.durationMinutes } : {}),
+    ...(step.mode ? { mode: step.mode } : {}),
+    ...(step.startCheck ? { startCheck: step.startCheck } : {}),
   });
+  step.started(out.workspaceId);
+  return out;
 }
 
 /**
@@ -53,13 +64,22 @@ export function useStartCourseTopic(opts: { onStarted?: (workspaceId: string) =>
     setBusyTopicId(topic.id);
     setBusyMode(mode ?? "quick5");
     try {
-      // Nothing is asked before a start: "How confident?" comes on the wait screen, once per subject.
+      // One screen first, once per course: practice or just study, and how confident they are.
+      const step = await prepareTopicStart({
+        courseId: course.id,
+        topics: [{ id: topic.id, name: topic.name }],
+        quickStart: mode !== "session",
+        durationMinutes: mode === "session" ? 30 : 15,
+        askLength: false,
+      });
       const { workspaceId, sessionId } = await coursesApi.startTopic({
         courseId: course.id,
         topicId: topic.id,
         ...(level ? { level } : {}),
-        ...(mode ? { mode } : {}),
+        ...(step.mode ? { mode: step.mode } : mode ? { mode } : {}),
+        ...(step.startCheck ? { startCheck: step.startCheck } : {}),
       });
+      step.started(workspaceId);
       emitTreeChanged();
       opts.onStarted?.(workspaceId);
       router.push(`/workspace/${workspaceId}/session/${sessionId}`);

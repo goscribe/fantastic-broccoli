@@ -1,57 +1,18 @@
 "use client";
 
 /**
- * Browser side of the "How long do you want to study?" question.
- * `chooseStudyLength(input)` is awaited right before a session is generated:
- * on the learner's first and second session it opens <StudyLengthHost/>'s
- * sheet and returns the input with their answer applied; otherwise, or when
- * they close the sheet, it returns the input as is. It never cancels the
- * start: some callers have already uploaded files or made the subject.
+ * Browser side of "How long do you want to study?": whether it is due (a
+ * learner's first and second session) and their last answer. The question
+ * itself is asked on the start step (src/lib/start-step-client.ts), on the
+ * same screen as everything else asked before a session.
  */
-import { useSyncExternalStore } from "react";
 import { fetchHomeSummary } from "@/lib/api/home";
-import { applyStudyLength, clampStudyMinutes, shouldAskStudyLength, type StudyLengthInput } from "@/lib/study-length";
+import { clampStudyMinutes, shouldAskStudyLength } from "@/lib/study-length";
 
 /** Set once the learner has two sessions, so later starts skip the count. */
 const DONE_KEY = "scribe.study-length.done";
 /** Their last answer, the slider's starting point next time. */
 const LAST_KEY = "scribe.study-length.last";
-
-interface Pending {
-  initial: number;
-  resolve: (minutes: number | null) => void;
-}
-
-let pending: Pending | null = null;
-const listeners = new Set<() => void>();
-const notify = () => listeners.forEach((l) => l());
-
-export function useStudyLengthRequest(): Pending | null {
-  return useSyncExternalStore(
-    (l) => {
-      listeners.add(l);
-      return () => listeners.delete(l);
-    },
-    () => pending,
-    () => null,
-  );
-}
-
-/** Called by the sheet with the chosen minutes, or null when closed. */
-export function answerStudyLength(minutes: number | null): void {
-  const p = pending;
-  if (!p) return;
-  pending = null;
-  notify();
-  if (minutes != null) {
-    try {
-      window.localStorage.setItem(LAST_KEY, String(minutes));
-    } catch {
-      // Storage blocked: the slider just starts at the session's default next time.
-    }
-  }
-  p.resolve(minutes);
-}
 
 function readFlag(key: string): string | null {
   try {
@@ -80,16 +41,22 @@ async function existingSessions(): Promise<number | null> {
   }
 }
 
-export async function chooseStudyLength<T extends StudyLengthInput>(input: T): Promise<T> {
-  if (typeof window === "undefined") return input;
-  if (!shouldAskStudyLength(await existingSessions())) return input;
-  // One question at a time: a second start while it is open settles the first with its defaults.
-  if (pending) pending.resolve(null);
+/** Whether to ask how long before this start. */
+export async function studyLengthDue(): Promise<boolean> {
+  if (typeof window === "undefined") return false;
+  return shouldAskStudyLength(await existingSessions());
+}
+
+/** Where the slider starts: their last answer, else the session's own length (at least 15 minutes). */
+export function initialStudyMinutes(defaultMinutes: number): number {
   const last = Number(readFlag(LAST_KEY));
-  const initial = clampStudyMinutes(Number.isFinite(last) && last > 0 ? last : Math.max(input.durationMinutes, 15));
-  const minutes = await new Promise<number | null>((resolve) => {
-    pending = { initial, resolve };
-    notify();
-  });
-  return minutes == null ? input : applyStudyLength(input, minutes);
+  return clampStudyMinutes(Number.isFinite(last) && last > 0 ? last : Math.max(defaultMinutes, 15));
+}
+
+export function rememberStudyMinutes(minutes: number): void {
+  try {
+    window.localStorage.setItem(LAST_KEY, String(minutes));
+  } catch {
+    // Storage blocked: the slider just starts at the session's default next time.
+  }
 }

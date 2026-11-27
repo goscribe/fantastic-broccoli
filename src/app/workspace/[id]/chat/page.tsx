@@ -62,7 +62,7 @@ import "@/lib/i18n/workspace";
 import "@/lib/i18n/misc";
 import { toast, toastError } from "@/lib/toast";
 import { cn } from "@/lib/utils";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 
 interface ChatMessage {
   role: "user" | "bot";
@@ -249,7 +249,7 @@ function WorkspaceChatPage() {
   const startQuick5 = useMutation({
     mutationFn: async () =>
       createStudySession(
-        await chooseStudyLength({
+        await prepareStart({
           workspaceId,
           title: workspace?.title ?? "Quick 5",
           depth: "light" as const,

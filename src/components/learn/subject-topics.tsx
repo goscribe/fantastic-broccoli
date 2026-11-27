@@ -23,7 +23,7 @@ import { startPickedTopics, useStartCourseTopic } from "@/components/courses/use
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/courses";
 import type { Material } from "@/types";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 import { MAX_SELECTED_TOPICS, groupState, selectedInOrder, toggleGroup, toggleTopic, type SelectChange } from "@/lib/topic-select";
 import { buttonClass } from "@/components/ui/button";
 
@@ -206,7 +206,7 @@ export function SubjectTopics({
     try {
       const files = topic.fileIds.map((id) => titleOf.get(id)).filter(Boolean);
       const session = await createStudySession(
-        await chooseStudyLength({
+        await prepareStart({
           workspaceId,
           title: topic.title,
           description: topic.summary || undefined,

@@ -35,6 +35,7 @@ import { remainingMinutes } from "@/components/session/session-progress";
 import { toastError } from "@/lib/toast";
 import { toastStartError } from "@/lib/no-materials";
 import { handOffCta } from "@/lib/session-start";
+import { practiceStart } from "@/lib/start-step";
 import type { StudySession } from "@/types";
 import { SESSION_COMPLETED_EVENT, type SessionCompletedDetail } from "@/lib/api/account";
 import { useI18n } from "@/lib/i18n";
@@ -418,7 +419,14 @@ export function SessionDebrief({
   onAskCopilot,
   activities,
   confidenceBefore = null,
+  studySession,
 }: {
+  /**
+   * Set for a "Just study the topic" session: it had no questions, so the end
+   * screen shows no score and no said-vs-got row, and its one next step is
+   * "Ready for practice questions?" (a practice session on the same topics).
+   */
+  studySession?: StudySession;
   /** The learner's own 0-10 confidence from the start check; null when it was not asked. */
   confidenceBefore?: number | null;
   /** The session's activities: their saved answers draw the row of answer dots. */
@@ -442,6 +450,23 @@ export function SessionDebrief({
   const queryClient = useQueryClient();
   const [showReport, setShowReport] = useState(false);
   const handOff = quickStart && !!workspaceId;
+  const studyOnly = !!studySession;
+
+  // "Ready for practice questions?": a full practice session on what was just read.
+  const startPractice = useMutation({
+    mutationFn: async (): Promise<{ workspaceId: string; sessionId: string } | null> => {
+      const next = practiceStart(studySession!);
+      if (next.kind === "topic") return coursesApi.startTopic({ courseId: next.courseId, topicId: next.topicId, mode: "session" });
+      if (next.kind === "topics") return coursesApi.startTopics({ courseId: next.courseId, topicIds: next.topicIds });
+      const created = await createStudySession({ ...next.input, examBoard: studySession!.examBoard });
+      return created ? { workspaceId: created.workspaceId, sessionId: created.id } : null;
+    },
+    onSuccess: (created) => {
+      queryClient.invalidateQueries({ queryKey: ["study-sessions", workspaceId] });
+      if (created) router.push(`/workspace/${created.workspaceId}/session/${created.sessionId}`);
+    },
+    onError: (error) => toastStartError(error, t("studyDone.failed"), { workspaceId, addLabel: t("session.addMaterial"), open: (href) => router.push(href) }),
+  });
 
   const { data: subjectSessions, isLoading: sessionsLoading } = useQuery({
     queryKey: ["study-sessions", workspaceId],
@@ -578,13 +603,27 @@ export function SessionDebrief({
   const mistakes = stats?.mistakes ?? 0;
   // A Quick 5 touches a topic or two; its debrief also asks for a study time, so keep it to two rows.
   const mastery = (stats?.mastery ?? []).slice(0, quickStart ? 2 : 3);
-  const weakest = !quickStart && workspaceId ? stats?.weakest : null;
+  const weakest = !quickStart && !studyOnly && workspaceId ? stats?.weakest : null;
   // Fixing mistakes is the practice returners did; it takes the Copilot row's place.
   const askRow = mistakes > 0 && ask && wrong > 0 ? null : ask;
   // "Fix N mistakes" sits right under the main button; the rest are optional extras further down.
   const showSteps = (!!deck && !!workspaceId) || (!!askRow && !!onAskCopilot);
 
-  const primary = handOff ? (
+  const primary = studyOnly ? (
+    <Button
+      size="lg"
+      data-practice-cta
+      className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
+      disabled={startPractice.isPending}
+      onClick={() => {
+        nextTapped("session");
+        startPractice.mutate();
+      }}
+    >
+      {startPractice.isPending ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Play className="mr-2 h-4 w-4 fill-current" />}
+      <span className="min-w-0 truncate">{t("studyDone.cta")}</span>
+    </Button>
+  ) : handOff ? (
     <Button
       size="lg"
       className="btn-chunky rounded-[var(--r-button)] h-[52px] w-full text-[16px] font-extrabold"
@@ -660,18 +699,19 @@ export function SessionDebrief({
     </>);
 
   if (newUi) {
-    const band = resultBand(stats?.accuracy);
+    // A study session has no questions: never a score band, whatever the stats say.
+    const band = studyOnly ? "done" : resultBand(stats?.accuracy);
     const celebrate = !!stats && bandCelebrates(band);
     // Today's streak day beats the pencil: the flame is the reward the student just earned.
     const pose: MascotPose = band === "okay" && streakLitDays ? "flame" : BAND_POSE[band];
-    const pct = stats && stats.accuracy !== null ? Math.round(stats.accuracy * 100) : null;
+    const pct = !studyOnly && stats && stats.accuracy !== null ? Math.round(stats.accuracy * 100) : null;
     const dots = stats ? resultDots(stats.answered, stats.correct, activities ? questionTrail(activities, restoredDraft) : []) : null;
     // Mistakes to fix come first; a Quick 5 keeps its hand-off to the full session as the main step.
-    const fixFirst = mistakes > 0 && !handOff;
+    const fixFirst = mistakes > 0 && !handOff && !studyOnly;
     const fixTitle = (mistakes === 1 ? t("habit.fixTitleOne") : t("habit.fixTitle")).replace("{n}", String(mistakes));
     const fixSub = t("habit.fixSub").replace("{m}", String(fixMinutes(mistakes)));
     // Asked "how confident?" at the start: their number beside the result, on the same scale.
-    const said = stats ? confidenceResult(confidenceBefore, stats.correct, stats.answered) : null;
+    const said = stats && !studyOnly ? confidenceResult(confidenceBefore, stats.correct, stats.answered) : null;
     // A Quick 5: "You got 3/5" (its own score), and how the exam-level questions went.
     const quick = quickStart && stats ? quick5SaidGot(confidenceBefore, stats.correct, stats.answered) : null;
     const levels = quickStart && activities ? difficultyResults(activities, restoredDraft) : null;
@@ -713,13 +753,15 @@ export function SessionDebrief({
           {/* The words: under the band when narrow; on one solid card over the scene when wide. */}
           <div className="hero-copy relative px-5 pb-5 pt-4 @max-[520px]:rounded-none @max-[520px]:border-0 @max-[520px]:bg-transparent @max-[520px]:shadow-none @[520px]:w-[58%] @[520px]:px-6 @[520px]:py-5">
           <p className="hero-eyebrow line-clamp-2 break-words text-small font-extrabold">
-            {[subjectTitle, t(quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
+            {[subjectTitle, t(studyOnly ? "studyDone.eyebrow" : quickStart ? "debrief.quick5Complete" : "debrief.complete")].filter(Boolean).join(" · ")}
           </p>
           <h2 id="finish-title" className="mt-1 text-balance text-[28px] font-extrabold leading-[1.08] tracking-tight @[520px]:text-[32px]">
-            {stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
+            {studyOnly ? t("studyDone.title") : stats ? t(band === "done" ? (quickStart ? "debrief.quick5Complete" : "debrief.complete") : `finish.${band}`) : statsError ? t(quickStart ? "debrief.quick5Complete" : "debrief.complete") : <span className="skeleton inline-block h-9 w-52 rounded-full align-middle" />}
           </h2>
           <div className="mt-1 min-h-[22px] text-ui font-semibold text-foreground/75 line-clamp-2">
-            {verdict ? (
+            {studyOnly ? (
+              t("studyDone.sub")
+            ) : verdict ? (
               <MathText text={verdict} />
             ) : debriefLoading ? (
               <span className="skeleton inline-block h-4 w-44 rounded-full align-middle" />
@@ -742,7 +784,7 @@ export function SessionDebrief({
               <span className="text-ui font-bold leading-tight text-foreground/75">
                 {pct !== null
                   ? t("finish.rightOf").replace("{c}", String(stats.correct)).replace("{n}", String(stats.answered))
-                  : t("debrief.done")}
+                  : t(studyOnly ? "studyDone.read" : "debrief.done")}
               </span>
             </p>
           ) : statsError ? null : (
@@ -791,6 +833,11 @@ export function SessionDebrief({
           ) : (
             <div className="[&_button]:sm:w-auto [&_button]:sm:min-w-[300px] [&>a]:sm:w-fit">{primary}</div>
           )}
+          {studySession && (
+            <p className="mt-2.5 text-small text-muted-foreground">
+              {t(studySession.courseTopic?.includes(",") ? "studyDone.ctaSubTopics" : "studyDone.ctaSub").replace("{n}", String(studySession.courseTopic && !studySession.courseTopic.includes(",") ? 30 : studySession.durationMinutes))}
+            </p>
+          )}
         </div>
         {/* At most two other ways on, then everything else behind one disclosure. */}
         <ul className="mt-3 w-full px-1">
@@ -838,7 +885,7 @@ export function SessionDebrief({
                 </ul>
               </section>
             )}
-            {dots && stats && (
+            {dots && stats && !studyOnly && (
               <section aria-labelledby="finish-answers">
                 <h3 id="finish-answers" className="text-small font-extrabold text-muted-foreground">{t("finish.detailsAnswers")}</h3>
                 <div className="mt-2.5">

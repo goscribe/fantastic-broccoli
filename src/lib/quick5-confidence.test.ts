@@ -1,11 +1,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { confidenceSkipKey, difficultyResults, quick5Path, quick5SaidGot, waitConfidenceNext } from "./quick5-confidence";
+import { confidenceSkipKey, difficultyResults, quick5Path, quick5SaidGot } from "./quick5-confidence";
 
 test("the answer's band matches the server's mix (0-4 gentle, 5-7 mixed, 8-10 hard)", () => {
   assert.deepEqual([0, 2, 4, 5, 7, 8, 9, 10].map(quick5Path), ["gentle", "gentle", "gentle", "mixed", "mixed", "hard", "hard", "hard"]);
-  assert.equal(waitConfidenceNext(2, true), "quick5Conf.next.gentle");
-  assert.equal(waitConfidenceNext(9, false), "quick5Conf.nextSession");
 });
 
 test("skip is remembered per subject: the question is asked once per subject", () => {

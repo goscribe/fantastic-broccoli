@@ -7,7 +7,7 @@ const en = {
   "quick5Conf.whileWriting": "While your 5 questions are written",
   "quick5Conf.whileWritingSession": "While your session is written",
   "quick5Conf.ready": "Your 5 questions are ready",
-  "quick5Conf.nextSession": "We'll pitch your questions to it from here on.",
+  "quick5Conf.picks": "Your answer picks which 5 questions you get.",
   "quick5Conf.next.gentle": "We'll build up gently, one hard one at the end.",
   "quick5Conf.next.mixed": "A warm-up, then exam-level questions.",
   "quick5Conf.next.hard": "Straight to exam-level, mostly hard ones.",

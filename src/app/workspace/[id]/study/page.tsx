@@ -36,7 +36,7 @@ import "@/lib/i18n/workspace";
 import { Plus, Sparkles, ArrowRight } from "lucide-react";
 import { ListRowsSkeleton, Skeleton } from "@/components/ui/skeleton";
 import { EmptyScene } from "@/components/graphics/floating-decor";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 
 function WorkspaceStudyPage() {
   const params = useParams();
@@ -112,7 +112,7 @@ function WorkspaceStudyPage() {
     router.push(`/workspace/${workspaceId}/session/${id}`);
   const startQuick5 = async () =>
     createSession.mutate(
-      await chooseStudyLength({
+      await prepareStart({
         workspaceId,
         title: workspace?.title ?? t("ws.studyNow.quick5"),
         depth: "light" as const,

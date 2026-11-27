@@ -3,7 +3,7 @@ import { analyzeFiles, uploadFiles } from "@/lib/api/materials";
 import { createStudySession } from "@/lib/api/study";
 import { emitTreeChanged } from "@/lib/tree-events";
 import type { StudySession } from "@/types";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 
 export function fileBasename(name: string): string {
   return name.replace(/\.[^.]+$/, "").replace(/[_-]+/g, " ").trim();
@@ -51,7 +51,7 @@ export async function startWorkspaceFromUploads(
   let session: StudySession | undefined;
   try {
     session = await createStudySession(
-      await chooseStudyLength({
+      await prepareStart({
         workspaceId,
         title,
         depth: "moderate" as const,
