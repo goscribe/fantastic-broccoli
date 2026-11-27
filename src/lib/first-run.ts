@@ -5,7 +5,7 @@
 import type { ExamBoard } from "../types";
 
 export interface TopicStart {
-  /** Subject + session title, e.g. "IB Physics – atomic structure". */
+  /** Subject + session title, e.g. "IB Physics – atomic structure" (see `topicTitle`). */
   title: string;
   /** What the planner should cover. */
   topics: string;
@@ -26,12 +26,51 @@ export function cleanTopic(raw: string): string {
   return raw.replace(/\s+/g, " ").trim().slice(0, 100).trim();
 }
 
-/** Reads an exam board out of a typed topic ("AP Bio cell transport" → AP). */
+const TITLE_MAX_CHARS = 80;
+/** "Topic: …", "Sujet : …": a label in front of the topic, not part of its name. */
+const TOPIC_LABEL = /^(?:topic|subject|title|theme|sujet|thème|tema|thema)\s*[:：]\s*/i;
+/** A sentence, after the topic, that tells Scribe what to make ("… . Create a detailed presentation"). */
+const INSTRUCTION_SENTENCE =
+  /(?<=[.!?:;])\s+(?:please\s+)?(?:create|make|generate|write|explain|give|provide|prepare|build|design|produce|summari[sz]e|teach|include|cover|i (?:want|need|would like)|can you|could you)\b/i;
+
+/**
+ * Subject name for a typed topic. Most are already a name ("IB Physics –
+ * atomic structure") and come back unchanged. Some students paste a whole
+ * prompt written for a chatbot — "**Topic: Artificial Intelligence (AI)**
+ * Create a detailed, student-friendly educational presentatio…" — which
+ * became the subject and session title as typed, asterisks and all. The name
+ * is the topic: markdown marks and a "Topic:" label are dropped, instruction
+ * sentences are cut, and the rest is capped at a word boundary.
+ */
+export function topicTitle(raw: string): string {
+  let t = raw.trim();
+  // A bold or heading lead is the topic; what follows it is the request.
+  const lead = t.match(/^(?:#+\s*)?(\*\*|__)(.+?)\1/);
+  if (lead && lead[2].trim().length >= 2) t = lead[2];
+  else t = t.split(/\r?\n/).find((l) => l.trim().length > 0) ?? "";
+  t = t
+    .replace(/^\s*(?:#+|>|[-*+])\s+/, "")
+    .replace(/\*\*|__|~~|`/g, "")
+    .trim()
+    .replace(TOPIC_LABEL, "");
+  const cut = t.search(INSTRUCTION_SENTENCE);
+  if (cut > 1) t = t.slice(0, cut);
+  t = cleanTopic(t).replace(/[.:;,\s]+$/, "");
+  if (t.length > TITLE_MAX_CHARS) t = t.slice(0, TITLE_MAX_CHARS).replace(/\s+\S*$/, "").replace(/[.:;,\s–-]+$/, "");
+  // Nothing recognisable left (the whole text was marks): keep what was typed.
+  return t.length >= 2 ? t : cleanTopic(raw).slice(0, TITLE_MAX_CHARS).trim();
+}
+
+/**
+ * A typed topic as a subject: a clean name for the title, the student's full
+ * wording for the planner, and the exam board read out of it ("AP Bio cell
+ * transport" → AP).
+ */
 export function topicStart(raw: string): TopicStart | null {
-  const title = cleanTopic(raw);
-  if (title.length < 2) return null;
-  const examBoard = BOARD_PATTERNS.find(([re]) => re.test(title))?.[1];
-  return { title, topics: title, ...(examBoard ? { examBoard } : {}) };
+  const topics = cleanTopic(raw);
+  if (topics.length < 2) return null;
+  const examBoard = BOARD_PATTERNS.find(([re]) => re.test(topics))?.[1];
+  return { title: topicTitle(raw), topics, ...(examBoard ? { examBoard } : {}) };
 }
 
 export const PASTE_MIN_CHARS = 40;
