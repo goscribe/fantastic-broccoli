@@ -552,7 +552,7 @@ export function FirstScoresSection({ days }: { days: MetricDays }) {
                     <tbody className="divide-y divide-border">
                       {data.byDifficulty.map((d) => (
                         <tr key={d.key}>
-                          <td className={TD}>{d.key === "easy" ? "Warm-up (easy)" : d.key === "medium" ? "Exam level (medium)" : "Exam level (hard)"}</td>
+                          <td className={TD}>{d.key === "easy" ? "Warm-up (easy)" : d.key === "medium" ? "Harder (medium)" : "Harder (hard)"}</td>
                           <td className={`${TD} text-right tabular-nums`}>{d.answered ? `${d.correct.toLocaleString()} / ${d.answered.toLocaleString()}` : "–"}</td>
                           <td className={`${TD} text-right tabular-nums`}>{pctText(d.pct)}</td>
                         </tr>

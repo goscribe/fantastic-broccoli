@@ -18,7 +18,7 @@ import {
   parseCourseTopics,
   primerPlan,
   readingPoints,
-  sessionPath,
+  primerPath,
   type MaterialPrimer,
   type NotePrimer,
   type PrimerPlan,
@@ -58,11 +58,10 @@ export function useSessionPrimer(session: StudySession | undefined): SessionPrim
   const sessionId = session?.id ?? "";
   const [dismissed, setDismissed] = useState<string | null>(null);
   const confidence = typeof session?.confidenceBefore === "number" ? session.confidenceBefore : null;
-  const path = sessionPath(confidence);
-  // A Quick 5 is five questions picked for the answer (no notes screen before them).
+  // A Quick 5 too, when they are not confident: the rating is given before the start, so the notes can come first.
+  const path = primerPath(confidence, !!session?.quickStart);
   const untouched =
     !!session &&
-    !session.quickStart &&
     session.status !== "completed" &&
     session.status !== "failed" &&
     session.activities.every((a) => a.status === "pending");

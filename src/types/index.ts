@@ -125,7 +125,7 @@ export interface McqQuestion {
   sourceFlashcardId?: string;
   /** Question-bank origin of a spaced-review question; answers are re-marked server-side. */
   bankRef?: { artifactId: string; index: number };
-  /** A Quick 5 question's rung: the warm-up is easy, the rest exam level (medium / hard). */
+  /** A Quick 5 question's rung: the warm-up is easy, the rest harder (medium / hard). */
   difficulty?: "easy" | "medium" | "hard";
 }
 
