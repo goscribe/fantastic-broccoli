@@ -58,6 +58,11 @@ export interface StudySession {
   courseTopic?: string;
   /** The paper chosen on the start check (a server paper id, e.g. "ib-math-p1"). */
   paperFocus?: string;
+  /** "Just study the topic": readings with their figures and no practice questions. */
+  mode?: "study";
+  /** What the session was planned around, as the planner was given it. */
+  topics?: string;
+  subject?: string;
   status: "active" | "paused" | "completed" | "failed";
   startDate: string;
   endDate?: string;

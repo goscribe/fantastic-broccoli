@@ -41,7 +41,7 @@ import { cn, formatRelativeDate } from "@/lib/utils";
 import { dataSelector, linkTarget, revealTarget } from "@/lib/link-target";
 import type { Folder, Material, StudySession, Workspace } from "@/types";
 import "@/app/design/design.css";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 import { PaperPicker } from "@/components/session/paper-picker";
 import { useI18n } from "@/lib/i18n";
 import "@/lib/i18n/practice-paper";
@@ -251,7 +251,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
           // A full session in this subject: the server adds its due questions as review activities.
           const labels = Array.from(new Set((review.data?.queue ?? []).filter((q) => q.type === "item").map((q) => q.label)));
           openSession(
-            await createStudySession(await chooseStudyLength({ workspaceId, title: `Review: ${title}`.slice(0, 200), depth: "light" as const, durationMinutes: 10, topics: (labels.length ? labels : [title]).join(", ").slice(0, 2000) })),
+            await createStudySession(await prepareStart({ workspaceId, title: `Review: ${title}`.slice(0, 200), depth: "light" as const, durationMinutes: 10, topics: (labels.length ? labels : [title]).join(", ").slice(0, 2000) })),
           );
         },
         "Couldn't start the review",
@@ -284,7 +284,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
           "next",
           async () => {
             const s = scope([]);
-            openSession(await createStudySession(await chooseStudyLength({ workspaceId, title: title || "Quick 5", depth: "light" as const, durationMinutes: 5, quickStart: true, topics: s.topics })));
+            openSession(await createStudySession(await prepareStart({ workspaceId, title: title || "Quick 5", depth: "light" as const, durationMinutes: 5, quickStart: true, topics: s.topics })));
           },
           "Couldn't start your 5 questions",
         );
@@ -302,7 +302,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
         const picked = materials.filter((m) => selected.has(m.id)).map((m) => m.title);
         openSession(
           await createStudySession(
-            await chooseStudyLength({
+            await prepareStart({
               workspaceId,
               title: text.length > 60 ? `${text.slice(0, 57).trimEnd()}…` : text,
               description: text,
@@ -350,7 +350,7 @@ export function SubjectPage({ workspaceId }: { workspaceId: string }) {
       "session",
       async () => {
         const s = scope(picked.map((m) => m.title));
-        const created = await createStudySession(await chooseStudyLength({ workspaceId, title: s.title, depth: "moderate" as const, durationMinutes: 25, topics: s.topics }));
+        const created = await createStudySession(await prepareStart({ workspaceId, title: s.title, depth: "moderate" as const, durationMinutes: 25, topics: s.topics }));
         const fromNotes = picked.filter((m) => attached.notes.has(m.id)).length;
         if (fromNotes > 0) trackFunnel("notes.attached_session_started", { from: "subject", noteCount: fromNotes }, workspaceId);
         openSession(created);

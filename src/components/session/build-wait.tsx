@@ -8,12 +8,13 @@ import { WaitConfidenceCard, type WaitConfidenceState } from "@/components/sessi
 /**
  * The session's wait screen while its plan is written, as one screen:
  *
- * - Something to do (the confidence question, the quick check, its results,
+ * - Something to do (a Quick 5's confidence question, the quick check, its results,
  *   the warm-up after a Skip): that is the main content. The build shrinks to
  *   a header over it (small cat, title, thin bar, one status line, the steps
  *   folded behind "7 steps"), so the question and its options fit a laptop or
  *   a phone without scrolling.
- * - Nothing to do (skipped with no warm-up questions, no question bank yet):
+ * - Nothing to do (skipped with no warm-up questions, no question bank yet,
+ *   or a "Just study the topic" session, which asks nothing):
  *   the full wait screen with the cat and the steps.
  *
  * Presentational: the page owns the progress events and passes them in.
@@ -24,16 +25,19 @@ export function SessionBuildWait({
   sessionId,
   focus,
   confidence,
+  quiz = true,
   extras,
   api,
 }: {
+  /** False for "Just study the topic": the learner asked for no questions, so the wait has no quick check or warm-up. */
+  quiz?: boolean;
   build: BuildStageProps;
   workspaceId: string;
   /** The session being built: the quick check asks about its planned topics. */
   sessionId?: string;
   /** What the quick check is about when the session has no planned topics (the session title). */
   focus: string;
-  /** The confidence question, asked here while the session is written (once per subject). */
+  /** A Quick 5 started without the start step: the confidence question, which picks its five questions. */
   confidence?: WaitConfidenceState;
   /** Shown between the progress and the quick check (the change-course link, the syllabus-match card). */
   extras?: React.ReactNode;
@@ -49,7 +53,7 @@ export function SessionBuildWait({
       {extras}
       {asking ? (
         <WaitConfidenceCard state={confidence} />
-      ) : (
+      ) : !quiz ? null : (
         // Flat under the header, like the session player: a hairline between them, no second card.
         <div className={compact ? "w-full border-t border-border pt-5" : "contents"}>
           <SessionPrecheck workspaceId={workspaceId} sessionId={sessionId} focus={focus} hero api={api} onShown={setQuizShown} />

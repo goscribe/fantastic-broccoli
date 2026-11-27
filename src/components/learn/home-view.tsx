@@ -23,7 +23,7 @@ import { useI18n } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import "@/lib/i18n/rewards";
 import "@/app/design/design.css";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 
 /** The same buckets as the banner's sky (src/lib/daypart.ts), so the words and the scene agree. */
 const GREETING: Record<Daypart, string> = {
@@ -78,7 +78,7 @@ export function HomeView({ summary }: { summary: HomeSummary }) {
       analyzeFiles(target, fileIds).catch(() => {});
       emitTreeChanged();
       const session = await createStudySession(
-        await chooseStudyLength({
+        await prepareStart({
           workspaceId: target,
           title: workspaceTitleFromFiles(list),
           depth: "light" as const,

@@ -133,8 +133,7 @@ const noop = () => {};
 const CONFIDENCE: WaitConfidenceState = {
   open: true,
   what: "Statistics and probability",
-  papers: [],
-  quickStart: false,
+  quickStart: true,
   answer: noop,
   skip: noop,
   pending: false,

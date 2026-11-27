@@ -222,8 +222,10 @@ export default function SessionDetailPage() {
   // No study features until the plan actually exists.
   const planReady = !!session && !generating && !planFailed;
   // Rated their confidence low or middling at the start: the notes (or a recap) come before the questions.
-  const primer = useSessionPrimer(planFailed ? undefined : session);
-  // "How confident are you?" is asked on the wait screen (once per subject); in a Quick 5 it picks the five questions.
+  // "Just study the topic": readings only. No notes-before-the-questions screen (there are no questions), no quick check.
+  const studyOnly = session?.mode === "study";
+  const primer = useSessionPrimer(planFailed || studyOnly ? undefined : session);
+  // A Quick 5 started without the start step: "How confident are you?" on its wait screen picks its five questions.
   const waitConfidence = useWaitConfidence(planFailed ? undefined : session);
 
   // Deep links (e.g. reminder emails) can point at a specific activity.
@@ -1190,6 +1192,7 @@ export default function SessionDetailPage() {
                   initial={session.generationProgress}
                   quickStart={session.quickStart}
                   confidence={waitConfidence}
+                  studyOnly={studyOnly}
                 />
               ) : waitConfidence.open ? (
                 // Ready while the question was still open: one tap, then question 1 (re-picked for the answer).
@@ -1228,7 +1231,7 @@ export default function SessionDetailPage() {
               ) : !finished ? (
                 <SessionUnfinished activities={activities} onResume={(id) => goToIndex(activities.findIndex((a) => a.id === id))} onLeave={() => router.push(`/workspace/${workspaceId}`)} />
               ) : (
-                <SessionDebrief activities={activities} confidenceBefore={session.confidenceBefore} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
+                <SessionDebrief activities={activities} confidenceBefore={session.confidenceBefore} studySession={studyOnly ? session : undefined} sessionId={sessionId} workspaceId={workspaceId} subjectTitle={workspace.title} quickStart={session.quickStart} sessionBonus={activities.length > 0 && activities.every((a) => a.status === "completed") ? POINTS_PER_SESSION : 0} streakLitDays={streakLitDays} onAskCopilot={askCopilot} onBack={() => router.push(`/workspace/${workspaceId}`)} />
               )}
             </div>
           </div>
@@ -1836,7 +1839,10 @@ function GeneratingPlanCard({
   initial,
   quickStart = false,
   confidence,
+  studyOnly = false,
 }: {
+  /** "Just study the topic": no quick check or warm-up questions while it is written. */
+  studyOnly?: boolean;
   title: string;
   workspaceId: string;
   sessionId: string;
@@ -1945,6 +1951,7 @@ function GeneratingPlanCard({
         sessionId={sessionId}
         focus={title}
         confidence={confidence}
+        quiz={!studyOnly}
         build={{
           title,
           pct: percent / 100,
@@ -2069,7 +2076,7 @@ function GeneratingPlanCard({
               })}
             </ul>
           )}
-          <SessionPrecheck workspaceId={workspaceId} sessionId={sessionId} focus={title} />
+          {!studyOnly && <SessionPrecheck workspaceId={workspaceId} sessionId={sessionId} focus={title} />}
         </div>
       </div>
     </div>

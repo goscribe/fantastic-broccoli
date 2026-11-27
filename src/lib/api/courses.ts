@@ -132,10 +132,10 @@ export const coursesApi = {
     rpc<{ workspaceId: string }>("course.enroll", "mutation", { courseId, ...(level ? { level } : {}) }),
   /** Before a start on these topics: which still need a confidence, and the course's papers. */
   startCheck: (courseId: string, topicIds: string[]) => rpc<StartCheckOptions>("course.startCheck", "query", { courseId, topicIds }),
-  startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel; mode?: "quick5" | "session"; startCheck?: StartCheckAnswers }) =>
+  startTopic: (input: { courseId: string; topicId: string; level?: CourseLevel; mode?: "quick5" | "session" | "study"; startCheck?: StartCheckAnswers }) =>
     rpc<{ workspaceId: string; sessionId: string }>("course.startTopic", "mutation", input),
   /** One session over several topics of a course, its questions mixed across them (one topic is a Quick 5). */
-  startTopics: (input: { courseId: string; topicIds: string[]; level?: CourseLevel; durationMinutes?: number; startCheck?: StartCheckAnswers }) =>
+  startTopics: (input: { courseId: string; topicIds: string[]; level?: CourseLevel; durationMinutes?: number; mode?: "study"; startCheck?: StartCheckAnswers }) =>
     rpc<{ workspaceId: string; sessionId: string }>("course.startTopics", "mutation", input),
 };
 

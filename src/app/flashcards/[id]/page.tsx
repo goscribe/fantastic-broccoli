@@ -26,7 +26,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { useI18n, type TranslationKey } from "@/lib/i18n";
 import { ArrowLeft } from "lucide-react";
-import { chooseStudyLength } from "@/lib/study-length-client";
+import { prepareStart } from "@/lib/start-step-client";
 
 type DeckMode = "cards" | "learn" | "test";
 
@@ -97,7 +97,7 @@ function FlashcardDeck() {
   const startSession = useMutation({
     mutationFn: async () =>
       createStudySession(
-        await chooseStudyLength({
+        await prepareStart({
           workspaceId,
           title: item!.title,
           depth: "moderate" as const,

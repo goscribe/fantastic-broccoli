@@ -3,7 +3,7 @@
 import { Check } from "lucide-react";
 import { Mascot, type MascotPose } from "@/components/rewards/mascot";
 import { cn } from "@/lib/utils";
-import { useStartCheckRequest } from "@/lib/start-check-client";
+import { useStartStepRequest } from "@/lib/start-step-client";
 import "@/app/design/design.css";
 
 export interface WaitStep {
@@ -105,8 +105,8 @@ export function WaitScreen({
   /** Inside a dialog or a list: a smaller cat and less air. */
   compact?: boolean;
 }) {
-  // A start question (the confidence sheet) is open over this: the sheet comes first, the wait after it.
-  const asking = useStartCheckRequest() !== null;
+  // A start question (the start step) is open over this: the sheet comes first, the wait after it.
+  const asking = useStartStepRequest() !== null;
   return (
     <section className={cn("mx-auto flex w-full max-w-[440px] flex-col items-center text-center", compact ? "py-6" : "py-10 sm:py-14", asking && "invisible", className)} role="status" aria-live="polite">
       <Mascot key={pose} pose={pose} className={cn("cat-float", compact ? "h-[72px]" : "h-[96px] sm:h-[112px]")} />

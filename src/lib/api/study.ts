@@ -5,6 +5,7 @@ import {
   statusToApi,
   depthToApi,
   type ApiArtifactKind,
+  type StartCheckAnswers,
 } from "./study-session";
 import { normalizeActivityContent } from "./activity-content";
 import type {
@@ -45,18 +46,21 @@ export interface CreateSessionInput {
   topics?: string;
   subject?: string;
   quickStart?: boolean;
+  /** "Just study the topic": readings with their figures, no practice questions. */
+  mode?: "study";
+  /** The start step's answers (src/lib/start-step-client.ts `prepareStart`), when it was shown. */
+  startCheck?: StartCheckAnswers;
 }
 
 /**
- * Starts a session in a subject, at once. "How confident are you?" is asked
- * on the session's wait screen the first time a learner studies a subject
- * (and when the rating has gone stale), never before the start.
+ * Starts a session in a subject. What a learner is asked first (how long,
+ * practice or just study, how confident, which paper) is asked by
+ * `prepareStart` before this is called, and arrives here in the input, so
+ * the session is written with the answers.
  */
 export async function createStudySession(
   input: CreateSessionInput,
 ): Promise<StudySession | undefined> {
-  // Nothing is asked before a start: "How confident?" comes on the wait screen
-  // (src/components/session/wait-confidence.tsx), once per subject; the paper is the remembered one.
   const row = await studySessionApi.create({
     ...input,
     depth: depthToApi[input.depth],
@@ -359,5 +363,5 @@ export async function appendActivities(
   );
 }
 
-/** `createStudySession` without the start check: onboarding, sessions made in bulk, and mistake practice. */
+/** `createStudySession` under its older name (onboarding, sessions made in bulk, mistake practice). */
 export const createStudySessionQuietly = (input: CreateSessionInput) => createStudySession(input);

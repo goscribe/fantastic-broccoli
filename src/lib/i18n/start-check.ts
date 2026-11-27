@@ -1,6 +1,6 @@
 import { registerTranslations } from "@/lib/i18n";
 
-// The start check before a session (src/components/session/start-check-*.tsx),
+// The start step before a session (src/components/session/start-step-host.tsx),
 // the notes-first screen and the end screen's confidence line. Imported for
 // side effect. English only for now: other languages fall back to it.
 const en = {
@@ -27,6 +27,35 @@ const en = {
   "startCheck.focusPlaceholder": "e.g. I keep mixing up mitosis and meiosis",
   "startCheck.continue": "Continue",
   "startCheck.skip": "Skip",
+
+  // The start step: one screen before a session is made (src/components/session/start-step-host.tsx).
+  "startStep.title": "Before we write your session",
+  "startStep.sub": "Your answers shape this session.",
+  "startStep.modeLegend": "What do you want to do?",
+  "startStep.practice": "Practice questions",
+  "startStep.practiceSub": "Notes where you need them, then questions.",
+  "startStep.practiceQuickSub": "5 quick questions.",
+  "startStep.study": "Just study the topic",
+  "startStep.studySub": "Notes with pictures. No questions yet.",
+  "startStep.length": "How long?",
+  "startStep.study.low": "We'll start from the basics, pictures first.",
+  "startStep.study.medium": "A brief recap of the basics, then the harder ideas.",
+  "startStep.study.high": "Straight to the harder ideas.",
+  "startStep.paperLegend": "Which paper are you preparing for?",
+  "startStep.paperSub": "Written questions follow it from this session on.",
+  "startStep.start": "Start",
+  "startStep.startStudy": "Start studying",
+  "startStep.skip": "Skip, start as usual",
+
+  // A study session's end screen ("Just study the topic": no questions, so no score).
+  "studyDone.eyebrow": "Study session complete",
+  "studyDone.title": "Topic studied",
+  "studyDone.sub": "No questions this time. You read it all.",
+  "studyDone.read": "read",
+  "studyDone.cta": "Ready for practice questions?",
+  "studyDone.ctaSub": "A practice session on the same topic, about {n} min.",
+  "studyDone.ctaSubTopics": "A practice session on the same topics, about {n} min.",
+  "studyDone.failed": "Couldn't start the practice session",
 
   "primer.eyebrowNotes": "Before the questions",
   "primer.eyebrowRecap": "Quick recap",
